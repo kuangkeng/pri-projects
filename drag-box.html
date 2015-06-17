@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<style>
+/*
+	Stylesheet for examples by DevHeart.
+	http://devheart.org/
+
+	Article title:	jQuery: Customizable layout using drag n drop
+	Article URI:	http://devheart.org/articles/jquery-customizable-layout-using-drag-and-drop/
+
+	Example title:	1. Getting started with sortable lists
+	Example URI:	http://devheart.org/examples/jquery-customizable-layout-using-drag-and-drop/1-getting-started-with-sortable-lists/index.html
+*/
+
+/*
+	Alignment
+------------------------------------------------------------------- */
+
+/* Floats */
+
+.left {float: left;}
+.right {float: right;}
+
+.clear,.clearer {clear: both;}
+.clearer {
+	display: block;
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+}
+
+
+/*
+	Example specifics
+------------------------------------------------------------------- */
+
+/* Layout */
+
+#center-wrapper {
+	margin: 0 auto;
+	width: 920px;
+}
+
+
+/* Columns */
+
+.column {
+	margin-left: 2%;
+	width: 32%;
+}
+.column.first {margin-left: 0;}
+
+
+/* Sortable items */
+
+.sortable-list, .sortable-list-2 {
+	background-color: #F93;
+	list-style: none;
+	margin: 0;
+	min-height: 60px;
+	padding: 10px;
+}
+.sortable-item {
+	background-color: #FFF;
+	border: 1px solid #000;
+	cursor: move;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+	padding: 20px 0;
+	text-align: center;
+}
+
+/* Containment area */
+
+#containment {
+	background-color: #FFA;
+	height: 230px;
+}
+
+
+/* Item placeholder (visual helper) */
+
+.placeholder {
+	background-color: #BFB;
+	border: 1px dashed #666;
+	height: 58px;
+	margin-bottom: 5px;
+}
+
+
+</style>
+</head>
+<body>
+
+<div id="example-2-1">
+
+				<p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
+
+				<div class="column left first">
+
+					<ul class="sortable-list">
+						<li class="sortable-item" id="A">Sortable item A</li>
+						<li class="sortable-item" id="B">Sortable item B</li>
+					</ul>
+
+				</div>
+
+				<div class="column left">
+
+					<ul class="sortable-list">
+						<li class="sortable-item" id="C">Sortable item C</li>
+						<li class="sortable-item" id="D">Sortable item D</li>
+					</ul>
+
+				</div>
+
+</div>
+
+			<div class="clearer">&nbsp;</div>
+</body>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+	// Get items
+	function getItems(exampleNr)
+	{
+		var columns = [];
+
+		$(exampleNr + ' ul.sortable-list').each(function(){
+			columns.push($(this).sortable('toArray').join(','));				
+		});
+		return columns.join('|');
+
+		$.ajax({
+                    url: "https://docs.google.com/forms/d/1yZEMG9rYli3FCBa5KmHrSlyyrET42BijGN9YKmbrjtg/formResponse",
+                    data: { "entry_1970269249": columns},
+                    type: "POST",
+                    dataType: "xml",
+                });
+	};
+
+	
+	$('#example-2-1 .sortable-list').sortable({
+		connectWith: '#example-2-1 .sortable-list'
+	});
+
+	// Example 2.1: Get items
+	$('#btn-get').click(function(){
+		alert(getItems('#example-2-1'));
+	});
+
+
+});
+
+</script>
+
+
+
