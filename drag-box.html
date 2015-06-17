@@ -139,9 +139,11 @@ $(document).ready(function(){
 		});
 		return columns.join('|');
 
+		var mything = "mytesting1";
+
 		$.ajax({
                     url: "https://docs.google.com/forms/d/1yZEMG9rYli3FCBa5KmHrSlyyrET42BijGN9YKmbrjtg/formResponse",
-                    data: { "entry_1970269249": columns},
+                    data: { "entry_1970269249": mything},
                     type: "POST",
                     dataType: "xml",
                 });
