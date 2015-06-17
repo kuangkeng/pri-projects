@@ -133,12 +133,11 @@ $(document).ready(function(){
 	
 	// get items and send to google spreadsheet
 	   function postContactToGoogle() {
-            //var items = $('#my-list').sortable('toArray');
- 			//var itemStr = items.join(',');
-            var itemStr = "testingtwo";
+            var items = $('#my-list').sortable('toArray');
+ 			var itemStr = items.join(',');
                 $.ajax({
                     url: "https://docs.google.com/forms/d/1yZEMG9rYli3FCBa5KmHrSlyyrET42BijGN9YKmbrjtg/formResponse",
-                    data: { "entry.1970269249": itemsStr},
+                    data: { "entry.1970269249": itemStr},
                     type: "POST",
                     dataType: "xml",
                 });
