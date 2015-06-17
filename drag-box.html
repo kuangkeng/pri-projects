@@ -148,7 +148,7 @@ $(document).ready(function(){
                         }
                     }
                 });
-        }
+        };
 
 	
 	$('#example-2-1 .sortable-list').sortable({
@@ -156,8 +156,9 @@ $(document).ready(function(){
 	});
 
 	// Example 2.1: Get items
-	$('#btn-get').click(function(){
-		.postContactToGoogle(function());
+	$('#btn-get').click(postContactToGoogle);
+
+
 	});
 
 
