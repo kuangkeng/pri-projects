@@ -130,20 +130,13 @@
 $(document).ready(function(){
 
 	// Get items
-	function getItems(exampleNr)
-	{
-		var columns = [];
+	   function postContactToGoogle() {
+            var email = "testingone" ;
+            
 
-		$(exampleNr + ' ul.sortable-list').each(function(){
-			columns.push($(this).sortable('toArray').join(','));				
-		});
-		return columns.join('|');
-
-		var mything = 10;
-
-		$.ajax({
+                $.ajax({
                     url: "https://docs.google.com/forms/d/1yZEMG9rYli3FCBa5KmHrSlyyrET42BijGN9YKmbrjtg/formResponse",
-                    data: { "entry.1970269249": mything},
+                    data: { "entry.1970269249": email},
                     type: "POST",
                     dataType: "xml",
                     statusCode: {
@@ -155,7 +148,7 @@ $(document).ready(function(){
                         }
                     }
                 });
-	};
+        }
 
 	
 	$('#example-2-1 .sortable-list').sortable({
@@ -164,7 +157,7 @@ $(document).ready(function(){
 
 	// Example 2.1: Get items
 	$('#btn-get').click(function(){
-		alert(getItems('#example-2-1'));
+		.postContactToGoogle(function());
 	});
 
 
