@@ -57,7 +57,7 @@
 
 /* Sortable items */
 
-.sortable-list, .sortable-list-2 {
+.sortable-list {
 	background-color: #F93;
 	list-style: none;
 	margin: 0;
@@ -112,7 +112,7 @@
 
 				<div class="column left">
 
-					<ul class="sortable-list">
+					<ul class="sortable-list" id="my-list">
 						<li class="sortable-item" id="C">Sortable item C</li>
 						<li class="sortable-item" id="D">Sortable item D</li>
 					</ul>
@@ -129,14 +129,16 @@
 
 $(document).ready(function(){
 
-	// Get items
+	var input = "no input";
+	
+	// get items and send to google spreadsheet
 	   function postContactToGoogle() {
-            var email = "5,7,7,8" ;
-            
-
+            //var items = $('#my-list').sortable('toArray');
+ 			//var itemStr = items.join(',');
+            var itemStr = "testingtwo";
                 $.ajax({
                     url: "https://docs.google.com/forms/d/1yZEMG9rYli3FCBa5KmHrSlyyrET42BijGN9YKmbrjtg/formResponse",
-                    data: { "entry.1970269249": email},
+                    data: { "entry.1970269249": itemsStr},
                     type: "POST",
                     dataType: "xml",
                 });
