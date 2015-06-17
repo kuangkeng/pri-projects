@@ -31,12 +31,20 @@ body {
 $(function () {
     $('#container').highcharts({
         title: {
-            text: "Percentage of STEM Bachelor's Degrees Conferred to Women (1971-2013)",
+            text: "Percentage of STEM Bachelor's Degrees Conferred to Women",
             x: -20 //center
         },
         subtitle: {
             text: 'Source: National Center for Education Statistics',
-            x: -20
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: 8,
+            style: {
+                color: '#808080',
+                fontSize: '11',
+                margin: '10',
+            }
         },
   
         xAxis: {

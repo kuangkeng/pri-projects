@@ -26,18 +26,30 @@ body {
 
 <body>
 <div id="container"></div>
+<br>
+Source:
+Credit: 
+
 </body>
 
 <script>
 $(function () {
     $('#container').highcharts({
         title: {
-            text: "Percentage Bachelor's Degrees Conferred to Women (1971-2013)",
+            text: "Percentage of Bachelor's Degrees Conferred to Women in Fields Dominated by Women",
             x: -20 //center
         },
         subtitle: {
             text: 'Source: <a href="http://nces.ed.gov/programs/digest/current_tables.asp">National Center for Education Statistics</a>',
-            x: -20
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: 8,
+            style: {
+                color: '#808080',
+                fontSize: '11',
+                margin: '10',
+            }
         },
   
         xAxis: {
