@@ -102,7 +102,9 @@
 
 				<p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
 
-<p><input id="search_input" placeholder="Type to filter" /></p>	  
+<p><input id="search_input" placeholder="Type to filter" /></p>	
+
+<p>Number of results: <div id="num_results"></div></p>  
   
 				<div class="column left first">
 <ul class="sortable-list" id="mylist">
@@ -869,9 +871,13 @@ $(document).ready(function(){
 	// Example 2.1: Get items
 	$('#btn-get').click(postContactToGoogle);
 
-//fastLiveFilter function here
+	//fastLiveFilter function here
 	$(function() {
-        $('#search_input').fastLiveFilter('#mylist');
+        $('#search_input').fastLiveFilter('#mylist', 
+       		{
+    		callback: function(total) { $('#num_results').html(total); }
+			}
+		);
     });
 
 	});
