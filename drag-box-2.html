@@ -16,7 +16,7 @@
 	Article URI:	http://devheart.org/articles/jquery-customizable-layout-using-drag-and-drop/
 
 	Example title:	1. Getting started with sortable lists
-	Example URI:	http://devheart.org/examples/jquery-customizable-layout-using-drag-and-drop/1-getting-started-with-lists/index.html
+	Example URI:	http://devheart.org/examples/jquery-customizable-layout-using-drag-and-drop/1-getting-started-with-sortable-lists/index.html
 */
 
 /*
@@ -60,7 +60,7 @@
 
 /* Sortable items */
 
-.list {
+.sortable-list {
 	background-color: #F93;
 	list-style: none;
 	margin: 0;
@@ -102,11 +102,22 @@
 
 <div id="example-2-1">
 
-<p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
+				<p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
 
+<p><input id="search_input" placeholder="Type to filter" /></p>	
+
+<p>Number of results: <div id="num_results"></div></p>  
+  
 <div class="column left first" id="users">
-<p><input class="search" placeholder="Type to filter" /></p>
-<ul class="list" id="mylist">
+
+ <input class="search" placeholder="Search" />
+ <button class="sort" data-sort="sortable-item">
+    Sort by name
+ </button>
+
+
+
+<ul class="sortable-list list" id="mylist">
 <li class="sortable-item" id="1"><p class="name">Type out three lists of orders.</p></li>
 <li class="sortable-item" id="2"><p class="name">He wrote down a long list of items.</p></li>
 <li class="sortable-item" id="3"><p class="name">The list of names is carved around the base.</p></li>
@@ -832,7 +843,7 @@
 
 				<div class="column left">
 
-					<ul class="list" id="my-list">
+					<ul class="sortable-list" id="my-list">
 						
 					</ul>
 
@@ -863,8 +874,8 @@ $(document).ready(function(){
         };
 
 	
-	$('#example-2-1 .list').sortable({
-		connectWith: '#example-2-1 .list'
+	$('#example-2-1 .sortable-list').sortable({
+		connectWith: '#example-2-1 .sortable-list'
 	});
 
 	// Example 2.1: Get items
