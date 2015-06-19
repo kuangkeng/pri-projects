@@ -16,7 +16,7 @@
 	Article URI:	http://devheart.org/articles/jquery-customizable-layout-using-drag-and-drop/
 
 	Example title:	1. Getting started with sortable lists
-	Example URI:	http://devheart.org/examples/jquery-customizable-layout-using-drag-and-drop/1-getting-started-with-sortable-lists/index.html
+	Example URI:	http://devheart.org/examples/jquery-customizable-layout-using-drag-and-drop/1-getting-started-with-lists/index.html
 */
 
 /*
@@ -60,7 +60,7 @@
 
 /* Sortable items */
 
-.sortable-list {
+.list {
 	background-color: #F93;
 	list-style: none;
 	margin: 0;
@@ -102,748 +102,737 @@
 
 <div id="example-2-1">
 
-				<p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
+<p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
 
-<p><input id="search_input" placeholder="Type to filter" /></p>	
-
-<p>Number of results: <div id="num_results"></div></p>  
-  
 <div class="column left first" id="users">
-
- <input class="search" placeholder="Search" />
- <button class="sort" data-sort="sortable-item">
-    Sort by name
- </button>
-
-
-
-<ul class="sortable-list" id="mylist">
-<li class="sortable-item" id="1">Type out three lists of orders.</li>
-<li class="sortable-item" id="2">He wrote down a long list of items.</li>
-<li class="sortable-item" id="3">The list of names is carved around the base.</li>
-<li class="sortable-item" id="4">The birch canoe slid on the smooth planks.</li>
-<li class="sortable-item" id="5">Glue the sheet to the dark blue background.</li>
-<li class="sortable-item" id="6">It's easy to tell the depth of a well.</li>
-<li class="sortable-item" id="7">These days a chicken leg is a rare dish.</li>
-<li class="sortable-item" id="8">Rice is often served in round bowls.</li>
-<li class="sortable-item" id="9">The juice of lemons makes fine punch.</li>
-<li class="sortable-item" id="10">The box was thrown beside the parked truck.</li>
-<li class="sortable-item" id="11">The hogs were fed chopped corn and garbage.</li>
-<li class="sortable-item" id="12">Four hours of steady work faced us.</li>
-<li class="sortable-item" id="13">Large size in stockings is hard to sell.</li>
-<li class="sortable-item" id="14">The boy was there when the sun rose.</li>
-<li class="sortable-item" id="15">A rod is used to catch pink salmon.</li>
-<li class="sortable-item" id="16">The source of the huge river is the clear spring.</li>
-<li class="sortable-item" id="17">Kick the ball straight and follow through.</li>
-<li class="sortable-item" id="18">Help the woman get back to her feet.</li>
-<li class="sortable-item" id="19">A pot of tea helps to pass the evening.</li>
-<li class="sortable-item" id="20">Smoky fires lack flame and heat.</li>
-<li class="sortable-item" id="21">The soft cushion broke the man's fall.</li>
-<li class="sortable-item" id="22">The salt breeze came across from the sea.</li>
-<li class="sortable-item" id="23">The girl at the booth sold fifty bonds.</li>
-<li class="sortable-item" id="24">The small pup gnawed a hole in the sock.</li>
-<li class="sortable-item" id="25">The fish twisted and turned on the bent hook.</li>
-<li class="sortable-item" id="26">Press the pants and sew a button on the vest.</li>
-<li class="sortable-item" id="27">The swan dive was far short of perfect.</li>
-<li class="sortable-item" id="28">The beauty of the view stunned the young boy.</li>
-<li class="sortable-item" id="29">Two blue fish swam in the tank.</li>
-<li class="sortable-item" id="30">Her purse was full of useless trash.</li>
-<li class="sortable-item" id="31">The colt reared and threw the tall rider.</li>
-<li class="sortable-item" id="32">It snowed, rained, and hailed the same morning.</li>
-<li class="sortable-item" id="33">Read verse out loud for pleasure.</li>
-<li class="sortable-item" id="34">Hoist the load to your left shoulder.</li>
-<li class="sortable-item" id="35">Take the winding path to reach the lake.</li>
-<li class="sortable-item" id="36">Note closely the size of the gas tank.</li>
-<li class="sortable-item" id="37">Wipe the grease off his dirty face.</li>
-<li class="sortable-item" id="38">Mend the coat before you go out.</li>
-<li class="sortable-item" id="39">The wrist was badly strained and hung limp.</li>
-<li class="sortable-item" id="40">The stray cat gave birth to kittens.</li>
-<li class="sortable-item" id="41">The young girl gave no clear response.</li>
-<li class="sortable-item" id="42">The meal was cooked before the bell rang.</li>
-<li class="sortable-item" id="43">What joy there is in living.</li>
-<li class="sortable-item" id="44">A king ruled the state in the early days.</li>
-<li class="sortable-item" id="45">The ship was torn apart on the sharp reef.</li>
-<li class="sortable-item" id="46">Sickness kept him home the third week.</li>
-<li class="sortable-item" id="47">The wide road shimmered in the hot sun.</li>
-<li class="sortable-item" id="48">The lazy cow lay in the cool grass.</li>
-<li class="sortable-item" id="49">Lift the square stone over the fence.</li>
-<li class="sortable-item" id="50">The rope will bind the seven books at once.</li>
-<li class="sortable-item" id="51">Hop over the fence and plunge in.</li>
-<li class="sortable-item" id="52">The friendly gang left the drug store.</li>
-<li class="sortable-item" id="53">Mesh mire keeps chicks inside.</li>
-<li class="sortable-item" id="54">The frosty air passed through the coat.</li>
-<li class="sortable-item" id="55">The crooked maze failed to fool the mouse.</li>
-<li class="sortable-item" id="56">Adding fast leads to wrong sums.</li>
-<li class="sortable-item" id="57">The show was a flop from the very start.</li>
-<li class="sortable-item" id="58">A saw is a tool used for making boards.</li>
-<li class="sortable-item" id="59">The wagon moved on well oiled wheels.</li>
-<li class="sortable-item" id="60">March the soldiers past the next hill.</li>
-<li class="sortable-item" id="61">A cup of sugar makes sweet fudge.</li>
-<li class="sortable-item" id="62">Place a rosebush near the porch steps.</li>
-<li class="sortable-item" id="63">Both lost their lives in the raging storm.</li>
-<li class="sortable-item" id="64">We talked of the slide show in the circus.</li>
-<li class="sortable-item" id="65">Use a pencil to write the first draft.</li>
-<li class="sortable-item" id="66">He ran half way to the hardware store.</li>
-<li class="sortable-item" id="67">The clock struck to mark the third period.</li>
-<li class="sortable-item" id="68">A small creek cut across the field.</li>
-<li class="sortable-item" id="69">Cars and busses stalled in snow drifts.</li>
-<li class="sortable-item" id="70">The set of china hit, the floor with a crash.</li>
-<li class="sortable-item" id="71">This is a grand season for hikes on the road.</li>
-<li class="sortable-item" id="72">The dune rose from the edge of the water.</li>
-<li class="sortable-item" id="73">Those words were the cue for the actor to leave.</li>
-<li class="sortable-item" id="74">A yacht slid around the point into the bay.</li>
-<li class="sortable-item" id="75">The two met while playing on the sand.</li>
-<li class="sortable-item" id="76">The ink stain dried on the finished page.</li>
-<li class="sortable-item" id="77">The walled town was seized without a fight.</li>
-<li class="sortable-item" id="78">The lease ran out in sixteen weeks.</li>
-<li class="sortable-item" id="79">A tame squirrel makes a nice pet.</li>
-<li class="sortable-item" id="80">The horn of the car woke the sleeping cop.</li>
-<li class="sortable-item" id="81">The heart beat strongly and with firm strokes.</li>
-<li class="sortable-item" id="82">The pearl was worn in a thin silver ring.</li>
-<li class="sortable-item" id="83">The fruit peel was cut in thick slices.</li>
-<li class="sortable-item" id="84">The Navy attacked the big task force.</li>
-<li class="sortable-item" id="85">See the cat glaring at the scared mouse.</li>
-<li class="sortable-item" id="86">There are more than two factors here.</li>
-<li class="sortable-item" id="87">The hat brim was wide and too droopy.</li>
-<li class="sortable-item" id="88">The lawyer tried to lose his case.</li>
-<li class="sortable-item" id="89">The grass curled around the fence post.</li>
-<li class="sortable-item" id="90">Cut the pie into large parts.</li>
-<li class="sortable-item" id="91">Men strive but seldom get rich.</li>
-<li class="sortable-item" id="92">Always close the barn door tight.</li>
-<li class="sortable-item" id="93">He lay prone and hardly moved a limb.</li>
-<li class="sortable-item" id="94">The slush lay deep along the street.</li>
-<li class="sortable-item" id="95">A wisp of cloud hung in the blue air.</li>
-<li class="sortable-item" id="96">A pound of sugar costs more than eggs.</li>
-<li class="sortable-item" id="97">The fin was sharp and cut the clear water.</li>
-<li class="sortable-item" id="98">The play seems dull and quite stupid.</li>
-<li class="sortable-item" id="99">Bail the boat, to stop it from sinking.</li>
-<li class="sortable-item" id="100">The term ended in late June that year.</li>
-<li class="sortable-item" id="101">A tusk is used to make costly gifts.</li>
-<li class="sortable-item" id="102">Ten pins were set in order.</li>
-<li class="sortable-item" id="103">The bill as paid every third week.</li>
-<li class="sortable-item" id="104">Oak is strong and also gives shade.</li>
-<li class="sortable-item" id="105">Cats and dogs each hate the other.</li>
-<li class="sortable-item" id="106">The pipe began to rust while new.</li>
-<li class="sortable-item" id="107">Open the crate but don't break the glass.</li>
-<li class="sortable-item" id="108">Add the sum to the product of these three.</li>
-<li class="sortable-item" id="109">Thieves who rob friends deserve jail.</li>
-<li class="sortable-item" id="110">The ripe taste of cheese improves with age.</li>
-<li class="sortable-item" id="111">Act on these orders with great speed.</li>
-<li class="sortable-item" id="112">The hog crawled under the high fence.</li>
-<li class="sortable-item" id="113">Move the vat over the hot fire.</li>
-<li class="sortable-item" id="114">The bark of the pine tree was shiny and dark.</li>
-<li class="sortable-item" id="115">Leaves turn brown and yellow in the fall.</li>
-<li class="sortable-item" id="116">The pennant waved when the wind blew.</li>
-<li class="sortable-item" id="117">Split the log with a quick, sharp blow.</li>
-<li class="sortable-item" id="118">Burn peat after the logs give out.</li>
-<li class="sortable-item" id="119">He ordered peach pie with ice cream.</li>
-<li class="sortable-item" id="120">Weave the carpet on the right hand side.</li>
-<li class="sortable-item" id="121">Hemp is a weed found in parts of the tropics.</li>
-<li class="sortable-item" id="122">A lame back kept his score low.</li>
-<li class="sortable-item" id="123">We find joy in the simplest things.</li>
-<li class="sortable-item" id="124">The harder he tried the less he got done.</li>
-<li class="sortable-item" id="125">The boss ran the show with a watchful eye.</li>
-<li class="sortable-item" id="126">The cup cracked and spilled its contents.</li>
-<li class="sortable-item" id="127">Paste can cleanse the most dirty brass.</li>
-<li class="sortable-item" id="128">The slang word for raw whiskey is booze.</li>
-<li class="sortable-item" id="129">It caught its hind paw in a rusty trap.</li>
-<li class="sortable-item" id="130">The wharf could be seen at the farther shore.</li>
-<li class="sortable-item" id="131">Feel the heat of the weak dying flame.</li>
-<li class="sortable-item" id="132">The tiny girl took off her hat.</li>
-<li class="sortable-item" id="133">A cramp is no small danger on a swim.</li>
-<li class="sortable-item" id="134">He said the same phrase thirty times.</li>
-<li class="sortable-item" id="135">Pluck the bright rose without leaves.</li>
-<li class="sortable-item" id="136">Two plus seven is less than ten.</li>
-<li class="sortable-item" id="137">The glow deepened in the eyes of the sweet girl.</li>
-<li class="sortable-item" id="138">Bring your problems to the wise chief.</li>
-<li class="sortable-item" id="139">Write a fond note to the friend you cherish.</li>
-<li class="sortable-item" id="140">Clothes and lodging are free to new men.</li>
-<li class="sortable-item" id="141">We frown when events take a bad turn.</li>
-<li class="sortable-item" id="142">Port is a strong wine with s smoky taste.</li>
-<li class="sortable-item" id="143">The young kid jumped the rusty gate.</li>
-<li class="sortable-item" id="144">Guess the results from the first scores.</li>
-<li class="sortable-item" id="145">A salt pickle tastes fine with ham.</li>
-<li class="sortable-item" id="146">The just claim got the right verdict.</li>
-<li class="sortable-item" id="147">These thistles bend in a high wind.</li>
-<li class="sortable-item" id="148">Pure bred poodles have curls.</li>
-<li class="sortable-item" id="149">The tree top waved in a graceful way.</li>
-<li class="sortable-item" id="150">The spot on the blotter was made by green ink.</li>
-<li class="sortable-item" id="151">Mud was spattered on the front of his white shirt.</li>
-<li class="sortable-item" id="152">The cigar burned a hole in the desk top.</li>
-<li class="sortable-item" id="153">The empty flask stood on the tin tray.</li>
-<li class="sortable-item" id="154">A speedy man can beat this track mark.</li>
-<li class="sortable-item" id="155">He broke a new shoelace that day.</li>
-<li class="sortable-item" id="156">The coffee stand is too high for the couch.</li>
-<li class="sortable-item" id="157">The urge to write short stories is rare.</li>
-<li class="sortable-item" id="158">The pencils have all been used.</li>
-<li class="sortable-item" id="159">The pirates seized the crew of the lost ship.</li>
-<li class="sortable-item" id="160">We tried to replace the coin but failed.</li>
-<li class="sortable-item" id="161">She sewed the torn coat quite neatly.</li>
-<li class="sortable-item" id="162">The sofa cushion is red and of light weight.</li>
-<li class="sortable-item" id="163">The jacket hung on the back of the wide chair.</li>
-<li class="sortable-item" id="164">At that high level the air is pure.</li>
-<li class="sortable-item" id="165">Drop the two when you add the figures.</li>
-<li class="sortable-item" id="166">A filing case is now hard to buy.</li>
-<li class="sortable-item" id="167">An abrupt start does not win the prize.</li>
-<li class="sortable-item" id="168">Wood is best for making toys and blocks.</li>
-<li class="sortable-item" id="169">The office paint was a dull sad tan.</li>
-<li class="sortable-item" id="170">He knew the skill of the great young actress.</li>
-<li class="sortable-item" id="171">A rag will soak up spilled water.</li>
-<li class="sortable-item" id="172">A shower of dirt fell from the hot pipes.</li>
-<li class="sortable-item" id="173">Steam hissed from the broken valve.</li>
-<li class="sortable-item" id="174">The child almost hurt the small dog.</li>
-<li class="sortable-item" id="175">There was a sound of dry leaves outside.</li>
-<li class="sortable-item" id="176">The sky that morning was clear and bright blue.</li>
-<li class="sortable-item" id="177">Torn scraps littered the stone floor.</li>
-<li class="sortable-item" id="178">Sunday is the best part of the week.</li>
-<li class="sortable-item" id="179">The doctor cured him with these pills.</li>
-<li class="sortable-item" id="180">The new girl was fired today at noon.</li>
-<li class="sortable-item" id="181">They felt gay when the ship arrived in port.</li>
-<li class="sortable-item" id="182">Add the store's account to the last cent.</li>
-<li class="sortable-item" id="183">Acid burns holes in wool cloth.</li>
-<li class="sortable-item" id="184">Fairy tales should be fun to write.</li>
-<li class="sortable-item" id="185">Eight miles of woodland burned to waste.</li>
-<li class="sortable-item" id="186">The third act was dull and tired the players.</li>
-<li class="sortable-item" id="187">A young child should not suffer fright.</li>
-<li class="sortable-item" id="188">Add the column and put the sum here.</li>
-<li class="sortable-item" id="189">We admire and love a good cook.</li>
-<li class="sortable-item" id="190">There the flood mark is ten inches.</li>
-<li class="sortable-item" id="191">He carved a head from the round block of marble.</li>
-<li class="sortable-item" id="192">She has st smart way of wearing clothes.</li>
-<li class="sortable-item" id="193">The fruit of a fig tree is apple-shaped.</li>
-<li class="sortable-item" id="194">Corn cobs can be used to kindle a fire.</li>
-<li class="sortable-item" id="195">Where were they when the noise started.</li>
-<li class="sortable-item" id="196">The paper box is full of thumb tacks.</li>
-<li class="sortable-item" id="197">Sell your gift to a buyer at a good gain.</li>
-<li class="sortable-item" id="198">The tongs lay beside the ice pail.</li>
-<li class="sortable-item" id="199">The petals fall with the next puff of wind.</li>
-<li class="sortable-item" id="200">Bring your best compass to the third class.</li>
-<li class="sortable-item" id="201">They could laugh although they were sad.</li>
-<li class="sortable-item" id="202">Farmers came in to thresh the oat crop.</li>
-<li class="sortable-item" id="203">The brown house was on fire to the attic.</li>
-<li class="sortable-item" id="204">The lure is used to catch trout and flounder.</li>
-<li class="sortable-item" id="205">Float the soap on top of the bath water.</li>
-<li class="sortable-item" id="206">A blue crane is a tall wading bird.</li>
-<li class="sortable-item" id="207">A fresh start will work such wonders.</li>
-<li class="sortable-item" id="208">The club rented the rink for the fifth night.</li>
-<li class="sortable-item" id="209">After the dance they went straight home.</li>
-<li class="sortable-item" id="210">The hostess taught the new maid to serve.</li>
-<li class="sortable-item" id="211">He wrote his last novel there at the inn.</li>
-<li class="sortable-item" id="212">Even the worst will beat his low score.</li>
-<li class="sortable-item" id="213">The cement had dried when he moved it.</li>
-<li class="sortable-item" id="214">The loss of the second ship was hard to take.</li>
-<li class="sortable-item" id="215">The fly made its way along the wall.</li>
-<li class="sortable-item" id="216">Do that with a wooden stick.</li>
-<li class="sortable-item" id="217">Lire wires should be kept covered.</li>
-<li class="sortable-item" id="218">The large house had hot water taps.</li>
-<li class="sortable-item" id="219">It is hard to erase blue or red ink.</li>
-<li class="sortable-item" id="220">Write at once or you may forget it.</li>
-<li class="sortable-item" id="221">The doorknob was made of bright clean brass.</li>
-<li class="sortable-item" id="222">The wreck occurred by the bank on Main Street.</li>
-<li class="sortable-item" id="223">A pencil with black lead writes best.</li>
-<li class="sortable-item" id="224">Coax a young calf to drink from a bucket.</li>
-<li class="sortable-item" id="225">Schools for ladies teach charm and grace.</li>
-<li class="sortable-item" id="226">The lamp shone with a steady green flame.</li>
-<li class="sortable-item" id="227">They took the axe and the saw to the forest.</li>
-<li class="sortable-item" id="228">The ancient coin was quite dull and worn.</li>
-<li class="sortable-item" id="229">The shaky barn fell with a loud crash.</li>
-<li class="sortable-item" id="230">Jazz and swing fans like fast music.</li>
-<li class="sortable-item" id="231">Rake the rubbish up and then burn it.</li>
-<li class="sortable-item" id="232">Slash the gold cloth into fine ribbons.</li>
-<li class="sortable-item" id="233">Try to have the court decide the case.</li>
-<li class="sortable-item" id="234">They are pushed back each time they attack.</li>
-<li class="sortable-item" id="235">He broke his ties with groups of former friends.</li>
-<li class="sortable-item" id="236">They floated on the raft to sun their white backs.</li>
-<li class="sortable-item" id="237">The map had an X that meant nothing.</li>
-<li class="sortable-item" id="238">Whitings are small fish caught in nets.</li>
-<li class="sortable-item" id="239">Some ads serve to cheat buyers.</li>
-<li class="sortable-item" id="240">Jerk the rope and the bell rings weakly.</li>
-<li class="sortable-item" id="241">A waxed floor makes us lose balance.</li>
-<li class="sortable-item" id="242">Madam, this is the best brand of corn.</li>
-<li class="sortable-item" id="243">On the islands the sea breeze is soft and mild.</li>
-<li class="sortable-item" id="244">The play began as soon as we sat down.</li>
-<li class="sortable-item" id="245">This will lead the world to more sound and fury</li>
-<li class="sortable-item" id="246">Add salt before you fry the egg.</li>
-<li class="sortable-item" id="247">The rush for funds reached its peak Tuesday.</li>
-<li class="sortable-item" id="248">The birch looked stark white and lonesome.</li>
-<li class="sortable-item" id="249">The box is held by a bright red snapper.</li>
-<li class="sortable-item" id="250">To make pure ice, you freeze water.</li>
-<li class="sortable-item" id="251">The first worm gets snapped early.</li>
-<li class="sortable-item" id="252">Jump the fence and hurry up the bank.</li>
-<li class="sortable-item" id="253">Yell and clap as the curtain slides back.</li>
-<li class="sortable-item" id="254">They are men nho walk the middle of the road.</li>
-<li class="sortable-item" id="255">Both brothers wear the same size.</li>
-<li class="sortable-item" id="256">In some forin or other we need fun.</li>
-<li class="sortable-item" id="257">The prince ordered his head chopped off.</li>
-<li class="sortable-item" id="258">The houses are built of red clay bricks.</li>
-<li class="sortable-item" id="259">Ducks fly north but lack a compass.</li>
-<li class="sortable-item" id="260">Fruit flavors are used in fizz drinks.</li>
-<li class="sortable-item" id="261">These pills do less good than others.</li>
-<li class="sortable-item" id="262">Canned pears lack full flavor.</li>
-<li class="sortable-item" id="263">The dark pot hung in the front closet.</li>
-<li class="sortable-item" id="264">Carry the pail to the wall and spill it there.</li>
-<li class="sortable-item" id="265">The train brought our hero to the big town.</li>
-<li class="sortable-item" id="266">We are sure that one war is enough.</li>
-<li class="sortable-item" id="267">Gray paint stretched for miles around.</li>
-<li class="sortable-item" id="268">The rude laugh filled the empty room.</li>
-<li class="sortable-item" id="269">High seats are best for football fans.</li>
-<li class="sortable-item" id="270">Tea served from the brown jug is tasty.</li>
-<li class="sortable-item" id="271">A dash of pepper spoils beef stew.</li>
-<li class="sortable-item" id="272">A zestful food is the hot-cross bun.</li>
-<li class="sortable-item" id="273">The horse trotted around the field at a brisk pace.</li>
-<li class="sortable-item" id="274">Find the twin who stole the pearl necklace.</li>
-<li class="sortable-item" id="275">Cut the cord that binds the box tightly.</li>
-<li class="sortable-item" id="276">The red tape bound the smuggled food.</li>
-<li class="sortable-item" id="277">Look in the corner to find the tan shirt.</li>
-<li class="sortable-item" id="278">The cold drizzle will halt the bond drive.</li>
-<li class="sortable-item" id="279">Nine men were hired to dig the ruins.</li>
-<li class="sortable-item" id="280">The junk yard had a mouldy smell.</li>
-<li class="sortable-item" id="281">The flint sputtered and lit a pine torch.</li>
-<li class="sortable-item" id="282">Soak the cloth and drown the sharp odor.</li>
-<li class="sortable-item" id="283">The shelves were bare of both jam or crackers.</li>
-<li class="sortable-item" id="284">A joy to every child is the swan boat.</li>
-<li class="sortable-item" id="285">All sat frozen and watched the screen.</li>
-<li class="sortable-item" id="286">ii cloud of dust stung his tender eyes.</li>
-<li class="sortable-item" id="287">To reach the end he needs much courage.</li>
-<li class="sortable-item" id="288">Shape the clay gently into block form.</li>
-<li class="sortable-item" id="289">The ridge on a smooth surface is a bump or flaw.</li>
-<li class="sortable-item" id="290">Hedge apples may stain your hands green.</li>
-<li class="sortable-item" id="291">Quench your thirst, then eat the crackers.</li>
-<li class="sortable-item" id="292">Tight curls get limp on rainy days.</li>
-<li class="sortable-item" id="293">The mute muffled the high tones of the horn.</li>
-<li class="sortable-item" id="294">The gold ring fits only a pierced ear.</li>
-<li class="sortable-item" id="295">The old pan was covered with hard fudge.</li>
-<li class="sortable-item" id="296">Watch the log float in the wide river.</li>
-<li class="sortable-item" id="297">The node on the stalk of wheat grew daily.</li>
-<li class="sortable-item" id="298">The heap of fallen leaves was set on fire.</li>
-<li class="sortable-item" id="299">Write fast, if you want to finish early.</li>
-<li class="sortable-item" id="300">His shirt was clean but one button was gone.</li>
-<li class="sortable-item" id="301">The barrel of beer was a brew of malt and hops.</li>
-<li class="sortable-item" id="302">Tin cans are absent from store shelves.</li>
-<li class="sortable-item" id="303">Slide the box into that empty space.</li>
-<li class="sortable-item" id="304">The plant grew large and green in the window.</li>
-<li class="sortable-item" id="305">The beam dropped down on the workmen's head.</li>
-<li class="sortable-item" id="306">Pink clouds floated JTith the breeze.</li>
-<li class="sortable-item" id="307">She danced like a swan, tall and graceful.</li>
-<li class="sortable-item" id="308">The tube was blown and the tire flat and useless.</li>
-<li class="sortable-item" id="309">It is late morning on the old wall clock.</li>
-<li class="sortable-item" id="310">Let's all join as we sing the last chorus.</li>
-<li class="sortable-item" id="311">The last switch cannot be turned off.</li>
-<li class="sortable-item" id="312">The fight will end in just six minutes.</li>
-<li class="sortable-item" id="313">The store walls were lined with colored frocks.</li>
-<li class="sortable-item" id="314">The peace league met to discuss their plans.</li>
-<li class="sortable-item" id="315">The rise to fame of a person takes luck.</li>
-<li class="sortable-item" id="316">Paper is scarce, so write with much care.</li>
-<li class="sortable-item" id="317">The quick fox jumped on the sleeping cat.</li>
-<li class="sortable-item" id="318">The nozzle of the fire hose was bright brass.</li>
-<li class="sortable-item" id="319">Screw the round cap on as tight as needed.</li>
-<li class="sortable-item" id="320">Time brings us many changes.</li>
-<li class="sortable-item" id="321">The purple tie was ten years old.</li>
-<li class="sortable-item" id="322">Men think and plan and sometimes act.</li>
-<li class="sortable-item" id="323">Fill the ink jar with sticky glue.</li>
-<li class="sortable-item" id="324">He smoke a big pipe with strong contents.</li>
-<li class="sortable-item" id="325">We need grain to keep our mules healthy.</li>
-<li class="sortable-item" id="326">Pack the records in a neat thin case.</li>
-<li class="sortable-item" id="327">The crunch of feet in the snow was the only sound.</li>
-<li class="sortable-item" id="328">The copper bowl shone in the sun's rays.</li>
-<li class="sortable-item" id="329">Boards will warp unless kept dry.</li>
-<li class="sortable-item" id="330">The plush chair leaned against the wall.</li>
-<li class="sortable-item" id="331">Glass will clink when struck by metal.</li>
-<li class="sortable-item" id="332">Bathe and relax in the cool green grass.</li>
-<li class="sortable-item" id="333">Nine rows of soldiers stood in line.</li>
-<li class="sortable-item" id="334">The beach is dry and shallow at low tide.</li>
-<li class="sortable-item" id="335">The idea is to sew both edges straight.</li>
-<li class="sortable-item" id="336">The kitten chased the dog down the street.</li>
-<li class="sortable-item" id="337">Pages bound in cloth make a book.</li>
-<li class="sortable-item" id="338">Try to trace the fine lines of the painting.</li>
-<li class="sortable-item" id="339">Women form less than half of the group.</li>
-<li class="sortable-item" id="340">The zones merge in the central part of town.</li>
-<li class="sortable-item" id="341">A gem in the rough needs work to polish.</li>
-<li class="sortable-item" id="342">Code is used when secrets are sent.</li>
-<li class="sortable-item" id="343">Most of the new is easy for us to hear.</li>
-<li class="sortable-item" id="344">He used the lathe to make brass objects.</li>
-<li class="sortable-item" id="345">The vane on top of the pole revolved in the wind.</li>
-<li class="sortable-item" id="346">Mince pie is a dish served to children.</li>
-<li class="sortable-item" id="347">The clan gathered on each dull night.</li>
-<li class="sortable-item" id="348">Let it burn, it gives us warmth and comfort.</li>
-<li class="sortable-item" id="349">A castle built from sand fails to endure.</li>
-<li class="sortable-item" id="350">A child's wit saved the day for us.</li>
-<li class="sortable-item" id="351">Tack the strip of carpet to the worn floor.</li>
-<li class="sortable-item" id="352">Next Tuesday we must vote.</li>
-<li class="sortable-item" id="353">Pour the stew from the pot into the plate.</li>
-<li class="sortable-item" id="354">Each penny shone like new.</li>
-<li class="sortable-item" id="355">The man went to the woods to gather sticks.</li>
-<li class="sortable-item" id="356">The dirt piles were lines along the road.</li>
-<li class="sortable-item" id="357">The logs fell and tumbled into the clear stream.</li>
-<li class="sortable-item" id="358">Just hoist it up and take it away,</li>
-<li class="sortable-item" id="359">A ripe plum is fit for a king's palate.</li>
-<li class="sortable-item" id="360">Our plans right now are hazy.</li>
-<li class="sortable-item" id="361">Brass rings are sold by these natives.</li>
-<li class="sortable-item" id="362">It takes a good trap to capture a bear.</li>
-<li class="sortable-item" id="363">Feed the white mouse some flower seeds.</li>
-<li class="sortable-item" id="364">The thaw came early and freed the stream.</li>
-<li class="sortable-item" id="365">He took the lead and kept it the whole distance.</li>
-<li class="sortable-item" id="366">The key you designed will fit the lock.</li>
-<li class="sortable-item" id="367">Plead to the council to free the poor thief.</li>
-<li class="sortable-item" id="368">Better hash is made of rare beef.</li>
-<li class="sortable-item" id="369">This plank was made for walking on.</li>
-<li class="sortable-item" id="370">The lake sparkled in the red hot sun.</li>
-<li class="sortable-item" id="371">He crawled with care along the ledge.</li>
-<li class="sortable-item" id="372">Tend the sheep while the dog wanders.</li>
-<li class="sortable-item" id="373">It takes a lot of help to finish these.</li>
-<li class="sortable-item" id="374">Mark the spot with a sign painted red.</li>
-<li class="sortable-item" id="375">Take two shares as a fair profit.</li>
-<li class="sortable-item" id="376">The fur of cats goes by many names.</li>
-<li class="sortable-item" id="377">North winds bring colds and fevers.</li>
-<li class="sortable-item" id="378">He asks no person to vouch for him.</li>
-<li class="sortable-item" id="379">Go now and come here later.</li>
-<li class="sortable-item" id="380">A sash of gold silk will trim her dress.</li>
-<li class="sortable-item" id="381">Soap can wash most dirt away.</li>
-<li class="sortable-item" id="382">That move means the game is over.</li>
-<li class="sortable-item" id="383">A siege will crack the strong defense.</li>
-<li class="sortable-item" id="384">Grape juice and water mix well.</li>
-<li class="sortable-item" id="385">Roads are paved with sticky tar.</li>
-<li class="sortable-item" id="386">Fake &ones shine but cost little.</li>
-<li class="sortable-item" id="387">The drip of the rain made a pleasant sound.</li>
-<li class="sortable-item" id="388">Smoke poured out of every crack.</li>
-<li class="sortable-item" id="389">Serve the hot rum to the tired heroes.</li>
-<li class="sortable-item" id="390">Much of the story makes good sense.</li>
-<li class="sortable-item" id="391">The sun came up to light the eastern sky.</li>
-<li class="sortable-item" id="392">Heave the line over the port side.</li>
-<li class="sortable-item" id="393">A lathe cuts and trims any wood.</li>
-<li class="sortable-item" id="394">It's a dense crowd in two distinct ways.</li>
-<li class="sortable-item" id="395">His hip struck the knee of the next player.</li>
-<li class="sortable-item" id="396">The stale smell of old beer lingers.</li>
-<li class="sortable-item" id="397">The desk was firm on the shaky floor.</li>
-<li class="sortable-item" id="398">It takes heat to bring out the odor.</li>
-<li class="sortable-item" id="399">Beef is scarcer than some lamb.</li>
-<li class="sortable-item" id="400">Raise the sail and steer the ship northward.</li>
-<li class="sortable-item" id="401">The cone costs five cents on Mondays.</li>
-<li class="sortable-item" id="402">A pod is what peas always grow in.</li>
-<li class="sortable-item" id="403">Jerk the dart from the cork target.</li>
-<li class="sortable-item" id="404">No cement will hold hard wood.</li>
-<li class="sortable-item" id="405">We now have a new base for shipping.</li>
-<li class="sortable-item" id="406">The sheep were led home by a dog.</li>
-<li class="sortable-item" id="407">Three for a dime, the young peddler cried.</li>
-<li class="sortable-item" id="408">The sense of smell is better than that of touch.</li>
-<li class="sortable-item" id="409">No hardship seemed to keep him sad.</li>
-<li class="sortable-item" id="410">Grace makes up for lack of beauty.</li>
-<li class="sortable-item" id="411">Nudge gently but wake her now.</li>
-<li class="sortable-item" id="412">The news struck doubt into restless minds.</li>
-<li class="sortable-item" id="413">Once we stood beside the shore.</li>
-<li class="sortable-item" id="414">A chink in the wall allowed a draft to blow.</li>
-<li class="sortable-item" id="415">Fasten two pins on each side.</li>
-<li class="sortable-item" id="416">A cold dip restores health and zest.</li>
-<li class="sortable-item" id="417">He takes the oath of office each March.</li>
-<li class="sortable-item" id="418">The sand drifts over the sill of the old house.</li>
-<li class="sortable-item" id="419">The point of the steel pen was bent and twisted.</li>
-<li class="sortable-item" id="420">There is a lag between thought and act.</li>
-<li class="sortable-item" id="421">Seed is needed to plant the spring corn.</li>
-<li class="sortable-item" id="422">Draw the chart with heavy black lines.</li>
-<li class="sortable-item" id="423">The boy owed his pal thirty cents.</li>
-<li class="sortable-item" id="424">The chap slipped into the crowd and was lost.</li>
-<li class="sortable-item" id="425">Hats are worn to tea and not to dinner.</li>
-<li class="sortable-item" id="426">The ramp led up to the wide highway.</li>
-<li class="sortable-item" id="427">Beat the dust from the rug onto the lawn.</li>
-<li class="sortable-item" id="428">Say it slow!y but make it ring clear.</li>
-<li class="sortable-item" id="429">The straw nest housed five robins.</li>
-<li class="sortable-item" id="430">Screen the porch with woven straw mats.</li>
-<li class="sortable-item" id="431">This horse will nose his way to the finish.</li>
-<li class="sortable-item" id="432">The dry wax protects the deep scratch.</li>
-<li class="sortable-item" id="433">He picked up the dice for a second roll.</li>
-<li class="sortable-item" id="434">These coins will be needed to pay his debt.</li>
-<li class="sortable-item" id="435">The nag pulled the frail cart along.</li>
-<li class="sortable-item" id="436">Twist the valve and release hot steam.</li>
-<li class="sortable-item" id="437">The vamp of the shoe had a gold buckle.</li>
-<li class="sortable-item" id="438">The smell of burned rags itches my nose.</li>
-<li class="sortable-item" id="439">Xew pants lack cuffs and pockets.</li>
-<li class="sortable-item" id="440">The marsh will freeze when cold enough.</li>
-<li class="sortable-item" id="441">They slice the sausage thin with a knife.</li>
-<li class="sortable-item" id="442">The bloom of the rose lasts a few days.</li>
-<li class="sortable-item" id="443">A gray mare walked before the colt.</li>
-<li class="sortable-item" id="444">Breakfast buns are fine with a hot drink.</li>
-<li class="sortable-item" id="445">Bottles hold four kinds of rum.</li>
-<li class="sortable-item" id="446">The man wore a feather in his felt hat.</li>
-<li class="sortable-item" id="447">He wheeled the bike past. the winding road.</li>
-<li class="sortable-item" id="448">Drop the ashes on the worn old rug.</li>
-<li class="sortable-item" id="449">The desk and both chairs were painted tan.</li>
-<li class="sortable-item" id="450">Throw out the used paper cup and plate.</li>
-<li class="sortable-item" id="451">A clean neck means a neat collar.</li>
-<li class="sortable-item" id="452">The couch cover and hall drapes were blue.</li>
-<li class="sortable-item" id="453">The stems of the tall glasses cracked and broke.</li>
-<li class="sortable-item" id="454">The wall phone rang loud and often.</li>
-<li class="sortable-item" id="455">The clothes dried on a thin wooden rack.</li>
-<li class="sortable-item" id="456">Turn on the lantern which gives us light.</li>
-<li class="sortable-item" id="457">The cleat sank deeply into the soft turf.</li>
-<li class="sortable-item" id="458">The bills were mailed promptly on the tenth of the month.</li>
-<li class="sortable-item" id="459">To have is better than to wait and hope.</li>
-<li class="sortable-item" id="460">The price is fair for a good antique clock.</li>
-<li class="sortable-item" id="461">The music played on while they talked.</li>
-<li class="sortable-item" id="462">Dispense with a vest on a day like this.</li>
-<li class="sortable-item" id="463">The bunch of grapes was pressed into wine.</li>
-<li class="sortable-item" id="464">He sent the figs, but kept the ripe cherries.</li>
-<li class="sortable-item" id="465">The hinge on the door creaked with old age.</li>
-<li class="sortable-item" id="466">The screen before the fire kept in the sparks.</li>
-<li class="sortable-item" id="467">Fly by night, and you waste little time.</li>
-<li class="sortable-item" id="468">Thick glasses helped him read the print.</li>
-<li class="sortable-item" id="469">Birth and death mark the limits of life.</li>
-<li class="sortable-item" id="470">The chair looked strong but had no bottom.</li>
-<li class="sortable-item" id="471">The kite flew wildly in the high wind.</li>
-<li class="sortable-item" id="472">A fur muff is stylish once more.</li>
-<li class="sortable-item" id="473">The tin box held priceless stones.</li>
-<li class="sortable-item" id="474">We need an end of all such matter.</li>
-<li class="sortable-item" id="475">The case was puzzling to the old and wise.</li>
-<li class="sortable-item" id="476">The bright lanterns were gay on the dark lawn.</li>
-<li class="sortable-item" id="477">We don't get much money but we have fun.</li>
-<li class="sortable-item" id="478">The youth drove with zest, but little skill.</li>
-<li class="sortable-item" id="479">Five years he lived with a shaggy dog.</li>
-<li class="sortable-item" id="480">A fence cuts through the corner lot.</li>
-<li class="sortable-item" id="481">The way to save money is not to spend much.</li>
-<li class="sortable-item" id="482">Shut the hatch before the waves push it in.</li>
-<li class="sortable-item" id="483">The odor of spring makes young hearts jump.</li>
-<li class="sortable-item" id="484">Crack the walnut with your sharp side teeth.</li>
-<li class="sortable-item" id="485">He offered proof in the form of a lsrge chart.</li>
-<li class="sortable-item" id="486">Send the stuff in a thick paper bag.</li>
-<li class="sortable-item" id="487">A quart of milk is water for the most part.</li>
-<li class="sortable-item" id="488">They told wild tales to frighten him.</li>
-<li class="sortable-item" id="489">The three story house was built of stone.</li>
-<li class="sortable-item" id="490">In the rear of the ground floor was a large passage.</li>
-<li class="sortable-item" id="491">A man in a blue sweater sat at the desk.</li>
-<li class="sortable-item" id="492">Oats are a food eaten by horse and man.</li>
-<li class="sortable-item" id="493">Their eyelids droop for want. of sleep.</li>
-<li class="sortable-item" id="494">The sip of tea revives his tired friend.</li>
-<li class="sortable-item" id="495">There are many ways to do these things.</li>
-<li class="sortable-item" id="496">Tuck the sheet under the edge of the mat.</li>
-<li class="sortable-item" id="497">A force equal to that would move the earth.</li>
-<li class="sortable-item" id="498">We like to see clear weather.</li>
-<li class="sortable-item" id="499">The work of the tailor is seen on each side.</li>
-<li class="sortable-item" id="500">Take a chance and win a china doll.</li>
-<li class="sortable-item" id="501">Shake the dust from your shoes, stranger.</li>
-<li class="sortable-item" id="502">She was kind to sick old people.</li>
-<li class="sortable-item" id="503">The dusty bench stood by the stone wall.</li>
-<li class="sortable-item" id="504">The square wooden crate was packed to be shipped.</li>
-<li class="sortable-item" id="505">We dress to suit the weather of most days.</li>
-<li class="sortable-item" id="506">Smile when you say nasty words.</li>
-<li class="sortable-item" id="507">A bowl of rice is free with chicken stew.</li>
-<li class="sortable-item" id="508">The water in this well is a source of good health.</li>
-<li class="sortable-item" id="509">Take shelter in this tent, but keep still.</li>
-<li class="sortable-item" id="510">That guy is the writer of a few banned books.</li>
-<li class="sortable-item" id="511">The little tales they tell are false.</li>
-<li class="sortable-item" id="512">The door was barred, locked, and bolted as well.</li>
-<li class="sortable-item" id="513">Ripe pears are fit for a queen's table.</li>
-<li class="sortable-item" id="514">A big wet stain was on the round carpet.</li>
-<li class="sortable-item" id="515">The kite dipped and swayed, but stayed aloft.</li>
-<li class="sortable-item" id="516">The pleasant hours fly by much too soon.</li>
-<li class="sortable-item" id="517">The room was crowded with a wild mob.</li>
-<li class="sortable-item" id="518">This strong arm shall shield your honor.</li>
-<li class="sortable-item" id="519">She blushed when he gave her a white orchid.</li>
-<li class="sortable-item" id="520">The beetle droned in the hot June sun.</li>
-<li class="sortable-item" id="521">Press the pedal with your left foot.</li>
-<li class="sortable-item" id="522">Neat plans fail without luck.</li>
-<li class="sortable-item" id="523">The black trunk fell from the landing.</li>
-<li class="sortable-item" id="524">The bank pressed for payment of the debt.</li>
-<li class="sortable-item" id="525">The theft of the pearl pin was kept secret.</li>
-<li class="sortable-item" id="526">Shake hands with this friendly child.</li>
-<li class="sortable-item" id="527">The vast space stretched into the far distance.</li>
-<li class="sortable-item" id="528">A rich farm is rare in this sandy waste.</li>
-<li class="sortable-item" id="529">His wide grin earned many friends.</li>
-<li class="sortable-item" id="530">Flax makes a fine brand of paper.</li>
-<li class="sortable-item" id="531">Hurdle the pit with the aid of a long pole.</li>
-<li class="sortable-item" id="532">A strong bid may scare your partner stiff.</li>
-<li class="sortable-item" id="533">Even a just cause needs power to win.</li>
-<li class="sortable-item" id="534">Peep under the tent and see the clowns.</li>
-<li class="sortable-item" id="535">The leaf drifts along with a slow spin.</li>
-<li class="sortable-item" id="536">Cheap clothes are flashy but don’t last.</li>
-<li class="sortable-item" id="537">A thing of small note can cause despair.</li>
-<li class="sortable-item" id="538">Flood the mails with requests for this book.</li>
-<li class="sortable-item" id="539">A thick coat of black paint covered all.</li>
-<li class="sortable-item" id="540">The pencil was cut to be sharp at both ends.</li>
-<li class="sortable-item" id="541">Those last words were a strong statement.</li>
-<li class="sortable-item" id="542">He wrote his name boldly at the top of tile sheet.</li>
-<li class="sortable-item" id="543">Dill pickles are sour but taste fine.</li>
-<li class="sortable-item" id="544">Down that road is the way to the grain farmer.</li>
-<li class="sortable-item" id="545">Either mud or dust are found at all times.</li>
-<li class="sortable-item" id="546">The best method is to fix it in place with clips.</li>
-<li class="sortable-item" id="547">If you mumble your speech will be lost.</li>
-<li class="sortable-item" id="548">At night the alarm roused him from a deep sleep.</li>
-<li class="sortable-item" id="549">Read just what the meter says.</li>
-<li class="sortable-item" id="550">Fill your pack with bright trinkets for the poor.</li>
-<li class="sortable-item" id="551">The small red neon lamp went out.</li>
-<li class="sortable-item" id="552">Clams are small, round, soft, and tasty.</li>
-<li class="sortable-item" id="553">The fan whirled its round blades softly.</li>
-<li class="sortable-item" id="554">The line where the edges join was clean.</li>
-<li class="sortable-item" id="555">Breathe deep and smell the piny air.</li>
-<li class="sortable-item" id="556">It matters not if he reads these words or those.</li>
-<li class="sortable-item" id="557">A brown leather bag hung from its strap.</li>
-<li class="sortable-item" id="558">A toad and a frog are hard to tell apart.</li>
-<li class="sortable-item" id="559">A white silk jacket goes with any shoes.</li>
-<li class="sortable-item" id="560">A break in the dam almost caused a flood.</li>
-<li class="sortable-item" id="561">Paint the sockets in the wall dull green.</li>
-<li class="sortable-item" id="562">The child crawled into the dense grass.</li>
-<li class="sortable-item" id="563">Bribes fail where honest men work.</li>
-<li class="sortable-item" id="564">Trample the spark, else the flames will spread.</li>
-<li class="sortable-item" id="565">The hilt. of the sword was carved with fine designs.</li>
-<li class="sortable-item" id="566">A round hole was drilled through the thin board.</li>
-<li class="sortable-item" id="567">Footprints showed the path he took up the beach.</li>
-<li class="sortable-item" id="568">She was waiting at my front lawn.</li>
-<li class="sortable-item" id="569">A vent near the edge brought in fresh air.</li>
-<li class="sortable-item" id="570">Prod the old mule with a crooked stick.</li>
-<li class="sortable-item" id="571">It is a band of steel three inches wide.</li>
-<li class="sortable-item" id="572">The pipe ran almost the length of the ditch.</li>
-<li class="sortable-item" id="573">It was hidden from sight by a mass of leaves and shrubs.</li>
-<li class="sortable-item" id="574">The weight. of the package was seen on the high scale.</li>
-<li class="sortable-item" id="575">Wake and rise, and step into the green outdoors.</li>
-<li class="sortable-item" id="576">The green light in the brown box flickered.</li>
-<li class="sortable-item" id="577">The brass tube circled the high wall.</li>
-<li class="sortable-item" id="578">The lobes of her ears were pierced to hold rings.</li>
-<li class="sortable-item" id="579">Hold the hammer near the end to drive the nail.</li>
-<li class="sortable-item" id="580">Next Sunday is the twelfth of the month.</li>
-<li class="sortable-item" id="581">Every word and phrase he speaks is true.</li>
-<li class="sortable-item" id="582">He put his last cartridge into the gun and fired.</li>
-<li class="sortable-item" id="583">They took their kids from the public school.</li>
-<li class="sortable-item" id="584">Drive the screw straight into the wood.</li>
-<li class="sortable-item" id="585">Keep the hatch tight and the watch constant.</li>
-<li class="sortable-item" id="586">Sever the twine with a quick snip of the knife.</li>
-<li class="sortable-item" id="587">Paper will dry out when wet.</li>
-<li class="sortable-item" id="588">Slide the catch back and open the desk.</li>
-<li class="sortable-item" id="589">Help the weak to preserve their strength.</li>
-<li class="sortable-item" id="590">A sullen smile gets few friends.</li>
-<li class="sortable-item" id="591">Stop whistling and watch the boys march.</li>
-<li class="sortable-item" id="592">Jerk the cord, and out tumbles the gold.</li>
-<li class="sortable-item" id="593">Slidc the tray across the glass top.</li>
-<li class="sortable-item" id="594">The cloud moved in a stately way and was gone.</li>
-<li class="sortable-item" id="595">Light maple makes for a swell room.</li>
-<li class="sortable-item" id="596">Set the piece here and say nothing.</li>
-<li class="sortable-item" id="597">Dull stories make her laugh.</li>
-<li class="sortable-item" id="598">A stiff cord will do to fasten your shoe.</li>
-<li class="sortable-item" id="599">Get the trust fund to the bank early.</li>
-<li class="sortable-item" id="600">Choose between the high road and the low.</li>
-<li class="sortable-item" id="601">A plea for funds seems to come again.</li>
-<li class="sortable-item" id="602">He lent his coat to the tall gaunt stranger.</li>
-<li class="sortable-item" id="603">There is a strong chance it will happen once more.</li>
-<li class="sortable-item" id="604">The duke left the park in a silver coach.</li>
-<li class="sortable-item" id="605">Greet the new guests and leave quickly.</li>
-<li class="sortable-item" id="606">When the frost has come it is time for turkey.</li>
-<li class="sortable-item" id="607">Sweet words work better than fierce.</li>
-<li class="sortable-item" id="608">A thin stripe runs down the middle.</li>
-<li class="sortable-item" id="609">A six comes up more often than a ten.</li>
-<li class="sortable-item" id="610">Lush fern grow on the lofty rocks.</li>
-<li class="sortable-item" id="611">The ram scared the school children off.</li>
-<li class="sortable-item" id="612">The team with the best timing looks good.</li>
-<li class="sortable-item" id="613">The farmer swapped his horse for a brown ox.</li>
-<li class="sortable-item" id="614">Sit on the perch and tell the others what to do.</li>
-<li class="sortable-item" id="615">A steep trail is painful for our feet.</li>
-<li class="sortable-item" id="616">The early phase of life moves fast.</li>
-<li class="sortable-item" id="617">Green moss grows on the northern side.</li>
-<li class="sortable-item" id="618">Tea in thin china has a sweet taste.</li>
-<li class="sortable-item" id="619">Pitch the straw through the door of the stable.</li>
-<li class="sortable-item" id="620">The latch on the beck gate needed a nail.</li>
-<li class="sortable-item" id="621">The goose was brought straight from the old market.</li>
-<li class="sortable-item" id="622">The sink is the thing in which we pile dishes.</li>
-<li class="sortable-item" id="623">A whiff of it will cure the most stubborn cold.</li>
-<li class="sortable-item" id="624">The facts don’t always show who is right.</li>
-<li class="sortable-item" id="625">She flaps her cape as she parades the street.</li>
-<li class="sortable-item" id="626">The loss of the cruiser was a blow to the fleet.</li>
-<li class="sortable-item" id="627">Loop the braid to the left and then over.</li>
-<li class="sortable-item" id="628">Plead with the lawyer to drop the lost cause.</li>
-<li class="sortable-item" id="629">Calves thrive on tender spring grass.</li>
-<li class="sortable-item" id="630">Post no bills on this office wall.</li>
-<li class="sortable-item" id="631">Tear a thin sheet from the yellow pad.</li>
-<li class="sortable-item" id="632">A cruise in warm waters in a sleek yacht is fun.</li>
-<li class="sortable-item" id="633">A streak of color ran down the left edge.</li>
-<li class="sortable-item" id="634">It was done before the boy could see it.</li>
-<li class="sortable-item" id="635">Crouch before you jump or miss the mark.</li>
-<li class="sortable-item" id="636">Pack the kits and don’t forget the salt.</li>
-<li class="sortable-item" id="637">The square peg will settle in the round hole.</li>
-<li class="sortable-item" id="638">Fine soap saves tender skin.</li>
-<li class="sortable-item" id="639">Poached eggs and tea must suffice.</li>
-<li class="sortable-item" id="640">Bad nerves are jangled by a door slam.</li>
-<li class="sortable-item" id="641">Ship maps are different from those for planes.</li>
-<li class="sortable-item" id="642">Dimes showered down from all sides.</li>
-<li class="sortable-item" id="643">They sang the same tunes at each party.</li>
-<li class="sortable-item" id="644">The sky in the west is tinged with orange red.</li>
-<li class="sortable-item" id="645">The pods of peas ferment in bare fields.</li>
-<li class="sortable-item" id="646">The horse balked and threw the tall rider.</li>
-<li class="sortable-item" id="647">The hitch between the horse and cart broke.</li>
-<li class="sortable-item" id="648">Pile the coal high in the shed corner.</li>
-<li class="sortable-item" id="649">The gold vase is both rare and costly.</li>
-<li class="sortable-item" id="650">The knife was hung inside its bright sheath.</li>
-<li class="sortable-item" id="651">The rarest spice comes from the far East.</li>
-<li class="sortable-item" id="652">The roof should be tilted at a sharp slant.</li>
-<li class="sortable-item" id="653">A smatter of French is worse than none.</li>
-<li class="sortable-item" id="654">The mule trod the treadmill day and night.</li>
-<li class="sortable-item" id="655">The aim of the contest is to raise a great fund.</li>
-<li class="sortable-item" id="656">To send it. now in large amounts is bad.</li>
-<li class="sortable-item" id="657">There is a fine hard tang in salty air.</li>
-<li class="sortable-item" id="658">Cod is the main business of the north shore.</li>
-<li class="sortable-item" id="659">The slab was hewn from heavy blocks of slat’e.</li>
-<li class="sortable-item" id="660">Dunk the stale biscuits into strong drink.</li>
-<li class="sortable-item" id="661">Hang tinsel from both branches.</li>
-<li class="sortable-item" id="662">Cap the jar with a tight brass cover.</li>
-<li class="sortable-item" id="663">The poor boy missed the boat again.</li>
-<li class="sortable-item" id="664">Be sure to set the lamp firmly in the hole.</li>
-<li class="sortable-item" id="665">Pick a card and slip it. under the pack.</li>
-<li class="sortable-item" id="666">A round mat will cover the dull spot.</li>
-<li class="sortable-item" id="667">The first part of the plan needs changing.</li>
-<li class="sortable-item" id="668">The good book informs of what we ought to know.</li>
-<li class="sortable-item" id="669">The mail comes in three batches per day.</li>
-<li class="sortable-item" id="670">You cannot brew tea in a cold pot.</li>
-<li class="sortable-item" id="671">Dots of light betrayed the black cat.</li>
-<li class="sortable-item" id="672">Put the chart on the mantel and tack it down.</li>
-<li class="sortable-item" id="673">The night shift men rate extra pay.</li>
-<li class="sortable-item" id="674">The red paper brightened the dim stage.</li>
-<li class="sortable-item" id="675">See the player scoot to third base.</li>
-<li class="sortable-item" id="676">Slide the bill between the two leaves.</li>
-<li class="sortable-item" id="677">Many hands help get the job done.</li>
-<li class="sortable-item" id="678">We don't like to admit our small faults.</li>
-<li class="sortable-item" id="679">No doubt about the way the wind blows.</li>
-<li class="sortable-item" id="680">Dig deep in the earth for pirate's gold.</li>
-<li class="sortable-item" id="681">The steady drip is worse than a drenching rain.</li>
-<li class="sortable-item" id="682">A flat pack takes less luggage space.</li>
-<li class="sortable-item" id="683">Green ice frosted the punch bowl.</li>
-<li class="sortable-item" id="684">A stuffed chair slipped from the moving van.</li>
-<li class="sortable-item" id="685">The stitch will serve but needs to be shortened.</li>
-<li class="sortable-item" id="686">A thin book fits in the side pocket.</li>
-<li class="sortable-item" id="687">The gloss on top made it unfit to read.</li>
-<li class="sortable-item" id="688">The hail pattered on the burnt brown grass.</li>
-<li class="sortable-item" id="689">Seven seals were stamped on great sheets.</li>
-<li class="sortable-item" id="690">Our troops are set to strike heavy blows.</li>
-<li class="sortable-item" id="691">The store was jammed before the sale could start.</li>
-<li class="sortable-item" id="692">It was a bad error on the part of the new judge.</li>
-<li class="sortable-item" id="693">One step more and the board will collapse.</li>
-<li class="sortable-item" id="694">Take the match and strike it against your shoe.</li>
-<li class="sortable-item" id="695">The pot boiled, but the contents failed to jell.</li>
-<li class="sortable-item" id="696">The baby puts his right foot in his mouth.</li>
-<li class="sortable-item" id="697">The bombs left most of the town in ruins.</li>
-<li class="sortable-item" id="698">Stop and stare at the hard working man.</li>
-<li class="sortable-item" id="699">The streets are narrow and full of sharp turns.</li>
-<li class="sortable-item" id="700">The pup jerked the leash as he saw a feline shape.</li>
-<li class="sortable-item" id="701">Open your book to the first page.</li>
-<li class="sortable-item" id="702">Fish evade the net, and swim off.</li>
-<li class="sortable-item" id="703">Dip the pail once and let it settle.</li>
-<li class="sortable-item" id="704">Will you please answer that phone.</li>
-<li class="sortable-item" id="705">The big red apple fell to the ground.</li>
-<li class="sortable-item" id="706">The curtain rose and the show was on.</li>
-<li class="sortable-item" id="707">The young prince became heir to the throne.</li>
-<li class="sortable-item" id="708">He sent the boy on a short errand.</li>
-<li class="sortable-item" id="709">Leave now and you will arrive on time.</li>
-<li class="sortable-item" id="710">The corner store was robbed last night.</li>
-<li class="sortable-item" id="711">A gold ring will please most any girl.</li>
-<li class="sortable-item" id="712">The long journey home took a year.</li>
-<li class="sortable-item" id="713">She saw a cat in the neighbor's house.</li>
-<li class="sortable-item" id="714">A pink shell was found on the sandy beach.</li>
-<li class="sortable-item" id="715">Small children came to see him.</li>
-<li class="sortable-item" id="716">The grass and bushes were wet with dew.</li>
-<li class="sortable-item" id="717">The blind man counted his old coins.</li>
-<li class="sortable-item" id="718">A severe storm tore down the barn.</li>
-<li class="sortable-item" id="719">She called his name many times.</li>
-<li class="sortable-item" id="720">When you hear the bell, come quickly.</li></ul>
+<p><input class="search" placeholder="Type to filter" /></p>
+<ul class="list" id="mylist">
+<li class="sortable-item" id="1"><p class="name">Type out three lists of orders.</p></li>
+<li class="sortable-item" id="2"><p class="name">He wrote down a long list of items.</p></li>
+<li class="sortable-item" id="3"><p class="name">The list of names is carved around the base.</p></li>
+<li class="sortable-item" id="4"><p class="name">The birch canoe slid on the smooth planks.</p></li>
+<li class="sortable-item" id="5"><p class="name">Glue the sheet to the dark blue background.</p></li>
+<li class="sortable-item" id="6"><p class="name">It's easy to tell the depth of a well.</p></li>
+<li class="sortable-item" id="7"><p class="name">These days a chicken leg is a rare dish.</p></li>
+<li class="sortable-item" id="8"><p class="name">Rice is often served in round bowls.</p></li>
+<li class="sortable-item" id="9"><p class="name">The juice of lemons makes fine punch.</p></li>
+<li class="sortable-item" id="10"><p class="name">The box was thrown beside the parked truck.</p></li>
+<li class="sortable-item" id="11"><p class="name">The hogs were fed chopped corn and garbage.</p></li>
+<li class="sortable-item" id="12"><p class="name">Four hours of steady work faced us.</p></li>
+<li class="sortable-item" id="13"><p class="name">Large size in stockings is hard to sell.</p></li>
+<li class="sortable-item" id="14"><p class="name">The boy was there when the sun rose.</p></li>
+<li class="sortable-item" id="15"><p class="name">A rod is used to catch pink salmon.</p></li>
+<li class="sortable-item" id="16"><p class="name">The source of the huge river is the clear spring.</p></li>
+<li class="sortable-item" id="17"><p class="name">Kick the ball straight and follow through.</p></li>
+<li class="sortable-item" id="18"><p class="name">Help the woman get back to her feet.</p></li>
+<li class="sortable-item" id="19"><p class="name">A pot of tea helps to pass the evening.</p></li>
+<li class="sortable-item" id="20"><p class="name">Smoky fires lack flame and heat.</p></li>
+<li class="sortable-item" id="21"><p class="name">The soft cushion broke the man's fall.</p></li>
+<li class="sortable-item" id="22"><p class="name">The salt breeze came across from the sea.</p></li>
+<li class="sortable-item" id="23"><p class="name">The girl at the booth sold fifty bonds.</p></li>
+<li class="sortable-item" id="24"><p class="name">The small pup gnawed a hole in the sock.</p></li>
+<li class="sortable-item" id="25"><p class="name">The fish twisted and turned on the bent hook.</p></li>
+<li class="sortable-item" id="26"><p class="name">Press the pants and sew a button on the vest.</p></li>
+<li class="sortable-item" id="27"><p class="name">The swan dive was far short of perfect.</p></li>
+<li class="sortable-item" id="28"><p class="name">The beauty of the view stunned the young boy.</p></li>
+<li class="sortable-item" id="29"><p class="name">Two blue fish swam in the tank.</p></li>
+<li class="sortable-item" id="30"><p class="name">Her purse was full of useless trash.</p></li>
+<li class="sortable-item" id="31"><p class="name">The colt reared and threw the tall rider.</p></li>
+<li class="sortable-item" id="32"><p class="name">It snowed, rained, and hailed the same morning.</p></li>
+<li class="sortable-item" id="33"><p class="name">Read verse out loud for pleasure.</p></li>
+<li class="sortable-item" id="34"><p class="name">Hoist the load to your left shoulder.</p></li>
+<li class="sortable-item" id="35"><p class="name">Take the winding path to reach the lake.</p></li>
+<li class="sortable-item" id="36"><p class="name">Note closely the size of the gas tank.</p></li>
+<li class="sortable-item" id="37"><p class="name">Wipe the grease off his dirty face.</p></li>
+<li class="sortable-item" id="38"><p class="name">Mend the coat before you go out.</p></li>
+<li class="sortable-item" id="39"><p class="name">The wrist was badly strained and hung limp.</p></li>
+<li class="sortable-item" id="40"><p class="name">The stray cat gave birth to kittens.</p></li>
+<li class="sortable-item" id="41"><p class="name">The young girl gave no clear response.</p></li>
+<li class="sortable-item" id="42"><p class="name">The meal was cooked before the bell rang.</p></li>
+<li class="sortable-item" id="43"><p class="name">What joy there is in living.</p></li>
+<li class="sortable-item" id="44"><p class="name">A king ruled the state in the early days.</p></li>
+<li class="sortable-item" id="45"><p class="name">The ship was torn apart on the sharp reef.</p></li>
+<li class="sortable-item" id="46"><p class="name">Sickness kept him home the third week.</p></li>
+<li class="sortable-item" id="47"><p class="name">The wide road shimmered in the hot sun.</p></li>
+<li class="sortable-item" id="48"><p class="name">The lazy cow lay in the cool grass.</p></li>
+<li class="sortable-item" id="49"><p class="name">Lift the square stone over the fence.</p></li>
+<li class="sortable-item" id="50"><p class="name">The rope will bind the seven books at once.</p></li>
+<li class="sortable-item" id="51"><p class="name">Hop over the fence and plunge in.</p></li>
+<li class="sortable-item" id="52"><p class="name">The friendly gang left the drug store.</p></li>
+<li class="sortable-item" id="53"><p class="name">Mesh mire keeps chicks inside.</p></li>
+<li class="sortable-item" id="54"><p class="name">The frosty air passed through the coat.</p></li>
+<li class="sortable-item" id="55"><p class="name">The crooked maze failed to fool the mouse.</p></li>
+<li class="sortable-item" id="56"><p class="name">Adding fast leads to wrong sums.</p></li>
+<li class="sortable-item" id="57"><p class="name">The show was a flop from the very start.</p></li>
+<li class="sortable-item" id="58"><p class="name">A saw is a tool used for making boards.</p></li>
+<li class="sortable-item" id="59"><p class="name">The wagon moved on well oiled wheels.</p></li>
+<li class="sortable-item" id="60"><p class="name">March the soldiers past the next hill.</p></li>
+<li class="sortable-item" id="61"><p class="name">A cup of sugar makes sweet fudge.</p></li>
+<li class="sortable-item" id="62"><p class="name">Place a rosebush near the porch steps.</p></li>
+<li class="sortable-item" id="63"><p class="name">Both lost their lives in the raging storm.</p></li>
+<li class="sortable-item" id="64"><p class="name">We talked of the slide show in the circus.</p></li>
+<li class="sortable-item" id="65"><p class="name">Use a pencil to write the first draft.</p></li>
+<li class="sortable-item" id="66"><p class="name">He ran half way to the hardware store.</p></li>
+<li class="sortable-item" id="67"><p class="name">The clock struck to mark the third period.</p></li>
+<li class="sortable-item" id="68"><p class="name">A small creek cut across the field.</p></li>
+<li class="sortable-item" id="69"><p class="name">Cars and busses stalled in snow drifts.</p></li>
+<li class="sortable-item" id="70"><p class="name">The set of china hit, the floor with a crash.</p></li>
+<li class="sortable-item" id="71"><p class="name">This is a grand season for hikes on the road.</p></li>
+<li class="sortable-item" id="72"><p class="name">The dune rose from the edge of the water.</p></li>
+<li class="sortable-item" id="73"><p class="name">Those words were the cue for the actor to leave.</p></li>
+<li class="sortable-item" id="74"><p class="name">A yacht slid around the point into the bay.</p></li>
+<li class="sortable-item" id="75"><p class="name">The two met while playing on the sand.</p></li>
+<li class="sortable-item" id="76"><p class="name">The ink stain dried on the finished page.</p></li>
+<li class="sortable-item" id="77"><p class="name">The walled town was seized without a fight.</p></li>
+<li class="sortable-item" id="78"><p class="name">The lease ran out in sixteen weeks.</p></li>
+<li class="sortable-item" id="79"><p class="name">A tame squirrel makes a nice pet.</p></li>
+<li class="sortable-item" id="80"><p class="name">The horn of the car woke the sleeping cop.</p></li>
+<li class="sortable-item" id="81"><p class="name">The heart beat strongly and with firm strokes.</p></li>
+<li class="sortable-item" id="82"><p class="name">The pearl was worn in a thin silver ring.</p></li>
+<li class="sortable-item" id="83"><p class="name">The fruit peel was cut in thick slices.</p></li>
+<li class="sortable-item" id="84"><p class="name">The Navy attacked the big task force.</p></li>
+<li class="sortable-item" id="85"><p class="name">See the cat glaring at the scared mouse.</p></li>
+<li class="sortable-item" id="86"><p class="name">There are more than two factors here.</p></li>
+<li class="sortable-item" id="87"><p class="name">The hat brim was wide and too droopy.</p></li>
+<li class="sortable-item" id="88"><p class="name">The lawyer tried to lose his case.</p></li>
+<li class="sortable-item" id="89"><p class="name">The grass curled around the fence post.</p></li>
+<li class="sortable-item" id="90"><p class="name">Cut the pie into large parts.</p></li>
+<li class="sortable-item" id="91"><p class="name">Men strive but seldom get rich.</p></li>
+<li class="sortable-item" id="92"><p class="name">Always close the barn door tight.</p></li>
+<li class="sortable-item" id="93"><p class="name">He lay prone and hardly moved a limb.</p></li>
+<li class="sortable-item" id="94"><p class="name">The slush lay deep along the street.</p></li>
+<li class="sortable-item" id="95"><p class="name">A wisp of cloud hung in the blue air.</p></li>
+<li class="sortable-item" id="96"><p class="name">A pound of sugar costs more than eggs.</p></li>
+<li class="sortable-item" id="97"><p class="name">The fin was sharp and cut the clear water.</p></li>
+<li class="sortable-item" id="98"><p class="name">The play seems dull and quite stupid.</p></li>
+<li class="sortable-item" id="99"><p class="name">Bail the boat, to stop it from sinking.</p></li>
+<li class="sortable-item" id="100"><p class="name">The term ended in late June that year.</p></li>
+<li class="sortable-item" id="101"><p class="name">A tusk is used to make costly gifts.</p></li>
+<li class="sortable-item" id="102"><p class="name">Ten pins were set in order.</p></li>
+<li class="sortable-item" id="103"><p class="name">The bill as paid every third week.</p></li>
+<li class="sortable-item" id="104"><p class="name">Oak is strong and also gives shade.</p></li>
+<li class="sortable-item" id="105"><p class="name">Cats and dogs each hate the other.</p></li>
+<li class="sortable-item" id="106"><p class="name">The pipe began to rust while new.</p></li>
+<li class="sortable-item" id="107"><p class="name">Open the crate but don't break the glass.</p></li>
+<li class="sortable-item" id="108"><p class="name">Add the sum to the product of these three.</p></li>
+<li class="sortable-item" id="109"><p class="name">Thieves who rob friends deserve jail.</p></li>
+<li class="sortable-item" id="110"><p class="name">The ripe taste of cheese improves with age.</p></li>
+<li class="sortable-item" id="111"><p class="name">Act on these orders with great speed.</p></li>
+<li class="sortable-item" id="112"><p class="name">The hog crawled under the high fence.</p></li>
+<li class="sortable-item" id="113"><p class="name">Move the vat over the hot fire.</p></li>
+<li class="sortable-item" id="114"><p class="name">The bark of the pine tree was shiny and dark.</p></li>
+<li class="sortable-item" id="115"><p class="name">Leaves turn brown and yellow in the fall.</p></li>
+<li class="sortable-item" id="116"><p class="name">The pennant waved when the wind blew.</p></li>
+<li class="sortable-item" id="117"><p class="name">Split the log with a quick, sharp blow.</p></li>
+<li class="sortable-item" id="118"><p class="name">Burn peat after the logs give out.</p></li>
+<li class="sortable-item" id="119"><p class="name">He ordered peach pie with ice cream.</p></li>
+<li class="sortable-item" id="120"><p class="name">Weave the carpet on the right hand side.</p></li>
+<li class="sortable-item" id="121"><p class="name">Hemp is a weed found in parts of the tropics.</p></li>
+<li class="sortable-item" id="122"><p class="name">A lame back kept his score low.</p></li>
+<li class="sortable-item" id="123"><p class="name">We find joy in the simplest things.</p></li>
+<li class="sortable-item" id="124"><p class="name">The harder he tried the less he got done.</p></li>
+<li class="sortable-item" id="125"><p class="name">The boss ran the show with a watchful eye.</p></li>
+<li class="sortable-item" id="126"><p class="name">The cup cracked and spilled its contents.</p></li>
+<li class="sortable-item" id="127"><p class="name">Paste can cleanse the most dirty brass.</p></li>
+<li class="sortable-item" id="128"><p class="name">The slang word for raw whiskey is booze.</p></li>
+<li class="sortable-item" id="129"><p class="name">It caught its hind paw in a rusty trap.</p></li>
+<li class="sortable-item" id="130"><p class="name">The wharf could be seen at the farther shore.</p></li>
+<li class="sortable-item" id="131"><p class="name">Feel the heat of the weak dying flame.</p></li>
+<li class="sortable-item" id="132"><p class="name">The tiny girl took off her hat.</p></li>
+<li class="sortable-item" id="133"><p class="name">A cramp is no small danger on a swim.</p></li>
+<li class="sortable-item" id="134"><p class="name">He said the same phrase thirty times.</p></li>
+<li class="sortable-item" id="135"><p class="name">Pluck the bright rose without leaves.</p></li>
+<li class="sortable-item" id="136"><p class="name">Two plus seven is less than ten.</p></li>
+<li class="sortable-item" id="137"><p class="name">The glow deepened in the eyes of the sweet girl.</p></li>
+<li class="sortable-item" id="138"><p class="name">Bring your problems to the wise chief.</p></li>
+<li class="sortable-item" id="139"><p class="name">Write a fond note to the friend you cherish.</p></li>
+<li class="sortable-item" id="140"><p class="name">Clothes and lodging are free to new men.</p></li>
+<li class="sortable-item" id="141"><p class="name">We frown when events take a bad turn.</p></li>
+<li class="sortable-item" id="142"><p class="name">Port is a strong wine with s smoky taste.</p></li>
+<li class="sortable-item" id="143"><p class="name">The young kid jumped the rusty gate.</p></li>
+<li class="sortable-item" id="144"><p class="name">Guess the results from the first scores.</p></li>
+<li class="sortable-item" id="145"><p class="name">A salt pickle tastes fine with ham.</p></li>
+<li class="sortable-item" id="146"><p class="name">The just claim got the right verdict.</p></li>
+<li class="sortable-item" id="147"><p class="name">These thistles bend in a high wind.</p></li>
+<li class="sortable-item" id="148"><p class="name">Pure bred poodles have curls.</p></li>
+<li class="sortable-item" id="149"><p class="name">The tree top waved in a graceful way.</p></li>
+<li class="sortable-item" id="150"><p class="name">The spot on the blotter was made by green ink.</p></li>
+<li class="sortable-item" id="151"><p class="name">Mud was spattered on the front of his white shirt.</p></li>
+<li class="sortable-item" id="152"><p class="name">The cigar burned a hole in the desk top.</p></li>
+<li class="sortable-item" id="153"><p class="name">The empty flask stood on the tin tray.</p></li>
+<li class="sortable-item" id="154"><p class="name">A speedy man can beat this track mark.</p></li>
+<li class="sortable-item" id="155"><p class="name">He broke a new shoelace that day.</p></li>
+<li class="sortable-item" id="156"><p class="name">The coffee stand is too high for the couch.</p></li>
+<li class="sortable-item" id="157"><p class="name">The urge to write short stories is rare.</p></li>
+<li class="sortable-item" id="158"><p class="name">The pencils have all been used.</p></li>
+<li class="sortable-item" id="159"><p class="name">The pirates seized the crew of the lost ship.</p></li>
+<li class="sortable-item" id="160"><p class="name">We tried to replace the coin but failed.</p></li>
+<li class="sortable-item" id="161"><p class="name">She sewed the torn coat quite neatly.</p></li>
+<li class="sortable-item" id="162"><p class="name">The sofa cushion is red and of light weight.</p></li>
+<li class="sortable-item" id="163"><p class="name">The jacket hung on the back of the wide chair.</p></li>
+<li class="sortable-item" id="164"><p class="name">At that high level the air is pure.</p></li>
+<li class="sortable-item" id="165"><p class="name">Drop the two when you add the figures.</p></li>
+<li class="sortable-item" id="166"><p class="name">A filing case is now hard to buy.</p></li>
+<li class="sortable-item" id="167"><p class="name">An abrupt start does not win the prize.</p></li>
+<li class="sortable-item" id="168"><p class="name">Wood is best for making toys and blocks.</p></li>
+<li class="sortable-item" id="169"><p class="name">The office paint was a dull sad tan.</p></li>
+<li class="sortable-item" id="170"><p class="name">He knew the skill of the great young actress.</p></li>
+<li class="sortable-item" id="171"><p class="name">A rag will soak up spilled water.</p></li>
+<li class="sortable-item" id="172"><p class="name">A shower of dirt fell from the hot pipes.</p></li>
+<li class="sortable-item" id="173"><p class="name">Steam hissed from the broken valve.</p></li>
+<li class="sortable-item" id="174"><p class="name">The child almost hurt the small dog.</p></li>
+<li class="sortable-item" id="175"><p class="name">There was a sound of dry leaves outside.</p></li>
+<li class="sortable-item" id="176"><p class="name">The sky that morning was clear and bright blue.</p></li>
+<li class="sortable-item" id="177"><p class="name">Torn scraps littered the stone floor.</p></li>
+<li class="sortable-item" id="178"><p class="name">Sunday is the best part of the week.</p></li>
+<li class="sortable-item" id="179"><p class="name">The doctor cured him with these pills.</p></li>
+<li class="sortable-item" id="180"><p class="name">The new girl was fired today at noon.</p></li>
+<li class="sortable-item" id="181"><p class="name">They felt gay when the ship arrived in port.</p></li>
+<li class="sortable-item" id="182"><p class="name">Add the store's account to the last cent.</p></li>
+<li class="sortable-item" id="183"><p class="name">Acid burns holes in wool cloth.</p></li>
+<li class="sortable-item" id="184"><p class="name">Fairy tales should be fun to write.</p></li>
+<li class="sortable-item" id="185"><p class="name">Eight miles of woodland burned to waste.</p></li>
+<li class="sortable-item" id="186"><p class="name">The third act was dull and tired the players.</p></li>
+<li class="sortable-item" id="187"><p class="name">A young child should not suffer fright.</p></li>
+<li class="sortable-item" id="188"><p class="name">Add the column and put the sum here.</p></li>
+<li class="sortable-item" id="189"><p class="name">We admire and love a good cook.</p></li>
+<li class="sortable-item" id="190"><p class="name">There the flood mark is ten inches.</p></li>
+<li class="sortable-item" id="191"><p class="name">He carved a head from the round block of marble.</p></li>
+<li class="sortable-item" id="192"><p class="name">She has st smart way of wearing clothes.</p></li>
+<li class="sortable-item" id="193"><p class="name">The fruit of a fig tree is apple-shaped.</p></li>
+<li class="sortable-item" id="194"><p class="name">Corn cobs can be used to kindle a fire.</p></li>
+<li class="sortable-item" id="195"><p class="name">Where were they when the noise started.</p></li>
+<li class="sortable-item" id="196"><p class="name">The paper box is full of thumb tacks.</p></li>
+<li class="sortable-item" id="197"><p class="name">Sell your gift to a buyer at a good gain.</p></li>
+<li class="sortable-item" id="198"><p class="name">The tongs lay beside the ice pail.</p></li>
+<li class="sortable-item" id="199"><p class="name">The petals fall with the next puff of wind.</p></li>
+<li class="sortable-item" id="200"><p class="name">Bring your best compass to the third class.</p></li>
+<li class="sortable-item" id="201"><p class="name">They could laugh although they were sad.</p></li>
+<li class="sortable-item" id="202"><p class="name">Farmers came in to thresh the oat crop.</p></li>
+<li class="sortable-item" id="203"><p class="name">The brown house was on fire to the attic.</p></li>
+<li class="sortable-item" id="204"><p class="name">The lure is used to catch trout and flounder.</p></li>
+<li class="sortable-item" id="205"><p class="name">Float the soap on top of the bath water.</p></li>
+<li class="sortable-item" id="206"><p class="name">A blue crane is a tall wading bird.</p></li>
+<li class="sortable-item" id="207"><p class="name">A fresh start will work such wonders.</p></li>
+<li class="sortable-item" id="208"><p class="name">The club rented the rink for the fifth night.</p></li>
+<li class="sortable-item" id="209"><p class="name">After the dance they went straight home.</p></li>
+<li class="sortable-item" id="210"><p class="name">The hostess taught the new maid to serve.</p></li>
+<li class="sortable-item" id="211"><p class="name">He wrote his last novel there at the inn.</p></li>
+<li class="sortable-item" id="212"><p class="name">Even the worst will beat his low score.</p></li>
+<li class="sortable-item" id="213"><p class="name">The cement had dried when he moved it.</p></li>
+<li class="sortable-item" id="214"><p class="name">The loss of the second ship was hard to take.</p></li>
+<li class="sortable-item" id="215"><p class="name">The fly made its way along the wall.</p></li>
+<li class="sortable-item" id="216"><p class="name">Do that with a wooden stick.</p></li>
+<li class="sortable-item" id="217"><p class="name">Lire wires should be kept covered.</p></li>
+<li class="sortable-item" id="218"><p class="name">The large house had hot water taps.</p></li>
+<li class="sortable-item" id="219"><p class="name">It is hard to erase blue or red ink.</p></li>
+<li class="sortable-item" id="220"><p class="name">Write at once or you may forget it.</p></li>
+<li class="sortable-item" id="221"><p class="name">The doorknob was made of bright clean brass.</p></li>
+<li class="sortable-item" id="222"><p class="name">The wreck occurred by the bank on Main Street.</p></li>
+<li class="sortable-item" id="223"><p class="name">A pencil with black lead writes best.</p></li>
+<li class="sortable-item" id="224"><p class="name">Coax a young calf to drink from a bucket.</p></li>
+<li class="sortable-item" id="225"><p class="name">Schools for ladies teach charm and grace.</p></li>
+<li class="sortable-item" id="226"><p class="name">The lamp shone with a steady green flame.</p></li>
+<li class="sortable-item" id="227"><p class="name">They took the axe and the saw to the forest.</p></li>
+<li class="sortable-item" id="228"><p class="name">The ancient coin was quite dull and worn.</p></li>
+<li class="sortable-item" id="229"><p class="name">The shaky barn fell with a loud crash.</p></li>
+<li class="sortable-item" id="230"><p class="name">Jazz and swing fans like fast music.</p></li>
+<li class="sortable-item" id="231"><p class="name">Rake the rubbish up and then burn it.</p></li>
+<li class="sortable-item" id="232"><p class="name">Slash the gold cloth into fine ribbons.</p></li>
+<li class="sortable-item" id="233"><p class="name">Try to have the court decide the case.</p></li>
+<li class="sortable-item" id="234"><p class="name">They are pushed back each time they attack.</p></li>
+<li class="sortable-item" id="235"><p class="name">He broke his ties with groups of former friends.</p></li>
+<li class="sortable-item" id="236"><p class="name">They floated on the raft to sun their white backs.</p></li>
+<li class="sortable-item" id="237"><p class="name">The map had an X that meant nothing.</p></li>
+<li class="sortable-item" id="238"><p class="name">Whitings are small fish caught in nets.</p></li>
+<li class="sortable-item" id="239"><p class="name">Some ads serve to cheat buyers.</p></li>
+<li class="sortable-item" id="240"><p class="name">Jerk the rope and the bell rings weakly.</p></li>
+<li class="sortable-item" id="241"><p class="name">A waxed floor makes us lose balance.</p></li>
+<li class="sortable-item" id="242"><p class="name">Madam, this is the best brand of corn.</p></li>
+<li class="sortable-item" id="243"><p class="name">On the islands the sea breeze is soft and mild.</p></li>
+<li class="sortable-item" id="244"><p class="name">The play began as soon as we sat down.</p></li>
+<li class="sortable-item" id="245"><p class="name">This will lead the world to more sound and fury</p></li>
+<li class="sortable-item" id="246"><p class="name">Add salt before you fry the egg.</p></li>
+<li class="sortable-item" id="247"><p class="name">The rush for funds reached its peak Tuesday.</p></li>
+<li class="sortable-item" id="248"><p class="name">The birch looked stark white and lonesome.</p></li>
+<li class="sortable-item" id="249"><p class="name">The box is held by a bright red snapper.</p></li>
+<li class="sortable-item" id="250"><p class="name">To make pure ice, you freeze water.</p></li>
+<li class="sortable-item" id="251"><p class="name">The first worm gets snapped early.</p></li>
+<li class="sortable-item" id="252"><p class="name">Jump the fence and hurry up the bank.</p></li>
+<li class="sortable-item" id="253"><p class="name">Yell and clap as the curtain slides back.</p></li>
+<li class="sortable-item" id="254"><p class="name">They are men nho walk the middle of the road.</p></li>
+<li class="sortable-item" id="255"><p class="name">Both brothers wear the same size.</p></li>
+<li class="sortable-item" id="256"><p class="name">In some forin or other we need fun.</p></li>
+<li class="sortable-item" id="257"><p class="name">The prince ordered his head chopped off.</p></li>
+<li class="sortable-item" id="258"><p class="name">The houses are built of red clay bricks.</p></li>
+<li class="sortable-item" id="259"><p class="name">Ducks fly north but lack a compass.</p></li>
+<li class="sortable-item" id="260"><p class="name">Fruit flavors are used in fizz drinks.</p></li>
+<li class="sortable-item" id="261"><p class="name">These pills do less good than others.</p></li>
+<li class="sortable-item" id="262"><p class="name">Canned pears lack full flavor.</p></li>
+<li class="sortable-item" id="263"><p class="name">The dark pot hung in the front closet.</p></li>
+<li class="sortable-item" id="264"><p class="name">Carry the pail to the wall and spill it there.</p></li>
+<li class="sortable-item" id="265"><p class="name">The train brought our hero to the big town.</p></li>
+<li class="sortable-item" id="266"><p class="name">We are sure that one war is enough.</p></li>
+<li class="sortable-item" id="267"><p class="name">Gray paint stretched for miles around.</p></li>
+<li class="sortable-item" id="268"><p class="name">The rude laugh filled the empty room.</p></li>
+<li class="sortable-item" id="269"><p class="name">High seats are best for football fans.</p></li>
+<li class="sortable-item" id="270"><p class="name">Tea served from the brown jug is tasty.</p></li>
+<li class="sortable-item" id="271"><p class="name">A dash of pepper spoils beef stew.</p></li>
+<li class="sortable-item" id="272"><p class="name">A zestful food is the hot-cross bun.</p></li>
+<li class="sortable-item" id="273"><p class="name">The horse trotted around the field at a brisk pace.</p></li>
+<li class="sortable-item" id="274"><p class="name">Find the twin who stole the pearl necklace.</p></li>
+<li class="sortable-item" id="275"><p class="name">Cut the cord that binds the box tightly.</p></li>
+<li class="sortable-item" id="276"><p class="name">The red tape bound the smuggled food.</p></li>
+<li class="sortable-item" id="277"><p class="name">Look in the corner to find the tan shirt.</p></li>
+<li class="sortable-item" id="278"><p class="name">The cold drizzle will halt the bond drive.</p></li>
+<li class="sortable-item" id="279"><p class="name">Nine men were hired to dig the ruins.</p></li>
+<li class="sortable-item" id="280"><p class="name">The junk yard had a mouldy smell.</p></li>
+<li class="sortable-item" id="281"><p class="name">The flint sputtered and lit a pine torch.</p></li>
+<li class="sortable-item" id="282"><p class="name">Soak the cloth and drown the sharp odor.</p></li>
+<li class="sortable-item" id="283"><p class="name">The shelves were bare of both jam or crackers.</p></li>
+<li class="sortable-item" id="284"><p class="name">A joy to every child is the swan boat.</p></li>
+<li class="sortable-item" id="285"><p class="name">All sat frozen and watched the screen.</p></li>
+<li class="sortable-item" id="286"><p class="name">ii cloud of dust stung his tender eyes.</p></li>
+<li class="sortable-item" id="287"><p class="name">To reach the end he needs much courage.</p></li>
+<li class="sortable-item" id="288"><p class="name">Shape the clay gently into block form.</p></li>
+<li class="sortable-item" id="289"><p class="name">The ridge on a smooth surface is a bump or flaw.</p></li>
+<li class="sortable-item" id="290"><p class="name">Hedge apples may stain your hands green.</p></li>
+<li class="sortable-item" id="291"><p class="name">Quench your thirst, then eat the crackers.</p></li>
+<li class="sortable-item" id="292"><p class="name">Tight curls get limp on rainy days.</p></li>
+<li class="sortable-item" id="293"><p class="name">The mute muffled the high tones of the horn.</p></li>
+<li class="sortable-item" id="294"><p class="name">The gold ring fits only a pierced ear.</p></li>
+<li class="sortable-item" id="295"><p class="name">The old pan was covered with hard fudge.</p></li>
+<li class="sortable-item" id="296"><p class="name">Watch the log float in the wide river.</p></li>
+<li class="sortable-item" id="297"><p class="name">The node on the stalk of wheat grew daily.</p></li>
+<li class="sortable-item" id="298"><p class="name">The heap of fallen leaves was set on fire.</p></li>
+<li class="sortable-item" id="299"><p class="name">Write fast, if you want to finish early.</p></li>
+<li class="sortable-item" id="300"><p class="name">His shirt was clean but one button was gone.</p></li>
+<li class="sortable-item" id="301"><p class="name">The barrel of beer was a brew of malt and hops.</p></li>
+<li class="sortable-item" id="302"><p class="name">Tin cans are absent from store shelves.</p></li>
+<li class="sortable-item" id="303"><p class="name">Slide the box into that empty space.</p></li>
+<li class="sortable-item" id="304"><p class="name">The plant grew large and green in the window.</p></li>
+<li class="sortable-item" id="305"><p class="name">The beam dropped down on the workmen's head.</p></li>
+<li class="sortable-item" id="306"><p class="name">Pink clouds floated JTith the breeze.</p></li>
+<li class="sortable-item" id="307"><p class="name">She danced like a swan, tall and graceful.</p></li>
+<li class="sortable-item" id="308"><p class="name">The tube was blown and the tire flat and useless.</p></li>
+<li class="sortable-item" id="309"><p class="name">It is late morning on the old wall clock.</p></li>
+<li class="sortable-item" id="310"><p class="name">Let's all join as we sing the last chorus.</p></li>
+<li class="sortable-item" id="311"><p class="name">The last switch cannot be turned off.</p></li>
+<li class="sortable-item" id="312"><p class="name">The fight will end in just six minutes.</p></li>
+<li class="sortable-item" id="313"><p class="name">The store walls were lined with colored frocks.</p></li>
+<li class="sortable-item" id="314"><p class="name">The peace league met to discuss their plans.</p></li>
+<li class="sortable-item" id="315"><p class="name">The rise to fame of a person takes luck.</p></li>
+<li class="sortable-item" id="316"><p class="name">Paper is scarce, so write with much care.</p></li>
+<li class="sortable-item" id="317"><p class="name">The quick fox jumped on the sleeping cat.</p></li>
+<li class="sortable-item" id="318"><p class="name">The nozzle of the fire hose was bright brass.</p></li>
+<li class="sortable-item" id="319"><p class="name">Screw the round cap on as tight as needed.</p></li>
+<li class="sortable-item" id="320"><p class="name">Time brings us many changes.</p></li>
+<li class="sortable-item" id="321"><p class="name">The purple tie was ten years old.</p></li>
+<li class="sortable-item" id="322"><p class="name">Men think and plan and sometimes act.</p></li>
+<li class="sortable-item" id="323"><p class="name">Fill the ink jar with sticky glue.</p></li>
+<li class="sortable-item" id="324"><p class="name">He smoke a big pipe with strong contents.</p></li>
+<li class="sortable-item" id="325"><p class="name">We need grain to keep our mules healthy.</p></li>
+<li class="sortable-item" id="326"><p class="name">Pack the records in a neat thin case.</p></li>
+<li class="sortable-item" id="327"><p class="name">The crunch of feet in the snow was the only sound.</p></li>
+<li class="sortable-item" id="328"><p class="name">The copper bowl shone in the sun's rays.</p></li>
+<li class="sortable-item" id="329"><p class="name">Boards will warp unless kept dry.</p></li>
+<li class="sortable-item" id="330"><p class="name">The plush chair leaned against the wall.</p></li>
+<li class="sortable-item" id="331"><p class="name">Glass will clink when struck by metal.</p></li>
+<li class="sortable-item" id="332"><p class="name">Bathe and relax in the cool green grass.</p></li>
+<li class="sortable-item" id="333"><p class="name">Nine rows of soldiers stood in line.</p></li>
+<li class="sortable-item" id="334"><p class="name">The beach is dry and shallow at low tide.</p></li>
+<li class="sortable-item" id="335"><p class="name">The idea is to sew both edges straight.</p></li>
+<li class="sortable-item" id="336"><p class="name">The kitten chased the dog down the street.</p></li>
+<li class="sortable-item" id="337"><p class="name">Pages bound in cloth make a book.</p></li>
+<li class="sortable-item" id="338"><p class="name">Try to trace the fine lines of the painting.</p></li>
+<li class="sortable-item" id="339"><p class="name">Women form less than half of the group.</p></li>
+<li class="sortable-item" id="340"><p class="name">The zones merge in the central part of town.</p></li>
+<li class="sortable-item" id="341"><p class="name">A gem in the rough needs work to polish.</p></li>
+<li class="sortable-item" id="342"><p class="name">Code is used when secrets are sent.</p></li>
+<li class="sortable-item" id="343"><p class="name">Most of the new is easy for us to hear.</p></li>
+<li class="sortable-item" id="344"><p class="name">He used the lathe to make brass objects.</p></li>
+<li class="sortable-item" id="345"><p class="name">The vane on top of the pole revolved in the wind.</p></li>
+<li class="sortable-item" id="346"><p class="name">Mince pie is a dish served to children.</p></li>
+<li class="sortable-item" id="347"><p class="name">The clan gathered on each dull night.</p></li>
+<li class="sortable-item" id="348"><p class="name">Let it burn, it gives us warmth and comfort.</p></li>
+<li class="sortable-item" id="349"><p class="name">A castle built from sand fails to endure.</p></li>
+<li class="sortable-item" id="350"><p class="name">A child's wit saved the day for us.</p></li>
+<li class="sortable-item" id="351"><p class="name">Tack the strip of carpet to the worn floor.</p></li>
+<li class="sortable-item" id="352"><p class="name">Next Tuesday we must vote.</p></li>
+<li class="sortable-item" id="353"><p class="name">Pour the stew from the pot into the plate.</p></li>
+<li class="sortable-item" id="354"><p class="name">Each penny shone like new.</p></li>
+<li class="sortable-item" id="355"><p class="name">The man went to the woods to gather sticks.</p></li>
+<li class="sortable-item" id="356"><p class="name">The dirt piles were lines along the road.</p></li>
+<li class="sortable-item" id="357"><p class="name">The logs fell and tumbled into the clear stream.</p></li>
+<li class="sortable-item" id="358"><p class="name">Just hoist it up and take it away,</p></li>
+<li class="sortable-item" id="359"><p class="name">A ripe plum is fit for a king's palate.</p></li>
+<li class="sortable-item" id="360"><p class="name">Our plans right now are hazy.</p></li>
+<li class="sortable-item" id="361"><p class="name">Brass rings are sold by these natives.</p></li>
+<li class="sortable-item" id="362"><p class="name">It takes a good trap to capture a bear.</p></li>
+<li class="sortable-item" id="363"><p class="name">Feed the white mouse some flower seeds.</p></li>
+<li class="sortable-item" id="364"><p class="name">The thaw came early and freed the stream.</p></li>
+<li class="sortable-item" id="365"><p class="name">He took the lead and kept it the whole distance.</p></li>
+<li class="sortable-item" id="366"><p class="name">The key you designed will fit the lock.</p></li>
+<li class="sortable-item" id="367"><p class="name">Plead to the council to free the poor thief.</p></li>
+<li class="sortable-item" id="368"><p class="name">Better hash is made of rare beef.</p></li>
+<li class="sortable-item" id="369"><p class="name">This plank was made for walking on.</p></li>
+<li class="sortable-item" id="370"><p class="name">The lake sparkled in the red hot sun.</p></li>
+<li class="sortable-item" id="371"><p class="name">He crawled with care along the ledge.</p></li>
+<li class="sortable-item" id="372"><p class="name">Tend the sheep while the dog wanders.</p></li>
+<li class="sortable-item" id="373"><p class="name">It takes a lot of help to finish these.</p></li>
+<li class="sortable-item" id="374"><p class="name">Mark the spot with a sign painted red.</p></li>
+<li class="sortable-item" id="375"><p class="name">Take two shares as a fair profit.</p></li>
+<li class="sortable-item" id="376"><p class="name">The fur of cats goes by many names.</p></li>
+<li class="sortable-item" id="377"><p class="name">North winds bring colds and fevers.</p></li>
+<li class="sortable-item" id="378"><p class="name">He asks no person to vouch for him.</p></li>
+<li class="sortable-item" id="379"><p class="name">Go now and come here later.</p></li>
+<li class="sortable-item" id="380"><p class="name">A sash of gold silk will trim her dress.</p></li>
+<li class="sortable-item" id="381"><p class="name">Soap can wash most dirt away.</p></li>
+<li class="sortable-item" id="382"><p class="name">That move means the game is over.</p></li>
+<li class="sortable-item" id="383"><p class="name">A siege will crack the strong defense.</p></li>
+<li class="sortable-item" id="384"><p class="name">Grape juice and water mix well.</p></li>
+<li class="sortable-item" id="385"><p class="name">Roads are paved with sticky tar.</p></li>
+<li class="sortable-item" id="386"><p class="name">Fake &ones shine but cost little.</p></li>
+<li class="sortable-item" id="387"><p class="name">The drip of the rain made a pleasant sound.</p></li>
+<li class="sortable-item" id="388"><p class="name">Smoke poured out of every crack.</p></li>
+<li class="sortable-item" id="389"><p class="name">Serve the hot rum to the tired heroes.</p></li>
+<li class="sortable-item" id="390"><p class="name">Much of the story makes good sense.</p></li>
+<li class="sortable-item" id="391"><p class="name">The sun came up to light the eastern sky.</p></li>
+<li class="sortable-item" id="392"><p class="name">Heave the line over the port side.</p></li>
+<li class="sortable-item" id="393"><p class="name">A lathe cuts and trims any wood.</p></li>
+<li class="sortable-item" id="394"><p class="name">It's a dense crowd in two distinct ways.</p></li>
+<li class="sortable-item" id="395"><p class="name">His hip struck the knee of the next player.</p></li>
+<li class="sortable-item" id="396"><p class="name">The stale smell of old beer lingers.</p></li>
+<li class="sortable-item" id="397"><p class="name">The desk was firm on the shaky floor.</p></li>
+<li class="sortable-item" id="398"><p class="name">It takes heat to bring out the odor.</p></li>
+<li class="sortable-item" id="399"><p class="name">Beef is scarcer than some lamb.</p></li>
+<li class="sortable-item" id="400"><p class="name">Raise the sail and steer the ship northward.</p></li>
+<li class="sortable-item" id="401"><p class="name">The cone costs five cents on Mondays.</p></li>
+<li class="sortable-item" id="402"><p class="name">A pod is what peas always grow in.</p></li>
+<li class="sortable-item" id="403"><p class="name">Jerk the dart from the cork target.</p></li>
+<li class="sortable-item" id="404"><p class="name">No cement will hold hard wood.</p></li>
+<li class="sortable-item" id="405"><p class="name">We now have a new base for shipping.</p></li>
+<li class="sortable-item" id="406"><p class="name">The sheep were led home by a dog.</p></li>
+<li class="sortable-item" id="407"><p class="name">Three for a dime, the young peddler cried.</p></li>
+<li class="sortable-item" id="408"><p class="name">The sense of smell is better than that of touch.</p></li>
+<li class="sortable-item" id="409"><p class="name">No hardship seemed to keep him sad.</p></li>
+<li class="sortable-item" id="410"><p class="name">Grace makes up for lack of beauty.</p></li>
+<li class="sortable-item" id="411"><p class="name">Nudge gently but wake her now.</p></li>
+<li class="sortable-item" id="412"><p class="name">The news struck doubt into restless minds.</p></li>
+<li class="sortable-item" id="413"><p class="name">Once we stood beside the shore.</p></li>
+<li class="sortable-item" id="414"><p class="name">A chink in the wall allowed a draft to blow.</p></li>
+<li class="sortable-item" id="415"><p class="name">Fasten two pins on each side.</p></li>
+<li class="sortable-item" id="416"><p class="name">A cold dip restores health and zest.</p></li>
+<li class="sortable-item" id="417"><p class="name">He takes the oath of office each March.</p></li>
+<li class="sortable-item" id="418"><p class="name">The sand drifts over the sill of the old house.</p></li>
+<li class="sortable-item" id="419"><p class="name">The point of the steel pen was bent and twisted.</p></li>
+<li class="sortable-item" id="420"><p class="name">There is a lag between thought and act.</p></li>
+<li class="sortable-item" id="421"><p class="name">Seed is needed to plant the spring corn.</p></li>
+<li class="sortable-item" id="422"><p class="name">Draw the chart with heavy black lines.</p></li>
+<li class="sortable-item" id="423"><p class="name">The boy owed his pal thirty cents.</p></li>
+<li class="sortable-item" id="424"><p class="name">The chap slipped into the crowd and was lost.</p></li>
+<li class="sortable-item" id="425"><p class="name">Hats are worn to tea and not to dinner.</p></li>
+<li class="sortable-item" id="426"><p class="name">The ramp led up to the wide highway.</p></li>
+<li class="sortable-item" id="427"><p class="name">Beat the dust from the rug onto the lawn.</p></li>
+<li class="sortable-item" id="428"><p class="name">Say it slow!y but make it ring clear.</p></li>
+<li class="sortable-item" id="429"><p class="name">The straw nest housed five robins.</p></li>
+<li class="sortable-item" id="430"><p class="name">Screen the porch with woven straw mats.</p></li>
+<li class="sortable-item" id="431"><p class="name">This horse will nose his way to the finish.</p></li>
+<li class="sortable-item" id="432"><p class="name">The dry wax protects the deep scratch.</p></li>
+<li class="sortable-item" id="433"><p class="name">He picked up the dice for a second roll.</p></li>
+<li class="sortable-item" id="434"><p class="name">These coins will be needed to pay his debt.</p></li>
+<li class="sortable-item" id="435"><p class="name">The nag pulled the frail cart along.</p></li>
+<li class="sortable-item" id="436"><p class="name">Twist the valve and release hot steam.</p></li>
+<li class="sortable-item" id="437"><p class="name">The vamp of the shoe had a gold buckle.</p></li>
+<li class="sortable-item" id="438"><p class="name">The smell of burned rags itches my nose.</p></li>
+<li class="sortable-item" id="439"><p class="name">Xew pants lack cuffs and pockets.</p></li>
+<li class="sortable-item" id="440"><p class="name">The marsh will freeze when cold enough.</p></li>
+<li class="sortable-item" id="441"><p class="name">They slice the sausage thin with a knife.</p></li>
+<li class="sortable-item" id="442"><p class="name">The bloom of the rose lasts a few days.</p></li>
+<li class="sortable-item" id="443"><p class="name">A gray mare walked before the colt.</p></li>
+<li class="sortable-item" id="444"><p class="name">Breakfast buns are fine with a hot drink.</p></li>
+<li class="sortable-item" id="445"><p class="name">Bottles hold four kinds of rum.</p></li>
+<li class="sortable-item" id="446"><p class="name">The man wore a feather in his felt hat.</p></li>
+<li class="sortable-item" id="447"><p class="name">He wheeled the bike past. the winding road.</p></li>
+<li class="sortable-item" id="448"><p class="name">Drop the ashes on the worn old rug.</p></li>
+<li class="sortable-item" id="449"><p class="name">The desk and both chairs were painted tan.</p></li>
+<li class="sortable-item" id="450"><p class="name">Throw out the used paper cup and plate.</p></li>
+<li class="sortable-item" id="451"><p class="name">A clean neck means a neat collar.</p></li>
+<li class="sortable-item" id="452"><p class="name">The couch cover and hall drapes were blue.</p></li>
+<li class="sortable-item" id="453"><p class="name">The stems of the tall glasses cracked and broke.</p></li>
+<li class="sortable-item" id="454"><p class="name">The wall phone rang loud and often.</p></li>
+<li class="sortable-item" id="455"><p class="name">The clothes dried on a thin wooden rack.</p></li>
+<li class="sortable-item" id="456"><p class="name">Turn on the lantern which gives us light.</p></li>
+<li class="sortable-item" id="457"><p class="name">The cleat sank deeply into the soft turf.</p></li>
+<li class="sortable-item" id="458"><p class="name">The bills were mailed promptly on the tenth of the month.</p></li>
+<li class="sortable-item" id="459"><p class="name">To have is better than to wait and hope.</p></li>
+<li class="sortable-item" id="460"><p class="name">The price is fair for a good antique clock.</p></li>
+<li class="sortable-item" id="461"><p class="name">The music played on while they talked.</p></li>
+<li class="sortable-item" id="462"><p class="name">Dispense with a vest on a day like this.</p></li>
+<li class="sortable-item" id="463"><p class="name">The bunch of grapes was pressed into wine.</p></li>
+<li class="sortable-item" id="464"><p class="name">He sent the figs, but kept the ripe cherries.</p></li>
+<li class="sortable-item" id="465"><p class="name">The hinge on the door creaked with old age.</p></li>
+<li class="sortable-item" id="466"><p class="name">The screen before the fire kept in the sparks.</p></li>
+<li class="sortable-item" id="467"><p class="name">Fly by night, and you waste little time.</p></li>
+<li class="sortable-item" id="468"><p class="name">Thick glasses helped him read the print.</p></li>
+<li class="sortable-item" id="469"><p class="name">Birth and death mark the limits of life.</p></li>
+<li class="sortable-item" id="470"><p class="name">The chair looked strong but had no bottom.</p></li>
+<li class="sortable-item" id="471"><p class="name">The kite flew wildly in the high wind.</p></li>
+<li class="sortable-item" id="472"><p class="name">A fur muff is stylish once more.</p></li>
+<li class="sortable-item" id="473"><p class="name">The tin box held priceless stones.</p></li>
+<li class="sortable-item" id="474"><p class="name">We need an end of all such matter.</p></li>
+<li class="sortable-item" id="475"><p class="name">The case was puzzling to the old and wise.</p></li>
+<li class="sortable-item" id="476"><p class="name">The bright lanterns were gay on the dark lawn.</p></li>
+<li class="sortable-item" id="477"><p class="name">We don't get much money but we have fun.</p></li>
+<li class="sortable-item" id="478"><p class="name">The youth drove with zest, but little skill.</p></li>
+<li class="sortable-item" id="479"><p class="name">Five years he lived with a shaggy dog.</p></li>
+<li class="sortable-item" id="480"><p class="name">A fence cuts through the corner lot.</p></li>
+<li class="sortable-item" id="481"><p class="name">The way to save money is not to spend much.</p></li>
+<li class="sortable-item" id="482"><p class="name">Shut the hatch before the waves push it in.</p></li>
+<li class="sortable-item" id="483"><p class="name">The odor of spring makes young hearts jump.</p></li>
+<li class="sortable-item" id="484"><p class="name">Crack the walnut with your sharp side teeth.</p></li>
+<li class="sortable-item" id="485"><p class="name">He offered proof in the form of a lsrge chart.</p></li>
+<li class="sortable-item" id="486"><p class="name">Send the stuff in a thick paper bag.</p></li>
+<li class="sortable-item" id="487"><p class="name">A quart of milk is water for the most part.</p></li>
+<li class="sortable-item" id="488"><p class="name">They told wild tales to frighten him.</p></li>
+<li class="sortable-item" id="489"><p class="name">The three story house was built of stone.</p></li>
+<li class="sortable-item" id="490"><p class="name">In the rear of the ground floor was a large passage.</p></li>
+<li class="sortable-item" id="491"><p class="name">A man in a blue sweater sat at the desk.</p></li>
+<li class="sortable-item" id="492"><p class="name">Oats are a food eaten by horse and man.</p></li>
+<li class="sortable-item" id="493"><p class="name">Their eyelids droop for want. of sleep.</p></li>
+<li class="sortable-item" id="494"><p class="name">The sip of tea revives his tired friend.</p></li>
+<li class="sortable-item" id="495"><p class="name">There are many ways to do these things.</p></li>
+<li class="sortable-item" id="496"><p class="name">Tuck the sheet under the edge of the mat.</p></li>
+<li class="sortable-item" id="497"><p class="name">A force equal to that would move the earth.</p></li>
+<li class="sortable-item" id="498"><p class="name">We like to see clear weather.</p></li>
+<li class="sortable-item" id="499"><p class="name">The work of the tailor is seen on each side.</p></li>
+<li class="sortable-item" id="500"><p class="name">Take a chance and win a china doll.</p></li>
+<li class="sortable-item" id="501"><p class="name">Shake the dust from your shoes, stranger.</p></li>
+<li class="sortable-item" id="502"><p class="name">She was kind to sick old people.</p></li>
+<li class="sortable-item" id="503"><p class="name">The dusty bench stood by the stone wall.</p></li>
+<li class="sortable-item" id="504"><p class="name">The square wooden crate was packed to be shipped.</p></li>
+<li class="sortable-item" id="505"><p class="name">We dress to suit the weather of most days.</p></li>
+<li class="sortable-item" id="506"><p class="name">Smile when you say nasty words.</p></li>
+<li class="sortable-item" id="507"><p class="name">A bowl of rice is free with chicken stew.</p></li>
+<li class="sortable-item" id="508"><p class="name">The water in this well is a source of good health.</p></li>
+<li class="sortable-item" id="509"><p class="name">Take shelter in this tent, but keep still.</p></li>
+<li class="sortable-item" id="510"><p class="name">That guy is the writer of a few banned books.</p></li>
+<li class="sortable-item" id="511"><p class="name">The little tales they tell are false.</p></li>
+<li class="sortable-item" id="512"><p class="name">The door was barred, locked, and bolted as well.</p></li>
+<li class="sortable-item" id="513"><p class="name">Ripe pears are fit for a queen's table.</p></li>
+<li class="sortable-item" id="514"><p class="name">A big wet stain was on the round carpet.</p></li>
+<li class="sortable-item" id="515"><p class="name">The kite dipped and swayed, but stayed aloft.</p></li>
+<li class="sortable-item" id="516"><p class="name">The pleasant hours fly by much too soon.</p></li>
+<li class="sortable-item" id="517"><p class="name">The room was crowded with a wild mob.</p></li>
+<li class="sortable-item" id="518"><p class="name">This strong arm shall shield your honor.</p></li>
+<li class="sortable-item" id="519"><p class="name">She blushed when he gave her a white orchid.</p></li>
+<li class="sortable-item" id="520"><p class="name">The beetle droned in the hot June sun.</p></li>
+<li class="sortable-item" id="521"><p class="name">Press the pedal with your left foot.</p></li>
+<li class="sortable-item" id="522"><p class="name">Neat plans fail without luck.</p></li>
+<li class="sortable-item" id="523"><p class="name">The black trunk fell from the landing.</p></li>
+<li class="sortable-item" id="524"><p class="name">The bank pressed for payment of the debt.</p></li>
+<li class="sortable-item" id="525"><p class="name">The theft of the pearl pin was kept secret.</p></li>
+<li class="sortable-item" id="526"><p class="name">Shake hands with this friendly child.</p></li>
+<li class="sortable-item" id="527"><p class="name">The vast space stretched into the far distance.</p></li>
+<li class="sortable-item" id="528"><p class="name">A rich farm is rare in this sandy waste.</p></li>
+<li class="sortable-item" id="529"><p class="name">His wide grin earned many friends.</p></li>
+<li class="sortable-item" id="530"><p class="name">Flax makes a fine brand of paper.</p></li>
+<li class="sortable-item" id="531"><p class="name">Hurdle the pit with the aid of a long pole.</p></li>
+<li class="sortable-item" id="532"><p class="name">A strong bid may scare your partner stiff.</p></li>
+<li class="sortable-item" id="533"><p class="name">Even a just cause needs power to win.</p></li>
+<li class="sortable-item" id="534"><p class="name">Peep under the tent and see the clowns.</p></li>
+<li class="sortable-item" id="535"><p class="name">The leaf drifts along with a slow spin.</p></li>
+<li class="sortable-item" id="536"><p class="name">Cheap clothes are flashy but don’t last.</p></li>
+<li class="sortable-item" id="537"><p class="name">A thing of small note can cause despair.</p></li>
+<li class="sortable-item" id="538"><p class="name">Flood the mails with requests for this book.</p></li>
+<li class="sortable-item" id="539"><p class="name">A thick coat of black paint covered all.</p></li>
+<li class="sortable-item" id="540"><p class="name">The pencil was cut to be sharp at both ends.</p></li>
+<li class="sortable-item" id="541"><p class="name">Those last words were a strong statement.</p></li>
+<li class="sortable-item" id="542"><p class="name">He wrote his name boldly at the top of tile sheet.</p></li>
+<li class="sortable-item" id="543"><p class="name">Dill pickles are sour but taste fine.</p></li>
+<li class="sortable-item" id="544"><p class="name">Down that road is the way to the grain farmer.</p></li>
+<li class="sortable-item" id="545"><p class="name">Either mud or dust are found at all times.</p></li>
+<li class="sortable-item" id="546"><p class="name">The best method is to fix it in place with clips.</p></li>
+<li class="sortable-item" id="547"><p class="name">If you mumble your speech will be lost.</p></li>
+<li class="sortable-item" id="548"><p class="name">At night the alarm roused him from a deep sleep.</p></li>
+<li class="sortable-item" id="549"><p class="name">Read just what the meter says.</p></li>
+<li class="sortable-item" id="550"><p class="name">Fill your pack with bright trinkets for the poor.</p></li>
+<li class="sortable-item" id="551"><p class="name">The small red neon lamp went out.</p></li>
+<li class="sortable-item" id="552"><p class="name">Clams are small, round, soft, and tasty.</p></li>
+<li class="sortable-item" id="553"><p class="name">The fan whirled its round blades softly.</p></li>
+<li class="sortable-item" id="554"><p class="name">The line where the edges join was clean.</p></li>
+<li class="sortable-item" id="555"><p class="name">Breathe deep and smell the piny air.</p></li>
+<li class="sortable-item" id="556"><p class="name">It matters not if he reads these words or those.</p></li>
+<li class="sortable-item" id="557"><p class="name">A brown leather bag hung from its strap.</p></li>
+<li class="sortable-item" id="558"><p class="name">A toad and a frog are hard to tell apart.</p></li>
+<li class="sortable-item" id="559"><p class="name">A white silk jacket goes with any shoes.</p></li>
+<li class="sortable-item" id="560"><p class="name">A break in the dam almost caused a flood.</p></li>
+<li class="sortable-item" id="561"><p class="name">Paint the sockets in the wall dull green.</p></li>
+<li class="sortable-item" id="562"><p class="name">The child crawled into the dense grass.</p></li>
+<li class="sortable-item" id="563"><p class="name">Bribes fail where honest men work.</p></li>
+<li class="sortable-item" id="564"><p class="name">Trample the spark, else the flames will spread.</p></li>
+<li class="sortable-item" id="565"><p class="name">The hilt. of the sword was carved with fine designs.</p></li>
+<li class="sortable-item" id="566"><p class="name">A round hole was drilled through the thin board.</p></li>
+<li class="sortable-item" id="567"><p class="name">Footprints showed the path he took up the beach.</p></li>
+<li class="sortable-item" id="568"><p class="name">She was waiting at my front lawn.</p></li>
+<li class="sortable-item" id="569"><p class="name">A vent near the edge brought in fresh air.</p></li>
+<li class="sortable-item" id="570"><p class="name">Prod the old mule with a crooked stick.</p></li>
+<li class="sortable-item" id="571"><p class="name">It is a band of steel three inches wide.</p></li>
+<li class="sortable-item" id="572"><p class="name">The pipe ran almost the length of the ditch.</p></li>
+<li class="sortable-item" id="573"><p class="name">It was hidden from sight by a mass of leaves and shrubs.</p></li>
+<li class="sortable-item" id="574"><p class="name">The weight. of the package was seen on the high scale.</p></li>
+<li class="sortable-item" id="575"><p class="name">Wake and rise, and step into the green outdoors.</p></li>
+<li class="sortable-item" id="576"><p class="name">The green light in the brown box flickered.</p></li>
+<li class="sortable-item" id="577"><p class="name">The brass tube circled the high wall.</p></li>
+<li class="sortable-item" id="578"><p class="name">The lobes of her ears were pierced to hold rings.</p></li>
+<li class="sortable-item" id="579"><p class="name">Hold the hammer near the end to drive the nail.</p></li>
+<li class="sortable-item" id="580"><p class="name">Next Sunday is the twelfth of the month.</p></li>
+<li class="sortable-item" id="581"><p class="name">Every word and phrase he speaks is true.</p></li>
+<li class="sortable-item" id="582"><p class="name">He put his last cartridge into the gun and fired.</p></li>
+<li class="sortable-item" id="583"><p class="name">They took their kids from the public school.</p></li>
+<li class="sortable-item" id="584"><p class="name">Drive the screw straight into the wood.</p></li>
+<li class="sortable-item" id="585"><p class="name">Keep the hatch tight and the watch constant.</p></li>
+<li class="sortable-item" id="586"><p class="name">Sever the twine with a quick snip of the knife.</p></li>
+<li class="sortable-item" id="587"><p class="name">Paper will dry out when wet.</p></li>
+<li class="sortable-item" id="588"><p class="name">Slide the catch back and open the desk.</p></li>
+<li class="sortable-item" id="589"><p class="name">Help the weak to preserve their strength.</p></li>
+<li class="sortable-item" id="590"><p class="name">A sullen smile gets few friends.</p></li>
+<li class="sortable-item" id="591"><p class="name">Stop whistling and watch the boys march.</p></li>
+<li class="sortable-item" id="592"><p class="name">Jerk the cord, and out tumbles the gold.</p></li>
+<li class="sortable-item" id="593"><p class="name">Slidc the tray across the glass top.</p></li>
+<li class="sortable-item" id="594"><p class="name">The cloud moved in a stately way and was gone.</p></li>
+<li class="sortable-item" id="595"><p class="name">Light maple makes for a swell room.</p></li>
+<li class="sortable-item" id="596"><p class="name">Set the piece here and say nothing.</p></li>
+<li class="sortable-item" id="597"><p class="name">Dull stories make her laugh.</p></li>
+<li class="sortable-item" id="598"><p class="name">A stiff cord will do to fasten your shoe.</p></li>
+<li class="sortable-item" id="599"><p class="name">Get the trust fund to the bank early.</p></li>
+<li class="sortable-item" id="600"><p class="name">Choose between the high road and the low.</p></li>
+<li class="sortable-item" id="601"><p class="name">A plea for funds seems to come again.</p></li>
+<li class="sortable-item" id="602"><p class="name">He lent his coat to the tall gaunt stranger.</p></li>
+<li class="sortable-item" id="603"><p class="name">There is a strong chance it will happen once more.</p></li>
+<li class="sortable-item" id="604"><p class="name">The duke left the park in a silver coach.</p></li>
+<li class="sortable-item" id="605"><p class="name">Greet the new guests and leave quickly.</p></li>
+<li class="sortable-item" id="606"><p class="name">When the frost has come it is time for turkey.</p></li>
+<li class="sortable-item" id="607"><p class="name">Sweet words work better than fierce.</p></li>
+<li class="sortable-item" id="608"><p class="name">A thin stripe runs down the middle.</p></li>
+<li class="sortable-item" id="609"><p class="name">A six comes up more often than a ten.</p></li>
+<li class="sortable-item" id="610"><p class="name">Lush fern grow on the lofty rocks.</p></li>
+<li class="sortable-item" id="611"><p class="name">The ram scared the school children off.</p></li>
+<li class="sortable-item" id="612"><p class="name">The team with the best timing looks good.</p></li>
+<li class="sortable-item" id="613"><p class="name">The farmer swapped his horse for a brown ox.</p></li>
+<li class="sortable-item" id="614"><p class="name">Sit on the perch and tell the others what to do.</p></li>
+<li class="sortable-item" id="615"><p class="name">A steep trail is painful for our feet.</p></li>
+<li class="sortable-item" id="616"><p class="name">The early phase of life moves fast.</p></li>
+<li class="sortable-item" id="617"><p class="name">Green moss grows on the northern side.</p></li>
+<li class="sortable-item" id="618"><p class="name">Tea in thin china has a sweet taste.</p></li>
+<li class="sortable-item" id="619"><p class="name">Pitch the straw through the door of the stable.</p></li>
+<li class="sortable-item" id="620"><p class="name">The latch on the beck gate needed a nail.</p></li>
+<li class="sortable-item" id="621"><p class="name">The goose was brought straight from the old market.</p></li>
+<li class="sortable-item" id="622"><p class="name">The sink is the thing in which we pile dishes.</p></li>
+<li class="sortable-item" id="623"><p class="name">A whiff of it will cure the most stubborn cold.</p></li>
+<li class="sortable-item" id="624"><p class="name">The facts don’t always show who is right.</p></li>
+<li class="sortable-item" id="625"><p class="name">She flaps her cape as she parades the street.</p></li>
+<li class="sortable-item" id="626"><p class="name">The loss of the cruiser was a blow to the fleet.</p></li>
+<li class="sortable-item" id="627"><p class="name">Loop the braid to the left and then over.</p></li>
+<li class="sortable-item" id="628"><p class="name">Plead with the lawyer to drop the lost cause.</p></li>
+<li class="sortable-item" id="629"><p class="name">Calves thrive on tender spring grass.</p></li>
+<li class="sortable-item" id="630"><p class="name">Post no bills on this office wall.</p></li>
+<li class="sortable-item" id="631"><p class="name">Tear a thin sheet from the yellow pad.</p></li>
+<li class="sortable-item" id="632"><p class="name">A cruise in warm waters in a sleek yacht is fun.</p></li>
+<li class="sortable-item" id="633"><p class="name">A streak of color ran down the left edge.</p></li>
+<li class="sortable-item" id="634"><p class="name">It was done before the boy could see it.</p></li>
+<li class="sortable-item" id="635"><p class="name">Crouch before you jump or miss the mark.</p></li>
+<li class="sortable-item" id="636"><p class="name">Pack the kits and don’t forget the salt.</p></li>
+<li class="sortable-item" id="637"><p class="name">The square peg will settle in the round hole.</p></li>
+<li class="sortable-item" id="638"><p class="name">Fine soap saves tender skin.</p></li>
+<li class="sortable-item" id="639"><p class="name">Poached eggs and tea must suffice.</p></li>
+<li class="sortable-item" id="640"><p class="name">Bad nerves are jangled by a door slam.</p></li>
+<li class="sortable-item" id="641"><p class="name">Ship maps are different from those for planes.</p></li>
+<li class="sortable-item" id="642"><p class="name">Dimes showered down from all sides.</p></li>
+<li class="sortable-item" id="643"><p class="name">They sang the same tunes at each party.</p></li>
+<li class="sortable-item" id="644"><p class="name">The sky in the west is tinged with orange red.</p></li>
+<li class="sortable-item" id="645"><p class="name">The pods of peas ferment in bare fields.</p></li>
+<li class="sortable-item" id="646"><p class="name">The horse balked and threw the tall rider.</p></li>
+<li class="sortable-item" id="647"><p class="name">The hitch between the horse and cart broke.</p></li>
+<li class="sortable-item" id="648"><p class="name">Pile the coal high in the shed corner.</p></li>
+<li class="sortable-item" id="649"><p class="name">The gold vase is both rare and costly.</p></li>
+<li class="sortable-item" id="650"><p class="name">The knife was hung inside its bright sheath.</p></li>
+<li class="sortable-item" id="651"><p class="name">The rarest spice comes from the far East.</p></li>
+<li class="sortable-item" id="652"><p class="name">The roof should be tilted at a sharp slant.</p></li>
+<li class="sortable-item" id="653"><p class="name">A smatter of French is worse than none.</p></li>
+<li class="sortable-item" id="654"><p class="name">The mule trod the treadmill day and night.</p></li>
+<li class="sortable-item" id="655"><p class="name">The aim of the contest is to raise a great fund.</p></li>
+<li class="sortable-item" id="656"><p class="name">To send it. now in large amounts is bad.</p></li>
+<li class="sortable-item" id="657"><p class="name">There is a fine hard tang in salty air.</p></li>
+<li class="sortable-item" id="658"><p class="name">Cod is the main business of the north shore.</p></li>
+<li class="sortable-item" id="659"><p class="name">The slab was hewn from heavy blocks of slat’e.</p></li>
+<li class="sortable-item" id="660"><p class="name">Dunk the stale biscuits into strong drink.</p></li>
+<li class="sortable-item" id="661"><p class="name">Hang tinsel from both branches.</p></li>
+<li class="sortable-item" id="662"><p class="name">Cap the jar with a tight brass cover.</p></li>
+<li class="sortable-item" id="663"><p class="name">The poor boy missed the boat again.</p></li>
+<li class="sortable-item" id="664"><p class="name">Be sure to set the lamp firmly in the hole.</p></li>
+<li class="sortable-item" id="665"><p class="name">Pick a card and slip it. under the pack.</p></li>
+<li class="sortable-item" id="666"><p class="name">A round mat will cover the dull spot.</p></li>
+<li class="sortable-item" id="667"><p class="name">The first part of the plan needs changing.</p></li>
+<li class="sortable-item" id="668"><p class="name">The good book informs of what we ought to know.</p></li>
+<li class="sortable-item" id="669"><p class="name">The mail comes in three batches per day.</p></li>
+<li class="sortable-item" id="670"><p class="name">You cannot brew tea in a cold pot.</p></li>
+<li class="sortable-item" id="671"><p class="name">Dots of light betrayed the black cat.</p></li>
+<li class="sortable-item" id="672"><p class="name">Put the chart on the mantel and tack it down.</p></li>
+<li class="sortable-item" id="673"><p class="name">The night shift men rate extra pay.</p></li>
+<li class="sortable-item" id="674"><p class="name">The red paper brightened the dim stage.</p></li>
+<li class="sortable-item" id="675"><p class="name">See the player scoot to third base.</p></li>
+<li class="sortable-item" id="676"><p class="name">Slide the bill between the two leaves.</p></li>
+<li class="sortable-item" id="677"><p class="name">Many hands help get the job done.</p></li>
+<li class="sortable-item" id="678"><p class="name">We don't like to admit our small faults.</p></li>
+<li class="sortable-item" id="679"><p class="name">No doubt about the way the wind blows.</p></li>
+<li class="sortable-item" id="680"><p class="name">Dig deep in the earth for pirate's gold.</p></li>
+<li class="sortable-item" id="681"><p class="name">The steady drip is worse than a drenching rain.</p></li>
+<li class="sortable-item" id="682"><p class="name">A flat pack takes less luggage space.</p></li>
+<li class="sortable-item" id="683"><p class="name">Green ice frosted the punch bowl.</p></li>
+<li class="sortable-item" id="684"><p class="name">A stuffed chair slipped from the moving van.</p></li>
+<li class="sortable-item" id="685"><p class="name">The stitch will serve but needs to be shortened.</p></li>
+<li class="sortable-item" id="686"><p class="name">A thin book fits in the side pocket.</p></li>
+<li class="sortable-item" id="687"><p class="name">The gloss on top made it unfit to read.</p></li>
+<li class="sortable-item" id="688"><p class="name">The hail pattered on the burnt brown grass.</p></li>
+<li class="sortable-item" id="689"><p class="name">Seven seals were stamped on great sheets.</p></li>
+<li class="sortable-item" id="690"><p class="name">Our troops are set to strike heavy blows.</p></li>
+<li class="sortable-item" id="691"><p class="name">The store was jammed before the sale could start.</p></li>
+<li class="sortable-item" id="692"><p class="name">It was a bad error on the part of the new judge.</p></li>
+<li class="sortable-item" id="693"><p class="name">One step more and the board will collapse.</p></li>
+<li class="sortable-item" id="694"><p class="name">Take the match and strike it against your shoe.</p></li>
+<li class="sortable-item" id="695"><p class="name">The pot boiled, but the contents failed to jell.</p></li>
+<li class="sortable-item" id="696"><p class="name">The baby puts his right foot in his mouth.</p></li>
+<li class="sortable-item" id="697"><p class="name">The bombs left most of the town in ruins.</p></li>
+<li class="sortable-item" id="698"><p class="name">Stop and stare at the hard working man.</p></li>
+<li class="sortable-item" id="699"><p class="name">The streets are narrow and full of sharp turns.</p></li>
+<li class="sortable-item" id="700"><p class="name">The pup jerked the leash as he saw a feline shape.</p></li>
+<li class="sortable-item" id="701"><p class="name">Open your book to the first page.</p></li>
+<li class="sortable-item" id="702"><p class="name">Fish evade the net, and swim off.</p></li>
+<li class="sortable-item" id="703"><p class="name">Dip the pail once and let it settle.</p></li>
+<li class="sortable-item" id="704"><p class="name">Will you please answer that phone.</p></li>
+<li class="sortable-item" id="705"><p class="name">The big red apple fell to the ground.</p></li>
+<li class="sortable-item" id="706"><p class="name">The curtain rose and the show was on.</p></li>
+<li class="sortable-item" id="707"><p class="name">The young prince became heir to the throne.</p></li>
+<li class="sortable-item" id="708"><p class="name">He sent the boy on a short errand.</p></li>
+<li class="sortable-item" id="709"><p class="name">Leave now and you will arrive on time.</p></li>
+<li class="sortable-item" id="710"><p class="name">The corner store was robbed last night.</p></li>
+<li class="sortable-item" id="711"><p class="name">A gold ring will please most any girl.</p></li>
+<li class="sortable-item" id="712"><p class="name">The long journey home took a year.</p></li>
+<li class="sortable-item" id="713"><p class="name">She saw a cat in the neighbor's house.</p></li>
+<li class="sortable-item" id="714"><p class="name">A pink shell was found on the sandy beach.</p></li>
+<li class="sortable-item" id="715"><p class="name">Small children came to see him.</p></li>
+<li class="sortable-item" id="716"><p class="name">The grass and bushes were wet with dew.</p></li>
+<li class="sortable-item" id="717"><p class="name">The blind man counted his old coins.</p></li>
+<li class="sortable-item" id="718"><p class="name">A severe storm tore down the barn.</p></li>
+<li class="sortable-item" id="719"><p class="name">She called his name many times.</p></li>
+<li class="sortable-item" id="720"><p class="name">When you hear the bell, come quickly.</p></li></ul>
 
 				</div>
 
 				<div class="column left">
 
-					<ul class="sortable-list" id="my-list">
+					<ul class="list" id="my-list">
 						
 					</ul>
 
@@ -874,15 +863,15 @@ $(document).ready(function(){
         };
 
 	
-	$('#example-2-1 .sortable-list').sortable({
-		connectWith: '#example-2-1 .sortable-list'
+	$('#example-2-1 .list').sortable({
+		connectWith: '#example-2-1 .list'
 	});
 
 	// Example 2.1: Get items
 	$('#btn-get').click(postContactToGoogle);
 
 	//list.js script goes here
-	var options = {valueNames: [ 'sortable-item' ]};
+	var options = {valueNames: [ 'name' ]};
 	var userList = new List('users', options);
 
 	});
