@@ -23,12 +23,13 @@ body{
   
 #input-box {
   float: right;
-  margin-right:2%;
-    width: 45%;
+  margin-right: 2%;
+  width: 45%;
   }  
   
 .input-button{
-margin-top:10px;
+margin-top:0px;
+margin-bottom: 10px;
 margin-left: 30%;
 border:1px solid #a23117; 
 -webkit-border-radius: 3px; 
@@ -79,6 +80,8 @@ border-radius: 3px;
   line-height: 1em;
   width:28%;
   padding:0px 0px 0px 10px;
+  margin-bottom: 70px;
+  
   }
   
 #input-name, #input-email {
@@ -88,17 +91,41 @@ width: 70%;
 line-height: 1.5em;
 padding: 5px 0px 5px 10px;
 margin-bottom: 10px;
+border: solid 1px #dcdcdc;
+transition: box-shadow 0.3s, border 0.3s;
+border-radius: 3px;  
+  
   }
 
 #results {
   line-height: 1.2em;
   font-size: 80%;
-  color: #7e7e7e;
-  width: 27.5%;
-  padding: 7px 10px 7px 10px;
-  margin-bottom: 20px;
+  font-weight: normal;
+  color: #ffffff;
+  width: 100%;
+  margin: 5px 0px;
 }
 
+#left-box-title{
+  line-height: 1.2em;
+  font-size: 112.5%;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0px 0px 0px;
+  color: #ffffff;
+  width: 100%;
+  }
+  
+  #right-box-title{
+  line-height: 1.2em;
+  font-size: 112.5%;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0px 49px 0px;
+  color: #ffffff;
+  width: 100%;
+  }
+  
 .left {float: left;}
 .right {
   float: right;
@@ -108,28 +135,27 @@ margin-bottom: 10px;
 /* Columns */
 
 .column {
+  background-color: #D3401E;
+  border-radius: 3px;
   margin-left: 0%;
   width: 48%;
 }
+
+#right-column{
+  background-color: #e77256;
+  }
+  
 .column.first {margin-left: 0;}
-
-
 /* Sortable items */
 
 .sortable-list {
-  background-color: #D3401E;
+  
   list-style: none;
   margin: 0;
   min-height: 500px;
   padding: 10px;
-  border-radius: 3px;
 }
-
-#my-list{
-  background-color: #e77256;
-  }
-  
-  
+   
 .sortable-item {
   background-color: #FFF;
   border: 1px solid #D3D3D3;
@@ -168,14 +194,16 @@ margin-bottom: 10px;
 <input type="text" id="input-email" placeholder="Your email"/>  
 <input type="submit" class="input-button" id="btn-get" value="Submit"/>
 </div>
-  
-<input id="search_input" placeholder="Type to filter" />
-  
+
+
+<input id="search_input" placeholder="Type to filter" /> 
 <p id="reminder">Empty this box to see all the phrases you have dropped into the right box.</p>
   
-<p id="results">Total number of phrases: <span id="num_results"></span><br>(scroll down to see more)</p>  
-  
-        <div class="column left first">
+<div class="column left first">
+<div id="left-box-title">
+  Harvard Sentences
+  <p id="results">Total number of phrases: <span id="num_results"></span><br>(scroll down to see more)</p>
+</div>
 <ul class="sortable-list" id="mylist">
 <li class="sortable-item" id="9">The juice of lemons makes fine punch.</li> 
 <li class="sortable-item" id="14">The boy was there when the sun rose.</li>  
@@ -900,7 +928,8 @@ margin-bottom: 10px;
 
         </div>
 
-        <div class="column right">
+        <div class="column right" id="right-column">
+          <div id="right-box-title">Your Composition</div>
 
           <ul class="sortable-list" id="my-list">
             
