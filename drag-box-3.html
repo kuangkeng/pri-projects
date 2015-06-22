@@ -5,7 +5,8 @@
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-<script src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+
+
 <style>
 /*
   Stylesheet for examples by DevHeart.
@@ -102,11 +103,12 @@
 <div id="example-2-1">
 
         <p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
- 
-<div class="column left first container" id="users">
 
- <input type="text" id="input" placeholder="Type here">
- 
+
+  
+<div class="column left first" id="users">
+
+
 
 
 <ul class="sortable-list list" id="mylist">
@@ -873,49 +875,32 @@ $(document).ready(function(){
   // Example 2.1: Get items
   $('#btn-get').click(postContactToGoogle);
 
-  //mixit script goes here
-    $(".container").mixItUp();
-
-  var inputText;
-  var $matching = $();
-
-  // Delay function
-  var delay = (function(){
-    var timer = 0;
-    return function(callback, ms){
-      clearTimeout (timer);
-      timer = setTimeout(callback, ms);
-    };
-  })();
-
-  $("#input").keyup(function(){
-    // Delay function invoked to make sure user stopped typing
-    delay(function(){
-      inputText = $("#input").val().toLowerCase();
-      
-      // Check to see if input field is empty
-      if ((inputText.length) > 0) {            
-        $( '.sortable-item').each(function() {
-          $this = $("this");
-          
-           // add item to be filtered out if input text matches items inside the title   
-           if($(this).children('.name').text().toLowerCase().match(inputText)) {
-            $matching = $matching.add(this);
-          }
-          else {
-            // removes any previously matched item
-            $matching = $matching.not(this);
-          }
+  //filter script goes here:
+  $("#filter").keyup(function(){
+ 
+        // Retrieve the input field text and reset the count to zero
+        var filter = $(this).val(), count = 0;
+ 
+        // Loop through the comment list
+        $(".sortable-list li").each(function(){
+ 
+            // If the list item does not contain the text phrase fade it out
+            if ($(this).text().search(new RegExp(filter, "i")) < 0) 
+            {
+                $(this).fadeOut();
+ 
+            // Show the list item if the phrase matches and increase the count by 1
+            } else {
+                $(this).show();
+                count++;
+            }
         });
-        $(".container").mixItUp('filter', $matching);
-      }
+ 
+        // Update the count
+        var numberItems = count;
+        $("#filter-count").text("Number of Comments = "+count);
+    });
 
-      else {
-        // resets the filter to show all item if input is empty
-        $(".container").mixItUp('filter', 'all');
-      }
-    }, 200 );
-  });
 
   });
 </script>
