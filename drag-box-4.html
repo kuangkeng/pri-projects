@@ -130,8 +130,6 @@ border-radius: 3px;
 
 <p id="message"><i>This interactive works best on desktop. Mobile users might experience delay in dragging and dropping the sentences.</i></p>
 
-<br>
-
 <div id="example-2-1">
 
 				<p><input type="submit" class="input-button" id="btn-get" value="Submit" /></p>
@@ -887,16 +885,16 @@ $(document).ready(function(){
 	// get items and send to google spreadsheet
 	   function postContactToGoogle() {
 
-	   		var email = $('#input-name').val();
-            var first = $('#input-email').val();
-            var last = $('#Last').val();
-            var company = $('#Company').val();
-
+	   		var username = $('#input-name').val();
+            var useremail = $('#input-email').val();
             var items = $('#my-list').sortable('toArray');
  			var itemStr = items.join(',');
                 $.ajax({
                     url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
-                    data: { "entry.1970269249": itemStr},
+                    data: 
+                    { "entry.1651239056": username, 
+                    "entry.958191294": useremail,
+                    "entry.1414165750": itemStr },	
                     type: "POST",
                     dataType: "xml",
                 });
