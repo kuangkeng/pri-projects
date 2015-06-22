@@ -5,6 +5,9 @@
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script src="http://kuangkeng.github.io/pri-projects/fastLiveFilter.js"></script>
+<script src="http://labs.abeautifulsite.net/archived/jquery-alerts/demo/jquery.alerts.css"></script>
+<script src="http://labs.abeautifulsite.net/archived/jquery-alerts/demo/jquery.alerts.js"></script>
+
 <style>
 body{
   width: 100%;
@@ -14,16 +17,22 @@ body{
   font-size: 112.5%;
   line-height: 1.5em;
   color: #33333c;
+  
 }
 
 #message {
   display:none;
-  }
-
+  }  
+  
+#input-box {
+  float: right;
+  margin-right:2%;
+    width: 45%;
+  }  
+  
 .input-button{
-float: right;
-margin-right:19%;
-margin-top:5%;
+margin-top:10px;
+margin-left: 30%;
 border:1px solid #a23117; 
 -webkit-border-radius: 3px; 
 -moz-border-radius: 3px;
@@ -31,7 +40,7 @@ border-radius: 3px;
 font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
 font-size: 112.5%;
 line-height: 1.5em;
-padding: 7px 20px 7px 20px; 
+padding: 3px 20px 3px 20px; 
 text-decoration:none; 
 display:inline-block;
 text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
@@ -56,21 +65,40 @@ background-image: linear-gradient(to bottom, #D3401E, #832813);filter:progid:DXI
 }
 
 #search_input {
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
-font-size: 100%;
+font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+font-size: 80%;
 width: 29%;
 line-height: 1.5em;
 padding: 7px 0px 7px 10px; 
+margin-bottom: -10px;
 border: solid 1px #dcdcdc;
 transition: box-shadow 0.3s, border 0.3s;
 border-radius: 3px;
 }
 
+#reminder {
+  font-size:12px;
+  color: #7e7e7e;
+  line-height: 1em;
+  width:28%;
+  padding:0px 0px 0px 10px;
+  }
+  
+#input-name, #input-email {
+font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+font-size: 80%;
+width: 70%;
+line-height: 1.5em;
+padding: 5px 0px 5px 10px;
+margin-bottom: 10px;
+  }
+
 #results {
-  border-radius: 3px;
-  border: 1px solid #dcdcdc;
-  width: 28%;
+  font-size: 100%;
+  color: #7e7e7e;
+  width: 27.5%;
   padding: 7px 10px 7px 10px;
+  margin-bottom: 30px;
 }
 
 .left {float: left;}
@@ -82,8 +110,8 @@ border-radius: 3px;
 /* Columns */
 
 .column {
-	margin-left: 0%;
-	width: 48%;
+  margin-left: 0%;
+  width: 48%;
 }
 .column.first {margin-left: 0;}
 
@@ -91,56 +119,61 @@ border-radius: 3px;
 /* Sortable items */
 
 .sortable-list {
-	background-color: #D3401E;
-	list-style: none;
-	margin: 0;
-	min-height: 200px;
-	padding: 10px;
+  background-color: #D3401E;
+  list-style: none;
+  margin: 0;
+  min-height: 500px;
+  padding: 10px;
   border-radius: 3px;
 }
 .sortable-item {
-	background-color: #FFF;
-	border: 1px solid #D3D3D3;
-	cursor: move;
-	display: block;
-	margin-bottom: 10px;
-	padding: 10px 5px;
-	text-align: center;
+  background-color: #FFF;
+  border: 1px solid #D3D3D3;
+  cursor: move;
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 5px;
+  text-align: center;
   border-radius: 3px;
 }
-
+  
 @media (max-width: 480px) {
         body, .input-button, #search_input 
         {
-          	font-size: 12px !important;
-       		line-height: 1.2em; !important;
+            font-size: 12px !important;
+          line-height: 1.2em; !important;
         }
         #message {
         display:block;
         }
-}
-
-
+}  
 </style>
 </head>
 
 <body>
   
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Drag the phrases in the left box and drop them into the right box to compose your own “poem.” You can filter the phrases by typing in the filter box on the left. <b>Empty the filter box to see all the phrases you have dropped into the right box.</b> Remember to include your name and email so we can credit you if your composition is shared in our podcast. Have fun!</p>
 
 <p id="message"><i>This interactive works best on desktop. Mobile users might experience delay in dragging and dropping the sentences.</i></p>
+<br>
 
 <div id="example-2-1">
 
-				<p><input type="submit" class="input-button" id="btn-get" value="Submit" /></p>
-
+<div id="input-box">
+<input type="text" id="input-name" placeholder="Your name"/>
+<input type="text" id="input-email" placeholder="Your email"/>  
+<input type="submit" class="input-button" id="btn-get" value="Submit"/>
+</div>
+  
 <input id="search_input" placeholder="Type to filter" />
+  
+<p id="reminder">Empty this box to see all the phrases you have dropped into the right box.</p>
   
 <p id="results">Number of results: <span id="num_results"></span></p>  
   
-				<div class="column left first">
+        <div class="column left first">
 <ul class="sortable-list" id="mylist">
-						<li class="sortable-item" id="1">Type out three lists of orders.</li>
+            <li class="sortable-item" id="1">Type out three lists of orders.</li>
 <li class="sortable-item" id="2">He wrote down a long list of items.</li>
 <li class="sortable-item" id="3">The list of names is carved around the base.</li>
 <li class="sortable-item" id="4">The birch canoe slid on the smooth planks.</li>
@@ -861,15 +894,15 @@ border-radius: 3px;
 <li class="sortable-item" id="719">She called his name many times.</li>
 <li class="sortable-item" id="720">When you hear the bell, come quickly.</li></ul>
 
-				</div>
+        </div>
 
-				<div class="column right">
+        <div class="column right">
 
-					<ul class="sortable-list" id="my-list">
-						
-					</ul>
+          <ul class="sortable-list" id="my-list">
+            
+          </ul>
 
-				</div>
+        </div>
 
 </div>
 
@@ -880,44 +913,51 @@ border-radius: 3px;
 
 $(document).ready(function(){
 
-	var input = "no input";
-	
-	// get items and send to google spreadsheet
-	   function postContactToGoogle() {
+  var input = "no input";
+  
+//Get Items and send to google spreadsheet
+     function postContactToGoogle() {
 
-	   		var username = $('#input-name').val();
+        var username = $('#input-name').val();
             var useremail = $('#input-email').val();
             var items = $('#my-list').sortable('toArray');
- 			var itemStr = items.join(',');
+      var itemStr = items.join(',');
                 $.ajax({
                     url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
                     data: 
                     { "entry.1651239056": username, 
                     "entry.958191294": useremail,
-                    "entry.1414165750": itemStr },	
+                    "entry.1414165750": itemStr },  
                     type: "POST",
                     dataType: "xml",
+
+                    statusCode: {
+                        0: function () {
+                            jAlert('This is a custom alert box', 'Alert Dialog');
+                        },
+                    }
+
                 });
-        };
+        };        
 
-	
-	$('#example-2-1 .sortable-list').sortable({
-		connectWith: '#example-2-1 .sortable-list'
-	});
+  //Make both columns draggable
+  $('#example-2-1 .sortable-list').sortable({
+    connectWith: '#example-2-1 .sortable-list'
+  });
 
-	// Example 2.1: Get items
-	$('#btn-get').click(postContactToGoogle);
+  //Connect click with Get Items
+  $('#btn-get').click(postContactToGoogle);
 
-	//fastLiveFilter function here
-	$(function() {
+  //fastLiveFilter function here
+  $(function() {
         $('#search_input').fastLiveFilter('#mylist', 
-       		{
-    		callback: function(total) { $('#num_results').html(total); }
-			}
-		);
+          {
+        callback: function(total) { $('#num_results').html(total); }
+      }
+    );
     });
 
-	});
+  });
 </script>
 
 
