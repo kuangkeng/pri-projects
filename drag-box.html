@@ -91,6 +91,7 @@ margin-bottom: 10px;
   }
 
 #results {
+  font-size: 100%;
   color: #7e7e7e;
   width: 27.5%;
   padding: 7px 10px 7px 10px;
@@ -911,7 +912,7 @@ $(document).ready(function(){
 
   var input = "no input";
   
-// get items and send to google spreadsheet
+//Get Items and send to google spreadsheet
      function postContactToGoogle() {
 
         var username = $('#input-name').val();
@@ -926,15 +927,22 @@ $(document).ready(function(){
                     "entry.1414165750": itemStr },  
                     type: "POST",
                     dataType: "xml",
+
+                    statusCode: {
+                        0: function () {
+                            alert("ThankYou");
+                        },
+                    }
+
                 });
         };
 
-  
+  //Make both columns draggable
   $('#example-2-1 .sortable-list').sortable({
     connectWith: '#example-2-1 .sortable-list'
   });
 
-  // Example 2.1: Get items
+  //Connect click with Get Items
   $('#btn-get').click(postContactToGoogle);
 
   //fastLiveFilter function here
