@@ -126,7 +126,7 @@ border-radius: 3px;
 
 <body>
   
-
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 <p id="message"><i>This interactive works best on desktop. Mobile users might experience delay in dragging and dropping the sentences.</i></p>
 
@@ -886,10 +886,16 @@ $(document).ready(function(){
 	
 	// get items and send to google spreadsheet
 	   function postContactToGoogle() {
+
+	   		var email = $('#input-name').val();
+            var first = $('#input-email').val();
+            var last = $('#Last').val();
+            var company = $('#Company').val();
+
             var items = $('#my-list').sortable('toArray');
  			var itemStr = items.join(',');
                 $.ajax({
-                    url: "https://docs.google.com/forms/d/1yZEMG9rYli3FCBa5KmHrSlyyrET42BijGN9YKmbrjtg/formResponse",
+                    url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
                     data: { "entry.1970269249": itemStr},
                     type: "POST",
                     dataType: "xml",
