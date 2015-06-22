@@ -104,14 +104,16 @@
 
         <p><input type="submit" class="input-button" id="btn-get" value="Get items" /></p>
 
-
+<form id="live-search" action="" class="styled" method="post">
+    <fieldset>
+        <input type="text" class="text-input" id="filter" value="" />
+        <span id="filter-count"></span>
+    </fieldset>
+</form>
   
 <div class="column left first" id="users">
 
-
-
-
-<ul class="sortable-list list" id="mylist">
+<ul class="sortable-list" id="mylist">
 <li class="sortable-item" id="1"><p class="name">Type out three lists of orders.</p></li>
 <li class="sortable-item" id="2"><p class="name">He wrote down a long list of items.</p></li>
 <li class="sortable-item" id="3"><p class="name">The list of names is carved around the base.</p></li>
@@ -874,8 +876,8 @@ $(document).ready(function(){
 
   // Example 2.1: Get items
   $('#btn-get').click(postContactToGoogle);
-
-  //filter script goes here:
+  
+    //filter script goes here:
   $("#filter").keyup(function(){
  
         // Retrieve the input field text and reset the count to zero
@@ -885,8 +887,7 @@ $(document).ready(function(){
         $(".sortable-list li").each(function(){
  
             // If the list item does not contain the text phrase fade it out
-            if ($(this).text().search(new RegExp(filter, "i")) < 0) 
-            {
+            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
                 $(this).fadeOut();
  
             // Show the list item if the phrase matches and increase the count by 1
@@ -900,7 +901,6 @@ $(document).ready(function(){
         var numberItems = count;
         $("#filter-count").text("Number of Comments = "+count);
     });
-
 
   });
 </script>
