@@ -67,10 +67,19 @@ font-size: 80%;
 width: 29%;
 line-height: 1.5em;
 padding: 7px 0px 7px 10px; 
+margin-bottom: -10px;
 border: solid 1px #dcdcdc;
 transition: box-shadow 0.3s, border 0.3s;
 border-radius: 3px;
 }
+
+#reminder {
+  font-size:12px;
+  color: #7e7e7e;
+  line-height: 1em;
+  width:28%;
+  padding:0px 0px 0px 10px;
+  }
   
 #input-name, #input-email {
 font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
@@ -154,6 +163,8 @@ margin-bottom: 10px;
 </div>
   
 <input id="search_input" placeholder="Type to filter" />
+  
+<p id="reminder">Empty this box to see all the phrases you have droped into the right box.</p>
   
 <p id="results">Number of results: <span id="num_results"></span></p>  
   
