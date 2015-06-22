@@ -91,11 +91,12 @@ margin-bottom: 10px;
   }
 
 #results {
-  font-size: 100%;
+  line-height: 1.2em;
+  font-size: 80%;
   color: #7e7e7e;
   width: 27.5%;
   padding: 7px 10px 7px 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .left {float: left;}
@@ -123,6 +124,12 @@ margin-bottom: 10px;
   padding: 10px;
   border-radius: 3px;
 }
+
+#my-list{
+  background-color: #e77256;
+  }
+  
+  
 .sortable-item {
   background-color: #FFF;
   border: 1px solid #D3D3D3;
@@ -149,7 +156,7 @@ margin-bottom: 10px;
 
 <body>
   
-<p>Drag the phrases in the left box and drop them into the right box to compose your own “poem.” You can filter the phrases by typing in the filter box on the left. <b>Empty the filter box to see all the phrases you have dropped into the right box.</b> Remember to include your name and email so we can credit you if your composition is shared in our podcast. Have fun!</p>
+<p>There are 720 phrases in the left box. You can drag and drop them into the right box where you can arrange the sequence to compose your own “poem.” Use the filter box on the left to find phrases that contain the word you want. <b>Empty the filter box to see all the phrases you have dropped into the right box. </b> When you are done, click "submit" to send us your composition. Remember to include your name and email so we can credit you if your composition is shared in our podcast. Have fun!</p>
 
 <p id="message"><i>This interactive works best on desktop. Mobile users might experience delay in dragging and dropping the sentences.</i></p>
 <br>
@@ -166,11 +173,12 @@ margin-bottom: 10px;
   
 <p id="reminder">Empty this box to see all the phrases you have dropped into the right box.</p>
   
-<p id="results">Number of results: <span id="num_results"></span></p>  
+<p id="results">Total number of phrases: <span id="num_results"></span><br>(scroll down to see more)</p>  
   
         <div class="column left first">
 <ul class="sortable-list" id="mylist">
-            <li class="sortable-item" id="1">Type out three lists of orders.</li>
+<li class="sortable-item" id="9">The juice of lemons makes fine punch.</li> 
+<li class="sortable-item" id="14">The boy was there when the sun rose.</li>  
 <li class="sortable-item" id="2">He wrote down a long list of items.</li>
 <li class="sortable-item" id="3">The list of names is carved around the base.</li>
 <li class="sortable-item" id="4">The birch canoe slid on the smooth planks.</li>
@@ -178,12 +186,11 @@ margin-bottom: 10px;
 <li class="sortable-item" id="6">It's easy to tell the depth of a well.</li>
 <li class="sortable-item" id="7">These days a chicken leg is a rare dish.</li>
 <li class="sortable-item" id="8">Rice is often served in round bowls.</li>
-<li class="sortable-item" id="9">The juice of lemons makes fine punch.</li>
+<li class="sortable-item" id="1">Type out three lists of orders.</li>
 <li class="sortable-item" id="10">The box was thrown beside the parked truck.</li>
 <li class="sortable-item" id="11">The hogs were fed chopped corn and garbage.</li>
 <li class="sortable-item" id="12">Four hours of steady work faced us.</li>
 <li class="sortable-item" id="13">Large size in stockings is hard to sell.</li>
-<li class="sortable-item" id="14">The boy was there when the sun rose.</li>
 <li class="sortable-item" id="15">A rod is used to catch pink salmon.</li>
 <li class="sortable-item" id="16">The source of the huge river is the clear spring.</li>
 <li class="sortable-item" id="17">Kick the ball straight and follow through.</li>
