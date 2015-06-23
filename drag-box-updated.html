@@ -69,6 +69,7 @@ width: 29%;
 line-height: 1.5em;
 padding: 7px 0px 7px 10px; 
 margin-bottom: -10px;
+margin-top: 13%;
 border: solid 1px #dcdcdc;
 transition: box-shadow 0.3s, border 0.3s;
 border-radius: 3px;
@@ -80,11 +81,11 @@ border-radius: 3px;
   line-height: 1em;
   width:28%;
   padding:0px 0px 0px 10px;
-  margin-bottom: 70px;
+  margin-bottom: 3%;
   
   }
   
-#input-name, #input-email {
+#input-name, #input-email, #input-twitter {
 font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
 font-size: 80%;
 width: 70%;
@@ -182,7 +183,7 @@ border-radius: 3px;
 
 <body>
   
-<p>There are 300 phrases in the left box. You can drag and drop them into the right box where you can arrange the sequence to compose your own “poem.” Use the filter box on the left to find phrases that contain the word you want. <b>Empty the filter box to see all the phrases you have dropped into the right box. </b> When you are done, click "submit" to send us your composition. Remember to include your name and email so we can credit you if your composition is shared in our podcast. Have fun!</p>
+<p>There are 300 phrases in the left box. You can drag and drop them into the right box where you can arrange the sequence to compose your own “poem.” Use the filter box on the left to find phrases that contain the word you want. <b>Empty the filter box to see all the phrases you have dropped into the right box. </b> When you are done, click "submit" to send us your composition. Remember to include your name, email and Twitter handle so we can credit you if your composition is shared in our podcast. Have fun!</p>
 
 <p id="message"><i>This interactive works best on desktop. Mobile users might experience delay in dragging and dropping the sentences.</i></p>
 <br>
@@ -191,7 +192,8 @@ border-radius: 3px;
 
 <div id="input-box">
 <input type="text" id="input-name" placeholder="Your name"/>
-<input type="text" id="input-email" placeholder="Your email"/>  
+<input type="text" id="input-email" placeholder="Your email"/>
+<input type="text" id="input-twitter" placeholder="Your Twitter handle"/>
 <input type="submit" class="input-button" id="btn-get" value="Submit"/>
 </div>
 
