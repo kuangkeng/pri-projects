@@ -69,6 +69,7 @@ width: 29%;
 line-height: 1.5em;
 padding: 7px 0px 7px 10px; 
 margin-bottom: -10px;
+margin-top: 13%;
 border: solid 1px #dcdcdc;
 transition: box-shadow 0.3s, border 0.3s;
 border-radius: 3px;
@@ -80,11 +81,11 @@ border-radius: 3px;
   line-height: 1em;
   width:28%;
   padding:0px 0px 0px 10px;
-  margin-bottom: 70px;
+  margin-bottom: 3%;
   
   }
   
-#input-name, #input-email {
+#input-name, #input-email, #input-twitter {
 font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
 font-size: 80%;
 width: 70%;
@@ -134,27 +135,22 @@ border-radius: 3px;
 
 /* Columns */
 
-#left-column {
+.column {
   background-color: #D3401E;
   border-radius: 3px;
   margin-left: 0%;
   width: 48%;
-  float:left;
 }
 
 #right-column{
-  border-radius: 3px;
-  max-width: 346px;
-  width: 100%;
   background-color: #e77256;
-  float: right;
-  
-  
   }
   
+.column.first {margin-left: 0;}
 /* Sortable items */
 
 .sortable-list {
+  
   list-style: none;
   margin: 0;
   min-height: 500px;
@@ -187,7 +183,7 @@ border-radius: 3px;
 
 <body>
   
-<p>There are 300 phrases in the left box. You can drag and drop them into the right box where you can arrange the sequence to compose your own “poem.” Use the filter box on the left to find phrases that contain the word you want. <b>Empty the filter box to see all the phrases you have dropped into the right box. </b> When you are done, click "submit" to send us your composition. Remember to include your name and email so we can credit you if your composition is shared in our podcast. Have fun!</p>
+<p>There are 300 phrases in the left box. You can drag and drop them into the right box where you can arrange the sequence to compose your own “poem.” Use the filter box on the left to find phrases that contain the word you want. <b>Empty the filter box to see all the phrases you have dropped into the right box. </b> When you are done, click "submit" to send us your composition. Remember to include your name, email and Twitter handle so we can credit you if your composition is shared in our podcast. Have fun!</p>
 
 <p id="message"><i>This interactive works best on desktop. Mobile users might experience delay in dragging and dropping the sentences.</i></p>
 <br>
@@ -196,7 +192,8 @@ border-radius: 3px;
 
 <div id="input-box">
 <input type="text" id="input-name" placeholder="Your name"/>
-<input type="text" id="input-email" placeholder="Your email"/>  
+<input type="text" id="input-email" placeholder="Your email"/>
+<input type="text" id="input-twitter" placeholder="Your Twitter handle"/>
 <input type="submit" class="input-button" id="btn-get" value="Submit"/>
 </div>
 
@@ -204,7 +201,7 @@ border-radius: 3px;
 <input id="search_input" placeholder="Type to filter" /> 
 <p id="reminder">Empty this box to see all the phrases you have dropped into the right box.</p>
   
-<div class="column left first" id="left-column">
+<div class="column left first">
 <div id="left-box-title">
   Harvard Sentences
   <p id="results">Total number of phrases: <span id="num_results"></span><br>(scroll down to see more)</p>
@@ -513,12 +510,15 @@ border-radius: 3px;
 </ul>
 
         </div>
-      
+
         <div class="column right" id="right-column">
           <div id="right-box-title">Your Composition</div>
-          <ul class="sortable-list" id="my-list"></ul>
+
+          <ul class="sortable-list" id="my-list">
+            
+          </ul>
+
         </div>
-     
 
 </div>
 
@@ -528,40 +528,42 @@ border-radius: 3px;
 <script type="text/javascript">
 
 $(document).ready(function(){
-
-//script to position sticky composition box  
+  
+  //script to position sticky composition box  
   $(document).scroll(function() {
-    $('#right-column').removeClass('float');
+    var boxposition = $('#right-column').offset().top;
+    //$('#right-column').removeClass('float');
     var scrollheight = $(document).scrollTop();
-    var windowheight = $(window).height();
-    var boxheight = 0.6*windowheight+scrollheight;
-    var absoluteheight = scrollheight/windowheight*100;
-    $('#right-column').css({'position': 'absolute', 'top': boxheight, 'left': '50%'});
+    //var windowheight = $(window).height();
+    //var boxheight = 0.6*windowheight+scrollheight;
+    //var absoluteheight = scrollheight/windowheight*100;
+    var difference = boxposition - scrollheight;
+    //$('#right-column').css({'position': 'absolute', 'top': boxheight, 'left': '50%'});
     console.log("scrollheight = " + scrollheight);
-    console.log("windowheight = " + windowheight);
-    console.log("boxheight = " + boxheight);
-    
-    
+    //console.log("windowheight = " + windowheight);
+    //console.log("boxheight = " + boxheight);
+    console.log("boxposition = " + boxposition);
+    console.log("difference = " + difference);
 });
   
   
-  
-  
-  
+
   var input = "no input";
   
 //Get Items and send to google spreadsheet
      function postContactToGoogle() {
 
-        var username = $('#input-name').val();
-            var useremail = $('#input-email').val();
-            var items = $('#my-list').sortable('toArray');
+      var username = $('#input-name').val();
+      var useremail = $('#input-email').val();
+      var items = $('#my-list').sortable('toArray');
+      var usertwitter = $('#input-twitter').val();
       var itemStr = items.join(',');
                 $.ajax({
                     url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
                     data: 
                     { "entry.1651239056": username, 
                     "entry.958191294": useremail,
+                    "entry.1803001734": usertwitter,
                     "entry.1414165750": itemStr },  
                     type: "POST",
                     dataType: "xml",
