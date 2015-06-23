@@ -5,6 +5,8 @@
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script src="http://kuangkeng.github.io/pri-projects/fastLiveFilter.js"></script>
+<script src="http://kuangkeng.github.io/pri-projects/jquery.sticky.js"></script>
+
 <style>
 body{
   width: 100%;
@@ -122,7 +124,7 @@ border-radius: 3px;
   font-size: 112.5%;
   font-weight: bold;
   text-align: center;
-  margin: 10px 0px 49px 0px;
+  padding: 15px 0px 15px 0px;
   color: #ffffff;
   width: 100%;
   }
@@ -135,25 +137,27 @@ border-radius: 3px;
 
 /* Columns */
 
-.column {
+#left-column{
   background-color: #D3401E;
   border-radius: 3px;
   margin-left: 0%;
-  width: 48%;
+  width: 49%;
 }
 
 #right-column{
   background-color: #e77256;
+  border-radius: 3px;
+  width: 350px;
+  float: right;
+  margin-right:2%;
   }
-  
-.column.first {margin-left: 0;}
+
 /* Sortable items */
 
 .sortable-list {
-  
   list-style: none;
   margin: 0;
-  min-height: 500px;
+  min-height: 450px;
   padding: 10px;
 }
    
@@ -168,15 +172,48 @@ border-radius: 3px;
   border-radius: 3px;
 }
   
-@media (max-width: 480px) {
+@media only screen
+and (min-width : 320px) 
+and (max-width : 480px) {
         body, .input-button, #search_input 
         {
             font-size: 12px !important;
           line-height: 1.2em; !important;
         }
+        #right-column{
+          width:190px;
+        }
         #message {
         display:block;
         }
+  }
+  
+@media (min-width : 480px) 
+and (max-width : 580px) {
+        body, .input-button, #search_input 
+        {
+            font-size: 12px !important;
+          line-height: 1.2em; !important;
+        }
+        #right-column {
+          width:240px;
+        }
+        #message {
+        display:block;
+        }
+  }
+
+@media (min-width : 580px) 
+and (max-width : 700px) {
+        
+        #right-column {
+          width:320px;
+        }
+    }
+
+  
+  
+  
 }  
 </style>
 </head>
@@ -201,7 +238,7 @@ border-radius: 3px;
 <input id="search_input" placeholder="Type to filter" /> 
 <p id="reminder">Empty this box to see all the phrases you have dropped into the right box.</p>
   
-<div class="column left first">
+<div class="column left first" id="left-column">
 <div id="left-box-title">
   Harvard Sentences
   <p id="results">Total number of phrases: <span id="num_results"></span><br>(scroll down to see more)</p>
@@ -511,7 +548,7 @@ border-radius: 3px;
 
         </div>
 
-        <div class="column right" id="right-column">
+        <div class="column" id="right-column">
           <div id="right-box-title">Your Composition</div>
 
           <ul class="sortable-list" id="my-list">
@@ -528,6 +565,11 @@ border-radius: 3px;
 <script type="text/javascript">
 
 $(document).ready(function(){
+  
+//run sticky jquery to make composition box sticky
+  $("#right-column").sticky({ topSpacing: 50, responsiveWidth:true });
+  
+  
 
   var input = "no input";
   
