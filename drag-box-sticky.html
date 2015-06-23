@@ -529,12 +529,12 @@ border-radius: 3px;
 
 $(document).ready(function(){
 
-  
+//script to position sticky composition box  
   $(document).scroll(function() {
     $('#right-column').removeClass('float');
     var scrollheight = $(document).scrollTop();
     var windowheight = $(window).height();
-    var boxheight = 0.7*windowheight+scrollheight;
+    var boxheight = 0.6*windowheight+scrollheight;
     var absoluteheight = scrollheight/windowheight*100;
     $('#right-column').css({'position': 'absolute', 'top': boxheight, 'left': '50%'});
     console.log("scrollheight = " + scrollheight);
