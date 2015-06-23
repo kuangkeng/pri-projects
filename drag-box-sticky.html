@@ -135,7 +135,7 @@ border-radius: 3px;
 
 /* Columns */
 
-.column {
+#left-column{
   background-color: #D3401E;
   border-radius: 3px;
   margin-left: 0%;
@@ -144,13 +144,15 @@ border-radius: 3px;
 
 #right-column{
   background-color: #e77256;
+  border-radius: 3px;
+  margin-left: 0%;
+  width: 48%;
+  float: right;
   }
-  
-.column.first {margin-left: 0;}
+
 /* Sortable items */
 
 .sortable-list {
-  
   list-style: none;
   margin: 0;
   min-height: 450px;
@@ -201,7 +203,7 @@ border-radius: 3px;
 <input id="search_input" placeholder="Type to filter" /> 
 <p id="reminder">Empty this box to see all the phrases you have dropped into the right box.</p>
   
-<div class="column left first">
+<div class="column left first" id="left-column">
 <div id="left-box-title">
   Harvard Sentences
   <p id="results">Total number of phrases: <span id="num_results"></span><br>(scroll down to see more)</p>
@@ -532,16 +534,25 @@ $(document).ready(function(){
   //script to position sticky composition box  
   $(document).scroll(function() {
     var boxposition = $('#right-column').offset().top;
-    //$('#right-column').removeClass('float');
+    
     var scrollheight = $(document).scrollTop();
-    //var windowheight = $(window).height();
-    //var boxheight = 0.6*windowheight+scrollheight;
+    var windowheight = $(window).height();
+    var boxheight = 0.6*windowheight+scrollheight;
     //var absoluteheight = scrollheight/windowheight*100;
     var spaceabovebox = boxposition - scrollheight;
-    //$('#right-column').css({'position': 'absolute', 'top': boxheight, 'left': '50%'});
+    
+
+    if(spaceabovebox < 80) {
+        $('#right-column').removeClass('float');
+        $('#right-column').css({'position': 'absolute', 'top': boxheight, 'left': '50%'});
+    } 
+    else {
+  
+    };
+
     console.log("scrollheight = " + scrollheight);
     //console.log("windowheight = " + windowheight);
-    //console.log("boxheight = " + boxheight);
+    console.log("boxheight = " + boxheight);
     console.log("boxposition = " + boxposition);
     console.log("spaceabovebox = " + spaceabovebox);
 });
