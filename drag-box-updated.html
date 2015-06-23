@@ -534,15 +534,17 @@ $(document).ready(function(){
 //Get Items and send to google spreadsheet
      function postContactToGoogle() {
 
-        var username = $('#input-name').val();
-            var useremail = $('#input-email').val();
-            var items = $('#my-list').sortable('toArray');
+      var username = $('#input-name').val();
+      var useremail = $('#input-email').val();
+      var items = $('#my-list').sortable('toArray');
+      var usertwitter = $('#input-twitter').val();
       var itemStr = items.join(',');
                 $.ajax({
                     url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
                     data: 
                     { "entry.1651239056": username, 
                     "entry.958191294": useremail,
+                    "entry.1803001734": usertwitter,
                     "entry.1414165750": itemStr },  
                     type: "POST",
                     dataType: "xml",
