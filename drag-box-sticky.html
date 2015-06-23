@@ -147,9 +147,9 @@ border-radius: 3px;
   max-width: 346px;
   width: 100%;
   background-color: #e77256;
-  position: absolute;
-  top:70%;
-  left: 50%;
+  float: right;
+  
+  
   }
   
 /* Sortable items */
@@ -531,11 +531,12 @@ $(document).ready(function(){
 
   
   $(document).scroll(function() {
+    $('#right-column').removeClass('float');
     var scrollheight = $(document).scrollTop();
     var windowheight = $(window).height();
-    var boxheight = 0.3*windowheight+scrollheight;
+    var boxheight = 0.7*windowheight+scrollheight;
     var absoluteheight = scrollheight/windowheight*100;
-    $('#right-column').css({"top":boxheight});
+    $('#right-column').css({'position': 'absolute', 'top': boxheight, 'left': '50%'});
     console.log("scrollheight = " + scrollheight);
     console.log("windowheight = " + windowheight);
     console.log("boxheight = " + boxheight);
