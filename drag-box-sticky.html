@@ -532,9 +532,15 @@ $(document).ready(function(){
   
   $(document).scroll(function() {
     var scrollheight = $(document).scrollTop();
-    var absoluteheight = scrollheight + 200;
-    console.log(scrollheight);
-    $('#right-column').css({"top":absoluteheight});
+    var windowheight = $(window).height();
+    var boxheight = 0.3*windowheight+scrollheight;
+    var absoluteheight = scrollheight/windowheight*100;
+    $('#right-column').css({"top":boxheight});
+    console.log("scrollheight = " + scrollheight);
+    console.log("windowheight = " + windowheight);
+    console.log("boxheight = " + boxheight);
+    
+    
 });
   
   
