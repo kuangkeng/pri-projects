@@ -5,6 +5,8 @@
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script src="http://kuangkeng.github.io/pri-projects/fastLiveFilter.js"></script>
+<script src="http://kuangkeng.github.io/pri-projects/jquery.sticky.js"></script>
+
 <style>
 body{
   width: 100%;
@@ -169,12 +171,17 @@ border-radius: 3px;
   text-align: center;
   border-radius: 3px;
 }
+
+
   
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
         body, .input-button, #search_input 
         {
-            font-size: 12px !important;
+          font-size: 12px !important;
           line-height: 1.2em; !important;
+        }
+        #right-column{
+          width:230px;
         }
         #message {
         display:block;

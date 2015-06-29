@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 530px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+	  }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+                }
+        }),
+  
+    $('#container').highcharts({
+        
+        chart: {
+            type: 'bubble',
+            zoomType: 'xy'
+        },
+
+        title: {
+            text: "Women's National Soccer Teams and Gender Inequality"
+        },
+        
+        yAxis: {
+            reversed: true,
+            ceiling: 0.7,
+            title: {
+                text: '<b>Gender Inequality Index (GII)</b><br><br><-- higher disparities between genders',
+                margin: 30
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        
+        xAxis: {
+            
+            
+            title: {
+                text: 'FIFA Points (Mar 27, 2015)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+      
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            borderWidth: 0,
+            itemMarginTop: 5,
+            itemMarginBottom: 5,
+            itemStyle: {
+                fontSize: '12px',
+                fontWeight: 'normal'
+            },
+            itemWidth: 170,
+        },
+        
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },        
+
+         plotOptions : {
+            bubble : {
+                tooltip : {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat : 'FIFA point: <b>{point.x:,.0f}</b><br>GII: <b>{point.y}</b><br>GDP per capita: <b>{point.z:,.0f}</b>',   
+                          },
+                minSize:10,
+                maxSize:40,
+            }
+        },
+      
+        
+series: [{
+		name: 'Africa',
+		color: '#984ea3',
+		data:
+			[
+  				{name:'Cameroon' , x: 1455, y: 0.622, z: 1329},
+  				{name:'Ivory Coast' , x: 1373, y: 0.645, z: 1529}
+			]
+		 }, {
+		name: 'Asia',
+		color: '#377eb8',
+		data:
+			[
+ 			 	{name:'Japan' , x: 2066, y: 0.138, z: 38634},
+  				{name:'Australia' , x: 1968, y: 0.113, z: 67463},
+  				{name:'China' , x: 1847, y: 0.202, z: 6807},
+  				{name:'South Korea' , x: 1830, y: 0.101, z: 25977},
+  				{name:'Thailand' , x: 1654, y: 0.364, z: 5779}
+			]
+		}, {
+		name: 'Europe',
+		color: '#e41a1c',
+		data:
+			[
+  				{name:'Switzerland' , x: 1813, y: 0.030, z: 84748},
+  				{name:'England' , x: 2001, y: 0.193, z: 41781},
+  				{name:'Norway' , x: 1933, y: 0.068, z: 100898},
+  				{name:'Germany' , x: 2168, y: 0.046, z: 46251},
+  				{name:'Spain' , x: 1867, y: 0.100, z: 29882},
+  				{name:'France' , x: 2103, y: 0.080, z: 42560},
+  				{name:'Sweden' , x: 2008, y: 0.054, z: 60381},
+  				{name:'Netherlands' , x: 1919, y: 0.057, z: 50793}
+			]
+		}, {
+		name: 'North, Central America',
+		color: '#4daf4a',
+		data:
+			[
+  				{name:'Canada' , x: 1969, y: 0.136, z: 51964},
+  				{name:'United States' , x: 2158, y: 0.262, z: 53042},
+  				{name:'Costa Rica' , x: 1589, y: 0.344, z: 10185},
+  				{name:'Mexico' , x: 1748, y: 0.376, z: 10307}
+			]
+		}, {
+		name: 'Oceania',
+		color: '#ffff33',
+		data:
+			[
+  				{name:'New Zealand' , x: 1832, y: 0.185, z: 41824}
+			]
+		}, {
+		name: 'South America',
+		color: '#ff7f00',
+		data:
+			[
+  				{name:'Brazil' , x: 1984, y: 0.441, z: 11208},
+  				{name:'Colombia' , x: 1692, y: 0.460, z: 7831},
+  				{name:'Ecuador' , x: 1485, y: 0.429, z: 6003}
+			]
+		}]
+      
+    });
+});
+</script>
