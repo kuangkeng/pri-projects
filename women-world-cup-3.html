@@ -58,18 +58,17 @@ $(function () {
         xAxis: {
             title: {
                 enabled: true,
-                text: '<b>FIFA Points (Mar 27, 2015)</b>',
+                text: 'FIFA Points (Mar 27, 2015)',
                 margin: 20,
             },
-            startOnTick: true,
-            endOnTick: true,
-            showLastLabel: true
+            startOnTick: false,
+            endOnTick: false,
         },
         yAxis: {
             reversed: true,
             title: {
-                text: '<b>Gender Inequality Index (GII) (%)</b><br>higher<span style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> lower<br>disparities <span style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>disparities',
-                margin: 40
+                text: 'high disparities ---- Gender Inequality Index (GII) (%) ---- low disparities ',
+                margin: 20
             },
             ceiling: 80,
             floor: 0,
