@@ -50,10 +50,11 @@ $(function () {
             margin: 20,
         },
         subtitle: {
-            text: 'Source: FIFA, UN, World Bank<br>Bubble size represents GDP per capita',           
+            text: 'Source: <a href="http://www.fifa.com/fifa-world-ranking/ranking-table/women/" target="_blank">FIFA</a>, <a href="http://hdr.undp.org/en/content/gender-inequality-index-gii" target="_blank">UN</a>, <a href="http://data.worldbank.org/indicator/NY.GDP.PCAP.CD" target="_blank">World Bank</a><br>Bubble size represents GDP per capita',           
+            useHTML: true, 
             style: {
                 color: '#808080',
-                fontSize: '10',
+                fontSize: '11',
             }
         },
         
@@ -108,8 +109,17 @@ $(function () {
                     headerFormat: '<b>{point.key}</b><br>',
                     pointFormat : 'FIFA point: <b>{point.x:,.0f}</b><br>GII: <b>{point.y}%</b><br>GDP per capita: <b>USD{point.z:,.0f}</b>',   
                           },
-                minSize:10,
-                maxSize:40,
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#D3401E'
+                        }
+                    }
+                },
+                minSize:5,
+                maxSize:30,
             }
         },
       

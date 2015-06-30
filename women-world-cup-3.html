@@ -45,22 +45,21 @@ $(function () {
         },
         title: {
             text: "Women's National Soccer Teams and Gender Inequality",
-            margin: 50,
+            margin: 20,
         },
         subtitle: {
-             text: 'Source: FIFA, United Nations',
-            y: 55,            
+            text: 'Source: <a href="http://www.fifa.com/fifa-world-ranking/ranking-table/women/" target="_blank">FIFA</a>, <a href="http://hdr.undp.org/en/content/gender-inequality-index-gii" target="_blank">UN</a>',
+            useHTML: true,
             style: {
                 color: '#808080',
                 fontSize: '12',
-                margin: '10',
             }            
         },
         xAxis: {
             title: {
                 enabled: true,
                 text: 'FIFA Points (Mar 27, 2015)',
-                margin: 20,
+                margin: 10,
             },
             startOnTick: false,
             endOnTick: false,
@@ -69,7 +68,7 @@ $(function () {
             reversed: true,
             title: {
                 text: 'high disparities ---- Gender Inequality Index (GII) (%) ---- low disparities ',
-                margin: 20
+                margin: 5
             },
             ceiling: 80,
             floor: 0,
@@ -102,7 +101,7 @@ $(function () {
         },
         series: [{
             
-            color: '#D3401E',
+            color: 'rgba(211, 64, 30, .7)',
             data: [{"name":"Afghanistan","x":889,"y":70.5},
 {"name":"Mali","x":1197,"y":67.3},
 {"name":"Ivory Coast","x":1373,"y":64.5},

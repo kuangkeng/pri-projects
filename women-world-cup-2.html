@@ -44,10 +44,11 @@ $(function () {
         },
         title: {
             text: "Women's National Soccer Teams and GDP per capita",
-            margin: 30,
+            margin: 20,
         },
         subtitle: {
-             text: 'Source: FIFA, World Bank',            
+            text: 'Source: <a href="http://www.fifa.com/fifa-world-ranking/ranking-table/women/" target="_blank">FIFA</a>, <a href="http://data.worldbank.org/indicator/NY.GDP.PCAP.CD" target="_blank">World Bank</a>',
+            useHTML: true,            
             style: {
                 color: '#808080',
                 fontSize: '12',
@@ -57,7 +58,7 @@ $(function () {
             title: {
                 enabled: true,
                 text: 'FIFA Points (Mar 27, 2015)',
-                margin: 20,
+                margin: 10,
             },
             startOnTick: false,
             endOnTick: false,
@@ -98,7 +99,7 @@ $(function () {
         },
         series: [{
             
-            color: '#D3401E',
+            color: 'rgba(211, 64, 30, .7)',
             data: [{"name":"Luxembourg","x":1146,"y":110665},
 {"name":"Norway","x":1933,"y":100898},
 {"name":"Qatar","x":864,"y":93714},
