@@ -44,15 +44,13 @@ $(function () {
         },
         title: {
             text: "Women's National Soccer Teams and GDP per capita",
-            margin: 50,
+            margin: 30,
         },
         subtitle: {
-             text: 'Source: FIFA, World Bank',
-            y: 55,            
+             text: 'Source: FIFA, World Bank',            
             style: {
                 color: '#808080',
                 fontSize: '12',
-                margin: '10',
             }            
         },
         xAxis: {
@@ -61,14 +59,13 @@ $(function () {
                 text: 'FIFA Points (Mar 27, 2015)',
                 margin: 20,
             },
-            startOnTick: true,
-            endOnTick: true,
-            showLastLabel: true
+            startOnTick: false,
+            endOnTick: false,
         },
         yAxis: {
             title: {
                 text: 'GDP per capita (current USD)',
-                margin: 20,
+                margin: 5,
             },
             ceiling: 120000,
             floor: 0,
