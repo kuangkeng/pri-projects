@@ -22,7 +22,7 @@ width=100%;
 max-width: 850px; 
 margin: 0 auto;
 border:1px solid #D3D3D3;
-	  }
+      }
 </style>
 </head>
 
@@ -228,8 +228,23 @@ $(function () {
 {"name":"Nepal","x":1115,"y":694},
 {"name":"Afghanistan","x":889,"y":665},
 {"name":"Ethiopia","x":1153,"y":505}]
-
-        }]
+},{
+            type: 'line',
+            name: 'Regression Line',
+            color: '#832813',
+            data: [[2400, 48824.86], [784.30, 0]],
+            marker: {
+                enabled: false
+            },
+            states: {
+                hover: {
+                    lineWidth: 0
+                }
+            },
+            enableMouseTracking: false
+        }
+  
+  ]
     });
 });
 
