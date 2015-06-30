@@ -1,0 +1,235 @@
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 530px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+	  }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+  Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+                }
+        }),
+    $('#container').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: "Women's National Soccer Teams and GDP per capita",
+            margin: 50,
+        },
+        subtitle: {
+             text: 'Source: FIFA, World Bank',
+            y: 45,            
+            style: {
+                color: '#808080',
+                fontSize: '12',
+                margin: '10',
+            }            
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'FIFA Points'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'GDP per capita (current USD)',
+            },
+            ceiling: 120000,
+            floor: 0,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend:{enabled: false,},
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#D3401E'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'FIFA point: <b>{point.x:,.0f}</b><br>GDP per capita: <b>USD{point.y:,.0f}</b>'
+                }
+            }
+        },
+        series: [{
+            
+            color: '#D3401E',
+            data: [{"name":"Luxembourg","x":1146,"y":110665},
+{"name":"Norway","x":1933,"y":100898},
+{"name":"Qatar","x":864,"y":93714},
+{"name":"Switzerland","x":1813,"y":84748},
+{"name":"Australia","x":1968,"y":67463},
+{"name":"Sweden","x":2008,"y":60381},
+{"name":"Denmark","x":1848,"y":59819},
+{"name":"Singapore","x":1177,"y":55182},
+{"name":"United States","x":2158,"y":53042},
+{"name":"Canada","x":1969,"y":51964},
+{"name":"Netherlands","x":1919,"y":50793},
+{"name":"Austria","x":1711,"y":50511},
+{"name":"Ireland","x":1653,"y":50478},
+{"name":"Finland","x":1770,"y":49151},
+{"name":"Iceland","x":1812,"y":47349},
+{"name":"Belgium","x":1700,"y":46930},
+{"name":"Germany","x":2168,"y":46251},
+{"name":"United Arab Emirates","x":1353,"y":43049},
+{"name":"France","x":2103,"y":42560},
+{"name":"New Zealand","x":1832,"y":41824},
+{"name":"England","x":2001,"y":41781},
+{"name":"Scotland","x":1795,"y":41781},
+{"name":"Wales","x":1629,"y":41781},
+{"name":"Northern Ireland","x":1376,"y":41781},
+{"name":"Japan","x":2066,"y":38634},
+{"name":"Hong Kong, China (SAR)","x":1347,"y":38124},
+{"name":"Israel","x":1424,"y":36051},
+{"name":"Italy","x":1875,"y":35686},
+{"name":"Spain","x":1867,"y":29882},
+{"name":"Puerto Rico","x":1108,"y":28529},
+{"name":"South Korea","x":1830,"y":25977},
+{"name":"Cyprus","x":1108,"y":25249},
+{"name":"Bahrain","x":1287,"y":24689},
+{"name":"Slovenia","x":1391,"y":23295},
+{"name":"Malta","x":1152,"y":22775},
+{"name":"Greece","x":1364,"y":21966},
+{"name":"Portugal","x":1578,"y":21738},
+{"name":"Equatorial Guinea","x":1425,"y":20582},
+{"name":"Czech Republic","x":1654,"y":19858},
+{"name":"Estonia","x":1339,"y":18877},
+{"name":"Trinidad and Tobago","x":1489,"y":18373},
+{"name":"Slovakia","x":1500,"y":18049},
+{"name":"Uruguay","x":1361,"y":16351},
+{"name":"Chile","x":1559,"y":15732},
+{"name":"Lithuania","x":1231,"y":15530},
+{"name":"Latvia","x":1173,"y":15381},
+{"name":"Argentina","x":1621,"y":14715},
+{"name":"Russia","x":1783,"y":14612},
+{"name":"Venezuela","x":1380,"y":14415},
+{"name":"Saint Kitts and Nevis","x":956,"y":14133},
+{"name":"Poland","x":1644,"y":13654},
+{"name":"Kazakhstan","x":1354,"y":13612},
+{"name":"Croatia","x":1415,"y":13598},
+{"name":"Hungary","x":1566,"y":13485},
+{"name":"Antigua and Barbuda","x":767,"y":13342},
+{"name":"Brazil","x":1984,"y":11208},
+{"name":"Panama","x":1363,"y":11037},
+{"name":"Turkey","x":1411,"y":10972},
+{"name":"Malaysia","x":1269,"y":10538},
+{"name":"Mexico","x":1748,"y":10307},
+{"name":"Costa Rica","x":1589,"y":10185},
+{"name":"Lebanon","x":949,"y":9928},
+{"name":"Suriname","x":1152,"y":9826},
+{"name":"Romania","x":1566,"y":9491},
+{"name":"Colombia","x":1692,"y":7831},
+{"name":"Belarus","x":1475,"y":7575},
+{"name":"Bulgaria","x":1343,"y":7499},
+{"name":"Saint Lucia","x":991,"y":7328},
+{"name":"Botswana","x":737,"y":7315},
+{"name":"Dominica","x":906,"y":7176},
+{"name":"Montenegro","x":1219,"y":7107},
+{"name":"South Africa","x":1413,"y":6886},
+{"name":"China","x":1847,"y":6807},
+{"name":"Maldives","x":938,"y":6666},
+{"name":"Peru","x":1412,"y":6662},
+{"name":"Saint Vincent and the Grenadines","x":1000,"y":6486},
+{"name":"Serbia","x":1531,"y":6354},
+{"name":"Ecuador","x":1485,"y":6003},
+{"name":"Dominican Republic","x":1207,"y":5879},
+{"name":"Thailand","x":1654,"y":5779},
+{"name":"Namibia","x":1039,"y":5693},
+{"name":"Algeria","x":1321,"y":5361},
+{"name":"Jamaica","x":1352,"y":5290},
+{"name":"Jordan","x":1452,"y":5213},
+{"name":"Belize","x":825,"y":4894},
+{"name":"Macedonia","x":1092,"y":4838},
+{"name":"Iran","x":1420,"y":4763},
+{"name":"Bosnia and Herzegovina","x":1358,"y":4662},
+{"name":"Albania","x":1330,"y":4460},
+{"name":"Tonga","x":1299,"y":4427},
+{"name":"Tunisia","x":1314,"y":4317},
+{"name":"Paraguay","x":1459,"y":4265},
+{"name":"Ukraine","x":1772,"y":3900},
+{"name":"El Salvador","x":1184,"y":3826},
+{"name":"Georgia","x":1099,"y":3597},
+{"name":"Guatemala","x":1300,"y":3478},
+{"name":"Egypt","x":1272,"y":3314},
+{"name":"Sri Lanka","x":968,"y":3280},
+{"name":"Morocco","x":1316,"y":3093},
+{"name":"Swaziland","x":836,"y":3034},
+{"name":"Nigeria","x":1633,"y":3006},
+{"name":"Bolivia","x":1217,"y":2868},
+{"name":"Philippines","x":1309,"y":2765},
+{"name":"Bhutan","x":778,"y":2363},
+{"name":"Honduras","x":1152,"y":2291},
+{"name":"Papua New Guinea","x":1472,"y":2105},
+{"name":"Vietnam","x":1630,"y":1911},
+{"name":"Uzbekistan","x":1540,"y":1878},
+{"name":"Ghana","x":1458,"y":1858},
+{"name":"Nicaragua","x":1111,"y":1851},
+{"name":"Zambia","x":989,"y":1845},
+{"name":"Laos","x":1267,"y":1661},
+{"name":"Ivory Coast","x":1373,"y":1529},
+{"name":"India","x":1425,"y":1498},
+{"name":"Cameroon","x":1455,"y":1329},
+{"name":"Pakistan","x":926,"y":1275},
+{"name":"Lesotho","x":836,"y":1126},
+{"name":"Senegal","x":1259,"y":1047},
+{"name":"Bangladesh","x":987,"y":958},
+{"name":"Zimbabwe","x":1196,"y":953},
+{"name":"Tanzania","x":940,"y":913},
+{"name":"Haiti","x":1397,"y":820},
+{"name":"Mali","x":1197,"y":715},
+{"name":"Nepal","x":1115,"y":694},
+{"name":"Afghanistan","x":889,"y":665},
+{"name":"Ethiopia","x":1153,"y":505}]
+
+        }]
+    });
+});
+
+
+</script>
