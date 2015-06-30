@@ -22,7 +22,7 @@ width=100%;
 max-width: 850px; 
 margin: 0 auto;
 border:1px solid #D3D3D3;
-	  }
+      }
 </style>
 </head>
 
@@ -66,9 +66,10 @@ $(function () {
             showLastLabel: true
         },
         yAxis: {
+            reversed: true,
             title: {
-                text: '<b>Gender Inequality Index (GII) (%)</b>',
-                margin: 20,
+                text: '<b>Gender Inequality Index (GII) (%)</b><br>higher<span style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> lower<br>disparities <span style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>disparities',
+                margin: 40
             },
             ceiling: 80,
             floor: 0,
