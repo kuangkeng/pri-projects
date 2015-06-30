@@ -1,0 +1,226 @@
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 530px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+	  }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+  Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+                }
+        }),
+    $('#container').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: "Women's National Soccer Teams and Gender Inequality",
+            margin: 50,
+        },
+        subtitle: {
+             text: 'Source: FIFA, United Nations',
+            y: 55,            
+            style: {
+                color: '#808080',
+                fontSize: '12',
+                margin: '10',
+            }            
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: '<b>FIFA Points (Mar 27, 2015)</b>',
+                margin: 20,
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: '<b>Gender Inequality Index (GII) (%)</b>',
+                margin: 20,
+            },
+            ceiling: 80,
+            floor: 0,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend:{enabled: false,},
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#D3401E'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'FIFA point: <b>{point.x:,.0f}</b><br>GII: <b>{point.y}%</b>'
+                }
+            }
+        },
+        series: [{
+            
+            color: '#D3401E',
+            data: [{"name":"Afghanistan","x":889,"y":70.5},
+{"name":"Mali","x":1197,"y":67.3},
+{"name":"Ivory Coast","x":1373,"y":64.5},
+{"name":"Cameroon","x":1455,"y":62.2},
+{"name":"Papua New Guinea","x":1472,"y":61.7},
+{"name":"Zambia","x":989,"y":61.7},
+{"name":"Haiti","x":1397,"y":59.9},
+{"name":"Egypt","x":1272,"y":58},
+{"name":"India","x":1425,"y":56.3},
+{"name":"Pakistan","x":926,"y":56.3},
+{"name":"Lesotho","x":836,"y":55.7},
+{"name":"Tanzania","x":940,"y":55.3},
+{"name":"Ghana","x":1458,"y":54.9},
+{"name":"Ethiopia","x":1153,"y":54.7},
+{"name":"Senegal","x":1259,"y":53.7},
+{"name":"Laos","x":1267,"y":53.4},
+{"name":"Bangladesh","x":987,"y":52.9},
+{"name":"Swaziland","x":836,"y":52.9},
+{"name":"Qatar","x":864,"y":52.4},
+{"name":"Guatemala","x":1300,"y":52.3},
+{"name":"Zimbabwe","x":1196,"y":51.6},
+{"name":"Iran","x":1420,"y":51},
+{"name":"Panama","x":1363,"y":50.6},
+{"name":"Dominican Republic","x":1207,"y":50.5},
+{"name":"Bhutan","x":778,"y":49.5},
+{"name":"Jordan","x":1452,"y":48.8},
+{"name":"Botswana","x":737,"y":48.6},
+{"name":"Honduras","x":1152,"y":48.2},
+{"name":"Nepal","x":1115,"y":47.9},
+{"name":"Bolivia","x":1217,"y":47.2},
+{"name":"Venezuela","x":1380,"y":46.4},
+{"name":"Suriname","x":1152,"y":46.3},
+{"name":"South Africa","x":1413,"y":46.1},
+{"name":"Colombia","x":1692,"y":46},
+{"name":"Morocco","x":1316,"y":46},
+{"name":"Tonga","x":1299,"y":45.8},
+{"name":"Nicaragua","x":1111,"y":45.8},
+{"name":"Paraguay","x":1459,"y":45.7},
+{"name":"Jamaica","x":1352,"y":45.7},
+{"name":"Namibia","x":1039,"y":45},
+{"name":"Brazil","x":1984,"y":44.1},
+{"name":"El Salvador","x":1184,"y":44.1},
+{"name":"Belize","x":825,"y":43.5},
+{"name":"Myanmar","x":1541,"y":43},
+{"name":"Ecuador","x":1485,"y":42.9},
+{"name":"Algeria","x":1321,"y":42.5},
+{"name":"Lebanon","x":949,"y":41.3},
+{"name":"Philippines","x":1309,"y":40.6},
+{"name":"Peru","x":1412,"y":38.7},
+{"name":"Sri Lanka","x":968,"y":38.3},
+{"name":"Argentina","x":1621,"y":38.1},
+{"name":"Mexico","x":1748,"y":37.6},
+{"name":"Thailand","x":1654,"y":36.4},
+{"name":"Uruguay","x":1361,"y":36.4},
+{"name":"Turkey","x":1411,"y":36},
+{"name":"Chile","x":1559,"y":35.5},
+{"name":"Cuba","x":1206,"y":35},
+{"name":"Costa Rica","x":1589,"y":34.4},
+{"name":"Ukraine","x":1772,"y":32.6},
+{"name":"Kazakhstan","x":1354,"y":32.3},
+{"name":"Vietnam","x":1630,"y":32.2},
+{"name":"Trinidad and Tobago","x":1489,"y":32.1},
+{"name":"Romania","x":1566,"y":32},
+{"name":"Russia","x":1783,"y":31.4},
+{"name":"Maldives","x":938,"y":28.3},
+{"name":"Tunisia","x":1314,"y":26.5},
+{"name":"United States","x":2158,"y":26.2},
+{"name":"Bahrain","x":1287,"y":25.3},
+{"name":"Hungary","x":1566,"y":24.7},
+{"name":"Albania","x":1330,"y":24.5},
+{"name":"United Arab Emirates","x":1353,"y":24.4},
+{"name":"Latvia","x":1173,"y":22.2},
+{"name":"Malta","x":1152,"y":22},
+{"name":"Malaysia","x":1269,"y":21},
+{"name":"Bulgaria","x":1343,"y":20.7},
+{"name":"China","x":1847,"y":20.2},
+{"name":"Bosnia and Herzegovina","x":1358,"y":20.1},
+{"name":"England","x":2001,"y":19.3},
+{"name":"Scotland","x":1795,"y":19.3},
+{"name":"Wales","x":1629,"y":19.3},
+{"name":"Northern Ireland","x":1376,"y":19.3},
+{"name":"New Zealand","x":1832,"y":18.5},
+{"name":"Croatia","x":1415,"y":17.2},
+{"name":"Slovakia","x":1500,"y":16.4},
+{"name":"Macedonia","x":1092,"y":16.2},
+{"name":"Estonia","x":1339,"y":15.4},
+{"name":"Luxembourg","x":1146,"y":15.4},
+{"name":"Belarus","x":1475,"y":15.2},
+{"name":"Greece","x":1364,"y":14.6},
+{"name":"Poland","x":1644,"y":13.9},
+{"name":"Japan","x":2066,"y":13.8},
+{"name":"Canada","x":1969,"y":13.6},
+{"name":"Cyprus","x":1108,"y":13.6},
+{"name":"Portugal","x":1578,"y":11.6},
+{"name":"Lithuania","x":1231,"y":11.6},
+{"name":"Ireland","x":1653,"y":11.5},
+{"name":"Australia","x":1968,"y":11.3},
+{"name":"South Korea","x":1830,"y":10.1},
+{"name":"Israel","x":1424,"y":10.1},
+{"name":"Spain","x":1867,"y":10},
+{"name":"Singapore","x":1177,"y":9},
+{"name":"Iceland","x":1812,"y":8.8},
+{"name":"Czech Republic","x":1654,"y":8.7},
+{"name":"France","x":2103,"y":8},
+{"name":"Finland","x":1770,"y":7.5},
+{"name":"Norway","x":1933,"y":6.8},
+{"name":"Belgium","x":1700,"y":6.8},
+{"name":"Italy","x":1875,"y":6.7},
+{"name":"Netherlands","x":1919,"y":5.7},
+{"name":"Denmark","x":1848,"y":5.6},
+{"name":"Austria","x":1711,"y":5.6},
+{"name":"Sweden","x":2008,"y":5.4},
+{"name":"Germany","x":2168,"y":4.6},
+{"name":"Switzerland","x":1813,"y":3},
+{"name":"Slovenia","x":1391,"y":2.1}]
+
+        }]
+    });
+});
+
+
+</script>
