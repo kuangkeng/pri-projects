@@ -218,8 +218,23 @@ $(function () {
 {"name":"Germany","x":2168,"y":4.6},
 {"name":"Switzerland","x":1813,"y":3},
 {"name":"Slovenia","x":1391,"y":2.1}]
-
-        }]
+},{
+            type: 'line',
+            name: 'Regression Line',
+            color: '#832813',
+            data: [[2168, 8.79], [737, 54.58]],
+            marker: {
+                enabled: false
+            },
+            states: {
+                hover: {
+                    lineWidth: 0
+                }
+            },
+            enableMouseTracking: false
+        }
+  
+  ]
     });
 });
 
