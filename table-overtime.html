@@ -3,6 +3,8 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.6/css/dataTables.responsive.css">
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/responsive/1.0.6/js/dataTables.responsive.js"></script>
 
 
 <style>  
@@ -12,20 +14,17 @@ body{
   max-width: 850px;
   margin:0px auto;
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: #33333c;
 }
-
-@media (max-width: 480px) {
-        body, #table-overtime {
-  font-size:8px !important;
-  }
-}
-  
   
 .earnings, .hours {
   text-align: center !important;
   }
+
+th.Occupation-cell {
+  width: 20% !important;
+} 
 
 .table_wrapper {
   width: 95%;
@@ -1760,8 +1759,10 @@ $(document).ready( function () {
     { className: "earnings", "targets": [ 1 ] },
     { className: "overtime", "targets": [ 4 ] },
     { className: "hours", "targets": [ 3 ] },
+    { className: "column3", "targets": [ 2 ] },
+    
   ],
-
+    responsive: true,
     }
     );
 } );
