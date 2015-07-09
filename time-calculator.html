@@ -440,14 +440,16 @@
 $(".fb-like").click(function(){
 
 FB.ui({
-  method: 'feed',
-  name: "I got "+ input01 +"! Which European are you destined to date?",
-  link: "http://www.pri.org/stories/2015-07-09/do-i-sound-gay-researcher-searches-world-answer",
-  picture: "http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/Key%2Bart%2BDO%2BI%2BSOUND%2BGAY.png?itok=Y2kPaqHG",
-  description: input01
-});
+  method: 'share_open_graph',
+  action_type: 'og.likes',
+  action_properties: JSON.stringify({
+      object: fbmsg,
+  })
+}, function(response){});
 
     });
+
+var fbmsg = "http://kuangkeng.github.io/keng-data-journalism/timeuseform/result1.html";
 
 var input01 = 0,
     input02 = 0,
