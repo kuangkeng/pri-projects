@@ -5,7 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Time Use Calculator</title>
+    <title>PRI Time Use Calculator</title>
+    <meta property="og:type" content="website" /> 
+    <meta property="og:site_name" content="PRI Time Use Calculator" />
+    <meta property="og:description" content="Find out how you use your time compared with other Americans." />
+    <meta property="og:title" content="Do you sleep, work and play more than fellow Americans?" />
+    <meta property="og:url" content="http://www.pri.org/stories/2015-07-09/do-i-sound-gay-researcher-searches-world-answer"/>
+    <meta property="og:image" content="http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/Key%2Bart%2BDO%2BI%2BSOUND%2BGAY.png?itok=Y2kPaqHG" />
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -434,11 +440,11 @@
 $(".fb-like").click(function(){
 
 FB.ui({
-  method: 'share_open_graph',
-  action_type: 'og.likes',
-  action_properties: JSON.stringify({
-      object:'https://developers.facebook.com/docs/',
-  })
+  method: 'feed',
+  name: "I got "+ input01 +"! Which European are you destined to date?",
+  link: "http://www.pri.org/stories/2015-07-09/do-i-sound-gay-researcher-searches-world-answer",
+  picture: "http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/Key%2Bart%2BDO%2BI%2BSOUND%2BGAY.png?itok=Y2kPaqHG",
+  description: input01
 }, function(response){});
 
     });
