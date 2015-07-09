@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Time Use Calculator</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <style>
+  body {
+    width: 100%;    
+    margin:0px auto;
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+    font-size: 18px;
+    color: #33333c;
+      }
+    
+    .counter {
+    font-size: 12px;
+    color: #999;
+    margin:20px 0 10px 0;
+    }
+    
+    .question{
+    font-size: 30px;
+    margin-bottom: 20px;
+    }
+    
+    .btn {
+    margin: 20px 0 20px 0;
+    }
+
+    #employment{
+    margin-top: 10px;  
+    }
+
+    #container {
+    font-size: 30px;
+    height: 520px;
+    width: 100%;
+    max-width: 850px; 
+    margin: 0 auto; 
+    }
+    
+    @media (max-width: 500px ) { 
+        .counter { 
+        margin: 10px 0 0 0; 
+        font-size:10px;
+        }
+        body {
+          font-size: 12px;
+        }
+        .question { 
+          font-size: 18px;
+      margin-bottom: 5px;
+        }
+        #container{
+          font-size: 18px;
+        }
+      .btn{
+      margin: 5px;    
+      }
+
+}
+    
+
+  </style>  
+  </head>
+
+<body>
+  <div id="timecalc" class="container">
+    <div class="row">
+      <div id="imgcol" class="col-sm-4 col-xs-4">
+        <div id="imgbox">
+          <img src="" class="img-responsive">
+        </div>
+      </div>
+
+      <div id="intro" class="col-sm-8 col-xs-8">
+        <div id="counter00" class="counter">Time Use Calculator</div>
+        <div class="question">What kind of phone should I get?</div>
+        <div class="blurb">With the release of the iPhone 6 and a slew of other new phones now on the market, we've developed this guide to help you determine which phone is right for you. All you have to do is answer a few short questions, so let's get started!</div>
+        <div class="mybtn">
+          <button id="begin" type="button" class="btn btn-primary btn-lg">Begin</button>
+        </div>
+      </div>
+
+      <div id="question01" class="col-sm-8 col-xs-8">
+        <div id="counter01" class="counter">Question 1 of 10</div>
+        <div id="theQuestion" class="question">How many hours do you typically sleep a night?</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour01" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour01">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin01" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin01">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>    
+        <div class="mybtn">
+          <button id="nextBtn01" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div> 
+      
+      <div id="question02" class="col-sm-8 col-xs-8">
+        <div id="counter02" class="counter">Question 2 of 10</div>
+        <div id="theQuestion" class="question">How many hours do you spend on the job during the average workday? Don’t count commute time.</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour02" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour02">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin02" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin02">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn02" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question03" class="col-sm-8 col-xs-8">
+        <div id="counter03" class="counter">Question 3 of 10</div>
+        <div id="theQuestion" class="question">How much time you spend watching TV on a weekend day?</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour03" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour03">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin03" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin03">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn03" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question04" class="col-sm-8 col-xs-8">
+        <div id="counter04" class="counter">Question 4 of 10</div>
+        <div id="theQuestion" class="question">How long do you spend playing video games and using computers for leisure, such as browsing the Internet or checking Facebook, on a typical weekend day?</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour04" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour04">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin04" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin04">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn04" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question05" class="col-sm-8 col-xs-8">
+        <div id="counter05" class="counter">Question 5 of 10</div>
+        <div id="theQuestion" class="question">How much time you spend on sports, exercise and recreation on a weekend day?</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour05" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour05">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin05" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin05">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn05" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question06" class="col-sm-8 col-xs-8">
+        <div id="counter06" class="counter">Question 6 of 10</div>
+        <div id="theQuestion" class="question">How much time you spend on reading for leisure or personal interest? Not for work or educational purposes.</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour06" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour06">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin06" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin06">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn06" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question07" class="col-sm-8 col-xs-8">
+        <div id="counter07" class="counter">Question 7 of 10</div>
+        <div id="theQuestion" class="question">How much time you spend shopping for goods or services per day, either in person, on the phone, online or at a store?</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour07" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour07">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin07" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin07">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn07" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question08" class="col-sm-8 col-xs-8">
+        <div id="counter08" class="counter">Question 8 of 10</div>
+        <div id="theQuestion" class="question">How much time you spend on household activities like cooking, cleaning, taking care of pets, paying bills and vehicle maintenance.</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour08" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour08">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin08" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin08">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn08" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question09" class="col-sm-8 col-xs-8">
+        <div id="counter09" class="counter">Question 9 of 10</div>
+        <div id="theQuestion" class="question">How much time you spend taking care of your kids or other household members such as talking and playing with them, helping with schoolwork, taking care of their health and traveling with them to school and events?</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputhour09" placeholder="0 to 24" data-validation="number" data-validation-allowing="range[0;24]" data-validation-error-msg="Must be a number between 0 and 24">
+                  <label for="inputhour09">Hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputmin09" placeholder="0 to 59" data-validation="number" data-validation-allowing="range[0;59]" data-validation-error-msg="Must be a number between 0 and 59">
+                  <label for="inputmin09">Minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>        
+        <div class="mybtn">
+          <button id="nextBtn09" type="button" class="btn btn-primary btn-lg">Next question</button>
+        </div>
+      </div>
+
+      <div id="question10" class="col-sm-8 col-xs-8">
+        <div id="counter10" class="counter">Question 10 of 10</div>
+        <div id="theQuestion" class="question">Tell us about yourself</div>
+          <div class="row">
+            <div class="col-sm-4 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <label for="inputage">Age</label>
+                  <select class="form-control" id="inputage">
+                  <option>15-19</option>
+                  <option>20-24</option>
+                  <option>25-34</option>
+                  <option>35-44</option>
+                  <option>45-54</option>
+                  <option>55-64</option>
+                  <option>65-74</option>
+                  <option>75 and above</option>
+                  </select>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group">
+                  <label for="inputgender">Gender</label>
+                  <select class="form-control" id="inputgender">
+                  <option>Male</option>
+                  <option>Female</option>
+                  </select>
+                </div>   
+              </form> 
+            </div>  
+          </div>
+          <div class="row">  
+            <div class="col-sm-12 col-xs-12">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group" id="employment">
+                  <label for="inputjob">Employment</label>
+                  <select class="form-control" id="inputjob">
+                  <option>Full time (35 hours or more weekly)</option>
+                  <option>Part time (34 hours or less weekly)</option>
+                  </select>
+                </div>   
+              </form> 
+            </div>   
+          </div>       
+        <div class="mybtn">
+          <button id="nextBtn10" type="button" class="btn btn-primary btn-lg">See my results!</button>
+        </div>
+      </div>
+
+      <div id="results" class="col-sm-12 col-xs-12">
+        <div class="question">say something here</span></div>
+        <div id="container"></div>
+      </div> 
+    
+    </div>
+  </div>
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.1/jquery.form-validator.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+</body>
+
+<script>
+
+var input01 = 0,
+    input02 = 0,
+    input03 = 0,
+    input04 = 0,
+    input05 = 0,
+    input06 = 0,
+    input07 = 0,
+    input08 = 0,
+    input09 = 0,
+    inputmin01 = 0,
+    inputmin02 = 0,
+    inputmin03 = 0,
+    inputmin04 = 0,
+    inputmin05 = 0,
+    inputmin06 = 0,
+    inputmin07 = 0,
+    inputmin08 = 0,
+    inputmin09 = 0,
+    inputhour01 = 0,
+    inputhour02 = 0,
+    inputhour03 = 0,
+    inputhour04 = 0,
+    inputhour05 = 0,
+    inputhour06 = 0,
+    inputhour07 = 0,
+    inputhour08 = 0,
+    inputhour09 = 0;
+
+var datasetslp = {male: 8.70, female: 8.90};
+
+var datasetwrk = [
+{"gender":"male","full-time":8.85,"part-time":5.89},
+{"gender":"female","full-time":8.19,"part-time":5.66}];
+
+var datasetlsr = [
+{"age":"15-19","sports":0.64,"tv":2.94,"read":0.14,"pc":1.24},
+{"age":"20-24","sports":0.47,"tv":2.77,"read":0.17,"pc":0.92},
+{"age":"25-34","sports":0.39,"tv":2.63,"read":0.12,"pc":0.54},
+{"age":"35-44","sports":0.35,"tv":2.8,"read":0.19,"pc":0.3},
+{"age":"45-54","sports":0.28,"tv":3.33,"read":0.28,"pc":0.4},
+{"age":"55-64","sports":0.23,"tv":3.85,"read":0.46,"pc":0.39},
+{"age":"65-74","sports":0.24,"tv":4.38,"read":0.72,"pc":0.42},
+{"age":"75over","sports":0.14,"tv":4.76,"read":1.02,"pc":0.4}];
+
+var datasetprm = [
+{"agesex":"15-19","gender":"male","house":0.53,"shop":0.3,"care":0.21},
+{"agesex":"20-24","gender":"male","house":0.63,"shop":0.5,"care":0.12},
+{"agesex":"25-34","gender":"male","house":1.23,"shop":0.51,"care":0.59},
+{"agesex":"35-44","gender":"male","house":1.42,"shop":0.56,"care":0.83},
+{"agesex":"45-54","gender":"male","house":1.53,"shop":0.67,"care":0.31},
+{"agesex":"55-64","gender":"male","house":1.6,"shop":0.74,"care":0.11},
+{"agesex":"65-74","gender":"male","house":2.07,"shop":0.74,"care":0.09},
+{"agesex":"75 and over","gender":"male","house":1.84,"shop":0.68,"care":0.12},
+{"agesex":"15-19","gender":"female","house":0.79,"shop":0.86,"care":0.28},
+{"agesex":"20-24","gender":"female","house":1.39,"shop":0.82,"care":0.69},
+{"agesex":"25-34","gender":"female","house":1.95,"shop":0.75,"care":1.6},
+{"agesex":"35-44","gender":"female","house":2.33,"shop":0.82,"care":1.51},
+{"agesex":"45-54","gender":"female","house":2.36,"shop":0.89,"care":0.49},
+{"agesex":"55-64","gender":"female","house":2.4,"shop":0.9,"care":0.21},
+{"agesex":"65-74","gender":"female","house":2.76,"shop":1.04,"care":0.12},
+{"agesex":"75 and over","gender":"female","house":2.43,"shop":0.89,"care":0.14}];
+
+function calculate() {
+
+//setting the age groups variables
+
+    if(inputage=="15-19"){var age=0;}
+    if(inputage=="20-24"){var age=1;}
+    if(inputage=="25-34"){var age=2;}
+    if(inputage=="35-44"){var age=3;}
+    if(inputage=="45-54"){var age=4;}
+    if(inputage=="55-64"){var age=5;}
+    if(inputage=="65-74"){var age=6;}
+    if(inputage=="75 and above"){var age=7;}
+
+    if(inputage=="15-19" && inputgender=="Male"){var agesex=0;}
+    if(inputage=="20-24" && inputgender=="Male"){var agesex=1;}
+    if(inputage=="25-34" && inputgender=="Male"){var agesex=2;}
+    if(inputage=="35-44" && inputgender=="Male"){var agesex=3;}
+    if(inputage=="45-54" && inputgender=="Male"){var agesex=4;}
+    if(inputage=="55-64" && inputgender=="Male"){var agesex=5;}
+    if(inputage=="65-74" && inputgender=="Male"){var agesex=6;}
+    if(inputage=="75 and above" && inputgender=="Male"){var agesex=7;}
+    if(inputage=="15-19" && inputgender=="Female"){var agesex=8;}
+    if(inputage=="20-24" && inputgender=="Female"){var agesex=9;}
+    if(inputage=="25-34" && inputgender=="Female"){var agesex=10;}
+    if(inputage=="35-44" && inputgender=="Female"){var agesex=11;}
+    if(inputage=="45-54" && inputgender=="Female"){var agesex=12;}
+    if(inputage=="55-64" && inputgender=="Female"){var agesex=13;}
+    if(inputage=="65-74" && inputgender=="Female"){var agesex=14;}
+    if(inputage=="75 and above" && inputgender=="Female"){var agesex=15;}
+
+//setting the gender groups variables
+    if(inputgender=="Male")
+        {
+        var gender=0, 
+        dataslp=datasetslp.male;
+        }
+    if(inputgender=="Female")
+        {
+        var gender=1, 
+        dataslp=datasetslp.female;
+        }
+
+//setting the workstatus groups variables
+    if(inputjob=="Full time (35 hours or more weekly)"){var job="full-time";}
+    if(inputjob=="Part time (34 hours or less weekly)"){var job="part-time";}
+
+//setting the average variables which are based on users' input
+
+var datawrk = datasetwrk[gender][job],
+    datasports = datasetlsr[age]["sports"],
+    datatv = datasetlsr[age]["tv"],
+    dataread = datasetlsr[age]["read"],
+    datapc = datasetlsr[age]["pc"],
+    datahouse = datasetprm[agesex]["house"],
+    datashop = datasetprm[agesex]["shop"],
+    datacare = datasetprm[agesex]["care"];
+
+    console.log("inputhour01 = " + inputhour01);
+    console.log("inputmin01 = " + inputmin01); 
+    console.log("inputhour02 = " + inputhour02);
+    console.log("inputmin02 = " + inputmin02); 
+    console.log("inputhour03 = " + inputhour03);
+    console.log("inputmin03 = " + inputmin03); 
+    console.log("inputhour04 = " + inputhour04);
+    console.log("inputmin04 = " + inputmin04); 
+    console.log("inputhour05 = " + inputhour05);
+    console.log("inputmin05 = " + inputmin05); 
+    console.log("inputhour06 = " + inputhour06);
+    console.log("inputmin06 = " + inputmin06); 
+    console.log("inputhour07 = " + inputhour07);
+    console.log("inputmin07 = " + inputmin07); 
+    console.log("inputhour08 = " + inputhour08);
+    console.log("inputmin08 = " + inputmin08); 
+    console.log("inputhour09 = " + inputhour09);
+    console.log("inputmin09 = " + inputmin09); 
+
+    console.log("inputgender = " + inputgender);
+    console.log("gender = " + gender);
+    console.log("dataslp = " + dataslp);
+    console.log("datawrk = " + datawrk);
+    console.log("datasports = " + datasports);
+    console.log("datatv = " + datatv);
+    console.log("dataread = " + dataread);
+    console.log("datapc = " + datapc);
+    console.log("datahouse = " + datahouse);
+    console.log("datashop = " + datashop);
+    console.log("datacare = " + datacare);
+    
+    var rtslp = Math.round((input01 - dataslp)/dataslp *100);
+    var rtwrk = Math.round((input02 - datawrk)/datawrk *100);
+    var rttv = Math.round((input03 - datatv)/datatv *100);
+    var rtpc = Math.round((input04 - datapc)/datapc *100);
+    var rtsports = Math.round((input05 - datasports)/datasports *100);
+    var rtread = Math.round((input06 - dataread)/dataread *100);
+    var rtshop = Math.round((input07 - datashop)/datashop *100);
+    var rthouse = Math.round((input08 - datahouse)/datahouse *100);
+    var rtcare = Math.round((input09 - datacare)/datacare *100);
+
+    console.log("rtslp = " + rtslp);              
+    console.log("rtwrk = " + rtwrk);             
+    console.log("rttv = " + rttv);             
+    console.log("rtpc = " + rtpc);             
+    console.log("rtsports = " + rtsports);     
+    console.log("rtread = " + rtread);         
+    console.log("rtshop = " + rtshop);         
+    console.log("rthouse = " + rthouse);       
+    console.log("rtcare = " + rtcare);
+
+    var datainput = [
+                ['Sleeping', rtslp],
+                ['Working', rtwrk],
+                ['Watching TV', rttv],
+                ['Computer', rtpc],
+                ['Workout', rtsports],
+                ['Reading', rtread],
+                ['Shopping', rtshop],
+                ['Household Activities', rthouse],
+                ['Taking Care', rtcare]
+                    ];
+
+    var datainput2 = [rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare];
+    console.log("datainput = " + JSON.stringify(datainput));    
+    console.log("datainput2 = " + JSON.stringify(datainput2));
+
+//draw chart based on input
+//convert data points into hour and min to be shown on chart
+var datahourslp = Math.floor(dataslp),
+    datahourwrk = Math.floor(datawrk),
+    datahoursports = Math.floor(datasports),
+    datahourtv = Math.floor(datatv),
+    datahourread = Math.floor(dataread),
+    datahourpc = Math.floor(datapc),
+    datahourhouse = Math.floor(datahouse),
+    datahourshop = Math.floor(datashop),
+    datahourcare = Math.floor(datacare),
+
+    dataminslp = Math.round((dataslp-datahourslp)*60),
+    dataminwrk = Math.round((datawrk-datahourwrk)*60),
+    dataminsports = Math.round((datasports-datahoursports)*60),
+    datamintv = Math.round((datatv-datahourtv)*60),
+    dataminread = Math.round((dataread-datahourread)*60),
+    dataminpc = Math.round((datapc-datahourpc)*60),
+    dataminhouse = Math.round((datahouse-datahourhouse)*60),
+    dataminshop = Math.round((datashop-datahourshop)*60),
+    datamincare = Math.round((datacare-datahourcare)*60);
+   
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Your results!',
+            margin: 20
+        },
+        subtitle: {
+            text: 'Negative value indicates your time use is lower than the average number while positive indicates your time use is higher than the average number. Hover over each bar for more details',
+            align: 'left',
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            }
+        },
+        xAxis: {
+            categories: ['Sleeping', 'Working', 'Watching TV', 'Computer', 'Workout', 'Reading', 'Shopping', 'Household Activities', 'Taking Care'],
+        },
+        yAxis: {
+            title: {
+                text: 'Comparison in percentage',
+            },
+            labels: {
+                overflow: 'justify',
+                format: '{value}%'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+  return '<b>' + this.point.name + '</b><br>' + this.point.line1 + '<br>Your time use: <b>' + this.point.line2 + '</b><br>Average time use: <b>' + this.point.line3 + '</b>';
+        }
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{y}%'
+                }
+            },
+        },
+        credits: {
+            text: 'Kuang Keng Kuek Ser / PRI'
+        },
+        legend:{enabled: false,},
+series: [{
+            data: [
+            {
+            y: rtslp,
+            name: "Sleeping",
+            line1: "Compared with " + inputgender.toLowerCase() + " Americans",
+            line2: inputhour01 + "hr " + inputmin01 + "min",
+            line3: datahourslp + "hr " + dataminslp + "min"              
+            }, 
+            {
+            y: rtwrk,
+            name: "Working",
+            line1: "Compared with " + inputgender.toLowerCase() + " Americans with " + job + " employment",
+            line2: inputhour02 + "hr " + inputmin02 + "min",
+            line3: datahourwrk + "hr " + dataminwrk + "min"
+            }, 
+            {
+            y: rttv,
+            name: "Watching TV",
+            line1: "Compared with Americans aged " + inputage,
+            line2: inputhour03 + "hr " + inputmin03 + "min",
+            line3: datahourtv + "hr " + datamintv + "min"
+            }, 
+            {
+            y: rtpc,
+            name: "Computer",
+            line1: "Compared with Americans aged " + inputage,
+            line2: inputhour04 + "hr " + inputmin04 + "min",
+            line3: datahourpc + "hr " + dataminpc + "min"
+            }, 
+            {
+            y: rtsports,
+            name: "Workout",
+            line1: "Compared with Americans aged " + inputage,
+            line2: inputhour05 + "hr " + inputmin05 + "min",
+            line3: datahoursports + "hr " + dataminsports + "min"
+            }, 
+            {
+            y: rtread,
+            name: "Reading",
+            line1: "Compared with Americans aged " + inputage,
+            line2: inputhour06 + "hr " + inputmin06 + "min",
+            line3: datahourread + "hr " + dataminread + "min"
+            }, 
+            {
+            y: rtshop,
+            name: "Shopping",
+            line1: "Compared with " + inputgender.toLowerCase() + " Americans aged " + inputage,
+            line2: inputhour07 + "hr " + inputmin07 + "min",
+            line3: datahourshop + "hr " + dataminshop + "min"
+            }, 
+            {
+            y: rthouse,
+            name: "Household activities",
+            line1: "Compared with " + inputgender.toLowerCase() + " Americans aged " + inputage,
+            line2: inputhour08 + "hr " + inputmin08 + "min",
+            line3: datahourhouse + "hr " + dataminhouse + "min"
+            }, 
+            {
+            y: rtcare,
+            name: "Taking Care",
+            line1: "Compared with " + inputgender.toLowerCase() + " Americans aged " + inputage,
+            line2: inputhour09 + "hr " + inputmin09 + "min",
+            line3: datahourcare + "hr " + datamincare + "min"
+            }],
+            color:'#4188bc',
+            negativeColor: '#d4301e',
+        }]
+
+
+    });
+});    
+
+};
+
+function init() {
+
+
+  $("#results, #question01, #question02, #question03, #question04, #question05, #question06, #question07, #question08, #question09, #question10").hide();
+
+  $.validate({
+  form : '.form, .form-inline'
+  });
+
+  $("#begin").click(function() {
+    $("#intro").hide();
+    $("#question01").show();
+  });
+
+  $("#nextBtn01").click(function() {
+    $("#question01").hide();
+    $("#question02").show();
+    inputhour01 = $('#inputhour01').val();
+    inputmin01 = $('#inputmin01').val();
+    input01 = $('#inputhour01').val()/10*10 + $('#inputmin01').val()/60;
+    console.log("input01 = " + input01);
+    console.log("inputhour01 = " + inputhour01);
+    console.log("inputmin01 = " + inputmin01);
+  });
+
+  $("#nextBtn02").click(function() {
+    $("#question02").hide();
+    $("#question03").show();
+    inputhour02 = $('#inputhour02').val()/10*10;
+    inputmin02 = $('#inputmin02').val()/10*10;
+    input02 = $('#inputhour02').val()/10*10 + $('#inputmin02').val()/60;
+    console.log("input02 = " + input02);
+    console.log("inputhour02 = " + inputhour02);
+    console.log("inputmin02 = " + inputmin02);
+  });  
+
+  $("#nextBtn03").click(function() {
+    $("#question03").hide();
+    $("#question04").show();
+    inputhour03 = $('#inputhour03').val()/10*10;
+    inputmin03 = $('#inputmin03').val()/10*10;
+    input03 = $('#inputhour03').val()/10*10 + $('#inputmin03').val()/60;
+    console.log("input03 = " + input03);
+    console.log("inputhour03 = " + inputhour03);
+    console.log("inputmin03 = " + inputmin03);
+  });
+
+  $("#nextBtn04").click(function() {
+    $("#question04").hide();
+    $("#question05").show();
+    inputhour04 = $('#inputhour04').val()/10*10;
+    inputmin04 = $('#inputmin04').val()/10*10;
+    input04 = $('#inputhour04').val()/10*10 + $('#inputmin04').val()/60;
+    console.log("input04 = " + input04);
+    console.log("inputhour04 = " + inputhour04);
+    console.log("inputmin04 = " + inputmin04);
+  });
+
+  $("#nextBtn05").click(function() {
+    $("#question05").hide();
+    $("#question06").show();
+    inputhour05 = $('#inputhour05').val()/10*10;
+    inputmin05 = $('#inputmin05').val()/10*10;
+    input05 = $('#inputhour05').val()/10*10 + $('#inputmin05').val()/60;
+    console.log("input05 = " + input05);
+    console.log("inputhour05 = " + inputhour05);
+    console.log("inputmin05 = " + inputmin05);
+  });
+
+  $("#nextBtn06").click(function() {
+    $("#question06").hide();
+    $("#question07").show();
+    inputhour06 = $('#inputhour06').val()/10*10;
+    inputmin06 = $('#inputmin06').val()/10*10;
+    input06 = $('#inputhour06').val()/10*10 + $('#inputmin06').val()/60;
+    console.log("input06 = " + input06);
+    console.log("inputhour06 = " + inputhour06);
+    console.log("inputmin06 = " + inputmin06);
+  });
+
+  $("#nextBtn07").click(function() {
+    $("#question07").hide();
+    $("#question08").show();
+    inputhour07 = $('#inputhour07').val()/10*10;
+    inputmin07 = $('#inputmin07').val()/10*10;
+    input07 = $('#inputhour07').val()/10*10 + $('#inputmin07').val()/60;
+    console.log("input07 = " + input07);
+    console.log("inputhour07 = " + inputhour07);
+    console.log("inputmin07 = " + inputmin07);
+  });
+
+  $("#nextBtn08").click(function() {
+    $("#question08").hide();
+    $("#question09").show();
+    inputhour08 = $('#inputhour08').val()/10*10;
+    inputmin08 = $('#inputmin08').val()/10*10;
+    input08 = $('#inputhour08').val()/10*10 + $('#inputmin08').val()/60;
+    console.log("input08 = " + input08);
+    console.log("inputhour08 = " + inputhour08);
+    console.log("inputmin08 = " + inputmin08);
+  });
+
+  $("#nextBtn09").click(function() {
+    $("#question09").hide();
+    $("#question10").show();
+    inputhour09 = $('#inputhour09').val()/10*10;
+    inputmin09 = $('#inputmin09').val()/10*10;
+    input09 = $('#inputhour09').val()/10*10 + $('#inputmin09').val()/60;
+    console.log("input09 = " + input09);
+    console.log("inputhour09 = " + inputhour09);
+    console.log("inputmin09 = " + inputmin09);
+  });
+
+  $("#nextBtn10").click(function() {
+    $("#question10").hide();
+    $("#imgcol").hide();
+    inputage = $('#inputage').val();
+    inputgender = $('#inputgender').val();
+    inputjob = $('#inputjob').val();
+    calculate();
+    $("#results").show();
+  });
+}  
+
+
+$(document).ready(function(){
+  init();
+});
+
+</script>
