@@ -39,15 +39,20 @@
     margin:20px 0 10px 0;
     }
     
-    .question{
+    .question, #sharemsg {
     font-size: 30px;
     margin-bottom: 20px;
+    }
+
+    #sharemsg {
+      margin-top: 20px;
     }
     
     .btn {
     margin: 20px 0 20px 0;
     }
 
+    
     #employment{
     margin-top: 10px;  
     }
@@ -72,10 +77,14 @@
         body {
           font-size: 12px;
         }
-        .question { 
+        .question, #sharemsg { 
           font-size: 18px;
-      margin-bottom: 5px;
+          margin-bottom: 5px;
         }
+        #sharemsg {
+          margin-top: 5px;
+        }
+
         #chart{
           font-size: 18px;
         }
@@ -413,16 +422,21 @@
       <div id="results" class="col-sm-12 col-xs-12">
         <div class="question">say something here</span></div>
         <div id="chart"></div>
-        <div class="mybtn">
-          <button id="reset" type="button" class="btn btn-primary btn-lg" onClick="history.go(0)">Calculate again!</button>
+        <div class="mybtn text-center">
+            <button id="reset" type="button" class="btn btn-primary btn-lg" onClick="history.go(0)">Calculate again</button>
         </div>
+        <div class="text-center" id="sharemsg">
+            Or share your results!
+        </div>
+        <div class="col-sm-6 col-xs-6 text-right">
+          <div id="btn-fb"><img style="border:0;" src="http://kuangkeng.github.io/pri-projects/images/facebook-button.png"></div>
+        </div>  
+        <div class="col-sm-6 col-xs-6 text-left">  
+          <div id="btn-twitter"><a href="https://twitter.com/share" target="_blank"><img src="http://kuangkeng.github.io/pri-projects/images/twitter-button.png"></a></div>
+        </div>  
       </div> 
-    
     </div>
   </div>
-
-
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -535,7 +549,8 @@ var datasetprm = [
 {"agesex":"65-74","gender":"female","house":2.76,"shop":1.04,"care":0.12},
 {"agesex":"75 and over","gender":"female","house":2.43,"shop":0.89,"care":0.14}];
 
-$("#begin").click(function(){
+//Facebook shraing button 
+$("#btn-fb").click(function(){
 var fbmsg = "http://kuangkeng.github.io/pri-projects/time-result1.html";
 console.log (fbmsg);
 
@@ -548,6 +563,7 @@ FB.ui({
 }, function(response){});
 
     });
+
 
 
 
@@ -816,6 +832,16 @@ series: [{
 
     });
 });    
+
+//Twitter dynamic sharing button
+var twittermsg="Result 1";
+var twitterurl = 'https://twitter.com/share?url=http://kuangkeng.github.io/pri-projects/time-calculator.html&text='+twittermsg+'&via=pri';
+
+$('a[href="https://twitter.com/share"]').each(function(){
+    $(this).prop('href', twitterurl);
+    });
+$.getScript('http://platform.twitter.com/widgets.js');
+
 
 //get user geolocation when user click get results button
 
