@@ -956,10 +956,10 @@ function showPosition(position) {
 
 //send user data to google spreadsheet
 function postContactToGoogle() {
-  var fullinput = {input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong},
-      fullinput2 = [input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong],
-      fullinput3 = fullinput.join(','),
-      fullinput4 = fullinput2.join(',');
+  var fullinput = {input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong};
+  var fullinput2 = [input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong];
+  var fullinput3 = fullinput.join(',');
+  var fullinput4 = fullinput2.join(',');
   $.ajax({
       url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
       data: 
