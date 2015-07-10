@@ -436,6 +436,12 @@
 </body>
 <div id="fb-root"></div>
  <script>
+
+$(document).ready(function(){
+  init();
+});
+
+
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '874944082601390',
@@ -454,22 +460,6 @@
 </script>
 
 <script>
-
-$("#begin").click(function(){
-
-console.log (fbmsg);
-
-FB.ui({
-  method: 'share_open_graph',
-  action_type: 'og.shares',
-  action_properties: JSON.stringify({
-      object: fbmsg,
-  })
-}, function(response){});
-
-    });
-
-var fbmsg = "http://kuangkeng.github.io/pri-projects/time-result1.html";
 
 var input01 = 0,
     input02 = 0,
@@ -544,6 +534,22 @@ var datasetprm = [
 {"agesex":"55-64","gender":"female","house":2.4,"shop":0.9,"care":0.21},
 {"agesex":"65-74","gender":"female","house":2.76,"shop":1.04,"care":0.12},
 {"agesex":"75 and over","gender":"female","house":2.43,"shop":0.89,"care":0.14}];
+
+$("#begin").click(function(){
+var fbmsg = "http://kuangkeng.github.io/pri-projects/time-result1.html";
+console.log (fbmsg);
+
+FB.ui({
+  method: 'share_open_graph',
+  action_type: 'og.shares',
+  action_properties: JSON.stringify({
+      object: fbmsg,
+  })
+}, function(response){});
+
+    });
+
+
 
 function calculate() {
 
@@ -665,9 +671,10 @@ var datawrk = datasetwrk[gender][job],
                 ['Taking Care', rtcare]
                     ];
 
-    var datainput2 = [rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare];
+    var dataexport = [input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job];
+
     console.log("datainput = " + JSON.stringify(datainput));    
-    console.log("datainput2 = " + JSON.stringify(datainput2));
+    console.log("dataexport = " + JSON.stringify(dataexport)); 
 
 //draw chart based on input
 //convert data points into hour and min to be shown on chart
@@ -810,10 +817,56 @@ series: [{
     });
 });    
 
+//get user geolocation when user click get results button
+
+var datalat = "default",
+    datalong = "default";
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        datalat = "not supported",
+        datalong = "not supported";
+    }
+}
+function showPosition(position) {
+    datalat = position.coords.latitude;
+    datalong = position.coords.longitude;
+    $.ajax({
+      url: "https://docs.google.com/forms/d/1Z8uiYjVFmLd3pI4bc9bhNhO-Xmqx1CyFv9AHVQirrPw/formResponse",
+      data: 
+      { 
+        "entry.1776485341": datalat,
+        "entry.1666482512": datalong,
+       },  
+      type: "POST",
+      dataType: "xml",
+  });
+    console.log("geolocation = " + datalat + "," + datalong);
+}
+
+//send user data to google spreadsheet
+function postContactToGoogle() {
+  console.log(input01 + "," + input02 + "," + input03 + "," + input04 + "," + input05 + "," + input06 + "," + input07 + "," + input08 + "," + input09 + "," + rtslp + "," + rtwrk + "," + rttv + "," + rtpc + "," + rtsports + "," + rtread + "," + rtshop + "," + rthouse + "," + rtcare + "," + inputgender + "," + inputage + "," + job + "," + datalat + "," + datalong);
+  var dataexportstring = dataexport.join(",");
+  $.ajax({
+      url: "https://docs.google.com/forms/d/1Z8uiYjVFmLd3pI4bc9bhNhO-Xmqx1CyFv9AHVQirrPw/formResponse",
+      data: 
+      { "entry.488621867": dataexportstring,
+       },  
+      type: "POST",
+      dataType: "xml",
+  });
+  };
+
+$("#results").show();
+getLocation();
+postContactToGoogle();
+
 };
 
 function init() {
-
 
   $("#results, #question01, #question02, #question03, #question04, #question05, #question06, #question07, #question08, #question09, #question10, #imgsleep, #imgwork, #imgtv, #imgpc, #imgsports, #imgread, #imgshop, #imghouse, #imgcare, #imgyou").hide();
 
@@ -932,54 +985,11 @@ function init() {
     inputgender = $('#inputgender').val();
     inputjob = $('#inputjob').val();
     calculate();
-    $("#results").show();
-    getLocation();
-    postContactToGoogle();
+    
   });
 
-//get user geolocation when user click get results button
 
-var datalat = "default",
-    datalong = "default";
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-        datalat = "not supported",
-        datalong = "not supported";
-    }
-}
-function showPosition(position) {
-    datalat = position.coords.latitude;
-    datalong = position.coords.longitude;
-    console.log("geolocation = " + datalat + "," + datalong);
-}
-
-//send user data to google spreadsheet
-function postContactToGoogle() {
-  console.log(input01 + input02 + input03 + input04 + input05 + input06 + input07 + input08 + input09 + rtslp + rtwrk + rttv + rtpc + rtsports + rtread + rtshop + rthouse + rtcare + inputgender + inputage + job + datalat + datalong);
-  var fullinput = {input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong};
-  var fullinput2 = [input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong];
-  var fullinput3 = datainput2.join(",");
-  var fullinput4 = datainput2.join();
-  $.ajax({
-      url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
-      data: 
-      { "entry.1651239056": fullinput3,
-        "entry.958191294": fullinput4,
-        "entry.1803001734": job,
-       },  
-      type: "POST",
-      dataType: "xml",
-  });
-  };
 
 }  
-
-
-$(document).ready(function(){
-  init();
-});
 
 </script>
