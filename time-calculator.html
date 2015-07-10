@@ -52,9 +52,9 @@
     margin-top: 10px;  
     }
 
-    #container {
+    #chart {
     font-size: 30px;
-    height: 520px;
+    height: 500px;
     width: 100%;
     max-width: 850px; 
     margin: 0 auto; 
@@ -76,7 +76,7 @@
           font-size: 18px;
       margin-bottom: 5px;
         }
-        #container{
+        #chart{
           font-size: 18px;
         }
       .btn{
@@ -412,7 +412,10 @@
 
       <div id="results" class="col-sm-12 col-xs-12">
         <div class="question">say something here</span></div>
-        <div id="container"></div>
+        <div id="chart"></div>
+        <div class="mybtn">
+          <button id="reset" type="button" class="btn btn-primary btn-lg" onClick="history.go(0)">Calculate again!</button>
+        </div>
       </div> 
     
     </div>
@@ -494,7 +497,17 @@ var input01 = 0,
     inputhour06 = 0,
     inputhour07 = 0,
     inputhour08 = 0,
-    inputhour09 = 0;
+    inputhour09 = 0,
+    rtslp = 0,
+    rtwrk = 0,
+    rttv = 0,
+    rtpc = 0,
+    rtsports = 0,
+    rtread = 0,
+    rtshop = 0,
+    rthouse = 0,
+    rtcare = 0,
+    job = 0;
 
 var datasetslp = {male: 8.70, female: 8.90};
 
@@ -677,7 +690,7 @@ var datahourslp = Math.floor(dataslp),
     datamincare = Math.round((datacare-datahourcare)*60);
    
 $(function () {
-    $('#container').highcharts({
+    $('#chart').highcharts({
         chart: {
             type: 'bar'
         },
@@ -918,7 +931,41 @@ function init() {
     inputjob = $('#inputjob').val();
     calculate();
     $("#results").show();
+    getLocation();
+    postContactToGoogle();
   });
+
+//get user geolocation when user click get results button
+
+var datalat = "default",
+    datalong = "default";
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        datalat = "not supported",
+        datalong = "not supported";
+    }
+}
+function showPosition(position) {
+    datalat = position.coords.latitude;
+    datalong = position.coords.longitude;
+    console.log("geolocation = " + datalat + "," + datalong);
+}
+
+//send user data to google spreadsheet
+function postContactToGoogle() {
+  var fullinput = {input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong};
+  $.ajax({
+      url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
+      data: 
+      { "entry.1651239056": fullinput, },  
+      type: "POST",
+      dataType: "xml",
+  });
+  };
+
 }  
 
 
