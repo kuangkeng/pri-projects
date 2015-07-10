@@ -59,6 +59,10 @@
     max-width: 850px; 
     margin: 0 auto; 
     }
+
+    .img-responsive{
+    opacity: 0.3;
+    }
     
     @media (max-width: 500px ) { 
         .counter { 
@@ -90,7 +94,17 @@
     <div class="row">
       <div id="imgcol" class="col-sm-4 col-xs-4">
         <div id="imgbox">
-          <img src="" class="img-responsive">
+          <img src="http://kuangkeng.github.io/pri-projects/images/clock.png" class="img-responsive" id="imgclock">
+          <img src="http://kuangkeng.github.io/pri-projects/images/sleep.png" class="img-responsive" id="imgsleep">
+          <img src="http://kuangkeng.github.io/pri-projects/images/work.png" class="img-responsive" id="imgwork">
+          <img src="http://kuangkeng.github.io/pri-projects/images/tv.png" class="img-responsive" id="imgtv">
+          <img src="http://kuangkeng.github.io/pri-projects/images/pc.png" class="img-responsive" id="imgpc">
+          <img src="http://kuangkeng.github.io/pri-projects/images/sports.png" class="img-responsive" id="imgsports">
+          <img src="http://kuangkeng.github.io/pri-projects/images/read.png" class="img-responsive" id="imgread">
+          <img src="http://kuangkeng.github.io/pri-projects/images/shop.png" class="img-responsive" id="imgshop">
+          <img src="http://kuangkeng.github.io/pri-projects/images/house.png" class="img-responsive" id="imghouse">
+          <img src="http://kuangkeng.github.io/pri-projects/images/care.png" class="img-responsive" id="imgcare">
+          <img src="http://kuangkeng.github.io/pri-projects/images/you.png" class="img-responsive" id="imgyou">
         </div>
       </div>
 
@@ -786,20 +800,20 @@ series: [{
 function init() {
 
 
-  $("#results, #question01, #question02, #question03, #question04, #question05, #question06, #question07, #question08, #question09, #question10").hide();
+  $("#results, #question01, #question02, #question03, #question04, #question05, #question06, #question07, #question08, #question09, #question10, #imgsleep, #imgwork, #imgtv, #imgpc, #imgsports, #imgread, #imgshop, #imghouse, #imgcare, #imgyou").hide();
 
   $.validate({
   form : '.form, .form-inline'
   });
 
   $("#begin").click(function() {
-    $("#intro").hide();
-    $("#question01").show();
+    $("#intro, #imgclock").hide();
+    $("#question01, #imgsleep").show();
   });
 
   $("#nextBtn01").click(function() {
-    $("#question01").hide();
-    $("#question02").show();
+    $("#question01, #imgsleep").hide();
+    $("#question02, #imgwork").show();
     inputhour01 = $('#inputhour01').val();
     inputmin01 = $('#inputmin01').val();
     input01 = $('#inputhour01').val()/10*10 + $('#inputmin01').val()/60;
@@ -809,8 +823,8 @@ function init() {
   });
 
   $("#nextBtn02").click(function() {
-    $("#question02").hide();
-    $("#question03").show();
+    $("#question02, #imgwork").hide();
+    $("#question03, #imgtv").show();
     inputhour02 = $('#inputhour02').val()/10*10;
     inputmin02 = $('#inputmin02').val()/10*10;
     input02 = $('#inputhour02').val()/10*10 + $('#inputmin02').val()/60;
@@ -820,8 +834,8 @@ function init() {
   });  
 
   $("#nextBtn03").click(function() {
-    $("#question03").hide();
-    $("#question04").show();
+    $("#question03, #imgtv").hide();
+    $("#question04, #imgpc").show();
     inputhour03 = $('#inputhour03').val()/10*10;
     inputmin03 = $('#inputmin03').val()/10*10;
     input03 = $('#inputhour03').val()/10*10 + $('#inputmin03').val()/60;
@@ -831,8 +845,8 @@ function init() {
   });
 
   $("#nextBtn04").click(function() {
-    $("#question04").hide();
-    $("#question05").show();
+    $("#question04, #imgpc").hide();
+    $("#question05, #imgsports").show();
     inputhour04 = $('#inputhour04').val()/10*10;
     inputmin04 = $('#inputmin04').val()/10*10;
     input04 = $('#inputhour04').val()/10*10 + $('#inputmin04').val()/60;
@@ -842,8 +856,8 @@ function init() {
   });
 
   $("#nextBtn05").click(function() {
-    $("#question05").hide();
-    $("#question06").show();
+    $("#question05, #imgsports").hide();
+    $("#question06, #imgread").show();
     inputhour05 = $('#inputhour05').val()/10*10;
     inputmin05 = $('#inputmin05').val()/10*10;
     input05 = $('#inputhour05').val()/10*10 + $('#inputmin05').val()/60;
@@ -853,8 +867,8 @@ function init() {
   });
 
   $("#nextBtn06").click(function() {
-    $("#question06").hide();
-    $("#question07").show();
+    $("#question06, #imgread").hide();
+    $("#question07, #imgshop").show();
     inputhour06 = $('#inputhour06').val()/10*10;
     inputmin06 = $('#inputmin06').val()/10*10;
     input06 = $('#inputhour06').val()/10*10 + $('#inputmin06').val()/60;
@@ -864,8 +878,8 @@ function init() {
   });
 
   $("#nextBtn07").click(function() {
-    $("#question07").hide();
-    $("#question08").show();
+    $("#question07, #imgshop").hide();
+    $("#question08, #imghouse").show();
     inputhour07 = $('#inputhour07').val()/10*10;
     inputmin07 = $('#inputmin07').val()/10*10;
     input07 = $('#inputhour07').val()/10*10 + $('#inputmin07').val()/60;
@@ -875,8 +889,8 @@ function init() {
   });
 
   $("#nextBtn08").click(function() {
-    $("#question08").hide();
-    $("#question09").show();
+    $("#question08, #imghouse").hide();
+    $("#question09, #imgcare").show();
     inputhour08 = $('#inputhour08').val()/10*10;
     inputmin08 = $('#inputmin08').val()/10*10;
     input08 = $('#inputhour08').val()/10*10 + $('#inputmin08').val()/60;
@@ -886,8 +900,8 @@ function init() {
   });
 
   $("#nextBtn09").click(function() {
-    $("#question09").hide();
-    $("#question10").show();
+    $("#question09, #imgcare").hide();
+    $("#question10, #imgyou").show();
     inputhour09 = $('#inputhour09').val()/10*10;
     inputmin09 = $('#inputmin09').val()/10*10;
     input09 = $('#inputhour09').val()/10*10 + $('#inputmin09').val()/60;
