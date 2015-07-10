@@ -956,11 +956,15 @@ function showPosition(position) {
 
 //send user data to google spreadsheet
 function postContactToGoogle() {
-  var fullinput = {input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong};
+  var fullinput = {input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong},
+      fullinput2 = [input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, datalat, datalong];
   $.ajax({
       url: "https://docs.google.com/forms/d/1LCPuFXUDtYStjwHhrL3Lw4k1BE9xn-XJOUYvEFLnnz8/formResponse",
       data: 
-      { "entry.1651239056": fullinput, },  
+      { "entry.1651239056": fullinput,
+        "entry.958191294": fullinput2,
+        "entry.1803001734": input01,
+       },  
       type: "POST",
       dataType: "xml",
   });
