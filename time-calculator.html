@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,10 +45,20 @@
     margin-bottom: 20px;
     }
 
-    #sharemsg {
+    #resulttitle{
+    font-weight: bold;
+    font-size:40px;
+    margin-top: 20px;
+    }
+
+    #sharemsg, #resultimg, #resultmsg {
       margin-top: 20px;
     }
     
+    #resultmsg {
+      margin-bottom: 40px;
+    }
+
     .btn {
     margin: 20px 0 20px 0;
     }
@@ -63,12 +74,17 @@
     width: 100%;
     max-width: 850px; 
     margin: 0 auto; 
+    border:1px solid #D3D3D3;
     }
 
     .img-responsive{
     opacity: 0.3;
     }
     
+    #btn-fb{
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 500px ) { 
         .counter { 
         margin: 10px 0 0 0; 
@@ -81,16 +97,24 @@
           font-size: 18px;
           margin-bottom: 5px;
         }
-        #sharemsg {
+        #sharemsg, #resultimg {
           margin-top: 5px;
         }
 
         #chart{
           font-size: 18px;
         }
-      .btn{
-      margin: 5px;    
-      }
+
+        #resulttitle{
+          font-size: 20px;
+          margin-top: 5px;
+        }
+        .btn{
+        margin: 10px 0 10px 0;
+        }
+        #imgcol{
+        display:none;
+        }
 
 }
     
@@ -119,8 +143,8 @@
 
       <div id="intro" class="col-sm-8 col-xs-8">
         <div id="counter00" class="counter">Time Use Calculator</div>
-        <div class="question">How you spend your time compared to others?</div>
-        <div class="blurb">We've built this calculator to compare the amount of your time spent on different activities with those of average Americans. It will take into account your age, gender and employment status (part-time or full-time). Want to know whether you are more hard-working or having more workout than an average American? Let’s get started!</div>
+        <div class="question">How do you spend your time compared to others?</div>
+        <div class="blurb">We've built this calculator to compare the amount of your time spent on different activities with those of the average American. It will take into account your age, gender and employment status (part-time or full-time). Want to know whether you are more hard-working or having more workout than an average American? Let’s get started!</div>
         <div class="mybtn">
           <button id="begin" type="button" class="btn btn-primary btn-lg">Begin</button>
         </div>
@@ -129,7 +153,7 @@
 
       <div id="question01" class="col-sm-8 col-xs-8">
         <div id="counter01" class="counter">Question 1 of 10</div>
-        <div id="theQuestion" class="question">How many hours do you typically sleep a night?</div>
+        <div id="theQuestion" class="question">How long do you sleep per day?</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -155,7 +179,7 @@
       
       <div id="question02" class="col-sm-8 col-xs-8">
         <div id="counter02" class="counter">Question 2 of 10</div>
-        <div id="theQuestion" class="question">How many hours do you spend on the job during the average workday? Don’t count commute time.</div>
+        <div id="theQuestion" class="question">How much time do you spend on the job on a workday? Exclude commute time.</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -207,7 +231,7 @@
 
       <div id="question04" class="col-sm-8 col-xs-8">
         <div id="counter04" class="counter">Question 4 of 10</div>
-        <div id="theQuestion" class="question">How long do you spend playing video games and using computers for leisure, such as browsing the Internet or checking Facebook, on a typical weekend day?</div>
+        <div id="theQuestion" class="question">How long do you spend using electronic devices for leisure like playing games, surfing the Internet or Facebook-ing on a weekend day?</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -233,7 +257,7 @@
 
       <div id="question05" class="col-sm-8 col-xs-8">
         <div id="counter05" class="counter">Question 5 of 10</div>
-        <div id="theQuestion" class="question">How much time you spend on sports, exercise and recreation on a weekend day?</div>
+        <div id="theQuestion" class="question">How much time do you spend on sports, exercise and recreation on a weekend day?</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -259,7 +283,7 @@
 
       <div id="question06" class="col-sm-8 col-xs-8">
         <div id="counter06" class="counter">Question 6 of 10</div>
-        <div id="theQuestion" class="question">How much time you spend on reading for leisure or personal interest? Not for work or educational purposes.</div>
+        <div id="theQuestion" class="question">How long do you spend on reading for leisure or personal interest on a weekend day? Not for work or educational purposes.</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -285,7 +309,7 @@
 
       <div id="question07" class="col-sm-8 col-xs-8">
         <div id="counter07" class="counter">Question 7 of 10</div>
-        <div id="theQuestion" class="question">How much time you spend shopping for goods or services per day, either in person, on the phone, online or at a store?</div>
+        <div id="theQuestion" class="question">How much time do you spend shopping for goods or services each day, either in store, on the phone or online?</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -311,7 +335,7 @@
 
       <div id="question08" class="col-sm-8 col-xs-8">
         <div id="counter08" class="counter">Question 8 of 10</div>
-        <div id="theQuestion" class="question">How much time you spend on household activities like cooking, cleaning, taking care of pets, paying bills and vehicle maintenance.</div>
+        <div id="theQuestion" class="question">How much time do you spend on house chores like cooking, cleaning, taking care of pets, paying bills and vehicle maintenance?</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -337,7 +361,7 @@
 
       <div id="question09" class="col-sm-8 col-xs-8">
         <div id="counter09" class="counter">Question 9 of 10</div>
-        <div id="theQuestion" class="question">How much time you spend taking care of your kids or other household members such as talking and playing with them, helping with schoolwork, taking care of their health and traveling with them to school and events?</div>
+        <div id="theQuestion" class="question">How much time do you spend taking care of your kids or other family members including talking and playing with them, helping with schoolwork, taking care of their health and traveling with them to school and events?</div>
           <div class="row">
             <div class="col-sm-6 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -363,7 +387,7 @@
 
       <div id="question10" class="col-sm-8 col-xs-8">
         <div id="counter10" class="counter">Question 10 of 10</div>
-        <div id="theQuestion" class="question">Tell us about yourself</div>
+        <div id="theQuestion" class="question">Tell us about you</div>
           <div class="row">
             <div class="col-sm-4 col-xs-12">
               <form class="form-inline" method="get" action="#">
@@ -413,7 +437,20 @@
       </div>
 
       <div id="results" class="col-sm-12 col-xs-12">
-        <div class="question">say something here</span></div>
+        <div class="text-center" id="resulttitle"></div>
+        <div class="text-center" id="resultimg">
+          <iframe src="//giphy.com/embed/V1BG1EP8dMinm" id="resultimg01" width="480" height="197" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/dGEKBThWl62hW" id="resultimg02" width="480" height="269" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/nwleaG1TObWsE" id="resultimg03" width="480" height="267" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/MgX8LzWrA6dgY" id="resultimg04" width="480" height="360" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/3yrN8xd6VQ73W" id="resultimg05" width="480" height="270" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/hxPwHuAIk7cpW" id="resultimg06" width="480" height="224" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/RFfXtX9fmo9GM" id="resultimg07" width="480" height="264" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/3DnDRfZe2ubQc" id="resultimg08" width="480" height="344" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/ADueB6dc3Dapi" id="resultimg09" width="480" height="270" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          <iframe src="//giphy.com/embed/CPskAi4C6WLHa" id="resultimg10" width="480" height="218" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        </div>
+        <div class="question" id="resultmsg"></div> 
         <div id="chart"></div>
         <div class="mybtn text-center">
             <button id="reset" type="button" class="btn btn-primary btn-lg" onClick="history.go(0)">Calculate again</button>
@@ -421,10 +458,10 @@
         <div class="text-center" id="sharemsg">
             Or share your results!
         </div>
-        <div class="col-sm-6 col-xs-6 text-right">
-          <div id="btn-fb"><img style="border:0;" src="http://kuangkeng.github.io/pri-projects/images/facebook-button.png"></div>
+        <div class="text-center">
+          <div id="btn-fb"><img src="http://kuangkeng.github.io/pri-projects/images/facebook-button.png"></div>
         </div>  
-        <div class="col-sm-6 col-xs-6 text-left">  
+        <div class="text-center">  
           <div id="btn-twitter"><a href="https://twitter.com/share" target="_blank"><img src="http://kuangkeng.github.io/pri-projects/images/twitter-button.png"></a></div>
         </div>  
       </div> 
@@ -548,11 +585,11 @@ var fbmsg = "http://kuangkeng.github.io/pri-projects/time-result1.html";
 console.log (fbmsg);
 
 FB.ui({
-  method: 'feed',
-  link: 'http://www.pri.org/stories/2015-07-10/amsterdam-there-are-people-paid-full-time-benefits-fish-bikes',
-  caption: 'An example caption testing',
-  description: 'testing description',
-  picture: 'http://kuangkeng.github.io/pri-projects/RTR2X79V.jpg',
+  method: 'share_open_graph',
+  action_type: 'og.shares',
+  action_properties: JSON.stringify({
+      object: fbmsg,
+  })
 }, function(response){});
 
     });
@@ -681,9 +718,138 @@ var datawrk = datasetwrk[gender][job],
                     ];
 
     var dataexport = [input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job];
+  
+ var results = [
+    {"name": "rtslp", "value": rtslp}, 
+    {"name": "rtwrk", "value": rtwrk},
+    {"name": "rttv", "value": rttv}, 
+    {"name": "rtpc", "value": rtpc}, 
+    {"name": "rtsports", "value": rtsports},
+    {"name": "rtread", "value": rtread},
+    {"name": "rtshop", "value": rtshop},
+    {"name": "rthouse", "value": rthouse},
+    {"name": "rtcare", "value": rtcare}
+                  ];
+
+  function sortObj(a, b){
+    return a.value < b.value ? 0 : 1;
+  }
+  results.sort(sortObj)   
+  var max = results.pop();
+  var maxname = max.name;
+  var maxvalue = max.value;
 
     console.log("datainput = " + JSON.stringify(datainput));    
     console.log("dataexport = " + JSON.stringify(dataexport)); 
+    console.log("results = " + JSON.stringify(results));
+    console.log("max name= " + maxname);
+    console.log("max value= " + maxvalue);
+
+//select results messages based on input
+
+var result01 = 'You’re sleeping ' + rtslp + '% more than the average American. While getting a good night’s sleep is definitely important, you could be getting too much of a good thing. Figure out if you’re an early bird or a night owl, and embrace it.',
+    result02 = 'You’re working ' + rtwrk + '% more than the average American. Studies show that overworking and stress can lead to serious health problems, so feel free to get out of the office. A walk in the park could do you some good.',
+    result03 = 'You’re watching ' + rttv + '% more television than the average American. We get it. You want to know what’s going to happen next to Khaleesi. Or maybe you’re binge-watching the newest season of Orange is the New Black. But by not moving off the couch, you’re risking a host of health problems linked to obesity and heart problems.',
+    result04 = 'You’re spending ' + rtpc + '% more time on the computer than the average American. Whether you’re looking at cat videos, living vicariously through your Sims or balancing your checkbook, too much time on the computer can be harmful. Outside of the mental side effects, you risk carpal tunnel and a host of eye problems. So feel free to leave the laptop at home, the cat videos will be there when you get back.',
+    result05 = 'You’re exercising ' + rtsports + '% more than the average American. While exercise is definitely important, it should still be done in moderation. Over-exercising can lead to muscle stresses and tears. It’s also been linked to exhaustion and depression. So you might want to jump off that treadmill and treat yourself to a more relaxing activity.',
+    result06 = 'You’re reading ' + rtread + '% more than the average American. This might seem silly, but there is a way to read too much. Make sure to get out of your bubble and avoid cutting yourself off from the rest of the world. You can even find a middle ground and join a book club, where you can talk about the things you read!',
+    result07 = 'You’re spending ' + rtshop + '% more time shopping than the average American. While retail therapy is real, and we understand how important it is to get your hands on the newest summer fashion, you may want to reign it in a little bit. I’m sure your wallet will thank you.',
+    result08 = 'You’re spending ' + rthouse + '% more time on chores than the average American. While the old saying goes: "Godliness is next to Cleanliness", you may be taking it a step too far. Feel free to take the day off, and let someone else tackle cleaning the bathroom for a change. You’ve earned it.',
+    result09 = 'You spend ' + rtcare + '% more time taking care of family and friends than the average American. You’re the type of person who others can rely on. You’re happy to be a shoulder to cry on. You might always find yourself helping friends move. But know that you also need to take care of yourself.',
+    result10 = 'Compared to the average American you spend less time doing, well, everything. What are you doing all day? Leave us a message in the comments and let us know.';
+
+var resulttitle01 = "Hey! Wake up!",
+    resulttitle02 = "Take a break!",
+    resulttitle03 = "Get off the couch!",
+    resulttitle04 = "Back away from the keyboard!",
+    resulttitle05 = "Drop the dumbbells!",
+    resulttitle06 = "Get your nose out of the book!",
+    resulttitle07 = "You’re literally shopping until you’re dropping!",
+    resulttitle08 = "Let someone else take the trash out for a change!",
+    resulttitle09 = "Go ahead and get some ‘you time’",
+    resulttitle10 = "What are you doing all day?";
+
+var twittermsg01= "Yay, I’m working X% longer than the average American. Time to go on a vacation!",
+    twittermsg02= "Zzzz, I’m sleeping X% more than the average American.",
+    twittermsg03= "Oh no, I’m watching X% more TV than the average American. I blame Netflix.",
+    twittermsg04= "I spend X% more time on my computer than the average American. But have you SEEN grumpy cat?",
+    twittermsg05= "Woo! I’m exercising X% more time than the average American. ",
+    twittermsg06= "It’s official, call me a bookworm. I’m reading X% more time than the average American!",
+    twittermsg07= "I’m spending X% more time shopping than the average American #proudshopper",
+    twittermsg08= "I’m spending X% more time on chores than the average American. Should I start a strike?",
+    twittermsg09= "Now everyone should know this: I spend X% more time taking care of family than the average American.",
+    twittermsg10= "Hmm…I spend less time doing everything compared to the average American. What am I doing all day?";
+
+var resultmsg,
+    resulttitle,
+    twittermsg;
+if(maxvalue>0&&maxname=="rtslp"){
+  resultmsg=result01,
+  resulttitle=resulttitle01,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result1.html",
+  twittermsg=twittermsg01;
+  $("#resultimg01").show();}
+if(maxvalue>0&&maxname=="rtwrk"){
+  resultmsg=result02,
+  resulttitle=resulttitle02,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result2.html",
+  twittermsg=twittermsg02;
+  $("#resultimg02").show();}
+if(maxvalue>0&&maxname=="rttv"){
+  resultmsg=result03,
+  resulttitle=resulttitle03,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result3.html",
+  twittermsg=twittermsg03;
+  $("#resultimg03").show();}
+if(maxvalue>0&&maxname=="rtpc"){
+  resultmsg=result04,
+  resulttitle=resulttitle04,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result4.html",
+  twittermsg=twittermsg4;
+  $("#resultimg04").show();}
+if(maxvalue>0&&maxname=="rtsports"){
+  resultmsg=result05,
+  resulttitle=resulttitle05,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result5.html",
+  twittermsg=twittermsg05;
+  $("#resultimg05").show();}
+if(maxvalue>0&&maxname=="rtread"){
+  resultmsg=result06,
+  resulttitle=resulttitle06,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result6.html",
+  twittermsg=twittermsg06;
+  $("#resultimg06").show();}
+if(maxvalue>0&&maxname=="rtshop"){
+  resultmsg=result07,
+  resulttitle=resulttitle07,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result7.html",
+  twittermsg=twittermsg07;
+  $("#resultimg07").show();}
+if(maxvalue>0&&maxname=="rthouse"){
+  resultmsg=result08,
+  resulttitle=resulttitle08,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result8.html",
+  twittermsg=twittermsg08;
+  $("#resultimg08").show();}
+if(maxvalue>0&&maxname=="rtcare"){
+  resultmsg=result09,
+  resulttitle=resulttitle09,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result9.html",
+  twittermsg=twittermsg09;
+  $("#resultimg09").show();}
+if(maxvalue<=0){
+  resultmsg=result10;
+  resulttitle=resulttitle10,
+  fbmsg="http://kuangkeng.github.io/pri-projects/time-result10.html",
+  twittermsg=twittermsg10;
+  $("#resultimg10").show();}
+
+console.log("resultmsg = " + resultmsg);
+console.log("resulttitle = " + resulttitle);
+
+$("#resulttitle").append(resulttitle);
+$("#resultmsg").append(resultmsg);
+
 
 //draw chart based on input
 //convert data points into hour and min to be shown on chart
@@ -713,11 +879,11 @@ $(function () {
             type: 'bar'
         },
         title: {
-            text: 'Your results!',
+            text: 'Compare your results!',
             margin: 20
         },
         subtitle: {
-            text: 'Negative value indicates your time use is lower than the average number while positive indicates your time use is higher than the average number. Hover over each bar for more details',
+            text: 'Negative value indicates your time use is lower than the average number while positive indicates your time use is higher than the average number. Hover over each bar for more details.',
             align: 'left',
             style: {
                 color: '#808080',
@@ -827,8 +993,8 @@ series: [{
 });    
 
 //Twitter dynamic sharing button
-var twittermsg="Result 1";
-var twitterurl = 'https://twitter.com/share?url=http://kuangkeng.github.io/pri-projects/time-calculator.html&text='+twittermsg+'&via=pri';
+
+var twitterurl = 'https://twitter.com/share?url=http://www.pri.org/stories/2015-07-13/are-you-more-hardworking-average-americans-find-out-tool&text='+twittermsg+'&via=pri';
 
 $('a[href="https://twitter.com/share"]').each(function(){
     $(this).prop('href', twitterurl);
@@ -887,7 +1053,7 @@ postContactToGoogle();
 
 function init() {
 
-  $("#results, #question01, #question02, #question03, #question04, #question05, #question06, #question07, #question08, #question09, #question10, #imgsleep, #imgwork, #imgtv, #imgpc, #imgsports, #imgread, #imgshop, #imghouse, #imgcare, #imgyou").hide();
+  $("#results, #question01, #question02, #question03, #question04, #question05, #question06, #question07, #question08, #question09, #question10, #imgsleep, #imgwork, #imgtv, #imgpc, #imgsports, #imgread, #imgshop, #imghouse, #imgcare, #imgyou, #resultimg01, #resultimg02, #resultimg03, #resultimg04, #resultimg05, #resultimg06, #resultimg07, #resultimg08, #resultimg09, #resultimg10").hide();
 
   $.validate({
   form : '.form, .form-inline'
