@@ -548,11 +548,9 @@ var fbmsg = "http://kuangkeng.github.io/pri-projects/time-result1.html";
 console.log (fbmsg);
 
 FB.ui({
-  method: 'share_open_graph',
-  action_type: 'og.shares',
-  action_properties: JSON.stringify({
-      object: fbmsg,
-  })
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2015-07-10/amsterdam-there-are-people-paid-full-time-benefits-fish-bikes',
+  caption: 'An example caption',
 }, function(response){});
 
     });
