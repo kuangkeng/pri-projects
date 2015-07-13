@@ -579,23 +579,6 @@ var datasetprm = [
 {"agesex":"65-74","gender":"female","house":2.76,"shop":1.04,"care":0.12},
 {"agesex":"75 and over","gender":"female","house":2.43,"shop":0.89,"care":0.14}];
 
-//Facebook shraing button 
-$("#btn-fb").click(function(){
-var fbmsg = "http://kuangkeng.github.io/pri-projects/time-result1.html";
-console.log (fbmsg);
-
-FB.ui({
-  method: 'share_open_graph',
-  action_type: 'og.shares',
-  action_properties: JSON.stringify({
-      object: fbmsg,
-  })
-}, function(response){});
-
-    });
-
-
-
 
 function calculate() {
 
@@ -1000,6 +983,20 @@ $('a[href="https://twitter.com/share"]').each(function(){
     $(this).prop('href', twitterurl);
     });
 $.getScript('http://platform.twitter.com/widgets.js');
+
+//Facebook shraing button 
+$("#btn-fb").click(function(){
+console.log (fbmsg);
+
+FB.ui({
+  method: 'share_open_graph',
+  action_type: 'og.shares',
+  action_properties: JSON.stringify({
+      object: fbmsg,
+  })
+}, function(response){});
+
+    });
 
 
 //get user geolocation when user click get results button
