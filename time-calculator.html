@@ -713,13 +713,16 @@ var datawrk = datasetwrk[gender][job],
     {"name": "rtcare", "value": rtcare}
                   ];
 
-  function sortObj(a, b){
-    return a.value < b.value ? 0 : 1;
-  }
-  results.sort(sortObj)   
-  var max = results.pop();
-  var maxname = max.name;
-  var maxvalue = max.value;
+  results.sort(function(a,b){
+    if(a.value > b.value) {return 1}
+      if (a.value < b.value) {return -1}
+        return 0;
+  });                
+
+  var maxname = results[8]["name"];
+  var maxvalue = results[8]["value"];
+
+  console.log("maxname = " + maxname + ", maxvalue= " + maxvalue);
 
   var dataexport = [input01, input02, input03, input04, input05, input06, input07, input08, input09, rtslp, rtwrk, rttv, rtpc, rtsports, rtread, rtshop, rthouse, rtcare, inputgender, inputage, job, max, maxname, maxvalue];
 
