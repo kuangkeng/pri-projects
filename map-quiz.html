@@ -2,16 +2,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Where's Damascus? (Don't Ask Us)</title>
-<meta name="description" content="The UK's probably about to bomb it. Do you know where it is?"> 
+<title>Where's Addis Ababa?</title>
+<meta name="description" content="President Obama is going to visit Addis Ababa, but do you know where it is?"> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
-<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
-<link rel="icon" href="http://usvsth3m.co.uk/favicon.ico"> 
-<link rel="image_src" href="http://games.usvsth3m.com/damascus/intro-damascus2.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website" /> 
+<meta property="og:site_name" content="PRI Map Quiz" />
+<meta property="og:description" content="President Obama is going to visit Addis Ababa, but do you know where it is?" />
+<meta property="og:title" content="Where's Addis Ababa?" />
+<meta property="og:url" content="http://kuangkeng.github.io/pri-projects/map-quiz.html"/>
+<meta property="og:image" content="http://kuangkeng.github.io/pri-projects/RTR2X79V.jpg"/>
+<meta property="fb:app_id" content="874944082601390"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
-<meta name="viewport" content="width=1024, user-scalable=no"> 
 
 <style type="text/css">
 
@@ -21,14 +24,16 @@
  }
 
 html {  -webkit-text-size-adjust: none; height: 100%; width: 100%; overflow: hidden; }
-h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; line-height: 6vh; font-weight: bold; font-family: 'Roboto Condensed'; color: #ff7f00; text-shadow: 2px 2px 0px #333; }
-a { color: #ff7f00; }
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+}
+h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; line-height: 6vh; font-weight: bold; color: #D3401E; }
 #map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; }
 #iframe-shim { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 1; pointer-events: none; }
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 20px; font-size: 18px; font-size: 3vh; line-height: 20px; line-height: 3vh; font-family: Roboto Condensed; color: #fff; background-color: rgba(0,0,0,0.8);}
-.panel button { width: 90%; padding: 10px 20px; font-size: 20px; font-size: 3vh; line-height: 20px; line-height: 3vh; font-family: Roboto Condensed; margin-top: 0.5em; }
-.panel input { width: 3em; padding: 5px 0px; font-size: 20px; font-size: 3vh; font-family: Roboto Condensed; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #fff; }
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 20px; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 3vh; color: #fff; background-color: rgba(0,0,0,0.8);}
+.panel button { width: 90%; padding: 10px 20px; font-size: 20px; font-size: 3vh; line-height: 20px; line-height: 3vh; margin-top: 0.5em; }
+.panel input { width: 3em; padding: 5px 0px; font-size: 20px; font-size: 3vh; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #fff; }
 .panel input:invalid { outline: none; }
 #guess { width: 4em; }
 .panel p { padding-bottom: 0.2em; }
@@ -41,13 +46,7 @@ p.data { font-size: 12px !important; margin-top: 10px; }
 
 }
 
-h1 { font-weight: bold; color: #ff7f00; text-shadow: 2px 2px 0px #000; margin-bottom: 10px; }
-
 .wait { cursor: wait; }
-
-strong { font-weight: bold; }
-
-s { text-decoration: line-through; }
 
 </style>
 
@@ -60,67 +59,61 @@ var heatmap;
 var state = 0;
 
 var homeCircle = {
-  path: google.maps.SymbolPath.CIRCLE,
-  fillColor: "#FF7F00",
-  fillOpacity: 0.8,
-  scale: 1,
-  strokeColor: "#FF7F00",
-  strokeWeight: 14
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 3,
+  strokeColor: "#ff7f00",
+  strokeWeight: 3
 };
 
 
 var guessCircle = {
-  path: google.maps.SymbolPath.CIRCLE,
-  fillColor: "red",
-  fillOpacity: 0.8,
-  scale: 1,
-  strokeColor: "red",
-  strokeWeight: 14
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 3,
+  strokeColor: "#fa1414",
+  strokeWeight: 3
 };
 
 
 
-var damascusCircle = {
-  path: google.maps.SymbolPath.CIRCLE,
-  fillColor: "green",
-  fillOpacity: 0.8,
-  scale: 1,
+var addisCircle = {
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 3,
   strokeColor: "green",
-  strokeWeight: 14
+  strokeWeight: 3
 };
 
 
 
 var homeMarker = new google.maps.Marker({icon: homeCircle});
 var guessMarker = new google.maps.Marker({icon: guessCircle});
-var damascusMarker = new google.maps.Marker({position: new google.maps.LatLng(1.2833, 36.8167), icon: damascusCircle});
+var addisMarker = new google.maps.Marker({position: new google.maps.LatLng(9.03, 38.74), icon: addisCircle});
 
 var tweet_rating = [
 "I couldn't find a piss up in a brewery.",
-"I'm not on the road to Damascus. I can't even find it.",
-"I can't find Damascus on a map. Help me!",
-"I'm pretty poor at Damascus finding!",
-"I'm nearly on the road to Damascus!",
-"I'm almost on the road to Damascus!",
-"I'm on the road to Damascus!",
-"I'm definitely on the road to Damascus!",
-"Ask me where Damascus is. I know.",
-"I'm a Grade-A Damascus finder!",
-"I'm a Grade-A Damascus finder!"
+"I'm not on the road to addis. I can't even find it.",
+"I can't find addis on a map. Help me!",
+"I'm pretty poor at addis finding!",
+"I'm nearly on the road to addis!",
+"I'm almost on the road to addis!",
+"I'm on the road to addis!",
+"I'm definitely on the road to addis!",
+"Ask me where addis is. I know.",
+"I'm a Grade-A addis finder!",
+"I'm a Grade-A addis finder!"
 ];
 
 var rating = [
 "You couldn't find a piss up in a brewery!",
-"You're not on the road to Damascus. You can't even find it!",
-"You can't find Damascus!",
-"You're pretty poor at Damascus finding!",
-"You're nearly on the road to Damascus!",
-"You're almost on the road to Damascus!",
-"You're on the road to Damascus!",
-"You're definitely on the road to Damascus!",
+"You're not on the road to addis. You can't even find it!",
+"You can't find addis!",
+"You're pretty poor at addis finding!",
+"You're nearly on the road to addis!",
+"You're almost on the road to addis!",
+"You're on the road to addis!",
+"You're definitely on the road to addis!",
 "People should ask you for directions!",
-"You're a Grade-A Damascus finder!",
-"You're a Grade-A Damascus finder!"
+"You're a Grade-A addis finder!",
+"You're a Grade-A addis finder!"
 ];
 
 
@@ -220,7 +213,7 @@ function init() {
   
   $('#home_placed').click(function () {
   
-    panel('damascus');
+    panel('addis');
     var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-180),
                                                  new google.maps.LatLng(65,180));
     map.fitBounds(worldBounds);
@@ -245,23 +238,23 @@ function init() {
     });
     
     var bounds = new google.maps.LatLngBounds();
-    damascusMarker.setMap(map);
+    addisMarker.setMap(map);
     bounds.extend(guessMarker.position);
-    bounds.extend(damascusMarker.position);
+    bounds.extend(addisMarker.position);
     map.fitBounds(bounds);
     
     map.setZoom(map.getZoom()-1);
-    meters = google.maps.geometry.spherical.computeDistanceBetween (guessMarker.position, damascusMarker.position);
+    meters = google.maps.geometry.spherical.computeDistanceBetween (guessMarker.position, addisMarker.position);
     miles = meters / 1609.344
     $('#miles_score').text(Math.round(miles));
     
     map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
     
     var guessLine = new google.maps.Polyline({
-      path: [guessMarker.position, damascusMarker.position],
-      strokeColor: "#FF7F00",
+      path: [guessMarker.position, addisMarker.position],
+      strokeColor: "#fa1414",
       strokeOpacity: 1.0,
-      strokeWeight: 5,
+      strokeWeight: 3,
       map: map
     });
 
@@ -281,7 +274,7 @@ function init() {
     $('#players_count').text(guesses.length);
     var point = 0;
     for (var i in guesses) {
-      if (google.maps.geometry.spherical.computeDistanceBetween(damascusMarker.position, guesses[i]) > meters) {
+      if (google.maps.geometry.spherical.computeDistanceBetween(addisMarker.position, guesses[i]) > meters) {
         point++;
       }
     }
@@ -352,7 +345,7 @@ function tweet() {
   var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
   tweet_url += encodeURIComponent(tweet_rating[Math.ceil(score/10)]);
   tweet_url += encodeURIComponent(' ' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you get closer?');
-  tweet_url += '&url=http://games.usvsth3m.com/damascus/';
+  tweet_url += '&url=http://games.usvsth3m.com/addis/';
   window.open(tweet_url,'_blank');
   
 }
@@ -361,9 +354,9 @@ function facebook() {
 
   FB.ui({
   method: 'feed',
-  link: 'http://games.usvsth3m.com/damascus/',
-  picture: 'http://games.usvsth3m.com/damascus/intro.jpg',
-  name: "Where's Damascus? Don't Ask Us",
+  link: 'http://games.usvsth3m.com/addis/',
+  picture: 'http://games.usvsth3m.com/addis/intro.jpg',
+  name: "Where's addis? Don't Ask Us",
   description: tweet_rating[Math.ceil(score/10)] + ' ' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you get closer?'
   }, function(response){});
 
@@ -380,35 +373,34 @@ function facebook() {
 </div>
 
 <div id="instructions" class="panel">
-  <h1>Where's Kenya? (Don't Ask Us)</h1>
-  <p>The US <s>and UK</s> are probably about to bomb it. Do you know where it is?</p>
-  <p><button id="start">Start!</button></p>
+  <h1>Where's Addis Ababa? (No googling please)</h1>
+  <p>President Obama is going to visit the city that is also known as the political capital of its continent, but do you know where it is?</p>
+  <p><button id="start">Bring it on!</button></p>
 </div>
 
 <div id="you" class="panel">
-<h1>First, where do you live?</h1>
-<p>Click on the map to place a marker on your home, then click the button to confirm.</p>
+<h1>First let's warm up, where do you live?</h1>
+<p>Click on the map to mark your home, then click the button to confirm.</p>
 <p><button id="home_placed" disabled>I live here</button></p>
 </div>
 
-<div id="damascus" class="panel">
-<h1>Great. Now, where's Damascus?</h1>
-<p>Click on where you think Damascus is, then click the button to confirm.</p>
-<p><button id="guess_placed" disabled>Damascus is here!</button></p>
+<div id="addis" class="panel">
+<h1>Awesome, and now the real challenge, where's Addis Ababa?</h1>
+<p>Click on the map where you think Addis Ababa is, then click the button to confirm.</p>
+<p><button id="guess_placed" disabled>Addis Ababa is here!</button></p>
 </div>
 
 <div id="results" class="panel">
-<h1>You were <span id="miles_score">0</span> miles away!</h1>
-<p>But how do you stack up against the world?</p>
+<h1>You were <span id="miles_score">0</span> miles away from the exact location!</h1>
+<p>But are you better or worse than other PRI readers?</p>
 <p><button id="compare">Compare my results!</button></p>
 </div>
 
 <div id="endgame" class="panel">
-<h1>Here's what the last <span id="players_count">500</span> players thought.</h1>
-<p><strong>You were better than <span id="score">0</span>%</strong> of them. <span id="rating"></span></p>
+<h1>This heat map shows answers given by the last <span id="players_count">500</span> users.</h1>
+<p>You were better than <span id="score">0</span>% of them. <span id="rating"></span></p>
 <button id="tweet">Tweet your score</button>
 <button id="facebook">Share on Facebook</button>
-<p class="data">We did a full analysis of the <a href="http://usvsth3m.com/post/59778656173/the-us-department-of-defense-isnt-sure-where-damascus">first 100,000 or so plays</a> of the game. The results aren't pretty.</p>
 </div>
 
 <div id="fb-root"></div>
