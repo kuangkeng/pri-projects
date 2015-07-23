@@ -11,10 +11,13 @@
 <meta property="og:description" content="President Obama is visiting Addis Ababa, but do you know where it is?" />
 <meta property="og:title" content="Where's Addis Ababa?" />
 <meta property="og:url" content="http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it"/>
-<meta property="og:image" content="http://kuangkeng.github.io/pri-projects/RTR2X79V.jpg"/>
+<meta property="og:image" content="http://cdn1.pri.org/sites/default/files/map-quiz.png"/>
 <meta property="fb:app_id" content="1168030159892489"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
+
+<!-- This map quiz code is modified from "Where's Damascus? (Don't Ask Us)" at games.usvsth3m.com/damascus 
+Thanks for the neat and well structured code! -->
 
 <style type="text/css">
 
@@ -355,10 +358,10 @@ google.maps.event.addDomListener(window, 'load', init);
 
 function tweet() {
 
-  var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
+  var tweet_url = 'https://twitter.com/intent/tweet?related=pri&text=';
   tweet_url += encodeURIComponent(tweet_rating[Math.ceil(score/10)]);
-  tweet_url += encodeURIComponent(' ' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you get closer?');
-  tweet_url += '&url=http://games.usvsth3m.com/addis/';
+  tweet_url += encodeURIComponent(" I'm" + Math.round(miles) + " miles away, better than " + score + "% of people. Can you beat me?");
+  tweet_url += '&url=http://bit.ly/1GHiF5m&via=pri&hashtags=whereisaddisababa';
   window.open(tweet_url,'_blank');
   
 }
@@ -367,10 +370,10 @@ function facebook() {
 
   FB.ui({
   method: 'feed',
-  link: 'http://games.usvsth3m.com/addis/',
-  picture: 'http://games.usvsth3m.com/addis/intro.jpg',
-  name: "Where's addis? Don't Ask Us",
-  description: tweet_rating[Math.ceil(score/10)] + ' ' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you get closer?'
+  link: 'http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it',
+  picture: 'http://cdn1.pri.org/sites/default/files/map-quiz.png',
+  name: "Obama is visiting Addis Ababa, but do you know where it is?",
+  description: tweet_rating[Math.ceil(score/10)] + ' I am' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you beat me?'
   }, function(response){});
 
 }
