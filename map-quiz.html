@@ -11,7 +11,7 @@
 <meta property="og:description" content="President Obama is visiting Addis Ababa, but do you know where it is?" />
 <meta property="og:title" content="Where's Addis Ababa?" />
 <meta property="og:url" content="http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it"/>
-<meta property="og:image" content="http://cdn1.pri.org/sites/default/files/map-quiz.png"/>
+<meta property="og:image" content="http://kuangkeng.github.io/pri-projects/images/map-quiz.png"/>
 <meta property="fb:app_id" content="658272894309512"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
@@ -369,12 +369,12 @@ function tweet() {
 function facebook() {
 
   FB.ui({
-  method: 'feed',
-  link: 'http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it',
-  picture: 'http://cdn1.pri.org/sites/default/files/map-quiz.png',
-  name: "Obama is visiting Addis Ababa, but do you know where it is?",
-  description: tweet_rating[Math.floor(score/10)] + ' I am ' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you beat me?'
-  }, function(response){});
+  method: 'share_open_graph',
+  action_type: 'og.shares',
+  action_properties: JSON.stringify({
+      object: "http://kuangkeng.github.io/pri-projects/map-result.html",
+  })
+}, function(response){});
 
 }
 
