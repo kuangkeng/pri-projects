@@ -12,7 +12,7 @@
 <meta property="og:title" content="Where's Addis Ababa?" />
 <meta property="og:url" content="http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it"/>
 <meta property="og:image" content="http://cdn1.pri.org/sites/default/files/map-quiz.png"/>
-<meta property="fb:app_id" content="1168030159892489"/>
+<meta property="fb:app_id" content="658272894309512"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
 
@@ -360,7 +360,7 @@ function tweet() {
 
   var tweet_url = 'https://twitter.com/intent/tweet?related=pri&text=';
   tweet_url += encodeURIComponent(tweet_rating[Math.ceil(score/10)]);
-  tweet_url += encodeURIComponent(" I'm" + Math.round(miles) + " miles away, better than " + score + "% of people. Can you beat me?");
+  tweet_url += encodeURIComponent(" I'm " + Math.round(miles) + " miles away. Can you beat me?");
   tweet_url += '&url=http://bit.ly/1GHiF5m&via=pri&hashtags=whereisaddisababa';
   window.open(tweet_url,'_blank');
   
@@ -373,7 +373,7 @@ function facebook() {
   link: 'http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it',
   picture: 'http://cdn1.pri.org/sites/default/files/map-quiz.png',
   name: "Obama is visiting Addis Ababa, but do you know where it is?",
-  description: tweet_rating[Math.ceil(score/10)] + ' I am' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you beat me?'
+  description: tweet_rating[Math.ceil(score/10)] + ' I am ' + Math.round(miles) + ' miles away, better than ' + score + '% of people. Can you beat me?'
   }, function(response){});
 
 }
@@ -422,21 +422,21 @@ function facebook() {
 <div id="fb-root"></div>
 
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1168030159892489',
-      xfbml      : true,
-      version    : 'v2.4'
-    });
-  };
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '658272894309512',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 </script>
 </body>
 
