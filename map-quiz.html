@@ -8,11 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website" /> 
 <meta property="og:site_name" content="PRI Map Quiz" />
-<meta property="og:description" content="President Obama is going to visit Addis Ababa, but do you know where it is?" />
+<meta property="og:description" content="President Obama is visiting Addis Ababa, but do you know where it is?" />
 <meta property="og:title" content="Where's Addis Ababa?" />
-<meta property="og:url" content="http://kuangkeng.github.io/pri-projects/map-quiz.html"/>
+<meta property="og:url" content="http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it"/>
 <meta property="og:image" content="http://kuangkeng.github.io/pri-projects/RTR2X79V.jpg"/>
-<meta property="fb:app_id" content="874944082601390"/>
+<meta property="fb:app_id" content="1168030159892489"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
 
@@ -31,8 +31,16 @@ h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; lin
 #map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; }
 #iframe-shim { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 1; pointer-events: none; }
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 20px; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 3vh; color: #fff; background-color: rgba(0,0,0,0.8);}
-.panel button { width: 90%; padding: 10px 20px; font-size: 20px; font-size: 3vh; line-height: 20px; line-height: 3vh; margin-top: 0.5em; }
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 20px; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 4vh; color: #fff; background-color: rgba(0,0,0,0.8);}
+.panel button { 
+  width: 50%; 
+  padding: 10px 20px; 
+  font-size: 20px; 
+  font-size: 3vh; 
+  line-height: 20px; 
+  line-height: 3vh; 
+  margin-top: 0.5em; 
+}
 .panel input { width: 3em; padding: 5px 0px; font-size: 20px; font-size: 3vh; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #fff; }
 .panel input:invalid { outline: none; }
 #guess { width: 4em; }
@@ -43,6 +51,13 @@ p.data { font-size: 12px !important; margin-top: 10px; }
 @media screen and (min-aspect-ratio: 1/1) {
 
   #endgame button { width: 30%; }
+
+}
+
+@media (max-width: 500px ) { 
+  h1 {font-size: 24px; line-height: 25px;}
+  .panel{font-size: 16px; line-height: 25px; padding: 5px 10px 5px 10px;}
+  .panel button {font-size: 20px; margin-top: 0;}
 
 }
 
@@ -89,31 +104,29 @@ var guessMarker = new google.maps.Marker({icon: guessCircle});
 var addisMarker = new google.maps.Marker({position: new google.maps.LatLng(9.03, 38.74), icon: addisCircle});
 
 var tweet_rating = [
-"I couldn't find a piss up in a brewery.",
-"I'm not on the road to addis. I can't even find it.",
-"I can't find addis on a map. Help me!",
-"I'm pretty poor at addis finding!",
-"I'm nearly on the road to addis!",
-"I'm almost on the road to addis!",
-"I'm on the road to addis!",
-"I'm definitely on the road to addis!",
-"Ask me where addis is. I know.",
-"I'm a Grade-A addis finder!",
-"I'm a Grade-A addis finder!"
+"Thank goodness I’m not flying Air Force One. ",
+"Thank goodness I’m not flying Air Force One. ",
+"Can someone please tell me where Addis Ababa is?",
+"Can someone please tell me where Addis Ababa is?",
+"I’m not *too* far off from Addis Ababa.",
+"I’m not *too* far off from Addis Ababa.",
+"I’m no expert, but I bet I can get closer than you when guessing where Addis Ababa is!",
+"I’m no expert, but I bet I can get closer than you when guessing where Addis Ababa is!",
+"Obama is going to Addis Ababa. And I’m basically an expert.",
+"Obama is going to Addis Ababa. And I’m basically an expert."
 ];
 
 var rating = [
-"You couldn't find a piss up in a brewery!",
-"You're not on the road to addis. You can't even find it!",
-"You can't find addis!",
-"You're pretty poor at addis finding!",
-"You're nearly on the road to addis!",
-"You're almost on the road to addis!",
-"You're on the road to addis!",
-"You're definitely on the road to addis!",
-"People should ask you for directions!",
-"You're a Grade-A addis finder!",
-"You're a Grade-A addis finder!"
+"Thank goodness you’re not flying Air Force One!",
+"Thank goodness you’re not flying Air Force One!",
+"You’re pretty far off…",
+"You’re pretty far off…",
+"You’re definitely on your way to Addis Ababa.",
+"You’re definitely on your way to Addis Ababa.",
+"Hey, not bad! You’re pretty close to Addis Ababa!",
+"Hey, not bad! You’re pretty close to Addis Ababa!",
+"Is that you, Obama? You’re an Addis expert!",
+"Is that you, Obama? You’re an Addis expert!"
 ];
 
 
@@ -373,13 +386,13 @@ function facebook() {
 </div>
 
 <div id="instructions" class="panel">
-  <h1>Where's Addis Ababa? (No googling please)</h1>
-  <p>President Obama is going to visit the city that is also known as the political capital of its continent, but do you know where it is?</p>
+  <h1>Where's Addis Ababa? (No Googling!)</h1>
+  <p>President Obama is going to visit a city known as the political capital of its continent, but do you know where it is?</p>
   <p><button id="start">Bring it on!</button></p>
 </div>
 
 <div id="you" class="panel">
-<h1>First let's warm up, where do you live?</h1>
+<h1>We’ll start out with an easy one: Where do you live?</h1>
 <p>Click on the map to mark your home, then click the button to confirm.</p>
 <p><button id="home_placed" disabled>I live here</button></p>
 </div>
@@ -397,7 +410,7 @@ function facebook() {
 </div>
 
 <div id="endgame" class="panel">
-<h1>This heat map shows answers given by the last <span id="players_count">500</span> users.</h1>
+<h1>This map shows answers given by <span id="players_count">50</span> users.</h1>
 <p>You were better than <span id="score">0</span>% of them. <span id="rating"></span></p>
 <button id="tweet">Tweet your score</button>
 <button id="facebook">Share on Facebook</button>
@@ -407,23 +420,18 @@ function facebook() {
 
 <script>
   window.fbAsyncInit = function() {
-    // init the FB JS SDK
     FB.init({
-      appId      : '383984258388383',                        // App ID from the app dashboard
-      channelUrl : '//games.usvsth3m.com/channel.html', // Channel file for x-domain comms
-      status     : true,                                 // Check Facebook Login status
-      xfbml      : true                                  // Look for social plugins on the page
+      appId      : '1168030159892489',
+      xfbml      : true,
+      version    : 'v2.4'
     });
-
-    // Additional initialization code such as adding Event Listeners goes here
   };
 
-  // Load the SDK asynchronously
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/all.js";
+     js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
