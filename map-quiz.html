@@ -34,7 +34,7 @@ h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; lin
 #map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; }
 #iframe-shim { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 1; pointer-events: none; }
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 0px ; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 4vh; color: #fff; background-color: rgba(0,0,0,0.8);}
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 10px ; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 4vh; color: #fff; background-color: rgba(0,0,0,0.8);}
 .panel button { 
   width: 50%; 
   padding: 10px 10px; 
@@ -308,38 +308,20 @@ function init() {
   });
   
     //tabletop function goes here to convert google spreadsheet into json
-    //var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1SB1Lw89Li2RT7lr_vS-3dOmeYrOKtXtwt2bNZ2U9nkY/pubhtml';
-    //Tabletop.init( { key: public_spreadsheet_url,
-    //                 callback: showInfo,
-    //                 simpleSheet: true } )
-    //function showInfo(dataset, tabletop) {
-    //console.log("dataset = " + JSON.stringify(dataset));
-    //for(var i in dataset) {
-    //    guesses.push(new google.maps.LatLng(dataset[i].lat,dataset[i].lng));
-    //  }
-    //var pointArray = new google.maps.MVCArray(guesses);
-    //  heatmap = new google.maps.visualization.HeatmapLayer({
-    //    data: pointArray
-    //  });
-    //}
-
-  //updated part after TableTop stop working
-  $.ajax({
-    type: 'GET',
-    url: 'http://kuangkeng.github.io/pri-projects/store.php',
-    dataType: 'json',
-    success: function(data) {
-      for(var i in data) {
-        guesses.push(new google.maps.LatLng(data[i].lat,data[i].lng));
+    var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1SB1Lw89Li2RT7lr_vS-3dOmeYrOKtXtwt2bNZ2U9nkY/pubhtml';
+    Tabletop.init( { key: public_spreadsheet_url,
+                     callback: showInfo,
+                     simpleSheet: true } )
+    function showInfo(dataset, tabletop) {
+    //console.log("guesses count = " + guesses.length);
+    for(var i in dataset) {
+        guesses.push(new google.maps.LatLng(dataset[i].lat,dataset[i].lng));
       }
-      var pointArray = new google.maps.MVCArray(guesses);
-      console.log("guesses = " + JSON.stringify(guesses));
-      console.log("guesses length = " + guesses.length);
+    var pointArray = new google.maps.MVCArray(guesses);
       heatmap = new google.maps.visualization.HeatmapLayer({
         data: pointArray
       });
     }
-  });
 
   
   $('#tweet').click(function (event) {

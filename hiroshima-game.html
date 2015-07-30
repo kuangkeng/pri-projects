@@ -132,7 +132,6 @@ function panel(id) {
   $('.panel').slideUp(500);
   $('#' + id).slideDown(500);
  
- 
 }
 
 //to get the country code of users
@@ -193,24 +192,31 @@ function init() {
     
   });
   
-  $('#fire').click(function () {
+  $('#fire').one("click", function () {
 
     $("#white-canvas").fadeIn(2000, function(){
       $("#white-canvas").fadeOut(2000);
       console.log(homeMarker.position);
-      var radiusOptions = {
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
-      map: map,
-      center: homeMarker.position,
-      radius: 2000,
-      draggable: true,
-      };
-      var circle = new google.maps.Circle(radiusOptions);
+      var radiusData = [
+        {"radius": 2000, "strokeColor": "#FFFF00", "strokeOpacity": 0.8, "fillColor": "#FFFF66", "fillOpacity": 0.4,},
+        {"radius": 1500, "strokeColor": "#FFA500", "strokeOpacity": 0.8, "fillColor": "#FF6600", "fillOpacity": 0.5,},
+        {"radius": 1000, "strokeColor": "#FF0000", "strokeOpacity": 0.8, "fillColor": "#E60000", "fillOpacity": 0.6,}];
+          
+      for (var unit in radiusData) {
+        var radiusOptions = {
+        strokeColor: radiusData[unit]["strokeColor"],
+        strokeOpacity: radiusData[unit]["strokeOpacity"],
+        strokeWeight: 1,
+        fillColor: radiusData[unit]["fillColor"],
+        fillOpacity: radiusData[unit]["fillOpacity"],
+        map: map,
+        center: homeMarker.position,
+        radius: radiusData[unit]["radius"],
+        };
+        var circle = new google.maps.Circle(radiusOptions); 
+      };  
       map.setCenter(homeMarker.position);
+      map.setZoom(13);
       state = 3;
       
       panel('results');
