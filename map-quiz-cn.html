@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Where's Addis Ababa?</title>
+<meta name="description" content="President Obama is going to visit Addis Ababa, but do you know where it is?"> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website" /> 
+<meta property="og:site_name" content="PRI Map Quiz" />
+<meta property="og:description" content="President Obama is visiting Addis Ababa, but do you know where it is?" />
+<meta property="og:title" content="Where's Addis Ababa?" />
+<meta property="og:url" content="http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it"/>
+<meta property="og:image" content="http://admin.pri.org/sites/default/files/map-quiz.png"/>
+<meta property="fb:app_id" content="658272894309512"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
+
+<!-- This map quiz code is modified from "Where's Damascus? (Don't Ask Us)" at games.usvsth3m.com/damascus 
+Thanks for the neat and well structured code! -->
+
+<style type="text/css">
+
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
+html {  -webkit-text-size-adjust: none; height: 100%; width: 100%; overflow: hidden; }
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+}
+h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; line-height: 6vh; font-weight: bold; color: #D3401E; }
+#map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; }
+#iframe-shim { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 1; pointer-events: none; }
+
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 0px ; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 4vh; color: #fff; background-color: rgba(0,0,0,0.8);}
+.panel button { 
+  width: 50%; 
+  padding: 10px 10px; 
+  font-size: 20px; 
+  font-size: 3vh; 
+  line-height: 20px; 
+  line-height: 3vh; 
+  margin-top: 0.5em; 
+}
+.panel input { width: 3em; padding: 5px 0px; font-size: 20px; font-size: 3vh; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #fff; }
+.panel input:invalid { outline: none; }
+#guess { width: 4em; }
+.panel p { padding-bottom: 0.2em; }
+
+p.data { font-size: 12px !important; margin-top: 10px; }
+
+@media screen and (min-aspect-ratio: 1/1) {
+
+  #endgame button { width: 30%; }
+
+}
+
+@media (max-width: 500px ) { 
+  h1 {font-size: 24px; line-height: 25px;}
+  .panel{font-size: 16px; line-height: 22px; padding: 5px 10px 5px 10px;}
+  .panel button {font-size: 17px; width:80%;}
+
+}
+
+.wait { cursor: wait; }
+
+</style>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
+<script>
+
+var sv;
+var map;
+var heatmap;
+var state = 0;
+
+var homeCircle = {
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 3,
+  strokeColor: "#ff7f00",
+  strokeWeight: 3
+};
+
+
+var guessCircle = {
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 3,
+  strokeColor: "#fa1414",
+  strokeWeight: 3
+};
+
+
+
+var addisCircle = {
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 3,
+  strokeColor: "green",
+  strokeWeight: 3
+};
+
+
+
+var homeMarker = new google.maps.Marker({icon: homeCircle});
+var guessMarker = new google.maps.Marker({icon: guessCircle});
+var addisMarker = new google.maps.Marker({position: new google.maps.LatLng(9.03, 38.74), icon: addisCircle});
+
+var tweet_rating = [
+"谢天谢地我没驾驶空军一号。",
+"谢天谢地我没驾驶空军一号。",
+"有人可以告诉我亚的斯亚贝巴在哪里吗？",
+"有人可以告诉我亚的斯亚贝巴在哪里吗？",
+"我距离亚的斯亚贝巴并不远！",
+"我距离亚的斯亚贝巴并不远！",
+"亚的斯亚贝巴？我完全知道它的位置！",
+"亚的斯亚贝巴？我完全知道它的位置！",
+"奥巴马将要访问亚的斯亚贝巴，而我可是专家！",
+"奥巴马将要访问亚的斯亚贝巴，而我可是专家！"
+];
+
+var rating = [
+"谢天谢地不是你驾驶空军一号。",
+"谢天谢地不是你驾驶空军一号。",
+"你的答案差得相当远...",
+"你的答案差得相当远...",
+"看来你还在找着往亚的斯亚贝巴的方向。",
+"看来你还在找着往亚的斯亚贝巴的方向。",
+"不赖！你非常靠近亚的斯亚贝巴了！",
+"不赖！你非常靠近亚的斯亚贝巴了！",
+"难道你就是奥巴马？你是亚的斯亚贝巴的专家啊！",
+"难道你就是奥巴马？你是亚的斯亚贝巴的专家啊！"
+];
+
+
+var startPosition = new google.maps.LatLng(20,0);
+var startZoom = 2;
+var country_code;
+
+var mapOptions = {
+  zoom: startZoom,
+  minZoom: 1,
+  maxZoom: 8,
+  center: startPosition,
+  disableDefaultUI: true,
+  zoomControl: true,
+  mapTypeId: google.maps.MapTypeId.SATELLITE
+};
+
+var geocoder = new google.maps.Geocoder();
+
+var guesses = [];
+var dataset = [];
+
+var meters;
+
+var score;
+var miles;
+
+function panel(id) {
+
+  $('.panel').slideUp(500);
+  $('#' + id).slideDown(500);
+  if(id != 'options') {
+    $('#' + id + ' button:eq(0)').focus();
+  }
+ 
+}
+
+function codeLatLng(latlng) {
+  country_code = 'xx';
+  geocoder.geocode({'latLng': latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[0]) {
+        try {
+          var x;
+          for (var i=0;i<results[0].address_components.length;i++) {
+            x = results[0].address_components[i].types;
+            if (x.indexOf('country') != -1) {
+              country_code = results[0].address_components[i].short_name;
+            }
+          }
+        } catch(err) {
+          country_code = 'xx';
+        }
+      }
+    } else {
+      country_code = 'xx';
+    }
+  });
+}
+
+
+function handleClick(latLng) {
+
+  switch(state) {
+  
+    case 1:
+      homeMarker.setPosition(latLng);
+      homeMarker.setMap(map);
+      codeLatLng(latLng);
+      $('#home_placed').attr('disabled',false);
+      break;
+    case 2:
+      guessMarker.setPosition(latLng);
+      guessMarker.setMap(map);
+      $('#guess_placed').attr('disabled',false);
+      break;
+
+  
+  }
+
+}
+
+function init() {
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-20),
+                                                 new google.maps.LatLng(65,20));
+  map.fitBounds(worldBounds);
+  panel('instructions');
+  
+  $('#start').click(function () {
+  
+    panel('you');
+    state = 1;
+  
+  });
+  
+  $('#home_placed').click(function () {
+  
+    panel('addis');
+    var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-180),
+                                                 new google.maps.LatLng(65,180));
+    map.fitBounds(worldBounds);
+    state = 2;
+  
+  });
+  
+  $('#guess_placed').click(function () {
+    
+    $.ajax({
+      type: 'POST',
+      url: 'https://docs.google.com/forms/d/1y_TFP1KxxiQNbo_jHi18FvJQHhSIFg-YBh7WEwfmGQ0/formResponse',
+      data: 
+      { 
+        "entry.163459536": guessMarker.position.lat(),
+        "entry.903441567": guessMarker.position.lng(),
+        "entry.469720109": homeMarker.position.lat(),
+        "entry.882057108": homeMarker.position.lng(),
+        "entry.577618485": country_code,
+        "entry.592194316": document.referrer,
+       }
+    });
+    
+    var bounds = new google.maps.LatLngBounds();
+    addisMarker.setMap(map);
+    bounds.extend(guessMarker.position);
+    bounds.extend(addisMarker.position);
+    map.fitBounds(bounds);
+    
+    map.setZoom(map.getZoom()-1);
+    meters = google.maps.geometry.spherical.computeDistanceBetween (guessMarker.position, addisMarker.position);
+    miles = meters / 1609.344
+    $('#miles_score').text(Math.round(miles));
+    
+    map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+    
+    var guessLine = new google.maps.Polyline({
+      path: [guessMarker.position, addisMarker.position],
+      strokeColor: "#fa1414",
+      strokeOpacity: 1.0,
+      strokeWeight: 3,
+      map: map
+    });
+
+    state = 3;
+    
+    panel('results');
+  
+  });
+  
+  $('#compare').click(function () {
+  
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-20),
+                                                 new google.maps.LatLng(65,20));
+    map.fitBounds(worldBounds);
+    
+    $('#players_count').text(guesses.length);
+    var point = 0;
+    for (var i in guesses) {
+      if (google.maps.geometry.spherical.computeDistanceBetween(addisMarker.position, guesses[i]) > meters) {
+        point++;
+      }
+    }
+    score = Math.round((point/ guesses.length)*100);
+    $('#score').text(score);
+    $('#rating').text(rating[Math.floor(score/10)]);
+    panel('endgame');
+    heatmap.setMap(map);
+    map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+  
+  });
+  
+  google.maps.event.addListener(map, 'click', function(event) {
+    handleClick(event.latLng);
+  });
+  
+    //tabletop function goes here to convert google spreadsheet into json
+    //var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1SB1Lw89Li2RT7lr_vS-3dOmeYrOKtXtwt2bNZ2U9nkY/pubhtml';
+    //Tabletop.init( { key: public_spreadsheet_url,
+    //                 callback: showInfo,
+    //                 simpleSheet: true } )
+    //function showInfo(dataset, tabletop) {
+    //console.log("dataset = " + JSON.stringify(dataset));
+    //for(var i in dataset) {
+    //    guesses.push(new google.maps.LatLng(dataset[i].lat,dataset[i].lng));
+    //  }
+    //var pointArray = new google.maps.MVCArray(guesses);
+    //  heatmap = new google.maps.visualization.HeatmapLayer({
+    //    data: pointArray
+    //  });
+    //}
+
+  //updated part after TableTop stop working
+  $.ajax({
+    type: 'GET',
+    url: 'http://kuangkeng.github.io/pri-projects/store.php',
+    dataType: 'json',
+    success: function(data) {
+      for(var i in data) {
+        guesses.push(new google.maps.LatLng(data[i].lat,data[i].lng));
+      }
+      var pointArray = new google.maps.MVCArray(guesses);
+      console.log("guesses = " + JSON.stringify(guesses));
+      console.log("guesses length = " + guesses.length);
+      heatmap = new google.maps.visualization.HeatmapLayer({
+        data: pointArray
+      });
+    }
+  });
+
+  
+  $('#tweet').click(function (event) {
+  
+    tweet();
+  
+  });  
+  $('#facebook').click(function (event) {
+  
+    facebook();
+  
+  });
+  
+  $(document).keypress(function(event) {
+    if ( event.which == 61 ) {
+      heatmap.setMap(map);
+    }
+  });
+
+  
+}
+google.maps.event.addDomListener(window, 'load', init);
+
+
+
+function tweet() {
+
+  var tweet_url = 'https://twitter.com/intent/tweet?related=pritheworld&text=';
+  tweet_url += encodeURIComponent(tweet_rating[Math.floor(score/10)]);
+  tweet_url += encodeURIComponent(" 我距离亚的斯亚贝巴只差" + Math.round(miles) + "英里，你能赢我吗？");
+  tweet_url += '&url=http://bit.ly/1GHiF5m&via=pri&hashtags=whereisaddisababa';
+  window.open(tweet_url,'_blank');
+  
+}
+
+function facebook() {
+
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it',
+  picture: 'http://admin.pri.org/sites/default/files/map-quiz.png',
+  name: "亚的斯亚贝巴在哪里？",
+  description: tweet_rating[Math.floor(score/10)] + '我的答案距离正确位置只差' + Math.round(miles) + '英里，比百分之' + score + '的人更准确，你能赢我吗？挑战这个游戏，告诉全世界你是否知道亚的斯亚贝巴在哪里。'
+  }, function(response){});
+
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="map-canvas">
+</div>
+
+<div id="instructions" class="panel">
+  <h1>亚的斯亚贝巴在哪里？（不许作弊）</h1>
+  <p>美国总统奥巴马将访问这个被视为该区域政经文教中心的城市，但是你知道它在哪里吗？</p>
+  <p><button id="start">放马过来！</button></p>
+</div>
+
+<div id="you" class="panel">
+<h1>先来个简单的问题热热身，你住在哪里？</h1>
+<p>在地图上标示你住的地点，再点击按钮确定。</p>
+<p><button id="home_placed" disabled>我住在这里</button></p>
+</div>
+
+<div id="addis" class="panel">
+<h1>很好！现在才是真正的挑战，亚的斯亚贝巴在哪里？</h1>
+<p>在地图上标示亚的斯亚贝巴的位置，再点击按钮确定。</p>
+<p><button id="guess_placed" disabled>亚的斯亚贝巴在这里！</button></p>
+</div>
+
+<div id="results" class="panel">
+<h1>你的答案与正确位置相差<span id="miles_score">0</span>英里！</h1>
+<p>但是比起其他PRI读者，你的表现如何？</p>
+<p><button id="compare">比较我的答案！</button></p>
+</div>
+
+<div id="endgame" class="panel">
+<h1>这个地图显示其他<span id="players_count">50</span>名读者的答案。</h1>
+<p>你比他们之中的百分之<span id="score">0</span>表现得更好,<span id="rating"></span></p>
+<button id="tweet">推特分享你的成绩</button>
+<button id="facebook">面子书分享你的成绩</button>
+</div>
+
+<div id="fb-root"></div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '658272894309512',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+
+</html>
