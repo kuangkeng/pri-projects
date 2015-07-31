@@ -3,18 +3,20 @@
 <html>
 <head>
 <title>Where's Addis Ababa?</title>
-<meta name="description" content="President Obama is going to visit Addis Ababa, but do you know where it is?"> 
+<meta name="description" content="What if Hiroshima atomic bomb was dropped on my hometown?"> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website" /> 
-<meta property="og:site_name" content="PRI Map Quiz" />
-<meta property="og:description" content="President Obama is visiting Addis Ababa, but do you know where it is?" />
-<meta property="og:title" content="Where's Addis Ababa?" />
+<meta property="og:site_name" content="Hiroshima Generations: The memory passed on" />
+<meta property="og:description" content="What would the damage be if the atomic bomb that hit Hiroshima in 1945 was dropped on your hometown?"/>
+<meta property="og:title" content="What if Hiroshima atomic bomb was dropped on my hometown?" />
 <meta property="og:url" content="http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it"/>
-<meta property="og:image" content="http://admin.pri.org/sites/default/files/map-quiz.png"/>
+<meta property="og:image" content="http://admin.pri.org/sites/default/files/nukeshot.png"/>
 <meta property="fb:app_id" content="658272894309512"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
+<script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
+
 
 <!-- This map quiz code is modified from "Where's Damascus? (Don't Ask Us)" at games.usvsth3m.com/damascus 
 Thanks for the neat and well structured code! -->
@@ -30,26 +32,40 @@ html {  -webkit-text-size-adjust: none; height: 100%; width: 100%; overflow: hid
 body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
 }
-h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; line-height: 6vh; font-weight: bold; color: #D3401E; }
+h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; line-height: 4vh; font-weight: bold; color: #D3401E; }
 #map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: -1; }
 #white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; background-color: white; display:none;}
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 0px ; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 4vh; color: #000000; background-color: rgba(255,255,255,0.6);}
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 0px ; font-size: 14px; font-size: 2vh; line-height: 18px; line-height: 2vh; color: #000000; background-color: rgba(255,255,255,0.6);}
 .panel button { 
   width: 50%; 
   padding: 10px 10px; 
-  font-size: 20px; 
-  font-size: 3vh; 
-  line-height: 20px; 
-  line-height: 3vh; 
+  font-size: 14px; 
+  font-size: 2vh; 
+  line-height: 14px; 
+  line-height: 2vh; 
   margin-top: 0.5em; 
 }
-.panel input { width: 3em; padding: 5px 0px; font-size: 20px; font-size: 3vh; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #000000; }
+.panel input { width: 3em; padding: 5px 0px; font-size: 14px; font-size: 2vh; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #000000; }
 .panel input:invalid { outline: none; }
 #guess { width: 4em; }
 .panel p { padding-bottom: 0.2em; }
 
 p.data { font-size: 12px !important; margin-top: 10px; }
+
+#redbutton, #redbuttondark {
+    width:5%;
+    margin:0 auto;
+}
+
+table {
+    width:100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding:0px 10px;
+}
+
+#indicator {height: 80%;}
 
 @media screen and (min-aspect-ratio: 1/1) {
 
@@ -67,8 +83,6 @@ p.data { font-size: 12px !important; margin-top: 10px; }
 .wait { cursor: wait; }
 
 </style>
-
-<script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
 <script>
 
 var sv;
@@ -172,7 +186,7 @@ function handleClick(latLng) {
 }
 
 function init() {
-  
+  $("#redbuttondark").hide();
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   map.setTilt(45);
   var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-20),
@@ -194,7 +208,10 @@ function init() {
     
   });
   
-  $('#fire').one("click", function () {
+  $('#redbutton').one("click", function () {
+
+    $("#redbutton").hide();
+    $("#redbuttondark").show();
 
     $("#white-canvas").fadeIn(2000, function(){
       $("#white-canvas").fadeOut(2000);
@@ -216,7 +233,7 @@ function init() {
       console.log("circlebounds = " + circlebounds);
 
       //place the nukecirlce image based on circlebounds
-      var nukeOpacity = {opacity:0.5};
+      var nukeOpacity = {opacity:0.7};
       var nukeOverlay = new google.maps.GroundOverlay(
       'http://kuangkeng.github.io/pri-projects/images/nukecircle.png',
       circlebounds, nukeOpacity);
@@ -291,29 +308,50 @@ FB.ui({
 </div>
 
 <div id="instructions" class="panel">
-  <h1>Where's Addis Ababa? (No Googling!)</h1>
-  <p>President Obama is going to visit a city known as the political capital of its continent, but do you know where it is?</p>
-  <p><button id="start">Bring it on!</button></p>
+  <h1>If your hometown was hit by Hiroshima atomic bomb</h1>
+  <p>Have you ever thought about the damage caused by the atomic bomb dropped on Hiroshima on August 6, 1945? What if the same atomic bomb was dropped on your hometown?</p>
+  <p><button id="start">Let's try it</button></p>
 </div>
 
 <div id="you" class="panel">
-<h1>We’ll start out with an easy one: Where do you live?</h1>
-<p>Click on the map to mark your home, then click the button to confirm.</p>
-<p>Or tell us the name of your town and we'll find it for you.</p>
-<p><input type="text" id="jumptocity"> <input type="submit" value="Go" onclick="jumptocitytext(); return false;"></p>
-<p><button id="home_placed" disabled>I live here</button></p>
+  <h1>Where are you from?</h1>
+  <p>Type to find your hometown and click on the map to mark where you want to drop the bomb.</p>
+  <p><input type="text" id="jumptocity"> <input type="submit" value="Find" onclick="jumptocitytext(); return false;"></p>
+  <p><button id="home_placed" disabled>Target marked</button></p>
 </div>
 
 <div id="dropbomb" class="panel">
-<h1>Now drop the bomb</h1>
-<p><button id="fire">FIRE</button></p>
+  <h1>Ready? Now drop the bomb</h1>
+  <div>
+    <img id="redbutton" src="http://admin.pri.org/sites/default/files/red-button.png">
+    <img id="redbuttondark" src="http://admin.pri.org/sites/default/files/red-button-dark.png">
+  </div>
 </div>
 
 <div id="results" class="panel">
-<h1>Something here</h1>
-<p>Description here</p>
-<button id="tweet">Tweet your score</button>
-<button id="facebook">Share on Facebook</button>
+  <h1>The bomb would cause damage within 12 mile radius of ground zero</h1>
+  <div id="details">
+    <table>
+      <tr>
+        <td style="width:25%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator4.png"></td>
+        <td style="width:75%; text-align:left">Within 0.5 mile: 90% of people are killed by fire blast. Pregnant women who survive will experience miscarriage due to radiation.</td> 
+      </tr>
+      <tr>
+        <td style="width:25%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator3.png"></td>
+        <td style="width:75%; text-align:left">Within 1.0 mile: 80% of people are killed by fire blast. Everything up to this distance is completely destroyed by heavy fire from the explosion at ground zero.</td> 
+      </tr>
+      <tr>
+        <td style="width:25%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator2.png"></td>
+        <td style="width:75%; text-align:left">Within 3.0 mile: Buildings up to this distance are heavily destroyed by fire that spread from ground zero.</td> 
+      </tr>
+      <tr>
+        <td style="width:25%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator1.png"></td>
+        <td style="width:75%; text-align:left">Buildings are safe but their glasses might be broken.</td> 
+      </tr>
+    </table>
+  </div>
+  <button id="tweet">Tweet your score</button>
+  <button id="facebook">Share on Facebook</button>
 </div>
 
 <div id="fb-root"></div>
