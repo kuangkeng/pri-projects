@@ -34,7 +34,7 @@ h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; lin
 #map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: -1; }
 #white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; background-color: white; display:none;}
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 0px ; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 4vh; color: #fff; background-color: rgba(0,0,0,0.8);}
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 0px ; font-size: 18px; font-size: 3vh; line-height: 23px; line-height: 4vh; color: #000000; background-color: rgba(255,255,255,0.6);}
 .panel button { 
   width: 50%; 
   padding: 10px 10px; 
@@ -44,7 +44,7 @@ h1 { text-align: center; font-size: 30px; font-size: 6vh; line-height: 30px; lin
   line-height: 3vh; 
   margin-top: 0.5em; 
 }
-.panel input { width: 3em; padding: 5px 0px; font-size: 20px; font-size: 3vh; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #fff; }
+.panel input { width: 3em; padding: 5px 0px; font-size: 20px; font-size: 3vh; margin-top: 0.5em; text-align: right; border: none; background: transparent; outline: none; border-bottom: 1px dotted #eee; color: #000000; }
 .panel input:invalid { outline: none; }
 #guess { width: 4em; }
 .panel p { padding-bottom: 0.2em; }
@@ -117,11 +117,11 @@ var country_code;
 var mapOptions = {
   zoom: startZoom,
   minZoom: 1,
-  maxZoom: 15,
+  maxZoom: 21,
   center: startPosition,
   disableDefaultUI: true,
   zoomControl: true,
-  mapTypeId: google.maps.MapTypeId.TERRAIN
+  mapTypeId: google.maps.MapTypeId.HYBRID
 };
 
 var geocoder = new google.maps.Geocoder();
@@ -174,9 +174,11 @@ function handleClick(latLng) {
 function init() {
   
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  map.setTilt(45);
   var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-20),
                                                  new google.maps.LatLng(65,20));
   map.fitBounds(worldBounds);
+
 
   panel('instructions');
   
@@ -214,14 +216,15 @@ function init() {
       console.log("circlebounds = " + circlebounds);
 
       //place the nukecirlce image based on circlebounds
+      var nukeOpacity = {opacity:0.5};
       var nukeOverlay = new google.maps.GroundOverlay(
       'http://kuangkeng.github.io/pri-projects/images/nukecircle.png',
-      circlebounds);
+      circlebounds, nukeOpacity);
       nukeOverlay.setMap(map); 
       console.log("nukeOverlay = " + nukeOverlay);
   
       map.setCenter(homeMarker.position);
-      map.setZoom(13);
+      map.setZoom(11);
       state = 3;
       
       panel('results');
