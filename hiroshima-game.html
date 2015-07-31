@@ -110,7 +110,6 @@ var rating = [
 "Is that you, Obama? You’re an Addis expert!"
 ];
 
-
 var startPosition = new google.maps.LatLng(20,0);
 var startZoom = 2;
 var country_code;
@@ -178,6 +177,7 @@ function init() {
   var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-20),
                                                  new google.maps.LatLng(65,20));
   map.fitBounds(worldBounds);
+
   panel('instructions');
   
   $('#start').click(function () {
@@ -196,25 +196,30 @@ function init() {
 
     $("#white-canvas").fadeIn(2000, function(){
       $("#white-canvas").fadeOut(2000);
-      console.log(homeMarker.position);
-      var radiusData = [
-        {"radius": 2000, "strokeColor": "#FFFF00", "strokeOpacity": 0.8, "fillColor": "#FFFF66", "fillOpacity": 0.4,},
-        {"radius": 1500, "strokeColor": "#FFA500", "strokeOpacity": 0.8, "fillColor": "#FF6600", "fillOpacity": 0.5,},
-        {"radius": 1000, "strokeColor": "#FF0000", "strokeOpacity": 0.8, "fillColor": "#E60000", "fillOpacity": 0.6,}];
-          
-      for (var unit in radiusData) {
-        var radiusOptions = {
-        strokeColor: radiusData[unit]["strokeColor"],
-        strokeOpacity: radiusData[unit]["strokeOpacity"],
-        strokeWeight: 1,
-        fillColor: radiusData[unit]["fillColor"],
-        fillOpacity: radiusData[unit]["fillOpacity"],
+      console.log("homeMarker = " + homeMarker.position);
+      
+      //constuct a transparent circle to get bounds
+      var radiusOptions = {
+        strokeColor: "#FFFF00",
+        strokeOpacity: 1,
+        strokeWeight: 0,
+        fillColor: "#FFFF00",
+        fillOpacity: 0,
         map: map,
         center: homeMarker.position,
-        radius: radiusData[unit]["radius"],
+        radius: 19312.1, //equals to 12 miles
         };
-        var circle = new google.maps.Circle(radiusOptions); 
-      };  
+      var circle = new google.maps.Circle(radiusOptions);
+      var circlebounds = circle.getBounds();
+      console.log("circlebounds = " + circlebounds);
+
+      //place the nukecirlce image based on circlebounds
+      var nukeOverlay = new google.maps.GroundOverlay(
+      'http://kuangkeng.github.io/pri-projects/images/nukecircle.png',
+      circlebounds);
+      nukeOverlay.setMap(map); 
+      console.log("nukeOverlay = " + nukeOverlay);
+  
       map.setCenter(homeMarker.position);
       map.setZoom(13);
       state = 3;
