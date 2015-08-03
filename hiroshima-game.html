@@ -10,9 +10,9 @@
 <meta property="og:site_name" content="Hiroshima Generations: The memory passed on" />
 <meta property="og:description" content="What would be the damage if the Hiroshima atomic bomb were dropped on your hometown?"/>
 <meta property="og:title" content="What if your hometown were hit by the Hiroshima atomic bomb?" />
-<meta property="og:url" content="http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it"/>
+<meta property="og:url" content="http://www.pri.org/stories/2015-08-03/what-if-your-hometown-were-hit-hiroshima-atomic-bomb"/>
 <meta property="og:image" content="http://admin.pri.org/sites/default/files/nukeshot.png"/>
-<meta property="fb:app_id" content="658272894309512"/>
+<meta property="fb:app_id" content="934801873242745"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
 
@@ -31,17 +31,17 @@ h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; lin
 #map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: -1; }
 #white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; background-color: white; display:none;}
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 10px 10px ; font-size: 14px; font-size: 2vh; line-height: 18px; line-height: 2.5vh; color: #000000; background-color: rgba(255,255,255,0.7);}
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 0px 10px ; font-size: 14px; font-size: 2.5vh; line-height: 20px; line-height: 3vh; color: #000000; background-color: rgba(255,255,255,0.7);}
 .panel button { 
   width: 30%; 
   padding: 10px 10px; 
   font-size: 14px; 
-  font-size: 2vh; 
+  font-size: 3vh; 
   line-height: 14px; 
   line-height: 2.5vh; 
-  margin-top: 0.5em; 
   color: #D3401E;
   font-weight: bold;
+  margin-bottom: 0.2em;
 }
 
 button:disabled {
@@ -49,12 +49,9 @@ button:disabled {
   font-weight: normal;
 }
 
-#searchbox { width: 12em; padding: 5px 0px; font-size: 14px; font-size: 2vh; background: transparent; border: 1px solid #eee; color: #000000; }
+#searchbox { width: 12em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: transparent; border: 1px solid #eee; color: #000000; }
 
 #findbutton { width: 5em; padding: 5px 5px; font-size: 14px; font-size: 2vh; border: none; background: transparent; color: #000000; text-align: left;}
-
-.panel p { padding-bottom: 0.2em; }
-p.data { font-size: 12px !important; margin-top: 10px; }
 
 #redbutton, #redbuttondark {
     width:15%;
@@ -265,7 +262,7 @@ function jumptocitytext() {
 
 function tweet() {
   var tweet_url = 'https://twitter.com/intent/tweet?related=pritheworld&text=';
-  tweet_url += encodeURIComponent("I just dropped the Hiroshima atomic bomb on my hometown. The damage could be felt within 12 mile radius.");
+  tweet_url += encodeURIComponent("I dropped the Hiroshima atomic bomb on my hometown, causing damage within a 12-mile radius.");
   tweet_url += '&url=http://bit.ly/1GHiF5m&via=pri&hashtags=Hiroshima70';
   window.open(tweet_url,'_blank'); 
 }
@@ -273,9 +270,9 @@ function tweet() {
 function facebook() {
 FB.ui({
   method: 'feed',
-  link: 'http://www.pri.org/stories/2015-07-23/obama-visiting-addis-ababa-do-you-know-where-it',
-  picture: 'http://admin.pri.org/sites/default/files/map-quiz.png',
-  name: "What if my hometown were hit by the Hiroshima atomic bomb?",
+  link: 'http://www.pri.org/stories/2015-08-03/what-if-your-hometown-were-hit-hiroshima-atomic-bomb',
+  picture: 'http://admin.pri.org/sites/default/files/nukeshot.png',
+  name: "What if your hometown were hit by the Hiroshima atomic bomb?",
   description: 'Have you ever thought about the damage caused by the atomic bomb dropped on Hiroshima on August 6, 1945? This app allows you to simulate the damage of the atomic bomb attack on Hiroshima 70 years ago on another location, such as your hometown.'
   }, function(response){});
 }
@@ -318,20 +315,20 @@ FB.ui({
   <div id="details">
     <table>
       <tr>
-        <td style="width:15%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator4.png"></td>
-        <td style="width:85%; text-align:left">Within 0.5 mile: 90% of people are killed by fire blast. Pregnant women who survive will experience miscarriage due to radiation.</td> 
+        <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator4.png"></td>
+        <td style="width:90%; text-align:left">Within 0.5 mile: 90% of people are killed by fire blast. Pregnant women who survive will experience miscarriage due to radiation.</td> 
       </tr>
       <tr>
-        <td style="width:15%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator3.png"></td>
-        <td style="width:85%; text-align:left">Within 1 mile: 80% of people are killed by fire blast. Everything up to this distance is completely destroyed by heavy fire from the explosion at ground zero.</td> 
+        <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator3.png"></td>
+        <td style="width:90%; text-align:left">Within 1 mile: 80% of people are killed by fire blast. Everything up to this distance is completely destroyed by heavy fire from the explosion at ground zero.</td> 
       </tr>
       <tr>
-        <td style="width:15%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator2.png"></td>
-        <td style="width:85%; text-align:left">Within 3 mile: Buildings up to this distance are heavily destroyed by fire that spread from ground zero.</td> 
+        <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator2.png"></td>
+        <td style="width:90%; text-align:left">Within 3 mile: Buildings up to this distance are heavily destroyed by fire that spread from ground zero.</td> 
       </tr>
       <tr>
-        <td style="width:15%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator1.png"></td>
-        <td style="width:85%; text-align:left">Within 12 mile: Buildings are safe but their glasses might be broken.</td> 
+        <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator1.png"></td>
+        <td style="width:90%; text-align:left">Within 12 mile: Buildings are safe but their glasses might be broken.</td> 
       </tr>
     </table>
   </div>
@@ -342,21 +339,21 @@ FB.ui({
 <div id="fb-root"></div>
 
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '658272894309512',
-      xfbml      : true,
-      version    : 'v2.4'
-    });
-  };
+    window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '934801873242745',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 </script>
 </body>
 
