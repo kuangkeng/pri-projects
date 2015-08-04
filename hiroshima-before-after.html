@@ -1,17 +1,31 @@
 <html>
+<link href="http://kuangkeng.github.io/pri-projects/juxtapose.css" rel="stylesheet">
+
 <style type="text/css">
-
-#container {
-	height:628px;
-	width:506px;
-	padding: 8px;
-	margin:0 auto;
-}
-
+  .container {
+  padding: 5px;
+  width:100%; 
+  height:auto; 
+  display:block; 
+  max-width:520px;}
+  
+  img
+  {max-width:100%}
 </style>
+
 <body>
-<div id="container">
-<iframe frameborder="0" scrolling="no" class="juxtapose" width="506" height="629" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=cf8c08e4-3ad1-11e5-bafc-0e7075bba956"></iframe>
+<div class="container">
+<div class="juxtapose" data-startingposition="65" data-showlabels="true" data-showcredits="true" data-animate="true" data-mode="horizontal">
+<img src="http://admin.pri.org/sites/default/files/before-atomic-wiki.jpg" data-label="Hiroshima before the atomic bomb attack" data-credit="">
+<img src="http://admin.pri.org/sites/default/files/after-atomic-wiki.jpg" data-label="After" data-credit="">
+</div>
 </div>
 </body>
+
+<script src="http://kuangkeng.github.io/pri-projects/juxtapose.js"></script>
+
 </html>
+
+
+
+
