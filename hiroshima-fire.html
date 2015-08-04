@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<style>
+html, body {
+  height: 100%;
+  width:100%;
+}
+      
+#map-canvas {
+  height: 700px;
+  width:100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display:block;
+}
+      
+#button { 
+  width: 20%; 
+  padding: 10px 10px; 
+  font-size: 14px; 
+  line-height: 14px; 
+  color: #D3401E;
+  font-weight: bold;
+  margin: 10px auto;
+  display:block;
+}
+</style>
+    
+<script>
+var map;
+var startPosition = new google.maps.LatLng(34.399233, 132.455605);
+var startZoom = 14;      
+var mapOptions = {
+  zoom: startZoom,
+  minZoom: 1,
+  maxZoom: 21,
+  center: startPosition,
+  disableDefaultUI: true,
+  zoomControl: true,
+  mapTypeId: google.maps.MapTypeId.HYBRID
+};  
+
+function initialize() {
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  map.setTilt(45);
+
+  $('#button').one("click", function (){
+    var fireBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(34.375433, 132.432719),
+      new google.maps.LatLng(34.422228, 132.486020));
+    var fireOverlay = new google.maps.GroundOverlay(
+      'http://admin.pri.org/sites/default/files/hiroshima-fire.png',
+      fireBounds);
+    fireOverlay.setMap(map);  
+  });
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+    <div><button id="button">See the fire</button></div>
+  </body>
+</html>
