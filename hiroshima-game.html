@@ -223,12 +223,13 @@ function init() {
 
     $.ajax({
       type: 'POST',
-      url: 'https://docs.google.com/forms/d/1EK9BMTb3MPBOb3XqkpF5bVIO8l2fM_YTUMBKZiigxhc/formResponse',
+      url: 'https://docs.google.com/forms/d/1s2Y0qSY3td9VNAcYHmxf-wT3jOVZZ46BBoTr1dD-LdI/formResponse',
       data: 
       { 
-        "entry.1074266109": homeMarker.position.lat(),
-        "entry.1455589030": homeMarker.position.lng(),
-        "entry.2076859263": country_code,
+        "entry.133146608": homeMarker.position.lat(),
+        "entry.1593427688": homeMarker.position.lng(),
+        "entry.277736978": country_code,
+        "entry.361885052": document.referrer,
        }
     });
   });
