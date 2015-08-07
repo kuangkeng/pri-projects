@@ -31,7 +31,7 @@ h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; lin
 #map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: -1; }
 #white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; background-color: white; display:none;}
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 0px 10px ; font-size: 14px; font-size: 2.5vh; line-height: 20px; line-height: 3vh; color: #000000; background-color: rgba(255,255,255,0.7);}
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 0px 10px; font-size: 14px; font-size: 2.5vh; line-height: 20px; line-height: 3vh; color: #000000; background-color: rgba(255,255,255,0.7);}
 .panel button { 
   width: 30%; 
   padding: 10px 10px; 
@@ -47,6 +47,18 @@ h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; lin
 button:disabled {
   color: #696969;
   font-weight: normal;
+}
+
+#credit {
+  position: absolute; bottom:5px; right:5px; font-size:1.5vh; color:#666666;
+}
+
+a {
+    color: #666666;
+}
+
+#referral {
+  padding:5px 0px;
 }
 
 #searchbox { width: 12em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: transparent; border: 1px solid #eee; color: #000000; }
@@ -72,14 +84,15 @@ table {
 @media screen and (min-aspect-ratio: 1/1) {
 
   #results button { width: 30%; }
-
 }
 
 @media (max-width: 500px ) { 
   h1 {font-size: 3vh; line-height: 20px;}
   .panel{font-size: 2vh; line-height: 15px; padding: 5px 10px 5px 10px;}
-  .panel button {font-size: 2.5vh; width:80%;}
+  .panel button {font-size: 2.5vh; width:50%;}
   #indicator {width:50%; height:auto;}
+  #credit {font-size: 1.3vh;}
+  #referral{margin-bottom: 10px;}
 }
 
 .wait { cursor: wait; }
@@ -223,13 +236,13 @@ function init() {
 
     $.ajax({
       type: 'POST',
-      url: 'https://docs.google.com/forms/d/1s2Y0qSY3td9VNAcYHmxf-wT3jOVZZ46BBoTr1dD-LdI/formResponse',
+      url: 'https://docs.google.com/forms/d/19pIzOGUPz_eGRPy03GesDT9frDNbMCxW1L6KqM1JP-M/formResponse',
       data: 
       { 
-        "entry.133146608": homeMarker.position.lat(),
-        "entry.1593427688": homeMarker.position.lng(),
-        "entry.277736978": country_code,
-        "entry.361885052": document.referrer,
+        "entry.662018262": homeMarker.position.lat(),
+        "entry.1496480064": homeMarker.position.lng(),
+        "entry.1249100743": country_code,
+        "entry.1455136260": document.referrer,
        }
     });
   });
@@ -337,6 +350,11 @@ FB.ui({
   </div>
   <button id="tweet">Share on Twitter</button>
   <button id="facebook">Share on Facebook</button>
+  <div id="referral">More <a href="http://bit.ly/1gPKAeT" target="_blank">#Hiroshima70 stories</a> at PRI.org</div>
+</div>
+
+<div id="credit">
+  Created by <a href="https://twitter.com/kuangkeng" target="_blank">@kuangkeng</a><br>at <a href="http://www.pri.org/stories/2015-08-04/what-if-your-hometown-were-hit-hiroshima-atomic-bomb" target="_blank">PRI.org</a>
 </div>
 
 <div id="fb-root"></div>

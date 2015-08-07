@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>What if your hometown were hit by the Hiroshima atomic bomb?</title>
+<meta name="description" content="What if your hometown were hit by the Hiroshima atomic bomb?"> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website" /> 
+<meta property="og:site_name" content="Hiroshima Generations: The memory passed on" />
+<meta property="og:description" content="What would be the damage if the Hiroshima atomic bomb were dropped on your hometown?"/>
+<meta property="og:title" content="What if your hometown were hit by the Hiroshima atomic bomb?" />
+<meta property="og:url" content="http://www.pri.org/stories/2015-08-03/what-if-your-hometown-were-hit-hiroshima-atomic-bomb"/>
+<meta property="og:image" content="http://admin.pri.org/sites/default/files/nukeshot.png"/>
+<meta property="fb:app_id" content="934801873242745"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
+
+<style type="text/css">
+
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
+html {  -webkit-text-size-adjust: none; height: 100%; width: 100%; overflow: hidden; }
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+}
+h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; line-height: 4vh; font-weight: bold; color: #D3401E; }
+#map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: -1; }
+#white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; background-color: white; display:none;}
+
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 0px 10px; font-size: 14px; font-size: 2.5vh; line-height: 20px; line-height: 3vh; color: #000000; background-color: rgba(255,255,255,0.7);}
+.panel button { 
+  width: 30%; 
+  padding: 10px 10px; 
+  font-size: 14px; 
+  font-size: 3vh; 
+  line-height: 14px; 
+  line-height: 2.5vh; 
+  color: #D3401E;
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+
+button:disabled {
+  color: #696969;
+  font-weight: normal;
+}
+
+#credit {
+  position: absolute; bottom:5px; right:5px; font-size:1.5vh; color:#666666;
+}
+
+a {
+    color: #666666;
+}
+
+#referral {
+  padding:5px 0px;
+}
+
+#searchbox { width: 12em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: transparent; border: 1px solid #eee; color: #000000; }
+
+#findbutton { border: 1px solid #C3C3C3; width: 5em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: #EBEBEB; color: #000000; text-align: center;}
+
+#findbutton:hover {background: #F5F5F5;}
+
+#redbutton, #redbuttondark {
+    width:15%;
+    margin:0 auto;
+}
+
+table {
+    width:100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding:0px 10px;
+}
+
+#indicator {height: 50%;}
+
+@media screen and (min-aspect-ratio: 1/1) {
+
+  #results button { width: 30%; }
+}
+
+@media (max-width: 500px ) { 
+  h1 {font-size: 3vh; line-height: 20px;}
+  .panel{font-size: 2vh; line-height: 15px; padding: 5px 10px 5px 10px;}
+  .panel button {font-size: 2.5vh; width:50%;}
+  #indicator {width:50%; height:auto;}
+  #credit {font-size: 1.3vh;}
+  #referral{margin-bottom: 10px;}
+}
+
+.wait { cursor: wait; }
+
+</style>
+
+<script>
+
+/**
+ * Data for the markers consisting of a name, a LatLng and a zIndex for
+ * the order in which these markers should display on top of each
+ * other.
+ */
+var cities = [
+          [38.907192,-77.036871,"Washington, DC"],
+          [37.997907,-76.46273,"Lewisetta, VA"],
+          [38.978445,-76.492183,"Annapolis, MD"],
+          [39.739072,-75.539788,"Wilmington, NC"],
+          [41.893476,-122.355019,"Windmill Point, VA"],
+          [38.935113,-74.906005,"Cape May, NJ"],
+          [38.501501,-75.062959,"Reedy Point, DE"],
+          [39.364283,-74.422927,"Atlantic City, NJ"],
+          [42.373616,-71.109733,"Cambridge, MD"],
+          [25.76168,-80.19179,"Miami, FL"],
+          [39.290385,-76.612189,"Baltimore, MD"],
+          [38.7758,-75.1422,"Lewes, DE"],
+          [24.555059,-81.779987,"Key West, FL"],
+          [40.478162,-74.016266,"Sandy Hook, NJ"],
+          [39.952584,-75.165222,"Philadelphia, PA"],
+          [32.776475,-79.931051,"Charleston, SC"],
+          [36.850769,-76.285873,"Norfolk, VA"],
+          [38.336503,-75.084906,"Ocean City, MD"],
+          [41.186548,-73.195177,"Bridgeport, CT"],
+          [40.819823,-73.735132,"Kings Point, NY"],
+          [37.129189,-75.957047,"Kiptopeke, VA"],
+          [40.660453,-74.118123,"Bergen Point, NY"],
+          [36.580514,-93.670154,"Duck, NC"],
+          [32.083541,-81.099834,"Savannah, GA"],
+          [30.308808,-89.330046,"Bay St Louis, MS"],
+          [30.332184,-81.655651,"Jacksonville, FL"],
+          [34.208504,-77.796371,"Wrightsville Beach, NC"],
+          [41.308274,-72.927883,"New Haven, CT"],
+          [42.360083,-71.05888,"Boston, MA"],
+          [45.523062,-122.676482,"Portland, ME"],
+          [40.411112,-95.516929,"Rockport, TX"],
+          [41.355654,-72.099521,"New London, CT"],
+          [30.669682,-81.462592,"Fernandina Beach, FL"],
+          [33.68906,-78.886694,"Myrtle Beach, SC"],
+          [40.789142,-73.13496,"Long Island, NY"],
+          [40.712784,-74.005941,"New York City, NY"]
+];
+
+var header = [
+     ["header 0"],
+     ["header 1"],
+     ["header 2"],
+     ["header 3"],
+     ["header 4"],
+     ["header 5"],
+     ["header 6"],
+     ["header 7"],
+     ["header 8"],
+     ["header 9"],
+     ["header 10"],
+     ["header 11"],
+     ["header 12"],
+     ["header 13"],
+     ["header 14"],
+     ["header 15"],
+     ["header 16"],
+     ["header 17"],
+     ["header 18"],
+     ["header 19"],
+     ["header 20"],
+     ["header 21"],
+     ["header 22"],
+     ["header 23"],
+     ["header 24"],
+     ["header 25"],
+     ["header 26"],
+     ["header 27"],
+     ["header 28"],
+     ["header 29"],
+     ["header 30"],
+     ["header 31"],
+     ["header 32"],
+     ["header 33"],
+     ["header 34"],
+     ["header 35"],
+];
+
+var para = [
+     ["para 0"],
+     ["para 1"],
+     ["para 2"],
+     ["para 3"],
+     ["para 4"],
+     ["para 5"],
+     ["para 6"],
+     ["para 7"],
+     ["para 8"],
+     ["para 9"],
+     ["para 10"],
+     ["para 11"],
+     ["para 12"],
+     ["para 13"],
+     ["para 14"],
+     ["para 15"],
+     ["para 16"],
+     ["para 17"],
+     ["para 18"],
+     ["para 19"],
+     ["para 20"],
+     ["para 21"],
+     ["para 22"],
+     ["para 23"],
+     ["para 24"],
+     ["para 25"],
+     ["para 26"],
+     ["para 27"],
+     ["para 28"],
+     ["para 29"],
+     ["para 30"],
+     ["para 31"],
+     ["para 32"],
+     ["para 33"],
+     ["para 34"],
+     ["para 35"],
+];
+
+
+var markers = [];
+
+function panel(i) {
+  $('.panel').slideUp(500, function(){
+    $('#header').text(header[i]);
+    $('#para').text(para[i]);
+  });
+  $('.panel').slideDown(500);
+  
+}
+
+function initialize() {
+  var mapOptions = {
+    zoom: 3,
+    center: new google.maps.LatLng(39.906362, -93.694727)
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+      for (var i = 0; i < cities.length; i++) {
+        var city = cities[i];
+        var image = {
+          url: 'http://icons.iconarchive.com/icons/treetog/i/256/Floppy-Small-icon.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          size: new google.maps.Size(20, 32),
+          // The origin for this image is 0,0.
+          origin: new google.maps.Point(0,0),
+          // The anchor for this image is the base of the flagpole at 0,32.
+          anchor: new google.maps.Point(0, 32)
+        };
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+          type: 'poly'
+        };                                      
+        var myLatLng = new google.maps.LatLng(city[0], city[1]);
+        
+        markers[i] = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            icon: image,
+            shape: shape,
+            title: city[2],
+        });
+        (function(marker,i){
+             google.maps.event.addListener(marker, 'click', function(){ 
+             panel(i);
+             }); 
+        }(markers[i],i));
+                            
+      }
+
+  //panel("instructions");
+  //$('#start').click(function () {
+  //  google.maps.event.trigger(markers[2], 'click');
+  //});    
+
+}
+
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+</head>
+
+<body>
+
+<div id="map-canvas">
+</div>
+
+<div id="instructions" class="panel">
+  <h1 id="header"></h1>
+  <p id="para"></p>
+</div>
+
+<div id="fb-root"></div>
+
+<script>
+    window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '934801873242745',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+
+</html>
