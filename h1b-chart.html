@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 600px; 
+  max-width: 937px; 
+  margin: 0 auto; 
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+                }
+        }),  
+
+    $('#container').highcharts({
+        title: {
+            text: "H-1B visa program increasingly dominated by Indian immigrants",
+            margin: 70,
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Top five countries of origin issued "specialty occupation" visas by the US<br>Source: <a href="http://travel.state.gov/content/visas/english/law-and-policy/statistics/non-immigrant-visas.html" target="_blank">US State Department, Bureau of Consular Affairs</a>',
+            floating: true,
+            align: 'center',
+            verticalAlign: 'top',
+            y: 60,
+            style: {
+                color: '#808080',
+                fontSize: '11',
+                margin: '10',
+            }
+        },
+  
+        xAxis: {
+            categories: ["1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013"]
+        },
+        yAxis: {
+            floor: 0,
+            max: 100000,
+            title: {
+                text: 'Number of visas issued',
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            borderWidth: 0,
+            itemMarginTop: 5,
+            itemMarginBottom: 5,
+            itemStyle: {
+                fontSize: '12px',
+                fontWeight: 'normal'
+            },
+            
+        },
+        //exporting: { enabled: false },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [{
+  name: "China",
+  data:[3206,3880,5775,7489,9076,7576,5608,6583,7113,9451,10761,9141,9223,11242,10849,11077,12632], lineWidth: 2, color: "#FFFF00",
+},{
+  name: "UK",
+  data:[6927,6342,6664,7304,8462,6842,6095,6557,5617,4805,4475,3082,2901,3553,3660,3019,2699], lineWidth: 2, color: "#00247D",
+},{
+  name: "India",
+  data:[31684,40246,55062,61530,74078,44012,42245,63737,53579,64887,83464,72517,55886,58664,72438,80630,99705], lineWidth: 3, color: "#138808",
+},{
+  name: "Japan",
+  data:[2929,2878,3338,3781,4096,3772,3836,4214,4073,3795,3516,2610,2505,2430,2054,1907,1698], lineWidth: 2, color:"#C70025",
+},{
+  name: "Philippines",
+  data:[2653,2759,3064,3102,4470,3387,3027,3467,2849,2823,4279,3998,3676,3173,2369,2026,2160], lineWidth: 2, color:"#fdae61",
+}], 
+  plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                }
+            }
+        },
+
+    });
+});
+</script>
