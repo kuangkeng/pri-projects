@@ -13,89 +13,44 @@
 <meta property="og:url" content="http://www.pri.org/stories/2015-08-03/what-if-your-hometown-were-hit-hiroshima-atomic-bomb"/>
 <meta property="og:image" content="http://admin.pri.org/sites/default/files/nukeshot.png"/>
 <meta property="fb:app_id" content="934801873242745"/>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
 
-<style type="text/css">
+<!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
+<style type="text/css">
 
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
  }
 
-html {  -webkit-text-size-adjust: none; height: 100%; width: 100%; overflow: hidden; }
+html {  -webkit-text-size-adjust: none; height: 100%; width: 100%; overflow:hidden;}
 body {
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; max-width: 1180px;
 }
-h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; line-height: 4vh; font-weight: bold; color: #D3401E; }
-#map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: -1; }
-#white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 0; background-color: white; display:none;}
+.leftbox{position:relative; height:700px;}
+h2 { text-align: center; color: #D3401E; margin-bottom:0px !important; margin-top: 10px !important}
+#map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%;}
+.panel {  position: absolute; bottom: 0px; left: 0; margin-bottom: 0px; width: 100%; display: none; padding: 0px 10px; font-size: 14px; line-height: 16px; color: #000000; background-color: rgba(255,255,255,0.7); z-index:1;}
 
-.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 0px 10px; font-size: 14px; font-size: 2.5vh; line-height: 20px; line-height: 3vh; color: #000000; background-color: rgba(255,255,255,0.7);}
-.panel button { 
-  width: 30%; 
-  padding: 10px 10px; 
-  font-size: 14px; 
-  font-size: 3vh; 
-  line-height: 14px; 
-  line-height: 2.5vh; 
-  color: #D3401E;
-  font-weight: bold;
-  margin-bottom: 0.2em;
-}
-
-button:disabled {
-  color: #696969;
-  font-weight: normal;
-}
-
-#credit {
-  position: absolute; bottom:5px; right:5px; font-size:1.5vh; color:#666666;
-}
-
-a {
-    color: #666666;
-}
-
-#referral {
-  padding:5px 0px;
-}
-
-#searchbox { width: 12em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: transparent; border: 1px solid #eee; color: #000000; }
-
-#findbutton { border: 1px solid #C3C3C3; width: 5em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: #EBEBEB; color: #000000; text-align: center;}
-
-#findbutton:hover {background: #F5F5F5;}
-
-#redbutton, #redbuttondark {
-    width:15%;
-    margin:0 auto;
-}
-
-table {
-    width:100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding:0px 10px;
-}
-
-#indicator {height: 50%;}
-
-@media screen and (min-aspect-ratio: 1/1) {
-
-  #results button { width: 30%; }
-}
+table {width:100%;}
+td {padding:0.5%;}
+#col1 {width:25%;}
+#col2 {width:15%; text-align: right}
+#col3 {width:60%; line-height: 20px;}
+button {width:100%; font-size: 14 !important}
+#bar15, #bar30, #bar45 { height:100%; width:50%; background-color: #337ab7;}
+#videobox {width:100%; padding:2% 0;}
+#source {font-size: 10px; color:#888888; text-align: right;}
+#tweet, #facebook {width:80%;}
+#sharecol {width:50%; text-align: center; padding:10px 0px;}
+#para {padding-top: 10px;}
+#rightbox {padding:5px 0px !important;}
+#chartbox {width:100%; height:670px;}
 
 @media (max-width: 500px ) { 
-  h1 {font-size: 3vh; line-height: 20px;}
-  .panel{font-size: 2vh; line-height: 15px; padding: 5px 10px 5px 10px;}
-  .panel button {font-size: 2.5vh; width:50%;}
-  #indicator {width:50%; height:auto;}
-  #credit {font-size: 1.3vh;}
-  #referral{margin-bottom: 10px;}
+  
 }
-
-.wait { cursor: wait; }
 
 </style>
 
@@ -107,129 +62,59 @@ table {
  * other.
  */
 var cities = [
-          [38.907192,-77.036871,"Washington, DC"],
-          [37.997907,-76.46273,"Lewisetta, VA"],
-          [38.978445,-76.492183,"Annapolis, MD"],
-          [39.739072,-75.539788,"Wilmington, NC"],
-          [41.893476,-122.355019,"Windmill Point, VA"],
-          [38.935113,-74.906005,"Cape May, NJ"],
-          [38.501501,-75.062959,"Reedy Point, DE"],
-          [39.364283,-74.422927,"Atlantic City, NJ"],
-          [42.373616,-71.109733,"Cambridge, MD"],
-          [25.76168,-80.19179,"Miami, FL"],
-          [39.290385,-76.612189,"Baltimore, MD"],
-          [38.7758,-75.1422,"Lewes, DE"],
-          [24.555059,-81.779987,"Key West, FL"],
-          [40.478162,-74.016266,"Sandy Hook, NJ"],
-          [39.952584,-75.165222,"Philadelphia, PA"],
-          [32.776475,-79.931051,"Charleston, SC"],
-          [36.850769,-76.285873,"Norfolk, VA"],
-          [38.336503,-75.084906,"Ocean City, MD"],
-          [41.186548,-73.195177,"Bridgeport, CT"],
-          [40.819823,-73.735132,"Kings Point, NY"],
-          [37.129189,-75.957047,"Kiptopeke, VA"],
-          [40.660453,-74.118123,"Bergen Point, NY"],
-          [36.580514,-93.670154,"Duck, NC"],
-          [32.083541,-81.099834,"Savannah, GA"],
-          [30.308808,-89.330046,"Bay St Louis, MS"],
-          [30.332184,-81.655651,"Jacksonville, FL"],
-          [34.208504,-77.796371,"Wrightsville Beach, NC"],
-          [41.308274,-72.927883,"New Haven, CT"],
-          [42.360083,-71.05888,"Boston, MA"],
-          [45.523062,-122.676482,"Portland, ME"],
-          [40.411112,-95.516929,"Rockport, TX"],
-          [41.355654,-72.099521,"New London, CT"],
-          [30.669682,-81.462592,"Fernandina Beach, FL"],
-          [33.68906,-78.886694,"Myrtle Beach, SC"],
-          [40.789142,-73.13496,"Long Island, NY"],
-          [40.712784,-74.005941,"New York City, NY"]
+  [38.907192,-77.036871,"Washington, DC",43,155,388],
+  [37.997907,-76.46273,"Lewisetta, VA",14,88,386],
+  [38.978445,-76.492183,"Annapolis, MD",50,187,368],
+  [39.739072,-75.539788,"Wilmington, NC",44,133,343],
+  [41.893476,-122.355019,"Windmill Point, VA",8,54,304],
+  [38.935113,-74.906005,"Cape May, NJ",41,128,302],
+  [38.501501,-75.062959,"Reedy Point, DE",15,76,257],
+  [39.364283,-74.422927,"Atlantic City, NJ",32,92,244],
+  [42.373616,-71.109733,"Cambridge, MD",10,46,242],
+  [25.76168,-80.19179,"Miami, FL",6,48,237],
+  [39.290385,-76.612189,"Baltimore, MD",17,63,227],
+  [38.7758,-75.1422,"Lewes, DE",28,87,223],
+  [24.555059,-81.779987,"Key West, FL",3,45,212],
+  [40.478162,-74.016266,"Sandy Hook, NJ",33,88,211],
+  [39.952584,-75.165222,"Philadelphia, PA",19,66,206],
+  [32.776475,-79.931051,"Charleston, SC",24,78,187],
+  [36.850769,-76.285873,"Norfolk, VA",9,39,182],
+  [38.336503,-75.084906,"Ocean City, MD",8,30,173],
+  [41.186548,-73.195177,"Bridgeport, CT",22,62,162],
+  [40.819823,-73.735132,"Kings Point, NY",22,57,142],
+  [37.129189,-75.957047,"Kiptopeke, VA",10,36,140],
+  [40.660453,-74.118123,"Bergen Point, NY",14,45,130],
+  [36.580514,-93.670154,"Duck, NC",8,32,126],
+  [32.083541,-81.099834,"Savannah, GA",10,37,113],
+  [30.308808,-89.330046,"Bay St Louis, MS",13,37,110],
+  [30.332184,-81.655651,"Jacksonville, FL",7,25,101],
+  [34.208504,-77.796371,"Wrightsville Beach, NC",8,29,90],
+  [41.308274,-72.927883,"New Haven, CT",7,25,86],
+  [42.360083,-71.05888,"Boston, MA",11,31,72],
+  [45.523062,-122.676482,"Portland, ME",11,30,65],
+  [40.411112,-95.516929,"Rockport, TX",1,3,39],
+  [41.355654,-72.099521,"New London, CT",2,7,37],
+  [30.669682,-81.462592,"Fernandina Beach, FL",2,8,37],
+  [33.68906,-78.886694,"Myrtle Beach, SC",4,15,66],
+  [40.789142,-73.13496,"Long Island, NY",3,10,52],
+  [40.712784,-74.005941,"New York City, NY",5,16,59]
 ];
-
-var header = [
-     ["header 0"],
-     ["header 1"],
-     ["header 2"],
-     ["header 3"],
-     ["header 4"],
-     ["header 5"],
-     ["header 6"],
-     ["header 7"],
-     ["header 8"],
-     ["header 9"],
-     ["header 10"],
-     ["header 11"],
-     ["header 12"],
-     ["header 13"],
-     ["header 14"],
-     ["header 15"],
-     ["header 16"],
-     ["header 17"],
-     ["header 18"],
-     ["header 19"],
-     ["header 20"],
-     ["header 21"],
-     ["header 22"],
-     ["header 23"],
-     ["header 24"],
-     ["header 25"],
-     ["header 26"],
-     ["header 27"],
-     ["header 28"],
-     ["header 29"],
-     ["header 30"],
-     ["header 31"],
-     ["header 32"],
-     ["header 33"],
-     ["header 34"],
-     ["header 35"],
-];
-
-var para = [
-     ["para 0"],
-     ["para 1"],
-     ["para 2"],
-     ["para 3"],
-     ["para 4"],
-     ["para 5"],
-     ["para 6"],
-     ["para 7"],
-     ["para 8"],
-     ["para 9"],
-     ["para 10"],
-     ["para 11"],
-     ["para 12"],
-     ["para 13"],
-     ["para 14"],
-     ["para 15"],
-     ["para 16"],
-     ["para 17"],
-     ["para 18"],
-     ["para 19"],
-     ["para 20"],
-     ["para 21"],
-     ["para 22"],
-     ["para 23"],
-     ["para 24"],
-     ["para 25"],
-     ["para 26"],
-     ["para 27"],
-     ["para 28"],
-     ["para 29"],
-     ["para 30"],
-     ["para 31"],
-     ["para 32"],
-     ["para 33"],
-     ["para 34"],
-     ["para 35"],
-];
-
 
 var markers = [];
 
 function panel(i) {
   $('.panel').slideUp(500, function(){
-    $('#header').text(header[i]);
-    $('#para').text(para[i]);
+    $('#header').text(cities[i][2]);
+    $('#stat15').text(cities[i][3]);
+    $('#stat30').text(cities[i][4]);
+    $('#stat45').text(cities[i][5]);
+    var bar15width = (cities[i][3])/388 *100 + "%";
+    var bar30width = (cities[i][4])/388 *100 + "%";
+    var bar45width = (cities[i][5])/388 *100 + "%";
+    $('#bar15').css({width: bar15width});
+    $('#bar30').css({width: bar30width});
+    $('#bar45').css({width: bar45width});
+    
   });
   $('.panel').slideDown(500);
   
@@ -237,49 +122,126 @@ function panel(i) {
 
 function initialize() {
   var mapOptions = {
-    zoom: 3,
-    center: new google.maps.LatLng(39.906362, -93.694727)
+    zoom: 4,
+    zoomControl: true,
+    zoomControlOptions: {
+    style: google.maps.ZoomControlStyle.SMALL
+  },
+    center: new google.maps.LatLng(29.069796, -96.946680)
   }
   var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
       for (var i = 0; i < cities.length; i++) {
         var city = cities[i];
-        var image = {
-          url: 'http://icons.iconarchive.com/icons/treetog/i/256/Floppy-Small-icon.png',
-          // This marker is 20 pixels wide by 32 pixels tall.
-          size: new google.maps.Size(20, 32),
-          // The origin for this image is 0,0.
-          origin: new google.maps.Point(0,0),
-          // The anchor for this image is the base of the flagpole at 0,32.
-          anchor: new google.maps.Point(0, 32)
-        };
-        var shape = {
-          coords: [1, 1, 1, 20, 18, 20, 18 , 1],
-          type: 'poly'
-        };                                      
+        var image = "http://admin.pri.org/sites/default/files/tidal-icon-blue-small.png";                                     
         var myLatLng = new google.maps.LatLng(city[0], city[1]);
         
         markers[i] = new google.maps.Marker({
             position: myLatLng,
             map: map,
             icon: image,
-            shape: shape,
             title: city[2],
         });
         (function(marker,i){
              google.maps.event.addListener(marker, 'click', function(){ 
+             map.setZoom(7);
+             var centerLatLng = new google.maps.LatLng((cities[i][0]-1), cities[i][1]);
+             //map.setCenter(centerLatLng); 
+             map.panTo(centerLatLng);
              panel(i);
              }); 
         }(markers[i],i));
                             
       }
 
+  $('#chartbox').highcharts({
+            chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Tidal flooding today, in 2030 and in 2045',
+            margin: 5,
+            style: {
+                fontSize: '11',
+            }     
+        },
+        xAxis: {
+            categories: ["Washington, DC","Lewisetta, VA","Annapolis, MD","Wilmington, NC","Windmill Point, VA","Cape May, NJ","Reedy Point, DE","Atlantic City, NJ","Cambridge, MD","Miami, FL","Baltimore, MD","Lewes, DE","Key West, FL","Sandy Hook, NJ","Philadelphia, PA","Charleston, SC","Norfolk, VA","Ocean City, MD","Bridgeport, CT","Kings Point, NY","Kiptopeke, VA","Bergen Point, NY","Duck, NC","Savannah, GA","Bay St Louis, MS","Jacksonville, FL","Wrightsville Beach, NC","New Haven, CT","Boston, MA","Portland, ME","Rockport, TX","New London, CT","Fernandina Beach, FL","Myrtle Beach, SC","Long Island, NY","New York City, NY"],
+            title: {
+              enabled: false,
+            },
+            labels: {
+                style: {
+                    fontSize: '9',
+                }
+            }            
+        },
+        yAxis: {
+            min: 0,
+            max:400,
+            title: {
+                text: 'Events per year',
+                align: 'high',
+                style: {
+                    fontSize: '10',
+                }
+            },
+            labels: {
+                style: {
+                    fontSize: '8',
+                }
+            }  
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: false
+                }
+            },
+            series: {
+                groupPadding: 0.1
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'bottom',
+            x: -10,
+            y: -50,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: false,
+            itemStyle: {
+                fontSize: '8',
+            }      
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Today',
+            data: [43,14,50,44,8,41,15,32,10,6,17,28,3,33,19,24,9,8,22,22,10,14,8,10,13,7,8,7,11,11,1,2,2,4,3,5]
+        }, {
+            name: '2030',
+            data: [155,88,187,133,54,128,76,92,46,48,63,87,45,88,66,78,39,30,62,57,36,45,32,37,37,25,29,25,31,30,3,7,8,15,10,16]
+        }, {
+            name: '2045',
+            data: [388,386,368,343,304,302,257,244,242,237,227,223,212,211,206,187,182,173,162,142,140,130,126,113,110,101,90,86,72,65,39,37,37,66,52,59]
+        }]
+    });
   //panel("instructions");
   //$('#start').click(function () {
   //  google.maps.event.trigger(markers[2], 'click');
   //});    
 
+
+//to trigger event on amchart, check this: http://jsfiddle.net/amcharts2/cV8GG/ and this: http://docs.amcharts.com/javascriptcharts/GraphDataItem
+// to interact with amchart from external element: http://stackoverflow.com/questions/20410358/how-do-i-interface-with-amcharts-from-outside-chart-creation-functions
 }
+
+//Highchart goes here:
+
 
 
 
@@ -290,14 +252,73 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </head>
 
 <body>
-
-<div id="map-canvas">
+<div class="container-fluid">  
+  <div class="row">
+    <div class="col-sm-9 col-xs-12 leftbox">
+      <div id="map-canvas"></div>
+      <div class="panel">
+        <div class="col-sm-7 col-xs-12">
+          <div id="videobox">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rog8ou-ZepE"></iframe>  
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5 col-xs-12">
+          <div id="controlbox">
+            <table>
+              <tr>
+                <td colspan="3"><h2 id="header"></h2></td>
+              </tr>
+              <tr>
+                 <td colspan="3"><h4>Number of tidal floods per year</h4></td>
+              </tr>
+              <tr>
+                <td id="col1"><button type="button" class="btn btn-primary">Today</button></td>
+                <td id="col2"><span id="stat15"></span></td>
+                <td id="col3"><div id="bar15">&nbsp;</div></td>
+              </tr>
+              <tr>
+                <td id="col1"><button type="button" class="btn btn-primary">2030</button></td>
+                <td id="col2"><span id="stat30"></span></td>
+                <td id="col3"><div id="bar30">&nbsp;</div></td>
+              </tr>
+              <tr>
+                <td id="col1"><button type="button" class="btn btn-primary">2045</button></td>
+                <td id="col2"><span id="stat45"></span></td>
+                <td id="col3"><div id="bar45">&nbsp;</div></td>
+              </tr>
+              <tr>
+                 <td colspan="3" id="para">Click a button to play the video at the tempo based on the frequency of flooding.</td>
+              </tr>
+              <tr>
+                 <td colspan="3" id="para">More stories on <a href="http://www.pri.org/stories/2015-08-10/womans-job-make-boston-stronger" target="_blank">Resilient Cities.</a></td>
+              </tr>
+              
+            </table>
+            <table> 
+              <tr>
+                 <td id="sharecol"><button class="btn btn-info btn-sm" id="tweet">Share on Twitter</button></td>
+                 <td id="sharecol"><button class="btn btn-info btn-sm" id="facebook">Share on Facebook</button></td>
+              </tr> 
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-12" id="rightbox">
+      <div id="chartbox"></div>
+      <div id="source">Data source: <a href="http://www.ucsusa.org/global_warming/impacts/effects-of-tidal-flooding-and-sea-level-rise-east-coast-gulf-of-mexico#.VckTQxZVhBc" target="_blank">Union of Concerned Scientists</a></div>
+    </div>
+  </div>
 </div>
 
-<div id="instructions" class="panel">
-  <h1 id="header"></h1>
-  <p id="para"></p>
-</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="http://code.highcharts.com/highcharts.js"></script>
 
 <div id="fb-root"></div>
 
