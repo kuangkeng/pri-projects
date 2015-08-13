@@ -59,6 +59,7 @@ button {width:100%; font-size: 14 !important}
 h3 {color:#D3401E; text-align: center; }
 #placeholder {font-size: 18px; margin:10px; padding:20px; background-color: rgba(0,0,0,0.7); color:#ffffff; line-height: 24px;border-radius: 5px;} 
 #youtubeurl {border-radius: 5px;}
+.btn:focus,.btn:active {outline: none;}
 
 
 @media (max-width: 768px ) { 
@@ -177,8 +178,8 @@ function panel(i) {
 
 //code for twitter here: everytime a new panel slides up, tweet_url will be refreshed to solve the issue of making twitter message dynamically change without reloading the page
   var tweet_url = '<a href="https://twitter.com/intent/tweet?related=pritheworld&text=';
-  tweet_url += encodeURIComponent("The no. of floods in " +  cities[i][2] + " may go up by " + Math.round(cities[i][5]/cities[i][3]) + "x in 30 yrs. Let Vanilla Ice break it down for you");
-  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri" target="_blank"><img id="tweet" class="img-responsive center.block col-xs-12" src="http://admin.pri.org/sites/default/files/twitter-button.png"></a>';
+  tweet_url += encodeURIComponent("Floods in " +  cities[i][2] + " may increase " + Math.round(cities[i][5]/cities[i][3]) + "x in 30 yrs. Vanilla Ice breaks it down");
+  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri&hashtags=floodfloodbaby" target="_blank"><img id="tweet" class="img-responsive center.block col-xs-12" src="http://admin.pri.org/sites/default/files/twitter-button.png"></a>';
   $("#sharecol1").html(tweet_url);
   $('#facebook').click(function (event) {facebook();});
 }
