@@ -70,7 +70,8 @@ h3 {color:#D3401E; text-align: center; }
   h4{font-size: 12px !important; margin:5px 0px;}
   #para {padding-top: 5px;}
   #col2 {font-size: 12px;}
-  #sharecol1, #sharecol2 {padding-bottom: 0px;}
+  #sharecol1, #sharecol2 {padding-bottom: 0px; max-height: 50px}
+  #placeholder {font-size: 14px !important; line-height: 18px !important; margin:0px; padding:10px;}
 }
 
 </style>
@@ -154,23 +155,30 @@ function panel(i) {
     $('#bar15').css({width: bar15width});
     $('#bar30').css({width: bar30width});
     $('#bar45').css({width: bar45width});
+    $('.btn').removeClass('btn-danger').addClass('btn-primary');
     $("#youtubeurl").html('<div id="placeholder">Click the button "Today", "2030" or "2045" and watch "Ice Ice Baby" music video played at a speed based on the frequency of flooding at that time. The video speed is normal when there&#39;s zero flood. Every increase of 10 floods shortens the video by one second.</div>'); 
   });
   $('.panel').slideDown(500);
   $("#btn-today").click(function(){
+    $('.btn').removeClass('btn-danger').addClass('btn-primary');
+    $(this).addClass('btn-danger').removeClass('btn-primary');
     $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][6] +'?autoplay=1&showinfo=0"></iframe></div>');  
   }); 
   $("#btn-2030").click(function(){
+    $('.btn').removeClass('btn-danger').addClass('btn-primary');
+    $(this).addClass('btn-danger').removeClass('btn-primary');
     $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][7] +'?autoplay=1&showinfo=0"></iframe></div>');  
   }); 
   $("#btn-2045").click(function() {
+    $('.btn').removeClass('btn-danger').addClass('btn-primary');
+    $(this).addClass('btn-danger').removeClass('btn-primary');
     $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][8] +'?autoplay=1&showinfo=0"></iframe></div>');
   });
 
 //code for twitter here: everytime a new panel slides up, tweet_url will be refreshed to solve the issue of making twitter message dynamically change without reloading the page
   var tweet_url = '<a href="https://twitter.com/intent/tweet?related=pritheworld&text=';
   tweet_url += encodeURIComponent("The no. of floods in " +  cities[i][2] + " may go up by " + Math.round(cities[i][5]/cities[i][3]) + "x in 30 yrs. Let Vanilla Ice break it down for you");
-  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri" target="_blank"><img id="tweet" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></a>';
+  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri" target="_blank"><img id="tweet" class="img-responsive center.block col-xs-12" src="http://admin.pri.org/sites/default/files/twitter-button.png"></a>';
   $("#sharecol1").html(tweet_url);
   $('#facebook').click(function (event) {facebook();});
 }
@@ -419,8 +427,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
             </table>
             <table> 
               <tr>
-                 <td id="sharecol1"><img id="tweet" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></td>
-                 <td id="sharecol2"><img id="facebook" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/facebook-button.png"></td>
+                 <td id="sharecol1"><img id="tweet" class="img-responsive center.block col-xs-12" src="http://admin.pri.org/sites/default/files/twitter-button.png"></td>
+                 <td id="sharecol2"><img id="facebook" class="img-responsive center.block col-xs-12" src="http://admin.pri.org/sites/default/files/facebook-button.png"></td>
                  <td id="logocol"> </td>
               </tr> 
             </table>
