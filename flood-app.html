@@ -47,7 +47,7 @@ button {width:100%; font-size: 14 !important}
 #videobox {width:100%; padding:2% 0;}
 #source {font-size: 9px; color:#888888; text-align: left; padding:0px 10px;}
 #tweet, #facebook {margin:0px 5px;}
-#sharecol {width:45%; text-align: center; padding:10px 5px;}
+#sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
 #para {padding-top: 10px;}
 #rightbox {padding:5px 0px !important; height: 700px;}
 #chartbox {width:100%; height:650px;}
@@ -70,7 +70,7 @@ h3 {color:#D3401E; text-align: center; }
   h4{font-size: 12px !important; margin:5px 0px;}
   #para {padding-top: 5px;}
   #col2 {font-size: 12px;}
-  #sharecol {padding-bottom: 0px;}
+  #sharecol1, #sharecol2 {padding-bottom: 0px;}
 }
 
 </style>
@@ -167,17 +167,12 @@ function panel(i) {
     $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][8] +'?autoplay=1&showinfo=0"></iframe></div>');
   });
 
-  function tweet() {
-  var tweet_url = 'https://twitter.com/intent/tweet?related=pritheworld&text=';
-  tweet_url += encodeURIComponent("The number of floods in " +  cities[i][2] + " will increase by " + Math.round(cities[i][5]/cities[i][3]) + " times in 30 years. Visualize the difference with Ice Ice Baby.");
-  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri';
-  window.open(tweet_url,'_blank'); 
-  };
-
-  $('#tweet').click(function (event) {tweet(); });  
-  
+//code for twitter here: everytime a new panel slides up, tweet_url will be refreshed to solve the issue of making twitter message dynamically change without reloading the page
+  var tweet_url = '<a href="https://twitter.com/intent/tweet?related=pritheworld&text=';
+  tweet_url += encodeURIComponent("The no. of floods in " +  cities[i][2] + " may go up by " + Math.round(cities[i][5]/cities[i][3]) + "x in 30 yrs. Let Vanilla Ice break it down for you");
+  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri" target="_blank"><img id="tweet" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></a>';
+  $("#sharecol1").html(tweet_url);
   $('#facebook').click(function (event) {facebook();});
-
 }
 
 function initialize() {
@@ -389,7 +384,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <div class="col-sm-7 col-xs-12">
           <div id="videobox">
             <div id="youtubeurl">
-              <div id="placeholder">Click the button "Today", "2030" or "2045" and watch "Ice Ice Baby" music video played at a speed based on the frequency of flooding at that time. The video speed is normal when there's zero flood. Every increase of 10 floods speeds up the video by one second.</div>
+              <div id="placeholder">Click the button "Today", "2030" or "2045" and watch the "Ice Ice Baby" music video played at a speed based on the frequency of flooding at that time. The video speed is normal when there's no flood in a year. Every increase of 10 floods speeds up the video by one second.</div>
             </div>
           </div>
         </div>
@@ -424,8 +419,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
             </table>
             <table> 
               <tr>
-                 <td id="sharecol"><img id="tweet" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></td>
-                 <td id="sharecol"><img id="facebook" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/facebook-button.png"></td>
+                 <td id="sharecol1"><img id="tweet" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></td>
+                 <td id="sharecol2"><img id="facebook" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/facebook-button.png"></td>
                  <td id="logocol"> </td>
               </tr> 
             </table>
@@ -454,6 +449,23 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <script src="http://kuangkeng.github.io/pri-projects/customEvents.js"></script>
 
 <div id="fb-root"></div>
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
 
 <script>
     window.fbAsyncInit = function() {
