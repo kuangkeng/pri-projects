@@ -164,8 +164,20 @@ function panel(i) {
     $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][7] +'?autoplay=1&showinfo=0"></iframe></div>');  
   }); 
   $("#btn-2045").click(function() {
-    $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][8] +'?autoplay=1&showinfo=0"></iframe></div>');                                                                                                    
+    $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][8] +'?autoplay=1&showinfo=0"></iframe></div>');
   });
+
+  function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?related=pritheworld&text=';
+  tweet_url += encodeURIComponent("The number of floods in " +  cities[i][2] + " will increase by " + Math.round(cities[i][5]/cities[i][3]) + " times in 30 years. Visualize the difference with Ice Ice Baby.");
+  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri';
+  window.open(tweet_url,'_blank'); 
+  };
+
+  $('#tweet').click(function (event) {tweet(); });  
+  
+  $('#facebook').click(function (event) {facebook();});
+
 }
 
 function initialize() {
@@ -350,6 +362,18 @@ function selectCity (i) {
   google.maps.event.trigger(markers[i], 'click');
 } 
 
+
+
+function facebook() {
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2015-08-03/what-if-your-hometown-were-hit-hiroshima-atomic-bomb',
+  picture: 'http://media.giphy.com/media/EXsNWlbGQOwjS/giphy.gif',
+  name: "What if your hometown were hit by the Hiroshima atomic bomb?",
+  description: 'Have you ever thought about the damage caused by the atomic bomb dropped on Hiroshima on August 6, 1945? This app allows you to simulate the damage of the atomic bomb attack on Hiroshima 70 years ago on another location, such as your hometown. #Hiroshima70'
+  }, function(response){});
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
@@ -365,7 +389,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <div class="col-sm-7 col-xs-12">
           <div id="videobox">
             <div id="youtubeurl">
-              <div id="placeholder">Click the button "Today", "2030" or "2045" and watch "Ice Ice Baby" music video played at a speed based on the frequency of flooding at that time. The video speed is normal when there's zero flood. Every increase of 10 floods shortens the video by one second.</div>
+              <div id="placeholder">Click the button "Today", "2030" or "2045" and watch "Ice Ice Baby" music video played at a speed based on the frequency of flooding at that time. The video speed is normal when there's zero flood. Every increase of 10 floods speeds up the video by one second.</div>
             </div>
           </div>
         </div>
@@ -400,7 +424,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
             </table>
             <table> 
               <tr>
-                 <td id="sharecol"><img id="facebook" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></td>
+                 <td id="sharecol"><img id="tweet" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></td>
                  <td id="sharecol"><img id="facebook" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/facebook-button.png"></td>
                  <td id="logocol"> </td>
               </tr> 
