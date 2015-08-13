@@ -46,8 +46,8 @@ button {width:100%; font-size: 14 !important}
 #bar45 {background-color: #0000FF;}
 #videobox {width:100%; padding:2% 0;}
 #source {font-size: 9px; color:#888888; text-align: left; padding:0px 10px;}
-#tweet, #facebook {width:80%;}
-#sharecol {width:45%; text-align: center; padding:10px 0px;}
+#tweet, #facebook {margin:0px 5px;}
+#sharecol {width:45%; text-align: center; padding:10px 5px;}
 #para {padding-top: 10px;}
 #rightbox {padding:5px 0px !important; height: 700px;}
 #chartbox {width:100%; height:650px;}
@@ -57,6 +57,9 @@ button {width:100%; font-size: 14 !important}
 #controlcol {padding-right: 0px !important}
 #prilogo {position: absolute; right:5px; bottom:0px; height: 30px; width: 30px; z-index: 1}
 h3 {color:#D3401E; text-align: center; }
+#placeholder {font-size: 18px; margin:10px; padding:20px; background-color: rgba(0,0,0,0.7); color:#ffffff; line-height: 24px;border-radius: 5px;} 
+#youtubeurl {border-radius: 5px;}
+
 
 @media (max-width: 768px ) { 
   #chartbox {display:none;}
@@ -79,36 +82,62 @@ h3 {color:#D3401E; text-align: center; }
  * the order in which these markers should display on top of each
  * other.
  */
+
+var clips = [
+  {"flood":387,"url":"X2K9j0kkgDQ"},
+  {"flood":368,"url":"kFxvQilIowU"},
+  {"flood":343,"url":"NxPb4xyDQvs"},
+  {"flood":302,"url":"LEWTL1UmlBQ"},
+  {"flood":240,"url":"PPAE0B0X9g8"},
+  {"flood":225,"url":"OG1c0Liq60Y"},
+  {"flood":209,"url":"vXZPDwYR-X8"},
+  {"flood":185,"url":"8RWsx1l4DVM"},
+  {"flood":173,"url":"GlrcjpNB7ms"},
+  {"flood":159,"url":"_qo2M5Wz_yI"},
+  {"flood":131,"url":"BTe6UgerTSo"},
+  {"flood":112,"url":"w_XtVOtGOWE"},
+  {"flood":101,"url":"VZARA8DCzuQ"},
+  {"flood":89,"url":"WDrg8oXJlIY"},
+  {"flood":78,"url":"1sivaz8oVrU"},
+  {"flood":72,"url":"ZbRC-7w9BUQ"},
+  {"flood":63,"url":"BakXHWZtIxQ"},
+  {"flood":50,"url":"hEX73pI3-ng"},
+  {"flood":41,"url":"u3qEmUmyXp8"},
+  {"flood":28,"url":"WRCPliBfeK4"},
+  {"flood":15,"url":"Ix_izAZg8GI"},
+  {"flood":5,"url":"ZcODj7OayuM"},
+];
+
 var cities = [
-  [38.907192,-77.036871,"Washington, DC",43,155,388],
-  [37.997907,-76.46273,"Lewisetta, VA",14,88,386],
-  [38.978445,-76.492183,"Annapolis, MD",50,187,368],
-  [34.2233,-77.9122,"Wilmington, NC",44,133,343],
-  [38.935113,-74.906005,"Cape May, NJ",41,128,302],
-  [39.364283,-74.422927,"Atlantic City, NJ",32,92,244],
-  [42.373616,-71.109733,"Cambridge, MD",10,46,242],
-  [25.76168,-80.19179,"Miami, FL*",6,48,237],
-  [39.290385,-76.612189,"Baltimore, MD",17,63,227],
-  [38.7158,-75.0831,"Rehoboth Beach, DE*",28,87,223],
-  [24.555059,-81.779987,"Key West, FL",3,45,212],
-  [40.478162,-74.016266,"Sandy Hook, NJ",33,88,211],
-  [39.952584,-75.165222,"Philadelphia, PA",19,66,206],
-  [32.776475,-79.931051,"Charleston, SC",24,78,187],
-  [36.850769,-76.285873,"Norfolk, VA*",9,39,182],
-  [38.336503,-75.084906,"Ocean City, MD",8,30,173],
-  [41.186548,-73.195177,"Bridgeport, CT",22,62,162],
-  [32.083541,-81.099834,"Savannah, GA*",10,37,113],
-  [30.4017,-89.0761,"Gulfport, MS*",13,37,110],
-  [30.332184,-81.655651,"Jacksonville, FL*",7,25,101],
-  [41.308274,-72.927883,"New Haven, CT",7,25,86],
-  [42.360083,-71.05888,"Boston, MA",11,31,72],
-  [33.68906,-78.886694,"Myrtle Beach, SC",4,15,66],
-  [43.6667,-70.2667,"Portland, ME",11,30,65],
-  [40.712784,-74.005941,"New York City, NY",5,16,59],
-  [40.789142,-73.13496,"Long Island, NY",3,10,52],
-  [28.0311,-97.0500,"Rockport, TX",1,3,39],
-  [41.355654,-72.099521,"New London, CT",2,7,37],
-  [30.669682,-81.462592,"Fernandina Beach, FL",2,8,37]
+  [38.907192,-77.036871,"Washington, DC",43,155,388,clips[18]["url"],clips[9]["url"],clips[0]["url"]],
+  [37.997907,-76.46273,"Lewisetta, VA",14,88,386,clips[20]["url"],clips[13]["url"],clips[0]["url"]],
+  [38.978445,-76.492183,"Annapolis, MD",50,187,368,clips[17]["url"],clips[7]["url"],clips[1]["url"]],
+  [34.2233,-77.9122,"Wilmington, NC",44,133,343,clips[18]["url"],clips[10]["url"],clips[2]["url"]],
+  [38.935113,-74.906005,"Cape May, NJ",41,128,302,clips[18]["url"],clips[10]["url"],clips[3]["url"]],
+  [39.364283,-74.422927,"Atlantic City, NJ",32,92,244,clips[19]["url"],clips[13]["url"],clips[4]["url"]],
+  [42.373616,-71.109733,"Cambridge, MD",10,46,242,clips[20]["url"],clips[17]["url"],clips[4]["url"]],
+  [25.76168,-80.19179,"Miami, FL*",6,48,237,clips[21]["url"],clips[17]["url"],clips[4]["url"]],
+  [39.290385,-76.612189,"Baltimore, MD",17,63,227,clips[20]["url"],clips[16]["url"],clips[5]["url"]],
+  [38.7158,-75.0831,"Rehoboth Beach, DE*",28,87,223,clips[19]["url"],clips[13]["url"],clips[5]["url"]],
+  [24.555059,-81.779987,"Key West, FL",3,45,212,clips[21]["url"],clips[18]["url"],clips[6]["url"]],
+  [40.478162,-74.016266,"Sandy Hook, NJ",33,88,211,clips[19]["url"],clips[13]["url"],clips[6]["url"]],
+  [39.952584,-75.165222,"Philadelphia, PA",19,66,206,clips[20]["url"],clips[16]["url"],clips[6]["url"]],
+  [32.776475,-79.931051,"Charleston, SC",24,78,187,clips[19]["url"],clips[14]["url"],clips[7]["url"]],
+  [36.850769,-76.285873,"Norfolk, VA*",9,39,182,clips[21]["url"],clips[18]["url"],clips[7]["url"]],
+  [38.336503,-75.084906,"Ocean City, MD",8,30,173,clips[21]["url"],clips[19]["url"],clips[8]["url"]],
+  [41.186548,-73.195177,"Bridgeport, CT",22,62,162,clips[19]["url"],clips[16]["url"],clips[9]["url"]],
+  [32.083541,-81.099834,"Savannah, GA*",10,37,113,clips[20]["url"],clips[18]["url"],clips[11]["url"]],
+  [30.4017,-89.0761,"Gulfport, MS*",13,37,110,clips[20]["url"],clips[18]["url"],clips[11]["url"]],
+  [30.332184,-81.655651,"Jacksonville, FL*",7,25,101,clips[21]["url"],clips[19]["url"],clips[12]["url"]],
+  [41.308274,-72.927883,"New Haven, CT",7,25,86,clips[21]["url"],clips[19]["url"],clips[13]["url"]],
+  [42.360083,-71.05888,"Boston, MA",11,31,72,clips[20]["url"],clips[19]["url"],clips[15]["url"]],
+  [33.68906,-78.886694,"Myrtle Beach, SC",4,15,66,clips[21]["url"],clips[20]["url"],clips[16]["url"]],
+  [43.6667,-70.2667,"Portland, ME",11,30,65,clips[20]["url"],clips[19]["url"],clips[16]["url"]],
+  [40.712784,-74.005941,"New York City, NY",5,16,59,clips[21]["url"],clips[20]["url"],clips[16]["url"]],
+  [40.789142,-73.13496,"Long Island, NY",3,10,52,clips[21]["url"],clips[20]["url"],clips[17]["url"]],
+  [28.0311,-97.0500,"Rockport, TX",1,3,39,clips[21]["url"],clips[21]["url"],clips[18]["url"]],
+  [41.355654,-72.099521,"New London, CT",2,7,37,clips[21]["url"],clips[21]["url"],clips[18]["url"]],
+  [30.669682,-81.462592,"Fernandina Beach, FL",2,8,37,clips[21]["url"],clips[21]["url"],clips[18]["url"]]
 ];
 
 var markers = [];
@@ -125,9 +154,18 @@ function panel(i) {
     $('#bar15').css({width: bar15width});
     $('#bar30').css({width: bar30width});
     $('#bar45').css({width: bar45width});
-    
+    $("#youtubeurl").html('<div id="placeholder">Click the button "Today", "2030" or "2045" and watch "Ice Ice Baby" music video played at a speed based on the frequency of flooding at that time. The video speed is normal when there&#39;s zero flood. Every increase of 10 floods shortens the video by one second.</div>'); 
   });
-  $('.panel').slideDown(500);  
+  $('.panel').slideDown(500);
+  $("#btn-today").click(function(){
+    $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][6] +'?autoplay=1&showinfo=0"></iframe></div>');  
+  }); 
+  $("#btn-2030").click(function(){
+    $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][7] +'?autoplay=1&showinfo=0"></iframe></div>');  
+  }); 
+  $("#btn-2045").click(function() {
+    $("#youtubeurl").html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="youtubeurl" src="https://www.youtube.com/embed/'+ cities[i][8] +'?autoplay=1&showinfo=0"></iframe></div>');                                                                                                    
+  });
 }
 
 function initialize() {
@@ -326,8 +364,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <div class="panel">
         <div class="col-sm-7 col-xs-12">
           <div id="videobox">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rog8ou-ZepE"></iframe>  
+            <div id="youtubeurl">
+              <div id="placeholder">Click the button "Today", "2030" or "2045" and watch "Ice Ice Baby" music video played at a speed based on the frequency of flooding at that time. The video speed is normal when there's zero flood. Every increase of 10 floods shortens the video by one second.</div>
             </div>
           </div>
         </div>
@@ -341,22 +379,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
                  <td colspan="3"><h4>Number of tidal floods per year</h4></td>
               </tr>
               <tr>
-                <td id="col1"><button type="button" class="btn btn-primary">Today</button></td>
+                <td id="col1"><button type="button" class="btn btn-primary" id="btn-today">Today</button></td>
                 <td id="col2"><span id="stat15"></span></td>
                 <td id="col3"><div id="bar15">&nbsp;</div></td>
               </tr>
               <tr>
-                <td id="col1"><button type="button" class="btn btn-primary">2030</button></td>
+                <td id="col1"><button type="button" class="btn btn-primary" id="btn-2030">2030</button></td>
                 <td id="col2"><span id="stat30"></span></td>
                 <td id="col3"><div id="bar30">&nbsp;</div></td>
               </tr>
               <tr>
-                <td id="col1"><button type="button" class="btn btn-primary">2045</button></td>
+                <td id="col1"><button type="button" class="btn btn-primary" id="btn-2045">2045</button></td>
                 <td id="col2"><span id="stat45"></span></td>
                 <td id="col3"><div id="bar45">&nbsp;</div></td>
-              </tr>
-              <tr>
-                 <td colspan="3" id="para">Click a button to play the video at the tempo based on the frequency of flooding.</td>
               </tr>
               <tr>
                  <td colspan="3" id="para">More stories on <a href="http://www.pri.org/stories/2015-08-10/womans-job-make-boston-stronger" target="_blank">Resilient Cities.</a></td>
@@ -365,8 +400,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
             </table>
             <table> 
               <tr>
-                 <td id="sharecol"><button class="btn btn-info btn-sm" id="tweet">Share on Twitter</button></td>
-                 <td id="sharecol"><button class="btn btn-info btn-sm" id="facebook">Share on Facebook</button></td>
+                 <td id="sharecol"><img id="facebook" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/twitter-button.png"></td>
+                 <td id="sharecol"><img id="facebook" class="img-responsive center.block" src="http://admin.pri.org/sites/default/files/facebook-button.png"></td>
                  <td id="logocol"> </td>
               </tr> 
             </table>
