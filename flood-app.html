@@ -2,16 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Listen to the Song of Flood</title>
-<meta name="description" content="Let's feel the rising sea levels through... a song"> 
+<title>How many floods will these American cities have in 2030, 2045?</title>
+<meta name="description" content="Fast-forwarding Vanilla Ice's hit rap single 'Ice Ice Baby' might be the most effective way to comprehend how rising sea level will steeply increase the number of tidal floods in cities along America's East and Gulf Coasts."> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website" /> 
-<meta property="og:site_name" content="Listen to the Song of Flood" />
-<meta property="og:description" content="Let's feel the rising sea levels through... a song"/>
-<meta property="og:title" content="Listen to the Song of Flood" />
+<meta property="og:site_name" content="How many floods will these American cities have in 2030, 2045?" />
+<meta property="og:description" content="Fast-forwarding Vanilla Ice's hit rap single "Ice Ice Baby" might be the most effective way to comprehend how rising sea level will steeply increase the number of tidal floods in cities along America's East and Gulf Coasts."/>
+<meta property="og:title" content="How many floods will these American cities have in 2030, 2045?" />
 <meta property="og:url" content="http://www.pri.org/stories/2015-08-13/let-vanilla-ice-break-down-sea-level-rise-you"/>
-<meta property="og:image" content="http://admin.pri.org/sites/default/files/PRI_logo_square-red.png"/>
+<meta property="og:image" content="http://cdn1.pri.org/sites/default/files/styles/original_image/public/flood-florida.jpg"/>
 <meta property="fb:app_id" content="421744364677664"/>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
 
@@ -50,7 +50,7 @@ button {width:100%; font-size: 14 !important}
 #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
 #para {padding-top: 10px;}
 #rightbox {padding:5px 0px !important; height: 700px;border: solid 1px #D3D3D3; position:relative;}
-#chartbox {width:100%; height:610px;}
+#chartbox {width:99%; height:610px;}
 #select {font-size: 9px;}
 #select:hover {font-weight: bold; color: #0000FF;}
 #logocol {width:10%;}
@@ -118,7 +118,7 @@ var cities = [
   [34.2233,-77.9122,"Wilmington, NC",44,133,343,clips[18]["url"],clips[10]["url"],clips[2]["url"]],
   [38.935113,-74.906005,"Cape May, NJ",41,128,302,clips[18]["url"],clips[10]["url"],clips[3]["url"]],
   [39.364283,-74.422927,"Atlantic City, NJ",32,92,244,clips[19]["url"],clips[13]["url"],clips[4]["url"]],
-  [42.373616,-71.109733,"Cambridge, MD",10,46,242,clips[20]["url"],clips[17]["url"],clips[4]["url"]],
+  [38.5664,-76.0769,"Cambridge, MD",10,46,242,clips[20]["url"],clips[17]["url"],clips[4]["url"]],
   [25.76168,-80.19179,"Miami, FL*",6,48,237,clips[21]["url"],clips[17]["url"],clips[4]["url"]],
   [39.290385,-76.612189,"Baltimore, MD",17,63,227,clips[20]["url"],clips[16]["url"],clips[5]["url"]],
   [38.7158,-75.0831,"Rehoboth Beach, DE*",28,87,223,clips[19]["url"],clips[13]["url"],clips[5]["url"]],
@@ -180,12 +180,33 @@ function panel(i) {
 //code for twitter here: everytime a new panel slides up, tweet_url will be refreshed to solve the issue of making twitter message dynamically change without reloading the page
   var tweet_url = '<a href="https://twitter.com/intent/tweet?related=pritheworld&text=';
   tweet_url += encodeURIComponent("Floods in " +  cities[i][2] + " may increase " + Math.round(cities[i][5]/cities[i][3]) + "x in 30 yrs. Vanilla Ice breaks it down");
-  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri&hashtags=floodfloodbaby" target="_blank"><img id="tweet" class="img-responsive center.block col-xs-12" src="http://admin.pri.org/sites/default/files/twitter-button.png"></a>';
+  tweet_url += '&url=http://bit.ly/1hCpq3W&via=pri&hashtags=futureflood" target="_blank"><img id="tweet" class="img-responsive center.block col-xs-12" src="http://admin.pri.org/sites/default/files/twitter-button.png"></a>';
   $("#sharecol1").html(tweet_url);
   $('#facebook').click(function (event) {facebook();});
 }
 
 function initialize() {
+
+//get IP address with Ipify
+  $(function() {
+      $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+      function(json) {
+        console.log(json.ip);
+        $.ajax({
+          type: 'POST',
+          url: 'https://docs.google.com/forms/d/1hCO-Jj6y9wvrBsbS7-VhRGMXpGa4Q1wCieQBehuEPfY/formResponse',
+          data: 
+          { 
+            "entry.1328667250": json.ip,
+            "entry.898882087": document.referrer,
+           }
+        }); 
+      }
+     );
+  });
+
+  
+
   var mapOptions = {
     zoom: 5,
     zoomControl: true,
@@ -358,9 +379,10 @@ function initialize() {
             color: "#0000FF"
         }]
     });
+
+//send referrer and IP address to google form
+
   
-//to trigger event on amchart, check this: http://jsfiddle.net/amcharts2/cV8GG/ and this: http://docs.amcharts.com/javascriptcharts/GraphDataItem
-// to interact with amchart from external element: http://stackoverflow.com/questions/20410358/how-do-i-interface-with-amcharts-from-outside-chart-creation-functions
 }
 
 function selectCity (i) {
@@ -368,14 +390,13 @@ function selectCity (i) {
 } 
 
 
-
 function facebook() {
 FB.ui({
   method: 'feed',
   link: 'http://www.pri.org/stories/2015-08-13/let-vanilla-ice-break-down-sea-level-rise-you',
-  picture: 'http://media.giphy.com/media/EXsNWlbGQOwjS/giphy.gif',
-  name: "What if your hometown were hit by the Hiroshima atomic bomb?",
-  description: 'Have you ever thought about the damage caused by the atomic bomb dropped on Hiroshima on August 6, 1945? This app allows you to simulate the damage of the atomic bomb attack on Hiroshima 70 years ago on another location, such as your hometown. #Hiroshima70'
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/flood-florida.jpg',
+  name: "How many floods will these American cities have in 2030, 2045?",
+  description: "Fast-forwarding Vanilla Ice's hit rap single 'Ice Ice Baby' might be the most effective way to comprehend how rising sea level will steeply increase the number of tidal floods in cities along America's East and Gulf Coasts. Find out how these 29 communities are projected to fare."
   }, function(response){});
 }
 
