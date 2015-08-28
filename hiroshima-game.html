@@ -1,5 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+
+
+<!DOCTYPE html>
+<html>
 <head>
 <title>What if your hometown were hit by the Hiroshima atomic bomb?</title>
 <meta name="description" content="What if your hometown were hit by the Hiroshima atomic bomb?"> 
@@ -13,7 +15,7 @@
 <meta property="og:image" content="http://admin.pri.org/sites/default/files/nukeshot.png"/>
 <meta property="fb:app_id" content="934801873242745"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.20&libraries=geometry,visualization&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
 
 <style type="text/css">
 
@@ -27,7 +29,7 @@ body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
 }
 h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; line-height: 4vh; font-weight: bold; color: #D3401E; }
-#map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100% }
+#map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; }
 #white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 1; background-color: white; display:none;}
 
 .panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 0px 10px; font-size: 14px; font-size: 2.5vh; line-height: 20px; line-height: 3vh; color: #000000; background-color: rgba(255,255,255,0.7); z-index: 1;}
@@ -103,7 +105,12 @@ var sv;
 var map;
 var state = 0;
 
-var homeCircle = "http://admin.pri.org/sites/default/files/tidal-icon-blue-small.png";
+var homeCircle = {
+  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  scale: 3,
+  strokeColor: "#ff7f00",
+  strokeWeight: 3
+};
 
 var homeMarker = new google.maps.Marker({icon: homeCircle});
 var startPosition = new google.maps.LatLng(20,0);
