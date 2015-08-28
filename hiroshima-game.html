@@ -13,7 +13,7 @@
 <meta property="og:image" content="http://admin.pri.org/sites/default/files/nukeshot.png"/>
 <meta property="fb:app_id" content="934801873242745"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.18&libraries=geometry,visualization&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry,visualization&sensor=false"></script>
 
 <style type="text/css">
 
@@ -103,14 +103,7 @@ var sv;
 var map;
 var state = 0;
 
-var homeCircle = {
-  path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-    fillColor: 'yellow',
-    fillOpacity: 0.8,
-    scale: 1,
-    strokeColor: 'gold',
-    strokeWeight: 14
-};
+var homeCircle = "http://admin.pri.org/sites/default/files/tidal-icon-blue-small.png";
 
 var homeMarker = new google.maps.Marker({icon: homeCircle});
 var startPosition = new google.maps.LatLng(20,0);
