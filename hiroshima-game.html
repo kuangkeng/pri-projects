@@ -115,7 +115,6 @@ var mapOptions = {
   minZoom: 1,
   maxZoom: 21,
   center: startPosition,
-  disableDefaultUI: true,
   zoomControl: true,
   mapTypeId: google.maps.MapTypeId.HYBRID
 };
@@ -170,7 +169,7 @@ function handleClick(latLng) {
 function init() {
   $("#redbuttondark").hide();
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  map.setTilt(45);
+  
   var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-20),
                                                  new google.maps.LatLng(65,20));
   map.fitBounds(worldBounds);
