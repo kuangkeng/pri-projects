@@ -1,0 +1,124 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 530px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Percentage of Foreign Prisoners in OECD Countries',
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.prisonstudies.org/about-wpb" target="_blank">Institute for Criminal Policy Research</a>',
+            useHTML: true,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },
+        xAxis: {
+            categories: [
+                "Switzerland",
+                "Luxembourg",
+                "Greece",
+                "Israel",
+                "Austria",
+                "Belgium",
+                "Estonia",
+                "Norway",
+                "Italy",
+                "Sweden",
+                "Spain",
+                "Denmark",
+                "Germany",
+                "Netherlands",
+                "France",
+                "Australia",
+                "Portugal",
+                "Iceland",
+                "Finland",
+                "Ireland",
+                "UK: England & Wales",
+                "Slovenia",
+                "Czech Republic",
+                "Japan",
+                "USA",
+                "Hungary",
+                "Chile",
+                "South Korea",
+                "New Zealand",
+                "Slovakia",
+                "Turkey",
+                "Mexico",
+                "Poland",
+            ],
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '12',
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of Total Prison Population',
+                margin: 10
+            },
+            ceiling: 100,
+            floor: 0,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:.1f}%</b>'
+        },
+        series: [{
+            data: [73,72.3,60.4,52,50.9,42.9,37.4,35.2,33,30.7,29.1,27.9,27.1,23.2,21.7,19.7,17.3,15.8,15.3,13.5,12.8,10.9,7.9,5.8,{y:5.5, color: 'red'},3.9,3.4,2.3,2.1,1.8,1.8,0.9,0.7],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:.1f}', // one decimal
+                y: -5, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>

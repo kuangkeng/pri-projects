@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://admin.pri.org/sites/default/files/nukeshot.png"/>
 <meta property="fb:app_id" content="934801873242745"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.12&libraries=geometry,visualization&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.20&libraries=geometry,visualization&sensor=false"></script>
 
 <style type="text/css">
 
@@ -237,13 +237,13 @@ function init() {
 
     $.ajax({
       type: 'POST',
-      url: 'https://docs.google.com/forms/d/1LuEBK4cZcc6HuMgjtcp3iMvDBzMFxesfAwsYdooegok/formResponse',
+      url: 'https://docs.google.com/forms/d/17Vh5O81bxciqpQH7cJN9xc8DaWfIxuonPA1TPhVlQrU/formResponse',
       data: 
       { 
-        "entry.1528855925": homeMarker.position.lat(),
-        "entry.804927876": homeMarker.position.lng(),
-        "entry.542656369": country_code,
-        "entry.547749403": document.referrer,
+        "entry.1116206904": homeMarker.position.lat(),
+        "entry.1160078349": homeMarker.position.lng(),
+        "entry.1030596158": country_code,
+        "entry.1605355897": document.referrer,
        }
     });
   });
