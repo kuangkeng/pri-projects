@@ -49,7 +49,7 @@ img
 
 .front
 {
-  background-image:url("http://cdn1.pri.org/sites/default/files/styles/original_image/public/malaysia-transgender-women-darken.jpg?itok=Dbx_A0gV");
+  background-image:url("http://cdn1.pri.org/sites/default/files/styles/original_image/public/malaysia-women-half-face-darken.jpg?itok=ULhtuV1X");
   background-repeat:no-repeat;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -63,8 +63,8 @@ img
 
 #front-text
   {
-  margin: 35% 0% 5% 0;
-  font-size: 30px;
+  margin: 0% 25% 10% 0;
+  font-size: 27px;
   }
 
 #front-tag
@@ -100,8 +100,8 @@ img
   
 #front-text
   {
-  margin: 35% 0% 5% 0;
-  font-size: 20px;
+  margin: 10% 20% 10% 0;
+  font-size: 18px;
   }
 
 #front-tag
@@ -136,7 +136,7 @@ img
 <div id="box_wrapper">
 <div id="box01">
   <div class="front">
-      <div id="front-text">'The Malaysian government jailed transgender women for 'posing as women'.'</div>
+      <div id="front-text">'OECD Development Center: Malaysian women's status in the family is the second worst in Southeast Asia.'</div>
       <div id="front-tag">#WhatObamaShouldKnow</div>
     <div style="cursor:pointer" id="front-flip">Flip to act ></div>
   </div> 
@@ -152,19 +152,19 @@ img
 <!--script starts here-->
 <script>
 $("#box01").flip({
-  trigger: 'click'
+  trigger: 'hover'
 });
   
 function tweet() {
   var tweet_url = 'https://twitter.com/intent/tweet?text=';
-  tweet_url += encodeURIComponent("Malaysian govt led by @NajibRazak jailed transgender women for 'posing as women' #WhatObamaShouldKnow @BarackObama");
+  tweet_url += encodeURIComponent("Malaysian women's status in the family is the 2nd worst in SEA #WhatObamaShouldKnow @BarackObama @NajibRazak");
   tweet_url += '&url=http://bit.ly/1KMseYs';
   window.open(tweet_url,'_blank'); 
 }
   
 $('#back-button').click(function (event) {
   tweet();
-  var record = "5";
+  var record = "3";
     $.ajax({
       type: 'POST',
       url: 'https://docs.google.com/forms/d/1v0LZBZiAnHlZh6EmIaJCmFHKFkSLU_W4iWoYaX93OoU/formResponse',

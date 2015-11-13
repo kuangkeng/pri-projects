@@ -138,12 +138,12 @@ img
   <div class="front">
       <div id="front-text">'A UN report reveals that women in Malaysia are forced into prostitution and domestic servitude.'</div>
       <div id="front-tag">#WhatObamaShouldKnow</div>
-    <div id="front-flip">Flip to act ></div>
+    <div style="cursor:pointer" id="front-flip">Flip to act ></div>
   </div> 
   <div class="back">
     <div id="back-title">TAKE ACTION NOW</div>
     <div id="back-text">Tweet this fact to Obama and Malaysian Prime Minister Najib Razak</div>
-    <div id="back-button"><img style="cursor:pointer"src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/twitter-button.png?itok=q4BVpgjJ"></div>
+    <div id="back-button"><img style="cursor:pointer" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/twitter-button.png?itok=q4BVpgjJ"></div>
     <div></div>
   </div> 
 </div>
@@ -152,8 +152,7 @@ img
 <!--script starts here-->
 <script>
 $("#box01").flip({
-  trigger: 'hover',
-  axis: 'y'
+  trigger: 'click'
 });
   
 function tweet() {
