@@ -1,0 +1,177 @@
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://kuangkeng.github.io/weibo-censorship/jquery.flip.min.js"></script>
+
+<!--CSS starts here-->  
+<style>
+body {
+  width: 100%;
+  margin:0px auto;
+  font-family: "TradeGothicLT-BoldCondTwenty","HelveticaNeue-CondensedBold","Franklin Gothic Medium",sans-serif;
+  line-height: 1.2;
+      }
+
+#back-title{
+  text-align: center;
+  margin:30px 0px 5px 0px;
+  font-size: 30px;
+}
+
+#back-text{ 
+  text-align: center;
+  margin:15px 0px 20px 0px;
+  font-size:30px;
+}
+
+#back-button
+  {
+  text-align: center;
+  height: 60px;
+  }
+
+img
+  {
+  height: 100%;
+  }  
+
+#box_wrapper{
+  margin:0px auto;
+  width: 100%;
+}
+
+#box01
+{
+  margin:5px;
+  display: inline-block;
+  position: relative;
+  width: 400px;
+  height:320px;
+}
+
+.front
+{
+  background-image:url("http://cdn1.pri.org/sites/default/files/styles/original_image/public/malaysia-women-migrant.jpg?itok=1ozfQ6Kd");
+  background-repeat:no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-position:center;
+  padding:15px;
+  color: white;
+  position: relative;
+}
+
+#front-text
+  {
+  margin: 0 35% 15% 0;
+  font-size: 26px;
+  }
+
+#front-tag
+  {
+  margin: 0 30% 0 0;
+  font-size: 20px;
+  }
+
+#front-flip
+  {
+  font-size: 20px;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  }
+  
+.back
+{
+  color:black;
+  padding:15px;
+  background-color: #fae596;
+}
+  
+@media (max-width: 500px ) {
+  #box01
+{
+  margin:5px;
+  display: inline-block;
+  position: relative;
+  width: 280px;
+  height:224px;
+}
+  
+#front-text
+  {
+  margin: 0 35% 15% 0;
+  font-size: 20px;
+  }
+
+#front-tag
+  {
+  font-size: 15px;
+  }
+
+#front-flip
+  {
+  font-size: 15px;
+  }
+  
+#back-title{
+  margin:10px 0px 5px 0px;
+  font-size: 25px;
+}
+
+#back-text{ 
+  margin:15px 0px 20px 0px;
+  font-size:22px;
+}
+
+#back-button
+  {
+  height: 40px;
+  }
+  
+</style>
+
+<!--HTML starts here-->
+<body>
+<div id="box_wrapper">
+<div id="box01">
+  <div class="front">
+      <div id="front-text">'A UN report reveals that women in Malaysia are forced into prostitution and domestic servitude.'</div>
+      <div id="front-tag">#WhatObamaShouldKnow</div>
+    <div id="front-flip">Flip to act ></div>
+  </div> 
+  <div class="back">
+    <div id="back-title">TAKE ACTION NOW</div>
+    <div id="back-text">Tweet this fact to Obama and Malaysian Prime Minister Najib Razak</div>
+    <div id="back-button"><img style="cursor:pointer"src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/twitter-button.png?itok=q4BVpgjJ"></div>
+    <div></div>
+  </div> 
+</div>
+</body>
+
+<!--script starts here-->
+<script>
+$("#box01").flip({
+  trigger: 'hover'
+});
+  
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("UN: women in Malaysia are forced into prostitution & domestic servitude #WhatObamaShouldKnow @BarackObama @NajibRazak");
+  tweet_url += '&url=http://bit.ly/1KMseYs';
+  window.open(tweet_url,'_blank'); 
+}
+  
+$('#back-button').click(function (event) {
+  tweet();
+  var record = "6";
+    $.ajax({
+      type: 'POST',
+      url: 'https://docs.google.com/forms/d/1v0LZBZiAnHlZh6EmIaJCmFHKFkSLU_W4iWoYaX93OoU/formResponse',
+      data: 
+      { 
+        "entry.1861196181": record,
+       }
+    });  
+});  
+</script>
