@@ -49,7 +49,7 @@ img
 
 .front
 {
-  background-image:url("http://cdn1.pri.org/sites/default/files/styles/original_image/public/malaysia-women-migrant.jpg?itok=1ozfQ6Kd");
+  background-image:url("http://cdn1.pri.org/sites/default/files/styles/original_image/public/malaysia-transgender-women-darken.jpg?itok=Dbx_A0gV");
   background-repeat:no-repeat;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -63,8 +63,8 @@ img
 
 #front-text
   {
-  margin: 0 35% 15% 0;
-  font-size: 26px;
+  margin: 35% 0% 5% 0;
+  font-size: 30px;
   }
 
 #front-tag
@@ -136,7 +136,7 @@ img
 <div id="box_wrapper">
 <div id="box01">
   <div class="front">
-      <div id="front-text">'A UN report reveals that women in Malaysia are forced into prostitution and domestic servitude.'</div>
+      <div id="front-text">'The Malaysian government jailed transgender women for 'posing as women'.'</div>
       <div id="front-tag">#WhatObamaShouldKnow</div>
     <div id="front-flip">Flip to act ></div>
   </div> 
@@ -152,20 +152,19 @@ img
 <!--script starts here-->
 <script>
 $("#box01").flip({
-  trigger: 'hover';
-  axis: 'y';
+  trigger: 'hover'
 });
   
 function tweet() {
   var tweet_url = 'https://twitter.com/intent/tweet?text=';
-  tweet_url += encodeURIComponent("UN: women in Malaysia are forced into prostitution & domestic servitude #WhatObamaShouldKnow @BarackObama @NajibRazak");
+  tweet_url += encodeURIComponent("Malaysian govt led by @NajibRazak jailed transgender women for 'posing as women' #WhatObamaShouldKnow @BarackObama");
   tweet_url += '&url=http://bit.ly/1KMseYs';
   window.open(tweet_url,'_blank'); 
 }
   
 $('#back-button').click(function (event) {
   tweet();
-  var record = "6";
+  var record = "5";
     $.ajax({
       type: 'POST',
       url: 'https://docs.google.com/forms/d/1v0LZBZiAnHlZh6EmIaJCmFHKFkSLU_W4iWoYaX93OoU/formResponse',
