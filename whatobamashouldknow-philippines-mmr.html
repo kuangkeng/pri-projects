@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 530px; 
+  width=100%; 
+  max-width: 850px; 
+  margin: 0 auto;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),  
+
+    $('#container').highcharts({
+        chart: {
+            type: 'line',
+            spacingBottom: 70,
+            //to show a tooltip by default
+            renderTo: 'container', 
+            events: {
+            load: function() {
+                this.tooltip.refresh(this.series[0].data[5]);
+                              }
+            }
+        },
+        title: {
+            text: "Trends in Maternal Mortality Rate (MMR) in Southeast Asia 1990-2015",
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="http://apps.who.int/iris/bitstream/10665/194254/1/9789241565141_eng.pdf">World Health Organization</a><br>Numbers are estimates that enable accurate and standardized comparison among countries.',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: 20,
+            
+            style: {
+                color: '#808080',
+                fontSize: '11',  
+            },
+        },
+        xAxis: {
+            categories: ["1990","1995","2000","2005","2010","2015"]
+        },
+        yAxis: {
+            title: {
+                text: 'Maternal deaths in every 1,000 women',
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            itemWidth: 100,
+            itemMarginBottom: 3,
+            itemStyle: {
+                fontSize: '12px',
+                fontWeight: 'normal'
+            }, 
+        },
+        
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng' },
+        
+        series: [
+          {name: "Philippines", data: [152,122,124,127,129,114], lineWidth: 3, color: "#e31a1c",},
+          {name: "Brunei", data: [35,33,31,30,27,23], lineWidth: 0.5, color: "#a6cee3",},
+          {name: "Cambodia", data: [1020,730,484,315,202,161], lineWidth: 0.5, color: "#1f78b4",},
+          {name: "Indonesia", data: [446,326,265,212,165,126], lineWidth: 0.5, color: "#b2df8a",},
+          {name: "Laos", data: [905,695,546,418,294,197], lineWidth: 0.5, color: "#33a02c",},
+          {name: "Malaysia", data: [79,68,58,52,48,40], lineWidth: 0.5, color: "#fb9a99",},
+          {name: "Myanmar", data: [453,376,308,248,205,178], lineWidth: 0.5, color: "#fdbf6f",},
+          {name: "Singapore", data: [12,13,18,16,11,10], lineWidth: 0.5, color: "#ff7f00",},
+          {name: "Thailand", data: [40,23,25,26,23,20], lineWidth: 0.5, color: "#cab2d6",},
+          {name: "Timor-Leste", data: [1080,897,694,506,317,215], lineWidth: 0.5, color: "#6a3d9a",},
+          {name: "Vietnam", data: [139,107,81,61,58,54], lineWidth: 0.5, color: "#FFFF00",}
+        ], 
+    });
+});
+</script>

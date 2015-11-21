@@ -20,7 +20,7 @@ body {
 #back-text{ 
   text-align: center;
   margin:15px 0px 20px 0px;
-  font-size:30px;
+  font-size:32px;
 }
 
 #back-button
@@ -50,7 +50,7 @@ img
 
 .front
 {
-  background-image:url("http://cdn1.pri.org/sites/default/files/styles/original_image/public/malaysia-women-migrant.jpg?itok=1ozfQ6Kd");
+  background-image:url("http://cdn1.pri.org/sites/default/files/styles/original_image/public/phillipines-women-maternal.jpg");
   background-repeat:no-repeat;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -64,8 +64,8 @@ img
 
 #front-text
   {
-  margin: 0 35% 15% 0;
-  font-size: 26px;
+  margin: 0% 0% 30% 0;
+  font-size: 27px;
   }
 
 #front-tag
@@ -101,8 +101,8 @@ img
   
 #front-text
   {
-  margin: 0 35% 15% 0;
-  font-size: 20px;
+  margin: 0% 0% 30% 0;
+  font-size: 17px;
   }
 
 #front-tag
@@ -137,13 +137,13 @@ img
 <div id="box_wrapper">
 <div id="box01">
   <div class="front">
-      <div id="front-text">A UN report revealed that women in Malaysia are forced into prostitution and domestic servitude.</div>
+      <div id="front-text">The Philippines is expected to miss its Millennium Development Goal to reduce maternal mortality ratio to 52 by 2015.</div>
       <div id="front-tag">#WhatObamaShouldKnow</div>
     <div style="cursor:pointer" id="front-flip">Flip to act ></div>
   </div> 
   <div class="back">
     <div id="back-title">TAKE ACTION NOW</div>
-    <div id="back-text">Tweet this fact to Obama and Malaysian Prime Minister Najib Razak</div>
+    <div id="back-text">Tweet this fact to Obama and Philippine President Benigno Aquino</div>
     <div id="back-button"><img style="cursor:pointer" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/twitter-button.png?itok=q4BVpgjJ"></div>
     <div></div>
   </div> 
@@ -158,14 +158,14 @@ $("#box01").flip({
   
 function tweet() {
   var tweet_url = 'https://twitter.com/intent/tweet?text=';
-  tweet_url += encodeURIComponent("@UN: Women in Malaysia forced into prostitution, domestic servitude #WhatObamaShouldKnow @BarackObama @NajibRazak");
-  tweet_url += '&url=http://bit.ly/1KMseYs';
+  tweet_url += encodeURIComponent("Philippines is expected to miss #MDGs goals to reduce maternal death #WhatObamaShouldKnow @BarackObama @noynoyaquino");
+  tweet_url += '&url=http://bit.ly/1OT5hoM';
   window.open(tweet_url,'_blank'); 
 }
   
 $('#back-button').click(function (event) {
   tweet();
-  var record = "6";
+  var record = "p-m";
     $.ajax({
       type: 'POST',
       url: 'https://docs.google.com/forms/d/1v0LZBZiAnHlZh6EmIaJCmFHKFkSLU_W4iWoYaX93OoU/formResponse',

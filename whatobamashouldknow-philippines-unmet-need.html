@@ -1,0 +1,121 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 530px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: ','
+        }
+    }),
+  
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            marginBottom: 100,
+            renderTo: 'container', 
+            events: {
+            load: function() {
+                this.tooltip.refresh(this.series[0].data[2]);
+                  }
+            }
+        },
+        title: {
+            text: 'Unmet Need for Family Planning in Southeast Asia (latest data)',
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.un.org/en/development/desa/population/publications/dataset/contraception/wcu2015.shtml">United Nations</a><br><i>Data of each country was collected in the year shown on the label.</i>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },
+        xAxis: {
+            categories: [
+                "Timor-Leste (2010)",
+                "Laos (2012)",
+                "Philippines (2013)",
+                "Cambodia (2014)",
+                "Indonesia (2012)",
+                "Thailand (2012)",
+                "Vietnam (2014)"
+            ],
+            labels: {
+                rotation: false,
+                style: {
+                    fontSize: '12',
+                },
+                distance: -10,
+                staggerLines: 1
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of married women with an unmet need',
+                margin: 10
+            },
+            labels: {
+                format: '{value}%'
+            },
+            floor: 0,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b>%',
+            headerFormat: '<style="font-size: 12">{point.key}<br>',  
+        },
+        series: [{
+            data: [31.5,19.9,17.5,12.5,11.4,6.9,6.1],
+            color: "#d3401e",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'center',
+                format: '{point.y}%',
+                y: -2, // 10 pixels down from the top 
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>

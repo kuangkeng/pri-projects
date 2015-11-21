@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/heatmap.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 530px; 
+  width=100%; 
+  max-width: 850px; 
+  margin: 0 auto;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Wanted, Unwanted and Mistimed Births in Philippines 2009-2013 '
+        },
+        subtitle: {
+            text: 'Source: <a href="https://dhsprogram.com/pubs/pdf/FR294/FR294.pdf">Philippines NDHS 2013</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage} %', 
+                }
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        series: [{
+            data: [{
+                name: 'Wanted',
+                y: 72,
+                color: "#4099ff"
+            }, {
+                name: 'Mistimed',
+                y: 17,
+                color: "#ffff00",
+            }, {
+                name: 'Unwanted',
+                y: 11,
+                sliced: true,
+                selected: true,
+                color: "#d4301e"
+            }]
+        }]
+    });
+});
+</script>

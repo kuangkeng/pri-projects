@@ -1,0 +1,122 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 530px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: ','
+        }
+    }),
+  
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            marginBottom: 170,
+            renderTo: 'container', 
+            events: {
+            load: function() {
+                this.tooltip.refresh(this.series[0].data[1]);
+                  }
+            }
+        },
+        title: {
+            text: 'Contraceptive Prevalence in Southeast Asia (latest data)',
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.un.org/en/development/desa/population/publications/dataset/contraception/wcu2015.shtml">United Nations</a><br><i>Contraceptive prevalence is the percentage of women who are currently using, or whose sexual partner is currently using, at least one method of contraception, regardless of the method used.<br>Data of each country was collected in the year shown on the label.</i>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -90,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },
+        xAxis: {
+            categories: [
+                "Timor-Leste (2010)",
+                "Philippines (2013)",
+                "Cambodia (2014)",
+                "Laos (2012)",
+                "Myanmar (2010)",
+                "Vietnam (2014)",
+                "Indonesia (2012)",
+                "Thailand (2009)"
+            ],
+            labels: {
+                rotation: false,
+                style: {
+                    fontSize: '12',
+                },
+                distance: -10,
+                staggerLines: 1
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of women using contraception method',
+                margin: 10
+            },
+            labels: {
+                format: '{value}%'
+            },
+            floor: 0,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b>%',
+            headerFormat: '<style="font-size: 12">{point.key}<br>',  
+        },
+        series: [{
+            data: [20.6,36.9,38.8,42.1,45.7,56.9,57.9,77.5],
+            color: "#d3401e",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'center',
+                format: '{point.y}%',
+                y: -2, // 10 pixels down from the top 
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>

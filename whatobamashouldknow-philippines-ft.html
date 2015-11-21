@@ -1,0 +1,115 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 530px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: ','
+        }
+    }),
+  
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            marginBottom: 100,
+        },
+        title: {
+            text: 'Philippines Fertility Rate 2013',
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="https://dhsprogram.com/pubs/pdf/FR294/FR294.pdf">Philippines NDHS 2013</a><br><i>Wealthiest and poorest categories represent the top and bottom wealth quintiles, respectively.</i>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -30,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },
+        xAxis: {
+            categories: [
+                "Average",
+                "Poorest",
+                "Wealthiest",
+            ],
+            labels: {
+                rotation: false,
+                style: {
+                    fontSize: '12',
+                },
+                distance: -10,
+                staggerLines: 1
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Fertility Rate',
+                margin: 10
+            },
+            labels: {
+                format: '{value}'
+            },
+            floor: 0,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        legend: {
+            align: 'left',
+            verticalAlign: 'top',
+            x: 50,
+            y: 40,
+            floating: true,
+        },
+        plotOptions: {
+          series: {
+            dataLabels: {
+              enabled: true,
+              rotation: 0,
+              color: '#FFFFFF',
+              align: 'center',
+              format: '{point.y}',
+              y: -2, // 10 pixels down from the top 
+              style: {
+                  fontSize: '12px',
+              }
+            }   
+          }
+        },
+        series: [
+            {name: "Ideal", data: [2.2,3.5,2.5], color: "#4099ff",},
+            {name: "Actual", data: [3,5.2,1.7], color: "#d4301e",},
+        ]
+    });
+});
+</script>
