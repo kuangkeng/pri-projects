@@ -1,0 +1,119 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 600px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 7000px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: ','
+        }
+    }),
+  
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            marginBottom: 90,
+        },
+        title: {
+            text: 'Death tolls in Syrian Conflict and Paris Attacks',
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.syriahr.com/en/2015/10/about-20-millions-and-half-killed-and-wounded-since-the-beginning-of-the-syrian-revolution/">Syrian Observatory for Human Rights</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -15,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },
+        xAxis: {
+            categories: [
+                'Death toll in Paris attacks',
+                'Death toll in Syrian conflict',  
+            ],
+            labels: {
+                rotation: false,
+                style: {
+                    fontSize: '12',
+                },
+                distance: -10,
+                staggerLines: 1
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of women using contraception method',
+                margin: 10
+            },
+            labels: {
+                format: '{value:,.0f}',
+            },
+            floor: 0,
+            ceiling: 252000,
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        legend: {
+            enabled: false
+        },
+        tooltip: {enabled: false},
+        plotOptions: {
+          series: {
+            dataLabels: {
+              enabled: true,
+              rotation: 0,
+              useHTML: true,
+              formatter: function () {
+                        tooltip_html = "<table>";
+        tooltip_html += '<tr><td style="font-weight:bold; color: #FFFFFF;text-shadow: 0 0 6px #000000, 0 0 3px #000000;">'+ this.point.name +'</td></tr><tr><td style="text-align: center; color: #FFFFFF;text-shadow: 0 0 6px #000000, 0 0 3px #000000;"> '+Highcharts.numberFormat (this.y,0)+'</td></tr>';
+        tooltip_html += "</table>";
+        return tooltip_html;
+              },
+              y: -2, // 10 pixels down from the top 
+              style: {
+                  fontSize: '16px',
+              }
+            }   
+          }
+        },
+        series: [{
+          data: [
+            {name: "Death toll in Paris Attacks", y: 130, color: '#4099ff'}, 
+            {name: "Death toll in Syrian Conflict", y: 250124, color: '#d4301e'}, 
+          ]  
+        }]
+    });
+});
+</script>
