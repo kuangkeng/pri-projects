@@ -97,13 +97,13 @@ $(function () {
               useHTML: true,
               formatter: function () {
                         tooltip_html = "<table>";
-        tooltip_html += '<tr><td style="font-weight:bold; color: #FFFFFF;text-shadow: 0 0 6px #000000, 0 0 3px #000000;">'+ this.point.name +'</td></tr><tr><td style="text-align: center; color: #FFFFFF;text-shadow: 0 0 6px #000000, 0 0 3px #000000;"> '+Highcharts.numberFormat (this.y,0)+'</td></tr>';
+        tooltip_html += '<tr><td style="font-weight:bold; color: #FFFFFF;text-shadow: 0 0 6px #000000, 0 0 3px #000000;">'+ this.point.name +'</td></tr><tr><td style="font-weight:bold; font-size: 20px; text-align: center; color: #FFFFFF;text-shadow: 0 0 6px #000000, 0 0 3px #000000;"> '+Highcharts.numberFormat (this.y,0)+'</td></tr>';
         tooltip_html += "</table>";
         return tooltip_html;
               },
               y: -2, // 10 pixels down from the top 
               style: {
-                  fontSize: '16px',
+                  fontSize: '14px',
               }
             }   
           }
