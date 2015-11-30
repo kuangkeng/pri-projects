@@ -1,0 +1,121 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 800px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 150,
+        },
+        title: {
+            text: 'Prevalence Estimates for Non-partner Sexual Violence, by Region',
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.west-info.eu/non-partner-sexual-violence-rises-worldwide-assault-the-lancet-assault/piis0140673613622436-1/">Worldwide prevalence of non-partner sexual violence: a systematic review</a>, The Lancet, February 12, 2014.',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -50,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },        
+        xAxis: {
+            categories: [
+                "Sub-Saharan Africa, central ",
+                "Sub-Saharan Africa, southern ",
+                "Australasia (New Zealand & Australia) ",
+                "Latin America, Andean",
+                "Oceania",
+                "North America, high income",
+                "Asia Pacific, high income",
+                "Latin America, central",
+                "Europe, western",
+                "Sub-Saharan Africa, east",
+                "Europe, central",
+                "Caribbean",
+                "Sub-Saharan Africa, west",
+                "Latin America, tropical",
+                "Global",
+                "Europe, eastern",
+                "Asia, central",
+                "Asia, east",
+                "Latin America, southern",
+                "Asia, southeast",
+                "North Africa/Middle East",
+                "Asia, south"
+            ],
+            labels: {
+                rotation: 0,
+                style: {
+                    fontSize: '12',
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of Women Aged 15 years or older',
+                margin: 10
+            },
+            ceiling: 100,
+            floor: 0,
+            labels: {
+                format: '{value}%'
+            },
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:.1f}%</b>'
+        },
+        series: [{
+            data: [21,17.4,{y:16.4, color: '#d3401e'},15.3,14.8,13,12.2,11.8,11.5,11.4,10.7,10.3,9.1,7.6,7.2,6.9,6.4,5.8,5.8,5.2,4.5,3.3],
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y} %', // one decimal
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>

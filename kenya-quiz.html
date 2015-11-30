@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PRI Kenya Quiz</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+    }
+    #phonewiz { margin-top: 20px; padding-bottom: 60px; max-width: 700px;}
+    #intro {
+      background: url("http://38.media.tumblr.com/b8ca5764ca406bdd13f1fd9a80f3d4ea/tumblr_mv2hylnf8l1se5kcvo1_500.gif") no-repeat center;
+      
+    }
+    
+    .title {
+      font-size: 30px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+      text-align: center;
+    }
+    
+    .question { 
+      font-size: 25px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+    }
+
+    .blurb {
+      font-size: 20px;
+      color: #333;
+      margin: 20px 0 40px 0;
+      text-align: center;
+    }
+    
+    #lead-img{
+      font-size: 18px;
+      text-align: center;
+      height: 300px;
+    }
+
+    .mybtn, #q1btn {
+      background-color: #006600;
+      padding: 10px 40px;
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFF;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto;
+      width: 140px;
+      text-align: center;
+    }
+    .mybtn,#q1btn:hover {
+      color: #FFF;
+      background-color: #008d00;
+      cursor: pointer;
+    }
+    
+    .secondary { background-color: #999; }
+
+    #counter, #q1counter {
+      font-size: 14px;
+      color: #999;
+      margin: 10px 0 10px 0;
+    }
+
+    input[type=radio], input[type=checkbox] {
+      margin: 3px 0 0;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: 300 !important;
+      color: #23538e;
+      margin-bottom: 10px !important;
+      line-height: 1.2em;
+    }
+
+    #nextBtn, #resultsBtn, #q1btn { margin-top: 20px; margin-bottom: 10px; }
+    
+    #intro, #questions, #results, #q1 { margin-top: 30px}
+
+    .c2, .c3, .c4, .c5, .c6, .c7, .c8, .c9 {
+      display: none;
+    }   
+
+    @media (max-width: 500px ) { 
+      #counter, #q1counter { margin: 0px; }
+      
+      .blurb {
+        font-size: 17px;
+        line-height: 1.3em;
+      }
+      .question { 
+        font-size: 25px;
+        line-height: 1.2em;
+      }
+
+    }
+  </style>  
+
+  <body>
+    <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="phonewiz" class="container">
+    
+    <div class="row">
+      
+      <div id="intro" class="col-sm-12 col-xs-12">
+        <div class="title">If I were a Kenyan woman</div>
+        <div class="blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        <div id="lead-img"><br><br><br><br><br>lead-img</div>
+        <div id="begin" class="mybtn">Start</div>
+      </div>
+      
+      <div id="q1" class="col-sm-12 col-xs-12">
+        <div id="q1counter">Question 0 of 0</div>
+        <div class="question">Tell us about you</div>
+        <div class="input-group">
+          <input id="countryInput" type="text" class="form-control" placeholder="Your country?">
+        </div>
+        <br>
+        <div class="input-group">
+          <input id="countryInput" type="text" class="form-control" placeholder="How old are you?">
+        </div>
+        <div id="q1btn" class="mybtn">Next</div>
+      </div>
+
+      <div id="questions" class="col-sm-12 col-xs-12">
+        <div id="counter">Question 0 of 0</div>
+        <div id="theQuestion" class="question">Question goes here</div>
+        <div id="allAnswers" class="radio">
+          <label><input class="answer" type="checkbox"> Answer</label>
+          <br />
+          <label><input class="answer" type="checkbox"> Answer</label>
+          <br />
+          <label><input class="answer" type="checkbox"> Answer</label>
+        </div>
+        <div id="nextBtn" class="mybtn">Next</div>
+        <div id="resultsBtn" class="mybtn">See results</div>
+      </div>  
+
+      <div id="results" class="col-sm-12 col-xs-12">
+      </div>
+    </div> <!-- END ROW -->
+    </div> <!-- END CONTAINER -->
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+    <script>
+    var count = 0;
+    var theQuestions = [];
+    theQuestions[0] = "Question 1: 111Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    theQuestions[1] = "Question 2: 222Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+    theQuestions[2] = "Question 3: 333Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+    theQuestions[3] = "Question 4: 444Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+    theQuestions[4] = "Question 5: 555Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+    theQuestions[5] = "Question 6: 666Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+    theQuestions[6] = "Question 7: 777Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+    theQuestions[7] = "Question 8: 888Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+
+    var theAnswers = [];
+    theAnswers[0] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[1] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[2] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[3] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[4] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[5] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[6] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[7] = "Choice 1;Choice 2;Choice 3";
+      
+    var theInput = [];  
+    theInput[0] = 0;
+    theInput[1] = 0;
+    theInput[2] = 0;
+    theInput[3] = 0;
+    theInput[4] = 0;
+    theInput[5] = 0;
+    theInput[6] = 0;
+    theInput[7] = 0;
+    
+    var countries = [
+     "Afghanistan",
+     "Aland Islands",
+     "Albania",
+     "Algeria",
+     "American Samoa",
+     "Andorra",
+     "Angola",
+     "Anguilla",
+     "Antarctica",
+     "Antigua",
+     "Argentina",
+     "Armenia",
+     "Aruba",
+     "Australia",
+     "Austria",
+     "Azerbaijan",
+     "Bahamas",
+     "Bahrain",
+     "Bangladesh",
+     "Barbados",
+     "Barbuda",
+     "Belarus",
+     "Belgium",
+     "Belize",
+     "Benin",
+     "Bermuda",
+     "Bhutan",
+     "Bolivia",
+     "Bosnia",
+     "Botswana",
+     "Bouvet Island",
+     "Brazil",
+     "British Indian Ocean Trty.",
+     "Brunei Darussalam",
+     "Bulgaria",
+     "Burkina Faso",
+     "Burundi",
+     "Caicos Islands",
+     "Cambodia",
+     "Cameroon",
+     "Canada",
+     "Cape Verde",
+     "Cayman Islands",
+     "Central African Republic",
+     "Chad",
+     "Chile",
+     "China",
+     "Christmas Island",
+     "Cocos (Keeling) Islands",
+     "Colombia",
+     "Comoros",
+     "Congo",
+     "Congo, Democratic Republic of the",
+     "Cook Islands",
+     "Costa Rica",
+     "Cote d'Ivoire",
+     "Croatia",
+     "Cuba",
+     "Cyprus",
+     "Czech Republic",
+     "Denmark",
+     "Djibouti",
+     "Dominica",
+     "Dominican Republic",
+     "Ecuador",
+     "Egypt",
+     "El Salvador",
+     "Equatorial Guinea",
+     "Eritrea",
+     "Estonia",
+     "Ethiopia",
+     "Falkland Islands (Malvinas)",
+     "Faroe Islands",
+     "Fiji",
+     "Finland",
+     "France",
+     "French Guiana",
+     "French Polynesia",
+     "French Southern Territories",
+     "Futuna Islands",
+     "Gabon",
+     "Gambia",
+     "Georgia",
+     "Germany",
+     "Ghana",
+     "Gibraltar",
+     "Greece",
+     "Greenland",
+     "Grenada",
+     "Guadeloupe",
+     "Guam",
+     "Guatemala",
+     "Guernsey",
+     "Guinea",
+     "Guinea-Bissau",
+     "Guyana",
+     "Haiti",
+     "Heard",
+     "Herzegovina",
+     "Holy See",
+     "Honduras",
+     "Hong Kong",
+     "Hungary",
+     "Iceland",
+     "India",
+     "Indonesia",
+     "Iran (Islamic Republic of)",
+     "Iraq",
+     "Ireland",
+     "Isle of Man",
+     "Israel",
+     "Italy",
+     "Jamaica",
+     "Jan Mayen Islands",
+     "Japan",
+     "Jersey",
+     "Jordan",
+     "Kazakhstan",
+     "Kenya",
+     "Kiribati",
+     "Korea",
+     "Korea (Democratic)",
+     "Kuwait",
+     "Kyrgyzstan",
+     "Lao",
+     "Latvia",
+     "Lebanon",
+     "Lesotho",
+     "Liberia",
+     "Libyan Arab Jamahiriya",
+     "Liechtenstein",
+     "Lithuania",
+     "Luxembourg",
+     "Macao",
+     "Macedonia",
+     "Madagascar",
+     "Malawi",
+     "Malaysia",
+     "Maldives",
+     "Mali",
+     "Malta",
+     "Marshall Islands",
+     "Martinique",
+     "Mauritania",
+     "Mauritius",
+     "Mayotte",
+     "McDonald Islands",
+     "Mexico",
+     "Micronesia",
+     "Miquelon",
+     "Moldova",
+     "Monaco",
+     "Mongolia",
+     "Montenegro",
+     "Montserrat",
+     "Morocco",
+     "Mozambique",
+     "Myanmar",
+     "Namibia",
+     "Nauru",
+     "Nepal",
+     "Netherlands",
+     "Netherlands Antilles",
+     "Nevis",
+     "New Caledonia",
+     "New Zealand",
+     "Nicaragua",
+     "Niger",
+     "Nigeria",
+     "Niue",
+     "Norfolk Island",
+     "Northern Mariana Islands",
+     "Norway",
+     "Oman",
+     "Pakistan",
+     "Palau",
+     "Palestinian Territory, Occupied",
+     "Panama",
+     "Papua New Guinea",
+     "Paraguay",
+     "Peru",
+     "Philippines",
+     "Pitcairn",
+     "Poland",
+     "Portugal",
+     "Principe",
+     "Puerto Rico",
+     "Qatar",
+     "Reunion",
+     "Romania",
+     "Russian Federation",
+     "Rwanda",
+     "Saint Barthelemy",
+     "Saint Helena",
+     "Saint Kitts",
+     "Saint Lucia",
+     "Saint Martin (French part)",
+     "Saint Pierre",
+     "Saint Vincent",
+     "Samoa",
+     "San Marino",
+     "Sao Tome",
+     "Saudi Arabia",
+     "Senegal",
+     "Serbia",
+     "Seychelles",
+     "Sierra Leone",
+     "Singapore",
+     "Slovakia",
+     "Slovenia",
+     "Solomon Islands",
+     "Somalia",
+     "South Africa",
+     "South Georgia",
+     "South Sandwich Islands",
+     "Spain",
+     "Sri Lanka",
+     "Sudan",
+     "Suriname",
+     "Svalbard",
+     "Swaziland",
+     "Sweden",
+     "Switzerland",
+     "Syrian Arab Republic",
+     "Taiwan",
+     "Tajikistan",
+     "Tanzania",
+     "Thailand",
+     "The Grenadines",
+     "Timor-Leste",
+     "Tobago",
+     "Togo",
+     "Tokelau",
+     "Tonga",
+     "Trinidad",
+     "Tunisia",
+     "Turkey",
+     "Turkmenistan",
+     "Turks Islands",
+     "Tuvalu",
+     "Uganda",
+     "Ukraine",
+     "United Arab Emirates",
+     "United Kingdom",
+     "United States",
+     "Uruguay",
+     "US Minor Outlying Islands",
+     "Uzbekistan",
+     "Vanuatu",
+     "Vatican City State",
+     "Venezuela",
+     "Vietnam",
+     "Virgin Islands (British)",
+     "Virgin Islands (US)",
+     "Wallis",
+     "Western Sahara",
+     "Yemen",
+     "Zambia",
+     "Zimbabwe"];  
+
+$( "#countryInput" ).autocomplete({
+      source: countries
+});      
+
+function init() { 
+  console.log("js ready!");
+  $("#q1").hide();    
+  $("#questions").hide();
+  $("#results").hide();
+  $("#resultsBtn").hide();
+
+  $("#begin").click(function() {
+    $("#intro").hide();
+    $("#q1").show();
+    //$("#q1btn").hide(); 
+    firstQuestion(0);  
+  });
+  
+  $("#q1btn").click(function() {
+    count ++;  
+    $("#q1").hide();
+    $("#questions").show();
+    console.log("click q1btn");         
+    nextQuestion(count);    
+  });  
+
+  $("#nextBtn, #resultsBtn").click(function() {
+    count ++;
+    if (count < theQuestions.length) {
+      addInput();                              
+      nextQuestion(count);
+    } else {
+      addInput();                              
+      showResults();
+    }
+  });
+}
+
+var tmpInput;
+                                    
+function setValue(theVal) {
+  console.log("setVal " + theVal);
+  console.log("current count " + count);
+  tmpInput = theVal;  
+  console.log("temp input " + tmpInput);                                    
+  if (count < theQuestions.length -1) {
+    $("#nextBtn").show();
+  } else {
+    $("#resultsBtn").show();
+  }
+  
+}                                    
+
+function addInput() {
+  var tmpCount = count-1;    
+  theInput[tmpCount] = tmpInput;  
+  console.log("current count " + tmpCount);    
+  console.log("Input" + tmpCount + " = " +  theInput[tmpCount]);    
+  console.log("theInput set " + theInput);    
+} 
+
+function firstQuestion(count) {
+  $("#q1counter").text("Question " + (count+1) + " of " + (theQuestions.length+1));
+  console.log("click begin button"); 
+  console.log("count = " + count);     
+}      
+      
+function nextQuestion(which) {
+  $("#nextBtn").hide();     
+  console.log("count = " + count); 
+  //DISPLAY QUESTION
+  $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length+1));
+  $("#theQuestion").text(theQuestions[which]);
+  //DISPLAY CHOICES
+  $("#allAnswers").empty();
+  var tmpAns = theAnswers[which].split(";");
+  for (var i=0; i<tmpAns.length; i++) {
+    $("#allAnswers").append("<p><label><input class='answer' type='radio' name='optionsRadios' onClick='setValue(" + i + ");'>" + tmpAns[i] + "</label></p>");
+  }
+}
+
+function showResults() {
+  $("#questions").hide();
+  $("#results").show();
+  $("#nextBtn").hide();
+  $("#resultsBtn").hide();
+}
+
+$(document).ready(function(){
+  init();
+});      
+
+    </script>
+
+     
+  </body>
+
+
+</html>
