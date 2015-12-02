@@ -25,7 +25,7 @@
     }
     #phonewiz { margin-top: 20px; padding-bottom: 60px; max-width: 700px;}
     #intro {
-      background: url("http://38.media.tumblr.com/b8ca5764ca406bdd13f1fd9a80f3d4ea/tumblr_mv2hylnf8l1se5kcvo1_500.gif") no-repeat center;
+      background: url("http://kuangkeng.github.io/pri-projects/kenya-logo.png") no-repeat center;
       
     }
     
@@ -53,6 +53,12 @@
       text-align: center;
     }
     
+    #q1question {
+      font-size: 20px;
+      color: #333;
+      margin: 20px 0 10px 0;
+    }
+    
     #lead-img{
       font-size: 18px;
       text-align: center;
@@ -71,6 +77,16 @@
       width: 140px;
       text-align: center;
     }
+    
+    #btn-plus, #btn-minus {
+      font-size: 20px;
+      font-weight: 100;
+      text-align: center;
+      margin: 0px 10px 10px 10px;
+      width: 30px;
+      vertical-align: middle;
+    }
+    
     .mybtn,#q1btn:hover {
       color: #FFF;
       background-color: #008d00;
@@ -95,6 +111,10 @@
       color: #23538e;
       margin-bottom: 10px !important;
       line-height: 1.2em;
+    }
+    
+    #ageInputbox, #countryInputbox {
+      margin-bottom: 40px;
     }
 
     #nextBtn, #resultsBtn, #q1btn { margin-top: 20px; margin-bottom: 10px; }
@@ -136,12 +156,17 @@
       <div id="q1" class="col-sm-12 col-xs-12">
         <div id="q1counter">Question 0 of 0</div>
         <div class="question">Tell us about you</div>
-        <div class="input-group">
-          <input id="countryInput" type="text" class="form-control" placeholder="Your country?">
+        <div id="q1question">Where are you from?</div>
+        <div id="countryInputbox" class="input-group">
+          <input id="countryInput" type="text" class="form-control" placeholder="Your country?" onclick='$("#q1btn").show()'>
         </div>
-        <br>
-        <div class="input-group">
-          <input id="countryInput" type="text" class="form-control" placeholder="How old are you?">
+        <div id="ageInputbox">
+          <div id="q1question">How old are you?</div>
+          <div id="knobbox">
+            <button id="btn-minus">-</button>
+            <input class="dial" data-angleOffset=-125 data-angleArc=250 data-fgColor="#d4301e" value="30" data-min="5" data-max="90">
+            <button id="btn-plus">+</button>
+          </div>  
         </div>
         <div id="q1btn" class="mybtn">Next</div>
       </div>
@@ -174,6 +199,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://kuangkeng.github.io/pri-projects/jquery.knob.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
@@ -201,7 +227,7 @@
       
     var theInput = [];  
     theInput[0] = 0;
-    theInput[1] = 0;
+    theInput[1] = 30;
     theInput[2] = 0;
     theInput[3] = 0;
     theInput[4] = 0;
@@ -484,16 +510,21 @@ function init() {
   $("#begin").click(function() {
     $("#intro").hide();
     $("#q1").show();
-    //$("#q1btn").hide(); 
+    $("#q1btn").hide(); 
     firstQuestion(0);  
   });
   
+  $("#countryInput").change(function() {
+    $("#q1btn").show;
+  });    
+      
   $("#q1btn").click(function() {
     count ++;  
     $("#q1").hide();
     $("#questions").show();
     console.log("click q1btn");         
-    nextQuestion(count);    
+    nextQuestion(count); 
+    q1addInput();  
   });  
 
   $("#nextBtn, #resultsBtn").click(function() {
@@ -524,12 +555,20 @@ function setValue(theVal) {
 }                                    
 
 function addInput() {
-  var tmpCount = count-1;    
+  var tmpCount = count;    
   theInput[tmpCount] = tmpInput;  
-  console.log("current count " + tmpCount);    
+  console.log("tmp count " + tmpCount);    
   console.log("Input" + tmpCount + " = " +  theInput[tmpCount]);    
   console.log("theInput set " + theInput);    
 } 
+      
+function q1addInput() {
+  theInput[0] = $('#countryInput').val();
+  theInput[1] = number; 
+  console.log("countryInput = " + theInput[0]);
+  console.log("ageInput = " + theInput[1]);        
+  console.log("theInput = " + theInput);    
+}      
 
 function firstQuestion(count) {
   $("#q1counter").text("Question " + (count+1) + " of " + (theQuestions.length+1));
@@ -557,6 +596,27 @@ function showResults() {
   $("#nextBtn").hide();
   $("#resultsBtn").hide();
 }
+                               
+//Knob code goes here
+var number=0;
+$(function() {   
+    $(".dial").knob({
+      'change' : function (v) {
+        number=Math.round(v);
+     console.log(number);                            
+      }
+    });
+});
+
+$("#btn-plus").click(function(){
+  $("input.dial").val(number+=1);
+  $("input.dial").trigger('change');
+});
+
+$("#btn-minus").click(function(){
+  $("input.dial").val(number-=1);
+  $("input.dial").trigger('change');
+});                                 
 
 $(document).ready(function(){
   init();
