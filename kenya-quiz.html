@@ -22,11 +22,12 @@
   <style>
     body {
       font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      background-color: #dddfd4;
     }
-    #phonewiz { margin-top: 20px; padding-bottom: 60px; max-width: 700px;}
+    #kenyaquiz { margin-top: 20px; padding-bottom: 60px; max-width: 700px;}
     #intro {
-      background: url("http://kuangkeng.github.io/pri-projects/kenya-logo.png") no-repeat center;
       
+     
     }
     
     .title {
@@ -46,11 +47,29 @@
       line-height: 1.2em;
     }
 
+    .result   { 
+      font-size: 25px;
+      font-weight: 400;
+      color: #333;
+      margin: 30px 0px;
+      padding:8px 12px;
+      border-radius: 5px;
+      line-height: 1.2em;
+      background-color: #fae596;
+    }
+
+    .desc { 
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+    }
+
     .blurb {
       font-size: 20px;
       color: #333;
       margin: 20px 0 40px 0;
-      text-align: center;
     }
     
     #q1question {
@@ -66,11 +85,11 @@
     }
 
     .mybtn, #q1btn {
-      background-color: #006600;
+      background-color: #fae596;
       padding: 10px 40px;
       font-size: 22px;
       font-weight: 400;
-      color: #FFF;
+      color: #000;
       border-radius: 10px;
       display: block;
       margin: 0 auto;
@@ -78,26 +97,31 @@
       text-align: center;
     }
     
+    .mybtn:hover, #q1btn:hover {
+      color: #000;
+      background-color: #e1ce87;
+      cursor: pointer;
+    }
+    
+    #dropdownMenu1 {
+      display: block;
+      margin: 0 auto;   
+    }
+    
     #btn-plus, #btn-minus {
       font-size: 20px;
-      font-weight: 100;
+      font-weight: 400;
       text-align: center;
       margin: 0px 10px 10px 10px;
       width: 30px;
       vertical-align: middle;
     }
     
-    .mybtn,#q1btn:hover {
-      color: #FFF;
-      background-color: #008d00;
-      cursor: pointer;
-    }
-    
     .secondary { background-color: #999; }
 
-    #counter, #q1counter {
+    .counter, #q1counter {
       font-size: 14px;
-      color: #999;
+      color: #3fb0ac;
       margin: 10px 0 10px 0;
     }
 
@@ -105,10 +129,10 @@
       margin: 3px 0 0;
     }
 
-    label {
+    label, .resultAnswer {
       font-size: 18px;
-      font-weight: 300 !important;
-      color: #23538e;
+      font-weight: 400 !important;
+      color: #173e43;
       margin-bottom: 10px !important;
       line-height: 1.2em;
     }
@@ -121,12 +145,25 @@
     
     #intro, #questions, #results, #q1 { margin-top: 30px}
 
+    .resultBox {
+      margin-top: 100px;
+    }
+
     .c2, .c3, .c4, .c5, .c6, .c7, .c8, .c9 {
       display: none;
+    }
+
+    .chart {
+      margin:20px 0px;
+    }
+
+    #chart04a, #chart04b {
+      display: inline-block;
+      width: 49%;
     }   
 
     @media (max-width: 500px ) { 
-      #counter, #q1counter { margin: 0px; }
+      .counter, #q1counter { margin: 0px; }
       
       .blurb {
         font-size: 17px;
@@ -137,12 +174,18 @@
         line-height: 1.2em;
       }
 
+      #chart04a, #chart04b {
+      display: inline-block;
+      width: 100%;
+      margin:10px 0px;
+      }   
+
     }
   </style>  
 
-  <body>
-    <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
-    <div id="phonewiz" class="container">
+<body>
+  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="kenyaquiz" class="container">
     
     <div class="row">
       
@@ -151,28 +194,366 @@
         <div class="blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
         <div id="lead-img"><br><br><br><br><br>lead-img</div>
         <div id="begin" class="mybtn">Start</div>
-      </div>
+      </div><!-- END INTRO -->
       
       <div id="q1" class="col-sm-12 col-xs-12">
         <div id="q1counter">Question 0 of 0</div>
         <div class="question">Tell us about you</div>
-        <div id="q1question">Where are you from?</div>
-        <div id="countryInputbox" class="input-group">
-          <input id="countryInput" type="text" class="form-control" placeholder="Your country?" onclick='$("#q1btn").show()'>
-        </div>
+        <div id="q1question">Which country are you from?</div>
+          <select class="form-control" id="countryInput">
+            <option disabled selected>Select your country</option>
+            <option>Afghanistan</option>
+            <option>Albania</option>
+            <option>Algeria</option>
+            <option>American Samoa</option>
+            <option>Andorra</option>
+            <option>Angola</option>
+            <option>Antigua and Barbuda</option>
+            <option>Arab World</option>
+            <option>Argentina</option>
+            <option>Armenia</option>
+            <option>Aruba</option>
+            <option>Australia</option>
+            <option>Austria</option>
+            <option>Azerbaijan</option>
+            <option>Bahamas, The</option>
+            <option>Bahrain</option>
+            <option>Bangladesh</option>
+            <option>Barbados</option>
+            <option>Belarus</option>
+            <option>Belgium</option>
+            <option>Belize</option>
+            <option>Benin</option>
+            <option>Bermuda</option>
+            <option>Bhutan</option>
+            <option>Bolivia</option>
+            <option>Bosnia and Herzegovina</option>
+            <option>Botswana</option>
+            <option>Brazil</option>
+            <option>Brunei Darussalam</option>
+            <option>Bulgaria</option>
+            <option>Burkina Faso</option>
+            <option>Burundi</option>
+            <option>Cabo Verde</option>
+            <option>Cambodia</option>
+            <option>Cameroon</option>
+            <option>Canada</option>
+            <option>Caribbean small states</option>
+            <option>Cayman Islands</option>
+            <option>Central African Republic</option>
+            <option>Central Europe and the Baltics</option>
+            <option>Chad</option>
+            <option>Channel Islands</option>
+            <option>Chile</option>
+            <option>China</option>
+            <option>Colombia</option>
+            <option>Comoros</option>
+            <option>Congo, Dem. Rep.</option>
+            <option>Congo, Rep.</option>
+            <option>Costa Rica</option>
+            <option>Cote d'Ivoire</option>
+            <option>Croatia</option>
+            <option>Cuba</option>
+            <option>Curacao</option>
+            <option>Cyprus</option>
+            <option>Czech Republic</option>
+            <option>Denmark</option>
+            <option>Djibouti</option>
+            <option>Dominica</option>
+            <option>Dominican Republic</option>
+            <option>East Asia & Pacific (all income levels)</option>
+            <option>East Asia & Pacific (developing only)</option>
+            <option>Ecuador</option>
+            <option>Egypt, Arab Rep.</option>
+            <option>El Salvador</option>
+            <option>Equatorial Guinea</option>
+            <option>Eritrea</option>
+            <option>Estonia</option>
+            <option>Ethiopia</option>
+            <option>Euro area</option>
+            <option>Europe & Central Asia (all income levels)</option>
+            <option>Europe & Central Asia (developing only)</option>
+            <option>European Union</option>
+            <option>Faeroe Islands</option>
+            <option>Fiji</option>
+            <option>Finland</option>
+            <option>Fragile and conflict affected situations</option>
+            <option>France</option>
+            <option>French Polynesia</option>
+            <option>Gabon</option>
+            <option>Gambia, The</option>
+            <option>Georgia</option>
+            <option>Germany</option>
+            <option>Ghana</option>
+            <option>Greece</option>
+            <option>Greenland</option>
+            <option>Grenada</option>
+            <option>Guam</option>
+            <option>Guatemala</option>
+            <option>Guinea</option>
+            <option>Guinea-Bissau</option>
+            <option>Guyana</option>
+            <option>Haiti</option>
+            <option>Heavily indebted poor countries (HIPC)</option>
+            <option>High income</option>
+            <option>High income: nonOECD</option>
+            <option>High income: OECD</option>
+            <option>Honduras</option>
+            <option>Hong Kong SAR, China</option>
+            <option>Hungary</option>
+            <option>Iceland</option>
+            <option>India</option>
+            <option>Indonesia</option>
+            <option>Iran, Islamic Rep.</option>
+            <option>Iraq</option>
+            <option>Ireland</option>
+            <option>Isle of Man</option>
+            <option>Israel</option>
+            <option>Italy</option>
+            <option>Jamaica</option>
+            <option>Japan</option>
+            <option>Jordan</option>
+            <option>Kazakhstan</option>
+            <option>Kenya</option>
+            <option>Kiribati</option>
+            <option>Korea, Dem. Rep.</option>
+            <option>Korea, Rep.</option>
+            <option>Kosovo</option>
+            <option>Kuwait</option>
+            <option>Kyrgyz Republic</option>
+            <option>Lao PDR</option>
+            <option>Latin America & Caribbean (all income levels)</option>
+            <option>Latin America & Caribbean (developing only)</option>
+            <option>Latvia</option>
+            <option>Least developed countries: UN classification</option>
+            <option>Lebanon</option>
+            <option>Lesotho</option>
+            <option>Liberia</option>
+            <option>Libya</option>
+            <option>Liechtenstein</option>
+            <option>Lithuania</option>
+            <option>Low & middle income</option>
+            <option>Low income</option>
+            <option>Lower middle income</option>
+            <option>Luxembourg</option>
+            <option>Macao SAR, China</option>
+            <option>Macedonia, FYR</option>
+            <option>Madagascar</option>
+            <option>Malawi</option>
+            <option>Malaysia</option>
+            <option>Maldives</option>
+            <option>Mali</option>
+            <option>Malta</option>
+            <option>Marshall Islands</option>
+            <option>Mauritania</option>
+            <option>Mauritius</option>
+            <option>Mexico</option>
+            <option>Micronesia, Fed. Sts.</option>
+            <option>Middle East & North Africa (all income levels)</option>
+            <option>Middle East & North Africa (developing only)</option>
+            <option>Middle income</option>
+            <option>Moldova</option>
+            <option>Monaco</option>
+            <option>Mongolia</option>
+            <option>Montenegro</option>
+            <option>Morocco</option>
+            <option>Mozambique</option>
+            <option>Myanmar</option>
+            <option>Namibia</option>
+            <option>Nepal</option>
+            <option>Netherlands</option>
+            <option>New Caledonia</option>
+            <option>New Zealand</option>
+            <option>Nicaragua</option>
+            <option>Niger</option>
+            <option>Nigeria</option>
+            <option>North America</option>
+            <option>Northern Mariana Islands</option>
+            <option>Norway</option>
+            <option>OECD members</option>
+            <option>Oman</option>
+            <option>Other small states</option>
+            <option>Pacific island small states</option>
+            <option>Pakistan</option>
+            <option>Palau</option>
+            <option>Panama</option>
+            <option>Papua New Guinea</option>
+            <option>Paraguay</option>
+            <option>Peru</option>
+            <option>Philippines</option>
+            <option>Poland</option>
+            <option>Portugal</option>
+            <option>Puerto Rico</option>
+            <option>Qatar</option>
+            <option>Romania</option>
+            <option>Russian Federation</option>
+            <option>Rwanda</option>
+            <option>Samoa</option>
+            <option>San Marino</option>
+            <option>Sao Tome and Principe</option>
+            <option>Saudi Arabia</option>
+            <option>Senegal</option>
+            <option>Serbia</option>
+            <option>Seychelles</option>
+            <option>Sierra Leone</option>
+            <option>Singapore</option>
+            <option>Sint Maarten (Dutch part)</option>
+            <option>Slovak Republic</option>
+            <option>Slovenia</option>
+            <option>Small states</option>
+            <option>Solomon Islands</option>
+            <option>Somalia</option>
+            <option>South Africa</option>
+            <option>South Asia</option>
+            <option>South Sudan</option>
+            <option>Spain</option>
+            <option>Sri Lanka</option>
+            <option>St. Kitts and Nevis</option>
+            <option>St. Lucia</option>
+            <option>St. Martin (French part)</option>
+            <option>St. Vincent and the Grenadines</option>
+            <option>Sub-Saharan Africa (all income levels)</option>
+            <option>Sub-Saharan Africa (developing only)</option>
+            <option>Sudan</option>
+            <option>Suriname</option>
+            <option>Swaziland</option>
+            <option>Sweden</option>
+            <option>Switzerland</option>
+            <option>Syrian Arab Republic</option>
+            <option>Tajikistan</option>
+            <option>Tanzania</option>
+            <option>Thailand</option>
+            <option>Timor-Leste</option>
+            <option>Togo</option>
+            <option>Tonga</option>
+            <option>Trinidad and Tobago</option>
+            <option>Tunisia</option>
+            <option>Turkey</option>
+            <option>Turkmenistan</option>
+            <option>Turks and Caicos Islands</option>
+            <option>Tuvalu</option>
+            <option>Uganda</option>
+            <option>Ukraine</option>
+            <option>United Arab Emirates</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+            <option>Upper middle income</option>
+            <option>Uruguay</option>
+            <option>Uzbekistan</option>
+            <option>Vanuatu</option>
+            <option>Venezuela, RB</option>
+            <option>Vietnam</option>
+            <option>Virgin Islands (U.S.)</option>
+            <option>West Bank and Gaza</option>
+            <option>World</option>
+            <option>Yemen, Rep.</option>
+            <option>Zambia</option>
+            <option>Zimbabwe</option>
+          </select>
         <div id="ageInputbox">
           <div id="q1question">How old are you?</div>
-          <div id="knobbox">
-            <button id="btn-minus">-</button>
-            <input class="dial" data-angleOffset=-125 data-angleArc=250 data-fgColor="#d4301e" value="30" data-min="5" data-max="90">
-            <button id="btn-plus">+</button>
-          </div>  
+            <select class="form-control" id="inputAge" onclick='$("#q1btn").show()' placeholder="Select your age">
+              <option disabled selected>Select your age</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+              <option>29</option>
+              <option>30</option>
+              <option>31</option>
+              <option>32</option>
+              <option>33</option>
+              <option>34</option>
+              <option>35</option>
+              <option>36</option>
+              <option>37</option>
+              <option>38</option>
+              <option>39</option>
+              <option>40</option>
+              <option>41</option>
+              <option>42</option>
+              <option>43</option>
+              <option>44</option>
+              <option>45</option>
+              <option>46</option>
+              <option>47</option>
+              <option>48</option>
+              <option>49</option>
+              <option>50</option>
+              <option>51</option>
+              <option>52</option>
+              <option>53</option>
+              <option>54</option>
+              <option>55</option>
+              <option>56</option>
+              <option>57</option>
+              <option>58</option>
+              <option>59</option>
+              <option>60</option>
+              <option>61</option>
+              <option>62</option>
+              <option>63</option>
+              <option>64</option>
+              <option>65</option>
+              <option>66</option>
+              <option>67</option>
+              <option>68</option>
+              <option>69</option>
+              <option>70</option>
+              <option>71</option>
+              <option>72</option>
+              <option>73</option>
+              <option>74</option>
+              <option>75</option>
+              <option>76</option>
+              <option>77</option>
+              <option>78</option>
+              <option>79</option>
+              <option>80</option>
+              <option>81</option>
+              <option>82</option>
+              <option>83</option>
+              <option>84</option>
+              <option>85</option>
+              <option>86</option>
+              <option>87</option>
+              <option>88</option>
+              <option>89</option>
+              <option>90</option>
+              <option>91</option>
+              <option>92</option>
+              <option>93</option>
+              <option>94</option>
+              <option>95</option>
+              <option>96</option>
+              <option>97</option>
+              <option>98</option>
+              <option>99</option>
+            </select>
         </div>
         <div id="q1btn" class="mybtn">Next</div>
-      </div>
+      </div><!-- END Q1 PAGE -->
 
       <div id="questions" class="col-sm-12 col-xs-12">
-        <div id="counter">Question 0 of 0</div>
+        <div id="counter" class="counter">Question 0 of 0</div>
         <div id="theQuestion" class="question">Question goes here</div>
         <div id="allAnswers" class="radio">
           <label><input class="answer" type="checkbox"> Answer</label>
@@ -183,14 +564,163 @@
         </div>
         <div id="nextBtn" class="mybtn">Next</div>
         <div id="resultsBtn" class="mybtn">See results</div>
-      </div>  
+      </div><!-- END QUESTION PAGE -->  
 
       <div id="results" class="col-sm-12 col-xs-12">
-      </div>
+        <div id="resultTitle" class="title">Your Life in Kenya</div>
+        
+        <div id="resultBox01" class="resultBox">
+          <div id="resultCounter01" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion01" class="question">Tell us about you</div>
+          <div id="resultAnswer01" class="resultAnswer"><span id="countryResult">country</span>, 
+            <span id="ageResult">age</span> years old</div>
+          <div id="resultResult01" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(0);shareTW(0)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart01" class="chart">chart</div>
+          <div id="resultDesc01" class="desc">Kenyan women get married at the average age of 20, and have their first child at the same age (2008 Kenya Demographic and Health Survey). Kenyan women have an average of four children (2014 Kenya Demographic and Health Survey).</div>
+        </div>
+        <div id="resultBox02" class="resultBox">
+          <div id="resultCounter02" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion02" class="question">Question goes here</div>
+          <div id="resultAnswer02" class="resultAnswer">Answer goes here</div>
+          <div id="resultResult02" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(1);shareTW(1)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart02" class="chart">chart</div>
+          <div id="resultDesc02" class="desc">Description goes here</div>
+        </div>
+        <div id="resultBox03" class="resultBox">
+          <div id="resultCounter03" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion03" class="question">Question goes here</div>
+          <div id="resultAnswer03" class="resultAnswer">Answer goes here</div>
+          <div id="resultResult03" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(2);shareTW(2)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart03" class="chart">chart</div>
+          <div id="resultDesc03" class="desc">Description goes here</div>
+        </div>
+        <div id="resultBox04" class="resultBox">
+          <div id="resultCounter04" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion04" class="question">Question goes here</div>
+          <div id="resultAnswer04" class="resultAnswer">Answer goes here</div>
+          <div id="resultResult04" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(3);shareTW(3)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart04a" class="chart">chart</div>
+          <div id="chart04b" class="chart">chart</div>
+          <div id="resultDesc04" class="desc">Description goes here</div>
+        </div>
+        <div id="resultBox05" class="resultBox">
+          <div id="resultCounter05" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion05" class="question">Question goes here</div>
+          <div id="resultAnswer05" class="resultAnswer">Answer goes here</div>
+          <div id="resultResult05" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(4);shareTW(4)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart05" class="chart">chart</div>
+          <div id="resultDesc05" class="desc">Description goes here</div>
+        </div>
+        <div id="resultBox06" class="resultBox">
+          <div id="resultCounter06" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion06" class="question">Question goes here</div>
+          <div id="resultAnswer06" class="resultAnswer">Answer goes here</div>
+          <div id="resultResult06" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(5);shareTW(5)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart06" class="chart">chart</div>
+          <div id="resultDesc06" class="desc">Description goes here</div>
+        </div>
+        <div id="resultBox07" class="resultBox">
+          <div id="resultCounter07" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion07" class="question">Question goes here</div>
+          <div id="resultAnswer07" class="resultAnswer">Answer goes here</div>
+          <div id="resultResult07" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(6);shareTW(6)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart07" class="chart embed-responsive embed-responsive-4by3"></div>
+          <div id="resultDesc07" class="desc">Description goes here</div>
+        </div>
+        <div id="resultBox08" class="resultBox">
+          <div id="resultCounter08" class="counter">Question 1 of 8</div>
+          <div id="resultQuestion08" class="question">Question goes here</div>
+          <div id="resultAnswer08" class="resultAnswer">Answer goes here</div>
+          <div id="resultResult08" class="result">Result goes here</div>
+          <div class="dropdown" id="resultShare">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Share this result
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Facebook</li>
+              <li onclick='tweet(7);shareTW(7)'>Twitter</li>
+            </ul>
+          </div>
+          <div id="chart08" class="chart embed-responsive embed-responsive-4by3"></div>
+          <div id="resultDesc08" class="desc">Description goes here</div>
+        </div>  
+      </div> <!-- END RESULTPAGE -->
     </div> <!-- END ROW -->
     </div> <!-- END CONTAINER -->
+  </div> <!-- END PARENT -->
 
-    </div>
+  <div id="fb-root"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -199,31 +729,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="http://kuangkeng.github.io/pri-projects/jquery.knob.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
     <script>
     var count = 0;
     var theQuestions = [];
-    theQuestions[0] = "Question 1: 111Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    theQuestions[1] = "Question 2: 222Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
-    theQuestions[2] = "Question 3: 333Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
-    theQuestions[3] = "Question 4: 444Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
-    theQuestions[4] = "Question 5: 555Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
-    theQuestions[5] = "Question 6: 666Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
-    theQuestions[6] = "Question 7: 777Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
-    theQuestions[7] = "Question 8: 888Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+    theQuestions[0] = "Not applicable";
+    theQuestions[1] = "Do you use a mobile phone to send/receive money?";
+    theQuestions[2] = "Where do you keep your savings?";
+    theQuestions[3] = "Are you worried about climate change?";
+    theQuestions[4] = "Do you think you're overweight?";
+    theQuestions[5] = "Are you a smoker?";
+    theQuestions[6] = "What's your favorite kind of music?";
+    theQuestions[7] = "What's your Netflix category of choice?";
 
     var theAnswers = [];
-    theAnswers[0] = "Choice 1;Choice 2;Choice 3";
-    theAnswers[1] = "Choice 1;Choice 2;Choice 3";
-    theAnswers[2] = "Choice 1;Choice 2;Choice 3";
-    theAnswers[3] = "Choice 1;Choice 2;Choice 3";
-    theAnswers[4] = "Choice 1;Choice 2;Choice 3";
-    theAnswers[5] = "Choice 1;Choice 2;Choice 3";
-    theAnswers[6] = "Choice 1;Choice 2;Choice 3";
-    theAnswers[7] = "Choice 1;Choice 2;Choice 3";
+    theAnswers[0] = "Not applicable";
+    theAnswers[1] = "Yes;Um, no. I can barely use Google maps.";
+    theAnswers[2] = "Bank;In my house;Please ... as if I have money to save!";
+    theAnswers[3] = "Obviously!;A little bit;Not really. I'll be dead before it matters.";
+    theAnswers[4] = "Errr ... yes. Thanks for asking.;Rude! Definitely not!";
+    theAnswers[5] = "Yes;No";
+    theAnswers[6] = "Boy Bands. I really miss Zayn :(;All Adele all the time.;Pop;I'm more of an alt-music kind of person.;Rap";
+    theAnswers[7] = "Soaps;News + Education;Teen Drama;Comedy";
       
     var theInput = [];  
     theInput[0] = 0;
@@ -234,270 +763,322 @@
     theInput[5] = 0;
     theInput[6] = 0;
     theInput[7] = 0;
-    
-    var countries = [
-     "Afghanistan",
-     "Aland Islands",
-     "Albania",
-     "Algeria",
-     "American Samoa",
-     "Andorra",
-     "Angola",
-     "Anguilla",
-     "Antarctica",
-     "Antigua",
-     "Argentina",
-     "Armenia",
-     "Aruba",
-     "Australia",
-     "Austria",
-     "Azerbaijan",
-     "Bahamas",
-     "Bahrain",
-     "Bangladesh",
-     "Barbados",
-     "Barbuda",
-     "Belarus",
-     "Belgium",
-     "Belize",
-     "Benin",
-     "Bermuda",
-     "Bhutan",
-     "Bolivia",
-     "Bosnia",
-     "Botswana",
-     "Bouvet Island",
-     "Brazil",
-     "British Indian Ocean Trty.",
-     "Brunei Darussalam",
-     "Bulgaria",
-     "Burkina Faso",
-     "Burundi",
-     "Caicos Islands",
-     "Cambodia",
-     "Cameroon",
-     "Canada",
-     "Cape Verde",
-     "Cayman Islands",
-     "Central African Republic",
-     "Chad",
-     "Chile",
-     "China",
-     "Christmas Island",
-     "Cocos (Keeling) Islands",
-     "Colombia",
-     "Comoros",
-     "Congo",
-     "Congo, Democratic Republic of the",
-     "Cook Islands",
-     "Costa Rica",
-     "Cote d'Ivoire",
-     "Croatia",
-     "Cuba",
-     "Cyprus",
-     "Czech Republic",
-     "Denmark",
-     "Djibouti",
-     "Dominica",
-     "Dominican Republic",
-     "Ecuador",
-     "Egypt",
-     "El Salvador",
-     "Equatorial Guinea",
-     "Eritrea",
-     "Estonia",
-     "Ethiopia",
-     "Falkland Islands (Malvinas)",
-     "Faroe Islands",
-     "Fiji",
-     "Finland",
-     "France",
-     "French Guiana",
-     "French Polynesia",
-     "French Southern Territories",
-     "Futuna Islands",
-     "Gabon",
-     "Gambia",
-     "Georgia",
-     "Germany",
-     "Ghana",
-     "Gibraltar",
-     "Greece",
-     "Greenland",
-     "Grenada",
-     "Guadeloupe",
-     "Guam",
-     "Guatemala",
-     "Guernsey",
-     "Guinea",
-     "Guinea-Bissau",
-     "Guyana",
-     "Haiti",
-     "Heard",
-     "Herzegovina",
-     "Holy See",
-     "Honduras",
-     "Hong Kong",
-     "Hungary",
-     "Iceland",
-     "India",
-     "Indonesia",
-     "Iran (Islamic Republic of)",
-     "Iraq",
-     "Ireland",
-     "Isle of Man",
-     "Israel",
-     "Italy",
-     "Jamaica",
-     "Jan Mayen Islands",
-     "Japan",
-     "Jersey",
-     "Jordan",
-     "Kazakhstan",
-     "Kenya",
-     "Kiribati",
-     "Korea",
-     "Korea (Democratic)",
-     "Kuwait",
-     "Kyrgyzstan",
-     "Lao",
-     "Latvia",
-     "Lebanon",
-     "Lesotho",
-     "Liberia",
-     "Libyan Arab Jamahiriya",
-     "Liechtenstein",
-     "Lithuania",
-     "Luxembourg",
-     "Macao",
-     "Macedonia",
-     "Madagascar",
-     "Malawi",
-     "Malaysia",
-     "Maldives",
-     "Mali",
-     "Malta",
-     "Marshall Islands",
-     "Martinique",
-     "Mauritania",
-     "Mauritius",
-     "Mayotte",
-     "McDonald Islands",
-     "Mexico",
-     "Micronesia",
-     "Miquelon",
-     "Moldova",
-     "Monaco",
-     "Mongolia",
-     "Montenegro",
-     "Montserrat",
-     "Morocco",
-     "Mozambique",
-     "Myanmar",
-     "Namibia",
-     "Nauru",
-     "Nepal",
-     "Netherlands",
-     "Netherlands Antilles",
-     "Nevis",
-     "New Caledonia",
-     "New Zealand",
-     "Nicaragua",
-     "Niger",
-     "Nigeria",
-     "Niue",
-     "Norfolk Island",
-     "Northern Mariana Islands",
-     "Norway",
-     "Oman",
-     "Pakistan",
-     "Palau",
-     "Palestinian Territory, Occupied",
-     "Panama",
-     "Papua New Guinea",
-     "Paraguay",
-     "Peru",
-     "Philippines",
-     "Pitcairn",
-     "Poland",
-     "Portugal",
-     "Principe",
-     "Puerto Rico",
-     "Qatar",
-     "Reunion",
-     "Romania",
-     "Russian Federation",
-     "Rwanda",
-     "Saint Barthelemy",
-     "Saint Helena",
-     "Saint Kitts",
-     "Saint Lucia",
-     "Saint Martin (French part)",
-     "Saint Pierre",
-     "Saint Vincent",
-     "Samoa",
-     "San Marino",
-     "Sao Tome",
-     "Saudi Arabia",
-     "Senegal",
-     "Serbia",
-     "Seychelles",
-     "Sierra Leone",
-     "Singapore",
-     "Slovakia",
-     "Slovenia",
-     "Solomon Islands",
-     "Somalia",
-     "South Africa",
-     "South Georgia",
-     "South Sandwich Islands",
-     "Spain",
-     "Sri Lanka",
-     "Sudan",
-     "Suriname",
-     "Svalbard",
-     "Swaziland",
-     "Sweden",
-     "Switzerland",
-     "Syrian Arab Republic",
-     "Taiwan",
-     "Tajikistan",
-     "Tanzania",
-     "Thailand",
-     "The Grenadines",
-     "Timor-Leste",
-     "Tobago",
-     "Togo",
-     "Tokelau",
-     "Tonga",
-     "Trinidad",
-     "Tunisia",
-     "Turkey",
-     "Turkmenistan",
-     "Turks Islands",
-     "Tuvalu",
-     "Uganda",
-     "Ukraine",
-     "United Arab Emirates",
-     "United Kingdom",
-     "United States",
-     "Uruguay",
-     "US Minor Outlying Islands",
-     "Uzbekistan",
-     "Vanuatu",
-     "Vatican City State",
-     "Venezuela",
-     "Vietnam",
-     "Virgin Islands (British)",
-     "Virgin Islands (US)",
-     "Wallis",
-     "Western Sahara",
-     "Yemen",
-     "Zambia",
-     "Zimbabwe"];  
+    theInput[8] = 0;
+
+    var theResult = [
+      {"question":"q1","cc1":"You'd still be single, but you'd be married in <span id='ageGap'>0</span> years. Start making your baby shower invite list though because you'd have your first child in <span id='ageGap2'>0</span> years too. After giving birth, you would have 90 days of paid maternity leave!","cc2":"Congratulations! You'd be married and have at least one child. Did we mention that you would have 90 days of paid maternity leave?","cc3":"","cc4":"","cc5":""},
+      {"question":"q2","cc1":"You would feel right at home! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You won't even need a smart phone.","cc2":"Welcome to the country of mobile payment! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You'd better learn to sing Stella Mwangi's <a href='https://www.youtube.com/watch?v=-7OcGS6sV8E' target='_blank'>Biashara</a> (which literally translates as 'Business') if you want to show you own it as a working woman in Kenya.","cc3":"","cc4":"","cc5":""},
+      {"question":"q3","cc1":"You probably wouldn't save money in a bank. Instead you would keep your money in an informal, community-based savings club. ","cc2":"You would trust local savings clubs in your community much more than your house, and they could provide you with loans! ","cc3":"Maybe not, but as a Kenyan woman, you'd have a better chance of saving money with the country's high savings rate among women.","cc4":"","cc5":""},
+      {"question":"q4","cc1":"Congratulations! You would be a part of the solution because your country emits less CO2 and consumes more renewable energy than most countries.","cc2":"You would be living in one of the greenest countries in the world. Your country would emit less CO2 and consume more renewable energy than most countries. ","cc3":"Well, your country cares, even if you don't. You would be living in one of the greenest countries in the world. Kenya emits less CO2 and consumes more renewable energy than most other countries. ","cc4":"","cc5":""},
+      {"question":"q5","cc1":"Say goodbye to your muffin top as the obesity rate in Kenya is extremely low.","cc2":"Welcome to your world! Obesity is extremely rare among women in Kenya.","cc3":"","cc4":"","cc5":""},
+      {"question":"q6","cc1":"Get ready to feel very lonely in Kenya.","cc2":"No more second-hand smoke for you!","cc3":"","cc4":"","cc5":""},
+      {"question":"q7","cc1":"You'd probably have Sauti Sol's song 'Isabella' on your phone. It's the second most downloaded song in Kenya right now. The Nairobi-based group has been around since 2005 and won the MTV Europe Music Award for Best African Act in 2014.","cc2":"Surprise! Adele's 'Hello' is the most downloaded song in Kenya right now. Turns out people love to sing out their feelings in cars all around the world.","cc3":"Kenyan group Elani — meaning light in Giriama — make some of the most loved music in country today. The trio write conscientious lyrics with meaning, and infuse their music videos with this good will. They currently have the 10th most downloaded album in Kenya.","cc4":"Kenyan Alt scene stalwarts Just a Band are back with a hugely popular single this fall, and a sweet video. The feel good vibes are typical of this Nairobi trio, who dabble in electronic, disco, house, funk, jazz and more.  ","cc5":"Muthoni The Drummer Queen is a total boss. One of the fastest rising rappers in the country, she recently headlined the uber-hip Blankets and Wine Festival."},
+      {"question":"q8","cc1":"The most viewed TV show in all of Kenya this year is the Mexican telenovela 'La Malquerida,' carried by the hugely dominant Citizen TV. ","cc2":"Nipashe,' which means 'tell me' in Swahili, is the country's second most popular TV show, and the most watched news show on air. ","cc3":"Kenyans love the teen drama 'Tahidi High.' Described by Citizen TV as 'an action packed high school drama, full of intrigue, love, infighting as well as the usual battle of the sexes,' the teen drama is the 5th most watched show in the country.","cc4":"Citizen TV's 'Naswa' is a zany hidden camera show in the style of 'Candid Camera.' Fake snakes, awkward situations and laugh tracks galore.","cc5":""}
+    ];
+    //the 'question' key is not required because the rows can be called by numbers
+
+    var theDesc = [
+      "Kenyan women get married at the average age of 20, and have their first child at the same age (2008 Kenya Demographic and Health Survey). Kenyan women have an average of four children (2014 Kenya Demographic and Health Survey).",
+      "Kenya has the world's highest rate of mobile payment. More than half (55%) of adult women use mobile money through GSM network. Read our #OwningIt <hyperlink> series to learn more about M-Pesa, Kenya's most popular mobile money transfer service.",
+      "Kenya has the world's highest rate of people using savings clubs. Four out of 10 adult women use savings clubs to keep money compared to financial institutions (28%). Kenyan women also have a high savings rate — 72% of them say they have saved money in the past year, slightly lower than the number of North American women (US: 73%, Canada: 80%). Read our #OwningIt series to learn more about Kenyan savings clubs.",
+      "Kenya's annual CO2 emmission per capita is 0.26 tons, the 14th lowest among 158 countries. 23% of its energy is produced from renewable energy (excluding hydropower), making Kenya the 6th highest country to use renewable energy out of 136 countries.",
+      "In Kenya, only one out of 10 women are obese (Body mass index, BMI > 30 kg/m²).",
+      "Only two percent of Kenyan women are smokers.",
+      "Description for Question 7",
+      "Description for Question 8"
+    ]; 
+
+    var twtArray = [
+      {"question":"q1","cc1":"I would be married and having my first kid in <span id='ageGap3'>0</span> years","cc2":"I would be married and having at least kid by now","cc3":"","cc4":"","cc5":""},
+      {"question":"q2","cc1":"I would be using mobile phone to send/receive $ everywhere!","cc2":"People around me would be using mobile phone to send/receive $ everywhere!","cc3":"","cc4":"","cc5":""},
+      {"question":"q3","cc1":"I probably wouldn't keep my $ in a bank","cc2":"I would keep my $ in a community-based savings club","cc3":"I would probably save more $ than I am now","cc4":"","cc5":""},
+      {"question":"q4","cc1":"I would be a part of the solution to climate change","cc2":"I would be living in 1 of the greenest countries!","cc3":"I would be living in 1 of the greenest countries!","cc4":"","cc5":""},
+      {"question":"q5","cc1":"I would be able to say goodbye to my muffin top!","cc2":"It would be much easier for me to lose weight","cc3":"","cc4":"","cc5":""},
+      {"question":"q6","cc1":"It would be much easier for me to quit smoking","cc2":"No more annoying second-hand smoke!","cc3":"","cc4":"","cc5":""},
+      {"question":"q7","cc1":"I would have Sauti Sol's song 'Isabella' on my phone","cc2":"Surprise! Adele's 'Hello' is the top song on my phone","cc3":"I would enjoy music videos by Kenyan group Elani, infused with good will","cc4":"Heard of 'Just a Band'? This Kenyan Alt stalwarts would be my jam","cc5":"Kenyan rapper Muthoni The Drummer Queen would be my jam"},
+      {"question":"q8","cc1":"dummy","cc2":"dummy","cc3":"dummy","cc4":"dummy","cc5":""}
+    ];
+    //the 'question' key is not required because the rows can be called by numbers
+
+    var countries =    [
+      {"label":"Afghanistan","value":"AFG","ban":0.9246893,"fer":4.9,"obe":4.1,"smo":0,"ren":null,"coo":0},
+      {"label":"Albania","value":"ALB","ban":7.001647,"fer":1.771,"obe":18.7,"smo":8.2,"ren":0,"coo":1.26},
+      {"label":"Algeria","value":"DZA","ban":5.72545,"fer":2.795,"obe":30.8,"smo":0,"ren":0,"coo":2.9},
+      {"label":"American Samoa","value":"ASM","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Andorra","value":"ADO","ban":0,"fer":0,"obe":30.5,"smo":28.4,"ren":null,"coo":0},
+      {"label":"Angola","value":"AGO","ban":9.495955,"fer":5.863,"obe":14.2,"smo":0,"ren":0,"coo":0.86},
+      {"label":"Antigua and Barbuda","value":"ATG","ban":0,"fer":2.089,"obe":38.7,"smo":0,"ren":null,"coo":0},
+      {"label":"Arab World","value":"ARB","ban":0,"fer":3.197439528,"obe":0,"smo":0,"ren":0.2510990921,"coo":0},
+      {"label":"Argentina","value":"ARG","ban":3.124133,"fer":2.175,"obe":28.9,"smo":20.8,"ren":2.0404226272,"coo":4.4},
+      {"label":"Armenia","value":"ARM","ban":1.695223,"fer":1.74,"obe":22,"smo":1.7,"ren":0.049776008,"coo":1.76},
+      {"label":"Aruba","value":"ABW","ban":0,"fer":1.673,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Australia","value":"AUS","ban":59.33734,"fer":1.921,"obe":28.8,"smo":14.7,"ren":3.9970427991,"coo":16.7},
+      {"label":"Austria","value":"AUT","ban":65.4828,"fer":1.44,"obe":16.3,"smo":35.9,"ren":10.8272098945,"coo":7.68},
+      {"label":"Azerbaijan","value":"AZE","ban":3.433804,"fer":2,"obe":26.1,"smo":0.4,"ren":0,"coo":3.13},
+      {"label":"Bahamas, The","value":"BHS","ban":0,"fer":1.888,"obe":42.5,"smo":0,"ren":null,"coo":0},
+      {"label":"Bahrain","value":"BHR","ban":25.12827,"fer":2.075,"obe":42.8,"smo":6.9,"ren":0,"coo":21.24},
+      {"label":"Bangladesh","value":"BGD","ban":6.538901,"fer":2.177,"obe":5.1,"smo":1.1,"ren":0,"coo":0.38},
+      {"label":"Barbados","value":"BRB","ban":0,"fer":1.849,"obe":38.2,"smo":1.1,"ren":null,"coo":0},
+      {"label":"Belarus","value":"BLR","ban":14.14731,"fer":1.62,"obe":25.5,"smo":11,"ren":0.3279327251,"coo":6.15},
+      {"label":"Belgium","value":"BEL","ban":51.61959,"fer":1.79,"obe":18.2,"smo":20.9,"ren":12.3518692903,"coo":8.02},
+      {"label":"Belize","value":"BLZ","ban":24.92098,"fer":2.676,"obe":28.8,"smo":0,"ren":null,"coo":0},
+      {"label":"Benin","value":"BEN","ban":5.272374,"fer":4.845,"obe":14.5,"smo":1.1,"ren":0.6134969325,"coo":0.51},
+      {"label":"Bermuda","value":"BMU","ban":0,"fer":1.63,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Bhutan","value":"BTN","ban":21.49403,"fer":2.232,"obe":8.8,"smo":0,"ren":null,"coo":0},
+      {"label":"Bolivia","value":"BOL","ban":20.69123,"fer":3.221,"obe":22.2,"smo":18.6,"ren":3.0544315364,"coo":1.62},
+      {"label":"Bosnia and Herzegovina","value":"BIH","ban":6.000751,"fer":1.283,"obe":19.4,"smo":31.2,"ren":0,"coo":5.62},
+      {"label":"Botswana","value":"BWA","ban":24.65759,"fer":2.619,"obe":32.3,"smo":0,"ren":0,"coo":2.71},
+      {"label":"Brazil","value":"BRA","ban":9.90111,"fer":1.801,"obe":22.7,"smo":12.4,"ren":7.2921738595,"coo":2.26},
+      {"label":"Brunei Darussalam","value":"BRN","ban":0,"fer":1.994,"obe":20.1,"smo":3.4,"ren":0.0508905852,"coo":16.39},
+      {"label":"Bulgaria","value":"BGR","ban":12.66026,"fer":1.5,"obe":24.5,"smo":30.4,"ren":4.5106163722,"coo":5.41},
+      {"label":"Burkina Faso","value":"BFA","ban":7.454464,"fer":5.605,"obe":9.2,"smo":5.1,"ren":null,"coo":0},
+      {"label":"Burundi","value":"BDI","ban":2.966515,"fer":6.033,"obe":4.5,"smo":0,"ren":null,"coo":0},
+      {"label":"Cabo Verde","value":"CPV","ban":0,"fer":2.292,"obe":17.4,"smo":3.9,"ren":null,"coo":0},
+      {"label":"Cambodia","value":"KHM","ban":2.601308,"fer":2.861,"obe":4.6,"smo":3.5,"ren":1.6039051604,"coo":0.34},
+      {"label":"Cameroon","value":"CMR","ban":4.794449,"fer":4.78,"obe":17.1,"smo":0.9,"ren":1.0155506189,"coo":0.27},
+      {"label":"Canada","value":"CAN","ban":59.53022,"fer":1.61,"obe":29.1,"smo":14.2,"ren":3.262929227,"coo":15.26},
+      {"label":"Caribbean small states","value":"CSS","ban":0,"fer":2.166156887,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Cayman Islands","value":"CYM","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Central African Republic","value":"CAF","ban":0,"fer":4.365,"obe":8,"smo":0,"ren":null,"coo":0},
+      {"label":"Central Europe and the Baltics","value":"CEB","ban":0,"fer":1.405902886,"obe":0,"smo":25.70746658,"ren":7.0894496201,"coo":0},
+      {"label":"Chad","value":"TCD","ban":3.713884,"fer":6.263,"obe":12.3,"smo":0,"ren":null,"coo":0},
+      {"label":"Channel Islands","value":"CHI","ban":0,"fer":1.459,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Chile","value":"CHL","ban":12.87721,"fer":1.82,"obe":32.2,"smo":37.4,"ren":7.5454115353,"coo":4.65},
+      {"label":"China","value":"CHN","ban":41.16059,"fer":1.668,"obe":8,"smo":2,"ren":2.7322613752,"coo":6.6},
+      {"label":"Colombia","value":"COL","ban":8.368082,"fer":2.286,"obe":25.7,"smo":6.9,"ren":3.2212008919,"coo":1.41},
+      {"label":"Comoros","value":"COM","ban":0,"fer":4.714,"obe":11,"smo":7.1,"ren":null,"coo":0},
+      {"label":"Congo, Dem. Rep.","value":"ZAR","ban":3.070973,"fer":5.933,"obe":7.1,"smo":0,"ren":0,"coo":0.04},
+      {"label":"Congo, Rep.","value":"COG","ban":8.33857,"fer":4.969,"obe":15.7,"smo":1.7,"ren":0,"coo":0.53},
+      {"label":"Costa Rica","value":"CRI","ban":21.66297,"fer":1.795,"obe":29.5,"smo":9.2,"ren":20.7469287469,"coo":1.46},
+      {"label":"Cote d'Ivoire","value":"CIV","ban":7.228524,"fer":4.866,"obe":13.8,"smo":0,"ren":0.9407069555,"coo":0.43},
+      {"label":"Croatia","value":"HRV","ban":27.42793,"fer":1.51,"obe":24.1,"smo":32.3,"ren":4.0885040885,"coo":3.76},
+      {"label":"Cuba","value":"CUB","ban":0,"fer":1.449,"obe":31.5,"smo":19.8,"ren":3.1304253472,"coo":2.64},
+      {"label":"Curacao","value":"CUW","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":28.91},
+      {"label":"Cyprus","value":"CYP","ban":21.43463,"fer":1.461,"obe":25.7,"smo":0,"ren":5.4483782065,"coo":6.49},
+      {"label":"Czech Republic","value":"CZE","ban":36.01529,"fer":1.45,"obe":27.3,"smo":28.9,"ren":6.8354022247,"coo":9.62},
+      {"label":"Denmark","value":"DNK","ban":62.99778,"fer":1.73,"obe":17,"smo":19,"ren":48.2279428516,"coo":6.91},
+      {"label":"Djibouti","value":"DJI","ban":0,"fer":3.387,"obe":13.5,"smo":0,"ren":null,"coo":0},
+      {"label":"Dominica","value":"DMA","ban":0,"fer":0,"obe":33,"smo":0,"ren":null,"coo":0},
+      {"label":"Dominican Republic","value":"DOM","ban":24.91872,"fer":2.484,"obe":29.5,"smo":10.3,"ren":0.1768242367,"coo":1.89},
+      {"label":"East Asia & Pacific (all income levels)","value":"EAS","ban":0,"fer":1.814090762,"obe":0,"smo":3.338814492,"ren":2.9765443094,"coo":0},
+      {"label":"East Asia & Pacific (developing only)","value":"EAP","ban":36.20813,"fer":1.850627958,"obe":0,"smo":2.724767071,"ren":2.828899454,"coo":0},
+      {"label":"Ecuador","value":"ECU","ban":14.01063,"fer":2.559,"obe":22.9,"smo":3.6,"ren":1.3043287959,"coo":2.51},
+      {"label":"Egypt, Arab Rep.","value":"EGY","ban":3.921921,"fer":2.77,"obe":37.5,"smo":0.4,"ren":0.9107833832,"coo":2.25},
+      {"label":"El Salvador","value":"SLV","ban":12.88048,"fer":2.184,"obe":27,"smo":0,"ren":32.5605182407,"coo":0.91},
+      {"label":"Equatorial Guinea","value":"GNQ","ban":0,"fer":4.845,"obe":22.7,"smo":0,"ren":null,"coo":0},
+      {"label":"Eritrea","value":"ERI","ban":0,"fer":4.696,"obe":6.9,"smo":0,"ren":0.5571030641,"coo":0.09},
+      {"label":"Estonia","value":"EST","ban":33.41297,"fer":1.56,"obe":22.9,"smo":25.4,"ren":11.9913094343,"coo":14.29},
+      {"label":"Ethiopia","value":"ETH","ban":12.36833,"fer":4.519,"obe":6.6,"smo":0.5,"ren":0.671641791,"coo":0.09},
+      {"label":"Euro area","value":"EMU","ban":43.00703,"fer":1.546805014,"obe":0,"smo":25.31684374,"ren":14.4588793748,"coo":0},
+      {"label":"Europe & Central Asia (all income levels)","value":"ECS","ban":0,"fer":1.729292856,"obe":0,"smo":20.98397759,"ren":8.4122480145,"coo":0},
+      {"label":"Europe & Central Asia (developing only)","value":"ECA","ban":6.492169,"fer":1.988798187,"obe":0,"smo":12.94607429,"ren":1.4911361996,"coo":0},
+      {"label":"European Union","value":"EUU","ban":0,"fer":1.57650621,"obe":0,"smo":24.77333571,"ren":13.2459513801,"coo":6.57},
+      {"label":"Faeroe Islands","value":"FRO","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Fiji","value":"FJI","ban":0,"fer":2.588,"obe":42.3,"smo":12.8,"ren":null,"coo":0},
+      {"label":"Finland","value":"FIN","ban":58.6804,"fer":1.8,"obe":19.6,"smo":19.6,"ren":16.5897242859,"coo":9.04},
+      {"label":"Fragile and conflict affected situations","value":"FCS","ban":0,"fer":4.327499991,"obe":0,"smo":0,"ren":0.0545899988,"coo":0},
+      {"label":"France","value":"FRA","ban":46.35595,"fer":2.01,"obe":24,"smo":25.8,"ren":4.4040279086,"coo":4.79},
+      {"label":"French Polynesia","value":"PYF","ban":0,"fer":2.058,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Gabon","value":"GAB","ban":17.00945,"fer":4.087,"obe":22.5,"smo":0,"ren":0.4096495221,"coo":1.69},
+      {"label":"Gambia, The","value":"GMB","ban":0,"fer":5.751,"obe":15.8,"smo":0,"ren":null,"coo":0},
+      {"label":"Georgia","value":"GEO","ban":1.065247,"fer":1.817,"obe":24,"smo":5.8,"ren":0,"coo":1.48},
+      {"label":"Germany","value":"DEU","ban":57.63022,"fer":1.38,"obe":18.5,"smo":28.7,"ren":19.5300702712,"coo":9.25},
+      {"label":"Ghana","value":"GHA","ban":18.84597,"fer":3.857,"obe":18.9,"smo":0.5,"ren":0,"coo":0.53},
+      {"label":"Greece","value":"GRC","ban":11.62749,"fer":1.29,"obe":23.8,"smo":34.2,"ren":9.4584588044,"coo":6.25},
+      {"label":"Greenland","value":"GRL","ban":0,"fer":2.05,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Grenada","value":"GRD","ban":0,"fer":2.17,"obe":34.3,"smo":0,"ren":null,"coo":0},
+      {"label":"Guam","value":"GUM","ban":0,"fer":2.405,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Guatemala","value":"GTM","ban":13.41238,"fer":3.783,"obe":23.9,"smo":0,"ren":19.5176370591,"coo":0.79},
+      {"label":"Guinea","value":"GIN","ban":1.513928,"fer":4.915,"obe":10.3,"smo":0,"ren":null,"coo":0},
+      {"label":"Guinea-Bissau","value":"GNB","ban":0,"fer":4.927,"obe":10.8,"smo":0,"ren":null,"coo":0},
+      {"label":"Guyana","value":"GUY","ban":0,"fer":2.546,"obe":31.6,"smo":0,"ren":null,"coo":0},
+      {"label":"Haiti","value":"HTI","ban":8.992279,"fer":3.148,"obe":16.6,"smo":2.7,"ren":0,"coo":0.21},
+      {"label":"Heavily indebted poor countries (HIPC)","value":"HPC","ban":0,"fer":5.033590795,"obe":0,"smo":0,"ren":1.5862269317,"coo":0},
+      {"label":"High income","value":"HIC","ban":45.47396,"fer":1.724862644,"obe":0,"smo":19.29022463,"ren":6.1855947745,"coo":0},
+      {"label":"High income: nonOECD","value":"NOC","ban":21.50294,"fer":1.945027168,"obe":0,"smo":19.70703764,"ren":0.4405157254,"coo":0},
+      {"label":"High income: OECD","value":"OEC","ban":50.35394,"fer":1.657363048,"obe":0,"smo":19.19143461,"ren":7.4610445517,"coo":0},
+      {"label":"Honduras","value":"HND","ban":11.60069,"fer":3.001,"obe":24.1,"smo":2.4,"ren":7.0327933623,"coo":1.04},
+      {"label":"Hong Kong SAR, China","value":"HKG","ban":47.6327,"fer":1.124,"obe":0,"smo":0,"ren":0.2059997425,"coo":6.41},
+      {"label":"Hungary","value":"HUN","ban":17.92481,"fer":1.34,"obe":23.9,"smo":26.5,"ren":7.0338248049,"coo":3.99},
+      {"label":"Iceland","value":"ISL","ban":0,"fer":2.04,"obe":21.5,"smo":16.9,"ren":29.6826029973,"coo":6.26},
+      {"label":"India","value":"IND","ban":10.1291,"fer":2.479,"obe":6.7,"smo":2.4,"ren":4.4621461651,"coo":1.49},
+      {"label":"Indonesia","value":"IDN","ban":26.76254,"fer":2.338,"obe":7.9,"smo":4,"ren":4.898032109,"coo":1.7},
+      {"label":"Iran, Islamic Rep.","value":"IRN","ban":19.60276,"fer":1.92,"obe":32,"smo":1.1,"ren":0.0904528937,"coo":6.79},
+      {"label":"Iraq","value":"IRQ","ban":1.848297,"fer":4.026,"obe":30.5,"smo":0,"ren":0,"coo":4.13},
+      {"label":"Ireland","value":"IRL","ban":47.7403,"fer":2.01,"obe":25.3,"smo":23.5,"ren":16.2527392257,"coo":7.47},
+      {"label":"Isle of Man","value":"IMY","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Israel","value":"ISR","ban":54.5798,"fer":3.03,"obe":27,"smo":20.1,"ren":0.7709635458,"coo":8.46},
+      {"label":"Italy","value":"ITA","ban":23.62118,"fer":1.43,"obe":21.6,"smo":19.8,"ren":16.935196335,"coo":5.58},
+      {"label":"Jamaica","value":"JAM","ban":27.05942,"fer":2.26,"obe":35.7,"smo":6.4,"ren":5.2606967501,"coo":2.75},
+      {"label":"Japan","value":"JPN","ban":65.71702,"fer":1.43,"obe":3.2,"smo":11.3,"ren":4.6422244008,"coo":9.7},
+      {"label":"Jordan","value":"JOR","ban":2.504394,"fer":3.244,"obe":38.6,"smo":10,"ren":0.0542299349,"coo":3.53},
+      {"label":"Kazakhstan","value":"KAZ","ban":6.161163,"fer":2.64,"obe":25,"smo":9.7,"ren":0.0032892212,"coo":14.38},
+      {"label":"Kenya","value":"KEN","ban":27.92771,"fer":4.382,"obe":11.1,"smo":2.3,"ren":23.2931242461,"coo":0.26},
+      {"label":"Kiribati","value":"KIR","ban":0,"fer":2.952,"obe":48.5,"smo":42.6,"ren":null,"coo":0},
+      {"label":"Korea, Dem. Rep.","value":"PRK","ban":0,"fer":1.988,"obe":3.1,"smo":0,"ren":0,"coo":0},
+      {"label":"Korea, Rep.","value":"KOR","ban":54.23978,"fer":1.187,"obe":6.7,"smo":4.4,"ren":0.588395943,"coo":11.39},
+      {"label":"Kosovo","value":"KSV","ban":4.288517,"fer":2.16,"obe":0,"smo":0,"ren":0,"coo":4.56},
+      {"label":"Kuwait","value":"KWT","ban":19.77823,"fer":2.6,"obe":45.9,"smo":0,"ren":0,"coo":24.96},
+      {"label":"Kyrgyz Republic","value":"KGZ","ban":5.103613,"fer":3.2,"obe":17.3,"smo":3.8,"ren":0,"coo":1.55},
+      {"label":"Lao PDR","value":"LAO","ban":0,"fer":3.02,"obe":4.9,"smo":10.7,"ren":null,"coo":0},
+      {"label":"Latin America & Caribbean (all income levels)","value":"LCN","ban":0,"fer":2.161981353,"obe":0,"smo":11.5724601,"ren":4.8114394664,"coo":0},
+      {"label":"Latin America & Caribbean (developing only)","value":"LAC","ban":11.33889,"fer":2.164562384,"obe":0,"smo":9.79140261,"ren":5.70275389,"coo":0},
+      {"label":"Latvia","value":"LVA","ban":23.34983,"fer":1.44,"obe":25.1,"smo":24.4,"ren":6.5337224384,"coo":3.44},
+      {"label":"Least developed countries: UN classification","value":"LDC","ban":0,"fer":4.20789083,"obe":0,"smo":3.626294936,"ren":0.0859264236,"coo":0},
+      {"label":"Lebanon","value":"LBN","ban":12.04579,"fer":1.495,"obe":37.7,"smo":29.4,"ren":0,"coo":4.62},
+      {"label":"Lesotho","value":"LSO","ban":0,"fer":3.038,"obe":24,"smo":0.4,"ren":null,"coo":0},
+      {"label":"Liberia","value":"LBR","ban":0,"fer":4.792,"obe":10.6,"smo":2.7,"ren":null,"coo":0},
+      {"label":"Libya","value":"LBY","ban":0,"fer":2.356,"obe":39.5,"smo":0,"ren":0,"coo":6.97},
+      {"label":"Liechtenstein","value":"LIE","ban":0,"fer":1.51,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Lithuania","value":"LTU","ban":27.93297,"fer":1.6,"obe":28.3,"smo":21.9,"ren":16.7807463016,"coo":3.63},
+      {"label":"Low & middle income","value":"LMY","ban":20.62376,"fer":2.617418798,"obe":0,"smo":3.83396721,"ren":2.9016925001,"coo":0},
+      {"label":"Low income","value":"LIC","ban":8.558826,"fer":4.83604565,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Lower middle income","value":"LMC","ban":11.95313,"fer":2.826705816,"obe":0,"smo":3.026808138,"ren":3.431633283,"coo":0},
+      {"label":"Luxembourg","value":"LUX","ban":60.97492,"fer":1.57,"obe":19.7,"smo":22.3,"ren":7.5190701053,"coo":17.93},
+      {"label":"Macao SAR, China","value":"MAC","ban":0,"fer":1.083,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Macedonia, FYR","value":"MKD","ban":10.17137,"fer":1.431,"obe":20.9,"smo":0,"ren":0.0479080166,"coo":3.94},
+      {"label":"Madagascar","value":"MDG","ban":3.234891,"fer":4.468,"obe":8.6,"smo":0,"ren":null,"coo":0},
+      {"label":"Malawi","value":"MWI","ban":5.59698,"fer":5.389,"obe":8.9,"smo":6.6,"ren":null,"coo":0},
+      {"label":"Malaysia","value":"MYS","ban":32.28412,"fer":1.964,"obe":16,"smo":1.6,"ren":0.6444363414,"coo":6.97},
+      {"label":"Maldives","value":"MDV","ban":0,"fer":2.256,"obe":10.8,"smo":0,"ren":null,"coo":0},
+      {"label":"Mali","value":"MLI","ban":0.979183,"fer":6.847,"obe":9.9,"smo":3.4,"ren":null,"coo":0},
+      {"label":"Malta","value":"MLT","ban":34.08287,"fer":1.43,"obe":28.5,"smo":21.5,"ren":1.0917030568,"coo":5.5},
+      {"label":"Marshall Islands","value":"MHL","ban":0,"fer":0,"obe":48.9,"smo":0,"ren":null,"coo":0},
+      {"label":"Mauritania","value":"MRT","ban":9.845138,"fer":4.67,"obe":13.6,"smo":4,"ren":null,"coo":0},
+      {"label":"Mauritius","value":"MUS","ban":34.29972,"fer":1.44,"obe":24.3,"smo":3.5,"ren":18.0550589918,"coo":3.04},
+      {"label":"Mexico","value":"MEX","ban":12.76527,"fer":2.185,"obe":33.1,"smo":7.6,"ren":4.1927843682,"coo":3.82},
+      {"label":"Micronesia, Fed. Sts.","value":"FSM","ban":0,"fer":3.294,"obe":43.7,"smo":0,"ren":null,"coo":0},
+      {"label":"Middle East & North Africa (all income levels)","value":"MEA","ban":0,"fer":2.72600206,"obe":0,"smo":0,"ren":0.248922412,"coo":0},
+      {"label":"Middle East & North Africa (developing only)","value":"MNA","ban":0,"fer":2.74835869,"obe":0,"smo":0,"ren":0.3849484376,"coo":0},
+      {"label":"Middle income","value":"MIC","ban":22.20928,"fer":2.38604576,"obe":0,"smo":3.821930189,"ren":2.9402410482,"coo":0},
+      {"label":"Moldova","value":"MDA","ban":7.146698,"fer":1.456,"obe":17.9,"smo":5.4,"ren":0,"coo":1.88},
+      {"label":"Monaco","value":"MCO","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Mongolia","value":"MNG","ban":36.35594,"fer":2.436,"obe":18.8,"smo":5.8,"ren":0,"coo":6.57},
+      {"label":"Montenegro","value":"MNE","ban":4.676371,"fer":1.666,"obe":20.7,"smo":0,"ren":0,"coo":3.66},
+      {"label":"Morocco","value":"MAR","ban":0,"fer":2.735,"obe":28.3,"smo":1.7,"ren":2.6632522407,"coo":1.53},
+      {"label":"Mozambique","value":"MOZ","ban":0,"fer":5.188,"obe":8.7,"smo":6.2,"ren":0,"coo":0.11},
+      {"label":"Myanmar","value":"MMR","ban":10.39502,"fer":1.938,"obe":4.3,"smo":7.7,"ren":0,"coo":0.25},
+      {"label":"Namibia","value":"NAM","ban":24.55869,"fer":3.051,"obe":28.2,"smo":12,"ren":0,"coo":1.49},
+      {"label":"Nepal","value":"NPL","ban":14.09193,"fer":2.3,"obe":4.6,"smo":13.9,"ren":0,"coo":0.18},
+      {"label":"Netherlands","value":"NLD","ban":54.96925,"fer":1.72,"obe":18.3,"smo":24.7,"ren":12.135017804,"coo":9.3},
+      {"label":"New Caledonia","value":"NCL","ban":0,"fer":2.28,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"New Zealand","value":"NZL","ban":71.20037,"fer":1.95,"obe":30.8,"smo":0,"ren":20.090303646,"coo":6.89},
+      {"label":"Nicaragua","value":"NIC","ban":6.404255,"fer":2.498,"obe":23.2,"smo":0,"ren":32.4237161995,"coo":0.69},
+      {"label":"Niger","value":"NER","ban":1.766696,"fer":7.561,"obe":6.8,"smo":0.2,"ren":null,"coo":0.1},
+      {"label":"Nigeria","value":"NGA","ban":21.40283,"fer":5.976,"obe":16.3,"smo":1.2,"ren":0,"coo":0.35},
+      {"label":"North America","value":"NAC","ban":0,"fer":1.843167703,"obe":0,"smo":16.08555524,"ren":5.1943627681,"coo":0},
+      {"label":"Northern Mariana Islands","value":"MNP","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Norway","value":"NOR","ban":80.8962,"fer":1.85,"obe":21.7,"smo":24.9,"ren":1.3074611816,"coo":6.95},
+      {"label":"OECD members","value":"OED","ban":0,"fer":1.742831443,"obe":0,"smo":17.72817153,"ren":7.2744644164,"coo":0},
+      {"label":"Oman","value":"OMN","ban":0,"fer":2.853,"obe":37.7,"smo":1,"ren":0,"coo":15.95},
+      {"label":"Other small states","value":"OSS","ban":0,"fer":3.519611325,"obe":0,"smo":0,"ren":3.6522841977,"coo":0},
+      {"label":"Pacific island small states","value":"PSS","ban":0,"fer":3.270703433,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Pakistan","value":"PAK","ban":1.5114,"fer":3.185,"obe":7.3,"smo":3.6,"ren":0,"coo":0.74},
+      {"label":"Palau","value":"PLW","ban":0,"fer":0,"obe":52.2,"smo":0,"ren":null,"coo":0},
+      {"label":"Panama","value":"PAN","ban":19.50452,"fer":2.466,"obe":33.1,"smo":2.9,"ren":0.3021148036,"coo":2.38},
+      {"label":"Papua New Guinea","value":"PNG","ban":0,"fer":3.781,"obe":33.4,"smo":0,"ren":null,"coo":0},
+      {"label":"Paraguay","value":"PRY","ban":0,"fer":2.864,"obe":19.5,"smo":9,"ren":0,"coo":0.73},
+      {"label":"Peru","value":"PER","ban":8.730925,"fer":2.417,"obe":26.5,"smo":6.5,"ren":1.7264276228,"coo":1.5},
+      {"label":"Philippines","value":"PHL","ban":15.88815,"fer":3.043,"obe":6.6,"smo":9.2,"ren":14.3854308087,"coo":0.91},
+      {"label":"Poland","value":"POL","ban":19.38151,"fer":1.3,"obe":26.7,"smo":26.1,"ren":9.1781016752,"coo":7.6},
+      {"label":"Portugal","value":"PRT","ban":26.06867,"fer":1.28,"obe":20.3,"smo":14,"ren":30.1649991223,"coo":4.3},
+      {"label":"Puerto Rico","value":"PRI","ban":19.06412,"fer":1.636,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Qatar","value":"QAT","ban":0,"fer":2.019,"obe":49.7,"smo":0,"ren":0,"coo":33.38},
+      {"label":"Romania","value":"ROM","ban":10.64954,"fer":1.53,"obe":22.7,"smo":23.4,"ren":4.8660972539,"coo":3.45},
+      {"label":"Russian Federation","value":"RUS","ban":16.51276,"fer":1.7,"obe":27.4,"smo":22.5,"ren":0.0492839795,"coo":10.79},
+      {"label":"Rwanda","value":"RWA","ban":20.21467,"fer":4.508,"obe":6.6,"smo":5.7,"ren":null,"coo":0},
+      {"label":"Samoa","value":"WSM","ban":0,"fer":4.147,"obe":51.3,"smo":20.1,"ren":null,"coo":0},
+      {"label":"San Marino","value":"SMR","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Sao Tome and Principe","value":"STP","ban":0,"fer":4.075,"obe":18.2,"smo":0,"ren":null,"coo":0},
+      {"label":"Saudi Arabia","value":"SAU","ban":9.19577,"fer":2.644,"obe":41.4,"smo":3,"ren":0.0003680801,"coo":16.39},
+      {"label":"Senegal","value":"SEN","ban":3.956872,"fer":4.934,"obe":14.6,"smo":0.8,"ren":1.4202898551,"coo":0.42},
+      {"label":"Serbia","value":"SRB","ban":7.851978,"fer":1.45,"obe":20.5,"smo":39.8,"ren":0.0165878743,"coo":6.33},
+      {"label":"Seychelles","value":"SYC","ban":0,"fer":2.4,"obe":35.9,"smo":9.2,"ren":null,"coo":0},
+      {"label":"Sierra Leone","value":"SLE","ban":8.428441,"fer":4.705,"obe":12,"smo":13.4,"ren":null,"coo":0},
+      {"label":"Singapore","value":"SGP","ban":46.68469,"fer":1.19,"obe":6.8,"smo":5.2,"ren":1.3598772274,"coo":8.62},
+      {"label":"Sint Maarten (Dutch part)","value":"SXM","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Slovak Republic","value":"SVK","ban":45.25978,"fer":1.34,"obe":26.7,"smo":18.1,"ren":4.8397345383,"coo":5.98},
+      {"label":"Slovenia","value":"SVN","ban":31.3823,"fer":1.58,"obe":25.5,"smo":18.9,"ren":2.7668747185,"coo":6.96},
+      {"label":"Small states","value":"SST","ban":0,"fer":3.176423252,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Solomon Islands","value":"SLB","ban":0,"fer":4.031,"obe":33.7,"smo":0,"ren":null,"coo":0},
+      {"label":"Somalia","value":"SOM","ban":1.287075,"fer":6.563,"obe":7.2,"smo":0,"ren":null,"coo":0},
+      {"label":"South Africa","value":"ZAF","ban":31.18489,"fer":2.387,"obe":37.3,"smo":7.4,"ren":0.1748669874,"coo":7.91},
+      {"label":"South Asia","value":"SAS","ban":9.106198,"fer":2.555139669,"obe":0,"smo":2.564933594,"ren":3.8906930971,"coo":0},
+      {"label":"South Sudan","value":"SSD","ban":0,"fer":4.92,"obe":11.1,"smo":0,"ren":null,"coo":0.13},
+      {"label":"Spain","value":"ESP","ban":38.82905,"fer":1.32,"obe":24.7,"smo":28,"ren":22.5952738976,"coo":5.06},
+      {"label":"Sri Lanka","value":"LKA","ban":28.49437,"fer":2.339,"obe":9.5,"smo":0.5,"ren":1.5796991849,"coo":0.67},
+      {"label":"St. Kitts and Nevis","value":"KNA","ban":0,"fer":0,"obe":35.3,"smo":0,"ren":null,"coo":0},
+      {"label":"St. Lucia","value":"LCA","ban":0,"fer":1.912,"obe":33.9,"smo":0,"ren":null,"coo":0},
+      {"label":"St. Martin (French part)","value":"MAF","ban":0,"fer":1.81,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"St. Vincent and the Grenadines","value":"VCT","ban":0,"fer":1.997,"obe":30.9,"smo":0,"ren":null,"coo":0},
+      {"label":"Sub-Saharan Africa (all income levels)","value":"SSF","ban":0,"fer":5.050025019,"obe":0,"smo":2.814849056,"ren":0.7186372401,"coo":0},
+      {"label":"Sub-Saharan Africa (developing only)","value":"SSA","ban":13.49477,"fer":5.05047843,"obe":0,"smo":2.813798521,"ren":0.7236704798,"coo":0},
+      {"label":"Sudan","value":"SDN","ban":3.940896,"fer":4.42,"obe":11.1,"smo":0,"ren":0,"coo":0.36},
+      {"label":"Suriname","value":"SUR","ban":0,"fer":2.268,"obe":32.9,"smo":0,"ren":null,"coo":0},
+      {"label":"Swaziland","value":"SWZ","ban":0,"fer":3.334,"obe":27.8,"smo":2.4,"ren":null,"coo":0},
+      {"label":"Sweden","value":"SWE","ban":74.4747,"fer":1.91,"obe":18.6,"smo":23,"ren":11.6429137927,"coo":3.91},
+      {"label":"Switzerland","value":"CHE","ban":47.3476,"fer":1.52,"obe":16.5,"smo":20.9,"ren":2.8476694884,"coo":5.14},
+      {"label":"Syrian Arab Republic","value":"SYR","ban":0,"fer":2.964,"obe":29.9,"smo":0,"ren":0,"coo":1.47},
+      {"label":"Tajikistan","value":"TJK","ban":0.9080846,"fer":3.815,"obe":17.3,"smo":0,"ren":0,"coo":0.4},
+      {"label":"Tanzania","value":"TZA","ban":8.1688,"fer":5.214,"obe":11.4,"smo":4,"ren":0.5522001726,"coo":0.2},
+      {"label":"Thailand","value":"THA","ban":37.91315,"fer":1.399,"obe":11.1,"smo":2.4,"ren":3.0146260075,"coo":3.69},
+      {"label":"Timor-Leste","value":"TMP","ban":0,"fer":5.2,"obe":3.2,"smo":0,"ren":null,"coo":0},
+      {"label":"Togo","value":"TGO","ban":6.191189,"fer":4.639,"obe":11.9,"smo":0,"ren":4.5045045045,"coo":0.24},
+      {"label":"Tonga","value":"TON","ban":0,"fer":3.767,"obe":50.1,"smo":13.3,"ren":null,"coo":0},
+      {"label":"Trinidad and Tobago","value":"TTO","ban":0,"fer":1.797,"obe":38,"smo":0,"ren":0,"coo":17.12},
+      {"label":"Tunisia","value":"TUN","ban":8.562175,"fer":2.25,"obe":33.8,"smo":0,"ren":1.1175979983,"coo":2.17},
+      {"label":"Turkey","value":"TUR","ban":5.374933,"fer":2.041,"obe":35.8,"smo":13.5,"ren":3.0693623276,"coo":3.75},
+      {"label":"Turkmenistan","value":"TKM","ban":0.8783028,"fer":2.326,"obe":23.1,"smo":0,"ren":0,"coo":12.6},
+      {"label":"Turks and Caicos Islands","value":"TCA","ban":0,"fer":0,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"Tuvalu","value":"TUV","ban":0,"fer":0,"obe":46.4,"smo":0,"ren":null,"coo":0},
+      {"label":"Uganda","value":"UGA","ban":14.58759,"fer":5.867,"obe":8.3,"smo":3.2,"ren":null,"coo":0},
+      {"label":"Ukraine","value":"UKR","ban":6.364473,"fer":1.506,"obe":22.6,"smo":14.4,"ren":0.3806153365,"coo":5.83},
+      {"label":"United Arab Emirates","value":"ARE","ban":20.73303,"fer":1.801,"obe":45.1,"smo":0,"ren":0,"coo":17.93},
+      {"label":"United Kingdom","value":"GBR","ban":52.7885,"fer":1.92,"obe":29.2,"smo":20.1,"ren":9.9689362681,"coo":7},
+      {"label":"United States","value":"USA","ban":53.46634,"fer":1.8695,"obe":34.7,"smo":16.3,"ren":5.4837405237,"coo":16.18},
+      {"label":"Upper middle income","value":"UMC","ban":31.0548,"fer":1.880784198,"obe":0,"smo":4.660534546,"ren":2.7890787276,"coo":0},
+      {"label":"Uruguay","value":"URY","ban":9.608356,"fer":2.046,"obe":30.6,"smo":22,"ren":10.5849056604,"coo":2.09},
+      {"label":"Uzbekistan","value":"UZB","ban":1.552528,"fer":2.2,"obe":18.9,"smo":1.3,"ren":0,"coo":3.18},
+      {"label":"Vanuatu","value":"VUT","ban":0,"fer":3.382,"obe":41.5,"smo":0,"ren":null,"coo":0},
+      {"label":"Venezuela, RB","value":"VEN","ban":22.34503,"fer":2.39,"obe":29.4,"smo":0,"ren":0,"coo":5.12},
+      {"label":"Vietnam","value":"VNM","ban":13.66257,"fer":1.743,"obe":4.8,"smo":1.4,"ren":0.1172208881,"coo":1.45},
+      {"label":"Virgin Islands (U.S.)","value":"VIR","ban":0,"fer":1.77,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"West Bank and Gaza","value":"WBG","ban":4.973953,"fer":4.01,"obe":0,"smo":0,"ren":null,"coo":0},
+      {"label":"World","value":"WLD","ban":25.78883,"fer":2.461422925,"obe":0,"smo":6.967913795,"ren":4.7206617559,"coo":0},
+      {"label":"Yemen, Rep.","value":"YEM","ban":0.0925427,"fer":4.075,"obe":23.4,"smo":0,"ren":0,"coo":0.98},
+      {"label":"Zambia","value":"ZMB","ban":16.35034,"fer":5.687,"obe":14.3,"smo":4.8,"ren":0,"coo":0.24},
+      {"label":"Zimbabwe","value":"ZWE","ban":3.732024,"fer":3.486,"obe":18.5,"smo":2.3,"ren":0.693221831,"coo":0.95}
+    ];
+
+    var mobArray = [54.9,61.9,52.2];
+    //mobile account, used to receive money, used to send money
+
+    var popArray = [
+      {"cc1":"https://www.youtube.com/embed/BS02l0cw140","cc2":"https://www.youtube.com/embed/YQHsXMglC9A","cc3":"https://www.youtube.com/embed/8wloBDrMKP4","cc4":"https://www.youtube.com/embed/HAX1ZWYv4ZQ","cc5":"https://www.youtube.com/embed/PNEob_6n60s"},
+      {"cc1":"https://www.youtube.com/embed/I-YSRENDx1c","cc2":"https://www.youtube.com/embed/Iw9AugMWSz4","cc3":"https://www.youtube.com/embed/WGagITzOsEM","cc4":"https://www.youtube.com/embed/FurxDnOajgI","cc5":""}
+    ];
+
+    var twtMsg = [];
+
+    var clickFB = ["No","No","No","No","No","No","No","No"];
+    var clickTW = ["No","No","No","No","No","No","No","No"];
+
+    var countryOutput = "default";
 
 $( "#countryInput" ).autocomplete({
-      source: countries
+      source: countries,
+      focus: function(event, ui) {
+          // prevent autocomplete from updating the textbox
+          event.preventDefault();
+          // manually update the textbox
+          $(this).val(ui.item.label);
+        },
+      select: function(event, ui) {
+          // prevent autocomplete from updating the textbox
+          event.preventDefault();
+          // manually update the textbox and hidden field
+          $(this).val(ui.item.label);
+        }
 });      
 
 function init() { 
@@ -506,6 +1087,24 @@ function init() {
   $("#questions").hide();
   $("#results").hide();
   $("#resultsBtn").hide();
+
+  //get IP address with Ipify
+  // $(function() {
+  //     $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+  //     function(json) {
+  //       console.log(json.ip);
+  //       $.ajax({
+  //         type: 'POST',
+  //         url: 'https://docs.google.com/forms/d/1hCO-Jj6y9wvrBsbS7-VhRGMXpGa4Q1wCieQBehuEPfY/formResponse',
+  //         data: 
+  //         { 
+  //           "entry.1328667250": json.ip,
+  //           "entry.898882087": document.referrer,
+  //          }
+  //       }); 
+  //     }
+  //    );
+  // });
 
   $("#begin").click(function() {
     $("#intro").hide();
@@ -535,6 +1134,7 @@ function init() {
     } else {
       addInput();                              
       showResults();
+      sendData();
     }
   });
 }
@@ -564,14 +1164,30 @@ function addInput() {
       
 function q1addInput() {
   theInput[0] = $('#countryInput').val();
-  theInput[1] = number; 
+  theInput[1] = $('#inputAge').val(); 
   console.log("countryInput = " + theInput[0]);
   console.log("ageInput = " + theInput[1]);        
-  console.log("theInput = " + theInput);    
+  console.log("theInput = " + theInput); 
+  var resultArray = jQuery.grep(countries, function (n, i) {
+            return (n.label == theInput[0]);
+        },false); //find within countries array for label that matches the country input, then pass the row into resultArray 
+  console.log("resultArray = " + resultArray[0]["fer"] + " " + resultArray[0]["ban"] + " " + resultArray[0]["coo"]);
+  var ferArray1 = [countries[112]["fer"],resultArray[0]["fer"]]; 
+  var banArray1 = [countries[112]["ban"],resultArray[0]["ban"]];
+  var cooArray1 = [countries[112]["coo"],resultArray[0]["coo"]];
+  var renArray1 = [countries[112]["ren"],resultArray[0]["ren"]];
+  var obeArray1 = [countries[112]["obe"],resultArray[0]["obe"]];
+  var smoArray1 = [countries[112]["smo"],resultArray[0]["smo"]];
+  jQuery.data( document.body, "ferArray2", ferArray1);
+  jQuery.data( document.body, "banArray2", banArray1);
+  jQuery.data( document.body, "cooArray2", cooArray1);
+  jQuery.data( document.body, "renArray2", renArray1);
+  jQuery.data( document.body, "obeArray2", obeArray1);
+  jQuery.data( document.body, "smoArray2", smoArray1);
 }      
 
 function firstQuestion(count) {
-  $("#q1counter").text("Question " + (count+1) + " of " + (theQuestions.length+1));
+  $("#q1counter").text("Question " + (count+1) + " of " + (theQuestions.length));
   console.log("click begin button"); 
   console.log("count = " + count);     
 }      
@@ -580,7 +1196,7 @@ function nextQuestion(which) {
   $("#nextBtn").hide();     
   console.log("count = " + count); 
   //DISPLAY QUESTION
-  $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length+1));
+  $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
   $("#theQuestion").text(theQuestions[which]);
   //DISPLAY CHOICES
   $("#allAnswers").empty();
@@ -595,28 +1211,670 @@ function showResults() {
   $("#results").show();
   $("#nextBtn").hide();
   $("#resultsBtn").hide();
+
+//Populate first question's result and tweets
+  $("#countryResult").text(theInput[0]);
+  $("#ageResult").text(theInput[1]);
+  if(theInput[1]<20) {
+    var tmpQ1result = "cc1";
+    twtMsg[0] = twtArray[0]["cc1"]
+  } else {
+    tmpQ1result = "cc2";
+    twtMsg[0] = twtArray[0]["cc2"]
+  }
+  $("#resultResult01").html(theResult[0][tmpQ1result]);
+  $("#ageGap, #ageGap2, #ageGap3").text(20-theInput[1]);
+
+//Populate the other questions' results and tweets
+  for (var i=2; i<theQuestions.length+1; i++) {
+    $("#resultCounter0"+i).text("Question " + i + " of " + (theQuestions.length));
+    $("#resultQuestion0"+i).text(theQuestions[i-1]);
+    var numChoice = theInput[i];
+    var tmpAnsSet = theAnswers[i-1].split(";");
+    var tmpAns = tmpAnsSet[numChoice];
+    console.log("numChoice = " + numChoice);
+    console.log("tmpAnsSet = " + tmpAnsSet);
+    console.log("tmpAns = " + tmpAns);
+    $("#resultAnswer0"+i).text(tmpAns);
+    var tmpResult = "cc" + (numChoice+1);
+    console.log("tmpResult = " + tmpResult);
+    $("#resultResult0"+i).html(theResult[i-1][tmpResult]);
+    $("#resultDesc0"+i).text(theDesc[i-1]);
+    twtMsg[i-1] = twtArray[i-1][tmpResult];
+  };  
+
+//Set the choice or cc in popArray, to be later in loading youtube url
+  var popData01 = "cc" + (theInput[7]+1);
+  var popData02 = "cc" + (theInput[8]+1);
+      
+console.log(twtMsg);
+var ferArray = jQuery.data( document.body, "ferArray2");
+var banArray = jQuery.data( document.body, "banArray2");
+var cooArray = jQuery.data( document.body, "cooArray2");
+var renArray = jQuery.data( document.body, "renArray2");
+var obeArray = jQuery.data( document.body, "obeArray2");
+var smoArray = jQuery.data( document.body, "smoArray2");
+console.log("ferArray = " + ferArray);
+console.log("banArray = " + banArray);
+console.log("cooArray = " + cooArray);
+console.log("renArray = " + renArray);
+console.log("obeArray = " + obeArray);
+console.log("smoArray = " + smoArray);  
+
+//Call chart functions
+//Call chart01
+  $(function () {
+      $('#chart01').highcharts({
+          chart: {
+              type: 'bar',
+              marginBottom: 150,
+          },
+          title: {
+              text: 'Fertility Rate of Kenya and Your Country (2013)',
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -50,
+              style: {
+                  color: '#808080',
+                  fontSize: '12',
+              },
+          },        
+          xAxis: {
+              categories: [
+                  "Kenya",
+                  theInput[0],
+              ],
+              labels: {
+                  rotation: 0,
+                  style: {
+                      fontSize: '12',
+                  }
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Fertility Rate',
+                  margin: 10
+              },
+              ceiling: 100,
+              floor: 0,
+              labels: {
+                  format: '{value}'
+              },
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+          legend: {
+              enabled: false
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y:.1f}</b>'
+          },
+          series: [{
+              data: [{y:countries[112]["fer"],color:'#d3401e'},ferArray[1]],
+              dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'left',
+                  format: '{point.y:.1f}', // one decimal
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '12px',
+                  }
+              }
+          }]
+      });
+  });
+
+//Call chart2
+  $(function () {
+      Highcharts.setOptions({
+          lang: {
+              thousandsSep: ','
+          }
+      }),
+    
+      $('#chart02').highcharts({
+          chart: {
+              type: 'column',
+              marginBottom: 100,
+          },
+          title: {
+              text: 'The Use of Mobile Payment within Kenyan Women',
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -20,
+              style: {
+                  color: '#808080',
+                  fontSize: '12',
+              },
+          },
+          xAxis: {
+              categories: [
+                  "Have a mobile account (2014)",
+                  "Use mobile phone to receive money (2011)",
+                  "Use mobile phone to send money (2011)"
+              ],
+              labels: {
+                  rotation: false,
+                  style: {
+                      fontSize: '12',
+                  },
+                  distance: -10,
+                  staggerLines: 1
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Percentage of Kenyan Women',
+                  margin: 10
+              },
+              labels: {
+                  format: '{value}%'
+              },
+              floor: 0,
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+          legend: {
+              enabled: false
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y:.1f}</b>%',
+              headerFormat: '<style="font-size: 12">{point.key}<br>',  
+          },
+          series: [{
+              data: mobArray,
+              color: "#d3401e",
+              dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'center',
+                  format: '{point.y:.1f}%',
+                  y: -2, // 10 pixels down from the top 
+                  style: {
+                      fontSize: '12px',
+                  }
+              }
+          }]
+      });
+  });
+
+//Call Chart03
+  $(function () {
+      Highcharts.setOptions({
+          lang: {
+              thousandsSep: ','
+          }
+      }),
+    
+      $('#chart03').highcharts({
+          chart: {
+              type: 'column',
+              marginBottom: 100,
+          },
+          title: {
+              text: 'The Use of Financial Institutions and Saving Clubs (2014)',
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -20,
+              style: {
+                  color: '#808080',
+                  fontSize: '12',
+              },
+          },
+          xAxis: {
+              categories: [
+                  "Keep saving in saving clubs (Kenya)",
+                  "Keep saving in financial institutions (Kenya)",
+                  "Keep saving in financial institutions (Your Country)"
+              ],
+              labels: {
+                  rotation: false,
+                  style: {
+                      fontSize: '12',
+                  },
+                  distance: -10,
+                  staggerLines: 1
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Percentage of Women',
+                  margin: 10
+              },
+              labels: {
+                  format: '{value}%'
+              },
+              floor: 0,
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+          legend: {
+              enabled: false
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y:.1f}</b>%',
+              headerFormat: '<style="font-size: 12">{point.key}<br>',  
+          },
+          series: [{
+              data: [{y:40.46556, color: '#d3401e'},{y:countries[112]["ban"], color: '#d3401e'},banArray[1]],
+              dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'center',
+                  format: '{point.y:.1f}%',
+                  y: -2, // 10 pixels down from the top 
+                  style: {
+                      fontSize: '12px',
+                  }
+              }
+          }]
+      });
+  });
+
+//Call Chart04a
+  $(function () {
+      Highcharts.setOptions({
+          lang: {
+              thousandsSep: ','
+          }
+      }),
+    
+      $('#chart04a').highcharts({
+          chart: {
+              type: 'column',
+              marginBottom: 100,
+          },
+          title: {
+              text: 'Annual CO2 Emission Per Capita (2013)',
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="http://www.iea.org/publications/freepublications/publication/co2-emissions-from-fuel-combustion-highlights-2015.html">International Energy Agency</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -20,
+              style: {
+                  color: '#808080',
+                  fontSize: '12',
+              },
+          },
+          xAxis: {
+              categories: [
+                  "Kenya",
+                  "Your Country",
+              ],
+              labels: {
+                  rotation: false,
+                  style: {
+                      fontSize: '12',
+                  },
+                  distance: -10,
+                  staggerLines: 1
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Tonnes Per Capita',
+                  margin: 10
+              },
+              labels: {
+                  format: '{value}'
+              },
+              floor: 0,
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+          legend: {
+              enabled: false
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y:.2f}</b>',
+              headerFormat: '<style="font-size: 12">{point.key}<br>',  
+          },
+          series: [{
+              data: [{y:countries[112]["coo"], color: '#d3401e'},cooArray[1]],
+              dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'center',
+                  format: '{point.y:.2f}',
+                  y: -2, // 10 pixels down from the top 
+                  style: {
+                      fontSize: '12px',
+                  }
+              }
+          }]
+      });
+  });
+
+//Call Chart04b
+  $(function () {
+      Highcharts.setOptions({
+          lang: {
+              thousandsSep: ','
+          }
+      }),
+    
+      $('#chart04b').highcharts({
+          chart: {
+              type: 'column',
+              marginBottom: 100,
+          },
+          title: {
+              text: 'Electricity Production From Renewable Sources, Excluding Hydroelectric (2012)',
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="http://data.worldbank.org/indicator/EG.ELC.RNWX.ZS?order=wbapi_data_value_2012+wbapi_data_value&sort=asc">World Bank</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -20,
+              style: {
+                  color: '#808080',
+                  fontSize: '12',
+              },
+          },
+          xAxis: {
+              categories: [
+                  "Kenya",
+                  "Your Country",
+              ],
+              labels: {
+                  rotation: false,
+                  style: {
+                      fontSize: '12',
+                  },
+                  distance: -10,
+                  staggerLines: 1
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Percentage of Total Energy',
+                  margin: 10
+              },
+              labels: {
+                  format: '{value}%'
+              },
+              floor: 0,
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+          legend: {
+              enabled: false
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y:.1f}</b>%',
+              headerFormat: '<style="font-size: 12">{point.key}<br>',  
+          },
+          series: [{
+              data: [{y:countries[112]["ren"], color: '#d3401e'},renArray[1]],
+              dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'center',
+                  format: '{point.y:.1f}%',
+                  y: -2, // 10 pixels down from the top 
+                  style: {
+                      fontSize: '12px',
+                  }
+              }
+          }]
+      });
+  });
+
+//Call chart05
+  $(function () {
+      $('#chart05').highcharts({
+          chart: {
+              type: 'bar',
+              marginBottom: 150,
+          },
+          title: {
+              text: 'Prevalence of Women Obesity in Kenya and Your Country (2014)',
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -50,
+              style: {
+                  color: '#808080',
+                  fontSize: '12',
+              },
+          },        
+          xAxis: {
+              categories: [
+                  "Kenya",
+                  theInput[0],
+              ],
+              labels: {
+                  rotation: 0,
+                  style: {
+                      fontSize: '12',
+                  }
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Percentage of Women Population',
+                  margin: 10
+              },
+              ceiling: 100,
+              floor: 0,
+              labels: {
+                  format: '{value}%'
+              },
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+          legend: {
+              enabled: false
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y:.1f}</b>%'
+          },
+          series: [{
+              data: [{y:countries[112]["obe"],color:'#d3401e'},obeArray[1]],
+              dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'left',
+                  format: '{point.y:.1f}%', // one decimal
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '12px',
+                  }
+              }
+          }]
+      });
+  });
+
+//Call chart06
+  $(function () {
+      $('#chart06').highcharts({
+          chart: {
+              type: 'bar',
+              marginBottom: 150,
+          },
+          title: {
+              text: 'Prevalence of Women Smoker in Kenya and Your Country (2014)',
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -50,
+              style: {
+                  color: '#808080',
+                  fontSize: '12',
+              },
+          },        
+          xAxis: {
+              categories: [
+                  "Kenya",
+                  theInput[0],
+              ],
+              labels: {
+                  rotation: 0,
+                  style: {
+                      fontSize: '12',
+                  }
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Percentage of Women Population',
+                  margin: 10
+              },
+              ceiling: 100,
+              floor: 0,
+              labels: {
+                  format: '{value}%'
+              },
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+          legend: {
+              enabled: false
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y:.1f}</b>%'
+          },
+          series: [{
+              data: [{y:countries[112]["smo"],color:'#d3401e'},smoArray[1]],
+              dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'left',
+                  format: '{point.y:.1f}%', // one decimal
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '12px',
+                  }
+              }
+          }]
+      });
+  });
+
+//Call chart07
+  $(function () {
+      $('#chart07').html("<iframe class='embed-responsive-item' src='" + popArray[0][popData01] + "'</iframe>")
+  });  
+
+//Call chart08
+  $(function () {
+      $('#chart08').html("<iframe class='embed-responsive-item' src='" + popArray[1][popData02] + "'</iframe>")
+  });    
+
+} //close Show result function
+
+
+//codes for charts goes here
+//chart01
+
+
+
+
+
+//Send data to google sheet
+
+function sendData() {
+  // $.ajax({
+  //   type: 'POST',
+  //   url: 'https://docs.google.com/forms/d/17Vh5O81bxciqpQH7cJN9xc8DaWfIxuonPA1TPhVlQrU/formResponse',
+  //   data: 
+  //   { 
+  //     "entry.1116206904": theInput[0], //country
+  //     "entry.1160078349": theInput[1], //age
+  //     "entry.1030596158": theInput[2], //q2
+  //     "entry.1030596158": theInput[3], //q3
+  //     "entry.1030596158": theInput[4], //q4
+  //     "entry.1030596158": theInput[5], //q5
+  //     "entry.1030596158": theInput[6], //q6
+  //     "entry.1030596158": theInput[7], //q7
+  //     "entry.1030596158": theInput[8], //q8
+  //     "entry.1030596158": clickFB[0], //q1FB
+  //     "entry.1030596158": clickFB[1], //q2FB
+  //     "entry.1030596158": clickFB[2], //q3FB
+  //     "entry.1030596158": clickFB[3], //q4FB
+  //     "entry.1030596158": clickFB[4], //q5FB
+  //     "entry.1030596158": clickFB[5], //q6FB
+  //     "entry.1030596158": clickFB[6], //q7FB
+  //     "entry.1030596158": clickFB[7], //q8FB
+  //     "entry.1030596158": clickTW[0], //q1TW
+  //     "entry.1030596158": clickTW[1], //q2TW
+  //     "entry.1030596158": clickTW[2], //q3TW
+  //     "entry.1030596158": clickTW[3], //q4TW
+  //     "entry.1030596158": clickTW[4], //q5TW
+  //     "entry.1030596158": clickTW[5], //q6TW
+  //     "entry.1030596158": clickTW[6], //q7TW
+  //     "entry.1030596158": clickTW[7], //q8TW    
+  //     "entry.1605355897": document.referrer,
+  //    }
+  // });  
+} 
+
+function shareFB(tmpNum) {
+  clickFB[tmpNum] = "Yes";
+  console.log(clickFB);
 }
-                               
-//Knob code goes here
-var number=0;
-$(function() {   
-    $(".dial").knob({
-      'change' : function (v) {
-        number=Math.round(v);
-     console.log(number);                            
-      }
-    });
-});
 
-$("#btn-plus").click(function(){
-  $("input.dial").val(number+=1);
-  $("input.dial").trigger('change');
-});
+function shareTW(tmpNum) {
+  clickTW[tmpNum] = "Yes";
+  console.log(clickTW);
+}
 
-$("#btn-minus").click(function(){
-  $("input.dial").val(number-=1);
-  $("input.dial").trigger('change');
-});                                 
+function tweet(tmpNum) {
+  //pass tmpNum from share button
+  //change url, related (needed?), hashtag, and add in twitter picture
+  var tweet_url = 'https://twitter.com/intent/tweet?related=pritheworld&text=';
+  tweet_url += twtMsg[tmpNum];
+  //tweet_url += encodeURIComponent("What would a Hiroshima-sized atomic bomb do to my hometown? I found out, and you can too.");
+  tweet_url += '&url=http://bit.ly/1KMseYs&via=pri&hashtags=OwningIt';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2015-08-03/what-if-your-hometown-were-hit-hiroshima-atomic-bomb',
+  picture: 'http://admin.pri.org/sites/default/files/nukeshot.png',
+  name: "What if your hometown were hit by the Hiroshima atomic bomb?",
+  description: 'Have you ever thought about the damage caused by the atomic bomb dropped on Hiroshima on August 6, 1945? This app allows you to simulate the damage of the atomic bomb attack on Hiroshima 70 years ago on another location, such as your hometown. #Hiroshima70'
+  }, function(response){});
+}
+                                
 
 $(document).ready(function(){
   init();
@@ -624,6 +1882,23 @@ $(document).ready(function(){
 
     </script>
 
+<script>
+    window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '934801873242745',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
      
   </body>
 
