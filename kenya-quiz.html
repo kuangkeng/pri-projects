@@ -733,7 +733,7 @@
       "Kenyan women get married at the average age of 20, and have their first child at the same age (2008 Kenya Demographic and Health Survey). Kenyan women have an average of four children (2014 Kenya Demographic and Health Survey).",
       "Kenya has the world's highest rate of mobile payment. More than half (55%) of adult women use mobile money through the GSM network. Read our <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> series to learn more about M-Pesa, Kenya's most popular mobile money transfer service.",
       "Kenya has the world's highest rate of people using savings clubs. Four out of 10 adult women keep their money in savings clubs compared to less than three in 10 who use financial institutions. Kenyan women also have a high overall savings rate — 72% of them say they have saved money in the past year, only slightly lower than the number of North American women (US: 73%, Canada: 80%). Read our #OwningIt series to learn more about Kenyan savings clubs.",
-      "Kenya's annual CO2 emissions per capita are 0.26 tons, the 14th-lowest among 158 countries. And 23% of its energy is produced from renewable energy (not include hydropower), making Kenya the 6th-largest user of renewable energy out of 136 countries.",
+      "Kenya's annual CO2 emissions per capita are 0.26 tons, the 13th-lowest among 141 countries. And 23% of its energy is produced from renewable energy (not include hydropower), making Kenya the 6th-largest user of renewable energy out of 137 countries.",
       "In Kenya, only one out of 10 women are obese (Body mass index, BMI > 30 kg/m²).",
       "Only two percent of Kenyan women are smokers.",
       "Description for Question 7",
@@ -1040,24 +1040,6 @@ function init() {
   $("#results").hide();
   $("#resultsBtn").hide();
 
-  //get IP address with Ipify
-  // $(function() {
-  //     $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
-  //     function(json) {
-  //       console.log(json.ip);
-  //       $.ajax({
-  //         type: 'POST',
-  //         url: 'https://docs.google.com/forms/d/1hCO-Jj6y9wvrBsbS7-VhRGMXpGa4Q1wCieQBehuEPfY/formResponse',
-  //         data: 
-  //         { 
-  //           "entry.1328667250": json.ip,
-  //           "entry.898882087": document.referrer,
-  //          }
-  //       }); 
-  //     }
-  //    );
-  // });
-
   $("#begin").click(function() {
     $("#intro").hide();
     $("#q1").show();
@@ -1086,7 +1068,7 @@ function init() {
     } else {
       addInput();                              
       showResults();
-      sendData();
+      //sendData();
     }
   });
 }
@@ -1226,7 +1208,7 @@ console.log("smoArray = " + smoArray);
               margin: 20,
           },
           subtitle: {
-              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a><br>Zero value indicates data is not available for that country.',
               useHTML: true,
               floating: true,
               align: 'left',
@@ -1302,7 +1284,7 @@ console.log("smoArray = " + smoArray);
               margin: 20,
           },
           subtitle: {
-              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a><br>Zero value indicates data is not available for that country.',
               useHTML: true,
               floating: true,
               align: 'left',
@@ -1382,7 +1364,7 @@ console.log("smoArray = " + smoArray);
               margin: 20,
           },
           subtitle: {
-              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a><br>Zero value indicates data is not available for that country.',
               useHTML: true,
               floating: true,
               align: 'left',
@@ -1461,7 +1443,7 @@ console.log("smoArray = " + smoArray);
               margin: 20,
           },
           subtitle: {
-              text: 'Source: <a href="http://www.iea.org/publications/freepublications/publication/co2-emissions-from-fuel-combustion-highlights-2015.html">International Energy Agency</a>',
+              text: 'Source: <a href="http://www.iea.org/publications/freepublications/publication/co2-emissions-from-fuel-combustion-highlights-2015.html">International Energy Agency</a><br>Zero value indicates data is not available for that country.',
               useHTML: true,
               floating: true,
               align: 'left',
@@ -1539,7 +1521,7 @@ console.log("smoArray = " + smoArray);
               margin: 20,
           },
           subtitle: {
-              text: 'Source: <a href="http://data.worldbank.org/indicator/EG.ELC.RNWX.ZS?order=wbapi_data_value_2012+wbapi_data_value&sort=asc">World Bank</a>',
+              text: 'Source: <a href="http://data.worldbank.org/indicator/EG.ELC.RNWX.ZS?order=wbapi_data_value_2012+wbapi_data_value&sort=asc">World Bank</a><br>Empty bar indicates data is not available for that country.',
               useHTML: true,
               floating: true,
               align: 'left',
@@ -1611,7 +1593,7 @@ console.log("smoArray = " + smoArray);
               margin: 20,
           },
           subtitle: {
-              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a><br>Zero value indicates data is not available for that country',
               useHTML: true,
               floating: true,
               align: 'left',
@@ -1681,7 +1663,7 @@ console.log("smoArray = " + smoArray);
               margin: 20,
           },
           subtitle: {
-              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a>',
+              text: 'Source: <a href="http://data.worldbank.org/data-catalog/gender-statistics">World Bank</a><br>Zero value indicates data is not available for that country',
               useHTML: true,
               floating: true,
               align: 'left',
@@ -1759,23 +1741,33 @@ console.log("smoArray = " + smoArray);
 
 
 
-//Send data to google sheet
+//Get IP address with Ipify, send data to google sheet
 
 function sendData() {
-  // $.ajax({
-  //   type: 'POST',
-  //   url: 'https://docs.google.com/forms/d/17Vh5O81bxciqpQH7cJN9xc8DaWfIxuonPA1TPhVlQrU/formResponse',
-  //   data: 
-  //   { 
-  //     "entry.1116206904": theInput[0], //country
-  //     "entry.1160078349": theInput[1], //age
-  //     "entry.1030596158": theInput[2], //q2
-  //     "entry.1030596158": theInput[3], //q3
-  //     "entry.1030596158": theInput[4], //q4
-  //     "entry.1030596158": theInput[5], //q5
-  //     "entry.1030596158": theInput[6], //q6
-  //     "entry.1030596158": theInput[7], //q7
-  //     "entry.1030596158": theInput[8], //q8
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      console.log(json.ip);
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1hCO-Jj6y9wvrBsbS7-VhRGMXpGa4Q1wCieQBehuEPfY/formResponse',
+        data: { 
+          "entry.1328667250": json.ip, //ip
+          "entry.1116206904": theInput[0], //country
+          "entry.1160078349": theInput[1], //age
+          "entry.1030596158": theInput[2], //q2
+          "entry.1030596158": theInput[3], //q3
+          "entry.1030596158": theInput[4], //q4
+          "entry.1030596158": theInput[5], //q5
+          "entry.1030596158": theInput[6], //q6
+          "entry.1030596158": theInput[7], //q7
+          "entry.1030596158": theInput[8], //q8   
+          "entry.1605355897": document.referrer,
+        }
+      }); 
+    }
+  );   
+} 
+
   //     "entry.1030596158": clickFB[0], //q1FB
   //     "entry.1030596158": clickFB[1], //q2FB
   //     "entry.1030596158": clickFB[2], //q3FB
@@ -1791,11 +1783,8 @@ function sendData() {
   //     "entry.1030596158": clickTW[4], //q5TW
   //     "entry.1030596158": clickTW[5], //q6TW
   //     "entry.1030596158": clickTW[6], //q7TW
-  //     "entry.1030596158": clickTW[7], //q8TW    
-  //     "entry.1605355897": document.referrer,
-  //    }
-  // });  
-} 
+  //     "entry.1030596158": clickTW[7], //q8TW 
+
 
 function shareFB(tmpNum) {
   clickFB[tmpNum] = "Yes";
