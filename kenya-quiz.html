@@ -52,9 +52,14 @@
       font-size: 25px;
       font-weight: 200;
       color: #fff;
-      margin: 30px 0px;
+      margin: 30px 0px 0px 0px;
       padding:8px 12px;
       line-height: 1.4em;
+      background-color: #0f9d58;
+    }
+
+    .shareBox {
+      margin: 0px 0px 30px 0px;
       background-color: #0f9d58;
     }
 
@@ -82,7 +87,7 @@
       margin: 20px 0 10px 0;
     }
     
-    lead-img {
+    #lead-img {
       position: relative; 
     }
     
@@ -93,7 +98,7 @@
     #begin{
       position: absolute;
       left:35%;
-      top:35%; 
+      top:15%; 
       font-size: 30px;
       width:180px;
     }
@@ -166,11 +171,17 @@
       width: 49%;
     }   
 
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 70%}
+    .btnTW {float:left; height: 70%}
+
     @media (max-width: 500px ) { 
       #begin {
         position: absolute;
         margin:0 auto;
-        top:50%;
+        top:15%;
         font-size: 22px;
         width:90px;
         padding: 5px 10px;
@@ -554,15 +565,13 @@
           <div id="resultAnswer01" class="resultAnswer"><span id="countryResult">country</span>, 
             <span id="ageResult">age</span> years old</div>
           <div id="resultResult01" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(0);shareTW(0)'>Twitter</li>
-            </ul>
+          <div id="shareBox01" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW01" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart01" class="chart">chart</div>
           <div id="resultDesc01" class="desc">Kenyan women get married at the average age of 20, and have their first child at the same age (2008 Kenya Demographic and Health Survey). Kenyan women have an average of four children (2014 Kenya Demographic and Health Survey).</div>
@@ -572,15 +581,13 @@
           <div id="resultQuestion02" class="question">Question goes here</div>
           <div id="resultAnswer02" class="resultAnswer">Answer goes here</div>
           <div id="resultResult02" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(1);shareTW(1)'>Twitter</li>
-            </ul>
+          <div id="shareBox02" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW02" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart02" class="chart">chart</div>
           <div id="resultDesc02" class="desc">Description goes here</div>
@@ -590,15 +597,13 @@
           <div id="resultQuestion03" class="question">Question goes here</div>
           <div id="resultAnswer03" class="resultAnswer">Answer goes here</div>
           <div id="resultResult03" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(2);shareTW(2)'>Twitter</li>
-            </ul>
+          <div id="shareBox03" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW03" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart03" class="chart">chart</div>
           <div id="resultDesc03" class="desc">Description goes here</div>
@@ -608,15 +613,13 @@
           <div id="resultQuestion04" class="question">Question goes here</div>
           <div id="resultAnswer04" class="resultAnswer">Answer goes here</div>
           <div id="resultResult04" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(3);shareTW(3)'>Twitter</li>
-            </ul>
+          <div id="shareBox04" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW04" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart04a" class="chart">chart</div>
           <div id="chart04b" class="chart">chart</div>
@@ -627,15 +630,13 @@
           <div id="resultQuestion05" class="question">Question goes here</div>
           <div id="resultAnswer05" class="resultAnswer">Answer goes here</div>
           <div id="resultResult05" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(4);shareTW(4)'>Twitter</li>
-            </ul>
+          <div id="shareBox05" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW05" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart05" class="chart">chart</div>
           <div id="resultDesc05" class="desc">Description goes here</div>
@@ -645,15 +646,13 @@
           <div id="resultQuestion06" class="question">Question goes here</div>
           <div id="resultAnswer06" class="resultAnswer">Answer goes here</div>
           <div id="resultResult06" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(5);shareTW(5)'>Twitter</li>
-            </ul>
+          <div id="shareBox06" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW06" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart06" class="chart">chart</div>
           <div id="resultDesc06" class="desc">Description goes here</div>
@@ -663,15 +662,13 @@
           <div id="resultQuestion07" class="question">Question goes here</div>
           <div id="resultAnswer07" class="resultAnswer">Answer goes here</div>
           <div id="resultResult07" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(6);shareTW(6)'>Twitter</li>
-            </ul>
+          <div id="shareBox07" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW07" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart07" class="chart embed-responsive embed-responsive-4by3"></div>
         </div>
@@ -680,15 +677,13 @@
           <div id="resultQuestion08" class="question">Question goes here</div>
           <div id="resultAnswer08" class="resultAnswer">Answer goes here</div>
           <div id="resultResult08" class="result">Result goes here</div>
-          <div class="dropdown" id="resultShare">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Share this result
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>Facebook</li>
-              <li onclick='tweet(7);shareTW(7)'>Twitter</li>
-            </ul>
+          <div id="shareBox08" class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://kuangkeng.github.io/pri-projects/images/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" id="btnTW08" class="img-responsive btnTW" src="http://kuangkeng.github.io/pri-projects/images/tw-button.png"></td>
+              </tr> 
+            </table>
           </div>
           <div id="chart08" class="chart embed-responsive embed-responsive-4by3"></div>
         </div>  
@@ -719,7 +714,7 @@
     theQuestions[4] = "Do you think you're overweight?";
     theQuestions[5] = "Are you a smoker?";
     theQuestions[6] = "What's your favorite kind of music?";
-    theQuestions[7] = "What's your Netflix category of choice?";
+    theQuestions[7] = "What's your favorite TV genre?";
 
     var theAnswers = [];
     theAnswers[0] = "Not applicable";
@@ -743,7 +738,7 @@
     theInput[8] = 0;
 
     var theResult = [
-      {"question":"q1","cc1":"You'd still be single, but you'd be married in <span id='ageGap'>0</span> years. Start making your baby shower invite list though because you'd have your first child in <span id='ageGap2'>0</span> years too. Kenyan law allows you 90 days of paid maternity leave!","cc2":"Congratulations! You'd be married and have at least one child. Did we mention that Kenyan law allows you 90 days of paid maternity leave?","cc3":"","cc4":"","cc5":""},
+      {"question":"q1","cc1":"You'd still be single, but you'd be married in <span id='ageGap'>0</span> years. Start making your baby shower invite list though because you'd have your first child in <span id='ageGap2'>0</span> years too. Kenyan law allows you 90 days of paid maternity leave!","cc2":"Congratulations! You'd be married and have at least one child. Oh, and by the way Kenyan law allows you 90 days of paid maternity leave?","cc3":"","cc4":"","cc5":""},
       {"question":"q2","cc1":"You would feel right at home! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You won't even need a smart phone.","cc2":"Welcome to the country of mobile payment! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You'd better learn to sing Stella Mwangi's <a href='https://www.youtube.com/watch?v=-7OcGS6sV8E' target='_blank'>Biashara</a> (which literally translates as 'Business') if you want to show you own it as a working woman in Kenya.","cc3":"","cc4":"","cc5":""},
       {"question":"q3","cc1":"You probably wouldn't save money in a bank. Instead you would keep your money in an informal, community-based savings club. ","cc2":"You would trust local savings clubs in your community much more than your house, and they could provide you with loans! ","cc3":"Maybe not, but as a Kenyan woman, you'd have a better chance of saving money with the country's high savings rate among women.","cc4":"","cc5":""},
       {"question":"q4","cc1":"Congratulations! You would be a part of the solution because Kenya emits less CO2 and consumes more renewable energy than most countries.","cc2":"You would be living in one of the greenest countries in the world. Kenya emits less CO2 and consumes more renewable energy than most countries.","cc3":"Well, Kenya cares, even if you don't. You would be living in one of the greenest countries in the world. Kenya emits less CO2 and consumes more renewable energy than most other countries. ","cc4":"","cc5":""},
@@ -1096,6 +1091,16 @@ function init() {
       sendData();
     }
   });
+
+  $('#btnFB').click(function (event) {facebook();});
+  $('#btnTW01').click(function (event) {tweet(0);});
+  $('#btnTW02').click(function (event) {tweet(1);});
+  $('#btnTW03').click(function (event) {tweet(2);});
+  $('#btnTW04').click(function (event) {tweet(3);});
+  $('#btnTW05').click(function (event) {tweet(4);});
+  $('#btnTW06').click(function (event) {tweet(5);});
+  $('#btnTW07').click(function (event) {tweet(6);});
+  $('#btnTW08').click(function (event) {tweet(7);});
 }
 
 var tmpInput;
