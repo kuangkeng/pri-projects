@@ -26,10 +26,6 @@
       background-color: #eeeeee;
     }
     #kenyaquiz { margin-top: 20px; padding-bottom: 60px; max-width: 700px;}
-    #intro {
-      
-     
-    }
     
     .title {
       font-size: 30px;
@@ -87,21 +83,30 @@
       margin: 20px 0 10px 0;
     }
     
-    #lead-img {
-      position: relative; 
-    }
-    
     .logo{
       margin:0 auto;
     }
-    
+
+    #lead-img {
+      position: relative; 
+    }    
+
     #begin{
       position: absolute;
-      left:35%;
-      top:15%; 
-      font-size: 30px;
-      width:180px;
+      left:50%;
+      top:15%;
+      margin-left: -90px; 
+      font-size: 28px;
+      width:160px;
     }
+
+    #end {
+      font-size: 25px;
+      width:300px;
+      margin:0 auto;
+    }
+
+    #banner {margin-bottom:30px;}
 
     .mybtn, #q1btn {
       background-color: #0f9d58;
@@ -177,6 +182,13 @@
     .btnFB {float:right; height: 70%}
     .btnTW {float:left; height: 70%}
 
+    .result a:link {color:#ffffc0;}
+    .result a:hover {color:#e5e5ac;}
+    .result a:visited {color:#ffe0d3;}
+
+    #end a:hover {text-decoration: none;}
+    #end a:visited {color:#ffe0d3;}
+    
     @media (max-width: 500px ) { 
       #begin {
         position: absolute;
@@ -219,7 +231,7 @@
       <div id="intro" class="col-sm-12 col-xs-12">
         <div class="title">If you were a Kenyan woman</div>
         <div class="blurb">Ever wonder what your life would be like if you were born and raised in a different country? For the next two weeks, the Across Women’s Lives team is taking a closer look at what it means to be a woman <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> in Kenya, particularly in the world of business. Take this quiz to find out how your life compares to that of an average Kenyan woman. The results may surprise you.</div>
-        <div id="lead-img"><img src="http://kuangkeng.github.io/pri-projects/kenya-logo.png" class="logo img-responsive" alt="Kenya OwningIt logo"><div id="begin" class="mybtn center-block">Start</div></div>
+        <div id="lead-img"><img src="http://kuangkeng.github.io/pri-projects/images/kenya-logo.png" class="logo img-responsive" alt="Kenya OwningIt logo"><div id="begin" class="mybtn center-block">Start</div></div>
         
       </div><!-- END INTRO -->
       
@@ -686,7 +698,11 @@
             </table>
           </div>
           <div id="chart08" class="chart embed-responsive embed-responsive-4by3"></div>
-        </div>  
+        </div> 
+        <div id="banner">
+          <a href="http://www.pri.org/series/owning-it" target="_blank"><img style="cursor:pointer" class="img-responsive" src="http://kuangkeng.github.io/pri-projects/images/kenya-quiz-banner.png"></a>
+        </div> 
+        <div id="end" class="mybtn center-block"><a href="http://www.pri.org/series/owning-it" target="_blank" style="cursor:pointer">Know their stories</a></div>
       </div> <!-- END RESULTPAGE -->
     </div> <!-- END ROW -->
     </div> <!-- END CONTAINER -->
@@ -738,7 +754,7 @@
     theInput[8] = 0;
 
     var theResult = [
-      {"question":"q1","cc1":"You'd still be single, but you'd be married in <span id='ageGap'>0</span> years. Start making your baby shower invite list though because you'd have your first child in <span id='ageGap2'>0</span> years too. Kenyan law allows you 90 days of paid maternity leave!","cc2":"Congratulations! You'd be married and have at least one child. Oh, and by the way Kenyan law allows you 90 days of paid maternity leave?","cc3":"","cc4":"","cc5":""},
+      {"question":"q1","cc1":"You'd still be single, but you'd be married in <span id='ageGap'>0</span> years. Start making your baby shower invite list though because you'd have your first child in <span id='ageGap2'>0</span> years too. Kenyan law allows you 90 days of paid maternity leave!","cc2":"Congratulations! You'd be married and have at least one child. Oh, and by the way Kenyan law allows you 90 days of paid maternity leave!","cc3":"","cc4":"","cc5":""},
       {"question":"q2","cc1":"You would feel right at home! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You won't even need a smart phone.","cc2":"Welcome to the country of mobile payment! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You'd better learn to sing Stella Mwangi's <a href='https://www.youtube.com/watch?v=-7OcGS6sV8E' target='_blank'>Biashara</a> (which literally translates as 'Business') if you want to show you own it as a working woman in Kenya.","cc3":"","cc4":"","cc5":""},
       {"question":"q3","cc1":"You probably wouldn't save money in a bank. Instead you would keep your money in an informal, community-based savings club. ","cc2":"You would trust local savings clubs in your community much more than your house, and they could provide you with loans! ","cc3":"Maybe not, but as a Kenyan woman, you'd have a better chance of saving money with the country's high savings rate among women.","cc4":"","cc5":""},
       {"question":"q4","cc1":"Congratulations! You would be a part of the solution because Kenya emits less CO2 and consumes more renewable energy than most countries.","cc2":"You would be living in one of the greenest countries in the world. Kenya emits less CO2 and consumes more renewable energy than most countries.","cc3":"Well, Kenya cares, even if you don't. You would be living in one of the greenest countries in the world. Kenya emits less CO2 and consumes more renewable energy than most other countries. ","cc4":"","cc5":""},
@@ -1057,7 +1073,7 @@ function init() {
   console.log("js ready!");
   $("#q1").hide();    
   $("#questions").hide();
-  $("#results").hide();
+  //$("#results").hide();
   $("#resultsBtn").hide();
 
   $("#begin").click(function() {
