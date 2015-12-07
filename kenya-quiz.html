@@ -49,11 +49,11 @@
 
     .result   { 
       font-size: 25px;
-      font-weight: 400;
+      font-weight: 200;
       color: #fff;
       margin: 30px 0px;
       padding:8px 12px;
-      line-height: 1.2em;
+      line-height: 1.4em;
       background-color: #0f9d58;
     }
 
@@ -62,13 +62,17 @@
       font-weight: 400;
       color: #333;
       margin-bottom: 20px;
-      line-height: 1.2em;
+      line-height: 1.4em;
     }
 
     .blurb {
       font-size: 20px;
       color: #333;
       margin: 20px 0 0 0;
+    }
+
+    #resultIntro {
+      margin-bottom:40px;
     }
     
     #q1question {
@@ -125,7 +129,7 @@
     }
 
     input[type=radio], input[type=checkbox] {
-      margin: 3px 0 0;
+      margin: 3px 0 0 ;
     }
 
     label, .resultAnswer {
@@ -145,7 +149,7 @@
     #intro, #questions, #results, #q1 { margin-top: 30px}
 
     .resultBox {
-      margin-top: 100px;
+      margin-bottom: 100px;
     }
 
     .c2, .c3, .c4, .c5, .c6, .c7, .c8, .c9 {
@@ -202,7 +206,7 @@
       
       <div id="intro" class="col-sm-12 col-xs-12">
         <div class="title">If you were a Kenyan woman</div>
-        <div class="blurb">Ever wonder what your life would be like if you were born and raised in a different country? For the next two weeks, the Across Women’s Lives team is taking a closer look at what it means to be a woman in Kenya, particularly in the world of business. Take this quiz to find out how your life compares to that of an average Kenyan woman. The results may surprise you.</div>
+        <div class="blurb">Ever wonder what your life would be like if you were born and raised in a different country? For the next two weeks, the Across Women’s Lives team is taking a closer look at what it means to be a woman <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> in Kenya, particularly in the world of business. Take this quiz to find out how your life compares to that of an average Kenyan woman. The results may surprise you.</div>
         <div id="lead-img"><img src="http://kuangkeng.github.io/pri-projects/kenya-logo.png" class="logo img-responsive" alt="Kenya OwningIt logo"><div id="begin" class="mybtn center-block">Start</div></div>
         
       </div><!-- END INTRO -->
@@ -528,7 +532,7 @@
       <div id="questions" class="col-sm-12 col-xs-12">
         <div id="counter" class="counter">Question 0 of 0</div>
         <div id="theQuestion" class="question">Question goes here</div>
-        <div id="allAnswers" class="radio-success">
+        <div id="allAnswers" class="radio">
           <label><input class="answer" type="checkbox"> Answer</label>
           <br />
           <label><input class="answer" type="checkbox"> Answer</label>
@@ -541,6 +545,7 @@
 
       <div id="results" class="col-sm-12 col-xs-12">
         <div id="resultTitle" class="title">Your Life in Kenya</div>
+        <div id="resultIntro" class="blurb">We have matched your answers with several local and global datasets and here's a glimpse of how your life would be as a Kenyan woman. Check out our <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> series to learn more about what it means to be a woman in Kenya.</div>
 
         <div id="resultBox01" class="resultBox">
           <div id="resultCounter01" class="counter">Question 1 of 8</div>
@@ -751,7 +756,7 @@
     var theDesc = [
       "Kenyan women get married at the average age of 20, and have their first child at the same age (2008 Kenya Demographic and Health Survey). Kenyan women have an average of four children (2014 Kenya Demographic and Health Survey).",
       "Kenya has the world's highest rate of mobile payment. More than half (55%) of adult women use mobile money through the GSM network. Read our <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> series to learn more about M-Pesa, Kenya's most popular mobile money transfer service.",
-      "Kenya has the world's highest rate of people using savings clubs. Four out of 10 adult women keep their money in savings clubs compared to less than three in 10 who use financial institutions. Kenyan women also have a high overall savings rate — 72% of them say they have saved money in the past year, only slightly lower than the number of North American women (US: 73%, Canada: 80%). Read our #OwningIt series to learn more about Kenyan savings clubs.",
+      "Kenya has the world's highest rate of people using savings clubs. Four out of 10 adult women keep their money in savings clubs compared to less than three in 10 who use financial institutions. Kenyan women also have a high overall savings rate — 72% of them say they have saved money in the past year, only slightly lower than the number of North American women (US: 73%, Canada: 80%). Read our <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> series to learn more about Kenyan savings clubs.",
       "Kenya's annual CO2 emissions per capita are 0.26 tons, the 13th-lowest among 141 countries. And 23% of its energy is produced from renewable energy (not include hydropower), making Kenya the 6th-largest user of renewable energy out of 137 countries.",
       "In Kenya, only one out of 10 women are obese (Body mass index, BMI > 30 kg/m²).",
       "Only two percent of Kenyan women are smokers.",
