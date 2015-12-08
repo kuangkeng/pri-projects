@@ -185,9 +185,9 @@
     .btnFB {float:right; height: 70%}
     .btnTW {float:left; height: 70%}
 
-    .result a:link {color:#ffffc0;}
-    .result a:hover {color:#e5e5ac;}
-    .result a:visited {color:#ffe0d3;}
+    .result a:link {color:#031f11;}
+    .result a:hover {color:#095e34;}
+    .result a:visited {color:#031f11;}
 
     #end a:hover {text-decoration: none;}
     #end a:visited {color:#ffe0d3;}
@@ -195,12 +195,15 @@
     @media (max-width: 500px ) { 
       #begin {
         position: absolute;
-        margin:0 auto;
+        left:50%;
         top:15%;
+        margin-left:-45px;
         font-size: 22px;
         width:90px;
         padding: 5px 10px;
       }
+
+      .result {font-size:20px ;line-height: 1.2em;}
 
       .counter, #q1counter { margin: 0px; }
       
@@ -209,15 +212,27 @@
         line-height: 1.3em;
       }
       .question { 
-        font-size: 25px;
+        font-size: 20px;
         line-height: 1.2em;
+      }
+
+      .desc { 
+      font-size: 17px;
+      line-height: 1.2em;
       }
 
       #chart04a, #chart04b {
       display: inline-block;
       width: 100%;
       margin:10px 0px;
-      }   
+      }
+
+      .counter, #q1counter {
+      font-size: 12px;
+      }
+
+      label, .resultAnswer {
+      font-size: 17px;
 
     }
 
@@ -769,7 +784,7 @@
       {"question":"q2","cc1":"You would feel right at home! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You won't even need a smart phone.","cc2":"Welcome to the country of mobile payment! Most people around you would use mobile phones (Internet connection not required) to send and receive money. You'd better learn to sing Stella Mwangi's <a href='https://www.youtube.com/watch?v=-7OcGS6sV8E' target='_blank'>Biashara</a> (which literally translates as 'Business') if you want to show you own it as a working woman in Kenya.","cc3":"","cc4":"","cc5":""},
       {"question":"q3","cc1":"You probably wouldn't save money in a bank. Instead you would keep your money in an informal, community-based savings club. ","cc2":"You would trust local savings clubs in your community much more than your house, and they could provide you with loans! ","cc3":"Maybe not, but as a Kenyan woman, you'd have a better chance of saving money with the country's high savings rate among women.","cc4":"","cc5":""},
       {"question":"q4","cc1":"Congratulations! You would be a part of the solution because Kenya emits less CO2 and consumes more renewable energy than most countries.","cc2":"You would be living in one of the greenest countries in the world. Kenya emits less CO2 and consumes more renewable energy than most countries.","cc3":"Well, Kenya cares, even if you don't. You would be living in one of the greenest countries in the world. Kenya emits less CO2 and consumes more renewable energy than most other countries. ","cc4":"","cc5":""},
-      {"question":"q5","cc1":"Say goodbye to your muffin top as the obesity rate in Kenya is extremely low, although obesity among women in Kenya’s capital Nairobi has been rising in recent years.","cc2":"Welcome to your world! Although obesity among women in Kenya’s capital Nairobi has been rising in recent years, obesity is extremely rare among the majority of women in Kenya.","cc3":"","cc4":"","cc5":""},
+      {"question":"q5","cc1":"Say goodbye to your muffin top as the obesity rate in Kenya is low, although obesity among women in Kenya’s capital Nairobi has been rising in recent years.","cc2":"Welcome to your world! Although obesity among women in Kenya’s capital Nairobi has been rising in recent years, obesity is still rare among the majority of women in Kenya.","cc3":"","cc4":"","cc5":""},
       {"question":"q6","cc1":"Get ready to feel very lonely in Kenya.","cc2":"No more second-hand smoke for you!","cc3":"","cc4":"","cc5":""},
       {"question":"q7","cc1":"You'd probably have Sauti Sol's song 'Isabella' on your phone. It's the second most downloaded song in Kenya right now. The Nairobi-based group has been around since 2005 and won the MTV Europe Music Award for Best African Act in 2014.","cc2":"Surprise! You can't get Adele's 'Hello' out of your mind — it's the most downloaded song in Kenya right now. Turns out people love to sing out their feelings in cars all around the world.","cc3":"You're in good company, Kenyan group Elani — meaning light in Giriama — make some of the most loved music in country today. The trio write conscientious lyrics with meaning, and infuse their music videos with this good will. They currently have the 10th most downloaded album in Kenya.","cc4":"Maybe it's their hot new video you love, but Kenyan Alt scene stalwarts Just a Band are back with a hugely popular single this fall. The feel good vibes are typical of this Nairobi trio, who dabble in electronic, disco, house, funk, jazz and more.","cc5":"You already know this, but Muthoni The Drummer Queen is a total boss. One of the fastest rising rappers in the country, she recently headlined the uber-hip Blankets and Wine Festival."},
       {"question":"q8","cc1":"The most viewed TV show in all of Kenya this year is the Mexican telenovela 'La Malquerida,' carried by the hugely dominant Citizen TV. ","cc2":"'Nipashe', which means 'tell me' in Swahili, is the country's second most popular TV show, and the most watched news show on air. ","cc3":"Kenyans love the teen drama 'Tahidi High.' Described by Citizen TV as 'an action packed high school drama, full of intrigue, love, infighting as well as the usual battle of the sexes,' the teen drama is the 5th most watched show in the country.","cc4":"Citizen TV's 'Naswa' is a zany hidden camera show in the style of 'Candid Camera.' Fake snakes, awkward situations and laugh tracks galore.","cc5":""}
@@ -782,8 +797,8 @@
       //Read our <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> series to learn more about M-Pesa, Kenya's most popular mobile money transfer service.",
       "Kenya has the world's highest rate of people using savings clubs. Four out of 10 adult women keep their money in savings clubs compared to less than three in 10 who use financial institutions. Kenyan women also have a high overall savings rate — 72% of them say they have saved money in the past year, only slightly lower than the number of North American women (US: 73%, Canada: 80%). Read our <a href='http://www.pri.org/series/owning-it' target='_blank'>#OwningIt</a> series to learn more about Kenyan savings clubs.",
       "Kenya's annual CO2 emissions per capita are 0.26 tons, the 13th-lowest among 141 countries. And 23% of its energy is produced from renewable energy (not including hydropower), making Kenya the 6th-largest user of renewable energy out of 137 countries.",
-      "In Kenya, only one out of 10 women are obese (Body mass index, BMI > 30 kg/m²).",
-      "Only two percent of Kenyan women are smokers.",
+      "In Kenya, only one out of 10 women are obese (Body mass index, BMI > 30 kg/m²). However several studies have found that obesity rate in Kenya has been <a href='http://www.businessdailyafrica.com/Lifestyle-diseases-burden-Kenya-with-a-huge-health-bill/-/539546/2135006/-/jeumyb/-/index.html' target='_blank'>increasing rapidly</a> in recent years due to urbanization and the rise of western fast food chains.",
+      "Only two percent of Kenyan women are smokers (daily and occasional smoking of any form of tobacco, including cigarettes, cigars, pipes or any other smoked tobacco products).",
       "Description for Question 7",
       "Description for Question 8"
     ]; 
@@ -1339,7 +1354,7 @@ console.log("smoArray = " + smoArray);
       $('#chart02').highcharts({
           chart: {
               type: 'column',
-              marginBottom: 100,
+              marginBottom: 130,
           },
           title: {
               text: 'Use of mobile payments by Kenyan women',
@@ -1419,7 +1434,7 @@ console.log("smoArray = " + smoArray);
       $('#chart03').highcharts({
           chart: {
               type: 'column',
-              marginBottom: 100,
+              marginBottom: 130,
           },
           title: {
               text: 'Use of financial institutions and savings clubs (2014)',
@@ -1510,7 +1525,7 @@ console.log("smoArray = " + smoArray);
               floating: true,
               align: 'left',
               verticalAlign: 'bottom',
-              y: -20,
+              y: -30,
               style: {
                   color: '#808080',
                   fontSize: '12',
@@ -1588,7 +1603,7 @@ console.log("smoArray = " + smoArray);
               floating: true,
               align: 'left',
               verticalAlign: 'bottom',
-              y: -20,
+              y: -30,
               style: {
                   color: '#808080',
                   fontSize: '12',
