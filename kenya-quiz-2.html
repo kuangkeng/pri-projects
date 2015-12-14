@@ -23,9 +23,8 @@
   <style>
     body {
       font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
-      background-color: #eeeeee;
     }
-    #kenyaquiz { margin-top: 20px; padding-bottom: 60px; max-width: 700px;}
+    #kenyaquiz { margin-top: 20px; padding-bottom: 60px; max-width: 700px; background-color: #eeeeee;}
     
     .title {
       font-size: 30px;
@@ -828,13 +827,13 @@
 
     var twtArray = [
       {"question":"q1","cc1":"I'd be single, but would be getting married & having my first kid in <span id='ageGap3'>0</span> years","cc2":"I'd already be married, and eventually have four kids!","cc3":"","cc4":"","cc5":""},
-      {"question":"q2","cc1":"I would join a generation of female entrepreneurs who are #OwningIt","cc2":"I maybe would think about opening my own business. Just maybe.","cc3":"","cc4":"","cc5":""},
+      {"question":"q2","cc1":"I would join a generation of female entrepreneurs who are Owning It","cc2":"I maybe would think about opening my own business. Just maybe.","cc3":"","cc4":"","cc5":""},
       {"question":"q3","cc1":"I'd use my cell phone to send/receive money even there's no Internet connection!","cc2":"People around me would be using their cell phones to send/receive money","cc3":"","cc4":"","cc5":""},
-      {"question":"q4","cc1":"I would manage my finances w/ my neighbors in a community-based savings club","cc2":"I would manage my finances w/ my neighbors in a community-based savings club","cc3":"I would probably be saving more money than I am now","cc4":"","cc5":""},
+      {"question":"q4","cc1":"I'd manage my finances w/ my neighbors in a community-based savings club","cc2":"I'd manage my finances w/ my neighbors in a community-based savings club","cc3":"I would probably be saving more money than I am now","cc4":"","cc5":""},
       {"question":"q5","cc1":"I would be a part of the solution to climate change","cc2":"I would be living in one of the greenest countries in the world!","cc3":"I would be living in one of the greenest countries in the world!","cc4":"","cc5":""},
       {"question":"q6","cc1":"I would probably weigh less than I do today!","cc2":"I would probably be living in a much skinnier community!","cc3":"","cc4":"","cc5":""},
       {"question":"q7","cc1":"I would think twice before taking up smoking to avoid judgemental stares","cc2":"I wouldn't have to deal with any more annoying second-hand smoke!","cc3":"","cc4":"","cc5":""},
-      {"question":"q8","cc1":"I would probably be rocking out to @SautiSol's song 'Isabella'","cc2":"I would probably be rocking out to @Adele's 'Hello'. Some things never change","cc3":"I would be watching the music videos by the group @elanimuziki on repeat","cc4":"Heard of @justaband? This Kenyan Alt band would be my jam","cc5":"Kenyan rapper @muthoniDQ would be my jam"},
+      {"question":"q8","cc1":"I would probably be rocking out to @SautiSol's song 'Isabella'","cc2":"I'd probably be rocking out to @Adele's 'Hello'. Some things never change","cc3":"I would be watching the music videos by the group @elanimuziki on repeat","cc4":"Heard of @justaband? This Kenyan Alt band would be my jam","cc5":"Kenyan rapper @muthoniDQ would be my jam"},
       {"question":"q9","cc1":"Surprise! Mexican telenovela 'La Malquerida' would be my favorite TV show","cc2":"I'd be watching a Swahili news bulletin show called 'Nipashe'","cc3":"I'd be watching teen drama 'Tahidi High' to pass time","cc4":"I'd be watching 'Naswa', Kenyan version of 'Candid Camera'","cc5":""}
     ];
     //the 'question' key is not required because the rows can be called by numbers
@@ -2031,8 +2030,8 @@ function tweet(tmpNum) {
   //pass tmpNum from share button
   //change url, related (needed?), hashtag, and add in twitter picture
   var tweet_url = 'https://twitter.com/intent/tweet?text=';
-  tweet_url += 'pic.twitter.com/5Dy00bmqf9 ';
   tweet_url += twtMsg[tmpNum];
+  tweet_url += ' pic.twitter.com/5Dy00bmqf9 ';
   //tweet_url += encodeURIComponent("What would a Hiroshima-sized atomic bomb do to my hometown? I found out, and you can too.");
   tweet_url += '&url=http://bit.ly/1Y4UkW0&via=pri&hashtags=OwningIt';
   window.open(tweet_url,'_blank'); 
@@ -2042,7 +2041,7 @@ function facebook() {
 FB.ui({
   method: 'feed',
   link: 'http://www.pri.org/stories/2015-12-12/how-does-your-life-stack-against-kenyan-womans',
-  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/kenya-quiz-lead.jpg',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/kenya-quiz-lead-2.jpg',
   name: "What if you were a Kenyan woman?",
   description: 'Ever wonder what your life would be like if you were born and raised in a different country? Take this quiz to find out how your life compares to that of an average Kenyan woman. The results may surprise you.'
   }, function(response){});
