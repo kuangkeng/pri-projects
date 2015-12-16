@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://kuangkeng.github.io/keng-data-journalism/carousel/dist/jquery.jcarousel.min.js"></script>
+
+    </head>
+
+    <style>
+        body {
+            font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+            font-size:15px;
+            padding: 0;
+            color: #4E443C;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+            
+            margin: 0 auto;
+        }
+
+        .wrapper {
+            max-width: 922px;
+            padding: 0px 0px 0px 0px;
+            margin: 0 auto;
+        }
+
+        .jcarousel-wrapper {
+    margin: 20px auto;
+    padding-bottom: 10px;
+    position: relative;
+    border: 10px solid #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 2px #999;
+    -moz-box-shadow: 0 0 2px #999;
+    box-shadow: 0 0 2px #999;
+}
+
+/** Carousel **/
+
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel li {
+    width: 200px;
+    float: left;
+    border: 1px solid #fff;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.jcarousel img {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+    margin-bottom: 5px;
+}
+
+/** Carousel Controls **/
+
+.jcarousel-control-prev,
+.jcarousel-control-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: #4E443C;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 1px #000;
+    font: 24px/27px Arial, sans-serif;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-box-shadow: 0 0 4px #F0EFE7;
+    -moz-box-shadow: 0 0 4px #F0EFE7;
+    box-shadow: 0 0 4px #F0EFE7;
+}
+
+.jcarousel-control-prev {
+    left: 15px;
+}
+
+.jcarousel-control-next {
+    right: 15px;
+}
+
+/** Carousel Pagination **/
+
+.jcarousel-pagination {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    margin: 0;
+}
+
+.jcarousel-pagination a {
+    text-decoration: none;
+    display: inline-block;
+
+    font-size: 11px;
+    height: 10px;
+    width: 10px;
+    line-height: 10px;
+
+    background: #fff;
+    color: #4E443C;
+    border-radius: 10px;
+    text-indent: -9999px;
+
+    margin-right: 7px;
+
+
+    -webkit-box-shadow: 0 0 2px #4E443C;
+    -moz-box-shadow: 0 0 2px #4E443C;
+    box-shadow: 0 0 2px #4E443C;
+}
+
+.jcarousel-pagination a.active {
+    background: #4E443C;
+    color: #fff;
+    opacity: 1;
+
+    -webkit-box-shadow: 0 0 2px #F0EFE7;
+    -moz-box-shadow: 0 0 2px #F0EFE7;
+    box-shadow: 0 0 2px #F0EFE7;
+}    
+
+    </style>
+
+    <body>
+
+        <div class="wrapper">
+
+            <div class="jcarousel-wrapper">
+                <div class="jcarousel">
+                    <ul>
+                       <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3020.jpg">One of the Maasai women growing aloe at the Twala Cultural Manyatta performs a traditional Maasai dance.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3116.jpg">Maasai women outside one of the plots of land at the Twala Cultural Manyatta where they harvest aloe for use in LUSH cosmetics.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/combo_maasai.jpg">Maasai women at the Twala Cultural Manyatta.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3094.jpg">Women of the Twala Cultural Manyatta tend to 40 acres of aloe secundiflora.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_2974.jpg">The Aloe Nabulu women's group processes aloe into soaps and lotions for local sales in Kenya.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_2908_0.jpg">Joseph Lentunyoi, the agronomist from the Laikipia Permaculture Project, works with women's groups growing aloe in the region to assist with transplanting and harvesting.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_2962.jpg">Aloe products made and sold locally by the women of the Nabulu Women's group in Laikipia.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3077.jpg">Some of the Maasai women tending to 40 acres of aloe secundiflora at the Twala Cultural Manyatta in Laikipia.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3075.jpg">While most women walk to the Twala Cultural Manyatta to work every day, some live on site and provide tours to visitors of the sustainable projects they're working on.</li>
+                        <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3127.jpg">Maasai women at the Twala Cultural Manyatta grow aloe and sell the leaves to the British cosmetics company LUSH.</li>
+                    </ul>
+                </div>
+                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+                
+                <p class="jcarousel-pagination"></p>
+                <p class="photo-credits">Credit: Anne Bailey</p>
+
+            </div>
+        </div>
+    <script>
+        (function($) {
+    $(function() {
+        var jcarousel = $('.jcarousel');
+
+        jcarousel
+            .on('jcarousel:reload jcarousel:create', function () {
+                var carousel = $(this),
+                    width = carousel.innerWidth();
+
+                // if (width >= 600) {
+                //     width = width / 3;
+                // } else if (width >= 350) {
+                //     width = width / 2;
+                // }
+
+                carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
+            })
+            .jcarousel({
+                wrap: 'circular'
+            });
+
+        $('.jcarousel-control-prev')
+            .jcarouselControl({
+                target: '-=1'
+            });
+
+        $('.jcarousel-control-next')
+            .jcarouselControl({
+                target: '+=1'
+            });
+
+        $('.jcarousel-pagination')
+            .on('jcarouselpagination:active', 'a', function() {
+                $(this).addClass('active');
+            })
+            .on('jcarouselpagination:inactive', 'a', function() {
+                $(this).removeClass('active');
+            })
+            .on('click', function(e) {
+                e.preventDefault();
+            })
+            .jcarouselPagination({
+                perPage: 1,
+                item: function(page) {
+                    return '<a href="#' + page + '">' + page + '</a>';
+                }
+            });
+    });
+})(jQuery);
+    </script>
+        
+    </body>
+</html>
