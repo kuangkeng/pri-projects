@@ -46,25 +46,36 @@ body {
 .front {
   display: flex;
   justify-content: center;
-  color:white;
-  
+  color: #292929;
   font-size: 40px;
   font-weight: bold;
-  background-color: #d3401e;
+  background: #ffe0d3;
+  text-shadow: 2px 2px 3px #c1c1c1;
+  -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+-moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
 }
+  
+.front:hover {
+  background: #ffceba;
+  }    
 
 .back-text {
   font-size: 18px;
   line-height: 25px;
   margin-top: 30px;
+  color: #292929;
+  text-shadow: 1px 1px 3px #c1c1c1;
 }
 
 .back
 {
-  color:white;
+  color: #333333;
   padding:20px;
-  background-color: #4188bc;
-  border:1px solid #D3D3D3;
+  background: #ffe8aa;
+  -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+-moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
 }
 
 @media (max-width: 500px ) {
@@ -95,7 +106,7 @@ body {
 <body>
 <div id="box_wrapper">
 <div id="box01">
-  <div class="front"> 
+  <div class="front effect2"> 
     <div class="front-text">Who should be blamed if a husband is fat and lazy?</div>
   </div> 
   <div class="back">
