@@ -441,7 +441,7 @@
       var output03 = (inputPaid/7*60) - data[1]["female"];
       var output04 = (inputPaid/7*60) - data[1]["male"];
 
-      console.log(output01 + " " + output02 + " " + output03 + " " + output04);
+      //console.log(output01 + " " + output02 + " " + output03 + " " + output04);
 
       if (output01>0){$("#result01").text(Math.round(output01) + " minutes more")}
         else{$("#result01").text(Math.abs(Math.round(output01)) + " minutes less")}
@@ -454,7 +454,9 @@
 
       if (output04>0){$("#result04").text(Math.round(output04) + " minutes more")}
         else{$("#result04").text(Math.abs(Math.round(output04)) + " minutes less")}
-              
+        
+      sendData();   
+                
       //draw chart01
       $(function () {
           $('#chart01').highcharts({
@@ -570,6 +572,23 @@
     }); //close click btn02 function 
   };
 
+  //Get IP address with Ipify, send data to google sheet
+  function sendData() {
+    $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+      function(json) {
+        console.log(json.ip);
+        $.ajax({
+          type: 'POST',
+          url: 'https://docs.google.com/forms/d/1R07Bx8IowsgA1bb3OrXQSIpF0pWJJJR2qnoOzRELDJY/formResponse',
+          data: { 
+            "entry.1898586199": json.ip, //ip
+            "entry.101149276": inputPaid, //paid hours
+            "entry.1042462722": inputUnpaid, //unpaid hours
+          }
+        }); 
+      }
+    );   
+  }
 
 
 
