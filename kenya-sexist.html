@@ -89,7 +89,7 @@ box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
   
   .back-text
 {
-  font-size: 16px !important;
+  font-size: 17px !important;
   line-height: 20px !important;
   margin-top: 0px;
 }
@@ -172,4 +172,54 @@ box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
 <!--script starts here-->
 <script>
  $("#box01,#box02,#box03,#box04,#box05,#box06").flip();
+
+var cardNum = 0;
+
+  $("#box01").click(function() {
+      cardNum = 1;                        
+      sendData();   
+  });
+
+  $("#box02").click(function() {
+      cardNum = 2;                        
+      sendData();   
+  });
+
+  $("#box03").click(function() {
+      cardNum = 3;                        
+      sendData();   
+  }); 
+
+  $("#box04").click(function() {
+      cardNum = 4;                        
+      sendData();   
+  });
+
+  $("#box05").click(function() {
+      cardNum = 5;                        
+      sendData();   
+  });
+
+  $("#box06").click(function() {
+      cardNum = 6;                        
+      sendData();   
+  });
+
+//Get IP address with Ipify, send data to google sheet
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      console.log(json.ip);
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1Uc8_iOxsuV_qhb28QxSIJbS8LFm1cGAi3jyiIvNb10M/formResponse',
+        data: { 
+          "entry.1583645090": json.ip, //ip
+          "entry.676837115": cardNum, //card number
+        }
+      }); 
+    }
+  );   
+} 
+
 </script>

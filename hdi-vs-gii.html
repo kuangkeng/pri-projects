@@ -1,0 +1,268 @@
+
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 420px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+  border:1px solid #D3D3D3;
+      }  
+
+#container01, #container02
+      {
+height: 700px; 
+margin: 0 auto;
+display: inline-block;
+width: 49%;  
+      }
+</style>
+</head>
+
+<body>
+<div id="container01"></div>
+<div id="container02"></div>
+</body>
+
+<script>
+$(function () {
+
+    $('#container01').highcharts({
+        chart: {
+            type: 'scatter',
+            marginBottom: 80,
+            zoomType: 'xy',
+            renderTo: 'container', 
+            events: {
+            load: function() {
+                this.tooltip.refresh(this.series[0].data[7]);
+                  }
+            }
+        },
+        title: {
+            text: "HDI 2014",
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Source: <a href="http://hdr.undp.org/en/rethinking-work-for-human-development" target="_blank">UNDP Human Development Report 2015</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -30,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        xAxis: {
+            title: {enabled: false,},
+            labels:{enabled: false,},
+        },
+        yAxis: {    
+            title: {
+                text: 'low ---- Human Development Index ---- high ',
+            },
+        },
+        credits: { enabled: false, },
+        legend:{enabled: false,},
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#ffffff'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'HDI: <b>{point.y}</b>'
+                }
+            }
+        },
+        series: [{data:[
+          {"name":"Norway", "x":1, "y":0.944},
+          {"name":"Australia", "x":1, "y":0.935},
+          {"name":"Switzerland", "x":1, "y":0.930},
+          {"name":"Denmark", "x":1, "y":0.923},
+          {"name":"Netherlands", "x":1, "y":0.922},
+          {"name":"Germany", "x":1, "y":0.916},
+          {"name":"Ireland", "x":1, "y":0.916},
+          {"name":"United States", "x":1, "y":0.915, "radius": 8, "color": "#d3401e"},
+          {"name":"Canada", "x":1, "y":0.913},
+          {"name":"New Zealand", "x":1, "y":0.913},
+          {"name":"Singapore", "x":1, "y":0.912},
+          {"name":"Hong Kong, China (SAR)", "x":1, "y":0.910},
+          {"name":"Liechtenstein", "x":1, "y":0.908},
+          {"name":"Sweden", "x":1, "y":0.907},
+          {"name":"United Kingdom", "x":1, "y":0.907},
+          {"name":"Iceland", "x":1, "y":0.899},
+          {"name":"Korea (Republic of)", "x":1, "y":0.898},
+          {"name":"Israel", "x":1, "y":0.894},
+          {"name":"Luxembourg", "x":1, "y":0.892},
+          {"name":"Japan", "x":1, "y":0.891},
+          {"name":"Belgium", "x":1, "y":0.890},
+          {"name":"France", "x":1, "y":0.888},
+          {"name":"Austria", "x":1, "y":0.885},
+          {"name":"Finland", "x":1, "y":0.883},
+          {"name":"Slovenia", "x":1, "y":0.880},
+          {"name":"Spain", "x":1, "y":0.876},
+          {"name":"Italy", "x":1, "y":0.873},
+          {"name":"Czech Republic", "x":1, "y":0.870},
+          {"name":"Greece", "x":1, "y":0.865},
+          {"name":"Estonia", "x":1, "y":0.861},
+          {"name":"Brunei Darussalam", "x":1, "y":0.856},
+          {"name":"Cyprus", "x":1, "y":0.850},
+          {"name":"Qatar", "x":1, "y":0.850},
+          {"name":"Andorra", "x":1, "y":0.845},
+          {"name":"Slovakia", "x":1, "y":0.844},
+          {"name":"Poland", "x":1, "y":0.843},
+          {"name":"Lithuania", "x":1, "y":0.839},
+          {"name":"Malta", "x":1, "y":0.839},
+          {"name":"Saudi Arabia", "x":1, "y":0.837},
+          {"name":"Argentina", "x":1, "y":0.836},
+          {"name":"United Arab Emirates", "x":1, "y":0.835},
+          {"name":"Chile", "x":1, "y":0.832},
+          {"name":"Portugal", "x":1, "y":0.830},
+          {"name":"Hungary", "x":1, "y":0.828},
+          {"name":"Bahrain", "x":1, "y":0.824},
+          {"name":"Latvia", "x":1, "y":0.819},
+          {"name":"Croatia", "x":1, "y":0.818},
+          {"name":"Kuwait", "x":1, "y":0.816},
+          {"name":"Montenegro", "x":1, "y":0.802},]}
+
+  ]
+    });
+});
+  
+$(function () {
+
+    $('#container02').highcharts({
+        chart: {
+            type: 'scatter',
+            marginBottom: 80,
+            zoomType: 'xy',
+            renderTo: 'container', 
+            events: {
+            load: function() {
+                this.tooltip.refresh(this.series[0].data[7]);
+                  }
+            }
+        },
+        title: {
+            text: "GII 2014",
+            margin: 20,
+            style: {
+                fontSize: '19px',
+            },
+        },
+        
+        xAxis: {
+            title: {enabled: false,},
+            labels:{enabled: false,},
+        },
+        yAxis: {    
+            title: {
+                text: 'equality ---- Gender Inequality Index ---- inequality ',
+            },
+            opposite: true,
+            reversed: true,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend:{enabled: false,},
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#ffffff'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'GII: <b>{point.y:.3f}</b>'
+                }
+            }
+        },
+        series: [{data:[
+           {"name":"Norway", "x":1, "y":0.067},
+{"name":"Australia", "x":1, "y":0.110},
+{"name":"Switzerland", "x":1, "y":0.028},
+{"name":"Denmark", "x":1, "y":0.048},
+{"name":"Netherlands", "x":1, "y":0.062},
+{"name":"Germany", "x":1, "y":0.041},
+{"name":"Ireland", "x":1, "y":0.113},
+{"name":"United States", "x":1, "y":0.280, "radius": 8, "color": "#d3401e"},
+{"name":"Canada", "x":1, "y":0.129},
+{"name":"New Zealand", "x":1, "y":0.157},
+{"name":"Singapore", "x":1, "y":0.088},
+{"name":"Sweden", "x":1, "y":0.055},
+{"name":"United Kingdom", "x":1, "y":0.177},
+{"name":"Iceland", "x":1, "y":0.087},
+{"name":"South Korea", "x":1, "y":0.125},
+{"name":"Israel", "x":1, "y":0.101},
+{"name":"Luxembourg", "x":1, "y":0.100},
+{"name":"Japan", "x":1, "y":0.133},
+{"name":"Belgium", "x":1, "y":0.063},
+{"name":"France", "x":1, "y":0.088},
+{"name":"Austria", "x":1, "y":0.053},
+{"name":"Finland", "x":1, "y":0.075},
+{"name":"Slovenia", "x":1, "y":0.016},
+{"name":"Spain", "x":1, "y":0.095},
+{"name":"Italy", "x":1, "y":0.068},
+{"name":"Czech Republic", "x":1, "y":0.091},
+{"name":"Greece", "x":1, "y":0.146},
+{"name":"Estonia", "x":1, "y":0.164},
+{"name":"Cyprus", "x":1, "y":0.124},
+{"name":"Qatar", "x":1, "y":0.524},
+{"name":"Slovakia", "x":1, "y":0.164},
+{"name":"Poland", "x":1, "y":0.138},
+{"name":"Lithuania", "x":1, "y":0.125},
+{"name":"Malta", "x":1, "y":0.227},
+{"name":"Saudi Arabia", "x":1, "y":0.284},
+{"name":"Argentina", "x":1, "y":0.376},
+{"name":"United Arab Emirates", "x":1, "y":0.232},
+{"name":"Chile", "x":1, "y":0.338},
+{"name":"Portugal", "x":1, "y":0.111},
+{"name":"Hungary", "x":1, "y":0.209},
+{"name":"Bahrain", "x":1, "y":0.265},
+{"name":"Latvia", "x":1, "y":0.167},
+{"name":"Croatia", "x":1, "y":0.149},
+{"name":"Kuwait", "x":1, "y":0.387},
+{"name":"Montenegro", "x":1, "y":0.171},
+
+  ,]}
+
+  ]
+    });
+});  
+
+
+</script>

@@ -1,0 +1,118 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+body {
+  width: 98%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 700px; 
+width: 100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 100,
+        },
+        title: {
+            text: 'Top 10 countries with largest decline percentage in GII 2014',
+        },
+        subtitle: {
+            text: 'Source: <a href="http://hdr.undp.org/en/rethinking-work-for-human-development" target="_blank">UNDP Human Development Report 2015</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },        
+        xAxis: {
+            categories: [
+                "Tonga",
+                "Kuwait",
+                "South Korea",
+                "Trinidad and Tobago",
+                "Morocco",
+                "Mauritius",
+                "France",
+                "Netherlands",
+                "Lithuania",
+                "US"
+            ],
+            labels: {
+                rotation: 0,
+                style: {
+                    fontSize: '12',
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of decline',
+                margin: 10
+            },
+            
+            
+            labels: {
+                formatter: function() {
+                return Math.abs(this.value) + '%';
+                },   
+                format: '{value}%'
+            },
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>' + this.x + '<br>' + '<b>' + Math.abs(this.y) + ' %';
+                }, 
+            pointFormat: '<b>{point.y:.1f}%</b>'
+        },
+        series: [{
+            data: [-31.2,-25.8,-19.2,-13.5,-12.4,-10.5,-9.6,-8.9,-7.0,{y:-6.6, color: '#d3401e'}],
+            color: '#545454',
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                formatter: function() {
+                return Math.abs(this.y) + ' %';
+                }, 
+                
+                y: 0,
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>

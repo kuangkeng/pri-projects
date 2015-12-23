@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 700px; 
+  max-width: 937px; 
+  margin: 0 auto; 
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+    var chart = new Highcharts.Chart({
+        chart: {
+          type: 'line',
+          marginBottom: 120,
+          renderTo: 'container',
+          marginRight: 50 //add margin for text
+        },
+        title: {
+            text: "GII changes among top 10 countries with highest HDI",
+        },
+        subtitle: {
+            text: 'The US and Netherlands are the only two countries where the GII has risen.<br>Source: <a href="http://hdr.undp.org/en/rethinking-work-for-human-development" target="_blank">Human Development Report 2015</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -65,
+            style: {
+                color: '#808080',
+                fontSize: '12px',
+            },
+        },
+  
+        xAxis: {
+            categories: ["2013","2014"],
+            plotLines: [{
+              color: '#d8d8d8',
+              value: 0,
+              width: 1
+              },
+              {
+              color: '#d8d8d8',
+              value: 1,
+              width: 1
+              },
+            ]
+        },
+        yAxis: {
+            title: {
+                text: 'equality -------- Gender Inequality Index (GII) -------- inequality',
+            },
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y:.3f}</b>'
+        },
+        
+        legend: {
+                    enabled: false
+        },
+        //exporting: { enabled: false },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [
+          {name: "Switzerland",data :[0.030,0.028],color: '#4188bc'},
+          {name: "Germany",data :[0.046,0.041],color: '#4188bc'},
+          {name: "Denmark",data :[0.056,0.048],color: '#4188bc'},
+          {name: "Netherlands",data :[0.057,0.062],color: '#d3401e'},
+          {name: "Norway",data :[0.068,0.067],color: '#4188bc'},
+          {name: "Australia",data :[0.113,0.110],color: '#4188bc'},
+          {name: "Ireland",data :[0.115,0.113],color: '#4188bc'},
+          {name: "Canada",data :[0.136,0.129],color: '#4188bc'},
+          {name: "New Zealand",data :[0.185,0.157],color: '#4188bc'},
+          {name: "United States",data :[0.262,0.280],color: '#d3401e'},
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                },
+
+            },
+
+        },
+    });
+          $(chart.series).each(function(){
+          var point = this.points[this.points.length-1];
+          chart.renderer.text(this.name,
+          point.plotX + chart.plotLeft + 5,
+          point.plotY + chart.plotTop + 5).attr(
+            {
+              zIndex: 5,
+              
+            }).add();
+        });
+});
+</script>
