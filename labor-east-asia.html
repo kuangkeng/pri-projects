@@ -40,7 +40,7 @@ $(function () {
           marginRight: 50 //add margin for text
         },
         title: {
-            text: "European Union",
+            text: "East Asia & Pacific",
             style: {
                 fontSize: '30px',
             },
@@ -116,24 +116,25 @@ $(function () {
         series: [
           {name: "Female", color:"#d3401e",
           data :[
-            [Date.UTC(1990, 0, 1),45.7],
-            [Date.UTC(2000, 0, 1),47.8],
-            [Date.UTC(2010, 0, 1),50.2],
-            [Date.UTC(2013, 0, 1),50.8]]},
+            [Date.UTC(1990, 0, 1),66.9],
+            [Date.UTC(2000, 0, 1),65.2],
+            [Date.UTC(2010, 0, 1),61.0],
+            [Date.UTC(2013, 0, 1),61.3]]},
           {name: "Male", color:"#4188bc",
           data :[
-            [Date.UTC(1990, 0, 1),69.1],
-            [Date.UTC(2000, 0, 1),66.1],
-            [Date.UTC(2010, 0, 1),64.9],
-            [Date.UTC(2013, 0, 1),64.7]]},    
+            [Date.UTC(1990, 0, 1),83.3],
+            [Date.UTC(2000, 0, 1),82.2],
+            [Date.UTC(2010, 0, 1),78.1],
+            [Date.UTC(2013, 0, 1),78.5]]},    
         ], 
         plotOptions: {
             series: {
                 marker: {
-                    enabled: false
+                    enabled: true
                 },
                 dataLabels: {
                   enabled: true,
+                  
                   color: '#FFFFFF',
                   align: 'right',
                   format: '{point.y:.1f}%', // one decimal
