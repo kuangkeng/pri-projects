@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 700px; 
+  max-width: 930px; 
+  margin: 0 auto; 
+  
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+    var chart = new Highcharts.Chart({
+
+        chart: {
+          type: 'line',
+          marginBottom: 100,
+          renderTo: 'container',
+          marginRight: 70, //add margin for text
+          marginBottom: 140,
+        },
+        title: {
+            text: "Top 5 destination countries for Nepali migrant labors 2008/09 - 2013/14",
+        },
+        subtitle: {
+            text: 'The figures are based on number of labor permits issued.<br>Source: <a href="http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_312137.pdf">Department of Nepali Foreign Employment</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -50,
+            style: {
+                color: '#808080',
+                fontSize: '12px',
+            },
+        },
+  
+        xAxis: {
+          categories: ["2008/09","2009/10","2010/11","2011/12","2012/13","2013/14",]
+        },
+        yAxis: {
+            title: {
+                text: 'Number of migrant labors',
+                style: {
+                      fontSize: '12px',
+                }
+            },
+            labels: {
+                format: '{value:,.0f}',
+                style: {
+                      fontSize: '12px',
+                }
+            },
+        },
+        tooltip: {
+          
+        },
+        
+        legend: {
+                    enabled: false
+        },
+        //exporting: { enabled: false },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [{
+          name: "Malaysia",
+          data:[29320,111366,106029,96272,157212,206719], lineWidth: 2, color: "#66c2a5",
+        },{
+          name: "Saudi Arabia",
+          data:[45044,59549,62499,68130,86126,75026], lineWidth: 2, color: "#fc8d62",
+        },{
+          name: "Qatar",
+          data:[54732,25612,35943,44883,85837,103850], lineWidth: 2, color: "#8da0cb",
+        },{
+          name: "UAE",
+          data:[24057,17778,24047,34503,51419,42542], lineWidth: 2, color:"#e78ac3",
+        },{
+          name: "Kuwait",
+          data:[410,2286,7981,9165,7890,8979], lineWidth: 2, color:"#a6d854",
+        }], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                },
+            },
+
+        },
+    });
+    $(chart.series).each(function(){
+    var point = this.points[this.points.length-1];
+    chart.renderer.text(this.name,
+    point.plotX + chart.plotLeft + 5,
+    point.plotY + chart.plotTop + 5).attr(
+      {
+        zIndex: 5,
+        
+      }).add();
+    });
+});
+</script>

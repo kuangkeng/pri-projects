@@ -1,0 +1,98 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 600px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 170,
+        },
+        title: {
+            text: 'Cause of death among Nepali migrant labors while abroad 2008/09 - 2013/14',
+        },
+        subtitle: {
+            text: "<p>* The natural cause category does not indicate the disease in the database, thus it does not reflect the cause of death. It is estimated that majority of migrant labors are youth, hence the records in this category are questionable. </p>Source: <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_312137.pdf'>Nepali Foreign Employment Promotion Board</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -100,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: [
+              "Heart Failure",
+              "Other or unidentified cause",
+              "Natural cause*",
+              "Traffic accident",
+              "Suicide",
+              "Workplace accident",
+              "Murder",
+            ],
+        },
+        yAxis: {
+            title: {
+                text: 'Number of deaths',
+                x: -30,
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b>'
+        },
+        series: [{
+            data: [858,736,600,444,332,255,47],
+            color: "#d3401e",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}', // one decimal
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>

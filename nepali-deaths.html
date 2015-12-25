@@ -1,0 +1,97 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 600px; 
+width=100%; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 100,
+        },
+        title: {
+            text: 'Deaths of Nepali migrant labors in top 5 destination countries 2008/09 - 2013/14',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_312137.pdf'>Nepali Foreign Employment Promotion Board</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '12',
+            },
+        },        
+        xAxis: {
+            categories: [
+              "Kuwait",
+              "Saudi Arabia",
+              "Qatar",
+              "Malaysia",
+              "UAE",
+            ],
+        },
+        yAxis: {
+            title: {
+                text: 'No. of deaths per 100,000 labor permits issued',
+                x: -30,
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b>'
+        },
+        series: [{
+            data: [262,222,211,159,136],
+            color: "#d3401e",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}', // one decimal
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>
