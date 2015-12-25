@@ -4,23 +4,19 @@
 
 <style>
 body {
-  width: 100%;
-  max-width: 850px;
-  margin:0 auto;
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
   font-size: 112.5%;
   line-height: 1.5em;
   color: #33333c;
       }  
 
-#container
-      {
+#container{
 height: 600px; 
-width=100%; 
 max-width: 850px; 
 margin: 0 auto;
 border:1px solid #D3D3D3;
-      }
+}
+
 </style>
 </head>
 
@@ -40,7 +36,7 @@ $(function () {
             margin: 20,
         },
         subtitle: {
-            text: "Source: <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_312137.pdf'>Nepali Foreign Employment Promotion Board</a>",
+            text: "Source: <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_312137.pdf'  target='_blank'>Nepali Foreign Employment Promotion Board</a>",
             useHTML: true,
             floating: true,
             align: 'left',
@@ -62,8 +58,12 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'No. of deaths per 100,000 labor permits issued',
-                x: -30,
+              text: 'No. of deaths per 100,000 labor permits issued',
+              x: -30,
+              style: {
+                color: '#808080',
+                fontSize: '10',
+              },  
             },
             labels: {
                 format: '{value}'
