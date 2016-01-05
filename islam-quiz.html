@@ -26,74 +26,198 @@
       font-size: 16px;
       color: #33333c;
     }
+
+    #islamquiz {
+      margin:0px auto;
+      width: 100%;
+    }
     
     .box {
       margin:5px;
-      padding:10px;
       display: inline-block;
       position: relative;
-      width: 280px;
+      width: 275px;
       height:150px;
-      background-color: yellow;
+      background: #ffeaa5;
+      text-shadow: 2px 2px 3px #c1c1c1;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+    }
+
+    .box:hover {
+      background: #ffd85c;
     }
 
     #bottombox {
-      margin:5px;
       position: fixed;
-      bottom:0;
+      bottom:0px;
+      padding-bottom: 10px;
+      padding-top: 5px;
       z-index: 1;
       width:100%;
       max-width:870px;
-      height:170px;
+      height:130px;
+      background-color: white;
     }
 
     .dropbox {
       display: inline-block;
       position: relative;
-      width: 287px;
-      height:170px;
-      background-color: blue;
+      margin:0px 5px;
+      width: 275px;
+      height:115px;
+      background-color: #8d89e9;
+      border-radius: 10px;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+    }
+
+    .text {
+      display: flex;
+      color: #292929;
+      font-size: 16px;
+      font-weight: bold;
+      padding:10px;      
     }
 
     #correctbox {
-      width:150px;
+      width:300px;
       height:150px;
-      background-color: blue;
-      position: absolute;
+      background-color: #1d3d86;
+      position: fixed;
       top:50%;
       left:50%;
-      margin-top:-75px; /* this is half the height of your div*/  
-      margin-left:-75px; /*this is half of width of your div*/
+      margin-top:-100px;
+      margin-left:-150px; 
+      z-index: 3;
+      border-radius: 10px;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
     }
 
     #wrongbox {
-      width:150px;
-      height:150px;
-      background-color: red;
-      position: absolute;
+      width:300px;
+      height:300px;
+      background-color: #a31d27;
+      position: fixed;
       top:50%;
       left:50%;
-      margin-top:-75px; /* this is half the height of your div*/  
-      margin-left:-75px; /*this is half of width of your div*/
+      margin-top:-150px; 
+      margin-left:-150px; 
+      z-index: 3;
+      border-radius: 10px;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
     }
 
     #replaybox {
-      width:150px;
-      height:150px;
-      background-color: white;
-      position: absolute;
+      width:300px;
+      height:180px;
+      background-color: #a31d27;
+      position: fixed;
       top:50%;
       left:50%;
-      margin-top:-75px; /* this is half the height of your div*/  
-      margin-left:-75px; /*this is half of width of your div*/
+      margin-top:-90px; /* this is half the height of your div*/  
+      margin-left:-150px; /*this is half of width of your div*/
+      z-index: 3;
+      border-radius: 10px;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+    }
+
+    #winbox {
+      width:300px;
+      height:180px;
+      background-color: #1d3d86;
+      position: fixed;
+      top:50%;
+      left:50%;
+      margin-top:-90px; /* this is half the height of your div*/  
+      margin-left:-150px; /*this is half of width of your div*/
+      z-index: 3;
+      border-radius: 10px;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+    }
+
+    #bufferbox {
+      height:150px;
+      width:100%;
+    }
+
+    .sect {
+      margin:0px auto;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-top:10px;
+      margin-bottom: -10px;
+    }
+
+    .counter, .correctmsg, .wrongmsg {
+      margin:0px auto;
+      font-size: 60px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 2px 2px 3px #c1c1c1;
+    }
+
+    .correctmsg {
+      color: white;
+      margin-top: 10%;
+    }
+
+    .wrongmsg {
+      color: white;
+      margin-top: 5%;
+    }
+
+    .wrongnum {
+      margin:0px auto;
+      font-size: 110px;
+      font-weight: bold;
+      text-align: center;
+      color: white;
+      margin-top: -20px;
+      margin-bottom: -20px;
+      text-shadow: 2px 2px 3px #c1c1c1;
+    }
+
+    .wrongtext {
+      margin:0px auto;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 3px #c1c1c1;
+    }
+
+    .overmsg, .winmsg {
+      margin:0px auto;
+      font-size: 40px;
+      text-align: center;
+      color: white;
+      padding:20px;
+      text-shadow: 2px 2px 3px #c1c1c1;
     }
 
     .selected{
-      z-index: 5;
+      z-index: 2;
+      background-color: #ffd85c
     }
 
     .active {
-      background-color: orange;
+      background-color: #a6a3e9;
+    }
+
+    .hover {
+      background-color: #6460d3;
     }
 
     @media (max-width: 500px ) { }
@@ -113,73 +237,115 @@
     <div id="islamquiz" class="container">
       <div class="row">
         <div id="left-column" class="col-sm-12 col-xs-12">
-          <div id="box01" class="box">
-            Believe that Islamic leadership must come through Prophet Muhammad's bloodline. They support Ali, Muhammad's cousin and son-in-law as the legitimate successor.
+          <div id="box01" class="box" id2="shiite">
+            <div class="text">
+              <div class="intext">Believe that Islamic leadership must come through the Prophet Muhammad's bloodline. They support Ali, Muhammad's cousin and son-in-law as the legitimate successor.</div>
+            </div>
           </div>
-          <div id="box02" class="box">
-            Their supreme leader was killed in 680 by the ruling rival sect, leading them to value martydom and sacrifice.
+          <div id="box02" class="box" id2="shiite">
+            <div class="text">
+              <div class="intext">Their supreme leader was killed in 680 by the ruling rival sect. They value martyrdom and sacrifice.</div>
+            </div>
           </div>
-          <div id="box03" class="box">
-            Believe that Islamic leadership should be given to the most qualified individual. They elected Abu Bakr, a friend of Muhammad and the father of his wife Aisha, as the rightful successor.
+          <div id="box03" class="box" id2="sunni">
+            <div class="text">
+              <div class="intext">Believe that Islamic leadership should be given to the most qualified individual. They elected Abu Bakr, a friend of Muhammad and the father of his wife Aisha, as the rightful successor.</div>
+            </div>
           </div>
-          <div id="box04" class="box">
-            They are the majority in Iran, Iraq and Bahrain, enduring a long history of marginalization in the Arab world.
+          <div id="box04" class="box" id2="shiite">
+            <div class="text">
+              <div class="intext">They are the majority in Iran, Iraq and Bahrain, and have endured a long history of marginalization in the Arab world.</div>
+            </div>
           </div>
-          <div id="box05" class="box">
-            They are 85% of the world's 1.6 billion Muslims. They are the majority in Saudi Arabia, Turkey, Pakistan, India, Bangladesk, Malaysia and Indonesia.
+          <div id="box05" class="box" id2="sunni">
+            <div class="text">
+              <div class="intext">They are 85% of the world's 1.6 billion Muslims. They are the majority in Saudi Arabia, Turkey, Pakistan, India, Bangladesh, Malaysia and Indonesia.</div>
+            </div>
           </div>
-          <div id="box06" class="box">
-            Karbala, Kufa and Najaf in Iraq are considered as revered shrines.
+          <div id="box06" class="box" id2="shiite">
+            <div class="text">
+              <div class="intext">Karbala, Kufa and Najaf in Iraq are considered as revered shrines.</div>
+            </div>
           </div>
-          <div id="box07" class="box">
-            Ousted Iraqi President Saddam Hussein is a member of this sect.
+          <div id="box07" class="box" id2="sunni">
+            <div class="text">
+              <div class="intext">Ousted Iraqi Dictator Saddam Hussein is a member of this sect.</div>
+            </div>
           </div>
-          <div id="box08" class="box">
-            Perform pilgrimage to Mecca, the holy shrine, and regard the Quran as holy book.
+          <div id="box08" class="box" id2="both">
+            <div class="text">
+              <div class="intext">Perform pilgrimage to Mecca, the holy shrine, and regard the Koran as holy book.</div>
+            </div>
           </div>
-          <div id="box09" class="box">
-            Believe that the 12th and final imam is hidden and will return one day as Mahdi or Messiah to fulfill divine will.
+          <div id="box09" class="box" id2="shiite">
+            <div class="text">
+              <div class="intext">Believe that the 12th and final imam is hidden and will return one day as Mahdi or Messiah to fulfill divine will.</div>
+            </div>
           </div>
-          <div id="box10" class="box">
-            Fast during the holy month of Ramadan.
+          <div id="box10" class="box" id2="both">
+            <div class="text">
+              <div class="intext">Fast during the holy month of Ramadan.</div>
+            </div>
           </div>
-          <div id="box11" class="box">
-            Their members include ISIS and Osama bin Laden.
+          <div id="box11" class="box" id2="sunni">
+            <div class="text">
+              <div class="intext">Their members include ISIS and Osama Bin Laden.</div>
+            </div>
           </div> 
-          <div id="box12" class="box">
-            Islamic authority is based more on the Quran and the traditions of Mohammed compared to religious scholars. 
+          <div id="box12" class="box" id2="sunni">
+            <div class="text">
+              <div class="intext">Islamic authority is based more on the Koran and the traditions of Mohammed compared to religious scholars.</div>
+            </div>
           </div>
-          <div id="box13" class="box">
-            Include the Alawite sect of Syrian President Bashar al-Assad.
+          <div id="box13" class="box" id2="shiite">
+            <div class="text">
+              <div class="intext">Include the Alawite sect of Syrian President Bashar al-Assad.</div>
+            </div>
           </div> 
-          <div id="box14" class="box">
-            Give great authority to their ayatollahs, or high-ranking Shia scholars, who are seen as God's guides.
+          <div id="box14" class="box" id2="shiite">
+            <div class="text">
+              <div class="intext">Give great authority to their ayatollahs, or high-ranking Muslim scholars, who are seen as God's guides.</div>
+            </div>
           </div>
-          <div id="box15" class="box">
-            Believe Allah is the only God and Muhammad his messenger.
+          <div id="box15" class="box" id2="both">
+            <div class="text">
+              <div class="intext">Believe Allah is the only God and Muhammad his messenger.</div>
+            </div>
           </div>
+          <div id="bufferbox"></div>
         </div>
       </div>
       <div id="bottombox">
-        <div id="dropbox01" class="dropbox">
-          <p>5</p>
+        <div id="dropbox01" class="dropbox" id2="sunni">
+          <div class="sect">Sunni</div>
+          <div class="counter">5</div>
         </div>
-        <div id="dropbox02" class="dropbox">
-          <p>4</p>
+        <div id="dropbox02" class="dropbox" id2="both">
+          <div class="sect">Sunni & Shiite</div>
+          <div class="counter">3</div>
         </div>
-        <div id="dropbox03" class="dropbox">
-          <p>3</p>
+        <div id="dropbox03" class="dropbox" id2="shiite">
+          <div class="sect">Shiite</div>
+          <div class="counter">7</div>
         </div>
       </div> 
       <div id="correctbox">
+        <div class="correctmsg">Correct!</div>
       </div> 
       <div id="wrongbox">
-        <p>5</p>
+        <div class="wrongmsg">Wrong!</div>
+        <div class="wrongtext">You still have</div>  
+        <div class="wrongnum">5</div> 
+        <div class="wrongtext">chances</div> 
       </div> 
       <div id="replaybox">
-        <p>Sorry, game over</p>
-        <button type="button" class="btn btn-primary" id="refresh-btn" onclick="location.reload()">Try again</button>
-      </div>       
+        <div class="overmsg">Sorry, you lost</div>
+        <button type="button" class="btn btn-primary btn-lg center-block" id="refresh-btn" onclick="location.reload()">Play again</button>
+      </div> 
+      <div id="winbox">
+        <div class="winmsg">You made it!</div>
+        <button type="button" class="btn btn-success btn-lg center-block" id="refresh-btn" onclick="location.reload()">Play again</button>
+      </div>        
     </div>
 
 
@@ -187,71 +353,66 @@
 
     <script>
 
-      var counter01 = 5,
-          counter02 = 4,
-          counter03 = 3,
+      var counter = [5,3,7],
           lives = 5;
 
       function init() { 
         console.log("js ready!");
-        $("#correctbox, #wrongbox, #replaybox").hide();
+        $("#wrongbox, #correctbox, #replaybox, #winbox").hide();
         $(function() {
 
           $(".box").draggable({
-              revert: function(is_valid_drop){
-                  if(!is_valid_drop){
+              revert: function(droppable){
+                  if($(droppable).attr("id2") == $(this).attr("id2"))
+                    {
+                      var num = ($(droppable).index());
+                      counter[num] = counter[num]-1;
+                      console.log(counter);
+                      $(this).fadeOut(1000);
+                      if((counter[0]==0)&&(counter[1]==0)&&(counter[2]==0))
+                        {
+                          console.log("win!");
+                          $(droppable).find( ".counter" ).html(counter[num]);
+                          $("#winbox").fadeIn();
+                          return false;
+                        }
+                        else{
+                          $("#correctbox").fadeIn().delay(1000).fadeOut();
+                          $(droppable).find( ".counter" ).html(counter[num]);
+                          return false;
+                        }
+                    } 
+                    else {
+                      $(this).removeClass("selected");
+                      return true
+                    }
+              },
+              drag: function(){
+                  $(this).addClass("selected");
+                  
+              },
+
+          });
+
+          $( ".dropbox" ).droppable({
+              accept: ".box",
+              activeClass: "active",
+              hoverClass: "hover",
+              drop: function(event,ui) {
+                if($(ui.draggable).attr("id2")==$(this).attr("id2")){}
+                  else {
                     lives = lives -1;
                     if(lives>0){
-                      $("#wrongbox").find( "p" ).html(lives);
-                      $("#wrongbox").fadeIn().delay(1000).fadeOut();
                       $(this).removeClass("selected");
+                      $("#wrongbox").find( ".wrongnum" ).html(lives);
+                      $("#wrongbox").fadeIn().delay(1000).fadeOut();
                       return true;                    
                     } else {
                       $("#replaybox").fadeIn();
                     }
-                  } else {
-                    $(this).fadeOut(1000);
-                    $("#correctbox").fadeIn().delay(1000).fadeOut();
-                  }
-              },
-              drag: function(){
-                  $(this).addClass("selected");
-                  $(".dropbox").addClass ("active");
-              },
-              stop: function(){
-                  $(".dropbox").removeClass ("active");
-              },
-          });
-
-          $( "#dropbox01" ).droppable({
-            accept: "#box01, #box02, #box03",
-            drop: function( event, ui ) {
-              counter01=counter01-1;
-              $( this )
-                .find( "p" )
-                  .html(counter01);
-            }
-          });
-
-          $( "#dropbox02" ).droppable({
-            accept: "#box04, #box05, #box06",
-            drop: function( event, ui ) {
-              counter02=counter02-1;
-              $( this )
-                .find( "p" )
-                  .html(counter02);
-            }
-          });
-
-          $( "#dropbox03" ).droppable({
-            accept: "#box07, #box08, #box09",
-            drop: function( event, ui ) {
-              counter03=counter03-1;
-              $( this )
-                .find( "p" )
-                  .html(counter03);
-            }
-          });          
+                  } 
+              }
+          });        
 
         }); //close draggable and droppable function
       }; //close init function
