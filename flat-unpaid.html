@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 666px; 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+      $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column',
+                marginBottom: 70,
+          		marginTop:40,
+            },
+            title: {
+              text: null,
+              style: {
+                fontSize: '14',
+              }                  
+            },
+            subtitle: {
+           		text: 'Source: UNDP',
+	            useHTML: true,
+	            floating: true,
+	            align: 'left',
+	            verticalAlign: 'bottom',
+	            y: 0,
+	            style: {
+	                color: '#808080',
+	                fontSize: '12px',
+	            },
+            },               
+            xAxis: {
+                categories: [
+                    "Women",
+                    "Men",
+                    ],
+                labels: {
+                	style: {fontSize: '18px'}
+            	}
+            },
+            yAxis: {
+                title: null,
+                labels: {
+                	style: {color: 'white'}
+            	},      
+            	gridLineWidth: 0,          
+            },
+            legend: {enabled: false},
+            credits: {enabled: false},
+            tooltip: {
+                headerFormat: '<b>{point.x}</b><br/>',
+                pointFormat: 'total work: {point.stackTotal:.0f} min<br/>{series.name} work: {point.y:.0f} min<br/>percentage of {series.name} work: {point.percentage:.0f}%'
+            },
+            plotOptions: {
+                column: {stacking: 'normal'},
+                series: {
+                  dataLabels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'center',
+                    format: '<b>{series.name}</b><br><br>{point.percentage:.0f}%', 
+                    y: 0,
+                    style: {fontSize: '18px', align: 'center'}
+                  }
+                }
+            },
+            series: [
+                {name: 'Paid work', data: [151,272], color: '#4188bc'},
+                {name: 'Unpaid work', data: [272,107], color: '#d3401e'},
+            ]
+        });
+      });
+
+</script>

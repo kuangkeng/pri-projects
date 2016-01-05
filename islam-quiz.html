@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <style>
+    body {font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;}
+    #islamquiz { margin-top: 20px; margin-bottom: 20px; padding: 10px; max-width: 900px;}
+    
+    .box {
+      margin:5px;
+      display: inline-block;
+      position: relative;
+      width: 280px;
+      height:150px;
+      background-color: yellow;
+    }
+
+    #bottombox {
+      margin:5px;
+      position: fixed;
+      bottom:0;
+      z-index: 1;
+      background-color: red;
+      width:100%;
+      max-width:870px;
+      height:170px;
+    }
+
+    .dropbox {
+      display: inline-block;
+      position: relative;
+      width: 287px;
+      height:170px;
+      background-color: blue;
+    }
+
+    #correctbox {
+      width:150px;
+      height:150px;
+      background-color: blue;
+      position: absolute;
+      top:50%;
+      left:50%;
+      margin-top:-75px; /* this is half the height of your div*/  
+      margin-left:-75px; /*this is half of width of your div*/
+    }
+
+    #wrongbox {
+      width:150px;
+      height:150px;
+      background-color: red;
+      position: absolute;
+      top:50%;
+      left:50%;
+      margin-top:-75px; /* this is half the height of your div*/  
+      margin-left:-75px; /*this is half of width of your div*/
+    }
+
+    #replaybox {
+      width:150px;
+      height:150px;
+      background-color: white;
+      position: absolute;
+      top:50%;
+      left:50%;
+      margin-top:-75px; /* this is half the height of your div*/  
+      margin-left:-75px; /*this is half of width of your div*/
+    }
+
+    .selected{
+      z-index: 5;
+    }
+
+    .active {
+      background-color: orange;
+    }
+
+    @media (max-width: 500px ) { }
+
+  </style>
+
+  <body>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+    <div id="islamquiz" class="container">
+      <div class="row">
+        <div id="left-column" class="col-sm-12 col-xs-12">
+          <div id="box01" class="box">
+            box01
+          </div>
+          <div id="box02" class="box">
+            box02
+          </div>
+          <div id="box03" class="box">
+            box03
+          </div>
+          <div id="box04" class="box">
+            box04
+          </div>
+          <div id="box05" class="box">
+            box05
+          </div>
+          <div id="box06" class="box">
+            box06
+          </div>
+          <div id="box07" class="box">
+            box07
+          </div>
+          <div id="box08" class="box">
+            box08
+          </div>
+          <div id="box09" class="box">
+            box09
+          </div>
+          <div id="box10" class="box">
+            box10
+          </div>
+        </div>
+      </div>
+      <div id="bottombox">
+        <div id="dropbox01" class="dropbox">
+          <p>5</p>
+        </div>
+        <div id="dropbox02" class="dropbox">
+          <p>4</p>
+        </div>
+        <div id="dropbox03" class="dropbox">
+          <p>3</p>
+        </div>
+      </div> 
+      <div id="correctbox">
+      </div> 
+      <div id="wrongbox">
+        <p>5</p>
+      </div> 
+      <div id="replaybox">
+        <p>Sorry, game over</p>
+        <button type="button" class="btn btn-primary" id="refresh-btn" onclick="location.reload()">Try again</button>
+      </div>       
+    </div>
+
+
+
+
+    <script>
+
+      var counter01 = 5,
+          counter02 = 4,
+          counter03 = 3,
+          lives = 5;
+
+      function init() { 
+        console.log("js ready!");
+        $("#correctbox, #wrongbox, #replaybox").hide();
+        $(function() {
+
+          $(".box").draggable({
+              revert: function(is_valid_drop){
+                  if(!is_valid_drop){
+                    lives = lives -1;
+                    if(lives>0){
+                      $("#wrongbox").find( "p" ).html(lives);
+                      $("#wrongbox").fadeIn().delay(1000).fadeOut();
+                      $(this).removeClass("selected");
+                      return true;                    
+                    } else {
+                      $("#replaybox").fadeIn();
+                    }
+                  } else {
+                    $(this).fadeOut(1000);
+                    $("#correctbox").fadeIn().delay(1000).fadeOut();
+                  }
+              },
+              drag: function(){
+                  $(this).addClass("selected");
+                  $(".dropbox").addClass ("active");
+              },
+              stop: function(){
+                  $(".dropbox").removeClass ("active");
+              },
+          });
+
+          $( "#dropbox01" ).droppable({
+            accept: "#box01, #box02, #box03",
+            drop: function( event, ui ) {
+              counter01=counter01-1;
+              $( this )
+                .find( "p" )
+                  .html(counter01);
+            }
+          });
+
+          $( "#dropbox02" ).droppable({
+            accept: "#box04, #box05, #box06",
+            drop: function( event, ui ) {
+              counter02=counter02-1;
+              $( this )
+                .find( "p" )
+                  .html(counter02);
+            }
+          });
+
+          $( "#dropbox03" ).droppable({
+            accept: "#box07, #box08, #box09",
+            drop: function( event, ui ) {
+              counter03=counter03-1;
+              $( this )
+                .find( "p" )
+                  .html(counter03);
+            }
+          });          
+
+        }); //close draggable and droppable function
+      }; //close init function
+
+      $(document).ready(function(){
+        init();
+      });
+
+    </script>
+  </body>
+</html>  
+

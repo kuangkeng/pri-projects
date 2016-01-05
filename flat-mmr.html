@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 666px; 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+    var chart = new Highcharts.Chart({
+        chart: {
+          type: 'line',
+          marginBottom: 70,
+          marginTop:40,
+          renderTo: 'container',
+          
+        },
+        title: {
+            text: '',
+        },
+        subtitle: {
+            text: 'Source: UNDP',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: 0,
+            x:250,
+            style: {
+                color: '#808080',
+                fontSize: '12px',
+            },
+        },
+  
+        xAxis: {
+            categories: ["1990","2013"],
+            plotLines: [{
+              color: '#d8d8d8',
+              value: 0,
+              width: 1
+              },
+              {
+              color: '#d8d8d8',
+              value: 1,
+              width: 1
+              },
+            ]
+        },
+        yAxis: {
+            title: {
+                text: null,
+            },
+            labels: {
+                  style: {color: 'white'}
+              }, 
+            gridLineWidth: 0,
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y}</b>'
+        },
+        
+        legend: {
+                    enabled: false
+        },
+        //exporting: { enabled: false },
+        credits: { text: null },
+        series: [
+          {name: "Australia",data :[10,6],color: '#4188bc'},
+          {name: "Canada",data :[6,11],color: '#4188bc'},
+          {name: "United States",data :[12,28],color: '#d3401e'},
+          {name: "United Kingdom",data :[10,8],color: '#4188bc'},          
+          {name: "Saudi Arabia",data :[44,16],color: '#4188bc'},
+          {name: "Russia",data :[74,24],color: '#4188bc'},
+          {name: "Chile",data :[56,22],color: '#4188bc'},
+          
+
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                },
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  align: 'right',
+                  y: 0,
+                  style: {
+                      fontSize: '16px',
+                  }
+                }
+            },
+
+        },
+    });
+          $(chart.series).each(function(){
+          var point = this.points[this.points.length-1];
+          chart.renderer.text(this.name,
+          point.plotX + chart.plotLeft + 5,
+          point.plotY + chart.plotTop + 5).attr(
+            {
+              zIndex: 5,
+              
+            }).add();
+        });
+});
+</script>

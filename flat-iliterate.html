@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 666px; 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+      $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'pie',
+                marginBottom: 70,
+          		  marginTop:40,
+            },
+            title: {
+              text: null,
+              style: {
+                fontSize: '14',
+              }                  
+            },
+            subtitle: {
+           		text: 'Source: UNESCO',
+	            useHTML: true,
+	            floating: true,
+	            align: 'left',
+	            verticalAlign: 'bottom',
+	            y: 0,
+	            style: {
+	                color: '#808080',
+	                fontSize: '12px',
+	            },
+            },               
+
+            legend: {enabled: false},
+            credits: {enabled: false},
+            tooltip: {
+                enabled: false
+            },
+            plotOptions: {
+              pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    distance:-120,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f}%<br>Population: {point.num}',
+                      style: {
+                        fontSize: '18px',
+                    },
+                }
+              }
+            },
+            series: [
+                {data: [
+                  {name:'Women',y:63.3,color:'#d3401e', num: '479,046,776',sliced: true,selected: true},
+                  {name:'Men',y:36.7, num:'277,540,790'}], color: '#4188bc'},
+            ]
+        });
+      });
+
+</script>
