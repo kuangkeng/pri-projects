@@ -33,6 +33,7 @@
     }
     
     .box {
+      cursor: pointer;
       margin:5px;
       display: inline-block;
       position: relative;
@@ -97,7 +98,8 @@
       top:50%;
       left:50%;
       margin-top:-100px;
-      margin-left:-150px; 
+      margin-left:-150px;
+      opacity:0.9;
     }
 
     #wrongbox {
@@ -109,6 +111,7 @@
       left:50%;
       margin-top:-150px; 
       margin-left:-150px; 
+      opacity:0.9;
     }
 
     #replaybox {
@@ -135,13 +138,13 @@
 
     #startbox {
       width:600px;
-      height:420px;
+      height:470px;
       background-color: #1d3d86;
       position: fixed;
       top:50%;
       left:50%;
-      margin-top:-210px; 
-      margin-left:-300px; 
+      margin-top:-250px; 
+      margin-left:-300px;
     }
 
     #bufferbox {
@@ -199,7 +202,7 @@
 
     .starttext {
       text-align: left;
-      padding:0px 30px 30px;
+      padding:0px 30px 10px;
     }
 
     .overmsg, .winmsg, .startmsg {
@@ -235,8 +238,56 @@
       height: 100%;
       z-index: 2;
     }
+    
+    @media (max-width: 900px ) {
+      .dropbox {
+        width: 180px;
+      }  
+    
+      #startbox {
+        width:500px;
+        height:480px;
+        margin-top:-310px; 
+        margin-left:-250px; 
+      }   
+      
+      .startmsg {
+        font-size: 35px;
+        padding-top: 15px;
+      }
+    }
 
-    @media (max-width: 500px ) { }
+    @media (max-width: 600px ) { 
+      .dropbox {
+        width: 98px;
+        margin-left: -5px;
+      }
+      
+      .box {
+        height:100%;
+      }
+    
+      .sect {
+        font-size: 13px;
+      }
+    
+      #startbox {
+        width:300px;
+        height:490px;
+        margin-top:-310px; 
+        margin-left:-150px; 
+      }
+      
+      .startmsg {
+        font-size: 30px;
+        padding-top: 15px;
+      }
+      
+      .starttext {
+        font-size: 16px;
+        padding: 0px 20px 10px;
+      }
+    }
 
   </style>
 
@@ -351,7 +402,7 @@
       <div id="wrongbox" class="popup">
         <div class="wrongmsg">Wrong!</div>
         <div class="wrongtext">You still have</div>  
-        <div class="wrongnum">5</div> 
+        <div class="wrongnum">3</div> 
         <div class="wrongtext">chances</div> 
       </div> 
       <div id="replaybox" class="popup">
@@ -363,8 +414,12 @@
         <button type="button" class="btn btn-success btn-lg center-block" id="refresh-btn" onclick="location.reload()">Play again</button>
       </div>   
       <div id="startbox" class="popup">
-        <div class="startmsg">How much do you know about Shiite and Sunni?</div>
-        <div class="starttext">Drag the yellow boxes and drop them on one of the 3 purple boxes at the bottom based on whether they are characteristics of Shiite, Sunni or shared by both sects. The number in each purple box indicates how many more answers the box can accept. You have 5 chances to be wrong before the round is over.</div>
+        <div class="startmsg">How much do you know about Shiites and Sunnis?</div>
+        <div class="starttext">
+          <p>1. Drag the yellow boxes and drop them on one of the 3 purple boxes at the bottom based on whether they are characteristics of Shiite, Sunni or shared by both sects.</p>
+          <p>2. The number in each purple box indicates how many more answers the box can accept.</p> 
+          <p>3. You have 3 chances to be wrong before the round is over.</p>
+        </div>
         <button type="button" class="btn btn-success btn-lg center-block" id="start-btn">Let's start</button>
       </div>     
     </div>
@@ -375,7 +430,7 @@
     <script>
 
       var counter = [5,3,7],
-          lives = 5;
+          lives = 3;
 
       function init() { 
         console.log("js ready!");
@@ -388,6 +443,7 @@
         $(function() {
 
           $(".box").draggable({
+              cursor: "pointer",
               revert: function(droppable){
                   if($(droppable).attr("id2") == $(this).attr("id2"))
                     {
