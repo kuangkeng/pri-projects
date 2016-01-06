@@ -39,10 +39,9 @@
       width: 275px;
       height:150px;
       background: #ffeaa5;
-      text-shadow: 2px 2px 3px #c1c1c1;
-      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -webkit-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
     }
 
     .box:hover {
@@ -69,17 +68,25 @@
       height:115px;
       background-color: #8d89e9;
       border-radius: 10px;
-      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -webkit-box-shadow: 7px 8px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 7px 8px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 7px 8px 11px -5px rgba(119,119,119,0.88);
     }
 
     .text {
       display: flex;
       color: #292929;
       font-size: 16px;
-      font-weight: bold;
-      padding:10px;      
+      padding:10px; 
+      font-weight: 500;     
+    }
+
+    .popup {
+      z-index: 3;
+      border-radius: 10px;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
     }
 
     #correctbox {
@@ -91,11 +98,6 @@
       left:50%;
       margin-top:-100px;
       margin-left:-150px; 
-      z-index: 3;
-      border-radius: 10px;
-      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
     }
 
     #wrongbox {
@@ -107,11 +109,6 @@
       left:50%;
       margin-top:-150px; 
       margin-left:-150px; 
-      z-index: 3;
-      border-radius: 10px;
-      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
     }
 
     #replaybox {
@@ -121,13 +118,8 @@
       position: fixed;
       top:50%;
       left:50%;
-      margin-top:-90px; /* this is half the height of your div*/  
-      margin-left:-150px; /*this is half of width of your div*/
-      z-index: 3;
-      border-radius: 10px;
-      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      margin-top:-90px;
+      margin-left:-150px;
     }
 
     #winbox {
@@ -137,13 +129,19 @@
       position: fixed;
       top:50%;
       left:50%;
-      margin-top:-90px; /* this is half the height of your div*/  
-      margin-left:-150px; /*this is half of width of your div*/
-      z-index: 3;
-      border-radius: 10px;
-      -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
-      box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+      margin-top:-90px; 
+      margin-left:-150px; 
+    }
+
+    #startbox {
+      width:600px;
+      height:420px;
+      background-color: #1d3d86;
+      position: fixed;
+      top:50%;
+      left:50%;
+      margin-top:-210px; 
+      margin-left:-300px; 
     }
 
     #bufferbox {
@@ -158,6 +156,7 @@
       text-align: center;
       margin-top:10px;
       margin-bottom: -10px;
+
     }
 
     .counter, .correctmsg, .wrongmsg {
@@ -189,16 +188,21 @@
       text-shadow: 2px 2px 3px #c1c1c1;
     }
 
-    .wrongtext {
+    .wrongtext, .starttext {
       margin:0px auto;
       font-size: 20px;
-      font-weight: bold;
+      
       text-align: center;
       color: white;
-      text-shadow: 2px 2px 3px #c1c1c1;
+      
     }
 
-    .overmsg, .winmsg {
+    .starttext {
+      text-align: left;
+      padding:0px 30px 30px;
+    }
+
+    .overmsg, .winmsg, .startmsg {
       margin:0px auto;
       font-size: 40px;
       text-align: center;
@@ -218,6 +222,18 @@
 
     .hover {
       background-color: #6460d3;
+    }
+
+    .darken:before {
+      background: black;
+      content: "";
+      opacity: 0.4;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
     }
 
     @media (max-width: 500px ) { }
@@ -329,23 +345,28 @@
           <div class="counter">7</div>
         </div>
       </div> 
-      <div id="correctbox">
+      <div id="correctbox" class="popup">
         <div class="correctmsg">Correct!</div>
       </div> 
-      <div id="wrongbox">
+      <div id="wrongbox" class="popup">
         <div class="wrongmsg">Wrong!</div>
         <div class="wrongtext">You still have</div>  
         <div class="wrongnum">5</div> 
         <div class="wrongtext">chances</div> 
       </div> 
-      <div id="replaybox">
+      <div id="replaybox" class="popup">
         <div class="overmsg">Sorry, you lost</div>
         <button type="button" class="btn btn-primary btn-lg center-block" id="refresh-btn" onclick="location.reload()">Play again</button>
       </div> 
-      <div id="winbox">
+      <div id="winbox" class="popup">
         <div class="winmsg">You made it!</div>
         <button type="button" class="btn btn-success btn-lg center-block" id="refresh-btn" onclick="location.reload()">Play again</button>
-      </div>        
+      </div>   
+      <div id="startbox" class="popup">
+        <div class="startmsg">How much do you know about Shiite and Sunni?</div>
+        <div class="starttext">Drag the yellow boxes and drop them on one of the 3 purple boxes at the bottom based on whether they are characteristics of Shiite, Sunni or shared by both sects. The number in each purple box indicates how many more answers the box can accept. You have 5 chances to be wrong before the round is over.</div>
+        <button type="button" class="btn btn-success btn-lg center-block" id="start-btn">Let's start</button>
+      </div>     
     </div>
 
 
@@ -358,7 +379,12 @@
 
       function init() { 
         console.log("js ready!");
-        $("#wrongbox, #correctbox, #replaybox, #winbox").hide();
+        $("#wrongbox, #correctbox, #winbox, #replaybox").hide();
+        $("#islamquiz").addClass("darken");
+        $("#start-btn").click(function(){
+          $("#islamquiz").removeClass("darken");
+          $("#startbox").hide();
+        });
         $(function() {
 
           $(".box").draggable({
