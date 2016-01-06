@@ -20,7 +20,7 @@
   <style>
     body {
       width: 100%;
-      max-width: 895px;
+      max-width: 897px;
       margin:0px auto;
       font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
       font-size: 16px;
@@ -407,11 +407,11 @@
       </div> 
       <div id="replaybox" class="popup">
         <div class="overmsg">Sorry, you lost</div>
-        <button type="button" class="btn btn-primary btn-lg center-block" id="refresh-btn" onclick="location.reload()">Play again</button>
+        <button type="button" class="btn btn-primary btn-lg center-block" id="refresh-btn" onclick="location.reload();sendreplay();">Play again</button>
       </div> 
       <div id="winbox" class="popup">
         <div class="winmsg">You made it!</div>
-        <button type="button" class="btn btn-success btn-lg center-block" id="refresh-btn" onclick="location.reload()">Play again</button>
+        <button type="button" class="btn btn-success btn-lg center-block" id="refresh-btn" onclick="location.reload();sendreplay();">Play again</button>
       </div>  
       <div id="startbox" class="popup">
         <div class="startmsg">How much do you know about Shiites and Sunnis?</div>
@@ -440,6 +440,7 @@
         $("#start-btn").click(function(){
           $("#islamquiz").removeClass("darken");
           $("#startbox").hide();
+          sendstart();
         });
         $(function() {
 
@@ -457,6 +458,7 @@
                           console.log("win!");
                           $(droppable).find( ".counter" ).html(counter[num]);
                           $("#winbox").fadeIn();
+                          sendwin();
                           return false;
                         }
                         else{
@@ -499,6 +501,52 @@
 
         }); //close draggable and droppable function
       }; //close init function
+
+      //Get IP address with Ipify, send data to google sheet
+      function sendstart() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1mQ6cDdq3uctHX4Y2KebPKNiaKOB98MowfN-_r3KESFs/formResponse',
+              data: { 
+                "entry.395832496": json.ip, //ip
+                "entry.198242951": "yes",
+              }
+            }); 
+          }
+        );   
+      } 
+
+      function sendreplay() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1mQ6cDdq3uctHX4Y2KebPKNiaKOB98MowfN-_r3KESFs/formResponse',
+              data: { 
+                "entry.395832496": json.ip, //ip
+                "entry.1213217018": "yes",
+              }
+            }); 
+          }
+        );   
+      }       
+
+      function sendwin() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1mQ6cDdq3uctHX4Y2KebPKNiaKOB98MowfN-_r3KESFs/formResponse',
+              data: { 
+                "entry.395832496": json.ip, //ip
+                "entry.1380245918": "yes",
+              }
+            }); 
+          }
+        );   
+      } 
 
       $(document).ready(function(){
         init();
