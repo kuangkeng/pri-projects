@@ -227,7 +227,7 @@ table {
 
           <form role="form" name="calculator" class="form-horizontal" method="get" action="#">
             <label>How old are you?</label>
-            <select class="form-control" id="InputAge" placeholder="Select your age" required>
+            <select class="form-control" id="inputAge" placeholder="Select your age" required>
               <option disabled selected>Select your age</option>
               <option>13</option>
               <option>14</option>
@@ -404,6 +404,10 @@ table {
               <td><span id="total"></span></td>
             </tr>
           </table>
+        <div id="databox" class="hide"></div>
+        <div id="datasumhw1" class="hide"></div>  
+        <div id="datasumhw2" class="hide"></div>    
+        <div id="datasum" class="hide"></div>  
 
 
         </div>
@@ -426,7 +430,7 @@ table {
       //$('#tollInput').inputmask({'mask':"9{0,3}.9{0,2}", greedy: false});
     //$('#tollInput2').inputmask({'mask':"9{0,3}.9{0,2}", greedy: false});
 
-            var calculatorForm = $('form[name="calculator"]');
+        var calculatorForm = $('form[name="calculator"]');
         var obj = {
 
         akleh: {
@@ -662,6 +666,10 @@ table {
             selectedObj1 = obj[selectedHw],
           selectedObj2 = obj[selectedHw2] || {
           projectEnd : 0};
+
+          
+          $("#databox").html(age);
+          
           
           if(selectedObj2.projectEnd>0){
           $(".secondhighway").removeClass("hide");
@@ -689,6 +697,10 @@ table {
           sumhw1 = oneyearhw1 * periodhw1,
           sumhw2 = oneyearhw2 * periodhw2,
           sum = sumhw1 + sumhw2;
+
+          $("#datasumhw1").html(sumhw1);
+          $("#datasumhw2").html(sumhw2);
+          $("#datasum").html(sum);
         
         $('#Atitle').html(selectedObj1.title);
         $('#Btitle').html(selectedObj2.title);
@@ -733,6 +745,8 @@ table {
         console.log('total you need to pay = ', sum);
 
 //run sendData function to send data to google form
+        
+        
         sendData();        
 
 
@@ -760,16 +774,21 @@ table {
       function sendData() {
         $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
           function(json) {
+            var dataage = $("#databox").html();
+            var datahw1 = $("#datasumhw1").html();
+            var datahw2 = $("#datasumhw2").html();
+            var datasum = $("#datasum").html();
             console.log("push to google sheets!");
+            console.log("data = " + dataage + " " + datahw1 + " " + datahw2 + " " + datasum);
             $.ajax({
               type: 'POST',
               url: 'https://docs.google.com/forms/d/1ZFJjA227jIgKqLsRbhvDj4ecYRhkvHtWIiDpmcc5h54/formResponse',
               data: { 
                 "entry.522889191": json.ip, //ip
-                "entry.1896422018": age,
-                "entry.1065609951": sumhw1,
-                "entry.1902035501": sumhw2,
-                "entry.435354040": sum,
+                "entry.1896422018": dataage,
+                "entry.1065609951": datahw1,
+                "entry.1902035501": datahw2,
+                "entry.435354040": datasum,
               }
             }); 
           }
