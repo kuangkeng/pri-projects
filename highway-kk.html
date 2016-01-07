@@ -730,6 +730,38 @@ table {
         console.log('how much needs to be pay for hw1 until contranct ends = ', sumhw1);
         console.log('how much needs to be pay for hw2 until contranct ends = ', sumhw2);
         console.log('total you need to pay = ', sum);
+
+//send data to google sheets
+      function sendData() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1ZFJjA227jIgKqLsRbhvDj4ecYRhkvHtWIiDpmcc5h54/formResponse',
+              data: { 
+                "entry.522889191": json.ip, //ip
+                "entry.1896422018": age,
+                "entry.1065609951": sumhw1,
+                "entry.1902035501": sumhw2,
+                "entry.435354040": sum,
+              }
+            }); 
+          }
+        );   
+      }
+
+
+
+//tabletop function goes here to convert google spreadsheet into json
+        var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1YXjKVRE0avt40e4QbGsqPu0vomAYhOhFJEDRHO9BJ0c/pubhtml';
+        Tabletop.init( { key: public_spreadsheet_url,
+                         callback: showInfo,
+                         simpleSheet: true } )
+        function showInfo(dataset, tabletop) {
+        console.log(dataset);
+
+        }      
+
         
           
             })
