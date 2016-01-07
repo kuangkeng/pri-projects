@@ -12,6 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.5/jquery.inputmask.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.2/tabletop.min.js"></script> 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -731,24 +732,8 @@ table {
         console.log('how much needs to be pay for hw2 until contranct ends = ', sumhw2);
         console.log('total you need to pay = ', sum);
 
-//send data to google sheets
-      function sendData() {
-        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
-          function(json) {
-            $.ajax({
-              type: 'POST',
-              url: 'https://docs.google.com/forms/d/1ZFJjA227jIgKqLsRbhvDj4ecYRhkvHtWIiDpmcc5h54/formResponse',
-              data: { 
-                "entry.522889191": json.ip, //ip
-                "entry.1896422018": age,
-                "entry.1065609951": sumhw1,
-                "entry.1902035501": sumhw2,
-                "entry.435354040": sum,
-              }
-            }); 
-          }
-        );   
-      }
+//run sendData function to send data to google form
+        sendData();        
 
 
 
@@ -770,6 +755,29 @@ table {
 
 
     });
+
+//send data to google sheets
+      function sendData() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            console.log("push to google sheets!");
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1ZFJjA227jIgKqLsRbhvDj4ecYRhkvHtWIiDpmcc5h54/formResponse',
+              data: { 
+                "entry.522889191": json.ip, //ip
+                "entry.1896422018": age,
+                "entry.1065609951": sumhw1,
+                "entry.1902035501": sumhw2,
+                "entry.435354040": sum,
+              }
+            }); 
+          }
+        );   
+      }
+
+
+
   </script>
 
 </body>
