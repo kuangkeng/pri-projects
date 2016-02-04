@@ -1,192 +1,154 @@
-<!doctype html>
-<html lang="en">
-<head>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.3.3/jquery.appear.min.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/highcharts-more.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<header>
 
 <style>
-body {
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
-  font-size: 112.5%;
-  line-height: 1.5em;
-  color: #33333c;
-      } 
 
-#main {
-    width: 300px;
-    margin: 0 auto;
+ul, li {
+    list-style:none;
+    margin:0;
+    padding:0;
 }
-
-p {
-    margin: 1em 0;
+header {
+    height: 40px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, .25) 0px 1px 5px;
+    z-index: 20;
+}
+header nav {
+    position: absolute;
+}
+header nav li {
+    display: inline;
+}
+#content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.slide {
+    height: 600px;
+    padding-top: 40px
+}
+#home {
+    background: #999;
+}
+#work {
+    background: #aaa;
+}
+#skills {
+    background: #ccc;
+}
+#contact {
+    background: #bbb;
 }
 
 </style>
-</head>
-<body>
-<div id="main">
 
-<div id="container1" style="min-width: 300px; height: 300px; margin: 1em"></div>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a>
 
-<div id="container2" style="min-width: 300px; height: 300px; margin: 1em"></div>
+            </li>
+            <li><a href="#work">Work</a>
 
-<div id="container3" style="min-width: 300px; height: 300px; margin: 1em"></div>
+            </li>
+            <li><a href="#skills">Skills</a>
 
-<div id="container4" style="min-width: 300px; height: 300px; margin: 1em"></div>
+            </li>
+            <li><a href="#contact">Contact</a>
 
+            </li>
+        </ul>
+    </nav>
+</header>
+<div id="content">
+    <section id="home" class="slide">home</section>
+    <section id="work" class="slide">work</section>
+    <section id="skills" class="slide">skills
+        <div id="container" style="width: 310px; height: 400px; margin: 0 auto"></div>
+    </section>
+    <section id="contact" class="slide">contact</section>
 </div>
-</body>
 
 <script>
+$(function () {
+    var $window = $(window),
+        didScroll = false,
+        skillsTop = $('#skills').offset().top - 40;
 
-/**
- * Highcharts plugin to defer initial series animation until the element has appeared. Requieres
- * jQuery.appear.
- *
- * Updated 2016-01-11
- */
-(function (H) {
-    function deferRender (proceed) {
-        var series = this, 
-            $renderTo = $(this.chart.container.parentNode);
+    $window.on('scroll', function () {
+        didScroll = true;
+    });
 
-        // It is appeared, render it
-        if ($renderTo.is(':appeared') || !series.options.animation) {
-            proceed.call(series);
-            
-        // It is not appeared, halt renering until appear
-        } else  {
-            $renderTo.appear(); // Initialize appear plugin
-            $renderTo.on('appear', function () {
-                proceed.call(series);
-            });
+    setInterval(function () {
+        if (didScroll) {
+            didScroll = false;
+            if ($window.scrollTop() >= skillsTop) {
+                createChart();
+            }
         }
+    }, 250);
+
+    function createChart() {
+        $window.off('scroll'); //remove listener that will create chart, this ensures the chart will be created only once
+        
+        $('#container').highcharts({
+            chart: {
+                type: 'bar',
+                spacingTop: 0
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                labels: {
+                    enabled: false
+                }
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: ''
+                },
+                labels: {
+                    enabled: false
+                }
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b>';
+                }
+            },
+            series: [{
+                name: 'clean',
+                data: [10],
+            }, {
+                name: 'eat',
+                data: [10]
+            }, {
+                name: 'sleep',
+                data: [40]
+            }, {
+                name: 'work',
+                data: [30]
+            }, {
+                name: 'play',
+                data: [10]
+            }]
+        });
     };
-    
-    H.wrap(H.Series.prototype, 'render', deferRender);
-    
-}(Highcharts));
-
-$('#container1').highcharts({
-    
-    chart: {
-        type: 'area'
-    },
-    
-    title: {
-        text: 'Area chart'
-    },
-    
-    xAxis: {
-        type: 'category'
-    },
-
-    series: [{
-        data: [
-            ['Jan', 29.9], 
-            ['Feb', 71.5], 
-            ['Mar', 106.4], 
-            ['Apr', 129.2], 
-            ['May', 144.0], 
-            ['Jun', 176.0], 
-            ['Jul', 135.6], 
-            ['Aug', 148.5], 
-            ['Sep', 216.4], 
-            ['Oct', 194.1], 
-            ['Nov', 95.6], 
-            ['Dec', 54.4]
-        ]
-    }]
-
 });
-
-$('#container2').highcharts({
-    
-    chart: {
-        type: 'pie'
-    },
-    
-    title: {
-        text: 'Pie chart'
-    },
-
-    series: [{
-        data: [
-            ['Jan', 29.9], 
-            ['Feb', 71.5], 
-            ['Mar', 106.4], 
-            ['Apr', 129.2], 
-            ['May', 144.0], 
-            ['Jun', 176.0], 
-            ['Jul', 135.6], 
-            ['Aug', 148.5], 
-            ['Sep', 216.4], 
-            ['Oct', 194.1], 
-            ['Nov', 95.6], 
-            ['Dec', 54.4]
-        ]
-    }]
-
-});
-
-$('#container3').highcharts({
-    
-    chart: {
-        type: 'column'
-    },
-    
-    title: {
-        text: 'Column chart'
-    },
-    
-    xAxis: {
-        type: 'category'
-    },
-
-    series: [{
-        data: [
-            ['Jan', 29.9], 
-            ['Feb', 71.5], 
-            ['Mar', 106.4], 
-            ['Apr', 129.2], 
-            ['May', 144.0], 
-            ['Jun', 176.0], 
-            ['Jul', 135.6], 
-            ['Aug', 148.5], 
-            ['Sep', 216.4], 
-            ['Oct', 194.1], 
-            ['Nov', 95.6], 
-            ['Dec', 54.4]
-        ]
-    }]
-
-});
-
-$('#container4').highcharts({
-    
-    chart: {
-        type: 'bubble'
-    },
-    
-    title: {
-        text: 'Bubble chart'
-    },  
-    
-    series: [{
-        data: [
-            [1,2,3], 
-            [5,4,3], 
-            [7,5,4], 
-            [8,4,5], 
-            [7,5,4]
-        ]
-    }]
-
-});
-
 </script>
-
-</html>
