@@ -35,7 +35,7 @@
       display: inline-block;
       position: relative;
       width: 275px;
-      height:150px;
+      height:130px;
       background: #ffeaa5;
       -webkit-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
       -moz-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
@@ -76,7 +76,8 @@
       color: #292929;
       font-size: 16px;
       padding:10px; 
-      font-weight: 500;     
+      font-weight: 500;
+      font-size:15px;     
     }
 
     .popup {
@@ -134,14 +135,14 @@
     }
 
     #startbox {
-      width:600px;
-      height:470px;
+      width:550px;
+      height:400px;
       background-color: #1d3d86;
       position: fixed;
       top:50%;
       left:50%;
-      margin-top:-250px; 
-      margin-left:-300px;
+      margin-top:-220px; 
+      margin-left:-275px;
       z-index:3;
     }
 
@@ -192,13 +193,13 @@
     .wrongtext, .starttext {
       margin:0px auto;
       font-size: 20px;
-      
       text-align: center;
       color: white;
       
     }
 
     .starttext {
+      font-size: 18px;
       text-align: left;
       padding:0px 30px 10px;
     }
@@ -211,7 +212,10 @@
       padding:20px;
       text-shadow: 2px 2px 3px #c1c1c1;
     }
-
+    
+    .startmsg {
+      font-size: 36px;
+    }
     .selected{
       z-index: 2;
       background-color: #ffd85c
@@ -232,8 +236,8 @@
     
       #startbox {
         width:500px;
-        height:480px;
-        margin-top:-310px; 
+        height:450px;
+        margin-top:-225px; 
         margin-left:-250px; 
       }   
       
@@ -261,7 +265,7 @@
       #startbox {
         width:290px;
         height:390px;
-        margin-top:-210px; 
+        margin-top:-250px; 
         margin-left:-145px; 
       }
       
@@ -294,7 +298,7 @@
         <div id="left-column" class="col-sm-12 col-xs-12">
           <div id="box01" class="box" id2="shiite">
             <div class="text">
-              <div class="intext">Believe that Islamic leadership must come through the Prophet Muhammad's bloodline. They support Ali, Muhammad's cousin and son-in-law as the legitimate successor.</div>
+              <div class="intext">Believe that Islamic leadership must come through the Prophet's bloodline. They support Ali, Muhammad's cousin and son-in-law as the legitimate successor.</div>
             </div>
           </div>
           <div id="box02" class="box" id2="shiite">
@@ -304,7 +308,7 @@
           </div>
           <div id="box03" class="box" id2="sunni">
             <div class="text">
-              <div class="intext">Believe that Islamic leadership should be given to the most qualified individual. They elected Abu Bakr, a friend of Muhammad and the father of his wife Aisha, as the rightful successor.</div>
+              <div class="intext">Believe that Islam should be led by the most qualified individual. They elected Abu Bakr, a friend of Muhammad and the father of his wife Aisha, as his successor.</div>
             </div>
           </div>
           <div id="box04" class="box" id2="shiite">
@@ -399,7 +403,7 @@
       </div> 
       <div id="winbox" class="popup">
         <div class="winmsg">You made it!</div>
-        <button type="button" class="btn btn-success btn-lg center-block" id="refresh-btn" onclick="location.reload();sendreplay();">Play again</button>
+        <button type="button" class="btn btn-primary btn-lg center-block" id="refresh-btn" onclick="location.reload();sendreplay();">Play again</button>
       </div>  
       <div id="startbox" class="popup">
         <div class="startmsg">How much do you know about Shiites and Sunnis?</div>
@@ -408,7 +412,7 @@
           <p>2. The number in each purple box indicates how many more answers the box can accept.</p> 
           <p>3. You have 3 chances to be wrong before the round is over.</p>
         </div>
-        <button type="button" class="btn btn-success btn-lg center-block" id="start-btn">Let's start</button>
+        <button type="button" class="btn btn-primary btn-lg center-block" id="start-btn">Let's start</button>
       </div>  
     </div>
     
@@ -423,9 +427,10 @@
 
       function init() { 
         console.log("js ready!");
-        $("#wrongbox, #correctbox, #winbox, #replaybox").hide();
+        $("#wrongbox, #correctbox, #winbox, #replaybox, .box, .dropbox").hide();
         $("#start-btn").click(function(){
           $("#startbox").hide();
+          $(".box, .dropbox").show();
           sendstart();
         });
         $(function() {

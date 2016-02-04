@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 800px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+ 
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 180,
+        },
+        title: {
+            text: "Number of children's books authored by people of color (2002-2014)",
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://ccbc.education.wisc.edu/books/pcstats.asp'  target='_blank'>Cooperative Children's Book Center (CCBC), University of Wisconsin-Madison</a><br>All figures are based on books received annually at CCBC.",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -50,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+  
+        xAxis: {
+            categories: ["2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2004","2003","2002"]
+        },
+        yAxis: {
+            max: 3750,
+            title: {
+                text: null,
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'bottom',
+            x: -10,
+            y: -70,
+            floating: true,
+            itemStyle: {
+                fontSize: '12px',
+                fontWeight: 'normal'
+            },
+            
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [{
+  name: "Total books received",
+  data:[3500,3200,3600,3400,3400,3000,3000,3000,3000,2800,2800,3200,3150,], color: "#4dac26",
+},{
+  name: "Asian Pacific/Asian Pacific Americans",
+  data:[129,90,83,76,60,67,77,56,72,60,61,43,46,], color: "#abd9e9",
+},{
+  name: "African/African Americans",
+  data:[84,68,68,79,102,83,83,77,87,75,99,79,69,], color: "#fdae61",
+},{
+  name: "Latinos",
+  data:[59,48,59,52,55,60,48,42,42,50,37,41,48,], color: "#2c7bb6",
+},{
+  name: "American Indians",
+  data:[20,18,6,12,9,12,9,6,14,4,7,11,6,], color: "#d7191c",
+}], 
+  plotOptions: {
+            series: {
+            	pointPadding: 0,
+                groupPadding: 0,
+                marker: {
+                    enabled: false
+                }
+            }
+        },
+
+    });
+});
+</script>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 800px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+
+</head>
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+$(function () { 
+    $('#container').highcharts('Map',{
+        series: [{
+            mapData: Highcharts.maps['countries/us/us-all'],
+            joinBy: ['postal-code', 'state'],
+            data:[{
+            	"state": "NY",
+            	"value": "100",
+            },{
+            	"state": "OR",
+            	"value": "300",
+            },{
+            	"state": "TX",
+            	"value": "300",
+            }]
+        }]
+    });
+});
+
+</script>

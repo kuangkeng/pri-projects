@@ -624,6 +624,7 @@ table {
       
 
         $(document).ready(function(){
+          
           $("#begin").click(function(){
             $("#intro").fadeOut("fast", function(){
               $("#q1").removeClass("hide");
@@ -748,7 +749,7 @@ table {
         
         
         sendData();        
-
+        var dataset = [];
 
 
 //tabletop function goes here to convert google spreadsheet into json
@@ -756,12 +757,39 @@ table {
         Tabletop.init( { key: public_spreadsheet_url,
                          callback: showInfo,
                          simpleSheet: true } )
-        function showInfo(dataset, tabletop) {
-        console.log(dataset);
-
-        }      
-
+        function showInfo(data, tabletop) {
+        //call out the data from column "total" in google sheet and push it into an array called dataset
+        for(var i in data) {
+            dataset.push(data[i].total);
+          }
+        console.log("dataset = " + dataset);
         
+        //calculate the number of entries in google sheet
+        var playerNum = dataset.length;
+        console.log("playerNum = " + playerNum);
+        
+        //call out the datasum (total toll to pay) that we stored in div
+        var datasum = $("#datasum").html();
+        console.log("datasum = " + datasum);
+        
+        //define "point" to be used as a counter. Each time datasum is bigger than one entry, add 1 to point
+        var point = 0;
+        for (var i in dataset){
+          if(datasum>dataset[i]){
+            console.log("data = "+ dataset[i]);
+            point++;
+            console.log("point = " + point);
+          }
+        }   
+        console.log("final point = " + point);
+        
+        //calculate the percentage. Meaning the toll paid by this user is higher than "pct"% of previous users.
+        var pct = Math.round((point/playerNum)*100);
+        console.log("percentage = " + pct);        
+
+        }   
+
+
           
             })
 
@@ -778,8 +806,6 @@ table {
             var datahw1 = $("#datasumhw1").html();
             var datahw2 = $("#datasumhw2").html();
             var datasum = $("#datasum").html();
-            console.log("push to google sheets!");
-            console.log("data = " + dataage + " " + datahw1 + " " + datahw2 + " " + datasum);
             $.ajax({
               type: 'POST',
               url: 'https://docs.google.com/forms/d/1ZFJjA227jIgKqLsRbhvDj4ecYRhkvHtWIiDpmcc5h54/formResponse',

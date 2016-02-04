@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.3.3/jquery.appear.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      } 
+
+#main {
+    width: 300px;
+    margin: 0 auto;
+}
+
+p {
+    margin: 1em 0;
+}
+
+</style>
+</head>
+<body>
+<div id="main">
+
+<div id="container1" style="min-width: 300px; height: 300px; margin: 1em"></div>
+
+<div id="container2" style="min-width: 300px; height: 300px; margin: 1em"></div>
+
+<div id="container3" style="min-width: 300px; height: 300px; margin: 1em"></div>
+
+<div id="container4" style="min-width: 300px; height: 300px; margin: 1em"></div>
+
+</div>
+</body>
+
+<script>
+
+/**
+ * Highcharts plugin to defer initial series animation until the element has appeared. Requieres
+ * jQuery.appear.
+ *
+ * Updated 2016-01-11
+ */
+(function (H) {
+    function deferRender (proceed) {
+        var series = this, 
+            $renderTo = $(this.chart.container.parentNode);
+
+        // It is appeared, render it
+        if ($renderTo.is(':appeared') || !series.options.animation) {
+            proceed.call(series);
+            
+        // It is not appeared, halt renering until appear
+        } else  {
+            $renderTo.appear(); // Initialize appear plugin
+            $renderTo.on('appear', function () {
+                proceed.call(series);
+            });
+        }
+    };
+    
+    H.wrap(H.Series.prototype, 'render', deferRender);
+    
+}(Highcharts));
+
+$('#container1').highcharts({
+    
+    chart: {
+        type: 'area'
+    },
+    
+    title: {
+        text: 'Area chart'
+    },
+    
+    xAxis: {
+        type: 'category'
+    },
+
+    series: [{
+        data: [
+            ['Jan', 29.9], 
+            ['Feb', 71.5], 
+            ['Mar', 106.4], 
+            ['Apr', 129.2], 
+            ['May', 144.0], 
+            ['Jun', 176.0], 
+            ['Jul', 135.6], 
+            ['Aug', 148.5], 
+            ['Sep', 216.4], 
+            ['Oct', 194.1], 
+            ['Nov', 95.6], 
+            ['Dec', 54.4]
+        ]
+    }]
+
+});
+
+$('#container2').highcharts({
+    
+    chart: {
+        type: 'pie'
+    },
+    
+    title: {
+        text: 'Pie chart'
+    },
+
+    series: [{
+        data: [
+            ['Jan', 29.9], 
+            ['Feb', 71.5], 
+            ['Mar', 106.4], 
+            ['Apr', 129.2], 
+            ['May', 144.0], 
+            ['Jun', 176.0], 
+            ['Jul', 135.6], 
+            ['Aug', 148.5], 
+            ['Sep', 216.4], 
+            ['Oct', 194.1], 
+            ['Nov', 95.6], 
+            ['Dec', 54.4]
+        ]
+    }]
+
+});
+
+$('#container3').highcharts({
+    
+    chart: {
+        type: 'column'
+    },
+    
+    title: {
+        text: 'Column chart'
+    },
+    
+    xAxis: {
+        type: 'category'
+    },
+
+    series: [{
+        data: [
+            ['Jan', 29.9], 
+            ['Feb', 71.5], 
+            ['Mar', 106.4], 
+            ['Apr', 129.2], 
+            ['May', 144.0], 
+            ['Jun', 176.0], 
+            ['Jul', 135.6], 
+            ['Aug', 148.5], 
+            ['Sep', 216.4], 
+            ['Oct', 194.1], 
+            ['Nov', 95.6], 
+            ['Dec', 54.4]
+        ]
+    }]
+
+});
+
+$('#container4').highcharts({
+    
+    chart: {
+        type: 'bubble'
+    },
+    
+    title: {
+        text: 'Bubble chart'
+    },  
+    
+    series: [{
+        data: [
+            [1,2,3], 
+            [5,4,3], 
+            [7,5,4], 
+            [8,4,5], 
+            [7,5,4]
+        ]
+    }]
+
+});
+
+</script>
+
+</html>

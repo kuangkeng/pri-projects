@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+ 
+    $('#container').highcharts({
+        chart: {
+            type: 'line',
+            marginBottom: 120,
+        },
+        title: {
+            text: "US exports and imports to/from Iran (1985-2015)",
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='https://www.census.gov/foreign-trade/balance/c5070.html'  target='_blank'>US Census Bureau</a><br>Values are on a nominal basis, not seasonally adjusted. Data in 1998 is not available.",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -40,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+  
+        xAxis: {
+            categories: ["1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015",]
+        },
+        yAxis: {
+            title: {
+                text: 'In millions of US dollars',
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        
+        legend: {
+            align: 'right',
+            verticalAlign: 'top',
+            x: -10,
+            y: 70,
+            floating: true,
+            itemStyle: {
+                fontSize: '12px',
+                fontWeight: 'normal'
+            },
+            
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [{
+  name: "Exports",
+  data:[73.9,34.1,54,80.5,55.2,162.5,527.6,747.5,616.2,328.8,277.4,0.2,1.1,0,47.9,16.8,8,31.9,98.9,85.1,95.8,85.9,144.7,683.2,280.4,211.4,233.2,251.1,308.1,186.5,245,], color: "#4188bc",
+},{
+  name: "Imports",
+  data:[725.1,568.9,1667.5,9,8.6,6.8,230.7,0.7,0.1,0.8,0.2,0,0.1,0,2.4,168.7,143.5,156.3,161.3,151.6,174.5,157.2,173.1,104.1,64.6,94.5,1,2.1,2.2,0,0,], color: "#d3401e",
+}], 
+  plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                }
+            }
+        },
+
+    });
+});
+</script>

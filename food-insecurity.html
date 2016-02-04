@@ -1,0 +1,91 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 150,
+        },
+        title: {
+            text: 'Child Food Insecurity Rates',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://www.feedingamerica.org/hunger-in-america/our-research/map-the-meal-gap/2013/CA_AllCounties_CDs_MMG_2013.pdf'  target='_blank'>Feeding America 2015 Report</a><br>The latest figures in the report are from 2013.<br>USDA defines food insecurity as 'limited or uncertain availability of nutritionally adequate and safe foods or limited or uncertain ability to acquire acceptable foods in socially acceptable ways.',",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -75,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["Imperial County","California","National"],
+        },
+        yAxis: {
+            title: {
+              text: 'Child food insecurity rate (% of child population)',
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}%</b>'
+        },
+        series: [{
+            data: [{y:35.4, color:'#b10026'},25.1,21.4],
+            color: "#feb24c",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}%', // one decimal
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '14px',
+                }
+            }
+        }]
+    });
+});
+</script>

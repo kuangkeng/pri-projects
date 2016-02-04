@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <style>
+  	body {font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; max-width: 650px; font-size: 16px;}
+  	.container {
+  		position:relative; 
+  		height:700px;
+  		border: solid 0.5px #D3D3D3
+  	}
+  	#map-canvas {
+  		position: absolute; 
+  		top: 0; 
+  		left: 0; 
+  		height: 100%; 
+  		width: 100%;
+  	}
+  	.panel {
+  		position: absolute; 
+  		bottom: 0px; 
+  		left: 0; 
+  		margin-bottom: 0px; 
+  		width: 100%; 
+  		display: block; 
+  		font-size: 14px; 
+  		line-height: 16px; 
+  		color: #000000; 
+  		background-color: rgba(255,255,255,0.8); 
+  		z-index:1; 
+  		height:75%;
+  	}
+
+  	.textbox {
+  		margin:10px 36px;
+  		color: #33333c;
+  	} 
+
+  	.title-intro{
+  		position: absolute; 
+  		bottom: 0px; 
+  		left: 0; 
+  		font-size: 40px;
+  		font-weight: bold;
+  		padding: 20px 36px;
+  		line-height: 45px;
+  		background-color: rgba(0,0,0,0.7); 
+  		color: white;
+  	}
+
+  	.title {
+  		font-size: 22px;
+  		font-weight: bold;
+  		margin: 15px 0px;
+  		line-height: 24px;
+  	}
+
+  	.desc {
+  		font-size: 16px;
+  		margin: 10px 0px;
+  		line-height: 20px;
+  	}
+  	
+  	.arrow{
+  		height:20px;
+  		width:20px;
+  		border-radius: 20px;
+    	text-align: center;
+    	background: #E7E7E7;
+    	color: #5A5A5A;
+    	text-decoration: none;
+    	text-shadow: 0 0 1px #000;
+    	font-size:14px;
+    	box-shadow: 0 0 2px #999;
+    	z-index: 2;
+    	position: absolute;
+  		bottom:10%;
+  		cursor: pointer;
+  	}
+
+  	#arrow-left {
+  		left:8px;
+  	}
+
+  	#arrow-right {
+  		right:8px;
+  	}
+
+  	.arrow.inactive {
+  		opacity:0.5;
+  	}
+
+  	.icon-box {
+  		width:120px;
+  		position: fixed;
+  		bottom:2%;
+  		left:50%;
+  		margin-left: -60px;
+  		z-index:2;
+  		display:none;
+  		background-color: #D3D3D3;
+  		border-radius: 5px;
+  		padding: 5px;
+  	}
+
+  	#icon {
+  		height:40px;
+  	}
+
+  	.icon-text {
+  		font-size: 12px;
+  		text-align: center;
+  	}
+
+  @media (max-width: 500px ) {
+  	.icon-box {display:block;}
+  } 
+
+
+  @media (max-width: 400px ) { 
+  	.container {
+  		height:550px;
+  	}
+
+  	.panel {
+  		height:65%;
+  	}
+
+  	.title-intro{
+  		font-size: 20px;
+  		line-height:24px;
+  		padding: 15px 15px;
+  	}
+
+  	.desc {
+  		font-size: 13px;
+  		line-height: 14px;
+  	}
+
+  	.title{
+  		font-size: 16px;
+  		line-height: 21px;
+  		margin: 5px 0px;
+  	}	
+
+  	.arrow{bottom:15%;}
+
+
+  }
+
+  </style>
+
+<body>
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="http://stereobit.github.io/dragend/dragend.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.20&libraries=geometry,visualization&sensor=false"></script>
+
+
+<div class="container-fluid">  
+  <div class="row">
+  	<div class="col-sm-12 col-xs-12 container">
+	    <div class="arrow" id="arrow-left"><</div>
+	    <div class="arrow" id="arrow-right">></div>
+	    <div id="map-canvas"></div>
+    	<div class="panel">
+	      <div class="dragend-page" id="page00">
+	      	<div class="mediabox embed-responsive embed-responsive-16by9">
+	      		<img src="http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/9661935883_4f754818d1_o.jpg" class="img-responsive">
+	      		<div class="title-intro">From Kierran to Isis, a story of Tema Blame Kierran</div>
+	      	</div>
+		    <div class="textbox">
+		    	<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+		    </div>
+	      </div>    		
+	      <div class="dragend-page" id="page01">
+	      	<div class="mediabox embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/X2K9j0kkgDQ?autoplay=0&showinfo=0"></iframe></div>
+		    <div class="textbox">
+		    	<div class="title">Damascus, Syria. Jan 16, 2016</div>
+		    	<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
+		    </div>
+	      </div>
+	      <div class="dragend-page" id="page02">
+	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/RTR4GVC8.jpg" class="img-responsive"></div>
+	      	<div class="textbox">
+	      		<div class="title">Damascus, Syria. Jan 16, 2016</div>
+		    	<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>	
+	      	</div>
+	      </div>
+	      <div class="dragend-page" id="page03">
+	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/RTS6TX0.jpg" class="img-responsive"></div>
+	      	<div class="textbox">
+	      		<div class="title">Damascus, Syria. Jan 16, 2016</div>
+		    	<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+	      	</div>
+	      </div>
+	      <div class="dragend-page" id="page04">
+	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/venezuela-couple-sex-2016-1-21.jpg" class="img-responsive"></div>
+	      	<div class="textbox">
+	      		<div class="title">Damascus, Syria. Jan 16, 2016</div>
+		    	<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+	      	</div>
+	      </div>
+	    </div> 
+	    <div class="icon-box">
+	      	<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/mobile-swipe-icon.png" class="img-responsive center-block" id="icon">
+	      	<div class="icon-text">Swipe on mobile</div>
+	    </div>
+	</div>     
+  </div>
+</div>
+
+<script>
+
+	var cities = [
+	  [38.907192,-77.036871,"Washington, DC"],
+	  [37.997907,-76.46273,"Lewisetta, VA"],
+	  [38.978445,-76.492183,"Annapolis, MD"],
+	  [34.2233,-77.9122,"Wilmington, NC"],
+	  [38.935113,-74.906005,"Cape May, NJ"],
+	  [39.364283,-74.422927,"Atlantic City, NJ"],
+	  [38.5664,-76.0769,"Cambridge, MD"],
+	  [25.76168,-80.19179,"Miami, FL*"],
+	  [39.290385,-76.612189,"Baltimore, MD"],
+	  [38.7158,-75.0831,"Rehoboth Beach, DE*"],
+	  [24.555059,-81.779987,"Key West, FL"],
+	  [40.478162,-74.016266,"Sandy Hook, NJ"],
+	  [39.952584,-75.165222,"Philadelphia, PA"],
+	  [32.776475,-79.931051,"Charleston, SC"],
+	  [36.850769,-76.285873,"Norfolk, VA*"],
+	  [38.336503,-75.084906,"Ocean City, MD"],
+	  [41.186548,-73.195177,"Bridgeport, CT"],
+	  [32.083541,-81.099834,"Savannah, GA*"],
+	  [30.4017,-89.0761,"Gulfport, MS*"],
+	  [30.332184,-81.655651,"Jacksonville, FL*"],
+	  [41.308274,-72.927883,"New Haven, CT"],
+	  [42.360083,-71.05888,"Boston, MA"],
+	  [33.68906,-78.886694,"Myrtle Beach, SC"],
+	  [43.6667,-70.2667,"Portland, ME"],
+	  [40.712784,-74.005941,"New York City, NY"],
+	  [40.789142,-73.13496,"Long Island, NY"],
+	  [28.0311,-97.0500,"Rockport, TX"],
+	  [41.355654,-72.099521,"New London, CT"],
+	  [30.669682,-81.462592,"Fernandina Beach, FL"],
+	];
+
+	var markers = [];
+
+function init() {
+	$("#arrow-left").addClass("inactive");
+	$(".panel").dragend({
+		onSwipeStart: function(){
+			var page = $(this.activeElement).index();				
+            console.log("page: " + page);
+            selectCity(page);
+            $(".icon-box").fadeOut("slow");
+
+		},
+		onSwipeEnd: function(){
+			var endpage = $(this.activeElement).index();
+			console.log("end page: " + endpage);
+
+			if(endpage>0){
+            	$("#arrow-left").removeClass("inactive");
+            } else {
+            	$("#arrow-left").addClass("inactive");
+            }
+            if(endpage>2){
+            	$("#arrow-right").addClass("inactive");
+            } else {
+            	$("#arrow-right").removeClass("inactive");
+            }
+		}
+
+	});
+
+	$("#arrow-left").click(function(){
+		$(".panel").dragend("right");
+	});
+
+	$("#arrow-right").click(function(){
+		$(".panel").dragend("left");
+	});
+
+	var mapOptions = {
+    	streetViewControl: false,
+    	zoom: 5,
+    	zoomControl: true,
+    	zoomControlOptions: {
+    	style: google.maps.ZoomControlStyle.SMALL
+		},
+		center: new google.maps.LatLng(36.603686, -84.126630)
+	};
+	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+
+	for (var i = 0; i < cities.length; i++) {
+		var city = cities[i];
+		var image = "http://admin.pri.org/sites/default/files/tidal-icon-blue-small.png";                                     
+		var myLatLng = new google.maps.LatLng(city[0], city[1]);
+
+		markers[i] = new google.maps.Marker({
+		    position: myLatLng,
+		    map: map,
+		    icon: image,
+		    title: city[2],
+		});
+		(function(marker,i){
+		     google.maps.event.addListener(marker, 'click', function(){ 
+		     map.setZoom(8);
+		     var centerLatLng = new google.maps.LatLng((cities[i][0]), cities[i][1]);
+		     //map.setCenter(centerLatLng); 
+		     map.panTo(centerLatLng);
+		     }); 
+		}(markers[i],i));
+	}
+
+}
+//function init finishes here
+
+function selectCity (i) {
+  google.maps.event.trigger(markers[i], 'click');
+} 
+
+
+
+
+	google.maps.event.addDomListener(window, 'load', init);
+		
+</script>
+
+</body>
+</html>
+
