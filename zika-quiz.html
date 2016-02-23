@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+    }
+    #zikaquiz {max-width: 700px; background-color: #eeeeee;}
+    
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+      text-align: center;
+    }
+
+    #introTitle {
+      margin-top: 60px; 
+      font-size: 40px; 
+      padding-left: 40px; 
+      padding-right: 40px;
+      padding-bottom: 30px;
+      color:white;
+      text-shadow: 1px 1px 2px #c1c1c1;
+      font-weight: 500;
+    }
+
+    #introIntro {
+      font-size: 25px; 
+      padding-left: 40px; 
+      padding-right: 40px; 
+      text-align: center; 
+      padding-bottom:40px;
+      color:white;
+    }
+
+    #resultTitle {margin-top: 40px;}
+
+    .question { 
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+    }    
+
+    .blurb {
+      font-size: 16px;
+      color: #333;
+      margin: 20px 0 0 0;
+    }
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 100px;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }
+
+    .counter {
+      font-size: 12px;
+      color: #4188bc;
+      margin: 10px 0 10px 0;
+    }   
+
+    #intro {
+      background:url('http://cdn1.pri.org/sites/default/files/styles/original_image/public/mosquito-aedes-zika-cropped-darken.jpg')no-repeat;
+      min-height: 504px;
+      background-size: contain;
+    } 
+
+    input[type=radio], input[type=checkbox] {
+      margin: 3px 0 0 ;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 400 !important;
+      color: #173e43;
+      line-height: 1.2em;
+      padding: 5px 20px 5px 40px !important;
+      border-radius: 5px;
+    }
+
+    #nextBtn { margin-top: 20px; margin-bottom: 10px; }  
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%}  
+    
+    .shareBox {padding-top: 30px;}    
+
+    @media (max-width: 600px ) { 
+      #zikaquiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 16px; margin-bottom: 0px;}
+      .blurb {font-size: 14px; margin-top: 0px;}
+      .mybtn {font-size: 16px;}
+      .counter {font-size: 10px;}
+      label {font-size: 14px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 14px; 
+        padding-left: 0px; 
+        padding-right: 0px; 
+        text-align: center; 
+        padding-bottom:10px;
+        color:white;
+      }
+      #introTitle {
+        font-size: 20px;
+        margin-top: 10px; 
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 0px;
+      }
+
+    }  
+</style>
+
+<body>
+  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="zikaquiz" class="container">    
+      <div class="row"> 
+        <div id="intro" class="col-sm-12 col-xs-12">
+          <div id="introTitle" class="title">Test your knowledge about the Zika virus</div>
+          <div id="introIntro" class="blurb">Lots has been reported about the Zika virus. How much do you know? Try answering these 5 questions.</div>
+          <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+        </div>  <!-- END INTRO PAGE -->       
+
+        <div id="questions" class="col-sm-12 col-xs-12">
+          <div id="counter" class="counter">Question 0 of 0</div>
+          <div id="theQuestion" class="question">Question goes here</div>
+          <div id="allChoices" class="radio">
+            <label><input class="choice">choice01</label>
+            <br />
+            <label><input class="choice">choice01</label>
+            <br />
+            <label><input class="choice">choice01</label>
+          </div>
+        </div><!-- END QUESTION PAGE -->  
+
+        <div id="answers" class="col-sm-12 col-xs-12">
+          <div id="answerTitle" class="title">Answer</div>
+          <div id="answerExplain" class="blurb">Explanation</div>
+          <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+        </div>  <!-- END ANSWERS PAGE -->     
+
+        <div id="results" class="col-sm-12 col-xs-12">
+          <div id="resultTitle" class="title">You got <span id="pointer">0</span> out of 5 right!</div>
+          <div id="resultIntro" class="blurb">Learn something from this quiz? Share it with your friends and help the world to better understand and fight this disease.</div>
+          <div class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+              </tr> 
+            </table>
+          </div>
+        </div>  <!-- END RESULTS PAGE -->       
+      </div> 
+    </div>
+
+  </div>    
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var count = 0;
+var point = 0;
+
+var theQuestions = [];
+    theQuestions[0] = "Does the Zika virus cause microcephaly?";
+    theQuestions[1] = "It was reported that Brazil has found more than 4,700 cases of microcephaly caused by the Zika virus, is that true?";
+    theQuestions[2] = "Does the Zika virus cause the nerve disorder known as Guillain-Barré Syndrome?";
+    theQuestions[3] = "Does the Zika virus spread through sexual contact?";
+    theQuestions[4] = "Why can't we detect and quarantine people infected with the Zika virus at the border?";
+
+var theChoices = [];
+    theChoices[0] = "Yes;No;Unclear";
+    theChoices[1] = "Yes;No;Maybe";
+    theChoices[2] = "Yes;No;Unclear";
+    theChoices[3] = "Yes;No;Unclear";
+    theChoices[4] = "Victims develop symptoms long after they are infected.;The symptoms are not visible.;Most victims have no symptoms.";
+
+var theExplain = [];
+    theExplain[0] = "<p>The World Health Organization (WHO) agreed that a causal relationship between Zika infection during pregnancy and microcephaly is strongly suspected, though not yet scientifically proven. <a href='http://www.pri.org/stories/2016-02-04/new-link-between-zika-and-microcephaly-found-brazil' target='_blank'>Researchers in Brazil</a> have found the Zika virus in the spinal fluid of several babies with microcephaly, all of whom were born to mothers who reported having symptoms of Zika early in their pregnancies.</p><p>According to the WHO, agencies investigating the Zika outbreaks are finding an increasing body of evidence about the link between the Zika virus and microcephaly. However, there are also growing questions about such things as the timing of both the upswing of microcephaly and the appearance of Zika in Brazil. Much more investigation is needed before we understand the relationship, if any, between microcephaly in babies and the Zika virus.</p>";
+    theExplain[1] = "<p>The high number is partly due to over-reporting by anxious clinics and doctors. Since the issue came into the limelight, pre-natal doctors have been spurred into reporting every single case where a baby has a small head. It could be due to other reasons such as high alcohol consumption during pregnancy and family histories of malformations having nothing to do with Zika.</p><p>Since the crisis began the Brazilian authorities have changed their definition of a small head, from a circumference of 33 cm (about 12.9 in) to 32 cm (about 12.5 in).</p><p>The number of suspected cases of microcephaly in Brazil has also <a href='http://www.pri.org/stories/2016-02-03/good-news-brazils-zika-front-lines-cases-microcephaly-may-be-dropping' target='_blank'>declined significantly</a> since January. There are also reports that the upswing in microcephaly in Brazil began before Zika emerged in the country. But the picture remains murky, and concerns are spreading. There are now at least <a href='http://www.cdc.gov/zika/geo/americas.html' target='_blank'>26 countries and territories</a> with active Zika virus transmission including neighboring Venezuela, where many experts believed its prevalence is <a href='http://www.pri.org/stories/2016-02-05/theres-chance-venezuelas-zika-outbreak-worse-brazils' target='_blank'>several time higher</a> than in Brazil.</p>";
+    theExplain[2] = "<p>Guillain-Barré syndrome is a serious condition that occurs when the body's immune system mistakenly attacks part of the nervous system. This leads to nerve inflammation that can cause muscle weakness or paralysis and other symptoms.</p><p>During an outbreak of Zika in 2013 - 2014 in French Polynesia, which also coincided with an ongoing outbreak of dengue, national health authorities reported an unusual increase in Guillain-Barré syndrome. A similar observation of increased Guillain-Barré syndrome was made in 2015 in the context of the first Zika virus outbreak in Brazil. The Colombian government has blamed the Zika virus for causing the death of three patients who developed Guillain-Barré syndrome after contracting Zika.</p><p>However as with microcephaly, the relationship between the Zika virus and Guillain-Barre syndrome is only suspected, not proven.</p>";
+    theExplain[3] = "<p>Yes, but experts suspect that it rarely happens. The most recent case happened in Dallas, in early February, when a patient contracted the virus after sexual contact with an infected person who returned from Venezuela.</p><p>Previously there were <a href='http://www.nytimes.com/2016/01/26/health/two-cases-suggest-zika-virus-could-be-spread-through-sex.html' target='_blank'>two documented cases</a> linking Zika to sexual contact. During the 2013 outbreak in French Polynesia, Zika was found in semen and urine samples from a Tahitian man even though the virus was absent in his blood samples. In 2008, a scientist contracted the virus while working in Africa. He returned to Colorado and apparently infected his wife.</p>";
+    theExplain[4] = "<p>They usually have a mild fever, skin rash (exanthema) and conjunctivitis that normally last for two to seven days. However, four out of five victims never have any symptoms, making it extremely hard to contain the disease through inspection at the border.</p>";
+
+var theAnswers = [2,1,2,0,2];
+
+function init() { 
+  $("#questions").hide();
+  $("#answers").hide();
+  $("#results").hide();
+  $("#nextBtn").hide();  
+  $("#startBtn").click(function(){
+    nextQuestion(count);
+  });
+
+  $("#nextBtn").click(function() {
+    count ++;
+    if (count < theQuestions.length) {                            
+      nextQuestion(count);
+    } else {
+      showResults();
+    }
+  });
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+}
+
+function setValue(theVal) {
+  var tmpAns = theVal; 
+  $("#answers").show();
+  $("#nextBtn").show();
+  if (tmpAns==theAnswers[count]) {
+    $("#answerTitle").text("Correct!").css("color","#4188bc");
+    point ++;
+  }  else {
+    $("#answerTitle").text("Wrong!").css("color","#d3401e");
+  }
+  $("label:eq(" + theAnswers[count] + ")").css("background-color","#a6c8e0");
+  $("#answerExplain").html(theExplain[count]);
+} 
+
+function nextQuestion(which) {
+  $('.container').slideUp(500, function(){
+    $("#nextBtn").hide(); 
+    $("#answers").hide();
+    $("#intro").hide();
+    $("#questions").show();
+    //DISPLAY QUESTION
+    $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
+    $("#theQuestion").text(theQuestions[which]);
+    //DISPLAY CHOICES
+    $("#allChoices").empty();
+    var tmpChoice = theChoices[count].split(";");
+    for (var i=0; i<tmpChoice.length; i++) {
+      $("#allChoices").append("<label><input class='answer' type='radio' name='optionsRadios' onClick='setValue(" + i + ");'>" + tmpChoice[i] + "</label><br>");
+    }
+  });
+  $('.container').slideDown(500);
+}
+
+function showResults() {
+  $('.container').slideUp(500, function(){
+    $("#questions").hide();
+    $("#answers").hide();
+    $("#nextBtn").hide(); 
+    $("#results").show();
+    console.log("point = " + point);
+    $("#pointer").text(point);
+  });
+  $('.container').slideDown(500); 
+  sendData();
+}
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      console.log(json.ip);
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1auDCnyQFdpjl--RzrnlFc8Hxkhi2jdO7hgnvg0hpGVY/formResponse',
+        data: { 
+          "entry.1140476205": json.ip, //ip
+          "entry.1952084833": point, //point
+          "entry.237074594": document.referrer,
+        }
+      }); 
+    }
+  );   
+}   
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("You think you know about the #ZikaVirus? I got " + point + "/5 in this quiz. How about you?");
+  tweet_url += ' pic.twitter.com/bwfXPJoRoO';
+  tweet_url += '&url=http://bit.ly/1V6tAyK&via=pri';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+var fbtitle = "How much do you know about the Zika virus? I got " +  point + "/5 questions right";
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-02-11/quiz-will-make-you-smarter-about-zika-virus',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/mosquito-aedes-zika-16x9.jpg',
+  name: fbtitle,
+  description: "There’s a lot of misinformation out there about the Zika virus. How much do you know? Test your knowledge."
+  }, function(response){});
+}
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1677378685838515',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

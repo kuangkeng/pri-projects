@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 460px; 
+  width: 100%; 
+  max-width: 850px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02 {
+  height: 400px; 
+  margin: 0 auto;
+  width:98%;
+  max-width: 800px;
+}
+
+#container02 {padding-right: 3%;}
+
+@media (max-width: 400px ) { 
+  #container01 {
+    width:115%;
+  }
+  #container02 {
+    width:97%;
+}
+}
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Cases</a></li>
+    <li><a href="#tabs-2">Deaths</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+  </div>
+</div>
+</body>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+  Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+  }),
+
+  $('#container01').highcharts({
+
+        chart: {
+          type: 'line',
+          marginBottom: 100,
+          renderTo: 'container',
+          marginRight: 50 //add margin for text
+        },
+        title: {
+            text: "Number of reported dengue cases in the Americas, 1995-2015",
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.paho.org/hq/index.php?option=com_topics&view=readall&cid=3273&Itemid=40734&lang=en" target="_blank">Pan American Health Organization</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+  
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                year: '%Y'
+            },
+            tickInterval: 2 * 24 * 3600 * 1000 * 365,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+                enabled: false
+            },
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y}</b>'
+        },
+        
+        legend: {
+                    enabled: false
+        },
+        //exporting: { enabled: false },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [
+          {name: "Number of cases", color:"#d3401e",
+          data :[
+            [Date.UTC(1995, 0, 1), 335667],
+            [Date.UTC(1996, 0, 1), 292609],
+            [Date.UTC(1997, 0, 1), 421998],
+            [Date.UTC(1998, 0, 1), 741794],
+            [Date.UTC(1999, 0, 1), 322256],
+            [Date.UTC(2000, 0, 1), 400519],
+            [Date.UTC(2001, 0, 1), 652212],
+            [Date.UTC(2002, 0, 1), 400519],
+            [Date.UTC(2003, 0, 1), 517617],
+            [Date.UTC(2004, 0, 1), 267050],
+            [Date.UTC(2005, 0, 1), 427627],
+            [Date.UTC(2006, 0, 1), 552141],
+            [Date.UTC(2007, 0, 1), 900782],
+            [Date.UTC(2008, 0, 1), 908926],
+            [Date.UTC(2009, 0, 1), 1134001],
+            [Date.UTC(2010, 0, 1), 1663276],
+            [Date.UTC(2011, 0, 1), 1663277],
+            [Date.UTC(2012, 0, 1), 1120902],
+            [Date.UTC(2013, 0, 1), 2386836],
+            [Date.UTC(2014, 0, 1), 1176529],
+            [Date.UTC(2015, 0, 1), 2326829]]},
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true
+                },
+                dataLabels: {
+                  enabled: false,
+              }
+            },
+        },
+    });
+});
+
+$(function () {
+  Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+  }),
+
+  $('#container02').highcharts({
+
+        chart: {
+          type: 'line',
+          marginBottom: 100,
+          renderTo: 'container',
+          marginRight: 50 //add margin for text
+        },
+        title: {
+            text: "Number of reported dengue deaths in the Americas, 1995-2015",
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.paho.org/hq/index.php?option=com_topics&view=readall&cid=3273&Itemid=40734&lang=en" target="_blank">Pan American Health Organization</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+  
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                year: '%Y'
+            },
+            tickInterval: 2 * 24 * 3600 * 1000 * 365,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+                text: null,
+            },
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y}</b>'
+        },
+        
+        legend: {
+                    enabled: false
+        },
+        //exporting: { enabled: false },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [
+          {name: "Number of cases", color:"#d3401e",
+          data :[
+            [Date.UTC(1995, 0, 1),  113],
+            [Date.UTC(1996, 0, 1),  78],
+            [Date.UTC(1997, 0, 1),  153],
+            [Date.UTC(1998, 0, 1),  151],
+            [Date.UTC(1999, 0, 1),  82],
+            [Date.UTC(2000, 0, 1),  92],
+            [Date.UTC(2001, 0, 1),  140],
+            [Date.UTC(2002, 0, 1),  92],
+            [Date.UTC(2003, 0, 1),  164],
+            [Date.UTC(2004, 0, 1),  71],
+            [Date.UTC(2005, 0, 1),  159],
+            [Date.UTC(2006, 0, 1),  193],
+            [Date.UTC(2007, 0, 1),  317],
+            [Date.UTC(2008, 0, 1),  306],
+            [Date.UTC(2009, 0, 1),  598],
+            [Date.UTC(2010, 0, 1),  1194],
+            [Date.UTC(2011, 0, 1),  763],
+            [Date.UTC(2012, 0, 1),  784],
+            [Date.UTC(2013, 0, 1),  1318],
+            [Date.UTC(2014, 0, 1),  798],
+            [Date.UTC(2015, 0 ,1),  1181]]},
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true
+                },
+                dataLabels: {
+                  enabled: false,
+              }
+            },
+        },
+    });
+});
+</script>

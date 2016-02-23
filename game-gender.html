@@ -1,0 +1,102 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 500px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            marginBottom: 130,
+        },
+        title: {
+            text: 'Gender Gap in Video Game Industry',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: Game developer demographic data is from the <a href='http://www.igda.org/?page=dss2015'  target='_blank'>IGDA Developer Satisfaction Survey 2015</a> while game player data is from the <a href='http://www.theesa.com/wp-content/uploads/2015/04/ESA-Essential-Facts-2015.pdf'  target='_blank'>ESA 2015 Sales, Demographic and Usage Data</a> report.",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -65,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["Player","Developer"],
+        },
+        yAxis: {
+            title: {
+              text: null,
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12',
+              },  
+            },
+            labels: {
+                format: '{value}%'
+            },
+            endOnTick: false,
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent',
+                dataLabels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'center',
+                    format: '{series.name}<br>{point.y}%', // one decimal
+                    style: {
+                        fontSize: '14px',
+                    }
+                }
+            },
+            series: {
+                groupPadding: 0.01,
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false,
+        },    
+        tooltip: {
+            pointFormat: '<b>{series.name}: {point.y}%</b>'
+        },
+        series: [{
+            name: 'Female', color:"#d3401e",
+            data: [44,22]
+        }, {
+            name: 'Male', color:"#4188bc",
+            data: [56,75]
+        }]
+    });
+});
+</script>

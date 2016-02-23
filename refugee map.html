@@ -16,7 +16,7 @@ body {
       }  
 
 #container{
-height: 800px; 
+height: 600px; 
 max-width: 850px; 
 margin: 0 auto;
 border:1px solid #D3D3D3;
@@ -32,22 +32,110 @@ border:1px solid #D3D3D3;
 <script>
 
 $(function () { 
-    $('#container').highcharts('Map',{
-        series: [{
-            mapData: Highcharts.maps['countries/us/us-all'],
-            joinBy: ['postal-code', 'state'],
-            data:[{
-            	"state": "NY",
-            	"value": "100",
-            },{
-            	"state": "OR",
-            	"value": "300",
-            },{
-            	"state": "TX",
-            	"value": "300",
-            }]
-        }]
-    });
+	Highcharts.data({
+		// Load the data from a Google Spreadsheet
+        googleSpreadsheetKey: '18Y7PrlI_c-RaRmO9oh7dxpmUyUs2V_Fp_qC3kvbU2Ag',
+
+        // custom handler when the spreadsheet is parsed
+        parsed: function (columns) {
+
+        	// Read the columns into the data array
+            var data = [];
+            $.each(columns[0], function (i, code) {
+                data.push({
+                    code: code.toUpperCase(),
+                    value: parseFloat(columns[3][i]),
+                    name: columns[2][i],
+                    label: columns[2][i]
+                });
+            });
+
+            console.log(data);
+
+		    $('#container').highcharts('Map',{
+		        chart: {
+		            marginBottom: 70,
+		        },
+		        title : {
+		            text: '2002',
+		        },
+		        subtitle : {
+		            text: "Source: <a href='http://www.wrapsnet.org/Reports/InteractiveReporting/tabid/393/Default.aspx' target='_blank'>Refugee Processing Center</a>",
+		            useHTML: true,
+		            floating: true,
+		            align: 'left',
+		            verticalAlign: 'bottom',
+		            y: -30,
+		            style: {
+		                color: '#808080',
+		                fontSize: '10px',
+		            },
+		        },
+		        legend: { enabled: false },
+		        mapNavigation: {
+		            enabled: true,
+		            buttonOptions: {
+		              verticalAlign: 'bottom',
+		              align: 'right',
+		              floating: true,
+		            },
+		        },
+
+		        colorAxis: {
+                    dataClasses: [
+                    	{from:10, to:20, color: "#F0E891"},
+						{from:20, to:30, color: "#F75394"},
+						{from:30, to:40, color: "#1CAC78"},
+						{from:40, to:50, color: "#C0448F"},
+						{from:50, to:60, color: "#FFAE42"},
+						{from:60, to:70, color: "#FF5349"},
+						{from:70, to:80, color: "#FFAACC"},
+						{from:80, to:90, color: "#926EAE"},
+						{from:90, to:100, color: "#EE204D"},
+						{from:100, to:110, color: "#FF7538"},
+						{from:110, to:120, color: "#B4674D"},
+						{from:120, to:130, color: "#FC2847"},
+						{from:130, to:140, color: "#0D98BA"},
+						{from:140, to:150, color: "#FCE883"},
+						{from:150, to:160, color: "#000000"},
+						{from:160, to:170, color: "#FDD9B5"},
+						{from:170, to:180, color: "#FDDB6D"},
+						{from:180, to:190, color: "#1DACD6"},
+						{from:190, to:200, color: "#1F75FE"},
+						{from:200, to:210, color: "#5D76CB"},
+						{from:210, to:220, color: "#7366BD"},
+						{from:220, to:230, color: "#95918C"},
+						{from:230, to:240, color: "#49311c"},
+						{from:240, to:250, color: "#C5E384"},
+						{from:250, to:260, color: "#FFFFFF"},
+					]
+                },
+
+		        tooltip: {
+		            headerFormat: '',
+		            pointFormat: '<b>{point.name}</b><br>{point.label}',
+		        },
+		        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+		        series: [{
+		            mapData: Highcharts.maps['countries/us/us-all'],
+		            joinBy: ['postal-code', 'code'],
+		            data: data,
+		            dataLabels: {
+		                enabled: true,
+		                color: '#FFFFFF',
+		                format: '{point.label}',
+		            },
+		        }]
+		    });
+		},
+
+		error: function () {
+            $('#container').html('<div class="loading">' +
+                '<i class="icon-frown icon-large"></i> ' +
+                'Error loading data from Google Spreadsheets' +
+                '</div>');
+        }
+    });    
 });
 
 </script>

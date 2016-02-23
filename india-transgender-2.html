@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/in/in-all.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 600px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+
+</head>
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+$(function () {
+
+    // Prepare demo data
+    var data = [
+        {
+            "hc-key": "in-py",
+            "value": 252
+        },
+        {
+            "hc-key": "in-ld",
+            "value": 2
+        },
+        {
+            "hc-key": "in-wb",
+            "value": 30349
+        },
+        {
+            "hc-key": "in-or",
+            "value": 20332
+        },
+        {
+            "hc-key": "in-br",
+            "value": 40827
+        },
+        {
+            "hc-key": "in-sk",
+            "value": 126
+        },
+        {
+            "hc-key": "in-ct",
+            "value": 6591
+        },
+        {
+            "hc-key": "in-tn",
+            "value": 22364
+        },
+        {
+            "hc-key": "in-mp",
+            "value": 29597
+        },
+        {
+            "hc-key": "in-2984",
+            "value": 11544
+        },
+        {
+            "hc-key": "in-ga",
+            "value": 398
+        },
+        {
+            "hc-key": "in-nl",
+            "value": 398
+        },
+        {
+            "hc-key": "in-mn",
+            "value": 1343
+        },
+        {
+            "hc-key": "in-ar",
+            "value": 495
+        },
+        {
+            "hc-key": "in-mz",
+            "value": 166
+        },
+        {
+            "hc-key": "in-tr",
+            "value": 833
+        },
+        {
+            "hc-key": "in-3464",
+            "value": 59
+        },
+        {
+            "hc-key": "in-dl",
+            "value": 4213
+        },
+        {
+            "hc-key": "in-hr",
+            "value": 8422
+        },
+        {
+            "hc-key": "in-ch",
+            "value": 142
+        },
+        {
+            "hc-key": "in-hp",
+            "value": 2051
+        },
+        {
+            "hc-key": "in-jk",
+            "value": 4137
+        },
+        {
+            "hc-key": "in-kl",
+            "value": 3902
+        },
+        {
+            "hc-key": "in-ka",
+            "value": 20266
+        },
+        {
+            "hc-key": "in-dn",
+            "value": 43
+        },
+        {
+            "hc-key": "in-mh",
+            "value": 40891
+        },
+        {
+            "hc-key": "in-as",
+            "value": 11374
+        },
+        {
+            "hc-key": "in-ap",
+            "value": 43769
+        },
+        {
+            "hc-key": "in-ml",
+            "value": 627
+        },
+        {
+            "hc-key": "in-pb",
+            "value": 10243
+        },
+        {
+            "hc-key": "in-rj",
+            "value": 16517
+        },
+        {
+            "hc-key": "in-up",
+            "value": 137465
+        },
+        {
+            "hc-key": "in-ut",
+            "value": 4555
+        },
+        {
+            "hc-key": "in-jh",
+            "value": 13463
+        }
+    ];
+
+    Highcharts.setOptions({
+      lang: {
+        thousandsSep: ','
+      }
+    }),
+
+    // Initiate the chart
+    $('#container').highcharts('Map', {
+    	chart: {
+            marginBottom: 80,
+        },
+
+        title : {
+            text: 'Transgender Population in India 2011',
+            margin: 50,
+        },
+
+        subtitle : {
+            text: "Source: <a href='http://www.census2011.co.in/transgender.php' target='_blank'>Indian Census 2011</a><br>The actual numbers may be higher as the data is based on self-reported numbers.",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -40,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        legend: {
+                title: {
+                    text: null
+                },
+                align: 'right',
+                verticalAlign: 'bottom',
+                y: -70,                
+                floating: true,
+                layout: 'vertical',
+                symbolHeight: 100,
+            },
+        tooltip: {
+            pointFormat: '{point.name}: <b>{point.value:,.0f}</b>',
+        },
+            
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+                verticalAlign: 'top',
+                align: 'right',
+                y: -50,
+            	floating: true,
+            },
+
+        },
+
+        colorAxis: {
+            min: 0,
+            minColor: '#ffeedc',
+            maxColor: '#d4301e'
+        },
+
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+
+        series : [{
+            data : data,
+            mapData: Highcharts.maps['countries/in/in-all'],
+            joinBy: 'hc-key',
+            name: 'Transgender population',
+            states: {
+                hover: {
+                    color: '#FFA500'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }]
+    }, function (chart) { // on complete
+    	var point = chart.series[0].data[0];
+        chart.renderer.text('Total: 487,803', 20, 80)
+            .css({
+                fontSize: '16px'
+            })
+            .add();
+
+    }
+    );
+});
+
+
+</script>

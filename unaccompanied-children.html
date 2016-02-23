@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 460px; 
+  width: 100%; 
+  max-width: 850px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02 {
+  height: 400px; 
+  width: 100%; 
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+@media (max-width: 900px ) { 
+  #container02 {
+    padding-right: 3%;
+  }
+} 
+
+@media (max-width: 600px ) { 
+  #container02 {
+    padding-right: 8%;
+  }
+}  
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Population</a></li>
+    <li><a href="#tabs-2">Percentage</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+  </div>
+</div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container01').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 80,
+        },
+        title: {
+            text: 'Unaccompanied Children referred to the Office of Refugee Resettlement',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://www.acf.hhs.gov/programs/orr/about/ucs/facts-and-data'  target='_blank'>Office of Refugee Resettlement</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -15,
+            style: {
+                color: '#808080',
+                fontSize: '12px',
+            },
+        },        
+        xAxis: {
+            categories: ["2015","2014","2013","2012"],
+        },
+        yAxis: {
+            title: {
+              text: null,
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b>'
+        },
+        series: [{
+            data: [33726,57496,24668,1362,],
+            color: "#4188bc",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '14px',
+                }
+            }
+        }]
+    });
+});
+
+
+$(function () {
+
+    $('#container02').highcharts({
+        chart: {
+            type: 'column',
+            marginBottom: 130,
+        },
+        title: {
+            text: 'Breakdown of Country of Origin of Unaccompanied Children',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://www.acf.hhs.gov/programs/orr/about/ucs/facts-and-data'  target='_blank'>Office of Refugee Resettlement</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -15,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["2012","2013","2014","2015"],
+        },
+        yAxis: {
+            title: {
+              text: null,
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12',
+              },  
+            },
+            labels: {
+                format: '{value}%'
+            },
+            endOnTick: false,
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent',
+                dataLabels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'center',
+                    format: '{point.y}%', // one decimal
+                    style: {
+                        fontSize: '10px',
+                    }
+                }
+            },
+            series: {
+                groupPadding: 0.01,
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            layout: 'horizontal',
+            align: 'left',
+            verticalAlign: 'bottom',
+            x: 0,
+            y: -30,
+            floating: true,
+            itemStyle: {
+                fontSize: '12px',
+                fontWeight: 'normal'
+            },
+        },    
+        tooltip: {
+            pointFormat: '<b>{series.name}: {point.y}%</b>'
+        },
+        series: [{
+            name: 'Honduras', color:"#d7191c",
+            data: [27,30,34,17]
+        }, {
+            name: 'Guatemala', color:"#fdae61",
+            data: [34,37,32,45]
+        }, {
+            name: 'El Salvador', color:"#ffffbf",
+            data: [27,26,29,29]
+        }, {
+            name: 'Mexico', color:"#abdda4",
+            data: [8,3,2,6]
+        }, {
+            name: 'Other countries', color:"#2b83ba",
+            data: [4,5,3,3]
+        }]
+    });
+});
+</script>  
+</body>
+</html>  
+

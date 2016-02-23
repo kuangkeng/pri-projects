@@ -1,0 +1,103 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 550px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 90,
+        },
+        title: {
+            text: 'Demographics of New Hampshire, Iowa and US',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://quickfacts.census.gov/qfd/states/33000.html'  target='_blank'>US Census Bureau, 2014 data</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -10,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["White","Black","Hispanic","Asian","Foreign born",],
+        },
+        yAxis: {
+            title: {
+              text: '% of total population',
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.1,
+                pointPadding: 0,
+                dataLabels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '#000000',
+                    align: 'left',
+                    format: '{series.name} {point.y}%',
+                    y: 0,
+                    style: {
+                        fontSize: '12px',
+                    }
+                }
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}%</b>'
+        },
+        series: [{
+            name: 'NH', color:"#d3401e",
+            data: [94,1.5,3.3,2.5,5.4,]
+        }, {
+            name: 'IA', color:"#ffa500",
+            data: [92.4,3.4,5.6,2.2,4.5,]
+        }, {
+            name: 'US', color:"#4188bc",
+            data: [77.4,13.2,17.4,5.4,12.9,]
+        }]
+    });
+});
+</script>

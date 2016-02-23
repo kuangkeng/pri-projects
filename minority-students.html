@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+
+<style>
+body {
+  width: 100%;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 500px; 
+  max-width: 850px; 
+  margin: 0 auto; 
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+    var ranges = [
+            [Date.UTC(1988, 0, 1),27.3,12.4],
+            [Date.UTC(1991, 0, 1),30.3,12.8],
+            [Date.UTC(1994, 0, 1),31.5,12.8],
+            [Date.UTC(2000, 0, 1),35.4,15.0],
+            [Date.UTC(2004, 0, 1),38.1,16.3],
+            [Date.UTC(2008, 0, 1),40.6,16.5],
+            [Date.UTC(2012, 0, 1),44.1,17.3],
+            ];
+
+    var maxArray = [];
+    var minArray = [];
+    var dataArrayLength = ranges.length;
+    for (var i = 0; i < dataArrayLength; i++) {
+        minArray[i] = [ranges[i][0], ranges[i][1]];
+        maxArray[i] = [ranges[i][0], ranges[i][2]];
+    }
+
+    var chart = new Highcharts.Chart({
+        chart: {
+
+          marginBottom: 100,
+          renderTo: 'container',
+          marginRight: 50 //add margin for text
+        },
+        title: {
+            text: 'Percentage of K-12 Minority Students VS Minority Teachers (1988-2012)',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://www.shankerinstitute.org/resource/teacherdiversity' target='_blank'>The State of Teacher Diversity in American Education</a>, Albert Shanker Institute",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+  
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                year: '%Y'
+            },
+            tickInterval: 24 * 3600 * 1000 * 365,
+            showLastLabel: true,
+        },
+        yAxis: {
+            min: 0,
+            title: null,
+            labels: {
+                format: '{value}%',
+                style: {
+                      fontSize: '12px',
+                }
+            },
+        },
+        tooltip: {
+          crosshairs: true,
+          shared: true,
+          formatter:function(){
+            return 'Year ' + Highcharts.dateFormat('%Y', new Date(this.x)) +'<br><b>' + 'Student: '+this.points[2].point.low+ '%<br><b>Teacher: '+this.y+ '%' ;
+          }
+        },
+        
+        legend: {
+                    enabled: false
+        },
+        //exporting: { enabled: false },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [
+          {name: 'Teacher',
+            showInLegend: false, 
+            data: maxArray,
+            zIndex: 1,
+            color: "#d3401e",
+            marker: {
+                fillColor: 'white',
+                lineWidth: 2,
+                lineColor: "#d3401e",
+                symbol: 'circle'
+            }
+        },{name: 'Student',
+            showInLegend: false, 
+            data: minArray,
+            zIndex: 1,
+            color: "#d3401e",
+            marker: {
+                fillColor: 'white',
+                lineWidth: 2,
+                lineColor: "#d3401e",
+                symbol: 'circle'
+            }
+        },{name: " ", 
+            data :ranges,
+            type: 'arearange',
+            lineWidth: 0,
+            linkedTo: ':previous',
+            color: "#d3401e",
+            fillOpacity: 0.3,
+            zIndex: 0
+          }    
+        ], 
+
+    });
+
+        $(chart.series).each(function(){
+          var point = this.points[this.points.length-1];
+          chart.renderer.text(this.name,
+          point.plotX + chart.plotLeft + 5,
+          point.plotY + chart.plotTop + 5).attr(
+            {
+              zIndex: 5,
+            }).add();
+        });
+
+  
+
+});
+</script>

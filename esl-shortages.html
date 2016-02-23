@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+
+</head>
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+$(function () { 
+    $('#container').highcharts('Map',{
+        chart: {
+            marginBottom: 70,
+        },
+        title : {
+            text: 'States Facing Shortages of ESL Teachers (2015-16)',
+        },
+        subtitle : {
+            text: "Source: <a href='https://www2.ed.gov/about/offices/list/ope/pol/tsa.pdf' target='_blank'>Office of Postsecondary Education, US Department of Education</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -30,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        legend: { enabled: false },
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+              verticalAlign: 'bottom',
+              align: 'right',
+              floating: true,
+            },
+
+        },
+        tooltip: {
+            headerFormat: '',
+            pointFormat: '{point.name}',
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [{
+            mapData: Highcharts.maps['countries/us/us-all'],
+            joinBy: ['postal-code', 'state'],
+            color: "#d3401e",
+            data:[{
+            	"state": "AZ",
+            	"value": "1",
+            },{
+            	"state": "CT",
+            	"value": "1",
+            },{
+            	"state": "DE",
+            	"value": "1",
+            },{
+              "state": "DC",
+              "value": "1",
+            },{
+              "state": "ID",
+              "value": "1",
+            },{
+              "state": "IL",
+              "value": "1",
+            },{
+              "state": "IN",
+              "value": "1",
+            },{
+              "state": "IA",
+              "value": "1",
+            },{
+              "state": "KY",
+              "value": "1",
+            },{
+              "state": "ME",
+              "value": "1",
+            },{
+              "state": "MD",
+              "value": "1",
+            },{
+              "state": "MA",
+              "value": "1",
+            },{
+              "state": "MI",
+              "value": "1",
+            },{
+              "state": "MN",
+              "value": "1",
+            },{
+              "state": "NE",
+              "value": "1",
+            },{
+              "state": "NV",
+              "value": "1",
+            },{
+              "state": "NH",
+              "value": "1",
+            },{
+              "state": "NJ",
+              "value": "1",
+            },{
+              "state": "NM",
+              "value": "1",
+            },{
+              "state": "NY",
+              "value": "1",
+            },{
+              "state": "ND",
+              "value": "1",
+            },{
+              "state": "OH",
+              "value": "1",
+            },{
+              "state": "OR",
+              "value": "1",
+            },{
+              "state": "RI",
+              "value": "1",
+            },{
+              "state": "SC",
+              "value": "1",
+            },{
+              "state": "SD",
+              "value": "1",
+            },{
+              "state": "TN",
+              "value": "1",
+            },{
+              "state": "TX",
+              "value": "1",
+            },{
+              "state": "VT",
+              "value": "1",
+            },{
+              "state": "WA",
+              "value": "1",
+            },{
+              "state": "WV",
+              "value": "1",
+            },{
+              "state": "WI",
+              "value": "1",
+            },{
+              "state": "WY",
+              "value": "1",
+            },],
+
+            dataLabels: {
+                enabled: true,
+                color: '#FFFFFF',
+                formatter: function () {
+                    if (this.point.value) {
+                        return this.point.state;
+                    }
+                }
+            },
+        }]
+    });
+});
+
+</script>

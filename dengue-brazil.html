@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  max-width: px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+height: 470px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+
+
+$(function () {
+  Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+  }),
+
+  $('#container').highcharts({
+
+        chart: {
+          type: 'line',
+          marginBottom: 100,
+          renderTo: 'container',
+          marginRight: 50 //add margin for text
+        },
+        title: {
+            text: "Number of reported dengue cases in Brazil, 1995-2015",
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.paho.org/hq/index.php?option=com_topics&view=readall&cid=3273&Itemid=40734&lang=en" target="_blank">Pan American Health Organization</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+  
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                year: '%Y'
+            },
+            tickInterval: 2 * 24 * 3600 * 1000 * 365,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+                enabled: false
+            },
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y}</b>'
+        },
+        
+        legend: {
+                    enabled: false
+        },
+        //exporting: { enabled: false },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        series: [
+          {name: "Number of cases", color:"#d3401e",
+          data :[
+            [Date.UTC(1995, 0, 1),  124887],
+            [Date.UTC(1996, 0, 1),  175818],
+            [Date.UTC(1997, 0, 1),  254109],
+            [Date.UTC(1998, 0, 1),  535388],
+            [Date.UTC(1999, 0, 1),  204201],
+            [Date.UTC(2000, 0, 1),  231471],
+            [Date.UTC(2001, 0, 1),  413067],
+            [Date.UTC(2002, 0, 1),  780644],
+            [Date.UTC(2003, 0, 1),  341902],
+            [Date.UTC(2004, 0, 1),  112928],
+            [Date.UTC(2005, 0, 1),  203789],
+            [Date.UTC(2006, 0, 1),  346550],
+            [Date.UTC(2007, 0, 1),  559954],
+            [Date.UTC(2008, 0, 1),  734384],
+            [Date.UTC(2009, 0, 1),  528883],
+            [Date.UTC(2010, 0, 1),  1004392],
+            [Date.UTC(2011, 0, 1),  764032],
+            [Date.UTC(2012, 0, 1),  565510],
+            [Date.UTC(2013, 0, 1),  1468873],
+            [Date.UTC(2014, 0, 1),  591080],
+            [Date.UTC(2015, 0, 1),  1649008]]},
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true
+                },
+                dataLabels: {
+                  enabled: false,
+              }
+            },
+        },
+    });
+});
+
+</script>
