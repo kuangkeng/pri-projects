@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/heatmap.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 530px; 
+  width:100%; 
+  max-width: 850px; 
+  margin: 0 auto;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+
+    $('#container').highcharts({
+
+        chart: {
+            type: 'heatmap',
+            marginTop: 60,
+            marginBottom: 180,
+            plotBorderWidth: 1
+        },
+        title: {
+            text: 'Legal Grounds for Abortion in Northern Europe, 2013',
+
+            
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.un.org/en/development/desa/population/publications/policy/abortionPoliciesAndReproductiveHealth.shtml">United Nations</a><br>*Refers to the abortion law of England, Wales and Scotland, excluding Northern Ireland.',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -30,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        xAxis: {
+            categories: ["Save Woman's Life","Physical Health","Mental Health","Rape/Incest","Fetal Impairment","Economic/Social Reasons","On Request"]
+        },
+
+        yAxis: {
+            categories: ["Ireland","UK*","Iceland","Finland","Sweden","Norway","Lithuania","Latvia","Estonia","Denmark"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '14px',
+              }
+            }  
+        },
+
+        colorAxis: {
+            min: 0,
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Reason: ' + this.series.xAxis.categories[this.point.x] + '<br>Legal: <b>' + this.point.word + '<b>';
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        series: [{
+            name: 'Legal Grounds',
+            borderWidth: 1,
+            data: [
+              {x: 0, y: 0, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 1, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 2, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 3, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 4, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 5, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 6, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 7, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 8, word: "Yes", color: "#4099ff"},
+              {x: 0, y: 9, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 0, word: "No", color: "#d4301e"},
+              {x: 1, y: 1, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 2, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 3, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 4, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 5, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 6, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 7, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 8, word: "Yes", color: "#4099ff"},
+              {x: 1, y: 9, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 0, word: "No", color: "#d4301e"},
+              {x: 2, y: 1, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 2, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 3, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 4, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 5, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 6, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 7, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 8, word: "Yes", color: "#4099ff"},
+              {x: 2, y: 9, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 0, word: "No", color: "#d4301e"},
+              {x: 3, y: 1, word: "No", color: "#d4301e"},
+              {x: 3, y: 2, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 3, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 4, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 5, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 6, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 7, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 8, word: "Yes", color: "#4099ff"},
+              {x: 3, y: 9, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 0, word: "No", color: "#d4301e"},
+              {x: 4, y: 1, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 2, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 3, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 4, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 5, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 6, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 7, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 8, word: "Yes", color: "#4099ff"},
+              {x: 4, y: 9, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 0, word: "No", color: "#d4301e"},
+              {x: 5, y: 1, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 2, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 3, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 4, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 5, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 6, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 7, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 8, word: "Yes", color: "#4099ff"},
+              {x: 5, y: 9, word: "Yes", color: "#4099ff"},
+              {x: 6, y: 0, word: "No", color: "#d4301e"},
+              {x: 6, y: 1, word: "No", color: "#d4301e"},
+              {x: 6, y: 2, word: "No", color: "#d4301e"},
+              {x: 6, y: 3, word: "No", color: "#d4301e"},
+              {x: 6, y: 4, word: "Yes", color: "#4099ff"},
+              {x: 6, y: 5, word: "Yes", color: "#4099ff"},
+              {x: 6, y: 6, word: "Yes", color: "#4099ff"},
+              {x: 6, y: 7, word: "Yes", color: "#4099ff"},
+              {x: 6, y: 8, word: "Yes", color: "#4099ff"},
+              {x: 6, y: 9, word: "Yes", color: "#4099ff"}],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.word;
+                },
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+
+    });
+});
+</script>
