@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Untitled layer</name>
+		<Placemark>
+			<name>23.0658289,-82.37154</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-82.37153999999998,23.0658289,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>-0.2058146,-78.476688</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-78.47668799999997,-0.2058146,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>LA MIEL</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-75.62198999999998,6.1031,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Point 5</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-79.3870354,9.0670086,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>11.070771, -85.629931</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-85.629931,11.070771,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Liberia</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-85.44067469999999,10.6345964,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>13.686514, -89.218557</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-89.21855700000003,13.686514000000003,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Liberia</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-85.44067469999999,10.6345964,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Point 11</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-92.151947,14.6792539,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>27.478425, -99.548027</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-99.54802699999999,27.478425,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>27.530587, -99.479600</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-99.4796,27.530587,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>27.953142, -82.429488</name>
+			<styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+			<Point>
+				<coordinates>-82.42948799999999,27.953142,0.0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Line 15</name>
+			<styleUrl>#line-000000-2-nodesc</styleUrl>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>-82.37154,23.0658289,0.0 -78.476688,-0.2058146,0.0 -77.2731183,1.6322797000000002,0.0 -76.5815689,3.1882328000000006,0.0 -75.9269902,4.6677287,0.0 -75.62199,6.1031,0.0 -79.3870354,9.0670086,0.0 -80.8749146,8.2397363,0.0 -81.9212424,8.4513433,0.0 -83.1809036,9.0420376,0.0 -84.3444838,9.9537181,0.0 -85.629931,11.070771,0.0 -85.4406747,10.6345964,0.0 -89.218557,13.686514000000003,0.0 -92.151947,14.6792539,0.0 -94.48463410000001,16.5177802,0.0 -94.2787953,17.5492223,0.0 -95.677218,18.1961503,0.0 -97.8382751,17.6759631,0.0 -100.4202652,18.863329700000005,0.0 -101.5792868,20.6442653,0.0 -101.3431396,22.5062088,0.0 -101.0478787,24.5198415,0.0 -101.7104006,26.306746,0.0 -99.548027,27.478425,0.0 -99.4796,27.530587,0.0 -97.2553805,29.4308618,0.0 -92.7780999,30.876093600000004,0.0 -89.023302,31.483603700000003,0.0 -85.0970431,30.6706237,0.0 -82.6468677,30.0058627,0.0 -82.429488,27.953142,0.0</coordinates>
+			</LineString>
+		</Placemark>
+		<Style id='icon-503-DB4436-nodesc-normal'>
+			<IconStyle>
+				<color>ff3644DB</color>
+				<scale>1.1</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+				<hotSpot x='16' y='31' xunits='pixels' yunits='insetPixels'>
+				</hotSpot>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.0</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='icon-503-DB4436-nodesc-highlight'>
+			<IconStyle>
+				<color>ff3644DB</color>
+				<scale>1.1</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+				<hotSpot x='16' y='31' xunits='pixels' yunits='insetPixels'>
+				</hotSpot>
+			</IconStyle>
+			<LabelStyle>
+				<scale>1.1</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='icon-503-DB4436-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#icon-503-DB4436-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#icon-503-DB4436-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id='line-000000-2-nodesc-normal'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>2</width>
+			</LineStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='line-000000-2-nodesc-highlight'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>3.0</width>
+			</LineStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='line-000000-2-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#line-000000-2-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#line-000000-2-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>
