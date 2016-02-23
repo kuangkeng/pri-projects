@@ -22,7 +22,7 @@
   	body {font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; max-width: 650px; font-size: 16px;}
   	.container {
   		position:relative; 
-  		height:700px;
+  		height:800px;
   		border: solid 0.5px #D3D3D3
   	}
   	#map-canvas {
@@ -173,7 +173,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="http://stereobit.github.io/dragend/dragend.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.20&libraries=geometry,visualization&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.22&libraries=geometry,visualization&sensor=false"></script>
 
 
 <div class="container-fluid">  
@@ -193,21 +193,21 @@
 		    </div>
 	      </div>    		
 	      <div class="dragend-page" id="page01">
-	      	<div class="mediabox embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-4_GONZALEZ%20FAMILY%20PORTRAIT-cropped.jpg"></iframe></div>
+          <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-4_GONZALEZ%20FAMILY%20PORTRAIT-cropped.jpg" class="img-responsive"></div>
 		    <div class="textbox">
 		    	<div class="title">Havana, Cuba. August 2015</div>
 		    	<div class="desc">They sold their house in Havana for $40,000 and left for Ecuador. Photo: The González family, right to left: Lizandra Blanco Aguilar, Osmany Jesús González Gutiérrez and the son, Johan Jesús González Blanco.</div>
 		    </div>
 	      </div>
 	      <div class="dragend-page" id="page02">
-	      	<div class="mediabox"><img src="" class="img-responsive"></div>
+	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-quito-ecuador-cropped.jpg" class="img-responsive"></div>
 	      	<div class="textbox">
 	      		<div class="title">Quito, Ecuador</div>
 		    	<div class="desc">They stayed here until October 2015.</div>	
 	      	</div>
 	      </div>
 	      <div class="dragend-page" id="page03">
-	      	<div class="mediabox"><img src="" class="img-responsive"></div>
+	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-panama-city-cropped.jpg" class="img-responsive"></div>
 	      	<div class="textbox">
 	      		<div class="title">Panama City, Panama</div>
 		    	<div class="desc">From Ecuador, they took a bus to Columbia. They went through La Miel and flew to Panama City.</div>
@@ -331,35 +331,24 @@
 <script>
 
 	var cities = [
-	  [38.907192,-77.036871,"Washington, DC"],
-	  [37.997907,-76.46273,"Lewisetta, VA"],
-	  [38.978445,-76.492183,"Annapolis, MD"],
-	  [34.2233,-77.9122,"Wilmington, NC"],
-	  [38.935113,-74.906005,"Cape May, NJ"],
-	  [39.364283,-74.422927,"Atlantic City, NJ"],
-	  [38.5664,-76.0769,"Cambridge, MD"],
-	  [25.76168,-80.19179,"Miami, FL*"],
-	  [39.290385,-76.612189,"Baltimore, MD"],
-	  [38.7158,-75.0831,"Rehoboth Beach, DE*"],
-	  [24.555059,-81.779987,"Key West, FL"],
-	  [40.478162,-74.016266,"Sandy Hook, NJ"],
-	  [39.952584,-75.165222,"Philadelphia, PA"],
-	  [32.776475,-79.931051,"Charleston, SC"],
-	  [36.850769,-76.285873,"Norfolk, VA*"],
-	  [38.336503,-75.084906,"Ocean City, MD"],
-	  [41.186548,-73.195177,"Bridgeport, CT"],
-	  [32.083541,-81.099834,"Savannah, GA*"],
-	  [30.4017,-89.0761,"Gulfport, MS*"],
-	  [30.332184,-81.655651,"Jacksonville, FL*"],
-	  [41.308274,-72.927883,"New Haven, CT"],
-	  [42.360083,-71.05888,"Boston, MA"],
-	  [33.68906,-78.886694,"Myrtle Beach, SC"],
-	  [43.6667,-70.2667,"Portland, ME"],
-	  [40.712784,-74.005941,"New York City, NY"],
-	  [40.789142,-73.13496,"Long Island, NY"],
-	  [28.0311,-97.0500,"Rockport, TX"],
-	  [41.355654,-72.099521,"New London, CT"],
-	  [30.669682,-81.462592,"Fernandina Beach, FL"],
+    [23.0658289,-82.37154],
+    [-0.2058146,-78.476688],
+    [9.067, -79.38703],
+    [11.070771, -85.629931],
+    [11.070771, -85.629931],
+    [13.686514, -89.218557],
+    [14.67925, -92.15194],
+    [14.67925, -92.15194],
+    [27.478425, -99.548027],
+    [27.478425, -99.548027],
+    [25.4322635,-101.3095286],
+    [27.478425, -99.548027],
+    [27.478425, -99.548027],
+    [27.478425, -99.548027],
+    [27.530587, -99.479600],
+    [27.530587, -99.479600],
+    [27.530587, -99.479600],
+    [27.953142, -82.429488],
 	];
 
 	var markers = [];
@@ -403,30 +392,36 @@ function init() {
 	var mapOptions = {
     	streetViewControl: false,
     	zoom: 5,
+      maxZoom: 15,
     	zoomControl: true,
     	zoomControlOptions: {
-    	style: google.maps.ZoomControlStyle.SMALL
+    	style: google.maps.ZoomControlStyle.SMALL,
+      position: google.maps.ControlPosition.LEFT_TOP
 		},
 		center: new google.maps.LatLng(36.603686, -84.126630)
 	};
 	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+  var ctaLayer = new google.maps.KmlLayer({
+    url: 'http://kuangkeng.github.io/pri-projects/cuba-florida-route.kml',
+    map: map,
+    suppressInfoWindows: true,
+    preserveViewport: true,
+  });
 
 
 	for (var i = 0; i < cities.length; i++) {
 		var city = cities[i];
-		var image = "http://admin.pri.org/sites/default/files/tidal-icon-blue-small.png";                                     
 		var myLatLng = new google.maps.LatLng(city[0], city[1]);
 
 		markers[i] = new google.maps.Marker({
 		    position: myLatLng,
 		    map: map,
-		    icon: image,
 		    title: city[2],
 		});
 		(function(marker,i){
 		     google.maps.event.addListener(marker, 'click', function(){ 
 		     map.setZoom(8);
-		     var centerLatLng = new google.maps.LatLng((cities[i][0]), cities[i][1]);
+		     var centerLatLng = new google.maps.LatLng((cities[i][0]-1), cities[i][1]);
 		     //map.setCenter(centerLatLng); 
 		     map.panTo(centerLatLng);
 		     }); 
