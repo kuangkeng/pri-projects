@@ -1,0 +1,109 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 110,
+        },
+        title: {
+            text: "Garment sector monthly minimum wages for Asia's 10 biggest garment exporters, 2014",
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---sro-bangkok/documents/publication/wcms_325219.pdf'  target='_blank'>International Labour Organization</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -10,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["Malaysia","China","Thailand","Indonesia","India","Vietnam","Cambodia","Pakistan","Bangladesh","Sri Lanka"],  
+        },
+        yAxis: {
+            title: {
+              text: "US dollar",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            stackLabels: {
+                style: {
+                    color: '#FFFFFF',
+                    format: '${point.y}',
+                    style: {
+                        fontSize: '10px',
+                    }
+                },
+                enabled: true,
+                formatter: function () {
+                    return "$" + this.total;
+                }
+            },
+            minTickInterval: 10,
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            y: -20,
+            itemStyle: {
+                fontSize: '11px',
+            },  
+        },
+        tooltip: {
+            formatter: function () {
+                return "Highest rate: $" + this.total;
+            }
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                groupPadding: 0.01,
+            }
+        },
+        series: [{
+            name: 'Highest rate for unskilled garment workers', color: "#8db7d6",
+            data: [31,110,0,145,61,38,0,10,0,0]
+        },{
+            name: 'Lowest rate for unskilled garment workers', color: "#4188bc",
+            data: [244,156,237,74,70,90,100,85,{y:68,color:"#d3401e"},66],
+            dataLabels: {
+                enabled: true,
+                format: '${point.y}',
+            }
+        }]
+    });
+});
+</script>

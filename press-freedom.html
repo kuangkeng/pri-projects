@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+  <style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+    }
+    #interactive-box { margin-top: 20px; padding-bottom: 20px; max-width: 420px; background-color: #eeeeee;}
+    
+    .title { 
+      font-size: 22px;
+      font-weight: 400;
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+    }
+
+    #question {
+      font-size: 20px;
+      color: #333;
+      text-align: center;
+      margin: 20px 0 30px 0;
+    }
+
+    .form-control {
+      width:250px;
+      margin-bottom: 40px;
+      margin: 0 auto;
+    }
+
+    #questions {
+      margin-top: 30px
+    }
+
+    .mybtn {
+      background-color: #4188bc;
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #fff;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 40px;
+      width: 170px;
+      text-align: center;
+    }
+    
+    .mybtn:hover {
+      color: #fff;
+      background-color: #8db7d6;
+      cursor: pointer;
+    }
+
+    #container01 {
+      height: 450px; 
+      max-width: 420px; 
+      margin: 0 auto;
+      padding-bottom: 10px;
+    }
+
+    #container02 {
+      height: 650px; 
+      max-width: 420px; 
+      margin: 0 auto;
+    }
+
+  </style>  
+
+<body>
+  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="interactive-box" class="container">
+    <div class="row">
+      <div id="questions" class="col-sm-12 col-xs-12">
+        <div class="title">Compare your country's press freedom with the US</div>
+        <div id="question">Which country are you from?</div>
+          <select class="form-control" id="countryInput">
+            <option>United States</option>
+            <option>Afghanistan</option>
+            <option>Albania</option>
+            <option>Algeria</option>
+            <option>Andorra</option>
+            <option>Angola</option>
+            <option>Argentina</option>
+            <option>Armenia</option>
+            <option>Australia</option>
+            <option>Austria</option>
+            <option>Azerbaijan</option>
+            <option>Bahrain</option>
+            <option>Bangladesh</option>
+            <option>Belarus</option>
+            <option>Belgium</option>
+            <option>Belize</option>
+            <option>Benin</option>
+            <option>Bhutan</option>
+            <option>Bolivia</option>
+            <option>Bosnia and Herzegovina</option>
+            <option>Botswana</option>
+            <option>Brazil</option>
+            <option>Brunei Darussalam</option>
+            <option>Bulgaria</option>
+            <option>Burkina Faso</option>
+            <option>Burundi</option>
+            <option>Cambodia</option>
+            <option>Cameroon</option>
+            <option>Canada</option>
+            <option>Cape Verde</option>
+            <option>Central African</option>
+            <option>Chad</option>
+            <option>Chile</option>
+            <option>China</option>
+            <option>Colombia</option>
+            <option>Comoros</option>
+            <option>Congo, Dem. Rep.</option>
+            <option>Congo, Rep.</option>
+            <option>Costa Rica</option>
+            <option>Cote d'Ivoire</option>
+            <option>Croatia</option>
+            <option>Cuba</option>
+            <option>Cyprus</option>
+            <option>Cyprus North</option>
+            <option>Czech Republic</option>
+            <option>Denmark</option>
+            <option>Djibouti</option>
+            <option>Dominican Republic</option>
+            <option>Ecuador</option>
+            <option>Egypt</option>
+            <option>El Salvador</option>
+            <option>Equatorial Guinea</option>
+            <option>Eritrea</option>
+            <option>Estonia</option>
+            <option>Ethiopia</option>
+            <option>Fiji</option>
+            <option>Finland</option>
+            <option>France</option>
+            <option>Gabon</option>
+            <option>Gambia</option>
+            <option>Georgia</option>
+            <option>Germany</option>
+            <option>Ghana</option>
+            <option>Greece</option>
+            <option>Guatemala</option>
+            <option>Guinea</option>
+            <option>Guinea-Bissau</option>
+            <option>Guyana</option>
+            <option>Haiti</option>
+            <option>Honduras</option>
+            <option>Hong Kong</option>
+            <option>Hungary</option>
+            <option>Iceland</option>
+            <option>India</option>
+            <option>Indonesia</option>
+            <option>Iran</option>
+            <option>Iraq</option>
+            <option>Ireland</option>
+            <option>Israel</option>
+            <option>Italy</option>
+            <option>Jamaica</option>
+            <option>Japan</option>
+            <option>Jordan</option>
+            <option>Kazakhstan</option>
+            <option>Kenya</option>
+            <option>Kosovo</option>
+            <option>Kuwait</option>
+            <option>Kyrgyzstan</option>
+            <option>Laos</option>
+            <option>Latvia</option>
+            <option>Lebanon</option>
+            <option>Lesotho</option>
+            <option>Liberia</option>
+            <option>Libya</option>
+            <option>Liechtenstein</option>
+            <option>Lithuania</option>
+            <option>Luxembourg</option>
+            <option>Macedonia</option>
+            <option>Madagascar</option>
+            <option>Malawi</option>
+            <option>Malaysia</option>
+            <option>Maldives</option>
+            <option>Mali</option>
+            <option>Malta</option>
+            <option>Mauritania</option>
+            <option>Mauritius</option>
+            <option>Mexico</option>
+            <option>Moldova</option>
+            <option>Mongolia</option>
+            <option>Montenegro</option>
+            <option>Morocco</option>
+            <option>Mozambique</option>
+            <option>Myanmar</option>
+            <option>Namibia</option>
+            <option>Nepal</option>
+            <option>Netherlands</option>
+            <option>New Zealand</option>
+            <option>Nicaragua</option>
+            <option>Niger</option>
+            <option>Nigeria</option>
+            <option>North Korea</option>
+            <option>Norway</option>
+            <option>Oman</option>
+            <option>Pakistan</option>
+            <option>Palestine</option>
+            <option>Panama</option>
+            <option>Papua New Guinea</option>
+            <option>Paraguay</option>
+            <option>Peru</option>
+            <option>Philippines</option>
+            <option>Poland</option>
+            <option>Portugal</option>
+            <option>Qatar</option>
+            <option>Romania</option>
+            <option>Russia</option>
+            <option>Rwanda</option>
+            <option>Samoa</option>
+            <option>Saudi Arabia</option>
+            <option>Senegal</option>
+            <option>Serbia</option>
+            <option>Seychelles</option>
+            <option>Sierra Leone</option>
+            <option>Singapore</option>
+            <option>Slovakia</option>
+            <option>Slovenia</option>
+            <option>Somalia</option>
+            <option>South Africa</option>
+            <option>South Korea</option>
+            <option>South Sudan</option>
+            <option>Spain</option>
+            <option>Sri Lanka</option>
+            <option>Sudan</option>
+            <option>Suriname</option>
+            <option>Swaziland</option>
+            <option>Sweden</option>
+            <option>Switzerland</option>
+            <option>Syria</option>
+            <option>Taiwan</option>
+            <option>Tajikistan</option>
+            <option>Tanzania</option>
+            <option>Thailand</option>
+            <option>Timor-Leste</option>
+            <option>Togo</option>
+            <option>Tonga</option>
+            <option>Trinidad and Tobago</option>
+            <option>Tunisia</option>
+            <option>Turkey</option>
+            <option>Turkmenistan</option>
+            <option>Uganda</option>
+            <option>Ukraine</option>
+            <option>United Arab Emirates</option>
+            <option>United Kingdom</option>
+            <option>Uruguay</option>
+            <option>Uzbekistan</option>
+            <option>Venezuela</option>
+            <option>Vietnam</option>
+            <option>Yemen</option>
+            <option>Zambia</option>
+            <option>Zimbabwe</option>
+          </select>
+        <div class="mybtn" id="nextbtn">Next</div>  
+      </div>  <!-- END QUESTIONPAGE -->
+
+      <div id="results" class="col-sm-12 col-xs-12">
+        <div id="container01"></div>
+        <div id="container02"></div>
+        <div class="mybtn" id="replaybtn" onclick="restart()">Compare again</div>
+      </div> <!-- END RESULTPAGE -->
+
+    </div> <!-- END ROW -->
+    </div> <!-- END CONTAINER -->
+  </div> <!-- END PARENT -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script>  
+  var data = [
+    {"name":"Finland", "year15":7.52, "year14":6.4, "situation":"Good", "color":"#ffff66", "diff":1.12, "change":"declined"},
+    {"name":"Norway", "year15":7.75, "year14":6.52, "situation":"Good", "color":"#ffff66", "diff":"1.23", "change":"declined"},
+    {"name":"Denmark", "year15":8.24, "year14":7.43, "situation":"Good", "color":"#ffff66", "diff":"0.81", "change":"declined"},
+    {"name":"Netherlands", "year15":9.22, "year14":6.46, "situation":"Good", "color":"#ffff66", "diff":"2.76", "change":"declined"},
+    {"name":"Sweden", "year15":9.47, "year14":8.98, "situation":"Good", "color":"#ffff66", "diff":"0.49", "change":"declined"},
+    {"name":"New Zealand", "year15":10.06, "year14":8.55, "situation":"Good", "color":"#ffff66", "diff":"1.51", "change":"declined"},
+    {"name":"Austria", "year15":10.85, "year14":10.01, "situation":"Good", "color":"#ffff66", "diff":"0.84", "change":"declined"},
+    {"name":"Canada", "year15":10.99, "year14":10.99, "situation":"Good", "color":"#ffff66", "diff":"0", "change":"unchanged"},
+    {"name":"Jamaica", "year15":11.18, "year14":10.9, "situation":"Good", "color":"#ffff66", "diff":"0.28", "change":"declined"},
+    {"name":"Estonia", "year15":11.19, "year14":9.63, "situation":"Good", "color":"#ffff66", "diff":"1.56", "change":"declined"},
+    {"name":"Ireland", "year15":11.2, "year14":10.87, "situation":"Good", "color":"#ffff66", "diff":"0.33", "change":"declined"},
+    {"name":"Germany", "year15":11.47, "year14":10.23, "situation":"Good", "color":"#ffff66", "diff":"1.24", "change":"declined"},
+    {"name":"Czech Republic", "year15":11.62, "year14":10.07, "situation":"Good", "color":"#ffff66", "diff":"1.55", "change":"declined"},
+    {"name":"Slovakia", "year15":11.66, "year14":11.39, "situation":"Good", "color":"#ffff66", "diff":"0.27", "change":"declined"},
+    {"name":"Belgium", "year15":11.98, "year14":12.8, "situation":"Good", "color":"#ffff66", "diff":"-0.82", "change":"improved"},
+    {"name":"Costa Rica", "year15":12.26, "year14":12.23, "situation":"Good", "color":"#ffff66", "diff":"0.03", "change":"declined"},
+    {"name":"Namibia", "year15":12.5, "year14":12.5, "situation":"Good", "color":"#ffff66", "diff":"0", "change":"unchanged"},
+    {"name":"Poland", "year15":12.71, "year14":11.03, "situation":"Good", "color":"#ffff66", "diff":"1.68", "change":"declined"},
+    {"name":"Luxembourg", "year15":13.61, "year14":6.7, "situation":"Good", "color":"#ffff66", "diff":"6.91", "change":"declined"},
+    {"name":"Switzerland", "year15":13.85, "year14":10.47, "situation":"Good", "color":"#ffff66", "diff":"3.38", "change":"declined"},
+    {"name":"Iceland", "year15":13.87, "year14":8.5, "situation":"Good", "color":"#ffff66", "diff":"5.37", "change":"declined"},
+    {"name":"Ghana", "year15":15.5, "year14":16.29, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.79", "change":"improved"},
+    {"name":"Uruguay", "year15":15.94, "year14":16.08, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.14", "change":"improved"},
+    {"name":"Cyprus", "year15":16.52, "year14":14.45, "situation":"Satisfactory", "color":"#fecc5c", "diff":"2.07", "change":"declined"},
+    {"name":"Australia", "year15":17.03, "year14":16.91, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0.12", "change":"declined"},
+    {"name":"Portugal", "year15":17.11, "year14":17.73, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.62", "change":"improved"},
+    {"name":"Liechtenstein", "year15":17.67, "year14":7.02, "situation":"Satisfactory", "color":"#fecc5c", "diff":"10.65", "change":"declined"},
+    {"name":"Latvia", "year15":18.12, "year14":21.1, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-2.98", "change":"improved"},
+    {"name":"Suriname", "year15":18.2, "year14":18.2, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0", "change":"unchanged"},
+    {"name":"Belize", "year15":18.54, "year14":17.05, "situation":"Satisfactory", "color":"#fecc5c", "diff":"1.49", "change":"declined"},
+    {"name":"Lithuania", "year15":18.8, "year14":19.2, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.4", "change":"improved"},
+    {"name":"Andorra", "year15":19.87, "year14":6.82, "situation":"Satisfactory", "color":"#fecc5c", "diff":"13.05", "change":"declined"},
+    {"name":"Spain", "year15":19.95, "year14":20.63, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.68", "change":"improved"},
+    {"name":"United Kingdom", "year15":20, "year14":19.93, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0.07", "change":"declined"},
+    {"name":"Slovenia", "year15":20.55, "year14":20.38, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0.17", "change":"declined"},
+    {"name":"Cape Verde", "year15":20.69, "year14":14.32, "situation":"Satisfactory", "color":"#fecc5c", "diff":"6.37", "change":"declined"},
+    {"label":"OECS", "year15":21.02, "year14":20.81, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.21", "change":"improved"},
+    {"name":"France", "year15":21.15, "year14":21.89, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.74", "change":"improved"},
+    {"name":"South Africa", "year15":22.06, "year14":23.19, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-1.13", "change":"improved"},
+    {"name":"Samoa", "year15":22.32, "year14":22.02, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0.3", "change":"declined"},
+    {"name":"Trinidad and Tobago", "year15":22.39, "year14":23.28, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.89", "change":"improved"},
+    {"name":"Botswana", "year15":22.91, "year14":22.91, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0", "change":"unchanged"},
+    {"name":"Chile", "year15":23, "year14":25.8, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-2.8", "change":"improved"},
+    {"name":"Tonga", "year15":23.37, "year14":26.7, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-3.33", "change":"improved"},
+    {"name":"El Salvador", "year15":23.66, "year14":21.57, "situation":"Satisfactory", "color":"#fecc5c", "diff":"2.09", "change":"declined"},
+    {"name":"Burkina Faso", "year15":23.79, "year14":24.45, "situation":"Satisfactory", "color":"#fecc5c", "diff":"-0.66", "change":"improved"},
+    {"name":"Niger", "year15":23.85, "year14":23.59, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0.26", "change":"declined"},
+    {"name":"Malta", "year15":24.16, "year14":23.84, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0.32", "change":"declined"},
+    {"name":"United States", "year15":24.41, "year14":23.49, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0.92", "change":"declined"},
+    {"name":"Comoros", "year15":24.52, "year14":24.52, "situation":"Satisfactory", "color":"#fecc5c", "diff":"0", "change":"unchanged"},
+    {"name":"Taiwan", "year15":24.83, "year14":23.82, "situation":"Satisfactory", "color":"#fecc5c", "diff":"1.01", "change":"declined"},
+    {"name":"Romania", "year15":24.9, "year14":23.48, "situation":"Satisfactory", "color":"#fecc5c", "diff":"1.42", "change":"declined"},
+    {"name":"Haiti", "year15":25.08, "year14":23.53, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.55", "change":"declined"},
+    {"name":"Mongolia", "year15":25.25, "year14":30.3, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-5.05", "change":"improved"},
+    {"name":"Mauritania", "year15":25.27, "year14":26.53, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.26", "change":"improved"},
+    {"name":"Papua New Guinea", "year15":25.87, "year14":23.46, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"2.41", "change":"declined"},
+    {"name":"Argentina", "year15":26.11, "year14":25.27, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.84", "change":"declined"},
+    {"name":"Croatia", "year15":26.12, "year14":26.82, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.7", "change":"improved"},
+    {"name":"Malawi", "year15":26.41, "year14":28.29, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.88", "change":"improved"},
+    {"name":"South Korea", "year15":26.55, "year14":25.66, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.89", "change":"declined"},
+    {"name":"Japan", "year15":26.95, "year14":26.02, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.93", "change":"declined"},
+    {"name":"Guyana", "year15":27.21, "year14":27.08, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.13", "change":"declined"},
+    {"name":"Dominican Republic", "year15":27.31, "year14":27.17, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.14", "change":"declined"},
+    {"name":"Madagascar", "year15":27.43, "year14":29.38, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.95", "change":"improved"},
+    {"name":"Hungary", "year15":27.44, "year14":26.73, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.71", "change":"declined"},
+    {"name":"Bosnia and Herzegovina", "year15":27.51, "year14":26.86, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.65", "change":"declined"},
+    {"name":"Serbia", "year15":27.66, "year14":25.05, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"2.61", "change":"declined"},
+    {"name":"Mauritius", "year15":27.69, "year14":27.69, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0", "change":"unchanged"},
+    {"name":"Georgia", "year15":27.7, "year14":29.78, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-2.08", "change":"improved"},
+    {"name":"Hong Kong", "year15":27.76, "year14":26.55, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.21", "change":"declined"},
+    {"name":"Senegal", "year15":27.77, "year14":26.68, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.09", "change":"declined"},
+    {"name":"Moldova", "year15":27.85, "year14":25.35, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"2.5", "change":"declined"},
+    {"name":"Italy", "year15":27.94, "year14":23.75, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.24", "change":"declined"},
+    {"name":"Nicaragua", "year15":27.94, "year14":27.7, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"4.19", "change":"declined"},
+    {"name":"Tanzania", "year15":28.09, "year14":27.3, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.79", "change":"declined"},
+    {"name":"Cyprus North", "year15":28.33, "year14":29.54, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.21", "change":"improved"},
+    {"name":"Lesotho", "year15":28.36, "year14":28.36, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0", "change":"unchanged"},
+    {"name":"Armenia", "year15":28.43, "year14":29.07, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.64", "change":"improved"},
+    {"name":"Sierra Leone", "year15":28.47, "year14":28.23, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.24", "change":"declined"},
+    {"name":"Togo", "year15":28.5, "year14":29, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.5", "change":"improved"},
+    {"name":"Guinea-Bissau", "year15":28.7, "year14":30.05, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.35", "change":"improved"},
+    {"name":"Albania", "year15":28.77, "year14":29.92, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.15", "change":"improved"},
+    {"name":"Panama", "year15":28.98, "year14":30.2, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.22", "change":"improved"},
+    {"name":"Benin", "year15":29.24, "year14":28.83, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.41", "change":"declined"},
+    {"name":"Mozambique", "year15":29.98, "year14":29.26, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.72", "change":"declined"},
+    {"name":"Cote d'Ivoire", "year15":30.45, "year14":31.63, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.18", "change":"improved"},
+    {"name":"Kosovo", "year15":30.63, "year14":29.29, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.34", "change":"declined"},
+    {"name":"Kyrgyzstan", "year15":30.69, "year14":31.24, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.55", "change":"improved"},
+    {"name":"Liberia", "year15":30.78, "year14":30.65, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.13", "change":"declined"},
+    {"name":"Kuwait", "year15":30.84, "year14":30.71, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.13", "change":"declined"},
+    {"name":"Greece", "year15":31.01, "year14":31.33, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.32", "change":"improved"},
+    {"name":"Peru", "year15":31.21, "year14":31.7, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.49", "change":"improved"},
+    {"name":"Fiji", "year15":31.28, "year14":32.57, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.29", "change":"improved"},
+    {"name":"Bolivia", "year15":31.29, "year14":31.04, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.25", "change":"declined"},
+    {"name":"Gabon", "year15":31.38, "year14":31.32, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.06", "change":"declined"},
+    {"name":"Seychelles", "year15":31.55, "year14":31.68, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.13", "change":"improved"},
+    {"name":"Uganda", "year15":31.65, "year14":33.29, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-1.64", "change":"improved"},
+    {"name":"Lebanon", "year15":31.81, "year14":31.89, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.08", "change":"improved"},
+    {"name":"Brazil", "year15":31.93, "year14":34.03, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-2.1", "change":"improved"},
+    {"name":"Kenya", "year15":32.07, "year14":30.7, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.37", "change":"declined"},
+    {"name":"Israel", "year15":32.09, "year14":31.19, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.9", "change":"declined"},
+    {"name":"Guinea", "year15":32.56, "year14":31.67, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.89", "change":"declined"},
+    {"name":"Timor-Leste", "year15":32.63, "year14":29.04, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"3.59", "change":"declined"},
+    {"name":"Bhutan", "year15":32.65, "year14":30.73, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.92", "change":"declined"},
+    {"name":"Nepal", "year15":32.71, "year14":36.16, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-3.45", "change":"improved"},
+    {"name":"Bulgaria", "year15":32.91, "year14":31.42, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.49", "change":"declined"},
+    {"name":"Congo, Rep.", "year15":33, "year14":29.44, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"3.56", "change":"declined"},
+    {"name":"Ecuador", "year15":33.65, "year14":31.16, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"2.49", "change":"declined"},
+    {"name":"Paraguay", "year15":33.74, "year14":31.81, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.93", "change":"declined"},
+    {"name":"Central African", "year15":33.84, "year14":33.13, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"0.71", "change":"declined"},
+    {"name":"Nigeria", "year15":34.09, "year14":34.24, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.15", "change":"improved"},
+    {"name":"Maldives", "year15":34.32, "year14":33.11, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"1.21", "change":"declined"},
+    {"name":"Zambia", "year15":34.35, "year14":30.89, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"3.46", "change":"declined"},
+    {"name":"Montenegro", "year15":34.63, "year14":34.78, "situation":"Noticeable problems", "color":"#fd8d3c", "diff":"-0.15", "change":"improved"},
+    {"name":"Qatar", "year15":35.35, "year14":34.32, "situation":"Difficult", "color":"#f03b20", "diff":"1.03", "change":"declined"},
+    {"name":"Tajikistan", "year15":36.19, "year14":34.86, "situation":"Difficult", "color":"#f03b20", "diff":"1.33", "change":"declined"},
+    {"name":"Macedonia", "year15":36.26, "year14":36.43, "situation":"Difficult", "color":"#f03b20", "diff":"-0.17", "change":"improved"},
+    {"name":"Mali", "year15":36.33, "year14":36.29, "situation":"Difficult", "color":"#f03b20", "diff":"0.04", "change":"declined"},
+    {"name":"Algeria", "year15":36.63, "year14":36.26, "situation":"Difficult", "color":"#f03b20", "diff":"0.37", "change":"declined"},
+    {"name":"United Arab Emirates", "year15":36.73, "year14":36.03, "situation":"Difficult", "color":"#f03b20", "diff":"0.7", "change":"declined"},
+    {"name":"Brunei Darussalam", "year15":36.76, "year14":35.45, "situation":"Difficult", "color":"#f03b20", "diff":"1.31", "change":"declined"},
+    {"name":"Afghanistan", "year15":37.44, "year14":37.07, "situation":"Difficult", "color":"#f03b20", "diff":"0.37", "change":"declined"},
+    {"name":"Angola", "year15":37.84, "year14":36.5, "situation":"Difficult", "color":"#f03b20", "diff":"1.34", "change":"declined"},
+    {"name":"Guatemala", "year15":37.92, "year14":36.61, "situation":"Difficult", "color":"#f03b20", "diff":"1.31", "change":"declined"},
+    {"name":"South Sudan", "year15":38.04, "year14":36.05, "situation":"Difficult", "color":"#f03b20", "diff":"1.99", "change":"declined"},
+    {"name":"Tunisia", "year15":38.68, "year14":38.69, "situation":"Difficult", "color":"#f03b20", "diff":"-0.01", "change":"improved"},
+    {"name":"Oman", "year15":38.83, "year14":38.83, "situation":"Difficult", "color":"#f03b20", "diff":"0", "change":"unchanged"},
+    {"name":"Colombia", "year15":39.08, "year14":36.68, "situation":"Difficult", "color":"#f03b20", "diff":"2.4", "change":"declined"},
+    {"name":"Ukraine", "year15":39.1, "year14":36.93, "situation":"Difficult", "color":"#f03b20", "diff":"2.17", "change":"declined"},
+    {"name":"Morocco", "year15":39.19, "year14":39.72, "situation":"Difficult", "color":"#f03b20", "diff":"-0.53", "change":"improved"},
+    {"name":"Zimbabwe", "year15":39.19, "year14":39.19, "situation":"Difficult", "color":"#f03b20", "diff":"0", "change":"unchanged"},
+    {"name":"Honduras", "year15":39.27, "year14":37.14, "situation":"Difficult", "color":"#f03b20", "diff":"2.13", "change":"declined"},
+    {"name":"Cameroon", "year15":39.63, "year14":38.13, "situation":"Difficult", "color":"#f03b20", "diff":"1.5", "change":"declined"},
+    {"name":"Thailand", "year15":40.07, "year14":37.94, "situation":"Difficult", "color":"#f03b20", "diff":"2.13", "change":"declined"},
+    {"name":"Chad", "year15":40.17, "year14":40.22, "situation":"Difficult", "color":"#f03b20", "diff":"-0.05", "change":"improved"},
+    {"name":"India", "year15":40.49, "year14":40.34, "situation":"Difficult", "color":"#f03b20", "diff":"0.15", "change":"declined"},
+    {"name":"Venezuela", "year15":40.61, "year14":35.37, "situation":"Difficult", "color":"#f03b20", "diff":"5.24", "change":"declined"},
+    {"name":"Indonesia", "year15":40.75, "year14":38.15, "situation":"Difficult", "color":"#f03b20", "diff":"2.6", "change":"declined"},
+    {"name":"Cambodia", "year15":40.99, "year14":40.97, "situation":"Difficult", "color":"#f03b20", "diff":"0.02", "change":"declined"},
+    {"name":"Palestine", "year15":41.01, "year14":40.11, "situation":"Difficult", "color":"#f03b20", "diff":"0.9", "change":"declined"},
+    {"name":"Philippines", "year15":41.19, "year14":43.69, "situation":"Difficult", "color":"#f03b20", "diff":"-2.5", "change":"improved"},
+    {"name":"Ethiopia", "year15":41.83, "year14":40.58, "situation":"Difficult", "color":"#f03b20", "diff":"1.25", "change":"declined"},
+    {"name":"Jordan", "year15":42.07, "year14":40.42, "situation":"Difficult", "color":"#f03b20", "diff":"1.65", "change":"declined"},
+    {"name":"Myanmar", "year15":42.08, "year14":41.43, "situation":"Difficult", "color":"#f03b20", "diff":"0.65", "change":"declined"},
+    {"name":"Burundi", "year15":42.93, "year14":40.5, "situation":"Difficult", "color":"#f03b20", "diff":"2.43", "change":"declined"},
+    {"name":"Bangladesh", "year15":42.95, "year14":42.58, "situation":"Difficult", "color":"#f03b20", "diff":"0.37", "change":"declined"},
+    {"name":"Malaysia", "year15":43.29, "year14":42.73, "situation":"Difficult", "color":"#f03b20", "diff":"0.56", "change":"declined"},
+    {"name":"Mexico", "year15":43.69, "year14":45.04, "situation":"Difficult", "color":"#f03b20", "diff":"-1.35", "change":"improved"},
+    {"name":"Turkey", "year15":44.16, "year14":45.87, "situation":"Difficult", "color":"#f03b20", "diff":"-1.71", "change":"improved"},
+    {"name":"Congo, Dem. Rep.", "year15":44.31, "year14":44.64, "situation":"Difficult", "color":"#f03b20", "diff":"-0.33", "change":"improved"},
+    {"name":"Gambia", "year15":44.5, "year14":46.42, "situation":"Difficult", "color":"#f03b20", "diff":"-1.92", "change":"improved"},
+    {"name":"Russia", "year15":44.97, "year14":42.78, "situation":"Difficult", "color":"#f03b20", "diff":"2.19", "change":"declined"},
+    {"name":"Singapore", "year15":45.87, "year14":44.29, "situation":"Difficult", "color":"#f03b20", "diff":"1.58", "change":"declined"},
+    {"name":"Libya", "year15":45.99, "year14":39.84, "situation":"Difficult", "color":"#f03b20", "diff":"6.15", "change":"declined"},
+    {"name":"Swaziland", "year15":47.28, "year14":46.76, "situation":"Difficult", "color":"#f03b20", "diff":"0.52", "change":"declined"},
+    {"name":"Iraq", "year15":47.76, "year14":45.44, "situation":"Difficult", "color":"#f03b20", "diff":"2.32", "change":"declined"},
+    {"name":"Belarus", "year15":47.98, "year14":47.82, "situation":"Difficult", "color":"#f03b20", "diff":"0.16", "change":"declined"},
+    {"name":"Egypt", "year15":50.17, "year14":51.89, "situation":"Difficult", "color":"#f03b20", "diff":"-1.72", "change":"improved"},
+    {"name":"Pakistan", "year15":50.46, "year14":51.46, "situation":"Difficult", "color":"#f03b20", "diff":"-1", "change":"improved"},
+    {"name":"Kazakhstan", "year15":53.46, "year14":54.94, "situation":"Difficult", "color":"#f03b20", "diff":"-1.48", "change":"improved"},
+    {"name":"Rwanda", "year15":56.57, "year14":56.57, "situation":"Very serious", "color":"#bd0026", "diff":"0", "change":"unchanged"},
+    {"name":"Azerbaijan", "year15":58.41, "year14":52.87, "situation":"Very serious", "color":"#bd0026", "diff":"5.54", "change":"declined"},
+    {"name":"Bahrain", "year15":58.69, "year14":58.26, "situation":"Very serious", "color":"#bd0026", "diff":"0.43", "change":"declined"},
+    {"name":"Saudi Arabia", "year15":59.41, "year14":58.3, "situation":"Very serious", "color":"#bd0026", "diff":"1.11", "change":"declined"},
+    {"name":"Sri Lanka", "year15":60.28, "year14":59.13, "situation":"Very serious", "color":"#bd0026", "diff":"1.15", "change":"declined"},
+    {"name":"Uzbekistan", "year15":61.14, "year14":61.01, "situation":"Very serious", "color":"#bd0026", "diff":"0.13", "change":"declined"},
+    {"name":"Equatorial Guinea", "year15":66.23, "year14":67.95, "situation":"Very serious", "color":"#bd0026", "diff":"-1.72", "change":"improved"},
+    {"name":"Yemen", "year15":66.36, "year14":67.26, "situation":"Very serious", "color":"#bd0026", "diff":"-0.9", "change":"improved"},
+    {"name":"Cuba", "year15":70.21, "year14":70.92, "situation":"Very serious", "color":"#bd0026", "diff":"-0.71", "change":"improved"},
+    {"name":"Djibouti", "year15":71.04, "year14":70.34, "situation":"Very serious", "color":"#bd0026", "diff":"0.7", "change":"declined"},
+    {"name":"Laos", "year15":71.25, "year14":71.22, "situation":"Very serious", "color":"#bd0026", "diff":"0.03", "change":"declined"},
+    {"name":"Somalia", "year15":72.31, "year14":73.19, "situation":"Very serious", "color":"#bd0026", "diff":"-0.88", "change":"improved"},
+    {"name":"Iran", "year15":72.32, "year14":72.29, "situation":"Very serious", "color":"#bd0026", "diff":"0.03", "change":"declined"},
+    {"name":"Sudan", "year15":72.34, "year14":71.88, "situation":"Very serious", "color":"#bd0026", "diff":"0.46", "change":"declined"},
+    {"name":"Vietnam", "year15":72.63, "year14":72.36, "situation":"Very serious", "color":"#bd0026", "diff":"0.27", "change":"declined"},
+    {"name":"China", "year15":73.55, "year14":72.91, "situation":"Very serious", "color":"#bd0026", "diff":"0.64", "change":"declined"},
+    {"name":"Syria", "year15":77.29, "year14":77.04, "situation":"Very serious", "color":"#bd0026", "diff":"0.25", "change":"declined"},
+    {"name":"Turkmenistan", "year15":80.83, "year14":80.81, "situation":"Very serious", "color":"#bd0026", "diff":"0.02", "change":"declined"},
+    {"name":"North Korea", "year15":83.25, "year14":81.96, "situation":"Very serious", "color":"#bd0026", "diff":"1.29", "change":"declined"},
+    {"name":"Eritrea", "year15":84.86, "year14":84.83, "situation":"Very serious", "color":"#bd0026", "diff":"0.03", "change":"declined"},
+];
+
+  var data2= [
+            {"name":"Finland", x:1, y:7.52, "color":"#ffff66", "ranking":1, "situation":"Good"},
+            {"name":"Norway", x:1, y:7.75, "color":"#ffff66", "ranking":2, "situation":"Good"},
+            {"name":"Denmark", x:1, y:8.24, "color":"#ffff66", "ranking":3, "situation":"Good"},
+            {"name":"Netherlands", x:1, y:9.22, "color":"#ffff66", "ranking":4, "situation":"Good"},
+            {"name":"Sweden", x:1, y:9.47, "color":"#ffff66", "ranking":5, "situation":"Good"},
+            {"name":"New Zealand", x:1, y:10.06, "color":"#ffff66", "ranking":6, "situation":"Good"},
+            {"name":"Austria", x:1, y:10.85, "color":"#ffff66", "ranking":7, "situation":"Good"},
+            {"name":"Canada", x:1, y:10.99, "color":"#ffff66", "ranking":8, "situation":"Good"},
+            {"name":"Jamaica", x:1, y:11.18, "color":"#ffff66", "ranking":9, "situation":"Good"},
+            {"name":"Estonia", x:1, y:11.19, "color":"#ffff66", "ranking":10, "situation":"Good"},
+            {"name":"Ireland", x:1, y:11.2, "color":"#ffff66", "ranking":11, "situation":"Good"},
+            {"name":"Germany", x:1, y:11.47, "color":"#ffff66", "ranking":12, "situation":"Good"},
+            {"name":"Czech Republic", x:1, y:11.62, "color":"#ffff66", "ranking":13, "situation":"Good"},
+            {"name":"Slovakia", x:1, y:11.66, "color":"#ffff66", "ranking":14, "situation":"Good"},
+            {"name":"Belgium", x:1, y:11.98, "color":"#ffff66", "ranking":15, "situation":"Good"},
+            {"name":"Costa Rica", x:1, y:12.26, "color":"#ffff66", "ranking":16, "situation":"Good"},
+            {"name":"Namibia", x:1, y:12.5, "color":"#ffff66", "ranking":17, "situation":"Good"},
+            {"name":"Poland", x:1, y:12.71, "color":"#ffff66", "ranking":18, "situation":"Good"},
+            {"name":"Luxembourg", x:1, y:13.61, "color":"#ffff66", "ranking":19, "situation":"Good"},
+            {"name":"Switzerland", x:1, y:13.85, "color":"#ffff66", "ranking":20, "situation":"Good"},
+            {"name":"Iceland", x:1, y:13.87, "color":"#ffff66", "ranking":21, "situation":"Good"},
+            {"name":"Ghana", x:1, y:15.5, "color":"#fecc5c", "ranking":22, "situation":"Satisfactory"},
+            {"name":"Uruguay", x:1, y:15.94, "color":"#fecc5c", "ranking":23, "situation":"Satisfactory"},
+            {"name":"Cyprus", x:1, y:16.52, "color":"#fecc5c", "ranking":24, "situation":"Satisfactory"},
+            {"name":"Australia", x:1, y:17.03, "color":"#fecc5c", "ranking":25, "situation":"Satisfactory"},
+            {"name":"Portugal", x:1, y:17.11, "color":"#fecc5c", "ranking":26, "situation":"Satisfactory"},
+            {"name":"Liechtenstein", x:1, y:17.67, "color":"#fecc5c", "ranking":27, "situation":"Satisfactory"},
+            {"name":"Latvia", x:1, y:18.12, "color":"#fecc5c", "ranking":28, "situation":"Satisfactory"},
+            {"name":"Suriname", x:1, y:18.2, "color":"#fecc5c", "ranking":29, "situation":"Satisfactory"},
+            {"name":"Belize", x:1, y:18.54, "color":"#fecc5c", "ranking":30, "situation":"Satisfactory"},
+            {"name":"Lithuania", x:1, y:18.8, "color":"#fecc5c", "ranking":31, "situation":"Satisfactory"},
+            {"name":"Andorra", x:1, y:19.87, "color":"#fecc5c", "ranking":32, "situation":"Satisfactory"},
+            {"name":"Spain", x:1, y:19.95, "color":"#fecc5c", "ranking":33, "situation":"Satisfactory"},
+            {"name":"United Kingdom", x:1, y:20, "color":"#fecc5c", "ranking":34, "situation":"Satisfactory"},
+            {"name":"Slovenia", x:1, y:20.55, "color":"#fecc5c", "ranking":35, "situation":"Satisfactory"},
+            {"name":"Cape Verde", x:1, y:20.69, "color":"#fecc5c", "ranking":36, "situation":"Satisfactory"},
+            {"name":"OECS", x:1, y:21.02, "color":"#fecc5c", "ranking":37, "situation":"Satisfactory"},
+            {"name":"France", x:1, y:21.15, "color":"#fecc5c", "ranking":38, "situation":"Satisfactory"},
+            {"name":"South Africa", x:1, y:22.06, "color":"#fecc5c", "ranking":39, "situation":"Satisfactory"},
+            {"name":"Samoa", x:1, y:22.32, "color":"#fecc5c", "ranking":40, "situation":"Satisfactory"},
+            {"name":"Trinidad and Tobago", x:1, y:22.39, "color":"#fecc5c", "ranking":41, "situation":"Satisfactory"},
+            {"name":"Botswana", x:1, y:22.91, "color":"#fecc5c", "ranking":42, "situation":"Satisfactory"},
+            {"name":"Chile", x:1, y:23, "color":"#fecc5c", "ranking":43, "situation":"Satisfactory"},
+            {"name":"Tonga", x:1, y:23.37, "color":"#fecc5c", "ranking":44, "situation":"Satisfactory"},
+            {"name":"El Salvador", x:1, y:23.66, "color":"#fecc5c", "ranking":45, "situation":"Satisfactory"},
+            {"name":"Burkina Faso", x:1, y:23.79, "color":"#fecc5c", "ranking":46, "situation":"Satisfactory"},
+            {"name":"Niger", x:1, y:23.85, "color":"#fecc5c", "ranking":47, "situation":"Satisfactory"},
+            {"name":"Malta", x:1, y:24.16, "color":"#fecc5c", "ranking":48, "situation":"Satisfactory"},
+            {"name":"United States", x:1, y:24.41, "color":"#fecc5c", "ranking":49, "situation":"Satisfactory"},
+            {"name":"Comoros", x:1, y:24.52, "color":"#fecc5c", "ranking":50, "situation":"Satisfactory"},
+            {"name":"Taiwan", x:1, y:24.83, "color":"#fecc5c", "ranking":51, "situation":"Satisfactory"},
+            {"name":"Romania", x:1, y:24.9, "color":"#fecc5c", "ranking":52, "situation":"Satisfactory"},
+            {"name":"Haiti", x:1, y:25.08, "color":"#fd8d3c", "ranking":53, "situation":"Noticeable problems"},
+            {"name":"Mongolia", x:1, y:25.25, "color":"#fd8d3c", "ranking":54, "situation":"Noticeable problems"},
+            {"name":"Mauritania", x:1, y:25.27, "color":"#fd8d3c", "ranking":55, "situation":"Noticeable problems"},
+            {"name":"Papua New Guinea", x:1, y:25.87, "color":"#fd8d3c", "ranking":56, "situation":"Noticeable problems"},
+            {"name":"Argentina", x:1, y:26.11, "color":"#fd8d3c", "ranking":57, "situation":"Noticeable problems"},
+            {"name":"Croatia", x:1, y:26.12, "color":"#fd8d3c", "ranking":58, "situation":"Noticeable problems"},
+            {"name":"Malawi", x:1, y:26.41, "color":"#fd8d3c", "ranking":59, "situation":"Noticeable problems"},
+            {"name":"South Korea", x:1, y:26.55, "color":"#fd8d3c", "ranking":60, "situation":"Noticeable problems"},
+            {"name":"Japan", x:1, y:26.95, "color":"#fd8d3c", "ranking":61, "situation":"Noticeable problems"},
+            {"name":"Guyana", x:1, y:27.21, "color":"#fd8d3c", "ranking":62, "situation":"Noticeable problems"},
+            {"name":"Dominican Republic", x:1, y:27.31, "color":"#fd8d3c", "ranking":63, "situation":"Noticeable problems"},
+            {"name":"Madagascar", x:1, y:27.43, "color":"#fd8d3c", "ranking":64, "situation":"Noticeable problems"},
+            {"name":"Hungary", x:1, y:27.44, "color":"#fd8d3c", "ranking":65, "situation":"Noticeable problems"},
+            {"name":"Bosnia and Herzegovina", x:1, y:27.51, "color":"#fd8d3c", "ranking":66, "situation":"Noticeable problems"},
+            {"name":"Serbia", x:1, y:27.66, "color":"#fd8d3c", "ranking":67, "situation":"Noticeable problems"},
+            {"name":"Mauritius", x:1, y:27.69, "color":"#fd8d3c", "ranking":68, "situation":"Noticeable problems"},
+            {"name":"Georgia", x:1, y:27.7, "color":"#fd8d3c", "ranking":69, "situation":"Noticeable problems"},
+            {"name":"Hong Kong", x:1, y:27.76, "color":"#fd8d3c", "ranking":70, "situation":"Noticeable problems"},
+            {"name":"Senegal", x:1, y:27.77, "color":"#fd8d3c", "ranking":71, "situation":"Noticeable problems"},
+            {"name":"Moldova", x:1, y:27.85, "color":"#fd8d3c", "ranking":72, "situation":"Noticeable problems"},
+            {"name":"Italy", x:1, y:27.94, "color":"#fd8d3c", "ranking":73, "situation":"Noticeable problems"},
+            {"name":"Nicaragua", x:1, y:27.94, "color":"#fd8d3c", "ranking":74, "situation":"Noticeable problems"},
+            {"name":"Tanzania", x:1, y:28.09, "color":"#fd8d3c", "ranking":75, "situation":"Noticeable problems"},
+            {"name":"Cyprus North", x:1, y:28.33, "color":"#fd8d3c", "ranking":76, "situation":"Noticeable problems"},
+            {"name":"Lesotho", x:1, y:28.36, "color":"#fd8d3c", "ranking":77, "situation":"Noticeable problems"},
+            {"name":"Armenia", x:1, y:28.43, "color":"#fd8d3c", "ranking":78, "situation":"Noticeable problems"},
+            {"name":"Sierra Leone", x:1, y:28.47, "color":"#fd8d3c", "ranking":79, "situation":"Noticeable problems"},
+            {"name":"Togo", x:1, y:28.5, "color":"#fd8d3c", "ranking":80, "situation":"Noticeable problems"},
+            {"name":"Guinea-Bissau", x:1, y:28.7, "color":"#fd8d3c", "ranking":81, "situation":"Noticeable problems"},
+            {"name":"Albania", x:1, y:28.77, "color":"#fd8d3c", "ranking":82, "situation":"Noticeable problems"},
+            {"name":"Panama", x:1, y:28.98, "color":"#fd8d3c", "ranking":83, "situation":"Noticeable problems"},
+            {"name":"Benin", x:1, y:29.24, "color":"#fd8d3c", "ranking":84, "situation":"Noticeable problems"},
+            {"name":"Mozambique", x:1, y:29.98, "color":"#fd8d3c", "ranking":85, "situation":"Noticeable problems"},
+            {"name":"Cote d'Ivoire", x:1, y:30.45, "color":"#fd8d3c", "ranking":86, "situation":"Noticeable problems"},
+            {"name":"Kosovo", x:1, y:30.63, "color":"#fd8d3c", "ranking":87, "situation":"Noticeable problems"},
+            {"name":"Kyrgyzstan", x:1, y:30.69, "color":"#fd8d3c", "ranking":88, "situation":"Noticeable problems"},
+            {"name":"Liberia", x:1, y:30.78, "color":"#fd8d3c", "ranking":89, "situation":"Noticeable problems"},
+            {"name":"Kuwait", x:1, y:30.84, "color":"#fd8d3c", "ranking":90, "situation":"Noticeable problems"},
+            {"name":"Greece", x:1, y:31.01, "color":"#fd8d3c", "ranking":91, "situation":"Noticeable problems"},
+            {"name":"Peru", x:1, y:31.21, "color":"#fd8d3c", "ranking":92, "situation":"Noticeable problems"},
+            {"name":"Fiji", x:1, y:31.28, "color":"#fd8d3c", "ranking":93, "situation":"Noticeable problems"},
+            {"name":"Bolivia", x:1, y:31.29, "color":"#fd8d3c", "ranking":94, "situation":"Noticeable problems"},
+            {"name":"Gabon", x:1, y:31.38, "color":"#fd8d3c", "ranking":95, "situation":"Noticeable problems"},
+            {"name":"Seychelles", x:1, y:31.55, "color":"#fd8d3c", "ranking":96, "situation":"Noticeable problems"},
+            {"name":"Uganda", x:1, y:31.65, "color":"#fd8d3c", "ranking":97, "situation":"Noticeable problems"},
+            {"name":"Lebanon", x:1, y:31.81, "color":"#fd8d3c", "ranking":98, "situation":"Noticeable problems"},
+            {"name":"Brazil", x:1, y:31.93, "color":"#fd8d3c", "ranking":99, "situation":"Noticeable problems"},
+            {"name":"Kenya", x:1, y:32.07, "color":"#fd8d3c", "ranking":100, "situation":"Noticeable problems"},
+            {"name":"Israel", x:1, y:32.09, "color":"#fd8d3c", "ranking":101, "situation":"Noticeable problems"},
+            {"name":"Guinea", x:1, y:32.56, "color":"#fd8d3c", "ranking":102, "situation":"Noticeable problems"},
+            {"name":"Timor-Leste", x:1, y:32.63, "color":"#fd8d3c", "ranking":103, "situation":"Noticeable problems"},
+            {"name":"Bhutan", x:1, y:32.65, "color":"#fd8d3c", "ranking":104, "situation":"Noticeable problems"},
+            {"name":"Nepal", x:1, y:32.71, "color":"#fd8d3c", "ranking":105, "situation":"Noticeable problems"},
+            {"name":"Bulgaria", x:1, y:32.91, "color":"#fd8d3c", "ranking":106, "situation":"Noticeable problems"},
+            {"name":"Congo, Rep.", x:1, y:33, "color":"#fd8d3c", "ranking":107, "situation":"Noticeable problems"},
+            {"name":"Ecuador", x:1, y:33.65, "color":"#fd8d3c", "ranking":108, "situation":"Noticeable problems"},
+            {"name":"Paraguay", x:1, y:33.74, "color":"#fd8d3c", "ranking":109, "situation":"Noticeable problems"},
+            {"name":"Central African", x:1, y:33.84, "color":"#fd8d3c", "ranking":110, "situation":"Noticeable problems"},
+            {"name":"Nigeria", x:1, y:34.09, "color":"#fd8d3c", "ranking":111, "situation":"Noticeable problems"},
+            {"name":"Maldives", x:1, y:34.32, "color":"#fd8d3c", "ranking":112, "situation":"Noticeable problems"},
+            {"name":"Zambia", x:1, y:34.35, "color":"#fd8d3c", "ranking":113, "situation":"Noticeable problems"},
+            {"name":"Montenegro", x:1, y:34.63, "color":"#fd8d3c", "ranking":114, "situation":"Noticeable problems"},
+            {"name":"Qatar", x:1, y:35.35, "color":"#f03b20", "ranking":115, "situation":"Difficult"},
+            {"name":"Tajikistan", x:1, y:36.19, "color":"#f03b20", "ranking":116, "situation":"Difficult"},
+            {"name":"Macedonia", x:1, y:36.26, "color":"#f03b20", "ranking":117, "situation":"Difficult"},
+            {"name":"Mali", x:1, y:36.33, "color":"#f03b20", "ranking":118, "situation":"Difficult"},
+            {"name":"Algeria", x:1, y:36.63, "color":"#f03b20", "ranking":119, "situation":"Difficult"},
+            {"name":"United Arab Emirates", x:1, y:36.73, "color":"#f03b20", "ranking":120, "situation":"Difficult"},
+            {"name":"Brunei Darussalam", x:1, y:36.76, "color":"#f03b20", "ranking":121, "situation":"Difficult"},
+            {"name":"Afghanistan", x:1, y:37.44, "color":"#f03b20", "ranking":122, "situation":"Difficult"},
+            {"name":"Angola", x:1, y:37.84, "color":"#f03b20", "ranking":123, "situation":"Difficult"},
+            {"name":"Guatemala", x:1, y:37.92, "color":"#f03b20", "ranking":124, "situation":"Difficult"},
+            {"name":"South Sudan", x:1, y:38.04, "color":"#f03b20", "ranking":125, "situation":"Difficult"},
+            {"name":"Tunisia", x:1, y:38.68, "color":"#f03b20", "ranking":126, "situation":"Difficult"},
+            {"name":"Oman", x:1, y:38.83, "color":"#f03b20", "ranking":127, "situation":"Difficult"},
+            {"name":"Colombia", x:1, y:39.08, "color":"#f03b20", "ranking":128, "situation":"Difficult"},
+            {"name":"Ukraine", x:1, y:39.1, "color":"#f03b20", "ranking":129, "situation":"Difficult"},
+            {"name":"Morocco", x:1, y:39.19, "color":"#f03b20", "ranking":130, "situation":"Difficult"},
+            {"name":"Zimbabwe", x:1, y:39.19, "color":"#f03b20", "ranking":131, "situation":"Difficult"},
+            {"name":"Honduras", x:1, y:39.27, "color":"#f03b20", "ranking":132, "situation":"Difficult"},
+            {"name":"Cameroon", x:1, y:39.63, "color":"#f03b20", "ranking":133, "situation":"Difficult"},
+            {"name":"Thailand", x:1, y:40.07, "color":"#f03b20", "ranking":134, "situation":"Difficult"},
+            {"name":"Chad", x:1, y:40.17, "color":"#f03b20", "ranking":135, "situation":"Difficult"},
+            {"name":"India", x:1, y:40.49, "color":"#f03b20", "ranking":136, "situation":"Difficult"},
+            {"name":"Venezuela", x:1, y:40.61, "color":"#f03b20", "ranking":137, "situation":"Difficult"},
+            {"name":"Indonesia", x:1, y:40.75, "color":"#f03b20", "ranking":138, "situation":"Difficult"},
+            {"name":"Cambodia", x:1, y:40.99, "color":"#f03b20", "ranking":139, "situation":"Difficult"},
+            {"name":"Palestine", x:1, y:41.01, "color":"#f03b20", "ranking":140, "situation":"Difficult"},
+            {"name":"Philippines", x:1, y:41.19, "color":"#f03b20", "ranking":141, "situation":"Difficult"},
+            {"name":"Ethiopia", x:1, y:41.83, "color":"#f03b20", "ranking":142, "situation":"Difficult"},
+            {"name":"Jordan", x:1, y:42.07, "color":"#f03b20", "ranking":143, "situation":"Difficult"},
+            {"name":"Myanmar", x:1, y:42.08, "color":"#f03b20", "ranking":144, "situation":"Difficult"},
+            {"name":"Burundi", x:1, y:42.93, "color":"#f03b20", "ranking":145, "situation":"Difficult"},
+            {"name":"Bangladesh", x:1, y:42.95, "color":"#f03b20", "ranking":146, "situation":"Difficult"},
+            {"name":"Malaysia", x:1, y:43.29, "color":"#f03b20", "ranking":147, "situation":"Difficult"},
+            {"name":"Mexico", x:1, y:43.69, "color":"#f03b20", "ranking":148, "situation":"Difficult"},
+            {"name":"Turkey", x:1, y:44.16, "color":"#f03b20", "ranking":149, "situation":"Difficult"},
+            {"name":"Congo, Dem. Rep.", x:1, y:44.31, "color":"#f03b20", "ranking":150, "situation":"Difficult"},
+            {"name":"Gambia", x:1, y:44.5, "color":"#f03b20", "ranking":151, "situation":"Difficult"},
+            {"name":"Russia", x:1, y:44.97, "color":"#f03b20", "ranking":152, "situation":"Difficult"},
+            {"name":"Singapore", x:1, y:45.87, "color":"#f03b20", "ranking":153, "situation":"Difficult"},
+            {"name":"Libya", x:1, y:45.99, "color":"#f03b20", "ranking":154, "situation":"Difficult"},
+            {"name":"Swaziland", x:1, y:47.28, "color":"#f03b20", "ranking":155, "situation":"Difficult"},
+            {"name":"Iraq", x:1, y:47.76, "color":"#f03b20", "ranking":156, "situation":"Difficult"},
+            {"name":"Belarus", x:1, y:47.98, "color":"#f03b20", "ranking":157, "situation":"Difficult"},
+            {"name":"Egypt", x:1, y:50.17, "color":"#f03b20", "ranking":158, "situation":"Difficult"},
+            {"name":"Pakistan", x:1, y:50.46, "color":"#f03b20", "ranking":159, "situation":"Difficult"},
+            {"name":"Kazakhstan", x:1, y:53.46, "color":"#f03b20", "ranking":160, "situation":"Difficult"},
+            {"name":"Rwanda", x:1, y:56.57, "color":"#bd0026", "ranking":161, "situation":"Very serious"},
+            {"name":"Azerbaijan", x:1, y:58.41, "color":"#bd0026", "ranking":162, "situation":"Very serious"},
+            {"name":"Bahrain", x:1, y:58.69, "color":"#bd0026", "ranking":163, "situation":"Very serious"},
+            {"name":"Saudi Arabia", x:1, y:59.41, "color":"#bd0026", "ranking":164, "situation":"Very serious"},
+            {"name":"Sri Lanka", x:1, y:60.28, "color":"#bd0026", "ranking":165, "situation":"Very serious"},
+            {"name":"Uzbekistan", x:1, y:61.14, "color":"#bd0026", "ranking":166, "situation":"Very serious"},
+            {"name":"Equatorial Guinea", x:1, y:66.23, "color":"#bd0026", "ranking":167, "situation":"Very serious"},
+            {"name":"Yemen", x:1, y:66.36, "color":"#bd0026", "ranking":168, "situation":"Very serious"},
+            {"name":"Cuba", x:1, y:70.21, "color":"#bd0026", "ranking":169, "situation":"Very serious"},
+            {"name":"Djibouti", x:1, y:71.04, "color":"#bd0026", "ranking":170, "situation":"Very serious"},
+            {"name":"Laos", x:1, y:71.25, "color":"#bd0026", "ranking":171, "situation":"Very serious"},
+            {"name":"Somalia", x:1, y:72.31, "color":"#bd0026", "ranking":172, "situation":"Very serious"},
+            {"name":"Iran", x:1, y:72.32, "color":"#bd0026", "ranking":173, "situation":"Very serious"},
+            {"name":"Sudan", x:1, y:72.34, "color":"#bd0026", "ranking":174, "situation":"Very serious"},
+            {"name":"Vietnam", x:1, y:72.63, "color":"#bd0026", "ranking":175, "situation":"Very serious"},
+            {"name":"China", x:1, y:73.55, "color":"#bd0026", "ranking":176, "situation":"Very serious"},
+            {"name":"Syria", x:1, y:77.29, "color":"#bd0026", "ranking":177, "situation":"Very serious"},
+            {"name":"Turkmenistan", x:1, y:80.83, "color":"#bd0026", "ranking":178, "situation":"Very serious"},
+            {"name":"North Korea", x:1, y:83.25, "color":"#bd0026", "ranking":179, "situation":"Very serious"},
+            {"name":"Eritrea", x:1, y:84.86, "color":"#bd0026", "ranking":180, "situation":"Very serious"},];
+
+  var input = "none";
+  var resultArray = [];
+  var index = 0;
+
+  function init() { 
+    console.log("js ready!");
+    $("#questions").show();
+    $("#results").hide();
+    $("#nextbtn").hide();
+
+    $("#countryInput").focus(function() {
+      $("#nextbtn").show();
+    });
+    $("#nextbtn").click(function() {
+      addInput();
+    });
+    $("#replaybtn").click(function() {
+      init();
+    });    
+  }
+
+
+
+  function addInput() {
+    input = $('#countryInput').val();
+    resultArray = jQuery.grep(data, function (n, i) {
+          return (n.name == input);
+      },false); //find among countries array for label that matches the country input, then pass the row into resultArray 
+    
+    for (var i=0; i<180; i++) {
+      if (input == data2[i]["name"]){index = i;}
+  } 
+
+    console.log("index = "+ index);
+    
+    $("#questions").hide();
+    $("#results").show();
+    buildchart();
+  }  
+
+  function buildchart() {
+      $('#container01').highcharts({
+          chart: {
+              type: 'column',
+              marginBottom: 80,
+              marginRight: 60,
+              backgroundColor: '#eeeeee',
+          },
+          title: {
+              text: 'Compare with US press freedom',
+              margin: 20,
+          },
+          subtitle: {
+              enabled:false,
+          },        
+          xAxis: {
+              categories: ["US",resultArray[0]["name"]],     
+          },
+          yAxis: {
+              title: {
+                text: "free ---- Press freedom index ---- unfree",
+                x: 0,
+                style: {
+                  color: '#808080',
+                  fontSize: '12px',
+                },  
+              },
+              labels: {
+                  format: '{value}'
+              },
+              min: 0,
+              max: 100,
+              gridLineColor: '#eeeeee',
+              plotLines: [{
+                  value: 15,
+                  color: '#ffff66',
+                  dashStyle: 'shortdash',
+                  width: 2,
+                  label: {
+                      useHTML: true,
+                      text: 'Good',
+                      align: 'right',
+                      x:25,
+                      y:20,
+                      style: {
+                          fontSize: '10px',
+                          color: '#808080',
+                      }
+                  }
+              }, {
+                  value: 25,
+                  color: '#fecc5c',
+                  dashStyle: 'shortdash',
+                  width: 2,
+                  label: {
+                      useHTML: true,
+                      text: 'Satisfactory',
+                      align: 'right',
+                      x:54,
+                      y:18,
+                      style: {
+                          fontSize: '10px',
+                          color: '#808080',
+                      }
+                  }
+              }, {
+                  value: 35,
+                  color: '#fd8d3c',
+                  dashStyle: 'shortdash',
+                  width: 2,
+                  label: {
+                      useHTML: true,
+                      text: 'Noticeable<br>problems',
+                      align: 'right',
+                      x:49,
+                      y:10,
+                      style: {
+                          fontSize: '10px',
+                          color: '#808080',
+                      }
+                  }
+              }, {
+                  value: 55,
+                  color: '#f03b20',
+                  dashStyle: 'shortdash',
+                  width: 2,
+                  label: {
+                      useHTML: true,
+                      text: 'Difficult<br>situation',
+                      align: 'right',
+                      x:40,
+                      y:20,
+                      style: {
+                          fontSize: '10px',
+                          color: '#808080',
+                      }
+                  }
+              }, {
+                  value: 99,
+                  color: '#bd0026',
+                  dashStyle: 'shortdash',
+                  width: 2,
+                  label: {
+                      useHTML: true,
+                      text: 'Very serious<br>situation',
+                      align: 'right',
+                      x:58,
+                      y:40,
+                      style: {
+                          fontSize: '10px',
+                          color: '#808080',
+                      }
+                  }
+              }],
+          },
+          legend: {
+              itemStyle: {
+                  fontSize: '12px',
+              }, 
+              y: -15, 
+          },
+          credits: { enabled: false, },
+          tooltip: {
+              headerFormat: '<b>{point.key}</b><br>',
+              pointFormat: '{series.name} Index: <b>{point.y:.2f}</b>',
+          },
+          plotOptions: {
+              series: {
+                  pointPadding: 0,
+                  groupPadding: 0.05,
+                  dataLabels: {
+                      enabled: true,
+                      rotation: 0,
+                      color: '#FFFFFF',
+                      align: 'center',
+                      format: '{point.y:.2f}',
+                      y: 0, // 10 pixels down from the top
+                      style: {
+                          fontSize: '12px',
+                      }
+                  }    
+              }
+          },
+          series: [{
+              name: '2014', color:"#4188bc",
+              data: [{y:data[48]["year14"]},{y:resultArray[0]["year14"]}],
+          },{
+              name: '2015', color:"#8db7d6",
+              data: [{y:data[48]["year15"]},{y:resultArray[0]["year15"]}]
+          }]
+      });
+
+      $('#container02').highcharts({
+          chart: {
+              type: 'scatter',
+              marginBottom: 60,
+              backgroundColor: '#eeeeee',
+              zoomType: 'xy',
+              renderTo: 'container', 
+              events: {
+              load: function() {
+                  this.tooltip.refresh(this.series[0].data[index]);
+                    }
+              }
+          },
+          title: {
+              text: "Where did you country stand in World Press Freedom Index 2015",
+              margin: 20,
+          },
+          subtitle: {
+              text: 'Source: <a href="https://index.rsf.org" target="_blank">Reporters Without Borders</a>',
+              useHTML: true,
+              floating: true,
+              align: 'left',
+              verticalAlign: 'bottom',
+              y: -10,
+              style: {
+                  color: '#808080',
+                  fontSize: '10px',
+              },
+          },
+          xAxis: {
+              title: {enabled: false,},
+              labels:{enabled: false,},
+          },
+          yAxis: {    
+              title: {
+                  text: 'unfree ---- Press freedom index ---- free',
+              },
+              reversed: true,
+              min: 0,
+              max: 100,
+          },
+          credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+          legend:{enabled: false,},
+          plotOptions: {
+              scatter: {
+                  marker: {
+                      radius: 3,
+                      states: {
+                          hover: {
+                              enabled: true,
+                              lineColor: '#ffffff',
+                              fillColor: '#000000',
+                          }
+                      }
+                  },
+                  tooltip: {
+                      headerFormat: '<b>{point.key}</b><br>',
+                      pointFormat: 'Index: <b>{point.y}</b><br>Ranking: <b>{point.ranking}</b><br>Situation: <b>{point.situation}</b>'
+                  }
+              }
+          },
+          series: [{data:data2}]
+      });
+
+      // dynamic change marker radius
+      $('#container02').mouseover(function() {
+          var chart = $('#container02').highcharts();
+          chart.series[0].data[index].update({
+              marker:{
+                  radius: 7,
+                  fillColor: '#4188bc',
+                  states: {
+                          hover: {
+                              radius: 10,
+                              enabled: true,
+                              lineColor: '#ffffff',
+                              fillColor: '#4188bc',
+                          }
+                      }
+              }
+          });
+      });
+  };
+
+
+  $(document).ready(function(){
+    init();
+  }); 
+
+</script>
+     
+</body>
+
+
+</html>

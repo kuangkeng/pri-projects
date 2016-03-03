@@ -1,0 +1,109 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 90,
+        },
+        title: {
+            text: 'Unsafe abortion rates 2008',
+            margin: 20,
+        },
+        subtitle: {
+            text: "Source: <a href='http://apps.who.int/iris/bitstream/10665/75173/1/WHO_RHR_12.01_eng.pdf'  target='_blank'>World Health Organization</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -10,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["Latin America & the Caribbean","Africa","World","Asia","Europe"],
+            labels:{
+                style: {
+                    fontSize: '12px',
+                    color: '#FFFFFF',
+                    textOverflow: 'none',
+                    whiteSpace: 'nowrap',
+                },
+                align: 'left',
+                x:5,
+                reserveSpace: false,
+            },
+            tickColor: '#FFFFFF',       
+        },
+        yAxis: {
+            title: {
+              text: "Unsafe abortion rates (per 1,000 women 15-44)",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            minTickInterval: 10,
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Unsafe abortion rate: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+            }
+        },
+        series: [{
+            data: [{y:31,color:"#d3201e"},28,14,11,2],
+            color: "#4188bc",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+});
+</script>

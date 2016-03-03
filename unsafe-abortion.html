@@ -1,0 +1,102 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0 auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container
+      {
+height: 450px; 
+width:100%; 
+max-width: 300px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+      }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: ','
+        }
+    }),
+  
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            marginBottom: 100,
+        },
+        title: {
+            text: 'Unsafe abortion rate vs abortion policies, 2011',
+            margin: 20,           
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.un.org/en/development/desa/population/publications/policy/abortionPoliciesAndReproductiveHealth.shtml" target="_blank">United Nations</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -30,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        xAxis: {
+            categories: ["Liberal countries","Restrictive countries"],
+            labels: {
+                rotation: false,
+                style: {
+                    fontSize: '12',
+                },
+                distance: -10,
+                staggerLines: 1
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Unsafe abortion rates (per 1,000 women 15-44)',
+                margin: 10
+            },
+            labels: {
+                format: '{value}'
+            },
+            floor: 0,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: 'Total fertility rate: <b>{point.y}</b>'
+        },
+        series: [{
+            data: [{y:6.1,color:"#4188bc"},{y:26.7,color:"#d3401e"}],
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'center',
+                format: '{point.y}',
+                style: {
+                    fontSize: '16px',
+                }
+            }
+        }]
+    });
+});
+</script>

@@ -1,0 +1,180 @@
+
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  width: 100%;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 600px; 
+  max-width: 850px; 
+  margin: 0 auto; 
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+
+    $('#container').highcharts({
+        chart: {
+            type: 'scatter',
+            marginBottom: 200,
+            zoomType: 'xy',
+            renderTo: 'container', 
+        },
+        title: {
+            text: 'Fertility rate vs "unmet needs" for family planning (latest data)',
+            margin: 20,
+        },
+        subtitle: {
+            text: 'Women with unmet needs are those who are fertile and sexually active but are not using any method of contraception, and report not wanting any more children or wanting to delay the birth of their next child.<br><br>Source: <a href="http://www.un.org/en/development/desa/population/publications/dataset/contraception/wcu2015.shtml" target="_blank">United Nations</a>, <a href="http://data.worldbank.org/indicator/SP.DYN.TFRT.IN" target="_blank">World Bank</a><br><br>Hover over the points on the chart for specific country data.',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -110,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                useHTML: true,
+                text: 'Unmet needs for family planning<br>(% of married women of reproductive age)',
+                style: {
+                  color: '#808080',
+                  fontSize: '12px',
+              },
+            },
+        },
+        yAxis: {    
+            title: {
+              text: "Fertility rate",
+              style: {
+                color: '#808080',
+                fontSize: '12px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            max: 8,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend:{enabled: false,},
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#ffffff'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'Unmet needs: <b>{point.x:.1f}</b><br>Fertility rate: <b>{point.y:.1f}'
+                }
+            }
+        },
+        series: [{
+          color: "#4188bc",
+          data:[
+          {"name":"Algeria", "x":10.4, "y":2.893},
+          {"name":"Bangladesh", "x":13.9, "y":2.209},
+          {"name":"Barbados", "x":19.9, "y":1.791},
+          {"name":"Belarus", "x":7, "y":1.620},
+          {"name":"Belize", "x":15.9, "y":2.611},
+          {"name":"Benin", "x":32.6, "y":4.846},
+          {"name":"Bosnia and Herzegovina", "x":9, "y":1.272},
+          {"name":"Burkina Faso", "x":35.7, "y":5.607},
+          {"name":"Cambodia", "x":12.5, "y":2.683},
+          {"name":"Cameroon", "x":23.5, "y":4.781},
+          {"name":"Comoros", "x":31.6, "y":4.560},
+          {"name":"Congo", "x":18.2, "y":4.919},
+          {"name":"Costa Rica", "x":7.6, "y":1.841},
+          {"name":"Cote d'Ivoire", "x":22.2, "y":5.063},
+          {"name":"Cuba", "x":8, "y":1.622},
+          {"name":"DR Congo", "x":27.7, "y":6.103},
+          {"name":"Dominican Republic", "x":10.8, "y":2.510},
+          {"name":"Egypt", "x":12.6, "y":3.336},
+          {"name":"Equatorial Guinea", "x":34, "y":4.924},
+          {"name":"Ethiopia", "x":24.3, "y":4.517},
+          {"name":"Gabon", "x":26.5, "y":3.963},
+          {"name":"Ghana", "x":32.7, "y":4.209},
+          {"name":"Haiti", "x":35.3, "y":3.098},
+          {"name":"Honduras", "x":10.7, "y":2.442},
+          {"name":"Indonesia", "x":11.4, "y":2.484},
+          {"name":"Iraq", "x":8, "y":4.026},
+          {"name":"Jordan", "x":11.7, "y":3.244},
+          {"name":"Kenya", "x":18.6, "y":4.406},
+          {"name":"Kyrgyzstan", "x":18, "y":3.200},
+          {"name":"Laos", "x":19.9, "y":3.063},
+          {"name":"Lesotho", "x":18.4, "y":3.222},
+          {"name":"Liberia", "x":31.1, "y":4.793},
+          {"name":"Malawi", "x":19.4, "y":5.220},
+          {"name":"Mali", "x":26, "y":6.314},
+          {"name":"Mauritania", "x":31.1, "y":4.662},
+          {"name":"Mongolia", "x":16, "y":2.657},
+          {"name":"Montenegro", "x":21.8, "y":1.666},
+          {"name":"Mozambique", "x":28.5, "y":5.418},
+          {"name":"Namibia", "x":17.5, "y":3.560},
+          {"name":"Nepal", "x":27.5, "y":2.292},
+          {"name":"Niger", "x":16, "y":7.623},
+          {"name":"Nigeria", "x":18.9, "y":5.707},
+          {"name":"Pakistan", "x":20.1, "y":3.682},
+          {"name":"Panama", "x":16.4, "y":2.465},
+          {"name":"Peru", "x":9, "y":2.480},
+          {"name":"Philippines", "x":17.5, "y":3.011},
+          {"name":"Qatar", "x":12.4, "y":2.043},
+          {"name":"Moldova", "x":9.5, "y":1.456},
+          {"name":"Russia", "x":8, "y":1.700},
+          {"name":"Saint Lucia", "x":17, "y":1.913},
+          {"name":"Senegal", "x":29.3, "y":5.134},
+          {"name":"Serbia", "x":14.9, "y":1.450},
+          {"name":"Sierra Leone", "x":25, "y":4.746},
+          {"name":"Tajikistan", "x":22.9, "y":3.514},
+          {"name":"Thailand", "x":6.9, "y":1.524},
+          {"name":"Macedonia", "x":17.2, "y":1.511},
+          {"name":"Togo", "x":33.6, "y":4.655},
+          {"name":"Tonga", "x":25.2, "y":3.768},
+          {"name":"Tunisia", "x":7, "y":2.250},
+          {"name":"Turkey", "x":5.9, "y":2.041},
+          {"name":"Uganda", "x":34.7, "y":5.869},
+          {"name":"Ukraine", "x":4.9, "y":1.506},
+          {"name":"Vanuatu", "x":24.2, "y":3.383},
+          {"name":"Vietnam", "x":6.1, "y":1.743},
+          {"name":"Yemen", "x":28.7, "y":4.284},
+          {"name":"Zambia", "x":21.1, "y":5.429},
+          {"name":"Zimbabwe", "x":10.4, "y":3.977},]}
+  ]
+    });
+});
+
+</script>

@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/heatmap.js"></script>
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 650px; 
+  max-width: 850px;
+  width:98%; 
+  margin: 0 auto;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+
+  if ($(window).width()<500){
+
+    $('#container').highcharts({
+
+        chart: {
+            type: 'heatmap',
+            marginTop: 60,
+            marginBottom: 200,
+            plotBorderWidth: 1
+        },
+        title: {
+            text: 'Sexual harassment laws in West Africa',
+            style: {
+                fontSize: '17px',
+            },            
+        },
+        subtitle: {
+            text: 'Source: <a href="http://wbl.worldbank.org/data/exploretopics/protecting-women-from-violence" target="_blank">World Bank</a><br>No data for Cape Verde, Gambia and Guinea-Bissau.',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: 0,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        xAxis: {
+            categories: ["Specific legislation on SH","Criminal penalties for SH","Legislation on SH in employment","Criminal penalties for SH in employment","Legislation on SH in education","Legislation on SH in public place","Civil remedies for SH","Civil remedies for SH in employment"],
+            useHTML: true,
+            labels: {
+              style: {
+                  fontSize: '10px',
+              },
+            },
+        },
+
+        yAxis: {
+            categories: ["Ghana","Guinea","Liberia","Mali","Mauritania","Sierra Leone","Burkina Faso","Côte d'Ivoire","Niger","Senegal","Togo","Nigeria","Benin"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '11px',
+              },
+            x: -5,  
+            },
+        },
+        plotOptions: {
+            series: {
+                borderColor: '#ffffff'
+            }
+        },
+        colorAxis: {
+            min: 0,
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Reason: ' + this.series.xAxis.categories[this.point.x] + '<br>Legal: <b>' + this.point.word + '<b>';
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        series: [{
+            name: 'Legal Grounds',
+            borderWidth: 1,
+            data: [
+              {x: 0, y: 0, word: "No", color: "#d4301e"},
+              {x: 0, y: 1, word: "No", color: "#db664a"},
+              {x: 0, y: 2, word: "No", color: "#db664a"},
+              {x: 0, y: 3, word: "No", color: "#db664a"},
+              {x: 0, y: 4, word: "No", color: "#db664a"},
+              {x: 0, y: 5, word: "Yes", color: "#4188bc"},
+              {x: 0, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 0, word: "No", color: "#d4301e"},
+              {x: 1, y: 1, word: "No", color: "#db664a"},
+              {x: 1, y: 2, word: "No", color: "#db664a"},
+              {x: 1, y: 3, word: "No", color: "#db664a"},
+              {x: 1, y: 4, word: "No", color: "#db664a"},
+              {x: 1, y: 5, word: "Yes", color: "#4188bc"},
+              {x: 1, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 0, word: "No", color: "#d4301e"},
+              {x: 2, y: 1, word: "No", color: "#db664a"},
+              {x: 2, y: 2, word: "No", color: "#db664a"},
+              {x: 2, y: 3, word: "No", color: "#db664a"},
+              {x: 2, y: 4, word: "No", color: "#db664a"},
+              {x: 2, y: 5, word: "No", color: "#d4301e"},
+              {x: 2, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 0, word: "No", color: "#d4301e"},
+              {x: 3, y: 1, word: "No", color: "#db664a"},
+              {x: 3, y: 2, word: "No", color: "#db664a"},
+              {x: 3, y: 3, word: "No", color: "#db664a"},
+              {x: 3, y: 4, word: "No", color: "#db664a"},
+              {x: 3, y: 5, word: "No", color: "#d4301e"},
+              {x: 3, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 0, word: "No", color: "#d4301e"},
+              {x: 4, y: 1, word: "No", color: "#db664a"},
+              {x: 4, y: 2, word: "No", color: "#db664a"},
+              {x: 4, y: 3, word: "No", color: "#db664a"},
+              {x: 4, y: 4, word: "No", color: "#db664a"},
+              {x: 4, y: 5, word: "No", color: "#d4301e"},
+              {x: 4, y: 6, word: "No", color: "#db664a"},
+              {x: 4, y: 7, word: "No", color: "#db664a"},
+              {x: 4, y: 8, word: "No", color: "#db664a"},
+              {x: 4, y: 9, word: "No", color: "#db664a"},
+              {x: 4, y: 10, word: "No", color: "#db664a"},
+              {x: 4, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 5, y: 0, word: "No", color: "#d4301e"},
+              {x: 5, y: 1, word: "No", color: "#db664a"},
+              {x: 5, y: 2, word: "No", color: "#db664a"},
+              {x: 5, y: 3, word: "No", color: "#db664a"},
+              {x: 5, y: 4, word: "No", color: "#db664a"},
+              {x: 5, y: 5, word: "No", color: "#d4301e"},
+              {x: 5, y: 6, word: "No", color: "#db664a"},
+              {x: 5, y: 7, word: "No", color: "#db664a"},
+              {x: 5, y: 8, word: "No", color: "#db664a"},
+              {x: 5, y: 9, word: "No", color: "#db664a"},
+              {x: 5, y: 10, word: "No", color: "#db664a"},
+              {x: 5, y: 11, word: "No", color: "#db664a"},
+              {x: 5, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 6, y: 0, word: "No", color: "#d4301e"},
+              {x: 6, y: 1, word: "No", color: "#db664a"},
+              {x: 6, y: 2, word: "No", color: "#db664a"},
+              {x: 6, y: 3, word: "No", color: "#db664a"},
+              {x: 6, y: 4, word: "No", color: "#db664a"},
+              {x: 6, y: 5, word: "Yes", color: "#4188bc"},
+              {x: 6, y: 6, word: "No", color: "#db664a"},
+              {x: 6, y: 7, word: "No", color: "#db664a"},
+              {x: 6, y: 8, word: "No", color: "#db664a"},
+              {x: 6, y: 9, word: "No", color: "#db664a"},
+              {x: 6, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 6, y: 11, word: "No", color: "#db664a"},
+              {x: 6, y: 12, word: "No", color: "#db664a"},
+              {x: 7, y: 0, word: "No", color: "#d4301e"},
+              {x: 7, y: 1, word: "No", color: "#db664a"},
+              {x: 7, y: 2, word: "No", color: "#db664a"},
+              {x: 7, y: 3, word: "No", color: "#db664a"},
+              {x: 7, y: 4, word: "No", color: "#db664a"},
+              {x: 7, y: 5, word: "No", color: "#d4301e"},
+              {x: 7, y: 6, word: "No", color: "#db664a"},
+              {x: 7, y: 7, word: "No", color: "#db664a"},
+              {x: 7, y: 8, word: "No", color: "#db664a"},
+              {x: 7, y: 9, word: "No", color: "#db664a"},
+              {x: 7, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 7, y: 11, word: "No", color: "#db664a"},
+              {x: 7, y: 12, word: "No", color: "#db664a"}],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.word;
+                },
+                style: {
+                    fontSize: '8px',
+                }
+            }
+        }]
+
+    });
+  }
+  else {
+    $('#container').highcharts({
+
+        chart: {
+            type: 'heatmap',
+            marginTop: 60,
+            marginBottom: 200,
+            plotBorderWidth: 1
+        },
+        title: {
+            text: 'Sexual harassment laws in West Africa',
+            style: {
+                fontSize: '17px',
+            },            
+        },
+        subtitle: {
+            text: 'Source: <a href="http://wbl.worldbank.org/data/exploretopics/protecting-women-from-violence" target="_blank">World Bank</a><br>No data for Cape Verde, Gambia and Guinea-Bissau.',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: 0,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        xAxis: {
+            categories: ["Specific legislation on SH","Criminal penalties for SH","Legislation on SH in employment","Criminal penalties for SH in employment","Legislation on SH in education","Legislation on SH in public place","Civil remedies for SH","Civil remedies for SH in employment"],
+            labels: {
+              style: {
+                fontSize: '12px',
+              },
+            }
+        },
+
+        yAxis: {
+            categories: ["Ghana","Guinea","Liberia","Mali","Mauritania","Sierra Leone","Burkina Faso","Côte d'Ivoire","Niger","Senegal","Togo","Nigeria","Benin"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '12px',
+              },
+            },  
+        },
+        plotOptions: {
+            series: {
+                borderColor: '#ffffff'
+            }
+        },
+        colorAxis: {
+            min: 0,
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Reason: ' + this.series.xAxis.categories[this.point.x] + '<br>Legal: <b>' + this.point.word + '<b>';
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        series: [{
+            name: 'Legal Grounds',
+            borderWidth: 1,
+            data: [
+              {x: 0, y: 0, word: "No", color: "#d4301e"},
+              {x: 0, y: 1, word: "No", color: "#db664a"},
+              {x: 0, y: 2, word: "No", color: "#db664a"},
+              {x: 0, y: 3, word: "No", color: "#db664a"},
+              {x: 0, y: 4, word: "No", color: "#db664a"},
+              {x: 0, y: 5, word: "Yes", color: "#4188bc"},
+              {x: 0, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 0, word: "No", color: "#d4301e"},
+              {x: 1, y: 1, word: "No", color: "#db664a"},
+              {x: 1, y: 2, word: "No", color: "#db664a"},
+              {x: 1, y: 3, word: "No", color: "#db664a"},
+              {x: 1, y: 4, word: "No", color: "#db664a"},
+              {x: 1, y: 5, word: "Yes", color: "#4188bc"},
+              {x: 1, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 0, word: "No", color: "#d4301e"},
+              {x: 2, y: 1, word: "No", color: "#db664a"},
+              {x: 2, y: 2, word: "No", color: "#db664a"},
+              {x: 2, y: 3, word: "No", color: "#db664a"},
+              {x: 2, y: 4, word: "No", color: "#db664a"},
+              {x: 2, y: 5, word: "No", color: "#d4301e"},
+              {x: 2, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 0, word: "No", color: "#d4301e"},
+              {x: 3, y: 1, word: "No", color: "#db664a"},
+              {x: 3, y: 2, word: "No", color: "#db664a"},
+              {x: 3, y: 3, word: "No", color: "#db664a"},
+              {x: 3, y: 4, word: "No", color: "#db664a"},
+              {x: 3, y: 5, word: "No", color: "#d4301e"},
+              {x: 3, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 0, word: "No", color: "#d4301e"},
+              {x: 4, y: 1, word: "No", color: "#db664a"},
+              {x: 4, y: 2, word: "No", color: "#db664a"},
+              {x: 4, y: 3, word: "No", color: "#db664a"},
+              {x: 4, y: 4, word: "No", color: "#db664a"},
+              {x: 4, y: 5, word: "No", color: "#d4301e"},
+              {x: 4, y: 6, word: "No", color: "#db664a"},
+              {x: 4, y: 7, word: "No", color: "#db664a"},
+              {x: 4, y: 8, word: "No", color: "#db664a"},
+              {x: 4, y: 9, word: "No", color: "#db664a"},
+              {x: 4, y: 10, word: "No", color: "#db664a"},
+              {x: 4, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 5, y: 0, word: "No", color: "#d4301e"},
+              {x: 5, y: 1, word: "No", color: "#db664a"},
+              {x: 5, y: 2, word: "No", color: "#db664a"},
+              {x: 5, y: 3, word: "No", color: "#db664a"},
+              {x: 5, y: 4, word: "No", color: "#db664a"},
+              {x: 5, y: 5, word: "No", color: "#d4301e"},
+              {x: 5, y: 6, word: "No", color: "#db664a"},
+              {x: 5, y: 7, word: "No", color: "#db664a"},
+              {x: 5, y: 8, word: "No", color: "#db664a"},
+              {x: 5, y: 9, word: "No", color: "#db664a"},
+              {x: 5, y: 10, word: "No", color: "#db664a"},
+              {x: 5, y: 11, word: "No", color: "#db664a"},
+              {x: 5, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 6, y: 0, word: "No", color: "#d4301e"},
+              {x: 6, y: 1, word: "No", color: "#db664a"},
+              {x: 6, y: 2, word: "No", color: "#db664a"},
+              {x: 6, y: 3, word: "No", color: "#db664a"},
+              {x: 6, y: 4, word: "No", color: "#db664a"},
+              {x: 6, y: 5, word: "Yes", color: "#4188bc"},
+              {x: 6, y: 6, word: "No", color: "#db664a"},
+              {x: 6, y: 7, word: "No", color: "#db664a"},
+              {x: 6, y: 8, word: "No", color: "#db664a"},
+              {x: 6, y: 9, word: "No", color: "#db664a"},
+              {x: 6, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 6, y: 11, word: "No", color: "#db664a"},
+              {x: 6, y: 12, word: "No", color: "#db664a"},
+              {x: 7, y: 0, word: "No", color: "#d4301e"},
+              {x: 7, y: 1, word: "No", color: "#db664a"},
+              {x: 7, y: 2, word: "No", color: "#db664a"},
+              {x: 7, y: 3, word: "No", color: "#db664a"},
+              {x: 7, y: 4, word: "No", color: "#db664a"},
+              {x: 7, y: 5, word: "No", color: "#d4301e"},
+              {x: 7, y: 6, word: "No", color: "#db664a"},
+              {x: 7, y: 7, word: "No", color: "#db664a"},
+              {x: 7, y: 8, word: "No", color: "#db664a"},
+              {x: 7, y: 9, word: "No", color: "#db664a"},
+              {x: 7, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 7, y: 11, word: "No", color: "#db664a"},
+              {x: 7, y: 12, word: "No", color: "#db664a"}],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.word;
+                },
+                style: {
+                    fontSize: '11px',
+                }
+            }
+        }]
+
+    });
+  }
+});
+</script>

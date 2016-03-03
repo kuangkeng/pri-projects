@@ -19,12 +19,19 @@
   </head>
 
   <style>
-  	body {font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; max-width: 650px; font-size: 16px;}
+  	body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; 
+      max-width: 650px; 
+      font-size: 16px;
+      overflow-y: scroll;
+    }
+
   	.container {
   		position:relative; 
   		height:700px;
   		border: solid 0.5px #D3D3D3
   	}
+
   	#map-canvas {
   		position: absolute; 
   		top: 0; 
@@ -64,7 +71,7 @@
   		position: absolute; 
   		bottom: 0px; 
   		left: 0; 
-  		font-size: 40px;
+  		font-size: 38px;
   		font-weight: bold;
   		padding: 20px 36px;
   		line-height: 45px;
@@ -84,6 +91,22 @@
   		margin: 10px 0px;
   		line-height: 20px;
   	}
+
+    #credit {
+      font-size: 12px;
+      color: #808080;
+      font-style: italic;
+    }
+
+    #note {
+      font-size: 12px;
+      color: #0266C8;
+      padding-right:0;
+    }
+
+    #logo {
+      padding:0 0 0 5px;
+    }
   	
   	.arrow{
   		height:20px;
@@ -117,7 +140,7 @@
   	.icon-box {
   		width:120px;
   		position: fixed;
-  		bottom:2%;
+  		bottom:10%;
   		left:50%;
   		margin-left: -60px;
   		z-index:2;
@@ -138,6 +161,7 @@
 
   @media (max-width: 500px ) {
   	.icon-box {display:block;}
+    .panel {height: 60%}
   } 
 
 
@@ -146,9 +170,7 @@
   		height:550px;
   	}
 
-  	.panel {
-  		height:65%;
-  	}
+
 
   	.title-intro{
   		font-size: 20px;
@@ -169,6 +191,8 @@
 
   	.arrow{bottom:15%;}
 
+    #note, #credit {font-size: 11px; line-height: 11px;}
+    #credit {margin-top: 5px;}
 
   }
 
@@ -180,7 +204,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script type="text/javascript" src="http://stereobit.github.io/dragend/dragend.js"></script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?v=3.22&libraries=geometry,visualization&sensor=false"></script>
 
 
@@ -194,51 +218,57 @@
 	      <div class="dragend-page" id="page00">
 	      	<div class="mediabox embed-responsive embed-responsive-16by9">
 	      		
-	      		<div class="title-intro">Title here: Something and something something</div>
+	      		<div class="title-intro">One Cuban Family’s 6,600-mile trail to America</div>
 	      	</div>
 		    <div class="textbox">
-		    	<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+		    	<div class="desc"><p>As the United States and Cuba re-establish ties, thousands of Cubans have left the island, worried that the new relations will end a US long-standing policy that gives them a fast-track to a green card if they reach US soil.</p><p>Cubans have long been considered political refugees. But instead of riding rafts for 90 miles to Florida, many Cubans — like the family photographer Mónica González followed for this story — are opting for a much longer, and legal, journey. To avoid being caught in the Florida Straits, they are taking planes and buses through Latin America to reach the US border.</p>
+            <div class="row">
+              <div class="col-sm-9 col-xs-8" id="note">A project in collaboration with <a href='http://www.periodistasdeapie.org.mx/'  target='_blank'>Periodistas de a Pie</a> and its <a href='http://enelcamino.periodistasdeapie.org.mx/'  target='_blank'>En El Camino project</a>.</div>
+              <div class="col-sm-3 col-xs-4"id="logo"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/logo_periodistas-resized.png" class="img-responsive center-block"></div>
+            </div>
+            <div id="credit">All photos by Mónica González</div>
+          </div>
 		    </div>
 	      </div>    		
 	      <div class="dragend-page" id="page01">
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-4_GONZALEZ%20FAMILY%20PORTRAIT-cropped.jpg" class="img-responsive"></div>
 		    <div class="textbox">
-		    	<div class="title">Havana, Cuba. August 2015</div>
-		    	<div class="desc">They sold their house in Havana for $40,000 and left for Ecuador. Photo: The González family, right to left: Lizandra Blanco Aguilar, Osmany Jesús González Gutiérrez and the son, Johan Jesús González Blanco.</div>
+		    	<div class="title">Departure: Havana, August 2015</div>
+		    	<div class="desc">That is when the González family sold their home in Havana and flew to Ecuador, which does not require visas from Cubans (a policy that has since changed). The family, photographed at a shelter they eventually reached in Costa Rica, from left to right: Lizandra Blanco Aguilar, Osmany Jesús González Gutiérrez and their son, Johan Jesús González Blanco.</div>
 		    </div>
 	      </div>
 	      <div class="dragend-page" id="page02">
 	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-quito-ecuador-cropped.jpg" class="img-responsive"></div>
 	      	<div class="textbox">
 	      		<div class="title">Quito, Ecuador</div>
-		    	<div class="desc">They stayed here until October 2015.</div>	
+		    	<div class="desc">The family stayed here until October 2015.</div>	
 	      	</div>
 	      </div>
 	      <div class="dragend-page" id="page03">
 	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-panama-city-cropped.jpg" class="img-responsive"></div>
 	      	<div class="textbox">
 	      		<div class="title">Panama City, Panama</div>
-		    	<div class="desc">From Ecuador, they took a bus to Columbia. They went through La Miel and flew to Panama City.</div>
+		    	<div class="desc">From Ecuador, the González family took a bus to Colombia, went through La Miel and then flew to Panama City.</div>
 	      	</div>
 	      </div>
 	      <div class="dragend-page" id="page04">
 	      	<div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-6_COSTA%20RICA%20SHELTER-cropped.jpg" class="img-responsive"></div>
 	      	<div class="textbox">
 	      		<div class="title">La Cruz, Costa Rica. November 15, 2015</div>
-		    	<div class="desc">Next they bused to La Cruz, Costa Rica on November 15, 2015. That month, the Nicaraguan government decided to close its border with Costa Rica to Cubans wanting to cross through with persmission to continue north to the US.<br>The González family stayed 82 days at a makeshift shelter, a converted school, in La Cruz, Costa Rica, near the Nicaraguan border. Classrooms became bedrooms. Hundreds of Cubans migrants have passed through shelters like these in Costa Rica in recent months. Many of the Cubans feared the end of US immigration policy, which stems from the 1966 Cuban Adjustment Act, which Cubans to apply for asylum if they reach dry land in the US.</div>
+		    	<div class="desc"><p>Next, the family bused to La Cruz, Costa Rica on November 15, 2015. That month, the Nicaraguan government decided to close its border with Costa Rica to Cubans wanting to cross through with permission to continue north to the US.</p><p>The González family stayed 82 days at a shelter, a converted school, in La Cruz. Thousands of Cubans have passed through shelters like these in Costa Rica in recent months, fearing the end of US immigration policy that offers them special political refugee status if they reach US soil.</p></div>
 	      	</div>
 	      </div>
         <div class="dragend-page" id="page05">
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-12_GONZALEZ_SHELTER_CR-cropped.jpg" class="img-responsive"></div>
           <div class="textbox">
             <div class="title">La Cruz, Costa Rica</div>
-          <div class="desc">Lizandra kept in touch through Facebook with her grandmother, who lives in Tampa, Florida, where the family headed.</div>
+          <div class="desc">Lizandra Blanco Aguilar kept in touch through Facebook with her grandmother, who lives in Tampa, Florida, where the family headed.</div>
           </div>
         </div>
         <div class="dragend-page" id="page06">
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-14_LEAVING_COSTA%20RICA-cropped.jpg" class="img-responsive"></div>
           <div class="textbox">
-            <div class="title">San Salvador, El Salvador. February, 2016</div>
+            <div class="title">San Salvador, El Salvador, February 2016</div>
           <div class="desc">In early February, the González family flew from Liberia, Costa Rica, to San Salvador, El Salvador, bypassing Nicaragua at a cost of $500 per passenger. Next, they boarded buses to Ciudad Hidalgo, Mexico. From there, some Cubans flew to Mexican cities on the US border. The González family could not afford the tickets and took a bus to reach the United States.</div>
           </div>
         </div>
@@ -246,13 +276,13 @@
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-16_PAPERS-cropped.jpg" class="img-responsive"></div>
           <div class="textbox">
             <div class="title">Ciudad Hidalgo, Mexico</div>
-          <div class="desc">At Ciudad Hidalgo, Cubans received documentation from Mexian migration officials allowing them to pass legally through the country for up to 20 days.</div>
+          <div class="desc">Cubans received documentation from Mexican migration officials allowing them to pass legally through the country for up to 20 days.</div>
           </div>
         </div>
         <div class="dragend-page" id="page08">
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-15_BUS%20LEAVING%20COSTA%20RICA-cropped.jpg" class="img-responsive"></div>
           <div class="textbox">
-            <div class="title">Ciudad Hidalgo, Mexico. February 4, 2016</div>
+            <div class="title">Ciudad Hidalgo, Mexico, February 4, 2016</div>
           <div class="desc">The González family contracted a private bus bound for Nuevo Laredo, Tamaulipas, just across the border from Laredo, Texas.</div>
           </div>
         </div>
@@ -266,7 +296,7 @@
         <div class="dragend-page" id="page10">
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-18_SAFE%20ROUTE-cropped.jpg" class="img-responsive"></div>
           <div class="textbox">
-            <div class="title">To Nuevo Laredo, Mexico</div>
+            <div class="title">Traveling through Mexico</div>
           <div class="desc">The bus took a longer route to the Texas border to avoid parts of Mexico run by drug cartels, where the organized groups tended to charge “tolls” to pass through their controlled areas. The bus passed through the following states: Chiapas, Veracruz, Oaxaca, Puebla, Estado de México, Querétaro, Guanajuato, San Luis Potosí, Coahuila and Nuevo León.</div>
           </div>
         </div>
@@ -294,8 +324,8 @@
         <div class="dragend-page" id="page14">
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-34_ASYLUM-cropped.jpg" class="img-responsive"></div>
           <div class="textbox">
-            <div class="title">Nuevo Laredo, Mexico. February 7, 2016</div>
-          <div class="desc">On the US side of the border, Cuban migrants were asked for documents in order to seek asylum in the US. They received approval within 24 hours. </div>
+            <div class="title">Asking for asylum</div>
+          <div class="desc">On the US side of the border, Cuban migrants asked for documents in order to seek asylum in the US. They received approval within 24 hours. </div>
           </div>
         </div>
         <div class="dragend-page" id="page15">
@@ -322,8 +352,8 @@
         <div class="dragend-page" id="page18">
           <div class="mediabox"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-florida-route-45_ARRIVED-cropped.jpg" class="img-responsive"></div>
           <div class="textbox">
-            <div class="title">Tampa, Florida. February 8, 2016</div>
-          <div class="desc">Five months after leaving Cuba, the González family reunited with relatives in Florida. For Lizandra Blanco Aguilar’s grandmother, she met her grandson for the first time. </div>
+            <div class="title">Tampa, Florida, February 8, 2016</div>
+          <div class="desc">More than five months after leaving Cuba, the González family reunited with relatives in Florida. Lizandra Blanco Aguilar’s grandmother met her grandson for the first time.</div>
           </div>
         </div>
 
@@ -361,7 +391,7 @@
 	];
 
   var points = [
-    [6, -90.023992],
+    [6, -80.023992],
     [23.0658289,-82.37154],
     [-0.2058146,-78.476688],
     [8.067, -79.38703],
@@ -437,7 +467,7 @@ function init() {
     	style: google.maps.ZoomControlStyle.SMALL,
       position: google.maps.ControlPosition.LEFT_TOP
 		},
-		center: new google.maps.LatLng(6, -90.023992)
+		center: new google.maps.LatLng(6, -80.023992)
 	};
 	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
   var ctaLayer = new google.maps.KmlLayer({
@@ -463,8 +493,8 @@ function init() {
           var centerLatLng = new google.maps.LatLng((points[i][0]), points[i][1]);
         } 
         else {
-          map.setZoom(6);
-          var centerLatLng = new google.maps.LatLng((points[i][0]-4), points[i][1]);
+          map.setZoom(5);
+          var centerLatLng = new google.maps.LatLng((points[i][0]-8), points[i][1]);
         }
          
 		     map.panTo(centerLatLng);
