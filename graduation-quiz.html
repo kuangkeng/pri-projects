@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+body{
+  width: 100%;
+  max-width: 700px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 18px;
+  color: #333;
+}
+
+#title {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  width: 100%;
+  }  
+
+#chart-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  width: 100%;
+  padding:20px 10px 0px 20px;
+}  
+
+#result {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#btn-get {
+  margin-top:82px;
+}  
+
+#back {
+  margin-bottom:10px;
+}
+
+#btn-result {
+  margin-top: 10px;
+}
+
+/* Columns */
+
+.column {
+  position: relative;
+  background-color: #eeeeee;
+  border-radius: 3px;
+  max-width: 350px;
+  margin:0px auto;
+  padding:10px 20px;
+}
+
+#page02 {
+  position: absolute;
+  left:0;
+  top:0;
+  width:100%;
+  max-width: 350px; 
+  background-color: #d6d6d6;
+}
+
+#container {
+  width:100%;
+  max-width: 350px; 
+  margin: 0 auto;
+  height: 432px; 
+}
+
+#instruct {
+  width:150px;
+  position: fixed;
+  bottom:55%;
+  left:50%;
+  margin-left: -75px;
+  z-index:2;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 5px;
+-webkit-box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
+-moz-box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
+box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
+}
+
+/* Sortable items */
+
+.sortable-list {
+  list-style: none;
+  margin: 0;
+  padding: 0px;
+}
+   
+.sortable-item {
+  color:#fff;
+  cursor: move;
+  display: block;
+  margin: 5px 0px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  background: #4188bc;
+  -webkit-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+  -moz-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+  box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+}
+  
+@media (max-width: 400px) {
+
+  body {font-size: 14px;}
+  #title {font-size: 12px;}
+  .column {padding:10px;}
+  #chart-title {padding-top:10px; font-size: 16px;}
+  #container {height: 390px; }
+  #result {font-size: 16px}
+}  
+
+</style>
+</head>
+
+<body>
+  
+  <p>How does ethnicity, identity, financial background or language ability affect graduation rates in public high schools? Which of the student groups below have the highest graduation rate? Rank them in order.</p>
+
+ 
+  <div class="column">
+    <div id="page01">
+      <div id="title">
+        Highest graduation rate<br><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+      </div>
+      <ul class="sortable-list" id="my-list">
+        <li class="sortable-item" id="8">Limited English proficiency</li>
+        <li class="sortable-item" id="7">With disabilities</li>
+        <li class="sortable-item" id="6">American Indian/Alaska Native</li>
+        <li class="sortable-item" id="5">Black</li>
+        <li class="sortable-item" id="4">Economically disadvantaged</li>
+        <li class="sortable-item" id="3">Hispanic</li>
+        <li class="sortable-item" id="2">White</li>
+        <li class="sortable-item" id="1">Asian/Pacific Islander</li>  
+      </ul>
+      <div id="title">
+        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><br>Lowest graduation rate
+      </div>
+      <div id="result">You got <span id="pointer">0</span> out of 9 right!</div>
+      <div><input type="submit" class="btn btn-danger btn-lg center-block" id="btn-get" value="See my result"/></div>
+      <div><button class="btn btn-danger btn-lg center-block" id="btn-result">What's the reality?</button></div>
+    </div>
+    
+
+    <div id="page02">
+      <div id="chart-title">US public high school graduation rates 2013/14</div>
+      <div id="container"></div>
+      <div><button class="btn btn-danger btn-lg center-block" id="back">Back to your result</button></div>
+    </div>
+
+    <div id="instruct">
+      Drag and drop the boxes to rank them.
+    </div>  
+  </div>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script type="text/javascript">
+
+function init() {
+  $("#page02").hide();
+  $("#result").hide();
+  $("#btn-result").hide();
+  $("#back").click(function(){
+    $("#page02").slideUp(500);
+  }); 
+  $(".column").mouseover(function(){
+    $("#instruct").fadeOut(1500);
+  }); 
+
+  //Make both columns draggable
+  $('.sortable-list').sortable();
+
+  $('#btn-get').click(sendData);
+  $('#btn-result').click(showResult);
+}  
+
+function sendData() {
+  var point = 0;
+  var items = $('#my-list').sortable('toArray');
+  var itemStr = items.join(',');
+  console.log("itemStr = " + itemStr);
+ 
+  for (var i=1; i<9; i++) {
+    if ($("#" + i).index()==i-1){
+      $("#" + i).css("background-color","#00b300");
+      point++;
+    } else
+    {$("#" + i).css("background-color","#d3401e");}
+  } 
+  console.log("point = " + point);
+  $("#pointer").text(point);
+  $("#btn-get").hide();
+  $("#btn-result").show();
+  $("#result").show();
+  $( ".sortable-list" ).sortable({
+    disabled: true
+  });
+
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1Il7Im9RCg3He4cKtUi0dy8nF1Mlje1cy-njAvOx6cuI/formResponse',
+        data: { 
+          "entry.1481426230": json.ip, //ip
+          "entry.480247188": itemStr, 
+          "entry.2114937734": point, 
+          "entry.1161624649": document.referrer,
+        }
+      }); 
+    }
+  );   
+}
+
+function showResult() {
+  $("#page02").slideDown(500);
+}
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#d6d6d6',
+            marginBottom: 100,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: "Source: <a href='https://nces.ed.gov/ccd/tables/ACGR_2010-11_to_2012-13.asp'  target='_blank'>National Center for Education Statistics</a><br>The 4-year adjusted cohort graduation rate (ACGR) shown above is the number of students who graduate in 4 years with a regular high school diploma divided by the number of students who form the adjusted cohort for the graduating class.",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -70,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["National average","Asian/Pacific Islander","White","Hispanic","Economically disadvantaged","Black","American Indian/Alaska Native","With disabilities","Limited English proficiency"],
+            labels:{
+                style: {
+                    fontSize: '12px',
+                    color: '#FFFFFF',
+                    textOverflow: 'none',
+                    whiteSpace: 'nowrap',
+                },
+                align: 'left',
+                x:5,
+                reserveSpace: false,
+            },
+            tickColor: '#d6d6d6',
+        },
+        yAxis: {
+            title: {
+              text: null,
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+            gridLineColor: '#d6d6d6',
+            visible: false,
+        },
+        credits: { enabled: false },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b>'
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                borderColor: '#d6d6d6',
+            }
+        },
+        series: [{
+            data: [{y:82.3, color:'#007f00'},89.4,87.2,76.3,74.6,72.5,69.6,63.1,{y:62.6, color:'#d3401e'}],
+            color: "#4188bc",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:.1f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '14px',
+                }
+            }
+        }]
+    });
+});
+
+$(document).ready(function(){
+  init();
+}); 
+
+
+</script>
+
+</script>
+
+</body>
+

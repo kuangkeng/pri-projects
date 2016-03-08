@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/heatmap.js"></script>
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container {
+  height: 800px; 
+  max-width: 850px;
+  width:98%; 
+  margin: 0 auto;
+  border:1px solid #D3D3D3;
+}
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+
+    $('#container').highcharts({
+
+        chart: {
+            type: 'heatmap',
+            marginTop: 80,
+            marginBottom: 150,
+            plotBorderWidth: 1
+        },
+        title: {
+            text: 'Legal grounds for abortion in Latin America & the Caribbean, 2013',
+            style: {
+                fontSize: '17px',
+            },            
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.un.org/en/development/desa/population/publications/policy/abortionPoliciesAndReproductiveHealth.shtml" target="_blank">United Nations</a>',
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: 0,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },
+        xAxis: {
+            categories: ["Save woman's life","Physical health","Mental health","Rape/Incest","Fetal impairment","Economic/Social reasons","On request"],
+            tickColor: '#FFFFFF',
+        },
+
+        yAxis: {
+            categories: ["Dominican Rep.","El Salvador","Nicaragua","Chile","Dominica","Haiti","Guatemala","Honduras","Brazil","Panama","Argentina","Grenada","Jamaica","Trinidad & Tobago","Costa Rica","Ecuador","Belize","Bolivia","Bahamas","Colombia","Barbados","Cuba","Mexico"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '12px',
+              }
+            }  
+        },
+        plotOptions: {
+            series: {
+                borderColor: '#ffffff'
+            }
+        },
+        colorAxis: {
+            min: 0,
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Reason: ' + this.series.xAxis.categories[this.point.x] + '<br>Legal: <b>' + this.point.word + '<b>';
+            }
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
+        series: [{
+            name: 'Legal Grounds',
+            borderWidth: 1,
+            data: [
+              {x: 0, y: 0, word: "No", color: "#db664a"},
+              {x: 0, y: 1, word: "No", color: "#db664a"},
+              {x: 0, y: 2, word: "No", color: "#db664a"},
+              {x: 0, y: 3, word: "No", color: "#d4301e"},
+              {x: 0, y: 4, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 5, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 6, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 7, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 13, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 14, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 15, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 16, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 17, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 18, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 19, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 20, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 21, word: "Yes", color: "#8db7d6"},
+              {x: 0, y: 22, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 0, word: "No", color: "#db664a"},
+              {x: 1, y: 1, word: "No", color: "#db664a"},
+              {x: 1, y: 2, word: "No", color: "#db664a"},
+              {x: 1, y: 3, word: "No", color: "#d4301e"},
+              {x: 1, y: 4, word: "No", color: "#db664a"},
+              {x: 1, y: 5, word: "No", color: "#db664a"},
+              {x: 1, y: 6, word: "No", color: "#db664a"},
+              {x: 1, y: 7, word: "No", color: "#db664a"},
+              {x: 1, y: 8, word: "No", color: "#db664a"},
+              {x: 1, y: 9, word: "No", color: "#db664a"},
+              {x: 1, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 13, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 14, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 15, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 16, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 17, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 18, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 19, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 20, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 21, word: "Yes", color: "#8db7d6"},
+              {x: 1, y: 22, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 0, word: "No", color: "#db664a"},
+              {x: 2, y: 1, word: "No", color: "#db664a"},
+              {x: 2, y: 2, word: "No", color: "#db664a"},
+              {x: 2, y: 3, word: "No", color: "#d4301e"},
+              {x: 2, y: 4, word: "No", color: "#db664a"},
+              {x: 2, y: 5, word: "No", color: "#db664a"},
+              {x: 2, y: 6, word: "No", color: "#db664a"},
+              {x: 2, y: 7, word: "No", color: "#db664a"},
+              {x: 2, y: 8, word: "No", color: "#db664a"},
+              {x: 2, y: 9, word: "No", color: "#db664a"},
+              {x: 2, y: 10, word: "No", color: "#db664a"},
+              {x: 2, y: 11, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 12, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 13, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 14, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 15, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 16, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 17, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 18, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 19, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 20, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 21, word: "Yes", color: "#8db7d6"},
+              {x: 2, y: 22, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 0, word: "No", color: "#db664a"},
+              {x: 3, y: 1, word: "No", color: "#db664a"},
+              {x: 3, y: 2, word: "No", color: "#db664a"},
+              {x: 3, y: 3, word: "No", color: "#d4301e"},
+              {x: 3, y: 4, word: "No", color: "#db664a"},
+              {x: 3, y: 5, word: "No", color: "#db664a"},
+              {x: 3, y: 6, word: "No", color: "#db664a"},
+              {x: 3, y: 7, word: "No", color: "#db664a"},
+              {x: 3, y: 8, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 10, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 11, word: "No", color: "#db664a"},
+              {x: 3, y: 12, word: "No", color: "#db664a"},
+              {x: 3, y: 13, word: "No", color: "#db664a"},
+              {x: 3, y: 14, word: "No", color: "#db664a"},
+              {x: 3, y: 15, word: "No", color: "#db664a"},
+              {x: 3, y: 16, word: "No", color: "#db664a"},
+              {x: 3, y: 17, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 18, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 19, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 20, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 21, word: "Yes", color: "#8db7d6"},
+              {x: 3, y: 22, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 0, word: "No", color: "#db664a"},
+              {x: 4, y: 1, word: "No", color: "#db664a"},
+              {x: 4, y: 2, word: "No", color: "#db664a"},
+              {x: 4, y: 3, word: "No", color: "#d4301e"},
+              {x: 4, y: 4, word: "No", color: "#db664a"},
+              {x: 4, y: 5, word: "No", color: "#db664a"},
+              {x: 4, y: 6, word: "No", color: "#db664a"},
+              {x: 4, y: 7, word: "No", color: "#db664a"},
+              {x: 4, y: 8, word: "No", color: "#db664a"},
+              {x: 4, y: 9, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 10, word: "No", color: "#db664a"},
+              {x: 4, y: 11, word: "No", color: "#db664a"},
+              {x: 4, y: 12, word: "No", color: "#db664a"},
+              {x: 4, y: 13, word: "No", color: "#db664a"},
+              {x: 4, y: 14, word: "No", color: "#db664a"},
+              {x: 4, y: 15, word: "No", color: "#db664a"},
+              {x: 4, y: 16, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 17, word: "No", color: "#db664a"},
+              {x: 4, y: 18, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 19, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 20, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 21, word: "Yes", color: "#8db7d6"},
+              {x: 4, y: 22, word: "Yes", color: "#8db7d6"},
+              {x: 5, y: 0, word: "No", color: "#db664a"},
+              {x: 5, y: 1, word: "No", color: "#db664a"},
+              {x: 5, y: 2, word: "No", color: "#db664a"},
+              {x: 5, y: 3, word: "No", color: "#d4301e"},
+              {x: 5, y: 4, word: "No", color: "#db664a"},
+              {x: 5, y: 5, word: "No", color: "#db664a"},
+              {x: 5, y: 6, word: "No", color: "#db664a"},
+              {x: 5, y: 7, word: "No", color: "#db664a"},
+              {x: 5, y: 8, word: "No", color: "#db664a"},
+              {x: 5, y: 9, word: "No", color: "#db664a"},
+              {x: 5, y: 10, word: "No", color: "#db664a"},
+              {x: 5, y: 11, word: "No", color: "#db664a"},
+              {x: 5, y: 12, word: "No", color: "#db664a"},
+              {x: 5, y: 13, word: "No", color: "#db664a"},
+              {x: 5, y: 14, word: "No", color: "#db664a"},
+              {x: 5, y: 15, word: "No", color: "#db664a"},
+              {x: 5, y: 16, word: "Yes", color: "#8db7d6"},
+              {x: 5, y: 17, word: "No", color: "#db664a"},
+              {x: 5, y: 18, word: "No", color: "#db664a"},
+              {x: 5, y: 19, word: "No", color: "#db664a"},
+              {x: 5, y: 20, word: "Yes", color: "#8db7d6"},
+              {x: 5, y: 21, word: "Yes", color: "#8db7d6"},
+              {x: 5, y: 22, word: "Yes", color: "#8db7d6"},
+              {x: 6, y: 0, word: "No", color: "#db664a"},
+              {x: 6, y: 1, word: "No", color: "#db664a"},
+              {x: 6, y: 2, word: "No", color: "#db664a"},
+              {x: 6, y: 3, word: "No", color: "#d4301e"},
+              {x: 6, y: 4, word: "No", color: "#db664a"},
+              {x: 6, y: 5, word: "No", color: "#db664a"},
+              {x: 6, y: 6, word: "No", color: "#db664a"},
+              {x: 6, y: 7, word: "No", color: "#db664a"},
+              {x: 6, y: 8, word: "No", color: "#db664a"},
+              {x: 6, y: 9, word: "No", color: "#db664a"},
+              {x: 6, y: 10, word: "No", color: "#db664a"},
+              {x: 6, y: 11, word: "No", color: "#db664a"},
+              {x: 6, y: 12, word: "No", color: "#db664a"},
+              {x: 6, y: 13, word: "No", color: "#db664a"},
+              {x: 6, y: 14, word: "No", color: "#db664a"},
+              {x: 6, y: 15, word: "No", color: "#db664a"},
+              {x: 6, y: 16, word: "No", color: "#db664a"},
+              {x: 6, y: 17, word: "No", color: "#db664a"},
+              {x: 6, y: 18, word: "No", color: "#db664a"},
+              {x: 6, y: 19, word: "No", color: "#db664a"},
+              {x: 6, y: 20, word: "No", color: "#db664a"},
+              {x: 6, y: 21, word: "Yes", color: "#8db7d6"},
+              {x: 6, y: 22, word: "Yes", color: "#8db7d6"}
+            ],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.word;
+                },
+                style: {
+                    fontSize: '11px',
+                }
+            }
+        }]
+
+    });
+});
+</script>
