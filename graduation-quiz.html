@@ -38,25 +38,38 @@ body{
 }  
 
 #result {
-  font-size: 20px;
+  font-size: 23px;
   font-weight: bold;
   text-align: center;
   color: #333;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 25px;
   margin-bottom: 30px;
 }
 
 #btn-get {
   margin-top:82px;
+  margin-bottom:10px;
 }  
 
 #back {
-  margin-bottom:10px;
+  margin-bottom:20px;
 }
 
 #btn-result {
   margin-top: 10px;
+  margin-bottom:10px;
+}
+
+#note {
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 40px;
+}
+
+#notes-title {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 /* Columns */
@@ -133,7 +146,9 @@ box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
   .column {padding:10px;}
   #chart-title {padding-top:10px; font-size: 16px;}
   #container {height: 390px; }
-  #result {font-size: 16px}
+  #result {font-size: 18px}
+  #notes-title, #note {font-size: 12px}
+  #note {margin-top: 20px;}
 }  
 
 </style>
@@ -143,7 +158,6 @@ box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
   
   <p>How does ethnicity, identity, financial background or language ability affect graduation rates in public high schools? Which of the student groups below have the highest graduation rate? Rank them in order.</p>
 
- 
   <div class="column">
     <div id="page01">
       <div id="title">
@@ -178,8 +192,13 @@ box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
       Drag and drop the boxes to rank them.
     </div>  
   </div>
-
-
+<div id="note">
+  <div id="notes-title"><p>Notes:</p></div>
+  <p>The <b>4-year adjusted cohort graduation rate (ACGR)</b> shown above is the number of students who graduate in 4 years with a regular high school diploma divided by the number of students who form the adjusted cohort for the graduating class.</p>
+  <p><b>Limited English proficiency</b> refers to students who reported speaking English "less than very well" as classified by the US Census Bureau.</p>
+  <p><b>Economically disadvantaged students</b> are defined by most states based on whether the students are eligible for free and reduced-price lunch, and the eligibility for such lunch is based on the students' family income at or below around $44,000 for a family of four.</p>
+  <p><b>Students with disabilities</b> are those who require special education because of disabilities including autism, communication disorders, emotional disturbances, hearing impairments, intellectual disability, orthopedic impairments, specific learning disabilities and visual impairments.</p>
+</div>  
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -257,18 +276,18 @@ $(function () {
         chart: {
             type: 'bar',
             backgroundColor: '#d6d6d6',
-            marginBottom: 100,
+            marginBottom: 30,
         },
         title: {
             text: null,
         },
         subtitle: {
-            text: "Source: <a href='https://nces.ed.gov/ccd/tables/ACGR_2010-11_to_2012-13.asp'  target='_blank'>National Center for Education Statistics</a><br>The 4-year adjusted cohort graduation rate (ACGR) shown above is the number of students who graduate in 4 years with a regular high school diploma divided by the number of students who form the adjusted cohort for the graduating class.",
+            text: "Source: <a href='https://nces.ed.gov/ccd/tables/ACGR_2010-11_to_2012-13.asp'  target='_blank'>National Center for Education Statistics</a>",
             useHTML: true,
             floating: true,
             align: 'left',
             verticalAlign: 'bottom',
-            y: -70,
+            y: 0,
             style: {
                 color: '#808080',
                 fontSize: '10px',
