@@ -1,0 +1,121 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<!-- embed height = 564px -->
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 410px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">Source: 
+        <a href='http://www.childtrends.org/?indicators=high-school-dropout-rates'  target='_blank'>Child Trends'</a> calculations of US Census Bureau data<br>
+        <i>
+       Dropout rate measures the percentage of young adults aged 16 to 24 who were not enrolled in a high school program and had not received a high school diploma or obtained an equivalency certificate.
+        </i>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Dropout rates of students age 16 to 24, October 2014',
+            margin: 10,
+            style: {
+                fontSize: '16px',
+            },
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Total","Foreign-born","Hispanic","Of foreign-born parents","Black","Of native-born parents","White, non-Hispanic","Asia"],   
+            tickColor: '#FFFFFF', 
+            labels: {
+                enabled: false,
+            },
+        },
+        yAxis: {
+            title: {
+              text: "Percentage of students",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            minTickInterval: 2,
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: 'Dropout rate: <b>{point.y}%<b>',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0,
+            }
+        },
+        series: [{
+            data:[{y:6.5,color:'#007f00'},{y:12.4,color:"#d3401e"},{y:10.6,color:"#d3401e"},7.6,7.3,6.2,5.2,1.1],
+            color: "#4188bc",
+            dataLabels: {
+                inside:true,
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{key} {point.y}%',
+                y: 0,
+                style: {
+                    fontSize: '11px',
+                }
+            },
+        }],
+    });
+});
+</script>

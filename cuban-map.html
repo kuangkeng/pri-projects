@@ -21,7 +21,7 @@
   <style>
   	body {
       font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; 
-      max-width: 650px; 
+      max-width: 750px; 
       font-size: 16px;
     }
 
@@ -143,7 +143,7 @@
   	.icon-box {
   		width:120px;
   		position: fixed;
-  		bottom:10%;
+  		bottom:30%;
   		left:50%;
   		margin-left: -60px;
   		z-index:2;
@@ -228,7 +228,7 @@
               <div class="col-sm-9 col-xs-8" id="note">A project in collaboration with <a href='http://www.periodistasdeapie.org.mx/'  target='_blank'>Periodistas de a Pie</a> and its <a href='http://enelcamino.periodistasdeapie.org.mx/'  target='_blank'>En El Camino project</a>.</div>
               <div class="col-sm-3 col-xs-4"id="logo"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/logo_periodistas-resized.png" class="img-responsive center-block"></div>
             </div>
-            <div id="credit">All photos by Mónica González</div>
+            <div id="credit">All photos by Mónica González. Routes shown on the map are estimates.</div>
           </div>
 		    </div>
 	      </div>    		
@@ -417,6 +417,9 @@
 	var markers = [];
   var extra1 = {lat: 6.1031, lng: -75.62198};
   var extra2 = {lat: 10.63459, lng: -85.44067};
+  var animate = "";
+  var route = "";
+  var lineSymbol = "";
 
 function init() {
 	$("#arrow-left").hide();
@@ -431,10 +434,11 @@ function init() {
       $(".textbox").removeClass("white");
       var page = $(this.activeElement).index();				
       $(".icon-box").fadeOut("slow");
+      window.clearInterval(animate);
 		},
 		onSwipeEnd: function(){
 			var endpage = $(this.activeElement).index();
-			console.log("end page: " + endpage);
+			//console.log("end page: " + endpage);
       selectCity(endpage);
       
 			if(18>endpage>0){
@@ -445,6 +449,7 @@ function init() {
               $("#arrow-left").hide();
               $(".panel").addClass("transparent");
               $(".textbox").addClass("white");
+              startanimate(route);
             }      
       if(endpage==18){
             	$("#arrow-right").hide();
@@ -466,6 +471,7 @@ function init() {
     	zoom: 4,
       maxZoom: 10,
     	zoomControl: true,
+      mapTypeControl: false,
     	zoomControlOptions: {
     	style: google.maps.ZoomControlStyle.SMALL,
       position: google.maps.ControlPosition.LEFT_TOP
@@ -473,12 +479,15 @@ function init() {
 		center: new google.maps.LatLng(6, -80.023992)
 	};
 	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-  var ctaLayer = new google.maps.KmlLayer({
-    url: 'http://kuangkeng.github.io/pri-projects/map-entire.kml',
-    map: map,
-    suppressInfoWindows: true,
-    preserveViewport: true,
-  });
+
+ 
+
+  // var ctaLayer = new google.maps.KmlLayer({
+  //   url: 'http://kuangkeng.github.io/pri-projects/map-entire.kml',
+  //   map: map,
+  //   suppressInfoWindows: true,
+  //   preserveViewport: true,
+  // });
 
 	for (var i = 0; i < cities.length; i++) {
 		var city = cities[i];
@@ -517,10 +526,82 @@ function init() {
     title: 'Liberia'
   })
 
+  var coordinates = [
+    {lat: 23.0658289, lng: -82.37154},
+    {lat: -0.2058146, lng: -78.476688},
+    {lat: 1.6322797, lng: -77.2731183},
+    {lat: 3.1882328, lng: -76.5815689},
+    {lat: 4.6677287, lng: -75.9269902},
+    {lat: 6.1031, lng: -75.62199},
+    {lat: 9.0670086, lng: -79.3870354},
+    {lat: 8.2397363, lng: -80.8749146},
+    {lat: 8.4513433, lng: -81.9212424},
+    {lat: 9.0420376, lng: -83.1809036},
+    {lat: 9.9537181, lng: -84.3444838},
+    {lat: 11.070771, lng: -85.629931},
+    {lat: 10.6345964, lng: -85.4406747},
+    {lat: 13.686514, lng: -89.218557},
+    {lat: 14.6792539, lng: -92.151947},
+    {lat: 16.5177802, lng: -94.48463411},
+    {lat: 17.5492223, lng: -94.2787953},
+    {lat: 18.1961503, lng: -95.677218},
+    {lat: 17.6759631, lng: -97.8382751},
+    {lat: 18.8633297, lng: -100.4202652},
+    {lat: 20.6442653, lng: -101.5792868},
+    {lat: 22.5062088, lng: -101.3431396},
+    {lat: 24.5198415, lng: -101.0478787},
+    {lat: 26.306746, lng: -101.7104006},
+    {lat: 27.478425, lng: -99.548027},
+    {lat: 27.530587, lng: -99.4796},
+    {lat: 29.4308618, lng: -97.2553805},
+    {lat: 30.8760936, lng: -92.7780999},
+    {lat: 31.4836037, lng: -89.023302},
+    {lat: 30.6706237, lng: -85.0970431},
+    {lat: 30.0058627, lng: -82.6468677},
+    {lat: 27.953142, lng: -82.429488},
+  ];
 
+  var lineSymbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    strokeColor: '#d3401e',
+    fillColor: 'yellow',
+    fillOpacity: 1,
+    strokeWeight: 2,
+  };
 
+  var route = new google.maps.Polyline({
+    path: coordinates,
+    icons: [{
+      icon: lineSymbol,
+      offset: '0%'
+    }],
+    geodesic: true,
+    strokeColor: '#7e7e7e',
+    strokeOpacity: 0.8,
+    strokeWeight: 2
+  });
+
+  route.setMap(map);
+  startanimate(route);
 
 }
+var count = 0;
+function startanimate(line) {
+    
+    animate = setInterval(function() {
+      count = (count + 1) % 400;
+      var temp = line.get('icons');
+      temp[0].offset = (count / 4) + '%';
+      line.set('icons', temp);
+      //console.log("count "+ count);
+      if (count == 399) {
+          window.clearInterval(animate);
+          setTimeout(function(){startanimate(line);},2000);
+      }
+    }, 20);
+}
+
 //function init finishes here
 
 function selectCity (i) {

@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+  <style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; 
+      max-width: 750px; 
+      font-size: 18px;
+    }
+
+    .container {
+      position:relative; 
+      height:650px;
+      border: solid 0.5px #D3D3D3
+    }
+
+    #map-canvas {
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      height: 100%; 
+      width: 100%;
+    }
+
+    #white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 3; background-color: red; opacity:0.8; display:none;}
+
+    .panel {
+      position: absolute; 
+      bottom: 0px; 
+      left: 0; 
+      margin-bottom: 0;
+      width: 100%; 
+      display: block; 
+      color: #000000; 
+      background-color: rgba(0,0,0,0.7); 
+      z-index:1; 
+      height:55%;
+    }
+
+    #container01 {
+      width:100%;
+      max-width: 500px;
+      margin: 0 auto;
+      height: 260px; 
+    }
+
+    #container02 {
+      width:100%;
+      max-width: 500px;
+      margin: 0 auto;
+      height: 440px; 
+      margin-bottom: 20px;
+    }
+
+    .textbox {
+      padding:0px 36px 10px 36px;
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 10px;
+      line-height: 24px;
+    } 
+
+    .title {
+      font-size: 38px;
+      font-weight: bold;
+      padding: 20px 36px;
+      line-height: 45px;
+      color: white;
+      text-align: center;
+    }
+
+    .btn {
+      width:150px;
+    }
+
+    #countryInput {
+      width: 300px;
+      margin:0 auto;
+      font-size: 22px;
+    }
+
+    #inputBox {
+      padding-top:10px;
+      padding-bottom: 50px;
+    }
+
+    #country {
+      text-align: center;
+    }
+
+    #population {
+      text-align: center;
+      font-size: 25px;
+      padding-bottom: 10px;
+      padding-top: 0px;
+    }
+
+    #line1, #line2, #line3, #line4, #line6, #nodata {
+      text-align: center;
+    }
+
+    #line1 {font-size: 45px; line-height: 50px; font-weight: bold; padding-top: 30px; padding-bottom: 10px;}
+    #line2 {font-size: 22px; line-height: 26px; padding: 20px 0px;}
+    #line3 {font-size: 35px; font-weight: bold;}
+    #line4 {font-size: 22px; padding-top: 20px; padding-bottom: 10px; width:75%; line-height: 26px; margin: 0 auto;}
+    #line5 {font-size: 22px; font-weight: bold; line-height: 26px; padding-bottom: 10px;}
+    #line6 {font-size: 30px; font-weight: bold; line-height: 35px; padding-top: 30px;}
+
+    #end {margin-top: 60px;}
+
+    #notes {
+      font-style: italic;
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 30px;
+    }
+
+    #nodata {font-size: 14px; color:#d3401e; font-weight: bold;}
+
+    .sharebox {margin-bottom: 30px;}
+
+    table {width:100%;}
+    #sharecol1, #sharecol2 {width:45%; padding:5px 5px;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%} 
+
+    a {color:#bddfeb;}
+    a:hover {color:#add8e6;}
+
+  @media (max-width: 600px ) { 
+    .title{
+      padding: 30px 15px;
+      font-size: 30px;
+      line-height:35px;
+    }
+
+    .textbox {
+      font-size: 16px;
+      line-height: 20px;
+      padding:0px 15px 10px 15px;
+    }
+
+    #line1 {font-size: 35px; line-height: 40px; padding-bottom: 0px; padding-top: 30px}
+    #line2 {font-size: 21px; padding-bottom: 20px}
+    #line3 {font-size: 30px;}
+    #line4 {font-size: 21px; width:100%; line-height: 25px; padding-top: 20px; padding-bottom: 20px; }
+    #line5 {font-size: 21px; line-height: 25px; padding-bottom: 30px;}
+    #line6 {font-size: 25px; line-height: 30px; padding-top: 20px;}
+    #container02 {margin-bottom: 0px; height: 440px; }
+    #end {margin-top: 20px;}
+    #notes {font-size: 14px;line-height: 18px; margin-bottom: 30px}
+
+  }  
+
+
+  @media (max-width: 450px ) { 
+    .container {
+      height:600px;
+    }
+
+    .title{
+      font-size: 20px;
+      line-height:25px;
+      padding: 15px 15px;
+    }
+
+    .textbox {
+      padding:0px 15px 10px 15px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      line-height: 18px;
+    }
+
+    .panel {height:60%;}
+
+    #countryInput {
+      width: 200px;
+      margin:0 auto;
+      font-size: 18px;
+    }
+    #container01 {height:230px;}
+    #population {font-size: 20px;}
+    #line1 {font-size: 30px; line-height: 35px; padding-bottom: 0px; padding-top: 20px}
+    #line2 {font-size: 16px; padding-bottom: 10px}
+    #line3 {font-size: 25px;}
+    #line4 {font-size: 16px; width:100%; line-height: 20px; padding-top: 10px; padding-bottom: 20px; }
+    #line5 {font-size: 16px; line-height: 20px; padding-bottom: 10px;}
+    #line6 {font-size: 20px; line-height: 24px; padding-top: 20px;}
+    #container02 {margin-bottom: 0px; height: 430px; }
+    #end {margin-top: 20px;}
+    #notes {font-size: 14px;line-height: 18px; margin-bottom: 10px}
+  }
+
+  </style>
+
+<body>
+
+<div class="container-fluid">  
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 container">
+      <div id="map-canvas"></div>
+      <div id="white-canvas"></div>
+      <div class="panel">
+        <div class="page" id="page00">
+          <div class="title">What if the Syrian civil war happened in your country?</div>
+          <div class="textbox">
+            The war in Syria is entering its sixth year with no end in sight. Most of us have been desensitized by the continuous violence and deaths in this country in the Middle East, but have you ever imagined if the Syrian conflict happened in your country? How many people would be killed and affected? Find out now. 
+          </div>
+          <div><button class="btn btn-danger btn-lg center-block" id="btn-00">Start</button></div>
+        </div>        
+        <div class="page" id="page01">
+          <div class="title">Where are you from?</div>
+            <div id="inputBox"><select class="form-control" id="countryInput">
+              <option>USA</option>
+              <option>Afghanistan</option>
+              <option>Albania</option>
+              <option>Algeria</option>
+              <option>Andorra</option>
+              <option>Angola</option>
+              <option>Antigua and Barbuda</option>
+              <option>Argentina</option>
+              <option>Armenia</option>
+              <option>Australia</option>
+              <option>Austria</option>
+              <option>Azerbaijan</option>
+              <option>Bahamas</option>
+              <option>Bahrain</option>
+              <option>Bangladesh</option>
+              <option>Barbados</option>
+              <option>Belarus</option>
+              <option>Belgium</option>
+              <option>Belize</option>
+              <option>Benin</option>
+              <option>Bhutan</option>
+              <option>Bolivia</option>
+              <option>Bosnia and Herzegovina</option>
+              <option>Botswana</option>
+              <option>Brazil</option>
+              <option>Brunei Darussalam</option>
+              <option>Bulgaria</option>
+              <option>Burkina Faso</option>
+              <option>Burundi</option>
+              <option>Cabo Verde</option>
+              <option>Cambodia</option>
+              <option>Cameroon</option>
+              <option>Canada</option>
+              <option>Central African Republic</option>
+              <option>Chad</option>
+              <option>Chile</option>
+              <option>China</option>
+              <option>Colombia</option>
+              <option>Congo</option>
+              <option>Costa Rica</option>
+              <option>Côte d'Ivoire</option>
+              <option>Croatia</option>
+              <option>Cuba</option>
+              <option>Cyprus</option>
+              <option>Czech Republic</option>
+              <option>Denmark</option>
+              <option>Djibouti</option>
+              <option>Dominica</option>
+              <option>Dominican Republic</option>
+              <option>DR Congo</option>
+              <option>Ecuador</option>
+              <option>Egypt</option>
+              <option>El Salvador</option>
+              <option>Equatorial Guinea</option>
+              <option>Eritrea</option>
+              <option>Estonia</option>
+              <option>Ethiopia</option>
+              <option>Fiji</option>
+              <option>Finland</option>
+              <option>France</option>
+              <option>Gabon</option>
+              <option>Gambia</option>
+              <option>Georgia</option>
+              <option>Germany</option>
+              <option>Ghana</option>
+              <option>Greece</option>
+              <option>Guatemala</option>
+              <option>Guinea</option>
+              <option>Guinea-Bissau</option>
+              <option>Guyana</option>
+              <option>Haiti</option>
+              <option>Honduras</option>
+              <option>Hong Kong, China</option>
+              <option>Hungary</option>
+              <option>Iceland</option>
+              <option>India</option>
+              <option>Indonesia</option>
+              <option>Iran</option>
+              <option>Iraq</option>
+              <option>Ireland</option>
+              <option>Israel</option>
+              <option>Italy</option>
+              <option>Jamaica</option>
+              <option>Japan</option>
+              <option>Jordan</option>
+              <option>Kazakhstan</option>
+              <option>Kenya</option>
+              <option>Kuwait</option>
+              <option>Kyrgyzstan</option>
+              <option>Laos</option>
+              <option>Latvia</option>
+              <option>Lebanon</option>
+              <option>Lesotho</option>
+              <option>Liberia</option>
+              <option>Libya</option>
+              <option>Lithuania</option>
+              <option>Luxembourg</option>
+              <option>Macao,China</option>
+              <option>Macedonia</option>
+              <option>Madagascar</option>
+              <option>Malawi</option>
+              <option>Malaysia</option>
+              <option>Maldives</option>
+              <option>Mali</option>
+              <option>Malta</option>
+              <option>Mauritania</option>
+              <option>Mauritius</option>
+              <option>Mexico</option>
+              <option>Moldova</option>
+              <option>Mongolia</option>
+              <option>Montenegro</option>
+              <option>Morocco</option>
+              <option>Mozambique</option>
+              <option>Myanmar</option>
+              <option>Namibia</option>
+              <option>Nepal</option>
+              <option>Netherlands</option>
+              <option>New Zealand</option>
+              <option>Nicaragua</option>
+              <option>Niger</option>
+              <option>Nigeria</option>
+              <option>North Korea</option>
+              <option>Norway</option>
+              <option>Oman</option>
+              <option>Pakistan</option>
+              <option>Palestine</option>
+              <option>Panama</option>
+              <option>Papua New Guinea</option>
+              <option>Paraguay</option>
+              <option>Peru</option>
+              <option>Philippines</option>
+              <option>Poland</option>
+              <option>Portugal</option>
+              <option>Puerto Rico</option>
+              <option>Qatar</option>
+              <option>Réunion</option>
+              <option>Romania</option>
+              <option>Russia</option>
+              <option>Rwanda</option>
+              <option>Saint Lucia</option>
+              <option>Saint Vincent and the Grenadines</option>
+              <option>Samoa</option>
+              <option>Sao Tome and Principe</option>
+              <option>Saudi Arabia</option>
+              <option>Senegal</option>
+              <option>Serbia</option>
+              <option>Seychelles</option>
+              <option>Sierra Leone</option>
+              <option>Singapore</option>
+              <option>Slovakia</option>
+              <option>Slovenia</option>
+              <option>Solomon Islands</option>
+              <option>Somalia</option>
+              <option>South Africa</option>
+              <option>South Korea</option>
+              <option>South Sudan</option>
+              <option>Spain</option>
+              <option>Sri Lanka</option>
+              <option>Sudan</option>
+              <option>Suriname</option>
+              <option>Swaziland</option>
+              <option>Sweden</option>
+              <option>Switzerland</option>
+              <option>Tajikistan</option>
+              <option>Tanzania</option>
+              <option>Thailand</option>
+              <option>Timor-Leste</option>
+              <option>Togo</option>
+              <option>Tonga</option>
+              <option>Trinidad and Tobago</option>
+              <option>Tunisia</option>
+              <option>Turkey</option>
+              <option>Turkmenistan</option>
+              <option>Uganda</option>
+              <option>Ukraine</option>
+              <option>United Arab Emirates</option>
+              <option>United Kingdom</option>
+              <option>USA</option>
+              <option>Uruguay</option>
+              <option>Uzbekistan</option>
+              <option>Venezuela</option>
+              <option>Vietnam</option>
+              <option>Yemen</option>
+              <option>Zambia</option>
+              <option>Zimbabwe</option>
+            </select></div>
+            <div><button class="btn btn-danger btn-lg center-block" id="btn-01">Next</button></div>
+        </div>
+        <div class="page" id="page02">
+          <div class="title" id="country">error</div>
+          <div class="textbox" id="population">
+            Population: <span id="pop">error</span>
+          </div>
+          <div><button class="btn btn-danger btn-lg center-block" id="btn-02">Start the war</button></div>
+        </div>
+        <div class="page" id="page03">
+          <div class="textbox">
+            <div id="line1">Total deaths: <span id="death1output">error</span></div>
+            <div id="line2">or <span id="death2output">error</span> per year, which is</div>
+            <div id="line3"><span id="caroutput">error</span></div> 
+            <div id="line4">times higher than the the number of annual road traffic deaths in the country</div>
+            <div id="container01"></div>
+            <div id="nodata">*Sorry, traffic data for your country is not available.</div>
+          </div>
+          <div><button class="btn btn-danger btn-lg center-block" id="btn-03">More</button></div>
+        </div>
+        <div class="page" id="page04">
+          <div class="textbox">
+            <div id="line6">The human toll</div>
+          </div>
+          <div id="container02"></div>
+          <div><button class="btn btn-danger btn-lg center-block" id="btn-04">Next</button></div>
+        </div>
+        <div class="page" id="page05">
+          <div class="title" id="end">Learned something?<br>Share it</div>
+          <div class="sharebox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+              </tr> 
+            </table>
+          </div>
+          <div class="textbox" id="notes">
+            <p>Notes:</p> 
+            <p>The simulated numbers of your country are calculated using the percentage of Syrian population affected by the war as provided by the <a href='https://docs.unocha.org/sites/dms/Documents/GHO-2016.pdf' target='_blank'>UN Office for the Coordination of Humantarian Affairs (OCHA)</a> and the <a href='http://www.syriahr.com/en/?p=44437' target='_blank'>Syrian Observatory for Human Rights</a>.</p>
+            <p>Population of your country is based on the <a href='http://esa.un.org/unpd/wpp/' target='_blank'>2010 population estimate by the United Nations.</p>
+            <p>The number of road traffic deaths is based on the estimate by the <a href='http://www.who.int/violence_injury_prevention/road_safety_status/2015/en/' target='_blank'>World Health Organization's Global Status Report on Road Safety 2015</a> and <a href='http://www.who.int/violence_injury_prevention/road_safety_status/2013/en/' target='_blank'>2013</a>.</p>
+          </div>
+          <div><button class="btn btn-danger btn-lg center-block" id="btn-05">Restart</button></div>
+        </div>
+
+      </div> 
+  </div>     
+  </div>
+</div>
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>  
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.23&libraries=geometry,visualization&sensor=false"></script>
+
+    <div id="fb-root"></div>
+
+<script>
+
+var data = [
+{"name":"Afghanistan", "pop":27962207, "traffic":4734}, 
+{"name":"Albania", "pop":2901883, "traffic":478}, 
+{"name":"Algeria", "pop":36036159, "traffic":9337}, 
+{"name":"Andorra", "pop":84419, "traffic":6}, 
+{"name":"Angola", "pop":21219954, "traffic":5769}, 
+{"name":"Antigua and Barbuda", "pop":87233, "traffic":6}, 
+{"name":"Argentina", "pop":41222875, "traffic":5619}, 
+{"name":"Armenia", "pop":2963496, "traffic":546}, 
+{"name":"Australia", "pop":22162863, "traffic":1252}, 
+{"name":"Austria", "pop":8391986, "traffic":455}, 
+{"name":"Azerbaijan", "pop":9099893, "traffic":943}, 
+{"name":"Bahamas", "pop":360830, "traffic":52}, 
+{"name":"Bahrain", "pop":1261319, "traffic":107}, 
+{"name":"Bangladesh", "pop":151616777, "traffic":21316}, 
+{"name":"Barbados", "pop":279566, "traffic":19}, 
+{"name":"Belarus", "pop":9492122, "traffic":1282}, 
+{"name":"Belgium", "pop":10929978, "traffic":746}, 
+{"name":"Belize", "pop":321609, "traffic":81}, 
+{"name":"Benin", "pop":9509798, "traffic":2855}, 
+{"name":"Bhutan", "pop":720246, "traffic":114}, 
+{"name":"Bolivia", "pop":9918245, "traffic":2476}, 
+{"name":"Bosnia and Herzegovina", "pop":3835258, "traffic":676}, 
+{"name":"Botswana", "pop":2047831, "traffic":477}, 
+{"name":"Brazil", "pop":198614208, "traffic":46935}, 
+{"name":"Brunei Darussalam", "pop":393302, "traffic":27}, 
+{"name":"Bulgaria", "pop":7407297, "traffic":601}, 
+{"name":"Burkina Faso", "pop":15632066, "traffic":5072}, 
+{"name":"Burundi", "pop":9461117, "traffic":0}, 
+{"name":"Cabo Verde", "pop":490379, "traffic":130}, 
+{"name":"Cambodia", "pop":14363586, "traffic":2635}, 
+{"name":"Cameroon", "pop":20590666, "traffic":6136}, 
+{"name":"Canada", "pop":34126173, "traffic":2114}, 
+{"name":"Central African Republic", "pop":4444973, "traffic":1495}, 
+{"name":"Chad", "pop":11896380, "traffic":3089}, 
+{"name":"Chile", "pop":17015048, "traffic":2179}, 
+{"name":"China", "pop":1340968737, "traffic":261367}, 
+{"name":"Colombia", "pop":45918101, "traffic":8107}, 
+{"name":"Congo", "pop":4066078, "traffic":1174}, 
+{"name":"Costa Rica", "pop":4545273, "traffic":676}, 
+{"name":"Côte d'Ivoire", "pop":20131707, "traffic":4924}, 
+{"name":"Croatia", "pop":4316425, "traffic":395}, 
+{"name":"Cuba", "pop":11308133, "traffic":840}, 
+{"name":"Cyprus", "pop":1103685, "traffic":59}, 
+{"name":"Czech Republic", "pop":10506617, "traffic":654}, 
+{"name":"Denmark", "pop":5550959, "traffic":196}, 
+{"name":"Djibouti", "pop":830802, "traffic":216}, 
+{"name":"Dominica", "pop":71167, "traffic":11}, 
+{"name":"Dominican Republic", "pop":9897983, "traffic":3052}, 
+{"name":"DR Congo", "pop":65938712, "traffic":22419}, 
+{"name":"Ecuador", "pop":14934692, "traffic":3164}, 
+{"name":"Egypt", "pop":82040994, "traffic":10466}, 
+{"name":"El Salvador", "pop":6038306, "traffic":1339}, 
+{"name":"Equatorial Guinea", "pop":728710, "traffic":80}, 
+{"name":"Eritrea", "pop":4689664, "traffic":1527}, 
+{"name":"Estonia", "pop":1332089, "traffic":90}, 
+{"name":"Ethiopia", "pop":87561814, "traffic":23837}, 
+{"name":"Fiji", "pop":859952, "traffic":51}, 
+{"name":"Finland", "pop":5367693, "traffic":258}, 
+{"name":"France", "pop":62961136, "traffic":3268}, 
+{"name":"Gabon", "pop":1541936, "traffic":383}, 
+{"name":"Gambia", "pop":1693002, "traffic":544}, 
+{"name":"Georgia", "pop":4250132, "traffic":514}, 
+{"name":"Germany", "pop":80435307, "traffic":3540}, 
+{"name":"Ghana", "pop":24317734, "traffic":6789}, 
+{"name":"Greece", "pop":11177509, "traffic":1013}, 
+{"name":"Guatemala", "pop":14732261, "traffic":2939}, 
+{"name":"Guinea", "pop":11012406, "traffic":3211}, 
+{"name":"Guinea-Bissau", "pop":1634196, "traffic":468}, 
+{"name":"Guyana", "pop":753362, "traffic":138}, 
+{"name":"Haiti", "pop":9999617, "traffic":0}, 
+{"name":"Honduras", "pop":7503875, "traffic":1408}, 
+{"name":"Hong Kong, China", "pop":6993570, "traffic":0}, 
+{"name":"Hungary", "pop":10014633, "traffic":765}, 
+{"name":"Iceland", "pop":318042, "traffic":15}, 
+{"name":"India", "pop":1230984504, "traffic":207551}, 
+{"name":"Indonesia", "pop":241613126, "traffic":38279}, 
+{"name":"Iran", "pop":74253373, "traffic":24896}, 
+{"name":"Iraq", "pop":30868156, "traffic":6826}, 
+{"name":"Ireland", "pop":4617334, "traffic":188}, 
+{"name":"Israel", "pop":7420368, "traffic":277}, 
+{"name":"Italy", "pop":59588007, "traffic":3721}, 
+{"name":"Jamaica", "pop":2741253, "traffic":320}, 
+{"name":"Japan", "pop":127319802, "traffic":5971}, 
+{"name":"Jordan", "pop":6517912, "traffic":1913}, 
+{"name":"Kazakhstan", "pop":16310624, "traffic":3983}, 
+{"name":"Kenya", "pop":40328313, "traffic":12891}, 
+{"name":"Kuwait", "pop":3059473, "traffic":629}, 
+{"name":"Kyrgyzstan", "pop":5464567, "traffic":1220}, 
+{"name":"Laos", "pop":6260544, "traffic":971}, 
+{"name":"Latvia", "pop":2090519, "traffic":205}, 
+{"name":"Lebanon", "pop":4337156, "traffic":1088}, 
+{"name":"Lesotho", "pop":2010586, "traffic":584}, 
+{"name":"Liberia", "pop":3957990, "traffic":1448}, 
+{"name":"Libya", "pop":6265697, "traffic":4554}, 
+{"name":"Lithuania", "pop":3122835, "traffic":320}, 
+{"name":"Luxembourg", "pop":507889, "traffic":46}, 
+{"name":"Macao,China", "pop":534626, "traffic":0}, 
+{"name":"Macedonia", "pop":2062443, "traffic":0}, 
+{"name":"Madagascar", "pop":21079532, "traffic":6506}, 
+{"name":"Malawi", "pop":14769824, "traffic":5732}, 
+{"name":"Malaysia", "pop":28119500, "traffic":7129}, 
+{"name":"Maldives", "pop":332575, "traffic":12}, 
+{"name":"Mali", "pop":15167286, "traffic":3920}, 
+{"name":"Malta", "pop":412064, "traffic":22}, 
+{"name":"Mauritania", "pop":3591400, "traffic":952}, 
+{"name":"Mauritius", "pop":1247951, "traffic":152}, 
+{"name":"Mexico", "pop":118617542, "traffic":15062}, 
+{"name":"Moldova", "pop":4084483, "traffic":437}, 
+{"name":"Mongolia", "pop":2712657, "traffic":597}, 
+{"name":"Montenegro", "pop":621952, "traffic":74}, 
+{"name":"Morocco", "pop":32107739, "traffic":6870}, 
+{"name":"Mozambique", "pop":24321457, "traffic":8173}, 
+{"name":"Myanmar", "pop":51733013, "traffic":10809}, 
+{"name":"Namibia", "pop":2193643, "traffic":551}, 
+{"name":"Nepal", "pop":26875910, "traffic":4713}, 
+{"name":"Netherlands", "pop":16631571, "traffic":574}, 
+{"name":"New Zealand", "pop":4369027, "traffic":272}, 
+{"name":"Nicaragua", "pop":5737722, "traffic":931}, 
+{"name":"Niger", "pop":16291990, "traffic":4706}, 
+{"name":"Nigeria", "pop":159424742, "traffic":35641}, 
+{"name":"North Korea", "pop":24500506, "traffic":0}, 
+{"name":"Norway", "pop":4891251, "traffic":192}, 
+{"name":"Oman", "pop":2943747, "traffic":924}, 
+{"name":"Pakistan", "pop":170043918, "traffic":25781}, 
+{"name":"Palestine", "pop":4068780, "traffic":0}, 
+{"name":"Panama", "pop":3620506, "traffic":386}, 
+{"name":"Papua New Guinea", "pop":6847517, "traffic":1232}, 
+{"name":"Paraguay", "pop":6209877, "traffic":1408}, 
+{"name":"Peru", "pop":29373644, "traffic":4234}, 
+{"name":"Philippines", "pop":93038902, "traffic":10379}, 
+{"name":"Poland", "pop":38574682, "traffic":3931}, 
+{"name":"Portugal", "pop":10584837, "traffic":828}, 
+{"name":"Puerto Rico", "pop":3709671, "traffic":0}, 
+{"name":"Qatar", "pop":1765513, "traffic":330}, 
+{"name":"Réunion", "pop":830516, "traffic":0}, 
+{"name":"Romania", "pop":20298838, "traffic":1881}, 
+{"name":"Russia", "pop":143158099, "traffic":27025}, 
+{"name":"Rwanda", "pop":10293669, "traffic":3782}, 
+{"name":"Saint Lucia", "pop":177397, "traffic":33}, 
+{"name":"Saint Vincent and the Grenadines", "pop":109316, "traffic":9}, 
+{"name":"Samoa", "pop":186029, "traffic":30}, 
+{"name":"Sao Tome and Principe", "pop":170880, "traffic":60}, 
+{"name":"Saudi Arabia", "pop":28090647, "traffic":7898}, 
+{"name":"Senegal", "pop":12956791, "traffic":3844}, 
+{"name":"Serbia", "pop":9059046, "traffic":735}, 
+{"name":"Seychelles", "pop":93081, "traffic":8}, 
+{"name":"Sierra Leone", "pop":5775902, "traffic":1661}, 
+{"name":"Singapore", "pop":5078961, "traffic":197}, 
+{"name":"Slovakia", "pop":5406896, "traffic":360}, 
+{"name":"Slovenia", "pop":2052480, "traffic":132}, 
+{"name":"Solomon Islands", "pop":526177, "traffic":108}, 
+{"name":"Somalia", "pop":9581714, "traffic":2664}, 
+{"name":"South Africa", "pop":51621594, "traffic":13273}, 
+{"name":"South Korea", "pop":49090041, "traffic":5931}, 
+{"name":"South Sudan", "pop":10056475, "traffic":0}, 
+{"name":"Spain", "pop":46601492, "traffic":1730}, 
+{"name":"Sri Lanka", "pop":20201312, "traffic":3691}, 
+{"name":"Sudan", "pop":36114885, "traffic":9221}, 
+{"name":"Suriname", "pop":518141, "traffic":103}, 
+{"name":"Swaziland", "pop":1193148, "traffic":303}, 
+{"name":"Sweden", "pop":9382297, "traffic":272}, 
+{"name":"Switzerland", "pop":7830534, "traffic":269}, 
+{"name":"Tajikistan", "pop":7581696, "traffic":1543}, 
+{"name":"Tanzania", "pop":45648525, "traffic":16211}, 
+{"name":"Thailand", "pop":66692024, "traffic":24237}, 
+{"name":"Timor-Leste", "pop":1057122, "traffic":188}, 
+{"name":"Togo", "pop":6390851, "traffic":2123}, 
+{"name":"Tonga", "pop":103947, "traffic":8}, 
+{"name":"Trinidad and Tobago", "pop":1328095, "traffic":189}, 
+{"name":"Tunisia", "pop":10639194, "traffic":2679}, 
+{"name":"Turkey", "pop":72310416, "traffic":6687}, 
+{"name":"Turkmenistan", "pop":5041995, "traffic":914}, 
+{"name":"Uganda", "pop":33149417, "traffic":10280}, 
+{"name":"Ukraine", "pop":45647497, "traffic":6121}, 
+{"name":"United Arab Emirates", "pop":8329453, "traffic":1021}, 
+{"name":"United Kingdom", "pop":62716684, "traffic":1827}, 
+{"name":"USA", "pop":309876170, "traffic":34064}, 
+{"name":"Uruguay", "pop":3374414, "traffic":567}, 
+{"name":"Uzbekistan", "pop":27739764, "traffic":3240}, 
+{"name":"Venezuela", "pop":28995745, "traffic":10791}, 
+{"name":"Vietnam", "pop":88357775, "traffic":22419}, 
+{"name":"Yemen", "pop":23591972, "traffic":5248}, 
+{"name":"Zambia", "pop":13917439, "traffic":3586}, 
+{"name":"Zimbabwe", "pop":13973897, "traffic":3985}, 
+];
+
+  var pop = 0,
+      traffic = 0,
+      death = 0,
+      children = 0,
+      injury = 0, 
+      refugee = 0,
+      displaced = 0,
+      refugee = 0,
+      humanitarian = 0,
+      health = 0,
+      food = 0,
+      shelter = 0,
+      water = 0,
+      death2 = 0,
+      children2 = 0,
+      injury2 = 0,
+      refugee2 = 0,
+      displaced2 = 0,
+      humanitarian2 = 0,
+      health2 = 0,
+      food2 = 0,
+      shelter2 = 0,
+      water2 = 0,
+      deathannual = 0,
+      deathtimes = 0;
+
+  var geocoder = new google.maps.Geocoder();
+  var mapOptions = {
+      streetViewControl: false,
+      zoom: 7,
+      maxZoom: 10,
+      zoomControl: true,
+      zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.SMALL,
+      position: google.maps.ControlPosition.LEFT_TOP
+    },
+    center: new google.maps.LatLng(34, 38.5)
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+
+function init() {
+  $("#page01, #page02, #page03, #page04, #page05, #nodata").hide();
+
+  $("#btn-00").click(function() {
+    $(".panel").slideUp(500, function(){
+      $("#page00").hide();
+      $(".panel").css("height","45%");
+      $("#page01").show();
+    });  
+    $(".panel").slideDown(500);
+  });  
+
+  $("#btn-01").click(function() {
+    $(".panel").slideUp(500, function(){
+      $("#page01").hide();
+      $(".panel").css("height","35%");
+      $("#page02").show();
+      addInput();
+      jumptoCountry();
+    });  
+    $(".panel").slideDown(500);
+  }); 
+
+  $("#btn-02").click(function() {
+    $("#white-canvas").fadeIn(2000, function(){
+    $("#white-canvas").fadeOut(2000);
+      $(".panel").slideUp(1000, function(){
+        $("#page02").hide();
+        $(".panel").css("height","100%");
+        $("#page03").show();
+        setTimeout(function(){chart01();},800);
+      });  
+      $(".panel").slideDown(500);
+    });  
+  });  
+
+  $("#btn-03").click(function() {
+    $(".panel").slideUp(500, function(){
+      $("#page03").hide();
+      $("#page04").show();
+      setTimeout(function(){chart02();},800);
+    });  
+    $(".panel").slideDown(500);
+    sendData();
+  }); 
+
+  $("#btn-04").click(function() {
+    $(".panel").slideUp(500, function(){
+      $("#page04").hide();
+      $("#page05").show();
+    });  
+    $(".panel").slideDown(500);
+  });
+
+  $("#btn-05").click(function() {
+    location.reload();
+  });
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+
+}
+//function init finishes here
+
+function addInput() {
+    input = $('#countryInput').val();
+    for (var i=0; i<184; i++) {
+      if (input == data[i]["name"])
+        {
+          pop = data[i]["pop"];
+          traffic = data[i]["traffic"];
+        }
+      }
+
+    death = numberWithCommas(Math.round(pop*1.31/100)),
+    children = numberWithCommas(Math.round(pop*0.07/100)),
+    injury = numberWithCommas(Math.round(pop*5.79/100)),
+    refugee = numberWithCommas(Math.round(pop*22.2/100)),
+    displaced = numberWithCommas(Math.round(pop*50/100)),
+    humanitarian = numberWithCommas(Math.round(pop*65.15/100)),
+    health = numberWithCommas(Math.round(pop*55.5/100)),
+    food = numberWithCommas(Math.round(pop*41.99/100)),
+    shelter = numberWithCommas(Math.round(pop*11.58/100)),
+    water = numberWithCommas(Math.round(pop*70/100));
+    
+
+    death2 = Math.round(pop*1.31/100),
+    children2 = Math.round(pop*0.07/100),
+    injury2 = Math.round(pop*5.79/100),
+    refugee2 = Math.round(pop*22.2/100),
+    displaced2 = Math.round(pop*50/100),
+    humanitarian2 = Math.round(pop*65.15/100),
+    health2 = Math.round(pop*55.5/100),
+    food2 = Math.round(pop*41.99/100),
+    shelter2 = Math.round(pop*11.58/100),
+    water2 = Math.round(pop*70/100),
+    deathannual = numberWithCommas(Math.round(pop*1.31/100/5)),
+    deathtimes = (pop*1.31/100/traffic).toFixed(1);
+    
+    if (traffic == 0){deathtimes = "*"; $("#nodata").show();}
+
+    //console.log(death+ " " + children+ " " + injury+ " " + refugee+ " " + displaced+ " " + humanitarian+ " " + health+ " " + food+ " " + shelter+ " " + water);
+
+    //console.log(death2+ " " + children2+ " " + injury2+ " " + refugee2+ " " + displaced2+ " " + humanitarian2+ " " + health2+ " " + food2+ " " + shelter2+ " " + water2 + " " + deathannual + " " + deathtimes);
+
+    var pop2 = numberWithCommas(pop);
+    $("#country").text(input);
+    $("#pop").text(pop2);
+    $("#death1output").text(death);
+    $("#death2output").text(deathannual);
+    $("#caroutput").text(deathtimes);
+    $("#countryoutput").text(input);
+    
+}    
+
+google.maps.event.addDomListener(window, 'load', init);
+
+function jumptoCountry() {
+    var address = input;
+    if(input=="Georgia"){address = "Georgia country"}
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+    var bounds = results[0].geometry.viewport;
+    map.fitBounds(bounds);
+      };
+    });
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function chart01() {
+
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container01').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: null,
+            marginBottom: 10,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Total deaths in 5 years","Deaths per year","Road traffic deaths in 2013"],
+            visible: false,
+        },
+        yAxis: {
+            title: {
+              text: null,
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+            visible: false,
+        },
+        credits: { enabled: false },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:,.0f}</b>',
+            style: {
+                    fontSize: '14px',
+                },            
+        },
+
+        series: [{
+            data: [{y:death2, color:'#d3401e'},death2/5,traffic],
+            color: "#4188bc",
+            borderWidth: 0,
+            groupPadding: 0.01,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '14px',
+                }
+            }
+        }]
+    });
+};
+
+function chart02() {
+
+  if ($(window).width()<400){
+
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container02').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: null,
+            marginBottom: 10,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Total population","Without safe drinking water","Need health aid","Displaced","Insufficient food","Refugees","Without shelter"],
+            visible: false,
+        },
+        yAxis: {
+            endOnTick: false,
+            visible: false,           
+        },
+        credits: { enabled: false },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:,.0f}</b>',
+            style: {
+                    fontSize: '14px',
+                },
+        },
+
+        series: [{
+            data: [{y:pop, color:'#4188bc'},water2,health2,displaced2,food2,refugee2,shelter2],
+            color: "#d3401e",
+            borderWidth: 0,
+            groupPadding: 0.01,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+  }
+  else {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container02').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: null,
+            marginBottom: 10,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Total population","Without safe drinking water","Need health assistance","Displaced","Insufficient food","Refugees","Without shelter"],
+            visible: false,
+        },
+        yAxis: {
+            endOnTick: false,
+            visible: false,
+        },
+        credits: { enabled: false },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:,.0f}</b>',
+            style: {
+                    fontSize: '14px',
+                },
+        },
+
+        series: [{
+            data: [{y:pop, color:'#4188bc'},water2,health2,displaced2,food2,refugee2,shelter2],
+            color: "#d3401e",
+            borderWidth: 0,
+            groupPadding: 0.01,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '14px',
+                }
+            }
+        }]
+    });
+  }
+};
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("If the Syrian war happened in " + input + ", " + death + " would be killed #syria5years @pri");
+  tweet_url += ' pic.twitter.com/7VnNoZ8KBC';
+  tweet_url += '&url=http://bit.ly/1RLlisQ';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+var fbtitle = "If the Syrian civil war happened in " + input + ", " + death + " would be killed. What about your country?";
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-03-15/what-if-syrian-civil-war-happened-your-country',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/Syria_web_01.jpg',
+  name: fbtitle,
+  description: "The war in Syria is entering its sixth year with no end in sight. What if it happened in your country? This app will show you."
+  }, function(response){});
+}
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      //console.log(json.ip);
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1sI1M5K0-c9Awf0HeNlQP4R1uo3eBRYFgiFe-Q-K1N_w/formResponse',
+        data: { 
+          "entry.108947394": json.ip,
+          "entry.1208674920": input,
+          "entry.1371222979": document.referrer,
+        }
+      }); 
+    }
+  );   
+}
+    
+</script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1676191859309313',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+</body>
+</html>
+

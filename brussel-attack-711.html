@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 5px;
+}
+
+table {width: 100%; margin-bottom: 10px;}
+
+#col01, #col02 {
+  width:48%;
+}
+
+.button01 {text-align: right; margin-right: 3%}
+.button02 {text-align: left; margin-left: 3%}
+
+#button01, #button02 {background-color: #e9e9e9;border-radius: 5px;}
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+      <table>
+        <tr>
+          <td id="col01"><div class="button01"><button id="button01">Zoom in</button></div></td>
+          <td id="col02"><div class="button02"><button id="button02">Zoom out</button></div></td>
+        </tr>
+      </table>
+    	   <div id="text">Click and drag on the chart or click the buttons to zoom in. </div>
+        <div>Numbers represent search interest relative to the highest point which is Brussels in the week of Mar 20, 2015. The numbers in that week is partial data from Mar 20 to 24.
+        <br>Weeks when attacks happened are marked by markers. 
+        <br>Source: <a href='https://www.google.com/trends/' target='_blank'>Google Trends</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container').highcharts({
+          chart: {
+              type: 'line',
+              zoomType: 'y',
+          },
+          title: {
+              text: 'Google search interest of cities/countries attacked by terrorists since the Paris attacks',
+              margin: 30,
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                  //year: '%Y',
+                  month: '%b<br>%Y'
+              },
+              tickInterval: 24 * 3600 * 1000 * 30,
+          },
+          yAxis: {
+              title: {
+                text: null,
+              },
+              labels: {
+                  format: '{value:,.0f}'
+              },
+              endOnTick: false,
+          },
+          credits: { enabled: false, },
+
+          tooltip: {
+              formatter: function() {
+               return '<b>' + this.series.name + '</b><br>(Attacked on ' + this.series.options.attack + ')<br>Week: '+ this.point.week +'</b>' + '<br>Search: <b>' + this.point.y + '</b>';
+              }
+          },
+          plotOptions: {
+              series: {
+                  groupPadding: 0,
+              },
+              line: {
+                  marker: {
+                      enabled: false
+                  }
+              }
+          },
+	        series: [
+	          {attack: "Mar 13, 2016", name: "Ivory Coast", color:"#a6cee3",
+	          data :[
+              {x:Date.UTC(2015,10,4), y:0.3, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:0.4, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:0.4, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:0.3, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:0.3, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:0.3, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:0.3, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:0.2, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:0.2, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:0.3, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:0.3, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:0.4, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:0.4, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:0.4, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:0.3, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:0.3, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:0.3, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:0.3, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:0.3, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:2.5, week:"13-19 Mar 2016", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2016,2,23), y:0.5, week:"20-26 Mar 2016"},
+	          ]},
+	          {attack: "Jan 12, 2016", name: "Istanbul", color:"#1f78b4",
+	          data :[
+              {x:Date.UTC(2015,10,4), y:26, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:28, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:28, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:28, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:29, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:27, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:27, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:31, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:42, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:32, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:45, week:"10-16 Jan 2016", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2016,0,20), y:41, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:31, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:30, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:29, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:28, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:28, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:28, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:27, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:35, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:32, week:"20-26 Mar 2016"}, 
+	          ]},
+            {attack: "Dec 2, 2015", name: "San Bernardino", color:"#33a02c",
+            data :[
+              {x:Date.UTC(2015,10,4), y:2, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:2, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:2, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:2, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:66, week:"29 Nov-5 Dec 2015", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2015,11,9), y:12, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:5, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:3, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:3, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:3, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:3, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:3, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:3, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:3, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:2, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:3, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:3, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:3, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:3, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:3, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:3, week:"20-26 Mar 2016"},
+            ]},
+            {attack: "Mar 22, 2016", name: "Brussels", color:"#e31a1c",
+            data :[
+              {x:Date.UTC(2015,10,4), y:5, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:5, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:8, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:9, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:4, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:4, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:4, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:4, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:4, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:4, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:5, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:5, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:5, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:5, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:5, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:5, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:5, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:5, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:5, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:5, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:100, week:"20-26 Mar 2016", marker: {enabled: true, radius: 6}},
+            ]},
+            {attack: "Nov 20, 2015", name: "Mali", color:"#b2df8a",
+            data :[
+              {x:Date.UTC(2015,10,4), y:5.7, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:6.9, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:57.1, week:"15-21 Nov 2015", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2015,10,25), y:9.7, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:5.7, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:5.1, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:5.1, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:5.1, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:4.6, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:5.1, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:5.1, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:5.1, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:5.1, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:5.1, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:5.1, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:4.6, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:5.1, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:5.1, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:4.6, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:4.6, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:6.3, week:"20-26 Mar 2016"},
+            ]},
+            {attack: "Nov 24, 2015", name: "Tunisia", color:"#fb9a99",
+            data :[
+              {x:Date.UTC(2015,10,4), y:1.7, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:1.7, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:1.7, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:2.9, week:"22-28 Nov 2015", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2015,11,2), y:1.7, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:1.7, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:1.7, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:1.7, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:1.7, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:1.7, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:1.7, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:2.3, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:1.7, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:1.7, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:1.7, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:1.7, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:1.7, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:1.7, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:1.7, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:1.7, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:1.7, week:"20-26 Mar 2016"},
+            ]},
+            {attack: "Jan 14, 2016", name: "Jakarta", color:"#ff7f00",
+            data :[
+              {x:Date.UTC(2015,10,4), y:17.7, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:17.7, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:17.7, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:17.7, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:17.7, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:17.7, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:18.3, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:20.0, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:19.4, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:19.4, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:42.9, week:"10-16 Jan 2016", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2016,0,20), y:21.1, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:18.9, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:18.3, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:18.3, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:18.9, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:18.9, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:18.9, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:18.9, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:18.3, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:18.9, week:"20-26 Mar 2016"},
+            ]},
+            {attack: "Feb 17 & Mar 13, 2016", name: "Ankara", color:"#6a3d9a",
+            data :[
+              {x:Date.UTC(2015,10,4), y:17.1, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:18.3, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:18.3, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:18.9, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:20.6, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:18.9, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:19.4, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:21.7, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:22.9, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:22.3, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:21.1, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:25.1, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:21.7, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:20.6, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:20.0, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:33.7, week:"14-20 Feb 2016", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2016,1,24), y:20.0, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:20.0, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:19.4, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:45.1, week:"13-19 Mar 2016", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2016,2,23), y:21.1, week:"20-26 Mar 2016"},
+            ]},
+            {attack: "Jan 15, 2016", name: "Burkina Faso", color:"#cab2d6",
+            data :[
+              {x:Date.UTC(2015,10,4), y:0.8, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:0.8, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:0.9, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:0.8, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:1.7, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:1.0, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:0.9, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:0.7, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:0.7, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:0.8, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:9.7, week:"10-16 Jan 2016", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2016,0,20), y:5.3, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:1.0, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:0.8, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:0.8, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:0.7, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:0.7, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:0.7, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:0.7, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:0.8, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:0.7, week:"20-26 Mar 2016"},
+            ]},
+            {attack: "Jan 21, 2016", name: "Somalia", color:"#fdbf6f",
+            data :[
+              {x:Date.UTC(2015,10,4), y:1.4, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:1.3, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:1.4, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:1.3, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:1.2, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:1.2, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:1.2, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:1.3, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:1.1, week:"27 Dec 2015-2 Jan 2016"},
+              {x:Date.UTC(2016,0,6), y:1.2, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:1.8, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:2.2, week:"17-23 Jan 2016", marker: {enabled: true, radius: 6}},
+              {x:Date.UTC(2016,0,27), y:1.5, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:1.7, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:1.6, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:1.3, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:1.2, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:1.2, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:1.6, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:1.4, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:1.3, week:"20-26 Mar 2016"},
+            ]},
+	        ],  
+  });
+
+  $('#button01').click(function () {
+      var chart = $('#container').highcharts();
+      chart.yAxis[0].setExtremes(1, 10); 
+  });
+
+  $('#button02').click(function () {
+      var chart = $('#container').highcharts();
+      chart.yAxis[0].setExtremes(1, 100); 
+  });
+
+});
+
+</script>

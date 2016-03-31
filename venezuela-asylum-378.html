@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 300px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        Source: USCIS' <a href='https://www.dhs.gov/publication/yearbook-immigration-statistics-2004-refugees-and-asylees'  target='_blank'>2004 Yearbook of Immigration Statistics</a>, <a href='https://www.dhs.gov/publication/yearbook-immigration-statistics-2013-refugees-and-asylees'  target='_blank'>2013 Yearbook of Immigration Statistics</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+          type: 'line',
+        },
+        title: {
+            text: "Venezuelans granted asylum by the US, 1997-2013",
+            margin: 30,
+            style: {
+                fontSize: '16px',
+            },
+        },
+        subtitle: {
+            enabled: false,
+        },
+  
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                year: '%Y'
+            },
+            tickInterval: 24 * 3600 * 1000 * 365 * 2,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+                text: 'Number of individuals',
+                style: {
+                      fontSize: '11px',
+                }
+            },
+            labels: {
+                format: '{value:,.0f}',
+            },
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y:,.0f}</b>'
+        },
+        
+        legend: {
+          enabled: false
+        },
+
+        credits: { enabled: false, },
+        series: [
+          {name: "Venezuela", color:"#d3401e",
+          data :[
+            [Date.UTC(1997,0,1),9],
+            [Date.UTC(1998,0,1),14],
+            [Date.UTC(1999,0,1),18],
+            [Date.UTC(2000,0,1),23],
+            [Date.UTC(2001,0,1),39],
+            [Date.UTC(2002,0,1),67],
+            [Date.UTC(2003,0,1),305],
+            [Date.UTC(2004,0,1),1257],
+            [Date.UTC(2005,0,1),1105],
+            [Date.UTC(2006,0,1),1359],
+            [Date.UTC(2007,0,1),1151],
+            [Date.UTC(2008,0,1),1059],
+            [Date.UTC(2009,0,1),585],
+            [Date.UTC(2010,0,1),648],
+            [Date.UTC(2011,0,1),1104],
+            [Date.UTC(2012,0,1),1090],
+            [Date.UTC(2013,0,1),687],
+          ]},    
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true
+                },
+                dataLabels: {
+                  enabled: true,
+                  
+                  color: '#FFFFFF',
+                  align: 'right',
+                  format: '{point.y:,.0f}', // one decimal
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+              }
+
+            },
+
+        },
+
+    });
+});
+
+</script>

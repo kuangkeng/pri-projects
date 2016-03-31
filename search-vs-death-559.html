@@ -1,0 +1,147 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 5px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Higher fatalities do not mean more attention.</div>
+        <div><i>Hover over each point for more details.</i></div>
+        <div>Percentage is calculated by dividing search interest during the week of attacks by the average search interest during other weeks. Numbers of deaths are the minimal deaths reported by media.</div>
+        <div>Source: <a href='https://www.google.com/trends/' target='_blank'>Google Trends</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'scatter',
+            renderTo: 'container', 
+        },
+        title: {
+            text: "Google search interest spike after terrorist attacks vs number of deaths",
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },
+        xAxis: {
+            title: {
+              text:'Search spike (percent)',
+            },
+            labels:{enabled: true,},
+        },
+        yAxis: {    
+            title: {
+                text: 'No. of deaths',
+            },
+        },
+        credits: { enabled: false, },
+        legend:{enabled: false,},
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 10,
+                    fillColor: '#4188bc',
+                    lineColor: '#D3D3D3',
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#33333c'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'Search spike: <b>{point.x}%</b><br>No. of deaths: <b>{point.y}</b>'
+                }
+            }
+        },
+        series: [{data:[
+            {"name":"San Bernardino","x":2100,"y":14},
+            {"name":"Brussels","x":1900,"y":31},
+            {"name":"Burkina Faso","x":1113,"y":30},
+            {"name":"Mali","x":1020,"y":20},
+            {"name":"Ivory Coast","x":733,"y":18},
+            {"name":"Jakarta","x":132,"y":8},
+            {"name":"Ankara (Mar 13)","x":121,"y":37},
+            {"name":"Tunisia","x":71,"y":13},
+            {"name":"Istanbul","x":50,"y":13},
+            {"name":"Somalia","x":69,"y":20},
+            {"name":"Ankara (Feb 17)","x":65,"y":29},
+          ],
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                align: 'center',
+                format: '{point.name}',
+                y: -8,
+                style: {
+                    fontSize: '10px',
+                }
+            },
+
+        }],
+    });    
+});
+</script>

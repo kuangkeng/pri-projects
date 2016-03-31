@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 14px;
+    color: #808080;
+    line-height: 18px;
+    padding:10px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.tooltip { position:absolute;
+  width: 145px;
+  padding: 5px;
+  border: 1px solid gray;
+  font-size: 9pt;
+  background-color: #fff;
+  color: #000;
+}
+
+#window {font-size: 14px;}
+#location {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px;
+}
+#date, #fatalities {line-height: 18px;}
+#date {font-size: 12px;}
+#first, #second {line-height: 16px;}
+#second {margin-top: 5px;}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+      Major terror attacks since the Paris attacks in November 2015
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.22&libraries=geometry,visualization&sensor=false"></script>
+    <script src="http://googlemapapitutorial.com/js/custom_map_tooltip.js"></script>
+
+<script>
+
+  var points = [
+    [12.639259,-8.003189,"Bamako, Mali"],
+    [36.80645,10.181232,"Tunis, Tunisia"],
+    [34.108461,-117.289709,"San Bernardino, US"],
+    [41.008013,28.978861,"Istanbul, Turkey"],
+    [-6.208936,106.845431,"Jakarta, Indonesia"],
+    [12.37146,-1.51964,"Ouagadougou, Burkina Faso"],
+    [39.933395,32.859675,"Ankara, Turkey"],
+    [2.047105,45.318319,"Mogadishu, Somalia"],
+    [5.225919,-3.753613,"Grand-Bassam, Ivory Coast"],
+  ];
+
+  var info =[
+["<div id='window'><div id='location'>Bamako, Mali</div><div id='date'>Nov 20, 2015</div><div id='fatalities'>Fatalies: <b>20</b></div></div>"],
+["<div id='window'><div id='location'>Tunis, Tunisia</div><div id='date'>Nov 24, 2015</div><div id='fatalities'>Fatalies: <b>13</b></div></div>"],
+["<div id='window'><div id='location'>San Bernardino, US</div><di id='date'v>Dec 2, 2015</div><div id='fatalities'>Fatalies: <b>14</b></div></div>"],
+["<div id='window'><div id='location'>Istanbul, Turkey</div><div id='date'>Jan 12, 2016</div><div id='fatalities'>Fatalies: <b>13</b></div></div>"],
+["<div id='window'><div id='location'>Jakarta, Indonesia</div><div id='date'>Jan 14, 2016</div><div id='fatalities'>Fatalies: <b>8</b></div></div>"],
+["<div id='window'><div id='location'>Ouagadougou, Burkina Faso</div><div id='date'>Jan 15, 2016</div><div id='fatalities'>Fatalies: <b>At least 30</b></div></div>"],
+["<div id='window'><div id='location'>Ankara, Turkey</div><div id='first'><b>First attack</b></div><div id='date'>Feb 17, 2016</div><div id='fatalities'>Fatalies: <b>At least 29</b></div><div id='second'><b>Second attack</b></div><div id='date'>Mar 13, 2016</div><div id='fatalities'>Fatalies: <b>37</b></div></div>"],
+["<div id='window'><div id='location'>Mogadishu, Somalia</div><div id='date'>Feb 25, 2016</div><div id='fatalities'>Fatalies: <b>At least 15</b></div></div>"],
+["<div id='window'><div id='location'>Grand-Bassam, Ivory Coast</div><div id='date'>Mar 13, 2016</div><div id='fatalities'>Fatalies: <b>At least 18</b></div></div>"],
+
+  ];
+
+  var markers = [];
+
+  function init() {  
+    var mapOptions = {
+        streetViewControl: false,
+        zoom: 2,
+        maxZoom: 7,
+        zoomControl: true,
+        mapTypeControl: false,
+        zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL,
+        position: google.maps.ControlPosition.LEFT_TOP
+      },
+      center: new google.maps.LatLng(0, 0)
+    };
+    var map = new google.maps.Map(document.getElementById('container'),mapOptions);
+
+    for (var i = 0; i < points.length; i++) {
+      var point = points[i];
+      var myLatLng = new google.maps.LatLng(point[0], point[1]);
+      markers[i] = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: point[2],
+      });
+
+      (function(marker,i){
+          google.maps.event.addListener(marker, 'click', function(){ 
+            var infowindow = new google.maps.InfoWindow({
+              content: info[i][0]
+            });
+            infowindow.open(map, marker);
+            console.log(info[i][0]);
+          }); 
+      }(markers[i],i));      
+
+    }
+  }
+
+ 
+  google.maps.event.addDomListener(window, 'load', init);
+
+</script>
+
+
+
+</body>

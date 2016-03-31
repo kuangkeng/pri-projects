@@ -1,0 +1,201 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+table {width: 100%; margin-bottom: 10px;}
+
+#col01, #col02 {
+  width:48%;
+}
+
+.button01 {text-align: right; margin-right: 3%}
+.button02 {text-align: left; margin-left: 3%}
+
+#button01, #button02 {background-color: #e9e9e9;border-radius: 5px;}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <table>
+            <tr>
+              <td id="col01"><div class="button01"><button id="button01">Zoom in</button></div></td>
+              <td id="col02"><div class="button02"><button id="button02">Zoom out</button></div></td>
+            </tr>
+        </table>
+        <div id="text">Mouseover each country in the legend to highlight corresponding line. Click to hide/show the line.<br>Click the 'zoom in' button to magnify the part below 5,000 refugees.</div>
+        Source: 
+        <a href='http://www.wrapsnet.org/Reports/InteractiveReporting/tabid/393/Default.aspx' target='_blank'>Refugee Processing Center</a><br>Only countries with over a total of 10,000 refugees are shown.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: 'Number of refugees by country of origin, 2002-2015',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015"],   
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  x: 0,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                labels: {
+                    format: '{value:,.0f}'
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {
+                itemWidth: 100,
+                itemStyle: {
+                    color: '#595959',
+                }
+            },
+            tooltip: {
+                enabled: true,
+            },
+            plotOptions: {
+                series:{
+                    stickyTracking: false,
+                },
+                line: {
+                  marker: {
+                      enabled: false
+                }
+              }
+            },
+            series: [
+                {name: "Afghanistan", color:"#FF5349", data: [2026,1370,836,876,633,413,611,338,527,392,578,678,696,1168]},
+                {name: "Bhutan", color:"#FDD9B5", data: [0,0,0,0,3,0,7544,15077,11729,14735,14459,9051,7476,5764]},
+                {name: "Burma", color:"#FDDB6D", data :[113,220,1277,1470,2294,14225,19000,19920,17176,15713,15112,14580,15971,17483]},
+                {name: "Burundi", color:"#C5E384", data: [62,18,335,153,514,5058,2567,635,435,129,183,162,133,1208]},
+                {name: "Cuba", color:"#1CAC78", data: [1829,468,3812,6440,2574,3249,4340,4790,4865,2151,2707,4101,3703,1060]},
+                {name: "DR Congo", color:"#000000", data: [94,286,626,331,478,821,963,1134,3160,1206,2132,2592,5128,8206]},
+                {name: "Ethiopia", color:"#FFAACC", data: [401,2199,2293,1627,1308,946,260,345,663,594,820,672,687,682]},
+                {name: "Eritrea", color:"#0D98BA", data: [14,41,181,515,432,846,376,1917,2517,1817,1819,1418,1409,1783]},
+                {name: "Iran", color:"#C0448F", data: [1778,2481,1746,1763,4065,5140,5067,5437,2979,2100,1973,2535,2830,3121]},
+                {name: "Iraq", color:"#FC2847", data :[552,209,73,204,218,2631,15766,19472,18251,6339,16369,18567,20337,10169]},
+                {name: "Laos", color:"#B4674D", data: [18,13,9201,5630,563,101,41,6,135,115,18,0,0,0]},
+                {name: "Liberia", color:"#95918C", data: [729,3990,6696,4069,1995,1822,602,447,181,132,56,81,28,11]},
+                {name: "Russia", color:"#FFAE42", data: [2295,1712,1187,7478,4890,1212,460,453,265,161,198,93,198,292]},
+                {name: "Somalia", color:"#1F75FE", data :[317,2762,15088,9334,10522,5708,2698,4620,4401,3453,5893,7450,10057,7779]},
+                {name: "Sudan", color:"#7366BD", data: [1041,2653,3259,2098,1883,465,346,705,505,442,1529,2044,1043,1688]},
+                {name: "Ukraine", color:"#F75394", data: [6104,5429,2822,2991,2276,1452,826,552,428,458,346,209,667,1760]},
+                {name: "Vietnam", color:"#EE204D", data: [3581,1373,805,3416,1975,1534,1234,1754,470,120,87,63,80,39]},    
+            ],
+            },
+        function(chart){
+
+            $(chart.series).each(function(i, serie){
+                $(serie.legendItem.element).hover(function(){
+                    highlight(chart.series, serie.index, true);
+                }, function(){
+                    highlight(chart.series, serie.index, false);
+                });
+            });
+
+            function highlight(series, index, hide) {
+                $(series).each(function (i, serie) {
+                    if(i != index) {
+                        $.each(serie.data, function (k, data) {
+                            if(data.series) {
+                                data.series.graph && data.series.graph.attr("stroke", (hide ? "#D4D4D4": serie.color));
+                                data.series.markerGroup && data.series.markerGroup.attr("visibility", (hide ? "hidden": "visible"));
+                            }
+                        });
+
+                    } else {
+                        serie.group.toFront();
+                        $.each(serie.data, function (k, data) {
+                            if(data.series) {
+                                data.series.graph && data.series.graph.attr("stroke", serie.color);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        );
+
+        $('#button01').click(function () {
+            chart.yAxis[0].setExtremes(0, 5000); 
+        });
+
+        $('#button02').click(function () {
+            chart.yAxis[0].setExtremes(0, 20500); 
+        });
+
+    });
+    
+});
+</script>

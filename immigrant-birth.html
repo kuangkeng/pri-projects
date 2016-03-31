@@ -4,24 +4,39 @@
 
 <style>
 body {
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;
   font-size: 112.5%;
   line-height: 1.5em;
   color: #33333c;
       }  
 
 #container{
-height: 600px; 
-max-width: 850px; 
-margin: 0 auto;
-border:1px solid #D3D3D3;
+height: 530px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 10px;
+    color: #808080;
+    line-height: 10px;
+    font-style: italic;
+    padding:0px 10px 10px 10px;
 }
 
 </style>
 </head>
 
 <body>
+<div id="wrapper">    
 <div id="container"></div>
+<div id="note">'Immigrant' refers to people residing in the US who were not US citizens at birth including naturalized citizens, lawful permanent residents, certain legal nonimmigrants (e.g., persons on student or work visas), those admitted under refugee or asylee status, and persons illegally residing in the US.</div>
+</div>
 </body>
 
 <script>
@@ -29,19 +44,19 @@ $(function () {
     $('#container').highcharts({
         chart: {
             type: 'bar',
-            marginBottom: 220,
+            marginBottom: 130,
         },
         title: {
             text: 'US immigrant population by country of birth, 2014',
             margin: 20,
         },
         subtitle: {
-            text: "<b><span style='font-size: 12px'>Only India and the Philippines are English-speaking countries.</span></b><br><br>Source: <a href='http://www.migrationpolicy.org/programs/data-hub/charts/immigrants-countries-birth-over-time'  target='_blank'>Migration Policy Institute</a><br>'Immigrant' refers to people residing in the US who were not US citizens at birth including naturalized citizens, lawful permanent residents, certain legal nonimmigrants (e.g., persons on student or work visas), those admitted under refugee or asylee status, and persons illegally residing in the US.",
+            text: "<b><span style='font-size: 12px'>Only India and the Philippines are English-speaking countries.</span></b><br><br>Source: <a href='http://www.migrationpolicy.org/programs/data-hub/charts/immigrants-countries-birth-over-time'  target='_blank'>Migration Policy Institute</a>",
             useHTML: true,
             floating: true,
             align: 'left',
             verticalAlign: 'bottom',
-            y: -140,
+            y: -50,
             style: {
                 color: '#808080',
                 fontSize: '10px',
@@ -64,7 +79,7 @@ $(function () {
             },
             endOnTick: false,
         },
-        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        credits: { enabled: false },
         legend: {
             enabled: false
         },

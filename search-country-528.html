@@ -1,0 +1,130 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 18px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div>Numbers represent search interest relative to the highest value in the chart which is 100.
+        <br>Source: <a href='https://www.google.com/trends/' target='_blank'>Google Trends</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: "Where did the searches for 'kill Muslims' come from? (Mar 22-28, 2016)",
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Australia","United States","United Kingdom","Canada","South Africa","Belgium","Netherlands","Germany"],   
+            labels:{
+                enabled: false,
+            },
+            tickColor: '#FFFFFF',
+        },
+        yAxis: {
+            title: {
+              text: "Google search interest",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: 'Search interest: <b>{point.y:,.0f}</b>',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0,
+                pointPadding:0.02,
+            }
+        },
+        series: [{
+            data:[100,95,93,86,58,55,25,9],
+            color:"#4188bc",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#333',
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '11px',
+                }
+            }
+        }],
+    });
+});
+</script>

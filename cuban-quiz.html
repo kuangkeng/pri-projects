@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+    }
+    #quiz {max-width: 700px;}    
+
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+      text-align: center;
+    }
+
+    #introTitle {
+      margin-top: 20px; 
+      font-size: 32px; 
+      padding-left: 40px; 
+      padding-right: 40px;
+      padding-bottom: 30px;
+      color:white;
+      text-shadow: 1px 1px 2px #9a9a9a;
+      font-weight: 500;
+    }
+
+    #introIntro {
+      font-size: 22px; 
+      padding-left: 40px; 
+      padding-right: 40px; 
+      text-align: center; 
+      padding-bottom:40px;
+      color:white;
+      text-shadow: 1px 1px 2px #9a9a9a;
+    }
+
+    #resultTitle {
+      margin-top: 40px;
+    }
+
+    #resultIntro {
+      text-align: center;
+    }
+
+    .question { 
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+    }   
+
+    .blurb {
+      font-size: 16px;
+      color: #333;
+      margin: 20px 0 0 0;
+    }
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 100px;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }
+
+    .counter {
+      font-size: 12px;
+      color: #4188bc;
+      margin: 10px 0 10px 0;
+    }   
+
+    #intro {
+      background:url('http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuba-quiz-lead-3.jpg')no-repeat;
+      min-height: 600px;
+      background-size: contain;
+    } 
+
+    input[type=radio], input[type=checkbox] {
+      margin: 3px 0 0 ;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 400 !important;
+      color: #173e43;
+      line-height: 1.4em;
+      padding: 5px 20px 5px 40px !important;
+      border-radius: 5px;
+    }
+
+    #nextBtn { margin-top: 20px; margin-bottom: 10px; }  
+
+    #container01{
+      height: 250px; 
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%}  
+    
+    .shareBox {
+      padding-top: 30px;
+      padding-bottom:40px;
+    }    
+
+    #notes {
+      font-style: italic;
+      padding-bottom: 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 16px; margin-bottom: 0px;}
+      .blurb {font-size: 14px; margin-top: 0px;}
+      .mybtn {font-size: 16px;}
+      .counter {font-size: 10px;}
+      label {font-size: 14px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 16px; 
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-bottom:20px;
+      }
+      #introTitle {
+        font-size: 22px;
+        margin-top: 10px; 
+        padding-left: 15px; 
+        padding-right: 15px;
+        padding-bottom: 20px;
+      }
+
+    }  
+
+    @media (max-width: 400px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 15px; margin-bottom: 0px;}
+      .blurb {font-size: 13px; margin-top: 0px;}
+      .mybtn {font-size: 16px;}
+      .counter {font-size: 10px;}
+      label {font-size: 13px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        display:none;
+      }
+      #introTitle {
+        font-size: 20px;
+        margin-top: 40px; 
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 40px;
+      }
+
+    }
+</style>
+
+<body>
+  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="quiz" class="container">    
+      <div class="row"> 
+        <div id="intro" class="col-sm-12 col-xs-12">
+          <div id="introTitle" class="title">How much do you know about Cuban immigration to the US?</div>
+          <div id="introIntro" class="blurb">President Barack Obama is the first sitting US president to visit Cuba since 1928. After decades of mistrust and hostility, both countries started to normalize relations in 2014. The US policy to isolate Cuba has created a unique immigration law for Cuban immigrants known as the "wet-foot, dry-foot policy." Test your knowledge about the quirk in immigration law.</div>
+          <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+        </div>  <!-- END INTRO PAGE -->       
+
+        <div id="questions" class="col-sm-12 col-xs-12">
+          <div id="counter" class="counter">Question 0 of 0</div>
+          <div id="theQuestion" class="question">Question goes here</div>
+          <div id="allChoices" class="radio">
+            <label><input class="choice">choice01</label>
+            <br />
+            <label><input class="choice">choice01</label>
+            <br />
+            <label><input class="choice">choice01</label>
+          </div>
+        </div><!-- END QUESTION PAGE -->  
+
+        <div id="answers" class="col-sm-12 col-xs-12">
+          <div id="answerTitle" class="title">Answer</div>
+          <div id="answerExplain" class="blurb">Explanation</div>
+          <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+        </div>  <!-- END ANSWERS PAGE -->     
+
+        <div id="results" class="col-sm-12 col-xs-12">
+          <div id="resultTitle" class="title">You got <span id="pointer">0</span> out of 8 right!</div>
+          <div id="result01" class="title">You are an expert. Obama should bring you along!</div>
+          <div id="result02" class="title">Not bad, time to explore a career in the Foreign Service.</div>
+          <div id="result03" class="title">Is okay, practice makes perfect.</div>
+          <div id="resultIntro" class="blurb">Learned something from this quiz? Share it with your friends and the world.</div>
+          <div class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+              </tr> 
+            </table>
+          </div>
+          <div id="notes">This quiz is designed based on information courtesy of the <a href='http://www.migrationpolicy.org/article/cuban-immigrants-united-states' target='_blank'>Migration Policy Institute</a>.</div>
+        </div>  <!-- END RESULTS PAGE -->       
+      </div> 
+    </div>
+
+  </div>    
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var count = 0;
+var point = 0;
+
+var theQuestions = [];
+    theQuestions[0] = 'What does the term "wet foot, dry foot" refer to?';
+    theQuestions[1] = 'What happens to those in the "wet foot" category?';
+    theQuestions[2] = 'What happens to those in the "dry foot" category?';
+    theQuestions[3] = 'Why was the "wet foot, dry foot policy" introduced?';
+    theQuestions[4] = 'When can Cuban immigrants in the US apply for legal permanent residence (a green card)?';
+    theQuestions[5] = 'Immigrants from which nationalities enjoy guaranteed legal entry when they arrive in the US, and are exempt from deportation and immigration enforcement policies? They’re also eligible for a green card after one year in the country.';
+    theQuestions[6] = 'What is the main reason behind the surge in the Cuban immigrant population in recent years?';
+    theQuestions[7] = "Since the beginning of the normalization of US-Cuba relations in 2014, what is the Obama administration's plan on Cuban immigration policy?";
+
+var theChoices = [];
+    theChoices[0] = "Cuban immigrants who are diagnosed with a disease while undergoing medical inspection at the border are considered having “wet feet” while those who are healthy are said to be having “dry feet.”;Cuban immigrants who are caught in the water between Cuba and the US are considered having “wet feet” while those who make it to US shores are considered having “dry feet.”;Cuban immigrants who fly to the US are said to be having “dry feet” while those who sail are said to be having “wet feet.”";
+    theChoices[1] = "They are resettled in a third country.;They are stopped and ordered to head in the opposite direction.  ;They are sent back to Cuba.";
+    theChoices[2] = "They are allowed to stay in the US for three months only.;They are allowed stay in the US and can attain legal permanent residence.;They are detained and charged in immigration court for deportation purpose.";
+    theChoices[3] = "To discourage Cuban immigrants from dangerous boat migration to the US.;So only wealthy Cuban immigrants who can afford air travel can come to the US.;To prevent Cuba from sending its spies into the US.";
+    theChoices[4] = "After getting a permanent job in the US.;After being present in the US for at least one year.;Right after they are admitted.";
+    theChoices[5] = "Only Cuban.;All citizens of the Caribbean countries.;Citizens of all communist countries.";
+    theChoices[6] = "Cuba was hit by its worst economic recession since the revolution in 1959.;Political crackdown in Cuba has intensified under the rule of Raul Castro who succeeded to the presidency in 2008.;Cubans were afraid their special immigration privileges would end after both countries started to mend their relations.";
+    theChoices[7] = "Dismantle the policy gradually.;No intention of changing.;Expand the policy to other Caribbean countries";
+
+var theExplain = [];
+    theExplain[0] = "<p>The “wet foot, dry foot” policy was introduced in 1995 as an addition to the 1966 Cuban Adjustment Act. More about the act later.</p>";
+    theExplain[1] = "<p>However, Cubans who can prove they are vulnerable to persecution if sent back can be resettled in third countries.</p>";
+    theExplain[2] = "<p>All Cubans who reach US soil, even without proper authorization, are granted entry. They are exempt from deportation and immigration enforcement policies affecting all other immigrants.</p>";
+    theExplain[3] = "<p>Boat migration from Cuba surged in the mid-1990s after the Soviet Union, which had been supporting Cuba financially, collapsed in 1991. The US and Cuba reached agreements in 1994 and 1995 to address the problem. Under the 1995 agreement, the US changed its policy to return Cubans caught at sea to Cuba. Before, they were admitted to the US, a practice criticized for prompting more Cubans to attempt the dangerous journey.</p>";
+    theExplain[4] = "<p>Under the <a href='https://www.uscis.gov/iframe/ilink/docView/AFM/HTML/AFM/0-0-0-1/0-0-0-8624/0-0-0-10170.html' target='_blank'>1966 Cuban Adjustment Act</a>, all Cuban immigrants who arrive in the US are presumed to be political refugees, and are <a href='https://www.uscis.gov/green-card/other-ways-get-green-card/green-card-cuban-native-or-citizen' target='_blank'>eligible to become green card holders</a> after one year. The CAA will cease to be in effect only when Cuba becomes a democracy.</p>";
+    theExplain[5] = "<p>The policy has drawn flak from critics who view it as preferential treatment as it is much harder for immigrants from other countries to obtain legal residency in the US. For instance, Haitian immigrants who arrive in the US on the same boat with Cubans would be sent back to their country.</p>";
+    theExplain[6] = "<p>The “wet-foot, dry foot policy” has its origins in the Cuban revolution of 1959. It led the US to isolate Cuba through economic sanctions and providing protection to Cubans fleeing from the socialist regime. As the hostility between both countries recedes, the policy is speculated to change.</p><div id='chart-image'><img src='http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuban-chart-pew-cropped.png?itok=HFTY1Gof' class='img-responsive center-block'></div>";
+    theExplain[7] = "<p>The policy has become a sensitive issue during this election season as Cuban American voters form a huge voting bloc. The Cuban immigrant population in the US has steadily grown to 1.17 million in 2014, becoming the fifth largest foreign-born group in the country, behind China, the Philippines, El Salvador and Vietnam.</p><div id='container01'></div>";
+
+var theAnswers = [1,2,1,0,1,0,2,1];
+
+function init() { 
+  $("#questions, #answers, #results, #nextBtn, #result01, #result02, #result03").hide();
+  $("#startBtn").click(function(){
+    nextQuestion(count);
+  });
+
+  $("#nextBtn").click(function() {
+    count ++;
+    if (count < theQuestions.length) {                            
+      nextQuestion(count);
+    } else {
+      showResults();
+    }
+  });
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+}
+
+function setValue(theVal) {
+  var tmpAns = theVal; 
+  $(".btn-radio").attr("disabled",true);
+  $("#answers").show();
+  $("#nextBtn").show();
+  if (tmpAns==theAnswers[count]) {
+    $("#answerTitle").text("Correct!").css("color","#4188bc");
+    point ++;
+  }  else {
+    $("#answerTitle").text("Wrong!").css("color","#d3401e");
+  }
+  $("label:eq(" + theAnswers[count] + ")").css("background-color","#a6c8e0");
+  $("#answerExplain").html(theExplain[count]);
+  if(count==7){chart01();}
+} 
+
+function nextQuestion(which) {
+  $("#quiz").css("background-color","#eeeeee");
+  $('.container').slideUp(500, function(){
+    $("#nextBtn").hide(); 
+    $("#answers").hide();
+    $("#intro").hide();
+    $("#questions").show();
+    //DISPLAY QUESTION
+    $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
+    $("#theQuestion").text(theQuestions[which]);
+    //DISPLAY CHOICES
+    $("#allChoices").empty();
+    var tmpChoice = theChoices[count].split(";");
+    for (var i=0; i<tmpChoice.length; i++) {
+      $("#allChoices").append("<label><input class='btn-radio' type='radio' name='optionsRadios' id='btn-radio' onClick='setValue(" + i + ");'>" + tmpChoice[i] + "</label><br>");
+    }
+  });
+  $('.container').slideDown(500);
+}
+
+function showResults() {
+  $('.container').slideUp(500, function(){
+    $("#questions").hide();
+    $("#answers").hide();
+    $("#nextBtn").hide(); 
+    $("#results").show();
+    if(point>6){$("#result01").show();console.log("point = " + point);}
+    if(point>3&&point<7){$("#result02").show();console.log("point = " + point);}
+    if(point>0&&point<4){$("#result03").show();console.log("point = " + point);}
+    $("#pointer").text(point);
+  });
+  $('.container').slideDown(500); 
+  sendData();
+}
+  
+function chart01() {
+  $(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container01').highcharts({
+          chart: {
+              type: 'line',
+          },
+          title: {
+              text: 'Cuban immigrant population in the US, 1980-2014',
+              margin: 30,
+              style: {
+                  fontSize: '16px',
+              },
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: { // don't display the dummy year
+                  year: '%Y'
+              },
+              tickInterval: 24 * 3600 * 1000 * 365 * 5,
+              showLastLabel: true,
+          },
+          yAxis: {
+              title: {
+                text: "Population",
+                x: 0,
+                style: {
+                  color: '#808080',
+                  fontSize: '11px',
+                },  
+              },
+              labels: {
+                  format: '{value:,.0f}'
+              },
+          },
+          credits: { enabled: false, },
+          legend: {
+              enabled: false,
+          },
+          tooltip: {
+              pointFormat: '<b>{point.y}</b>'
+          },
+          plotOptions: {
+              series: {
+                  groupPadding: 0,
+              }
+          },
+
+          series: [
+              {name: "Population", color:"#4188bc",
+                  data :[
+                      [Date.UTC(1980,0,1), 608000],
+                      [Date.UTC(1990,0,1), 737000],
+                      [Date.UTC(2000,0,1), 873000],
+                      [Date.UTC(2006,0,1), 936000],
+                      [Date.UTC(2010,0,1), 1105000],
+                      [Date.UTC(2014,0,1), 1173000],  
+                  ],
+                  dataLabels: {
+                      enabled: true,
+                      rotation: 0,
+                      color: '#FFFFFF',
+                      align: 'right',
+                      format: '{point.y:,.0f}',
+                      y: 0,
+                      style: {
+                          fontSize: '11px',
+                      }
+                  },
+              },
+          ], 
+
+      });
+  });
+}
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1tl69Z6CUZKxKB99adiTT0HecQVvnQHMTmYZ8rrQN5rw/formResponse',
+        data: { 
+          "entry.410389617": json.ip,
+          "entry.318250004": point,
+          "entry.953167018": document.referrer,
+        }
+      }); 
+    }
+  );   
+}   
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("I got " + point + "/8 in this quiz on Cuban immigration to the US. Can you do better than me?");
+  tweet_url += ' pic.twitter.com/1FhIxqgZjl';
+  tweet_url += '&url=http://bit.ly/1MetEwA&via=pri';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+var fbtitle = "I got " + point + "/8 in this quiz about Cuban immigration to the US. Can you do better than me?";
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-03-18/us-has-been-giving-cubans-unique-immigration-privileges-how-much-do-you-know',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/cuban-exodus-1994-cropped.jpg',
+  name: fbtitle,
+  description:"The US policy to isolate Cuba has created a unique immigration law that gives much-coveted immigration privileges to Cubans coming to the US."
+  }, function(response){});
+}
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1149789485033841',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

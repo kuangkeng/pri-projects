@@ -1,0 +1,110 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 680px; 
+max-width: 850px; 
+margin: 0 auto;
+border:1px solid #D3D3D3;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginBottom: 100,
+        },
+        title: {
+            text: 'Percentage of 8th-graders by the number of days absent from school in one month and race, 2009',
+            margin: 10,
+            style: {
+                fontSize: '16px',
+            },
+        },
+        subtitle: {
+            text: "Source: <a href='https://nces.ed.gov/pubs2010/2010015/tables/table_16.asp'  target='_blank'>National Center for Education Statistics</a>",
+            useHTML: true,
+            floating: true,
+            align: 'left',
+            verticalAlign: 'bottom',
+            y: -20,
+            style: {
+                color: '#808080',
+                fontSize: '10px',
+            },
+        },        
+        xAxis: {
+            categories: ["No absences", "1 to 2 days absences", "more than 3 days absences"],  
+            labels: {
+                rotation: 270,
+            }  
+        },
+        yAxis: {
+            title: {
+              text: "% of students of the particular ethnic group",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            minTickInterval: 10,
+            endOnTick: false,
+        },
+        credits: { text: 'Kuang Keng Kuek Ser / PRI' },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: '<br>{series.name}<br>Percentage: <b>{point.y}%<b>',
+            headerFormat: '{point.x}',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0,
+                dataLabels: {
+                    inside:true,
+                    enabled: true,
+                    rotation: 0,
+                    color: '#000',
+                    align: 'left',
+                    format: '{series.name}',
+                    y: 0, // 10 pixels down from the top
+                    style: {
+                        fontSize: '10px',
+                    }
+                }    
+            }
+        },
+        series: [
+            {name: 'Asian/Pacific Islander', color: '#8dd3c7', data: [63,26,11]},
+            {name: 'Total', color: '#ffffb3', data: [45,35,20]},
+            {name: 'Black', color: '#bebada', data: [45,32,23]},
+            {name: 'Hispanic', color: '#fb8072', data: [45,34,22]},
+            {name: 'White', color: '#80b1d3', data: [44,37,19]},
+            {name: 'American Indian/Alaska Native', color: '#fdb462', data: [35,36,28]},
+            ]
+    });
+});
+</script>

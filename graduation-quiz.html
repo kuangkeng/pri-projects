@@ -44,7 +44,7 @@ body{
   color: #333;
   width: 100%;
   margin-top: 25px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 #btn-get {
@@ -102,7 +102,7 @@ body{
 #instruct {
   width:150px;
   position: fixed;
-  bottom:55%;
+  bottom:70%;
   left:50%;
   margin-left: -75px;
   z-index:2;
@@ -146,7 +146,7 @@ box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
   .column {padding:10px;}
   #chart-title {padding-top:10px; font-size: 16px;}
   #container {height: 390px; }
-  #result {font-size: 18px}
+  #result {font-size: 22px}
   #notes-title, #note {font-size: 12px}
   #note {margin-top: 20px;}
 }  
@@ -176,7 +176,7 @@ box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
       <div id="title">
         <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><br>Lowest graduation rate
       </div>
-      <div id="result">You got <span id="pointer">0</span> out of 9 right!</div>
+      <div id="result">You got <span id="pointer">0</span> out of 8 right!</div>
       <div><input type="submit" class="btn btn-danger btn-lg center-block" id="btn-get" value="See my result"/></div>
       <div><button class="btn btn-danger btn-lg center-block" id="btn-result">What's the reality?</button></div>
     </div>
@@ -194,7 +194,8 @@ box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
   </div>
 <div id="note">
   <div id="notes-title"><p>Notes:</p></div>
-  <p>The <b>4-year adjusted cohort graduation rate (ACGR)</b> shown above is the number of students who graduate in 4 years with a regular high school diploma divided by the number of students who form the adjusted cohort for the graduating class.</p>
+  <p>The student categories are selected by the <a href='https://nces.ed.gov/ccd/tables/ACGR_RE_and_characteristics_2013-14.asp'  target='_blank'>National Center for Education Statistics</a>.</p>
+  <p>The graduation rate refers to the <b>4-year adjusted cohort graduation rate (ACGR)</b>. It is the number of students who graduate in 4 years with a regular high school diploma divided by the number of students who form the adjusted cohort for the graduating class.</p>
   <p><b>Limited English proficiency</b> refers to students who reported speaking English "less than very well" as classified by the US Census Bureau.</p>
   <p><b>Economically disadvantaged students</b> are defined by most states based on whether the students are eligible for free and reduced-price lunch, and the eligibility for such lunch is based on the students' family income at or below around $44,000 for a family of four.</p>
   <p><b>Students with disabilities</b> are those who require special education because of disabilities including autism, communication disorders, emotional disturbances, hearing impairments, intellectual disability, orthopedic impairments, specific learning disabilities and visual impairments.</p>
@@ -282,7 +283,7 @@ $(function () {
             text: null,
         },
         subtitle: {
-            text: "Source: <a href='https://nces.ed.gov/ccd/tables/ACGR_2010-11_to_2012-13.asp'  target='_blank'>National Center for Education Statistics</a>",
+            text: "Source: <a href='https://nces.ed.gov/ccd/tables/ACGR_RE_and_characteristics_2013-14.asp'  target='_blank'>National Center for Education Statistics</a>",
             useHTML: true,
             floating: true,
             align: 'left',
@@ -318,7 +319,7 @@ $(function () {
               },  
             },
             labels: {
-                format: '{value}'
+                format: '{value}%'
             },
             endOnTick: false,
             gridLineColor: '#d6d6d6',
@@ -329,7 +330,7 @@ $(function () {
             enabled: false
         },
         tooltip: {
-            pointFormat: '<b>{point.y}</b>'
+            pointFormat: '<b>{point.y}%</b>'
         },
         plotOptions: {
             series: {
@@ -345,7 +346,7 @@ $(function () {
                 rotation: 0,
                 color: '#FFFFFF',
                 align: 'left',
-                format: '{point.y:.1f}',
+                format: '{point.y:.1f}%',
                 y: 0, // 10 pixels down from the top
                 style: {
                     fontSize: '14px',

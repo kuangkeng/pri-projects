@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        Source: 
+        <a href='http://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml'  target='_blank'>American Community Surveys</a>, <a href='http://www.census.gov/population/www/documentation/twps0029/twps0029.html'  target='_blank'>US Census Bureau</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+
+$(function () {
+
+    var chart = new Highcharts.Chart({
+        chart: {
+          type: 'line',
+          marginBottom: 100,
+          renderTo: 'container',
+          marginRight: 80 //add margin for text
+        },
+        title: {
+            text: "Cuban and Venezuelan immigrant population in the US, 1990-2014",
+            margin: 30,
+            style: {
+                fontSize: '16px',
+            },
+        },
+        subtitle: {
+            enabled: false,
+        },
+  
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                year: '%Y'
+            },
+            tickInterval: 24 * 3600 * 1000 * 365 * 2,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+                text: 'Population',
+                style: {
+                      fontSize: '11px',
+                }
+            },
+            labels: {
+                format: '{value:,.0f}',
+            },
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y:,.0f}</b>'
+        },
+        
+        legend: {
+          enabled: false
+        },
+
+        credits: { enabled: false, },
+        series: [
+          {name: "Cuba", color:"#4188bc",
+          data :[
+            [Date.UTC(1990,0,1),736971],
+            [Date.UTC(2000,0,1),872716],
+            [Date.UTC(2005,0,1),895861],
+            [Date.UTC(2006,0,1),935865],
+            [Date.UTC(2007,0,1),983454],
+            [Date.UTC(2008,0,1),974657],
+            [Date.UTC(2009,0,1),991385],
+            [Date.UTC(2010,0,1),1104679],
+            [Date.UTC(2011,0,1),1094811],
+            [Date.UTC(2012,0,1),1113901],
+            [Date.UTC(2013,0,1),1144024],
+            [Date.UTC(2014,0,1),1172899],
+          ]},
+          {name: "Venezuela", color:"#d3401e",
+          data :[
+            [Date.UTC(1990,0,1),42119],
+            [Date.UTC(2000,0,1),107031],
+            [Date.UTC(2005,0,1),151743],
+            [Date.UTC(2006,0,1),162524],
+            [Date.UTC(2007,0,1),155492],
+            [Date.UTC(2008,0,1),168592],
+            [Date.UTC(2009,0,1),157819],
+            [Date.UTC(2010,0,1),184039],
+            [Date.UTC(2011,0,1),189219],
+            [Date.UTC(2012,0,1),194287],
+            [Date.UTC(2013,0,1),197724],
+            [Date.UTC(2014,0,1),216187],
+          ]},    
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true
+                },
+                dataLabels: {
+                  enabled: true,
+                  
+                  color: '#FFFFFF',
+                  align: 'right',
+                  format: '{point.y:,.0f}', // one decimal
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+              }
+
+            },
+
+        },
+    });
+
+          $(chart.series).each(function(){
+          var point = this.points[this.points.length-1];
+          chart.renderer.text(this.name,
+          point.plotX + chart.plotLeft + 5,
+          point.plotY + chart.plotTop + 5).attr(
+            {
+              zIndex: 5,
+              
+            }).add();
+        });
+});
+</script>

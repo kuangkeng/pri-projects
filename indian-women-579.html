@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+	font-size: 13px;
+	line-height: 17px;
+	margin-bottom: 5px;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+    	<div id="text">Domestic violence against Indian women by husbands has been rising. Hover over each points to see the numbers.</div>
+        <div>Dowry deaths are deaths of a women who are murdered or driven to suicide by husbands and in-laws in an effort to extort an increased dowry. Source: <a href='http://ncrb.gov.in/' target='_blank'>Indian National Crime Records Bureau</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container').highcharts({
+          chart: {
+              type: 'line',
+          },
+          title: {
+              text: 'Domestic violence against women in India, 2001-2014',
+              margin: 30,
+              style: {
+                  fontSize: '16px',
+              },
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: { // don't display the dummy year
+                  year: '%Y'
+              },
+              tickInterval: 24 * 3600 * 1000 * 365 * 2,
+              showLastLabel: true,
+          },
+          yAxis: {
+              title: {
+                text: "Number of cases",
+                x: 0,
+                style: {
+                  color: '#808080',
+                  fontSize: '11px',
+                },  
+              },
+              labels: {
+                  format: '{value:,.0f}'
+              },
+              endOnTick: false,
+          },
+          credits: { enabled: false, },
+
+          tooltip: {
+              pointFormat: '<b>{point.y}</b>'
+          },
+          plotOptions: {
+              series: {
+                  groupPadding: 0,
+              }
+          },
+	        series: [
+	          {name: "Dowry deaths", color:"#007f00",
+	          data :[
+                [Date.UTC(2001,0,1), 6851],
+				[Date.UTC(2002,0,1), 6822],
+				[Date.UTC(2003,0,1), 6208],
+				[Date.UTC(2004,0,1), 7026],
+				[Date.UTC(2005,0,1), 6787],
+				[Date.UTC(2006,0,1), 7618],
+				[Date.UTC(2007,0,1), 8093],
+				[Date.UTC(2008,0,1), 8172],
+				[Date.UTC(2009,0,1), 8383],
+				[Date.UTC(2010,0,1), 8391],
+				[Date.UTC(2011,0,1), 8618],
+				[Date.UTC(2012,0,1), 8233],
+				[Date.UTC(2013,0,1), 8083],
+				[Date.UTC(2014,0,1), 8455],
+	          ]},
+	          {name: "Cruelty by husband or his relatives", color:"#4188bc",
+	          data :[
+	            [Date.UTC(2001,0,1), 49170],
+				[Date.UTC(2002,0,1), 49237],
+				[Date.UTC(2003,0,1), 50703],
+				[Date.UTC(2004,0,1), 58121],
+				[Date.UTC(2005,0,1), 58319],
+				[Date.UTC(2006,0,1), 63128],
+				[Date.UTC(2007,0,1), 75930],
+				[Date.UTC(2008,0,1), 81344],
+				[Date.UTC(2009,0,1), 89546],
+				[Date.UTC(2010,0,1), 94041],
+				[Date.UTC(2011,0,1), 99135],
+				[Date.UTC(2012,0,1), 106527],
+				[Date.UTC(2013,0,1), 118866],
+				[Date.UTC(2014,0,1), 122877],    
+	          ]},
+	        ],  
+  });
+});
+
+</script>

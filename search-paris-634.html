@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 5px;
+  color:#33333c;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+    	   <div id="text">Google searches for anti-Muslim phrases peaked after Paris attacks on Nov 3, 2015.</div>
+        <div>Numbers represent search interest relative to the highest point in the chart.
+        <br>Source: <a href='https://www.google.com/trends/' target='_blank'>Google Trends</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container').highcharts({
+          chart: {
+              type: 'line',
+              zoomType: 'y',
+          },
+          title: {
+              text: 'Search interest for anti-Muslim phrases, Sep 2015 - Mar 2016',
+              margin: 30,
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                  day: '%b %e',
+              },
+              //tickInterval: 24 * 3600 * 1000 * 5 ,
+              plotLines: [{
+                  value: Date.UTC(2016,2,22),
+                  color: '#33333c',
+                  dashStyle: 'shortdash',
+                  width: 1,
+                  label: {
+                      useHTML: true,
+                      text: 'Brussels attacks',
+                      verticalAlign: 'bottom',
+                      y:-90,
+                      style: {
+                          fontSize: '11px',
+                          color: '#33333c',
+                      }
+                  }
+              },
+              {
+                  value: Date.UTC(2015,10,13),
+                  color: '#33333c',
+                  dashStyle: 'shortdash',
+                  width: 1,
+                  label: {
+                      useHTML: true,
+                      text: 'Paris attacks',
+                      verticalAlign: 'bottom',
+                      y:-70,
+                      style: {
+                          fontSize: '11px',
+                          color: '#33333c',
+                      }
+                  }
+              },
+              {
+                  value: Date.UTC(2015,11,2),
+                  color: '#33333c',
+                  dashStyle: 'shortdash',
+                  width: 1,
+                  label: {
+                      useHTML: true,
+                      text: 'San Bernardino attack',
+                      verticalAlign: 'bottom',
+                      y:-117,
+                      style: {
+                          fontSize: '11px',
+                          color: '#33333c',
+                      }
+                  }
+              }]
+          },
+          yAxis: {
+              title: {
+                text: null,
+              },
+              labels: {
+                  format: '{value:,.0f}'
+              },
+              endOnTick: false,
+          },
+          credits: { enabled: false, },
+
+          tooltip: {
+              formatter: function() {
+               return '<b>' + this.series.name + '</b><br>Week: '+ this.point.week +'</b>' + '<br>Search interest: <b>' + this.point.y + '</b>';
+              }
+          },
+          plotOptions: {
+              series: {
+                  groupPadding: 0,
+              },
+              line: {
+                  marker: {
+                      enabled: false
+                  }
+              }
+          },
+	        series: [
+	          {name: "'kill Muslims'", color:"#377eb8",
+	          data :[
+              
+              {x:Date.UTC(2015,8,2), y:8, week:"30 Aug-5 Sep 2015"},
+              {x:Date.UTC(2015,8,9), y:15, week:"6-12 Sep 2015"},
+              {x:Date.UTC(2015,8,16), y:15, week:"13-19 Sep 2015"},
+              {x:Date.UTC(2015,8,23), y:20, week:"20-26 Sep 2015"},
+              {x:Date.UTC(2015,8,30), y:14, week:"27 Sep-3 Oct 2015"},
+              {x:Date.UTC(2015,9,7), y:13, week:"4-10 Oct 2015"},
+              {x:Date.UTC(2015,9,14), y:12, week:"11-17 Oct 2015"},
+              {x:Date.UTC(2015,9,21), y:13, week:"18-24 Oct 2015"},
+              {x:Date.UTC(2015,9,28), y:8, week:"25-31 Oct 2015"},
+              {x:Date.UTC(2015,10,4), y:10, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:43, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:100, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:26, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:37, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:54, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:32, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:22, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:16, week:"27 Dec 2016-2 Jan 2015"},
+              {x:Date.UTC(2016,0,6), y:16, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:13, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:13, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:12, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:12, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:10, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:10, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:14, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:11, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:12, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:10, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:30, week:"20-26 Mar 2016"},
+	          ]},
+	          {name: "'Muslims are terrorists'", color:"#4daf4a",
+	          data :[
+              
+              {x:Date.UTC(2015,8,2), y:3, week:"30 Aug-5 Sep 2015"},
+              {x:Date.UTC(2015,8,9), y:6, week:"6-12 Sep 2015"},
+              {x:Date.UTC(2015,8,16), y:5, week:"13-19 Sep 2015"},
+              {x:Date.UTC(2015,8,23), y:6, week:"20-26 Sep 2015"},
+              {x:Date.UTC(2015,8,30), y:4, week:"27 Sep-3 Oct 2015"},
+              {x:Date.UTC(2015,9,7), y:4, week:"4-10 Oct 2015"},
+              {x:Date.UTC(2015,9,14), y:3, week:"11-17 Oct 2015"},
+              {x:Date.UTC(2015,9,21), y:3, week:"18-24 Oct 2015"},
+              {x:Date.UTC(2015,9,28), y:3, week:"25-31 Oct 2015"},
+              {x:Date.UTC(2015,10,4), y:3, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:24, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:76, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:20, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:20, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:25, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:14, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:7, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:6, week:"27 Dec 2016-2 Jan 2015"},
+              {x:Date.UTC(2016,0,6), y:7, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:7, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:6, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:6, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:9, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:6, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:6, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:6, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:6, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:7, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:7, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:21, week:"20-26 Mar 2016"},
+	          ]},
+            {name: "'stop Islam'", color:"#e41a1c",
+            data :[
+              
+              {x:Date.UTC(2015,8,2), y:15, week:"30 Aug-5 Sep 2015"},
+              {x:Date.UTC(2015,8,9), y:19, week:"6-12 Sep 2015"},
+              {x:Date.UTC(2015,8,16), y:16, week:"13-19 Sep 2015"},
+              {x:Date.UTC(2015,8,23), y:18, week:"20-26 Sep 2015"},
+              {x:Date.UTC(2015,8,30), y:13, week:"27 Sep-3 Oct 2015"},
+              {x:Date.UTC(2015,9,7), y:15, week:"4-10 Oct 2015"},
+              {x:Date.UTC(2015,9,14), y:17, week:"11-17 Oct 2015"},
+              {x:Date.UTC(2015,9,21), y:15, week:"18-24 Oct 2015"},
+              {x:Date.UTC(2015,9,28), y:14, week:"25-31 Oct 2015"},
+              {x:Date.UTC(2015,10,4), y:14, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:28, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:36, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:21, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:14, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:19, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:14, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:15, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:17, week:"27 Dec 2016-2 Jan 2015"},
+              {x:Date.UTC(2016,0,6), y:15, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:15, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:14, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:13, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:14, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:13, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:12, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:15, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:12, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:12, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:14, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:46, week:"20-26 Mar 2016"},
+            ]},
+            {name: "'hate Muslims'", color:"#ff7f00",
+            data :[
+              
+              {x:Date.UTC(2015,8,2), y:17, week:"30 Aug-5 Sep 2015"},
+              {x:Date.UTC(2015,8,9), y:27, week:"6-12 Sep 2015"},
+              {x:Date.UTC(2015,8,16), y:29, week:"13-19 Sep 2015"},
+              {x:Date.UTC(2015,8,23), y:30, week:"20-26 Sep 2015"},
+              {x:Date.UTC(2015,8,30), y:21, week:"27 Sep-3 Oct 2015"},
+              {x:Date.UTC(2015,9,7), y:21, week:"4-10 Oct 2015"},
+              {x:Date.UTC(2015,9,14), y:20, week:"11-17 Oct 2015"},
+              {x:Date.UTC(2015,9,21), y:18, week:"18-24 Oct 2015"},
+              {x:Date.UTC(2015,9,28), y:17, week:"25-31 Oct 2015"},
+              {x:Date.UTC(2015,10,4), y:20, week:"1-7 Nov 2015"},
+              {x:Date.UTC(2015,10,11), y:42, week:"8-14 Nov 2015"},
+              {x:Date.UTC(2015,10,18), y:96, week:"15-21 Nov 2015"},
+              {x:Date.UTC(2015,10,25), y:40, week:"22-28 Nov 2015"},
+              {x:Date.UTC(2015,11,2), y:41, week:"29 Nov-5 Dec 2015"},
+              {x:Date.UTC(2015,11,9), y:84, week:"6-12 Dec 2015"},
+              {x:Date.UTC(2015,11,16), y:47, week:"13-19 Dec 2015"},
+              {x:Date.UTC(2015,11,23), y:33, week:"20-26 Dec 2015"},
+              {x:Date.UTC(2015,11,30), y:23, week:"27 Dec 2016-2 Jan 2015"},
+              {x:Date.UTC(2016,0,6), y:22, week:"3-9 Jan 2016"},
+              {x:Date.UTC(2016,0,13), y:19, week:"10-16 Jan 2016"},
+              {x:Date.UTC(2016,0,20), y:22, week:"17-23 Jan 2016"},
+              {x:Date.UTC(2016,0,27), y:21, week:"24-30 Jan 2016"},
+              {x:Date.UTC(2016,1,3), y:21, week:"31 Jan-6 Feb 2016"},
+              {x:Date.UTC(2016,1,10), y:19, week:"7-13 Feb 2016"},
+              {x:Date.UTC(2016,1,17), y:18, week:"14-20 Feb 2016"},
+              {x:Date.UTC(2016,1,24), y:19, week:"21-27 Feb 2016"},
+              {x:Date.UTC(2016,2,2), y:18, week:"28 Feb-5 Mar 2016"},
+              {x:Date.UTC(2016,2,9), y:28, week:"6-12 Mar 2016"},
+              {x:Date.UTC(2016,2,16), y:24, week:"13-19 Mar 2016"},
+              {x:Date.UTC(2016,2,23), y:34, week:"20-26 Mar 2016"},
+            ]},
+	        ],  
+  });
+
+
+});
+
+</script>

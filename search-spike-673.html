@@ -1,0 +1,126 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 550px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div>Percentage is calculated by dividing search interest during the week of attacks by the average search interest during other weeks.</div>
+        <div>Source: <a href='https://www.google.com/trends/' target='_blank'>Google Trends</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Google search interest spike after terrorist attacks',
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["San Bernardino","Brussels","Burkina Faso","Mali","Ivory Coast","Jakarta","Ankara","Tunisia","Somalia","Istanbul"],   
+            tickColor: '#FFFFFF', 
+            labels: {
+                enabled: false,
+            },
+        },
+        yAxis: {
+            title: {
+              text: "Percentage",
+              x: 0,
+              style: {
+                color: '#808080',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: 'Spike: <b>{point.y:,.0f}%</b>',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                pointPadding: 0.01,
+            }
+        },
+        series: [{
+            data:[2100,1900,1113,1020,733,132,121,71,69,50],
+            color:"#4188bc",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}%',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }],
+    });
+});
+</script>
