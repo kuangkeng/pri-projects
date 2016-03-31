@@ -57,10 +57,7 @@ max-width: 850px;
     width: 100%;
     padding: 5px 0 1em 0;
 }
-#play-controls * {
-    display: inline-block;
-    vertical-align: middle;
-}
+
 #play-pause-button {
     width: 30px;
     height: 30px;
@@ -68,6 +65,7 @@ max-width: 850px;
     font-size: 15px;
     outline: none;
     cursor: pointer;
+
 }
 #play-range {
     margin: 2.5%;
@@ -78,7 +76,8 @@ max-width: 850px;
 </head>
 
 <body>
-<div id="wrapper">    
+<div id="wrapper">  
+    
     <div id="container01"></div>
     <div id="container02"></div>
     <div id="note">
@@ -101,16 +100,21 @@ var inactive = 0;
 var chart;
 var chart02;
 
-$('#wrapper').click(function() {
-    updateTitle()
-});
+// $('#play-controls').click(function() {
+//     updateTitle();
+// });
 
 function updateTitle() {
+    input = "2015";
+    
+    console.log("input = " + input);
     window.setInterval(function(){
-        input = $("#play-output").html();
-        chart.setTitle({ text: 'Leading country of origin of refugees ' + input });
-        updateChart();
-        }, 500);
+        change = $("#play-output").html();
+        if(change != input){
+            input = change; 
+            chart.setTitle({ text: 'Leading country of origin of refugees ' + input });
+            updateChart();
+        }}, 500);
 };  
 
 var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,125,125,85], "value":85},
@@ -492,6 +496,7 @@ function updateChart() {
     var chart02 = $('#container02').highcharts();
     for (var i=0; i<17; i++) {
         chart02.series[i].graph.attr({ stroke: '#D3D3D3' });
+        chart02.series[i].graph.attr({ 'stroke-width': 1 });
     }
     if(input == 2002){count = 0}
     if(input == 2003){count = 1}

@@ -103,6 +103,7 @@
         // Request focus to the controls when clicking on controls div
         Highcharts.addEvent(this.playControls, 'click', function () {
             motion.playRange.focus();
+            updateTitle();
         });
         // Bind keys to events
         Highcharts.addEvent(this.playPauseBtn, 'keydown', handleKeyEvents);
