@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+  font-size: 13px;
+  line-height: 17px;
+  margin-bottom: 5px;
+}
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        Source: <a href='https://www.amnesty.org/en/what-we-do/death-penalty/'  target='_blank'>Amnesty International's Death Sentences and Executions Report 2015</a>.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+      $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'pie',
+            },
+            title: {
+              text: 'Death penalty in 198 countries',
+            },
+            subtitle: {
+              enabled: false,
+            },               
+
+            //legend: {enabled: true},
+            credits: {enabled: false},
+            tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
+            },
+            legend: {
+                itemStyle: {
+                    width: 200,
+                },
+            },
+            plotOptions: {
+              pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                showInLegend: true,
+                dataLabels: {
+                    format: '{point.y}',
+                      style: {
+                        fontSize: '11px',
+                    },
+                }
+              }
+            },
+            series: [
+                {data: [
+                  {name: 'No death penalty for any crime', y:102, color: '#00E0FF'},
+                  {name: 'Death penalty only for exceptional crimes', y:6, color: '#1F00FF'},
+                  {name: 'Retain the death penalty but no execution in the last 10 years', y:32, color: '#809DFF'},
+                  {name: 'Death penalty for ordinary crimes', y:58, color: '#FF1300',sliced: true,
+                    selected: true},
+            ]}]  
+        });
+      });
+
+</script>

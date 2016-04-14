@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+body{
+  width: 100%;
+  max-width: 700px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 18px;
+  color: #333;
+}
+
+#headline {
+  text-align: center;
+}
+
+#title {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  width: 100%;
+  }  
+
+#chart-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  width: 100%;
+  padding:20px 10px 0px 20px;
+}  
+
+#result {
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#btn-get {
+  margin-top:82px;
+  margin-bottom:10px;
+}  
+
+#back {
+  margin-bottom:10px;
+}
+
+#btn-result {
+  margin-top: 10px;
+  margin-bottom:10px;
+}
+
+#note {
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 40px;
+}
+
+#notes-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Columns */
+
+.column {
+  position: relative;
+  background-color: #eeeeee;
+  border-radius: 3px;
+  max-width: 350px;
+  margin:0px auto;
+  padding:10px 20px;
+  height:485px;
+} 
+
+#page02 {
+  position: absolute;
+  left:0;
+  top:0;
+  width:100%;
+  max-width: 343px; 
+  background-color: #eeeeee;
+  border-radius: 3px;
+}
+
+#container {
+  width:90%;
+  max-width: 350px; 
+  margin: 0 auto;
+  height: 375px; 
+}
+
+#instruct {
+  width:150px;
+  position: fixed;
+  bottom:70%;
+  left:50%;
+  margin-left: -75px;
+  z-index:2;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 5px;
+-webkit-box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
+-moz-box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
+box-shadow: 5px 7px 13px 3px rgba(42,42,42,1);
+}
+
+/* Sortable items */
+
+.sortable-list {
+  list-style: none;
+  margin: 0;
+  padding: 0px;
+}
+   
+.sortable-item {
+  width:70%;
+  color:#fff;
+  cursor: move;
+  display: block;
+  margin: 0 auto;
+  margin-top:5px;
+  margin-bottom:5px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  background: #4188bc;
+  -webkit-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+  -moz-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+  box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+}
+
+table {width:100%;}
+
+#col01{
+  width:60%; 
+  text-align: right;
+  padding-right: 10px;
+}
+
+#col02{
+  width:40%; 
+  text-align: left;
+}
+  
+@media (max-width: 400px) {
+
+  body {font-size: 14px;}
+  #title {font-size: 12px;}
+  .column {padding:10px; height:470px;}
+  #chart-title {padding-top:10px; font-size: 18px;}
+  #container {height: 350px; }
+  #result {font-size: 22px}
+  #notes-title, #note {font-size: 12px}
+  #note {margin-top: 20px;}
+}  
+
+</style>
+</head>
+
+<body>
+  
+  <div id="headline"><p>Which country executed the most people in 2015? Rank them in order.</p></div>
+
+  <div class="column">
+    <div id="page01">
+      <div id="title">
+        Highest number of executions<br><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+      </div>
+      <ul class="sortable-list" id="my-list">
+        <li class="sortable-item" id="5"><div><table><tr><td id="col01">United States</td><td id="col02"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/us-flag-logo.png?itok=V_Mo5P0s"></td></tr></table></div></li>
+        <li class="sortable-item" id="4"><div><table><tr><td id="col01">Saudi Arabia</td><td id="col02"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/saudi-arabia-flag-logo.png?itok=t3GHA8PQ"></td></tr></table></div></li>
+        <li class="sortable-item" id="3"><div><table><tr><td id="col01">Pakistan</td><td id="col02"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/pakistan-flag-logo.png?itok=4dHs-CCi"></td></tr></table></div></li>
+        <li class="sortable-item" id="2"><div><table><tr><td id="col01">Iran</td><td id="col02"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/iran-flag-logo.png"></td></tr></table></div></li>
+        <li class="sortable-item" id="1"><div><table><tr><td id="col01">China</td><td id="col02"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/china-flag-logo.png?itok=KEvX_YIA"></td></tr></table></div></li>  
+      </ul>
+      <div id="title">
+        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><br>Lowest number of executions
+      </div>
+      <div id="result">You got <span id="pointer">0</span> out of 5 right!</div>
+      <div><input type="submit" class="btn btn-info btn-lg center-block" id="btn-get" value="See my result"/></div>
+      <div><button class="btn btn-info btn-lg center-block" id="btn-result">Check the answers</button></div>
+    </div>
+    
+
+    <div id="page02">
+      <div id="chart-title">Top 5 executing countries in 2015</div>
+      <div id="container"></div>
+      <div><button class="btn btn-info btn-lg center-block" id="back">Back to your result</button></div>
+    </div>
+
+    <div id="instruct">
+      Drag and drop the boxes to rank them.
+    </div>  
+  </div>
+<div id="note">
+  <div id="notes-title"><p>Notes:</p></div>
+  <p>Source: <a href='https://www.amnesty.org/en/what-we-do/death-penalty/'  target='_blank'>Amnesty International's Death Sentences and Executions Report 2015</a>.</p>
+  <p>* figures on the use of the death penalty in China remain a state secret and likely number in the thousands.
+  <p>+ indicates that the figure is a minimum.</p>
+  <p>Judicial executions may have taken place in Syria but Amnesty International was unable to confirm any figures.</p>
+</div>  
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script type="text/javascript">
+
+function init() {
+  $("#page02, #result, #note, #btn-result").hide();
+  $("#back").click(function(){
+    $("#page02").slideUp(500);
+  }); 
+  $(".column").mouseover(function(){
+    $("#instruct").fadeOut(1500);
+  }); 
+
+  //Make both columns draggable
+  $('.sortable-list').sortable();
+
+  $('#btn-get').click(sendData);
+  $('#btn-result').click(showResult);
+}  
+
+function sendData() {
+  var point = 0;
+  var items = $('#my-list').sortable('toArray');
+  var itemStr = items.join(',');
+  console.log("itemStr = " + itemStr);
+ 
+  for (var i=1; i<6; i++) {
+    if ($("#" + i).index()==i-1){
+      $("#" + i).css("background-color","#00b300");
+      point++;
+    } else
+    {$("#" + i).css("background-color","#d3401e");}
+  } 
+  console.log("point = " + point);
+  $("#pointer").text(point);
+  $("#btn-get").hide();
+  $("#btn-result, #result").show();
+  $( ".sortable-list" ).sortable({
+    disabled: true
+  });
+
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1KV327_vEoAJ2_YE6LmT2gA8WODpM5CM-mV5us3jGiFM/formResponse',
+        data: { 
+          "entry.691310456": json.ip, //ip
+          "entry.1078473822": itemStr, 
+          "entry.797705577": point, 
+          "entry.1814182590": document.referrer,
+        }
+      }); 
+    }
+  );   
+}
+
+function showResult() {
+  $("#page02").slideDown(500);
+  $("#note").show();
+}
+
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    Highcharts.seriesTypes.column.prototype.pointAttrToOptions.dashstyle = 'dashStyle';
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#eeeeee',
+            marginBottom: 30,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["China","Iran","Pakistan","Saudi Arabia","US"],
+            visible: false,
+        },
+        yAxis: {
+            title: {
+              text: 'Np. of people executed',
+              x: -50,
+              style: {
+                color: '#808080',
+                fontSize: '12px',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+            endOnTick: false,
+            gridLineColor: '#d6d6d6',
+            visible: false,
+        },
+        credits: { enabled: false },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:,.0f}</b> executions'
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                pointPadding: 0.05,
+                borderColor: '#d6d6d6',
+            }
+        },
+        series: [{
+            data: [{y:1000,color:"rgba(211, 64, 30, 0.5)", borderColor: '#d3401e', dashStyle: 'dash', dataLabels: {format: '{key}<br>{point.y:,.0f}*'}},{y:977,dataLabels: {format: '{key}<br>{point.y:,.0f}+'}},326,{y:158,dataLabels: {format: '{key}<br>{point.y:,.0f}+'}},28],
+            color: "#d3401e",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '14px',
+                }
+            }
+        }]
+    });
+});
+
+$(document).ready(function(){
+  init();
+}); 
+
+
+</script>
+
+</script>
+
+</body>
+

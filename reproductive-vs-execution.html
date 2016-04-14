@@ -1,0 +1,207 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 5px;
+}
+
+table {width: 100%; margin-bottom: 10px;}
+
+#col01, #col02 {
+  width:48%;
+}
+
+.button01 {text-align: right; margin-right: 3%}
+.button02 {text-align: left; margin-left: 3%}
+
+#button01, #button02 {background-color: #e9e9e9;border-radius: 5px;}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <table>
+            <tr>
+              <td id="col01"><div class="button01"><button id="button01">Exclude Texas</button></div></td>
+              <td id="col02"><div class="button02"><button id="button02">Include Texas</button></div></td>
+            </tr>
+        </table>
+        <div>Source: <a href='http://www.deathpenaltyinfo.org/number-executions-state-and-region-1976' target='_blank'>Death Penalty Information Center</a>, <a href='http://www.prochoiceamerica.org/assets/download-files/2016-wd-report.pdf' target='_blank'>NARAL Pro-Choice America</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'scatter',
+            renderTo: 'container', 
+        },
+        title: {
+            text: "Reproductive rights vs execution",
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },
+        xAxis: {
+            title: {
+              text:'No. of executions 2010-2016',
+            },
+            labels:{enabled: true,},
+        },
+        yAxis: {    
+            title: {
+                text: 'lower ----- Reproductive rights ----- higher',
+            },
+            max:100,
+            tickInterval: 20,
+        },
+        credits: { enabled: false, },
+        legend:{enabled: false,},
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    fillColor: '#4188bc',
+                    lineColor: '#D3D3D3',
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#33333c'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'Reproductive rights score:<b>{point.y}</b><br>No. of executions: <b>{point.x}</b>'
+                }
+            }
+        },
+        series: [{data:[
+            {"name":"Connecticut","y":90, "x":1},
+            {"name":"Hawaii","y":90, "x":0},
+            {"name":"Montana","y":90, "x":3},
+            {"name":"Oregon","y":90, "x":2},
+            {"name":"Washington","y":90, "x":5},
+            {"name":"California","y":100, "x":13},
+            {"name":"Illinois","y":70, "x":12},
+            {"name":"Alaska","y":80, "x":0},
+            {"name":"Maine","y":80, "x":0},
+            {"name":"Maryland","y":80, "x":5},
+            {"name":"Nevada","y":80, "x":12},
+            {"name":"New Jersey","y":80, "x":0},
+            {"name":"New Mexico","y":80, "x":1},
+            {"name":"New York","y":80, "x":0},
+            {"name":"Vermont","y":80, "x":0},
+            {"name":"Colorado","y":50, "x":1},
+            {"name":"Delaware","y":50, "x":16},
+            {"name":"Iowa","y":50, "x":0},
+            {"name":"Minnesota","y":50, "x":0},
+            {"name":"Massachusetts","y":60, "x":0},
+            {"name":"New Hampshire","y":60, "x":0},
+            {"name":"West virginia","y":40, "x":0},
+            {"name":"Wyoming","y":40, "x":1},
+            {"name":"Alabama","y":0, "x":57},
+            {"name":"Arizona","y":0, "x":37},
+            {"name":"Arkansas","y":0, "x":27},
+            {"name":"Florida","y":0, "x":92},
+            {"name":"Georgia","y":0, "x":63},
+            {"name":"Idaho","y":0, "x":3},
+            {"name":"Indiana","y":0, "x":20},
+            {"name":"Kansas","y":0, "x":0},
+            {"name":"Kentucky","y":0, "x":3},
+            {"name":"Louisiana","y":0, "x":28},
+            {"name":"Michigan","y":0, "x":0},
+            {"name":"Mississippi","y":0, "x":21},
+            {"name":"Missouri","y":0, "x":86},
+            {"name":"Nebraska","y":0, "x":3},
+            {"name":"North Carolina","y":0, "x":43},
+            {"name":"North Dakota","y":0, "x":0},
+            {"name":"Ohio","y":0, "x":53},
+            {"name":"Oklahoma","y":0, "x":112},
+            {"name":"Pennsylvania","y":0, "x":3},
+            {"name":"Rhode Island","y":0, "x":0},
+            {"name":"South Carolina","y":0, "x":43},
+            {"name":"South Dakota","y":0, "x":3},
+            {"name":"Tennessee","y":0, "x":6},
+            {"name":"Texas","y":0, "x":537, dataLabels: {enabled: true, format: '{point.name}', style: {fontSize: '12px'}}},
+            {"name":"Utah","y":0, "x":7},
+            {"name":"Virginia","y":0, "x":111},
+            {"name":"Wisconsin","y":0, "x":0},
+          ],
+            dataLabels: {
+                enabled: false,
+            },
+
+        }],
+    });
+    
+    var chart = $('#container').highcharts();
+
+  $('#button01').click(function () {
+      chart.xAxis[0].setExtremes(0, 120); 
+  });
+
+  $('#button02').click(function () {
+      chart.xAxis[0].setExtremes(0, 540); 
+  });
+
+});
+</script>

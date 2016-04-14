@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 300px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+  font-size: 13px;
+  line-height: 17px;
+  margin-bottom: 5px;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        Source: <a href='http://www.wrapsnet.org/Reports/AdmissionsArrivals/tabid/211/Default.aspx'  target='_blank'>Refugee Processing Center</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container').highcharts({
+          chart: {
+              type: 'line',
+          },
+          title: {
+              text: 'Number of Syrian refugees admitted to the US',
+              margin: 20,
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+            categories: ["Oct '15","Nov '15","Dec '15","Jan '16","Feb '16","Mar '16"],  
+          },
+          yAxis: {
+              title: {
+                text: null,
+                x: 0,
+                style: {
+                  color: '#808080',
+                  fontSize: '11px',
+                },  
+              },
+              labels: {
+                  format: '{value:,.0f}'
+              },
+              endOnTick: false,
+          },
+          credits: { enabled: false, },
+          legend: { enabled: false, },
+          tooltip: {
+              pointFormat: 'Number of Syrian refugees: <b>{point.y}</b>'
+          },
+          series: [{
+            data:[187,250,237,167,114,330,],
+            color:"#d3401e",
+          }],  
+  });
+});
+
+</script>

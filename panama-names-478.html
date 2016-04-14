@@ -1,0 +1,117 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 18px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        The numbers are not final as the ICIJ will only release the full data in May.
+        <br>Source: 
+        <a href='https://panamapapers.icij.org/'  target='_blank'>ICIJ</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Number of notable individuals named in the Panama Papers as shareholders/directors of offshore companies',
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Sitting heads of government","Former heads of government","Government officials","Govt' officials' relatives/associates","Individuals connected with FIFA","Others",],   
+            visible: false,
+        },
+        yAxis: {
+            visible: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: '{point.y:,.0f}',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0,
+                pointPadding:0.01,
+            }
+        },
+        series: [{
+            data:[5,7,32,29,6,10,],
+            color:"#d3401e",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '11px',
+                }
+            }
+        }],
+    });
+});
+</script>

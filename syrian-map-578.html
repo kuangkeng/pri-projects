@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+  font-size: 13px;
+  line-height: 17px;
+  margin-bottom: 5px;
+}
+
+</style>
+
+</head>
+<body>
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        No Syrian refugee was placed in states with no label.<br>
+        Source: <a href='http://www.wrapsnet.org/Reports/AdmissionsArrivals/tabid/211/Default.aspx'  target='_blank'>Refugee Processing Center</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () { 
+    $('#container').highcharts('Map',{
+        chart: {
+            marginBottom: 70,
+        },
+        title : {
+            text: 'Number of Syrian refugees admitted to the US by placement state (Oct 2015 - Mar 2016)',
+        },
+        subtitle : {enabled: false},
+        legend: {  
+          layout: 'horizontal',
+          align:'center',
+          verticalAlign: 'bottom',
+          floating: true,
+        },
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+              verticalAlign: 'bottom',
+              align: 'left',
+              floating: true,
+            },
+
+        },
+        tooltip: {
+            headerFormat: '',
+            pointFormat: '{point.name}<br>No. of Syrian refugees: <b>{point.value}</b>',
+        },
+        credits: { enabled: false },
+        colorAxis: {
+            min: 1,
+            max: 166,
+            stops: [
+                [0, '#eff3ff'],
+                [0.3, '#bdd7e7'],
+                [0.6, '#6baed6'],
+                [0.9, '#2171b5'],
+            ],
+           
+        },
+
+        series: [{
+            mapData: Highcharts.maps['countries/us/us-all'],
+            joinBy: ['postal-code', 'state'],
+            data:[
+              {"state": "AZ", "value": "48",},
+              {"state": "CA", "value": "127",},
+              {"state": "CO", "value": "19",},
+              {"state": "CT", "value": "50",}, 
+              {"state": "FL", "value": "76",},
+              {"state": "GA", "value": "42",},
+              {"state": "ID", "value": "1",},
+              {"state": "IL", "value": "87",},
+              {"state": "IN", "value": "25",},
+              {"state": "KS", "value": "5",},
+              {"state": "KY", "value": "57",},
+              {"state": "LA", "value": "20",},
+              {"state": "MD", "value": "20",},
+              {"state": "MA", "value": "10",},
+              {"state": "MI", "value": "166",},
+              {"state": "MN", "value": "8",},
+              {"state": "MO", "value": "8",},
+              {"state": "NV", "value": "5",},
+              {"state": "NH", "value": "1",},
+              {"state": "NJ", "value": "24",},
+              {"state": "NY", "value": "48",},
+              {"state": "NC", "value": "59",},
+              {"state": "OH", "value": "61",},
+              {"state": "OR", "value": "17",},
+              {"state": "PA", "value": "117",},
+              {"state": "RI", "value": "22",},
+              {"state": "SC", "value": "2",},
+              {"state": "TN", "value": "17",},
+              {"state": "TX", "value": "82",},
+              {"state": "UT", "value": "13",},
+              {"state": "VA", "value": "11",},
+              {"state": "WA", "value": "31",},
+              {"state": "WI", "value": "6",},
+            ],
+            states: {
+                    hover: {
+                        color: '#4188bc'
+                    }
+                },
+            dataLabels: {
+                enabled: true,
+                color: '#FFFFFF',
+                format: '{point.state}'
+            },
+        }]
+    });
+});
+
+</script>

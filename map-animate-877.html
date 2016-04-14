@@ -4,9 +4,12 @@
 <script src="https://code.highcharts.com/maps/modules/map.js"></script>
 <script src="https://code.highcharts.com/maps/modules/data.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
-<script src="https://rawgit.com/larsac07/Motion-Highcharts-Plugin/master/motion.js"></script>
+<script src="http://kuangkeng.github.io/pri-projects/motion.js"></script>
 
 <style>
+
+@import "http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+
 body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
   font-size: 112.5%;
@@ -15,13 +18,13 @@ body {
       }  
 
 #container01{
-height: 600px; 
+height: 400px; 
 max-width: 850px;
-margin-bottom: 100px;
+margin-bottom: 50px;
 }
 
 #container02{
-height: 500px; 
+height: 230px; 
 max-width: 850px;
 }
 
@@ -45,9 +48,8 @@ max-width: 850px;
 }
 
 #text {
-    font-size: 14px;
-    font-weight: bold;
-    padding-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
     color: #33333c;
     line-height: 18px;
 }
@@ -55,7 +57,6 @@ max-width: 850px;
 #play-controls {
     text-align: center;
     width: 100%;
-    padding: 5px 0 1em 0;
 }
 
 #play-pause-button {
@@ -68,8 +69,14 @@ max-width: 850px;
 
 }
 #play-range {
-    margin: 2.5%;
-    width: 70%;
+    margin: 1%;
+    width: 85%;
+}
+
+.button {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
 </style>
@@ -81,34 +88,29 @@ max-width: 850px;
     <div id="container01"></div>
     <div id="container02"></div>
     <div id="note">
-        <div class="button"><button id="button01">click</button></div>
-        <div id="text">Mouseover each country in the legend to highlight corresponding line. Click to hide/show the line.<br>Click the 'zoom in' button to magnify the part below 5,000 refugees.</div>
+        <div class="button"><button id="button01">Reset the chart</button></div>
+        <div id="text">Click the reset button to have all colors back. Hover over each country in the legend to highlight corresponding line. Click to hide/show the line.</div>
         Source: 
-        <a href='http://www.wrapsnet.org/Reports/InteractiveReporting/tabid/393/Default.aspx' target='_blank'>Refugee Processing Center</a><br>Only countries with over a total of 10,000 refugees are shown.
+        <a href='http://www.wrapsnet.org/Reports/InteractiveReporting/tabid/393/Default.aspx' target='_blank'>Refugee Processing Center</a><br>The map shows only the country of origin of the largest refugee group in that particular state.<br>The chart shows only countries with over a total of 10,000 refugees.
         <div id="credit">Kuang Keng Kuek Ser / PRI</div>
     </div>
 </div>
 </body>
 
 <script>
-var input = "";
+var input = "2015";
 var count = 0;
-var country = [15,14,13,13,13,2,2,2,2,2,9,9,2];
-var color = ["#F75394","#7366BD","#1F75FE","#1F75FE","#1F75FE","#FDDB6D","#FDDB6D","#FDDB6D","#FDDB6D","#FDDB6D","#FC2847","#FC2847","#FDDB6D"];
+var country = [15,14,13,13,13,2,2,2,9,2,9,9,9,2];
+var color = ["#6a3d9a","#1f78b4","#b2df8a","#b2df8a","#b2df8a","#ff7f00","#ff7f00","#ff7f00","#fb9a99","#ff7f00","#fb9a99","#fb9a99","#fb9a99","#ff7f00"];
 var active = 0;
 var inactive = 0;
 var chart;
 var chart02;
-
-// $('#play-controls').click(function() {
-//     updateTitle();
-// });
+var checkchange = "";
 
 function updateTitle() {
-    input = "2015";
-    
     console.log("input = " + input);
-    window.setInterval(function(){
+        checkchange = setInterval(function(){
         change = $("#play-output").html();
         if(change != input){
             input = change; 
@@ -117,18 +119,18 @@ function updateTitle() {
         }}, 500);
 };  
 
-var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,125,125,85], "value":85},
+var data = [{"code":"AL", "sequence":[275,75,75,165,165,65,125,125,125,195,195,125,125,85], "value":85},
             {"code":"AK", "sequence":[225,165,135,135,225,235,205,35,35,195,55,205,195,195], "value":195},
             {"code":"AZ", "sequence":[175,195,195,195,195,55,125,125,125,35,125,125,125,85], "value":85},
             {"code":"AR", "sequence":[155,115,135,245,155,75,125,125,125,35,55,55,55,55], "value":55},
             {"code":"CA", "sequence":[225,225,135,135,115,115,115,125,125,125,125,125,125,115], "value":115},
             {"code":"CO", "sequence":[165,225,195,165,195,55,55,35,35,35,35,55,55,55], "value":55},
-            {"code":"CT", "sequence":[45,145,195,195,165,55,55,125,125,55,125,125,125,255,], "value":255},
-            {"code":"DE", "sequence":[255,145,255,145,145,145,125,125,55,55,155,55,55,265], "value":265},
+            {"code":"CT", "sequence":[45,145,195,195,165,55,55,125,125,55,125,125,125,385,], "value":385},
+            {"code":"DE", "sequence":[255,145,325,145,145,145,125,125,55,55,155,55,55,265], "value":265},
             {"code":"DC", "sequence":[105,105,185,105,165,105,125,125,125,95,125,125,95,95], "value":95},
             {"code":"FL", "sequence":[75,75,75,75,75,75,75,75,75,75,75,75,75,75], "value":75},
             {"code":"GA", "sequence":[245,105,195,165,195,55,55,35,55,35,35,55,55,55], "value":55},
-            {"code":"HI", "sequence":[245,245,245,245,245,245,55,255,155,55,155,125,55,55], "value":55},
+            {"code":"HI", "sequence":[245,245,245,245,245,245,55,335,155,55,155,125,55,55], "value":55},
             {"code":"ID", "sequence":[45,15,195,165,165,65,125,35,55,35,55,125,125,85], "value":85},
             {"code":"IL", "sequence":[175,175,195,165,195,55,125,125,125,55,125,125,125,55], "value":55},
             {"code":"IN", "sequence":[225,145,195,55,55,55,55,55,55,55,55,55,55,55], "value":55},
@@ -141,28 +143,28 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
             {"code":"MA", "sequence":[225,225,195,195,195,65,125,125,125,35,125,125,125,195,], "value":195},
             {"code":"MI", "sequence":[45,145,195,165,195,125,125,125,125,125,125,125,125,125,], "value":125},
             {"code":"MN", "sequence":[145,105,135,195,195,195,55,55,55,55,55,55,195,195], "value":195},
-            {"code":"MS", "sequence":[255,255,195,115,15,205,125,15,85,195,255,255,95,15], "value":15},
+            {"code":"MS", "sequence":[375,315,195,115,15,205,125,15,85,195,355,365,95,15], "value":15},
             {"code":"MO", "sequence":[45,195,195,165,195,195,55,55,55,55,35,195,195,85], "value":85},
             {"code":"MT", "sequence":[25,25,25,225,155,55,125,125,155,155,125,155,155,155], "value":155},
             {"code":"NE", "sequence":[205,205,205,205,205,55,55,55,55,55,55,55,55,55], "value":55},
             {"code":"NV", "sequence":[175,175,75,75,75,75,75,75,75,75,75,75,75,85], "value":85},
             {"code":"NH", "sequence":[45,205,195,165,165,65,35,35,35,35,35,35,85,85], "value":85},
             {"code":"NJ", "sequence":[75,145,145,165,145,55,55,55,75,75,75,75,75,215], "value":215},
-            {"code":"NM", "sequence":[75,255,75,75,215,75,125,125,125,55,55,125,125,15], "value":15},
+            {"code":"NM", "sequence":[75,305,75,75,215,75,125,125,125,55,55,125,125,15], "value":15},
             {"code":"NY", "sequence":[225,225,195,145,55,55,55,55,55,55,35,55,55,55], "value":55},
             {"code":"NC", "sequence":[245,245,195,245,245,55,55,55,55,55,55,55,55,55], "value":55},
             {"code":"ND", "sequence":[45,145,145,195,195,195,35,35,35,35,35,35,35,35], "value":35},
             {"code":"OH", "sequence":[225,195,195,195,195,195,55,35,35,35,35,35,35,35], "value":35},
-            {"code":"OK", "sequence":[245,255,145,165,195,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"OK", "sequence":[245,285,145,165,195,55,55,55,55,55,55,55,55,55], "value":55},
             {"code":"OR", "sequence":[225,225,225,225,225,55,55,125,55,55,125,125,125,55], "value":55},
             {"code":"PA", "sequence":[225,145,145,165,165,145,55,35,35,35,35,35,35,35], "value":35},
-            {"code":"RI", "sequence":[225,145,145,145,145,145,65,35,35,255,35,35,125,85], "value":85},
+            {"code":"RI", "sequence":[225,145,145,145,145,145,65,35,35,345,35,35,125,85], "value":85},
             {"code":"SC", "sequence":[225,225,195,195,55,55,55,55,55,55,55,55,55,55], "value":55},
-            {"code":"SD", "sequence":[225,205,195,195,195,195,195,35,55,35,35,35,35,255], "value":255},
+            {"code":"SD", "sequence":[225,205,195,195,195,195,195,35,55,35,35,35,35,395], "value":255},
             {"code":"TN", "sequence":[175,205,195,195,195,65,125,55,125,55,55,125,125,55], "value":55},
             {"code":"TX", "sequence":[245,205,195,195,195,55,55,55,55,55,55,125,125,55], "value":55},
             {"code":"UT", "sequence":[15,205,195,195,195,55,55,55,35,55,195,125,195,195], "value":195},
-            {"code":"VT", "sequence":[45,255,195,165,165,65,35,35,35,35,35,35,35,35], "value":35},
+            {"code":"VT", "sequence":[45,295,195,165,165,65,35,35,35,35,35,35,35,35], "value":35},
             {"code":"VA", "sequence":[45,185,195,195,165,55,125,35,125,35,125,125,125,125,], "value":125},
             {"code":"WA", "sequence":[225,225,225,225,225,225,55,55,55,55,55,125,125,225], "value":225},
             {"code":"WV", "sequence":[95,115,155,245,155,155,55,125,125,55,125,95,125,95], "value":95},
@@ -173,23 +175,13 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
     chart = new Highcharts.Map({
     chart: {
         renderTo: 'container01',
-        marginBottom: 90,
     },
     
     title : {
         text: 'Leading country of origin of refugees 2015',
     },
     subtitle : {
-        text: "This map only shows the country of origin of the largest refugee group in that particular state.<br>Source: <a href='http://www.wrapsnet.org/Reports/InteractiveReporting/tabid/393/Default.aspx' target='_blank'>Refugee Processing Center</a>",
-        useHTML: true,
-        floating: true,
-        align: 'left',
-        verticalAlign: 'bottom',
-        y: -40,
-        style: {
-            color: '#808080',
-            fontSize: '10px',
-        },
+        enabled: false,
     },
     legend: { enabled: false },
     mapNavigation: {
@@ -200,7 +192,7 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
           floating: true,
         },
     },
-
+    credits: { enabled: false, },
     colorAxis: {
         dataClasses: [
             {from:10, to:20, color: "#2a2a2a"},
@@ -229,6 +221,7 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
             {from:240, to:250, color: "#ffff99"},
             {from:250, to:260, color: "#e4e4e4"},
             {from:260, to:270, color: "#dbdbdb"},
+            {from:270, to:400, color: "#e4e4e4"},
         ]
     },
 
@@ -237,10 +230,10 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
         axisLabel: 'year',
         labels: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
         series: 0, // The series which holds points to update
-        updateInterval: 100,
+        updateInterval: 1500,
         magnet: {
             round: 'floor', // ceil / floor / round
-            step: 0.05
+            step: 1
         }
     },
 
@@ -272,21 +265,22 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
                 if (this.value == 235) {return "<b>" + this.name + "</b>" + "<br>Uzbekistan"}
                 if (this.value == 245) {return "<b>" + this.name + "</b>" + "<br>Vietnam"}
                 if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Afghanistan/Liberia"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Afghanistan/Vietnam"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Afghanistan/Liberia/Sudan"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Azerbaijan/Somalia"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Cuba/Liberia"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Liberia/Serbia"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Eritrea/Sierra Leone"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Russia/Vietnam"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Bhutan/Burma"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Afghanistan/Burma"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Burma/Cuba/Iran"}
-                if (this.value == 255) {return "<b>" + this.name + "</b>" + "<br>Iran/Sudan"}
+                if (this.value == 275) {return "<b>" + this.name + "</b>" + "<br>Afghanistan/Vietnam"}
+                if (this.value == 285) {return "<b>" + this.name + "</b>" + "<br>Afghanistan/Liberia/Sudan"}
+                if (this.value == 295) {return "<b>" + this.name + "</b>" + "<br>Azerbaijan/Somalia"}
+                if (this.value == 305) {return "<b>" + this.name + "</b>" + "<br>Cuba/Liberia"}
+                if (this.value == 315) {return "<b>" + this.name + "</b>" + "<br>Liberia/Serbia"}
+                if (this.value == 325) {return "<b>" + this.name + "</b>" + "<br>Eritrea/Sierra Leone"}
+                if (this.value == 335) {return "<b>" + this.name + "</b>" + "<br>Russia/Vietnam"}
+                if (this.value == 345) {return "<b>" + this.name + "</b>" + "<br>Bhutan/Burma"}
+                if (this.value == 355) {return "<b>" + this.name + "</b>" + "<br>Afghanistan/Burma"}
+                if (this.value == 365) {return "<b>" + this.name + "</b>" + "<br>Burma/Cuba/Iran"}
+                if (this.value == 375) {return "<b>" + this.name + "</b>" + "<br>Iran/Sudan"}
+                if (this.value == 385) {return "<b>" + this.name + "</b>" + "<br>Dem. Rep. Congo/Somalia"}
+                if (this.value == 395) {return "<b>" + this.name + "</b>" + "<br>Burma/Somalia"}
                 if (this.value == 265) {return "<b>" + this.name + "</b>" + "<br>Sri Lanka"}
             },
     },
-    credits: { text: 'Kuang Keng Kuek Ser / PRI' },
     series: [{
         mapData: Highcharts.maps['countries/us/us-all'],
         joinBy: ['postal-code', 'code'],
@@ -296,7 +290,7 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
             color: '#FFFFFF',
             allowOverlap: 'true',
             style: {
-                fontSize: '10px',
+                fontSize: '9px',
                 },
             formatter: function () {
                 if (this.point.value == 15) {return "Afghanistan"}
@@ -324,17 +318,19 @@ var data = [{"code":"AL", "sequence":[255,75,75,165,165,65,125,125,125,195,195,1
                 if (this.point.value == 235) {return "Uzbekistan"}
                 if (this.point.value == 245) {return "Vietnam"}
                 if (this.point.value == 255) {return "Afghanistan/Liberia"}
-                if (this.point.value == 255) {return "Afghanistan/Vietnam"}
-                if (this.point.value == 255) {return "Afghanistan/Liberia/Sudan"}
-                if (this.point.value == 255) {return "Azerbaijan/Somalia"}
-                if (this.point.value == 255) {return "Cuba/Liberia"}
-                if (this.point.value == 255) {return "Liberia/Serbia"}
-                if (this.point.value == 255) {return "Eritrea/Sierra Leone"}
-                if (this.point.value == 255) {return "Russia/Vietnam"}
-                if (this.point.value == 255) {return "Bhutan/Burma"}
-                if (this.point.value == 255) {return "Afghanistan/Burma"}
-                if (this.point.value == 255) {return "Burma/Cuba/Iran"}
-                if (this.point.value == 255) {return "Iran/Sudan"}
+                if (this.point.value == 275) {return "Afghanistan/Vietnam"}
+                if (this.point.value == 285) {return "Afghanistan/Liberia/Sudan"}
+                if (this.point.value == 295) {return "Azerbaijan/Somalia"}
+                if (this.point.value == 305) {return "Cuba/Liberia"}
+                if (this.point.value == 315) {return "Liberia/Serbia"}
+                if (this.point.value == 325) {return "Eritrea/Sierra Leone"}
+                if (this.point.value == 335) {return "Russia/Vietnam"}
+                if (this.point.value == 345) {return "Bhutan/Burma"}
+                if (this.point.value == 355) {return "Afghanistan/Burma"}
+                if (this.point.value == 365) {return "Burma/Cuba/Iran"}
+                if (this.point.value == 375) {return "Iran/Sudan"}
+                if (this.point.value == 385) {return "Dem. Rep. Congo/Somalia"}
+                if (this.point.value == 395) {return "Burma/Somalia"}
                 if (this.point.value == 265) {return "Sri Lanka"}
             },
         },
@@ -362,53 +358,46 @@ $(function () {
             chart: {
                 renderTo: 'container02',
                 type: 'line',
+                marginTop: -5,
                 events: {
                     redraw: function () {
-                        if(count>0){
-                            for (var i=0; i<17; i++) {
-                                this.series[i].data[0].setState("");
-                                this.series[i].data[1].setState("");
-                                this.series[i].data[2].setState("");
-                                this.series[i].data[3].setState("");
-                                this.series[i].data[4].setState("");
-                                this.series[i].data[5].setState("");
-                                this.series[i].data[6].setState("");
-                                this.series[i].data[7].setState("");
-                                this.series[i].data[8].setState("");
-                                this.series[i].data[9].setState("");
-                                this.series[i].data[10].setState("");
-                                this.series[i].data[11].setState("");
-                                this.series[i].data[12].setState("");
-                                this.series[i].data[13].setState("");
-                            }
-                            this.tooltip.refresh(this.series[active].data[count]);
-                            this.series[active].data[count].setState("hover");
+                        console.log("redraw!");
+                        for (var i=0; i<17; i++) {
+                            this.series[i].data[0].setState("");
+                            this.series[i].data[1].setState("");
+                            this.series[i].data[2].setState("");
+                            this.series[i].data[3].setState("");
+                            this.series[i].data[4].setState("");
+                            this.series[i].data[5].setState("");
+                            this.series[i].data[6].setState("");
+                            this.series[i].data[7].setState("");
+                            this.series[i].data[8].setState("");
+                            this.series[i].data[9].setState("");
+                            this.series[i].data[10].setState("");
+                            this.series[i].data[11].setState("");
+                            this.series[i].data[12].setState("");
+                            this.series[i].data[13].setState("");
                         }
-                            else{
-                               this.tooltip.refresh(this.series[active].data[count]);
-                                this.series[active].data[count].setState("hover");
-                            }
+                        this.tooltip.refresh(this.series[active].data[count]);
+                        this.series[active].data[count].setState("hover");
                     }
                 }
             },
             title: {
-                text: 'Number of refugees by country of origin, 2002-2015',
-                margin: 20,
+                text: null,
+                margin:30,
             },
             subtitle: {
                 enabled: false,
             },
             xAxis: {
-                categories: ["2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015"],   
+                categories: ["'02","'03","'04","'05","'06","'07","'08","'09","'10","'11","'12","'13","'14","'15"], 
+
             },
             yAxis: {
+                visible: false,
                 title: {
                   text: null,
-                  x: 0,
-                  style: {
-                    color: '#808080',
-                    fontSize: '11px',
-                  },  
                 },
                 labels: {
                     format: '{value:,.0f}'
@@ -420,7 +409,9 @@ $(function () {
                 itemWidth: 100,
                 itemStyle: {
                     color: '#595959',
-                }
+                },
+                margin: 5,
+                maxHeight: 60,
             },
             tooltip: {
                 enabled: true,
@@ -436,23 +427,23 @@ $(function () {
               }
             },
             series: [
-                {name: "Afghanistan", color:"#FF5349", data: [2026,1370,836,876,633,413,611,338,527,392,578,678,696,1168]},
-                {name: "Bhutan", color:"#FDD9B5", data: [0,0,0,0,3,0,7544,15077,11729,14735,14459,9051,7476,5764]},
-                {name: "Burma", color:"#FDDB6D", data :[113,220,1277,1470,2294,14225,19000,19920,17176,15713,15112,14580,15971,17483]},
-                {name: "Burundi", color:"#C5E384", data: [62,18,335,153,514,5058,2567,635,435,129,183,162,133,1208]},
-                {name: "Cuba", color:"#1CAC78", data: [1829,468,3812,6440,2574,3249,4340,4790,4865,2151,2707,4101,3703,1060]},
-                {name: "DR Congo", color:"#000000", data: [94,286,626,331,478,821,963,1134,3160,1206,2132,2592,5128,8206]},
-                {name: "Ethiopia", color:"#FFAACC", data: [401,2199,2293,1627,1308,946,260,345,663,594,820,672,687,682]},
-                {name: "Eritrea", color:"#0D98BA", data: [14,41,181,515,432,846,376,1917,2517,1817,1819,1418,1409,1783]},
-                {name: "Iran", color:"#C0448F", data: [1778,2481,1746,1763,4065,5140,5067,5437,2979,2100,1973,2535,2830,3121]},
-                {name: "Iraq", color:"#FC2847", data :[552,209,73,204,218,2631,15766,19472,18251,6339,16369,18567,20337,10169]},
-                {name: "Laos", color:"#B4674D", data: [18,13,9201,5630,563,101,41,6,135,115,18,0,0,0]},
-                {name: "Liberia", color:"#95918C", data: [729,3990,6696,4069,1995,1822,602,447,181,132,56,81,28,11]},
-                {name: "Russia", color:"#FFAE42", data: [2295,1712,1187,7478,4890,1212,460,453,265,161,198,93,198,292]},
-                {name: "Somalia", color:"#1F75FE", data :[317,2762,15088,9334,10522,5708,2698,4620,4401,3453,5893,7450,10057,7779]},
-                {name: "Sudan", color:"#7366BD", data: [1041,2653,3259,2098,1883,465,346,705,505,442,1529,2044,1043,1688]},
-                {name: "Ukraine", color:"#F75394", data: [6104,5429,2822,2991,2276,1452,826,552,428,458,346,209,667,1760]},
-                {name: "Vietnam", color:"#EE204D", data: [3581,1373,805,3416,1975,1534,1234,1754,470,120,87,63,80,39]},    
+                {name: "Afghanistan", color:"#FFAACC", data: [2026,1370,836,876,633,413,611,338,527,392,578,678,696,1168]},
+                {name: "Bhutan", color:"#33a02c", data: [0,0,0,0,3,0,7544,15077,11729,14735,14459,9051,7476,5764]},
+                {name: "Burma", color:"#ff7f00", data :[113,220,1277,1470,2294,14225,19000,19920,17176,15713,15112,14580,15971,17483]},
+                {name: "Burundi", color:"#5D76CB", data: [62,18,335,153,514,5058,2567,635,435,129,183,162,133,1208]},
+                {name: "Cuba", color:"#e31a1c", data: [1829,468,3812,6440,2574,3249,4340,4790,4865,2151,2707,4101,3703,1060]},
+                {name: "DR Congo", color:"#a6cee3", data: [94,286,626,331,478,821,963,1134,3160,1206,2132,2592,5128,8206]},
+                {name: "Ethiopia", color:"#FDDB6D", data: [401,2199,2293,1627,1308,946,260,345,663,594,820,672,687,682]},
+                {name: "Eritrea", color:"#a8a8a8", data: [14,41,181,515,432,846,376,1917,2517,1817,1819,1418,1409,1783]},
+                {name: "Iran", color:"#1DACD6", data: [1778,2481,1746,1763,4065,5140,5067,5437,2979,2100,1973,2535,2830,3121]},
+                {name: "Iraq", color:"#fb9a99", data :[552,209,73,204,218,2631,15766,19472,18251,6339,16369,18567,20337,10169]},
+                {name: "Laos", color:"#1F75FE", data: [18,13,9201,5630,563,101,41,6,135,115,18,0,0,0]},
+                {name: "Liberia", color:"#b15928", data: [729,3990,6696,4069,1995,1822,602,447,181,132,56,81,28,11]},
+                {name: "Russia", color:"#fdbf6f", data: [2295,1712,1187,7478,4890,1212,460,453,265,161,198,93,198,292]},
+                {name: "Somalia", color:"#b2df8a", data :[317,2762,15088,9334,10522,5708,2698,4620,4401,3453,5893,7450,10057,7779]},
+                {name: "Sudan", color:"#1f78b4", data: [1041,2653,3259,2098,1883,465,346,705,505,442,1529,2044,1043,1688]},
+                {name: "Ukraine", color:"#6a3d9a", data: [6104,5429,2822,2991,2276,1452,826,552,428,458,346,209,667,1760]},
+                {name: "Vietnam", color:"#ffff99", data: [3581,1373,805,3416,1975,1534,1234,1754,470,120,87,63,80,39]},    
             ],
             },
         function(chart02){
@@ -514,7 +505,34 @@ function updateChart() {
     if(input == 2015){count = 13}
     active = country[count]; 
     chart02.series[active].graph.attr({ stroke: color[count] });
-    chart02.series[active].graph.attr({ 'stroke-width': 5 });
+    chart02.series[active].graph.attr({ 'stroke-width': 3 });
     chart02.redraw();
 }
+
+$("#button01").click(function() {
+    clearInterval(checkchange);
+    for (var i=0; i<17; i++) {
+        chart02.series[i].graph.attr({ 'stroke-width': 2 });
+    }
+    chart02.series[0].graph.attr({ stroke: '#FFAACC' });
+    chart02.series[1].graph.attr({ stroke: '#33a02c' });
+    chart02.series[2].graph.attr({ stroke: '#ff7f00' });
+    chart02.series[3].graph.attr({ stroke: '#5D76CB' });
+    chart02.series[4].graph.attr({ stroke: '#e31a1c' });
+    chart02.series[5].graph.attr({ stroke: '#a6cee3' });
+    chart02.series[6].graph.attr({ stroke: '#FDDB6D' });
+    chart02.series[7].graph.attr({ stroke: '#a8a8a8' });
+    chart02.series[8].graph.attr({ stroke: '#1DACD6' });
+    chart02.series[9].graph.attr({ stroke: '#fb9a99' });
+    chart02.series[10].graph.attr({ stroke: '#1F75FE' });
+    chart02.series[11].graph.attr({ stroke: '#b15928' });
+    chart02.series[12].graph.attr({ stroke: '#fdbf6f' });
+    chart02.series[13].graph.attr({ stroke: '#b2df8a' });
+    chart02.series[14].graph.attr({ stroke: '#1f78b4' });
+    chart02.series[15].graph.attr({ stroke: '#6a3d9a' });
+    chart02.series[16].graph.attr({ stroke: '#ffff99' });
+    Highcharts.charts[0].motion.pause();
+
+});
+
 </script>

@@ -1,0 +1,127 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 18px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <br>Source: 
+        <a href='http://www.wrapsnet.org/Reports/AdmissionsArrivals/tabid/211/Default.aspx'  target='_blank'>Refugee Processing Center</a>, <a href='http://www.cic.gc.ca/english/refugees/welcome/milestones/data.asp'  target='_blank'>Canadian government</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.seriesTypes.column.prototype.pointAttrToOptions.dashstyle = 'dashStyle';
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+        },
+        title: {
+            text: 'Number of Syrian refugees admitted to the US and Canada',
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["US (Oct 2015 – Mar 2016)","US target (Oct 2015 - Sep 2016)","Canada (Nov 4, 2015 – Apr 3, 2016)",],  
+        },
+        yAxis: {
+            title: {
+              text: null,
+              style: {
+                color: '#808080',
+                fontSize: '8px',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+            endOnTick: false,
+            minTickInterval: 10000,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: 'Number of Syrian refugees: {point.y:,.0f}',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0,
+                pointPadding:0.1,
+            }
+        },
+        series: [{
+            data:[{y:1285,color:"#d3401e"},{y:10000,color:"rgba(211, 64, 30, 0.3)", borderColor: '#d3401e', dashStyle: 'dash'},26213],
+            color:"#4188bc",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'center',
+                format: '{point.y:,.0f}',
+                style: {
+                    fontSize: '16px',
+                }
+            }
+        }],
+    });
+});
+</script>
