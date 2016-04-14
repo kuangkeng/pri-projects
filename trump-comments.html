@@ -4931,14 +4931,14 @@ var toggle = ["none","none","off","off","off","off","off","off","off","off","off
     var num = $(this).attr("id");
     console.log("before = " + toggle[num]);
     if (toggle[num] == "on"){
-      for (var i=1; i<51; i++) {
+      for (var i=1; i<4797; i++) {
         if($("#comment"+i).attr("id"+num)=="No"){$("#comment"+i).show()};
       }
       toggle[num] = "off";
       $(this).css("color","black");
     }
     else{
-      for (var i=1; i<51; i++) {
+      for (var i=1; i<4797; i++) {
         if($("#comment"+i).attr("id"+num)=="No"){$("#comment"+i).hide()};
       }
       toggle[num] = "on";
