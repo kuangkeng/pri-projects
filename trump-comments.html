@@ -5005,7 +5005,7 @@ var count = 0;
     count = [];
     toggle = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     $(".filter").removeClass("on");
-    for (var a=1; a<101; a++) {
+    for (var a=1; a<4797; a++) {
       var show = $("#comment"+a).detach();
           $("#mylist").append(show);
     }
@@ -5026,7 +5026,7 @@ var count = 0;
 
     if(selectLong==1){
       console.log("selected 1 = " + selected);
-      for (var a=1; a<101; a++) {
+      for (var a=1; a<4797; a++) {
         if(
           $("#comment"+a).attr("id"+selected[0])=="Yes"){
           var show = $("#comment"+a).detach();
@@ -5037,7 +5037,7 @@ var count = 0;
 
     else if(selectLong==2){
       console.log("selected 2 = " + selected);
-      for (var a=1; a<101; a++) {
+      for (var a=1; a<4797; a++) {
         if(
           $("#comment"+a).attr("id"+selected[0])=="Yes" && $("#comment"+a).attr("id"+selected[1])=="Yes"){
           var show = $("#comment"+a).detach();
@@ -5048,7 +5048,7 @@ var count = 0;
 
     else if(selectLong==3){
       console.log("selected 3 = " + selected);
-      for (var a=1; a<101; a++) {
+      for (var a=1; a<4797; a++) {
         if(
           $("#comment"+a).attr("id"+selected[0])=="Yes" && $("#comment"+a).attr("id"+selected[1])=="Yes" && $("#comment"+a).attr("id"+selected[2])=="Yes"){
           var show = $("#comment"+a).detach();
