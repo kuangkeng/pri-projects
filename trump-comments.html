@@ -22,7 +22,7 @@ body{
 
 #search_input {
 font-size: 80%;
-width: 29%;
+width: 40%;
 margin:0px auto;
 padding: 7px 0px 7px 10px; 
 border: solid 1px #dcdcdc;
@@ -54,6 +54,8 @@ border-radius: 3px;
 
 .filter{
   display:inline-block;
+  margin: 2px 0px;
+  padding:6px 10px;
 }
 
 .filter-box {
@@ -68,7 +70,7 @@ border-radius: 3px;
   font-size: 20px;
   font-weight: bold;
   margin-top:15px;
-  margin-bottom: 10px; 
+  margin-bottom: 5px; 
 }
 
 .questions {
@@ -83,33 +85,17 @@ border-radius: 3px;
 
 #num_results {font-weight: bold; font-style: normal;}
 
+.tag1, .tag2, .tag3, .tag4, .tag5 {
+  font-size: 12px;
+  padding:1px 6px;
+  margin-right:3px;
+}
+
 .tips {
   font-size: 12px; 
   color: #848484;
   margin-bottom: 15px;
   font-style: italic;
-}
-
-#waitbox {
-  padding:5px;
-  text-align: center;
-  width:120px;
-  height:34px;
-  background-color: #333;
-  color:#fff;
-  position: fixed;
-  top:50%;
-  left:50%;
-  margin-top:-17px;
-  margin-left:-60px;
-  opacity:0.8;
-  border-radius: 3px;
-}
-
-.tag1, .tag2, .tag3, .tag4, .tag5 {
-  font-size: 12px;
-  padding:1px 6px;
-  margin-right:3px;
 }
 
 .ui-tooltip-content {
@@ -131,12 +117,27 @@ td {padding:0.5%;}
 #btn-reset {float:left; height: 100%}  
 #small {font-size: 14px; color:#848484;}
 
+@media (max-width: 400px) {
+  body { font-size: 14px;}
+  .instruct {font-size:12px; margin-bottom:10px;}
+  .title {font-size: 16px;font-weight: bold;margin-top:5px;margin-bottom: 2px;}
+  .questions {margin-bottom: 15px; font-size: 13px;}
+  ol{padding-left: 15px;}
+  .filter {margin: 2px 0px; padding:2px 4px;}
+  #btn-reset, #btn-result {font-size: 16px; padding:5px 12px;}
+  #small {font-size: 12px;}
+  .filter-box {margin-bottom: 0px;}
+  #search_input {width: 60%}
+  ul{padding-left: 10px;}
+  .column {margin-top:0px; padding-top: 5px;}
+  .tips{margin-bottom: 5px; font-size: 11px;}
+  #results {margin-bottom: 5px;}
+  .ui-tooltip-content {font-size: 10px;}
+} 
 </style>
 </head>
 
 <body>
-
-<div id="waitbox">Searching...</div>
 
 <div class="instruct">
   The SPLC's survey asked teachers about the effect of GOP presidential candidate Donald Trump in their schools. There were 4,796 comments responding to 5 questions. Try filtering the comments using keywords (3 maximum). Click "See my selection" to see comments containing the keywords you select. You can further filter the results with your own custom words using the custom filter box. Click "Reset" to select new set of keywords.
@@ -5008,7 +5009,7 @@ td {padding:0.5%;}
 
 $(document).ready(function(){
 console.log("ready!!!");
-$("#storage, #waitbox").hide();
+$("#storage").hide();
 $( ".tag1" ).tooltip({
   content: "How have you seen the rhetoric of this year’s presidential campaign affect your students? Your school?"
 });
@@ -5070,7 +5071,6 @@ var count = 0;
   }
   
   function showResult(){ 
-    $("#waitbox").show();  
     var hide = $(".comment").detach();
           $("#storage").append(hide);
     var selected = [];
@@ -5117,7 +5117,6 @@ var count = 0;
     }
     var panjang = $("#mylist").children().length;
     $("#num_results").html(panjang);
-    $("#waitbox").hide();
   }
 });
 </script>
