@@ -106,20 +106,13 @@ $(function () {
             tickInterval: 20,
         },
         credits: { enabled: false, },
-        legend:{enabled: false,},
+        legend:{enabled: true,},
         plotOptions: {
             scatter: {
                 marker: {
-                    radius: 5,
-                    fillColor: '#4188bc',
+                    radius: 8,
                     lineColor: '#D3D3D3',
                     lineWidth: 1,
-                    states: {
-                        hover: {
-                            enabled: true,
-                            lineColor: '#33333c'
-                        }
-                    }
                 },
                 states: {
                     hover: {
@@ -129,68 +122,86 @@ $(function () {
                     }
                 },
                 tooltip: {
-                    headerFormat: '<b>{point.key}</b><br>',
-                    pointFormat: 'Reproductive rights score:<b>{point.y}</b><br>No. of executions: <b>{point.x}</b>'
+                    headerFormat: '',
+                    pointFormatter: function () {
+                        return "<b>" + this.item + "</b><br>" + this.series.name + "<br>Reproductive rights score:<b>" + this.y + "</b><br>No. of executions: <b>" + this.x + "</b>"
+                    }
                 }
             }
         },
-        series: [{data:[
-            {"name":"Connecticut","y":90, "x":1},
-            {"name":"Hawaii","y":90, "x":0},
-            {"name":"Montana","y":90, "x":3},
-            {"name":"Oregon","y":90, "x":2},
-            {"name":"Washington","y":90, "x":5},
-            {"name":"California","y":100, "x":13},
-            {"name":"Illinois","y":70, "x":12},
-            {"name":"Alaska","y":80, "x":0},
-            {"name":"Maine","y":80, "x":0},
-            {"name":"Maryland","y":80, "x":5},
-            {"name":"Nevada","y":80, "x":12},
-            {"name":"New Jersey","y":80, "x":0},
-            {"name":"New Mexico","y":80, "x":1},
-            {"name":"New York","y":80, "x":0},
-            {"name":"Vermont","y":80, "x":0},
-            {"name":"Colorado","y":50, "x":1},
-            {"name":"Delaware","y":50, "x":16},
-            {"name":"Iowa","y":50, "x":0},
-            {"name":"Minnesota","y":50, "x":0},
-            {"name":"Massachusetts","y":60, "x":0},
-            {"name":"New Hampshire","y":60, "x":0},
-            {"name":"West virginia","y":40, "x":0},
-            {"name":"Wyoming","y":40, "x":1},
-            {"name":"Alabama","y":0, "x":57},
-            {"name":"Arizona","y":0, "x":37},
-            {"name":"Arkansas","y":0, "x":27},
-            {"name":"Florida","y":0, "x":92},
-            {"name":"Georgia","y":0, "x":63},
-            {"name":"Idaho","y":0, "x":3},
-            {"name":"Indiana","y":0, "x":20},
-            {"name":"Kansas","y":0, "x":0},
-            {"name":"Kentucky","y":0, "x":3},
-            {"name":"Louisiana","y":0, "x":28},
-            {"name":"Michigan","y":0, "x":0},
-            {"name":"Mississippi","y":0, "x":21},
-            {"name":"Missouri","y":0, "x":86},
-            {"name":"Nebraska","y":0, "x":3},
-            {"name":"North Carolina","y":0, "x":43},
-            {"name":"North Dakota","y":0, "x":0},
-            {"name":"Ohio","y":0, "x":53},
-            {"name":"Oklahoma","y":0, "x":112},
-            {"name":"Pennsylvania","y":0, "x":3},
-            {"name":"Rhode Island","y":0, "x":0},
-            {"name":"South Carolina","y":0, "x":43},
-            {"name":"South Dakota","y":0, "x":3},
-            {"name":"Tennessee","y":0, "x":6},
-            {"name":"Texas","y":0, "x":537, dataLabels: {enabled: true, format: '{point.name}', style: {fontSize: '12px'}}},
-            {"name":"Utah","y":0, "x":7},
-            {"name":"Virginia","y":0, "x":111},
-            {"name":"Wisconsin","y":0, "x":0},
-          ],
-            dataLabels: {
-                enabled: false,
+        series: [
+            {
+                name: 'Democratic governor',
+                data: [
+                    {item:"California", "y":100, "x":13},
+                    {item:"Connecticut", "y":90, "x":1},
+                    {item:"Hawaii", "y":90, "x":0},
+                    {item:"Montana", "y":90, "x":3},
+                    {item:"Oregon", "y":90, "x":2},
+                    {item:"Washington", "y":90, "x":5},
+                    {item:"New York", "y":80, "x":0},
+                    {item:"Vermont", "y":80, "x":0},
+                    {item:"New Hampshire", "y":60, "x":0},
+                    {item:"Colorado", "y":50, "x":1},
+                    {item:"Delaware", "y":50, "x":16},
+                    {item:"Minnesota", "y":50, "x":0},
+                    {item:"West virginia", "y":40, "x":0},
+                    {item:"Louisiana", "y":0, "x":28},
+                    {item:"Missouri", "y":0, "x":86},
+                    {item:"Pennsylvania", "y":0, "x":3},
+                    {item:"Rhode Island", "y":0, "x":0},
+                    {item:"Virginia", "y":0, "x":111},
+                ],
+                dataLabels: {enabled: false,},
+                marker: {symbol: 'circle', fillColor: '#0018BE', states: {hover: {fillColor: '#0018BE',}}}
             },
-
-        }],
+            {
+                name: 'Republican governor',
+                data: [
+                    {item:"Maine", "y":80, "x":0},
+                    {item:"Maryland", "y":80, "x":5},
+                    {item:"Nevada", "y":80, "x":12},
+                    {item:"New Jersey", "y":80, "x":0},
+                    {item:"New Mexico", "y":80, "x":1},
+                    {item:"Illinois", "y":70, "x":12},
+                    {item:"Massachusetts", "y":60, "x":0},
+                    {item:"Iowa", "y":50, "x":0},
+                    {item:"Wyoming", "y":40, "x":1},
+                    {item:"Alabama", "y":0, "x":57},
+                    {item:"Arizona", "y":0, "x":37},
+                    {item:"Arkansas", "y":0, "x":27},
+                    {item:"Florida", "y":0, "x":92},
+                    {item:"Georgia", "y":0, "x":63},
+                    {item:"Idaho", "y":0, "x":3},
+                    {item:"Indiana", "y":0, "x":20},
+                    {item:"Kansas", "y":0, "x":0},
+                    {item:"Kentucky", "y":0, "x":3},
+                    {item:"Michigan", "y":0, "x":0},
+                    {item:"Mississippi", "y":0, "x":21},
+                    {item:"Nebraska", "y":0, "x":3},
+                    {item:"North Carolina", "y":0, "x":43},
+                    {item:"North Dakota", "y":0, "x":0},
+                    {item:"Ohio", "y":0, "x":53},
+                    {item:"Oklahoma", "y":0, "x":112},
+                    {item:"South Carolina", "y":0, "x":43},
+                    {item:"South Dakota", "y":0, "x":3},
+                    {item:"Tennessee", "y":0, "x":6},
+                    {item:"Texas", "y":0, "x":537, dataLabels: {enabled: true, format: 'Texas', style: {fontSize: '12px'}}},
+                    {item:"Utah", "y":0, "x":7},
+                    {item:"Wisconsin", "y":0, "x":0},
+                ],
+                dataLabels: {enabled: false,},
+                marker: {symbol: 'circle', fillColor: '#E91D0E', states: {hover: {fillColor: '#E91D0E',}}}
+            },
+            {
+                name: 'Independent governor',
+                data: [
+                    {item:"Alaska", "y":80, "x":0},
+                ],
+                dataLabels: {enabled: false,},
+                marker: {symbol: 'circle', fillColor: '#F8CA00', states: {hover: {fillColor: '#F8CA00',}}}
+            },
+],
     });
     
     var chart = $('#container').highcharts();

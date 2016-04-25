@@ -47,9 +47,9 @@ border-radius: 3px;
   min-height: 500px;
 }
 
-li {
-  list-style-type: none;
-  padding-bottom: 10px;
+.instruct {
+  font-size:14px;
+  margin-bottom:20px;
 }
 
 .headline {
@@ -79,6 +79,10 @@ li {
   font-weight: bold;
   margin-top:15px;
   margin-bottom: 5px; 
+}
+
+.questions {
+  margin-bottom: 30px;
 }
 
 #results {
@@ -113,32 +117,51 @@ li {
 .tag5 {background-color: #fed9a6;}
 
 #col1, #col2 {text-align: center; padding:10px 5px;}
-#col1 {width:54%;}
-#col2 {width:44%;}
+#col1 {width:59%;}
+#col2 {width:39%;}
 table {width:100%;}
 td {padding:0.5%;}
 #btn-result {float:right; height: 100%}
 #btn-reset {float:left; height: 100%}  
 #small {font-size: 14px; color:#848484;}
 
-.direct {
-  display:none;
-  font-size: 20px;
-  font-weight: bold;
-}
-
 @media (max-width: 400px) {
-  .direct {display:inline;}
-  .box {display:none;}
+  body { font-size: 14px;}
+  .instruct {font-size:12px; margin-bottom:10px;}
+  .title {font-size: 16px;font-weight: bold;margin-top:5px;margin-bottom: 2px;}
+  .headline {font-size: 20px;font-weight: bold;margin-top:5px;margin-bottom: 10px;}
+  .questions {margin-bottom: 15px; font-size: 13px;}
+  ol{padding-left: 15px;}
+  .filter {margin: 2px 0px; padding:2px 4px;}
+  #btn-reset, #btn-result {font-size: 16px; padding:5px 12px;}
+  #small {font-size: 12px;}
+  .filter-box {margin-bottom: 0px;}
+  #search_input {width: 60%}
+  ul{padding-left: 10px;}
+  .column {margin-top:0px; padding-top: 5px;}
+  .tips{margin-bottom: 5px; font-size: 11px;}
+  #results {margin-bottom: 5px;}
+  .ui-tooltip-content {font-size: 10px;}
 } 
 </style>
 </head>
 
 <body>
-<div class="direct"><a href='http://admin.pri.org/sites/default/files/trump-comments-mobile.html' target='_blank'>Browse and search the teachers' comments here.</a></div>  
-
-<div class="box">
 <div class="headline">Explore the "Trump Effect"</div>
+<div class="instruct">
+  The SPLC's survey asked teachers about the effect of GOP presidential candidate Donald Trump in their schools. There were 4,796 comments responding to 5 questions. Try filtering the comments using keywords (3 maximum). Click "See my selection" to see comments containing the keywords you select. You can further filter the results with your own custom words using the custom filter box. Click "Reset" to select a new set of keywords.
+</div>
+
+<div class="questions">
+<div class="title">The questions:</div>  
+  <ol>
+    <li>How have you seen the rhetoric of this year’s presidential campaign affect your students? Your school?</li>
+    <li>If you have witnessed bullying or biased language at your school—from adults or students—that mimics the rhetoric of the campaign, please tell us about it.</li>
+    <li>Have you changed the way you approach teaching about the election this year? If so, how?</li>
+    <li>Do you have additional comments?</li>
+    <li>What resources do you need to help you teach safely and effectively about the 2016 election?</li>
+  </ol>  
+</div>
 
 <div class="filter-box">  
 <div class="title">Pick your keywords <span id="small">(max 3)</span></div>  
@@ -167,17 +190,17 @@ td {padding:0.5%;}
 <table> 
   <tr>
      <td id="col1"><button class="btn btn-info btn-lg" id="btn-result">See my selection</button></td>
-     <td id="col2"><button class="btn btn-info btn-lg" id="btn-reset">Start over</button></td>
+     <td id="col2"><button class="btn btn-info btn-lg" id="btn-reset">Reset</button></td>
   </tr> 
 </table>
 
 <div class="column">
   <div class="title">Comments:</div>
   <div id="results">Number of comments found: <span id="num_results">4,796</span></div>
-  <div class="input-box"><input id="search_input" placeholder="Filter using your own word"/></div>
-  <div class="tips">Type Q1, Q2, Q3, Q4 or Q5 to filter by question. Hover over the number tags to show the corresponding questions.</div>
+  <div class="input-box"><input id="search_input" placeholder="Type to custom filter" /></div>
+  <div class="tips">Type 'Q1', 'Q2' and so on to filter by question. Hover over the question tag of each comment to see the corresponding question.</div>
   <ul class="sortable-list" id="mylist">
-    <li  class="comment" id="comment1" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>No but we are an elementary school</li>
+<li  class="comment" id="comment1" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>No but we are an elementary school</li>
 <li  class="comment" id="comment2" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>They hesitate to voice their opinions in respect for the opinions of others AND in fear of retribution.</li>
 <li  class="comment" id="comment3" id1="q1" id2="No" id3="Yes" id4="Yes" id5="Yes" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students from families supporting Republican candidates, especially (but not limited to) Trump, have been much more vocal about their distrust of Muslims and President Obama.</li>
 <li  class="comment" id="comment4" id1="q1" id2="No" id3="No" id4="No" id5="Yes" id6="No" id7="No" id8="No" id9="No" id10="No" id11="Yes" id12="No" id13="No" id14="Yes" id15="No" id16="Yes" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>This election cycle has become more than a joke. My immigrant students, illegal and legal, are asking questions that tell me they are scared. The Republican rhetoric about walls and "keeping them out" is frightening. The lack of tolerance is appalling! The language is a return to isolationism and a promotion of racism that hasn't been seen since the 1920's!</li>
@@ -4978,7 +5001,7 @@ td {padding:0.5%;}
 <ul id="storage">
   STORAGE
 </ul>
-</div>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -4988,7 +5011,7 @@ td {padding:0.5%;}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script src="http://cdn2.pri.org/scripts/fastLiveFilter.js"></script>
+    <script src="http://kuangkeng.github.io/pri-projects/fastLiveFilter.js"></script>
 
 
 <script type="text/javascript">

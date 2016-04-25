@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+body{
+  width: 100%;
+  max-width: 600px;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 16px;
+  color: #333;
+} 
+
+#search_input {
+font-size: 80%;
+width: 40%;
+margin:0px auto;
+padding: 7px 0px 7px 10px; 
+border: solid 1px #dcdcdc;
+border-radius: 3px;
+}
+
+.input-box {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.column {
+  padding:10px;
+  background-color: #eeeeee;
+  border-radius: 5px;
+  max-width: 600px;
+  margin:0px auto;
+  margin-top:15px;
+}
+
+#mylist {
+  min-height: 500px;
+}
+
+.instruct {
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+.headline {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top:15px;
+  margin-bottom: 10px; 
+  text-align: center;
+}
+
+.filter{
+  display:inline-block;
+  margin: 2px 0px;
+  padding:6px 10px;
+}
+
+.filter-box {
+  margin-bottom: 10px;
+}
+
+.on {
+  color: red !important;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top:15px;
+  margin-bottom: 5px; 
+}
+
+.questions {
+  margin-bottom: 30px;
+}
+
+#results {
+  text-align: center;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+#num_results {font-weight: bold; font-style: normal;}
+
+.tag1, .tag2, .tag3, .tag4, .tag5 {
+  font-size: 12px;
+  padding:1px 6px;
+  margin-right:3px;
+}
+
+.tips {
+  font-size: 12px; 
+  color: #848484;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.ui-tooltip-content {
+  font-size: 12px;
+}
+
+.tag1 {background-color: #fbb4ae;}
+.tag2 {background-color: #b3cde3;}
+.tag3 {background-color: #ccebc5;}
+.tag4 {background-color: #decbe4;}
+.tag5 {background-color: #fed9a6;}
+
+#col1, #col2 {text-align: center; padding:10px 5px;}
+#col1 {width:59%;}
+#col2 {width:39%;}
+table {width:100%;}
+td {padding:0.5%;}
+#btn-result {float:right; height: 100%}
+#btn-reset {float:left; height: 100%}  
+#small {font-size: 14px; color:#848484;}
+
+@media (max-width: 400px) {
+  body { font-size: 14px;}
+  .instruct {font-size:12px; margin-bottom:10px;}
+  .title {font-size: 16px;font-weight: bold;margin-top:5px;margin-bottom: 2px;}
+  .headline {font-size: 20px;font-weight: bold;margin-top:5px;margin-bottom: 10px;}
+  .questions {margin-bottom: 15px; font-size: 13px;}
+  ol{padding-left: 15px;}
+  .filter {margin: 2px 0px; padding:2px 4px;}
+  #btn-reset, #btn-result {font-size: 16px; padding:5px 12px;}
+  #small {font-size: 12px;}
+  .filter-box {margin-bottom: 0px;}
+  #search_input {width: 60%}
+  ul{padding-left: 10px;}
+  .column {margin-top:0px; padding-top: 5px;}
+  .tips{margin-bottom: 5px; font-size: 11px;}
+  #results {margin-bottom: 5px;}
+  .ui-tooltip-content {font-size: 10px;}
+} 
+</style>
+</head>
+
+<body>
+<div class="headline">Explore the "Trump Effect"</div>
+<div class="instruct">
+  The SPLC's survey asked teachers about the effect of GOP presidential candidate Donald Trump in their schools. There were 4,796 comments responding to 5 questions. Try filtering the comments using keywords (3 maximum). Click "See my selection" to see comments containing the keywords you select. You can further filter the results with your own custom words using the custom filter box. Click "Reset" to select a new set of keywords.
+</div>
+
+<div class="questions">
+<div class="title">The questions:</div>  
+  <ol>
+    <li>How have you seen the rhetoric of this year’s presidential campaign affect your students? Your school?</li>
+    <li>If you have witnessed bullying or biased language at your school—from adults or students—that mimics the rhetoric of the campaign, please tell us about it.</li>
+    <li>Have you changed the way you approach teaching about the election this year? If so, how?</li>
+    <li>Do you have additional comments?</li>
+    <li>What resources do you need to help you teach safely and effectively about the 2016 election?</li>
+  </ol>  
+</div>
+
+<div class="filter-box">  
+<div class="title">Pick your keywords <span id="small">(max 3)</span></div>  
+  <button class="btn btn-default filter" id="2">Hispanic</button>
+  <button class="btn btn-default filter" id="3">Muslim</button>
+  <button class="btn btn-default filter" id="4">Trump</button>
+  <button class="btn btn-default filter" id="5">Republican</button>
+  <button class="btn btn-default filter" id="6">hate</button>
+  <button class="btn btn-default filter" id="7">white</button>
+  <button class="btn btn-default filter" id="8">rights</button>
+  <button class="btn btn-default filter" id="9">racist</button>
+  <button class="btn btn-default filter" id="10">fear</button>
+  <button class="btn btn-default filter" id="11">tolerance</button>
+  <button class="btn btn-default filter" id="12">immigrants</button>
+  <button class="btn btn-default filter" id="13">bullying</button>
+  <button class="btn btn-default filter" id="14">language</button>
+  <button class="btn btn-default filter" id="15">bias</button>
+  <button class="btn btn-default filter" id="16">racism</button>
+  <button class="btn btn-default filter" id="17">worried</button>
+  <button class="btn btn-default filter" id="18">afraid</button>
+  <button class="btn btn-default filter" id="19">anti</button>
+  <button class="btn btn-default filter" id="20">Mexican</button>
+  <button class="btn btn-default filter" id="21">scare</button>
+</div>
+
+<table> 
+  <tr>
+     <td id="col1"><button class="btn btn-info btn-lg" id="btn-result">See my selection</button></td>
+     <td id="col2"><button class="btn btn-info btn-lg" id="btn-reset">Reset</button></td>
+  </tr> 
+</table>
+
+<div class="column">
+  <div class="title">Comments:</div>
+  <div id="results">Number of comments found: <span id="num_results">4,796</span></div>
+  <div class="input-box"><input id="search_input" placeholder="Type to custom filter" /></div>
+  <div class="tips">Type 'Q1', 'Q2' and so on to filter by question. Hover over the question tag of each comment to see the corresponding question.</div>
+  <ul class="sortable-list" id="mylist">
+<li  class="comment" id="comment1" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>No but we are an elementary school</li>
+<li  class="comment" id="comment2" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>They hesitate to voice their opinions in respect for the opinions of others AND in fear of retribution.</li>
+<li  class="comment" id="comment3" id1="q1" id2="No" id3="Yes" id4="Yes" id5="Yes" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students from families supporting Republican candidates, especially (but not limited to) Trump, have been much more vocal about their distrust of Muslims and President Obama.</li>
+<li  class="comment" id="comment4" id1="q1" id2="No" id3="No" id4="No" id5="Yes" id6="No" id7="No" id8="No" id9="No" id10="No" id11="Yes" id12="No" id13="No" id14="Yes" id15="No" id16="Yes" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>This election cycle has become more than a joke. My immigrant students, illegal and legal, are asking questions that tell me they are scared. The Republican rhetoric about walls and "keeping them out" is frightening. The lack of tolerance is appalling! The language is a return to isolationism and a promotion of racism that hasn't been seen since the 1920's!</li>
+<li  class="comment" id="comment5" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="Yes" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>There has been an increase in bullying by way of accusing each other that they are Trump supporters to isolate them from the social groups.</li>
+<li  class="comment" id="comment6" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Discussion of the candidates comes up more this year than I remember in past election years. Our school emphasizes respect so students are concerned and discouraged when they don't see that same respect from those that want to be national leaders. I also think they feel helpless in how to deal with it.</li>
+<li  class="comment" id="comment7" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>We haven't addressed it head on yet--some of the kids asked me who I voted for in the primary (I wore my "I Voted" sticker to group).</li>
+<li  class="comment" id="comment8" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Kids are asking frightened questions, rather than positive ones.</li>
+<li  class="comment" id="comment9" id1="q1" id2="No" id3="Yes" id4="Yes" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="Yes" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Fear among Muslim and Latino students My fourth graders are having a difficult time understanding why Donald Trump is using such hateful and inflammatory rhetoric. One of my students who is Muslim is worried that he will have to wear a microchip identifying him as Muslim.</li>
+<li  class="comment" id="comment10" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="Yes" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>While some of my students have been able to look at the campaign critically, some have said things about the campaign simply to be inflammatory. Others think the whole thing is a farce that won't affect them. One male student said, "Well, if Bernie isn't the candidate, then I want Trump to win. It'll be funny." At the same time, some students have raised concerns over how our country could be viewed or treated after the election, depending on the outcome, and others have said they are worried about themselves, their families, and/or their friends.</li>
+<li  class="comment" id="comment11" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students are mostly curious about the way I will vote. Many of them are against Trump as he is directly insulting them.</li>
+<li  class="comment" id="comment12" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="Yes" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>They seem to be more afraid of people who are different from them. They seem to be angry. It seems as if they are echoing the rhetoric of their parents' candidates.</li>
+<li  class="comment" id="comment13" id1="q1" id2="No" id3="Yes" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="Yes" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>Yes. I have students who expressed that they are scared because they are Muslim and/or immigrants.</li>
+<li  class="comment" id="comment14" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="Yes" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students agree with the fact that immigrants are gutting USA, some of them don't but most of them do.</li>
+<li  class="comment" id="comment15" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="Yes" id21="No" ><span class="tag1" title="tooltip">Q1</span>My students have heard that one candidate wants to kicks out all Mexicans. We do research, not web searches, and have discovered that the candidate is only concerned about those that are here illegally. This is reassuring and calms my students.</li>
+<li  class="comment" id="comment16" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I feel students definitely seem more involved in promoting the ideologies express by some candidates. Other students, especially minority, seem to be extremely concerned with what will happen to them if certain candidate wins the election. Never before had I witnessed such uncertainty by my students or peers.</li>
+<li  class="comment" id="comment17" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>There has been no change here that I can see.</li>
+<li  class="comment" id="comment18" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="Yes" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I teach elementary students and a few have become very vocal in expressing intolerance.</li>
+<li  class="comment" id="comment19" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>We all find it repulsive.</li>
+<li  class="comment" id="comment20" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I have noticed that many of our students, as young as 1st grade, are asking questions about what may happen to their family members that are here without the proper documentation. The vast majority of our students were born in the USA. Even with their USA citizenship intact, they continue to share some misconceptions of what will happen to them and their citizenship if Donald Trump is elected. These situations have led to various conversations to clarify these misconceptions.</li>
+<li  class="comment" id="comment21" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>The presidential campaign will focus its rhetoric on issues of our nation after the major political parties choose their platform and candidates. This party behavior has been horrible to watch and listen to. However, I believe it presents a lesson for our students about how to not conduct ourselves.</li>
+<li  class="comment" id="comment22" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>They are very scared by some of what they hear. The intolerant comments are affecting those students of color and they hear and see the lack of diversity in the candidates. They are making fun of candidates and calling them names- as they see them do on TV.</li>
+<li  class="comment" id="comment23" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>No, not at all.</li>
+<li  class="comment" id="comment24" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>They believe Trump...how.</li>
+<li  class="comment" id="comment25" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I'm taking a graduate course in rhetoric, so the term has multiple meanings for me. I can say that some my students seem to think Trump's incendiary speech will somehow improve our country.</li>
+<li  class="comment" id="comment26" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Doesn't because we don't talk about it.</li>
+<li  class="comment" id="comment27" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Many of my students are repeating the hate speech (directed at Trump) that is found in the media and social networks</li>
+<li  class="comment" id="comment28" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Latent prejudices are being voiced. Can be redirected into healthy discourse.</li>
+<li  class="comment" id="comment29" id1="q1" id2="No" id3="No" id4="Yes" id5="Yes" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>We ran a mock primary in our school and the students really rose to the occasion. They took on the roles and put up the posters and made announcements and speeches and just generally worked hard to get everyone in school to get excited about the primary. They learned about caucuses and primaries through creating them in our school. Although I was sorry to see the level of support for Trump amongst some of our student body, mostly he was seen as an "entertainment" candidate, like a reality TV host, not as a true political candidate. He won the republican vote by 1 point over Cruz. Sanders won the democratic vote by a landslide over Clinton. I think the primary has energized our students to consider themselves as politically motivated, rather than apathetic.</li>
+<li  class="comment" id="comment30" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="Yes" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>So many of my students have begun to show hatred towards refugees, low-income and poverty citizens, and there has been an increase in religious bias. Many are taking the anger and hate-filled speeches of the candidates to heart and are projecting the messages onto students they feel fit the stereotypes in the speeches.</li>
+<li  class="comment" id="comment31" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Not much talk</li>
+<li  class="comment" id="comment32" id1="q1" id2="No" id3="No" id4="No" id5="Yes" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My students are horrified at the spectacle of the Republican candidates shouting insults and insulting American citizens.</li>
+<li  class="comment" id="comment33" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My students are from primarily low-income families. However, because Donald Trump is known for his money, they want to talk about how it would be great to have a "rich" president.</li>
+<li  class="comment" id="comment34" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>A lot of concern over what they "should do". Many excited to participate in the process, but unclear about how to feel about it.</li>
+<li  class="comment" id="comment35" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Many of our students on the cusp have fallen off a bit. They feel more emboldened to make derogatory comments, or to speak exclusively of some groups,</li>
+<li  class="comment" id="comment36" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I have seen more students, faculty, and staff feeling free to publicly denounce a candidate, specifically Donald Trump.</li>
+<li  class="comment" id="comment37" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>There is an increased interest in the election this year.</li>
+<li  class="comment" id="comment38" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I think Trump's rude and brash behavior teaches my students that they can act like that.</li>
+<li  class="comment" id="comment39" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Absolutely, they are talking about little else</li>
+<li  class="comment" id="comment40" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>It is very hard to explain to students why grownups are acting like children and saying hurtful things to each other and about groups of other people.</li>
+<li  class="comment" id="comment41" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Student who support Trump experience the most "ribbing"</li>
+<li  class="comment" id="comment42" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="Yes" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes, they are horrified at the anti-immigration positions of some of the candidates, and are shocked at the profanity, name-calling, and other non-presidential behavior.</li>
+<li  class="comment" id="comment43" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students talk about it among each other.</li>
+<li  class="comment" id="comment44" id1="q1" id2="No" id3="Yes" id4="No" id5="No" id6="No" id7="Yes" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="Yes" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>The Muslim students in my school have a wait and see attitude towards the presidential election. However, they are more inclined to discuss biased comments made to them by "white" students. (While the US census may classify Muslim Americans as "white," as a race, most do not agree and believe it applies to Christians not them.)</li>
+<li  class="comment" id="comment45" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="Yes" id7="Yes" id8="No" id9="No" id10="No" id11="No" id12="Yes" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>In the past two days there has been a group of 8th grade boys coming to school with Trump-emblazoned t-shirts, red-white-and-blue plastic leis, and other "patriotic" decorations that are related to this Trump support. These are popular boys, and the group is growing. There are plenty of teachers who are saying to them how much they, too, like Trump. I am appalled. I demanded to know why these teachers were telling students that they liked Trump, but the only person who could name a reason said, "I don't think illegal immigrants should be in our country." I responded, "Oh, so you think a nationalist, exclusionary, hateful-rhetoric-spouting millionaire badboy is going to help our country?" She said, "You know what I mean about immigrants." I said, "No--I don't know what you mean."</li>
+<li  class="comment" id="comment46" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="Yes" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes, my school is primarily white, middle class and rural. They are hearing a lot of stuff from their parents and grandparents, but also from TV, radio, Internet, etc. I'm hoping that the Media Literacy unit will also cause them to question and not swallow everything they hear hook, line and sinker.</li>
+<li  class="comment" id="comment47" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Thank you for this very timely survey. I've been feeling like maybe I'm incapable of leading my students toward civil discussion. The divisive rhetoric has certainly split students, many who are young and impressionable. Discussing politics has become a huge challenge to maintain civility.</li>
+<li  class="comment" id="comment48" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My school is actually having more political conversations and the students are more engaged than usual. Hopelessness because they cannot vote and fear of what could happen is more of an issue.</li>
+<li  class="comment" id="comment49" id1="q1" id2="No" id3="Yes" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Most of my students are Latina or Muslim. They are hurt and upset by the comments made by Trump and Trump's supporters about groups they identify with.</li>
+<li  class="comment" id="comment50" id1="q1" id2="Yes" id3="No" id4="Yes" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My Hispanic students seem dejected about not only Donald Trump's rhetoric, but also about the amount of people who seem to agree with him. They feel sure that Americans, their fellow students, and even their teachers hate them (regardless of their citizenship).</li>
+<li  class="comment" id="comment51" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="Yes" id8="No" id9="Yes" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My students, primarily Latin@ are very concerned that Trump and his supporters have a chance of gaining power. Also, many of my poor white students feel that they have a sounding board for making intolerant and racist statements.</li>
+<li  class="comment" id="comment52" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes, the students are concerned with the outcome of the election far earlier. There is an absolutist belief - I'm always right!! - being brought into the discussion.</li>
+<li  class="comment" id="comment53" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Faculty members who align themselves with one of the political parties espouse the rhetoric of their candidate to students or around the students.</li>
+<li  class="comment" id="comment54" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="Yes" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>They seem angrier about voting.... chanting...</li>
+<li  class="comment" id="comment55" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>One of the students from another classroom wore a Trump t-shirt to school on Super Tuesday. When challenged by a student, he became upset and responded in an inappropriate manner. This allowed for a conversation about everyone having a right to choose the candidate of their choice. It also allowed for the conversation about being respectful in the disagreements we have.</li>
+<li  class="comment" id="comment56" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="Yes" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Teachers are worried more than students.</li>
+<li  class="comment" id="comment57" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="Yes" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My kids wrote essays either supporting or not supporting political candidates for this election. I had an overwhelming number of students write in opposition to Donald Trump and cited his rhetoric as inflammatory and racist.</li>
+<li  class="comment" id="comment58" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes. Students asked me why politicians can yell at each other like that.</li>
+<li  class="comment" id="comment59" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I hear my students talk about things they have heard their parents say, but this is typical for an election year. I encourage my students to ask questions, and to do their own research. I encourage them to look for the truth in what people have said, and to be careful when people are quoting things out of context. These are important lessons for their daily lives with their relationships with peers, as well as in the realm of the political climate.</li>
+<li  class="comment" id="comment60" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My students who are vocal are vehemently against Donald Trump. As a teacher, I need to remain neutral, and I think the current political climate makes it hard to do so. I don't want to alienate any students/families who may support Trump.</li>
+<li  class="comment" id="comment61" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Increased worry that their parents will be deported.</li>
+<li  class="comment" id="comment62" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>They're scared as to what might happen to them next year, some of my students have told me that they've experienced hateful people outside of school (in the community and at their jobs).</li>
+<li  class="comment" id="comment63" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Kids tend to blame others more than accept responsibility. I believe this is a direct reflection of what is happening in the United States.</li>
+<li  class="comment" id="comment64" id1="q1" id2="No" id3="Yes" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students at my school say hurtful things sometimes about minority groups (African Americans, people of alternative sexual orientations, Muslims, etc.). Before the campaign, when they said hurtful or disrespectful things and I called them out on it, they would stop and nothing else would be said during that class period. Today, when such things are said, they question me why I think it is not appropriate to say when their parents and the future president of this country is saying it (their opinion not mine). I don't know what to say to these comments other than that in my classroom such things are not going to be tolerated and if they continue they are going to be sent to the office.</li>
+<li  class="comment" id="comment65" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes, inflammatory rhetoric and polarized positions have transferred into the school and classroom. Students are more apt to get into shouting matches than to have a discussion about something.</li>
+<li  class="comment" id="comment66" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>The explosive headlines and conversations have caught their attention and most weeks, they want to talk about a cartoon/headline/video they saw.</li>
+<li  class="comment" id="comment67" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I use the rhetoric to help improve my students’ critical thinking skills. I remind them that historically, name-calling and backbiting are nothing you in American politics. In addition, it is natural for politicians to look for wedge issues to garner support. My students are first critical thinkers and problem solvers. So, much of the stuff they say and hear is mostly entertainment.</li>
+<li  class="comment" id="comment68" id1="q1" id2="No" id3="Yes" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>Definitely. A lot of our students from historically marginalized identities (e.g., Muslim, people of color, and LGBTQ+-identified folks) are truly scared for their lives if Trump were elected.</li>
+<li  class="comment" id="comment69" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Some students like the idea of "free speech" so we have talked about what that means.</li>
+<li  class="comment" id="comment70" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>They are more engaged and willing to discuss the current rhetoric.</li>
+<li  class="comment" id="comment71" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="Yes" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Our students who are recent immigrants or who have parents who are immigrants are upset and bringing up topics of worry and concern for their families ----daily I hear comments. Non-immigrant families are hearing concerns but have no information about how to support.</li>
+<li  class="comment" id="comment72" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>I teach in an "immigrant" high school. My students are scared!</li>
+<li  class="comment" id="comment73" id1="q1" id2="Yes" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="Yes" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Because my school is heavily Hispanic, the rhetoric is precisely the opposite that these questions reflect. Bias is directed toward students who express anything other than sincere hatred for Donald Trump.</li>
+<li  class="comment" id="comment74" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>They make "big hands" jokes. They make jokes out of DT's name-calling. They've seen the nearly naked pictures of DT's wife.</li>
+<li  class="comment" id="comment75" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Teachers are avoiding the subject, some students have made comments about politics being all about money or that all politicians are corrupt.</li>
+<li  class="comment" id="comment76" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I have heard student repeat their parents' beliefs and their parents' become their beliefs.</li>
+<li  class="comment" id="comment77" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Haven't seen this</li>
+<li  class="comment" id="comment78" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>See above. I have mostly seen it with the older kids, not with the 3rd thru 6th graders whom I also teach, but in a non-social studies curriculum.</li>
+<li  class="comment" id="comment79" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students seem more energized from Donald Trump's personality.</li>
+<li  class="comment" id="comment80" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>The call for return to slavery (indentured servitude) by some has been astounding but has not seemed to shock my students. Heightened distinction between ethnic groups with stereotyping and discrimination.</li>
+<li  class="comment" id="comment81" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>One student asked if this was how Germany elected Adolf Hitler.</li>
+<li  class="comment" id="comment82" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I have heard from my students that they are either very clear about their political leaning or choose not to talk about politics at all. Many students are excited but know very little about the process. Some of my students have been turned off my what they have seen from our political leaders and have already checked out of the process.</li>
+<li  class="comment" id="comment83" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="Yes" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="Yes" id21="No" ><span class="tag1" title="tooltip">Q1</span>We have held civil discussions that allowed my students to voice their concerns about some of the issues they heard outside of class or in their home. We have a diverse population in California and my school and classroom have many Mexican-Americans and as expected the subject of building a "Big Wall" to keep out immigrants from Mexico is a common topic. We will return to election topics for the rest of this school year and again next year until November.</li>
+<li  class="comment" id="comment84" id1="q1" id2="No" id3="No" id4="No" id5="Yes" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes, they are more intense and vocal about "why in the world would you be a Republican with all the fighting going on?"</li>
+<li  class="comment" id="comment85" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I have many immigrant students who are constantly in fear of their parents being deported.</li>
+<li  class="comment" id="comment86" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I find that I can't give it as much attention as I would like. Some of the discussion has been inappropriate for any age. I teach middle school.</li>
+<li  class="comment" id="comment87" id1="q1" id2="Yes" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>The Hispanic students are fearful.</li>
+<li  class="comment" id="comment88" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>In my community, ironically, the most noticeable change in rhetoric has been treating Trump as a foolish figure and dismissing his platform as obviously hateful and thus unlikely to be successful. So I am seeing levels of disrespect toward his candidacy that I have never seen in any previous election with any candidate.</li>
+<li  class="comment" id="comment89" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="Yes" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Absolutely! A lot of kids are fired up about the election! We have many anti-Trump students at my school who have been watching the news a lot and following the things that Trump has been speaking about.</li>
+<li  class="comment" id="comment90" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="Yes" id14="No" id15="No" id16="No" id17="Yes" id18="Yes" id19="No" id20="Yes" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>Many students are genuinely worried and afraid. A fifth-grade teacher whose class watches CNN Student News each morning told me that one of my ESL students said, "That man scares me!" when Trump's face flashed across the screen. He wasn't kidding. His eyes were huge and real fear flashed across his face. Many, many students have told me some version of, "Donald Trump hates us," or "Donald Trump hates all Mexicans." I have spoken with parents whose children have heard racial slurs and taunting. Unfortunately, staff has not always dealt appropriately with these incidents of bullying.</li>
+<li  class="comment" id="comment91" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Not really as I have addressed the elections almost on a daily basis in order to educate my students on the campaigns and current events.</li>
+<li  class="comment" id="comment92" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My students have expressed anger at a few of the candidates in regards to the candidates' inflammatory rhetoric. I have not seen that anger transferred or directed to fellow students.</li>
+<li  class="comment" id="comment93" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Increasing numbers of my students are referring to the presidential candidates as dangerously acting like children overcome by unrealistic fears.</li>
+<li  class="comment" id="comment94" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students in my racially diverse and immigrant diverse school are generally fearful of what may happen to them or their families if Trump is elected. They voice it, they write it, they talk about it when they are having a stressful day, they add it to their papers (like writing the word TRUMP in a circle and making a slash through it).</li>
+<li  class="comment" id="comment95" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>I have heard some kids say things that are exaggerations of what they hear, and/or repeating political rhetoric.</li>
+<li  class="comment" id="comment96" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>None</li>
+<li  class="comment" id="comment97" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>One of the things that worry me is that this is the first presidential campaign my high school students are old enough to understand. It doesn't usually work quite like this, and I hope they don't walk away thinking this is what politics is all about.</li>
+<li  class="comment" id="comment98" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes, I hear students parroting what they hear.</li>
+<li  class="comment" id="comment99" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="Yes" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Teaching the government class to the senior classes has been quite engaging. In our discussions I can hear fear in their voices. They hate the hate being expressed towards various groups. We are quite a diverse school so they are aware how certain rallies are not diverse and how they become violent when opposing view are expressed. They are apprehensive of what the outcome maybe.</li>
+<li  class="comment" id="comment100" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes. I inform them that my classroom is for me to teach and students to learn.</li>
+<li  class="comment" id="comment101" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="Yes" id9="No" id10="No" id11="Yes" id12="No" id13="No" id14="Yes" id15="No" id16="No" id17="No" id18="No" id19="Yes" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Yes. Some students are angry and challenge any discussions about inclusiveness, civil rights or tolerance as being attached to an agenda that forces political correctness. These students employ language that matches the rhetoric from the presidential campaigns. Anti-intellectualism is a viewpoint that some students are demanding to be an option within a course's syllabus. In these cases, some students are very insistent and persistent about alternative lessons so that they do not need to read about, discuss, learn or hear about topics related to tolerance. This aggression resists course objectives and goals as outlined in the course syllabus.</li>
+<li  class="comment" id="comment102" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="Yes" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>Yes, they cannot believe a presidential candidate can say things & act in the way that Trump is. I have had students tell me that they don't want to even both to vote. (Poor kids! I hope I scared them into voting!) I've had to give impromptu lessons on how apathy is actually a vote for intolerance and ignorance. Students that blame Obama, or others for actions they have no control over. The rhetoric is teaching students that there is a very simple cause = effect or outcome, without addressing the complicated nuances and domino effects of various actions.</li>
+<li  class="comment" id="comment103" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Students who support Trump are getting extremely involved with students who are against Trump. The conversations quickly digress into a fire that is rarely seen with basic politics. On the other hand - students who support Trump for one reason or another are in turn also ostracized from the mainstream as we are a fairly liberal school. It is causing social divide amongst students who were once (if not friends) at least cordial to each other.</li>
+<li  class="comment" id="comment104" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>The students seem to be very polarized, but very interested. When we talk about it in class, they are repeating something they had heard on television or read on the Internet. I always caution them to not trust everything they see or read. Time permitting, I will take the concern they have and attempt to temper it with the alternate perspectives and give them context.</li>
+<li  class="comment" id="comment105" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="Yes" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My students are concerned about their and their peers' immigration status, rights and ethnicity.</li>
+<li  class="comment" id="comment106" id1="q1" id2="No" id3="No" id4="Yes" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="Yes" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>My kids either vilify Trump or would vote for him. Interesting that I am just now using Teaching Tolerance materials for a unit on the use of political and editorial cartoons to teach social justice. Trump cartoons are, of course, everywhere, I think this sham of an election process is bringing out the worst in everyone.</li>
+<li  class="comment" id="comment107" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>The issue of behavior modeling is a problem. Students are asked to be respectful, but are noticing the lack of respect that exists in the "adult world" as a result of the campaign and simply think rules of respect are not necessary beyond school.</li>
+<li  class="comment" id="comment108" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="No" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>Definitely! Students make jokes about the election, inflammatory remarks.</li>
+<li  class="comment" id="comment109" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="Yes" id7="No" id8="No" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="Yes" id20="No" id21="No" ><span class="tag1" title="tooltip">Q1</span>There was an anti-hate event a few weeks ago. We hesitated on endorsing the event given the use of an image of one of the presidential candidates.</li>
+<li  class="comment" id="comment110" id1="q1" id2="No" id3="No" id4="No" id5="No" id6="No" id7="No" id8="Yes" id9="No" id10="No" id11="No" id12="No" id13="No" id14="No" id15="No" id16="No" id17="No" id18="No" id19="Yes" id20="No" id21="Yes" ><span class="tag1" title="tooltip">Q1</span>I teach at a very liberal school in a liberal community. I have seen students become extreme apathetic to politic and the government because of what they view as "anti-social justice" that other Americans seem to be supporting. Others are scared at how their rights may be under attack.</li>
+  </ul>
+</div>
+<ul id="storage">
+  STORAGE
+</ul>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://kuangkeng.github.io/pri-projects/fastLiveFilter.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+$("#storage").hide();
+$( ".tag1" ).tooltip({
+  content: "How have you seen the rhetoric of this year’s presidential campaign affect your students? Your school?"
+});
+$( ".tag2" ).tooltip({
+  content: "If you have witnessed bullying or biased language at your school—from adults or students—that mimics the rhetoric of the campaign, please tell us about it."
+});
+$( ".tag3" ).tooltip({
+  content: "Have you changed the way you approach teaching about the election this year? If so, how?"
+});
+$( ".tag4" ).tooltip({
+  content: "Do you have additional comments?"
+});
+$( ".tag5" ).tooltip({
+  content: "What resources do you need to help you teach safely and effectively about the 2016 election?"
+});
+var toggle = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var count = 0;
+
+//Get Items and send to google spreadsheet
+
+  //fastLiveFilter function here
+  $(function() {
+    $('#search_input').fastLiveFilter('#mylist');
+  });
+
+  $(".filter").click(filterData);
+  $("#btn-result").click(showResult);
+  $("#btn-reset").click(resetResult);
+
+  function filterData() {
+    $(this).toggleClass( "on" );
+    var num = $(this).attr("id");
+    if(toggle[num] == 0){
+      toggle[num] = 1;
+      count = count + 1;
+    }
+    else if(toggle[num] == 1){
+      toggle[num] = 0;
+      count = count - 1;   
+    }
+    if(count == 3){
+      $('.filter').prop('disabled', true);
+    }
+  }
+
+  function resetResult(){  
+    $('.filter').prop('disabled', false);
+    count = [];
+    toggle = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    $("#num_results").html("4,796");
+    $(".filter").removeClass("on");
+    for (var a=1; a<101; a++) {
+      var show = $("#comment"+a).detach();
+          $("#mylist").append(show);
+    }
+  }
+  
+  function showResult(){ 
+    var hide = $(".comment").detach();
+          $("#storage").append(hide);
+    var selected = [];
+    for (var i=2; i<23; i++) {
+      if (toggle[i] == "1"){
+        selected.push(i);    
+      }  
+    }
+
+    var selectLong = selected.length;
+    
+    if(selectLong==1){
+      for (var a=1; a<101; a++) {
+        if(
+          $("#comment"+a).attr("id"+selected[0])=="Yes"){
+          var show = $("#comment"+a).detach();
+          $("#mylist").append(show);
+        };
+      }
+    }
+
+    else if(selectLong==2){
+      for (var a=1; a<101; a++) {
+        if(
+          $("#comment"+a).attr("id"+selected[0])=="Yes" && $("#comment"+a).attr("id"+selected[1])=="Yes"){
+          var show = $("#comment"+a).detach();
+          $("#mylist").append(show);
+        };
+      }
+    }
+
+    else if(selectLong==3){
+      for (var a=1; a<101; a++) {
+        if(
+          $("#comment"+a).attr("id"+selected[0])=="Yes" && $("#comment"+a).attr("id"+selected[1])=="Yes" && $("#comment"+a).attr("id"+selected[2])=="Yes"){
+          var show = $("#comment"+a).detach();
+          $("#mylist").append(show);
+        };
+      }
+    }
+    var panjang = $("#mylist").children().length;
+    $("#num_results").html(panjang);
+    var output = selected.toString();
+    console.log(output);
+    $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+      function(json) {
+        $.ajax({
+          type: 'POST',
+          url: 'https://docs.google.com/forms/d/1JNAclxOdc68dCuTYFnLOHO715S826w6s4ncQNtNTt0U/formResponse',
+          data: { 
+            "entry.743033935": json.ip, //ip
+            "entry.1298311753": 1, 
+            "entry.566623519": output,
+            "entry.1999191961": document.referrer,
+          }
+        }); 
+      }
+    ); 
+
+  }
+});
+</script>
+</body>
