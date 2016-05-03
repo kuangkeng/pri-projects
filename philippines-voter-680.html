@@ -1,0 +1,130 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 12px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">The San Francisco Philippine Consulate registers voters in eight states in the northwest, Northern California and Nevada. The Los Angeles Consulate covers three states in the southwest, Southern California and Nevada. California is home to 45 percent of Filipinos in America.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Filipinos registered in California to vote in Philippines elections',
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ['2010','2013','2016'],   
+        },
+        yAxis: {    
+            visible: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: true,
+        },
+        tooltip: {
+            pointFormat: '{series.name}<br><b>{point.y:,.0f}</b>',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.07,
+                pointPadding: 0,
+            }
+        },
+        series: [{
+            name: 'Registered in San Francisco',
+            data: [6951,15221,46583],
+            color:"#fcd116",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }, {
+            name: 'Registered in Los Angeles',
+            data: [12642,29037,54651],
+            color:"#4188bc",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.0f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }],
+    });
+});
+</script>
