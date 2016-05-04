@@ -27,16 +27,17 @@
     }
 
     .jcarousel-wrapper {
-        margin: 20px auto;
+        margin: 0px auto;
         padding-bottom: 10px;
         position: relative;
-        border: 5px solid #fff;
+        border: 5px solid #Fff2cc;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
         -webkit-box-shadow: 0 0 2px #999;
         -moz-box-shadow: 0 0 2px #999;
         box-shadow: 0 0 2px #999;
+        background-color: #Fff2cc;
     }
 
     .card {
@@ -57,6 +58,7 @@
     #chart01{
         height: 200px; 
         max-width: 450px;
+        min-width: 280px;
     }
 
     #chart02{
@@ -82,6 +84,8 @@
         height: auto;
     }
 
+    #extra {display:none;}
+
     /** Carousel **/
 
     .jcarousel {
@@ -101,7 +105,7 @@
     .jcarousel li {
         width: 200px;
         float: left;
-        border: 1px solid #fff;
+        border: 1px solid #Fff2cc;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
@@ -189,6 +193,32 @@
         box-shadow: 0 0 2px #F0EFE7;
     }    
 
+    @media (max-width: 500px ) { 
+        .card {
+            margin: 10px 25px;
+        }
+    } 
+
+    @media (max-width: 400px ) { 
+        .card {
+            margin: 10px 15px;
+            font-size: 14px;
+            line-height: 1.3em;
+        }
+        .jcarousel-control-prev,
+        .jcarousel-control-next {
+            background: rgba(78,68,60,0.5);
+        }
+        .icon {
+            margin-top: 15%;
+        }    
+        .jcarousel-wrapper {
+            border:1px;
+        }
+        #extra {display:block;}
+        #chart01 {margin-left: -20px;}
+    }     
+
     </style>
 
     <body>
@@ -200,12 +230,12 @@
                     <ul>
                         <li><div class="card"><div class="box">
                                 <div class="chart" id="chart01"></div>
-                                <div class="note">Source: <a href='http://www.opec.org/opec_web/en/publications/338.htm'  target='_blank'>Opec</a></div>
+                                <div class="note"><div id="extra">Numbers in thousand of barrels per day</div>Source: <a href='http://www.opec.org/opec_web/en/publications/338.htm'  target='_blank'>Opec</a></div>
                             </div>
                             <div class="title">Oil export</div><div class="graph">Sanctions against Iran were lifted on January 16, 2016, also known as the Implementation Day of the nuclear deal. EU, US and several other countries removed their ban on the import, purchase and transport of Iranian crude oil and natural gas, as well as the insuring of Iranian oil shipments. As a result, Iran's oil production has increased by 14% since December 2015.</div></div></li>
                         <li><div class="card"><div class="box">
                                 <div class="chart" id="chart02">[chart]</div>
-                                <div class="note">Source: <a href='http://www.worldbank.org/en/country/iran/overview'  target='_blank'>World Bank</a></div>
+                                <div class="note">*Estimated figures<br>Source: <a href='http://www.worldbank.org/en/country/iran/overview'  target='_blank'>World Bank</a></div>
                             </div>
                             <div class="title">GDP</div><div class="graph"><a href="http://www.worldbank.org/en/country/iran/overview" target='_blank'>The World Bank</a> said the lifting of sanctions and a more business-oriented environment will boost the GDP growth to above four percent in 2016 and 2017. The end of the sanctions will also increase oil production, reduce international transaction costs, bring in foreign direct investment and assets that were earlier frozen by the sanctions.</div></div></li>
                         <li><div class="card"><div class="icon"><img src="http://kuangkeng.github.io/pri-projects/iran-images/money-bag-icon.png"></div><div class="title">Access to assets</div><div class="graph">Iran is being given gradual access to some $100 billion of frozen assets. The US Treasury said Iran will be able to bring back $50 billion of foreign reserves. However, three months after the lifting of the sanctions, US Secretary of State John Kerry said in April that Iran has reaped just <a href="http://www.cnsnews.com/news/article/patrick-goodenough/kerry-iran-has-only-received-3-billion-not-100b-result-nuclear-deal" target="_blank">$3 billion</a> from the frozen assets so far.</div></div></li>
@@ -267,71 +297,148 @@
     </script>
 
     <script>
+    if ($(window).width()<400){
+        $(function () {
 
-    $(function () {
+            Highcharts.setOptions({
+                lang: {
+                  thousandsSep: ','
+                }
+            }),
 
-        Highcharts.setOptions({
-            lang: {
-              thousandsSep: ','
-            }
-        }),
-
-        $('#chart01').highcharts({
-            chart: {
-                type: 'column',
-            },
-            title: {
-                text: 'Iran oil production',
-                margin: 20,
-            },
-            subtitle: {
-                enabled: false,
-            },        
-            xAxis: {
-                categories: ["2014","Oct<br>2015","Nov<br>2015","Dec<br>2015","Jan<br>2016","Feb<br>2016","Mar<br>2016"],   
-            },
-            yAxis: {
+            $('#chart01').highcharts({
+                chart: {
+                    type: 'column',
+                    backgroundColor: '#Fff2cc',
+                },
                 title: {
-                  text: "thousand barrels per day",
-                  style: {
-                    color: '#808080',
-                    fontSize: '12px',
-                  },  
+                    text: 'Iran oil production',
+                    margin: 20,
                 },
-                labels: {
-                    format: '{value:,.0f}'
+                subtitle: {
+                    enabled: false,
+                },        
+                xAxis: {
+                    categories: ["2014","Oct<br>'15","Nov<br>'15","Dec<br>'15","Jan<br>'16","Feb<br>'16","Mar<br>'16"],
+                    labels: {
+                        style: {
+                            color: '#808080',
+                            fontSize: '10px',
+                        },  
+                        autoRotation: false,
+                    },   
                 },
-                endOnTick: false,
-            },
-            credits: { enabled: false },
-            legend: {
-                enabled: false,
-            },
-            tooltip: {
-                pointFormat: '{point.y:,.0f} thousand barrels per day',
-            },
-            plotOptions: {
-                series: {
-                    groupPadding:0.01,
-                }
-            },
-            series: [{
-                data:[2766,2876,2876,2882,{y:2944,color:"#2d95ec"},{y:3152,color:"#2d95ec"},{y:3291,color:"#2d95ec"}],
-                color:"#f64d2a",
-                dataLabels: {
-                    enabled: true,
-                    rotation: 0,
-                    color: '#FFFFFF',
-                    align: 'center',
-                    format: '{point.y:,.0f}',
-                    y: 0, // 10 pixels down from the top
-                    style: {
+                yAxis: {
+                    title: {
+                      text: null,
+                      style: {
+                        color: '#808080',
                         fontSize: '12px',
+                      },  
+                    },
+                    labels: {
+                        format: '{value:,.0f}',
+                        rotation: 270,
+                    },
+                    endOnTick: false,
+                },
+                credits: { enabled: false },
+                legend: {
+                    enabled: false,
+                },
+                tooltip: {
+                    pointFormat: '{point.y:,.0f} thousand barrels per day',
+                },
+                plotOptions: {
+                    series: {
+                        groupPadding:0.01,
                     }
-                }
-            }],
+                },
+                series: [{
+                    data:[2766,2876,2876,2882,{y:2944,color:"#2d95ec"},{y:3152,color:"#2d95ec"},{y:3291,color:"#2d95ec"}],
+                    color:"#f64d2a",
+                    dataLabels: {
+                        enabled: true,
+                        rotation: 0,
+                        color: '#FFFFFF',
+                        align: 'center',
+                        format: '{point.y:,.0f}',
+                        y: 0, // 10 pixels down from the top
+                        style: {
+                            fontSize: '10px',
+                        }
+                    }
+                }],
+            });
         });
-    });
+    }
+
+    else {
+        $(function () {
+            Highcharts.setOptions({
+                lang: {
+                  thousandsSep: ','
+                }
+            }),
+
+            $('#chart01').highcharts({
+                chart: {
+                    type: 'column',
+                    backgroundColor: '#Fff2cc',
+                },
+                title: {
+                    text: 'Iran oil production',
+                    margin: 20,
+                },
+                subtitle: {
+                    enabled: false,
+                },        
+                xAxis: {
+                    categories: ["2014","Oct<br>2015","Nov<br>2015","Dec<br>2015","Jan<br>2016","Feb<br>2016","Mar<br>2016"],   
+                },
+                yAxis: {
+                    title: {
+                      text: "thousand barrels per day",
+                      style: {
+                        color: '#808080',
+                        fontSize: '12px',
+                      },  
+                    },
+                    labels: {
+                        format: '{value:,.0f}',
+                    },
+                    endOnTick: false,
+                },
+                credits: { enabled: false },
+                legend: {
+                    enabled: false,
+                },
+                tooltip: {
+                    pointFormat: '{point.y:,.0f} thousand barrels per day',
+                },
+                plotOptions: {
+                    series: {
+                        groupPadding:0.01,
+                    }
+                },
+                series: [{
+                    data:[2766,2876,2876,2882,{y:2944,color:"#2d95ec"},{y:3152,color:"#2d95ec"},{y:3291,color:"#2d95ec"}],
+                    color:"#f64d2a",
+                    dataLabels: {
+                        enabled: true,
+                        rotation: 0,
+                        color: '#FFFFFF',
+                        align: 'center',
+                        format: '{point.y:,.0f}',
+                        y: 0, // 10 pixels down from the top
+                        style: {
+                            fontSize: '12px',
+                        }
+                    }
+                }],
+            });
+        });
+    }
 
     $(function () {
           Highcharts.setOptions({
@@ -343,6 +450,7 @@
           $('#chart02').highcharts({
               chart: {
                   type: 'line',
+                  backgroundColor: '#Fff2cc',
               },
               title: {
                   text: "Iran's GDP growth",
@@ -352,7 +460,7 @@
                   enabled: false,
               },        
               xAxis: {
-                categories: ["2013","2014","2015 (est.)","2016 (est.)","2016 (est.)"],  
+                categories: ["2013","2014","2015*","2016*","2017*"],  
               },
               yAxis: {
                   title: {
