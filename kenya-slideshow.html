@@ -8,6 +8,7 @@
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://kuangkeng.github.io/keng-data-journalism/carousel/dist/jquery.jcarousel.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
 
     </head>
 
@@ -39,6 +40,11 @@
     -moz-box-shadow: 0 0 2px #999;
     box-shadow: 0 0 2px #999;
 }
+
+    #chart01{
+        height: 200px; 
+        
+    }
 
 /** Carousel **/
 
@@ -166,7 +172,7 @@
             <div class="jcarousel-wrapper">
                 <div class="jcarousel">
                     <ul>
-                       <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3020.jpg">One of the Maasai women growing aloe at the Twala Cultural Manyatta performs a traditional Maasai dance.</li>
+                       <li><div class="chart" id="chart01"></div>One of the Maasai women growing aloe at the Twala Cultural Manyatta performs a traditional Maasai dance.</li>
                         <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3116.jpg">Maasai women outside one of the plots of land at the Twala Cultural Manyatta where they harvest aloe for use in LUSH cosmetics.</li>
                         <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/combo_maasai.jpg">Maasai women at the Twala Cultural Manyatta.</li>
                         <li><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/_MG_3094.jpg">Women of the Twala Cultural Manyatta tend to 40 acres of aloe secundiflora.</li>
@@ -234,6 +240,80 @@
             });
     });
 })(jQuery);
+
+        $(function () {
+
+            Highcharts.setOptions({
+                lang: {
+                  thousandsSep: ','
+                }
+            }),
+
+            $('#chart01').highcharts({
+                chart: {
+                    type: 'column',
+                    backgroundColor: '#Fff2cc',
+                },
+                title: {
+                    text: 'Iran oil production',
+                    margin: 20,
+                },
+                subtitle: {
+                    enabled: false,
+                },        
+                xAxis: {
+                    categories: ["2014","Oct<br>'15","Nov<br>'15","Dec<br>'15","Jan<br>'16","Feb<br>'16","Mar<br>'16"],
+                    labels: {
+                        style: {
+                            color: '#808080',
+                            fontSize: '10px',
+                        },  
+                        autoRotation: false,
+                    },   
+                },
+                yAxis: {
+                    title: {
+                      text: null,
+                      style: {
+                        color: '#808080',
+                        fontSize: '12px',
+                      },  
+                    },
+                    labels: {
+                        format: '{value:,.0f}',
+                        rotation: 270,
+                    },
+                    endOnTick: false,
+                },
+                credits: { enabled: false },
+                legend: {
+                    enabled: false,
+                },
+                tooltip: {
+                    pointFormat: '{point.y:,.0f} thousand barrels per day',
+                },
+                plotOptions: {
+                    series: {
+                        groupPadding:0.01,
+                    }
+                },
+                series: [{
+                    data:[2766,2876,2876,2882,{y:2944,color:"#2d95ec"},{y:3152,color:"#2d95ec"},{y:3291,color:"#2d95ec"}],
+                    color:"#f64d2a",
+                    dataLabels: {
+                        enabled: true,
+                        rotation: 0,
+                        color: '#FFFFFF',
+                        align: 'center',
+                        format: '{point.y:,.0f}',
+                        y: 0, // 10 pixels down from the top
+                        style: {
+                            fontSize: '10px',
+                        }
+                    }
+                }],
+            });
+        });
     </script>
         
     </body>

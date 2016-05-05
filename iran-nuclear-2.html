@@ -63,7 +63,7 @@
 
     #chart02{
         height: 200px; 
-        max-width: 450px;
+        
     }
 
     .note {
@@ -191,14 +191,12 @@
         -webkit-box-shadow: 0 0 2px #F0EFE7;
         -moz-box-shadow: 0 0 2px #F0EFE7;
         box-shadow: 0 0 2px #F0EFE7;
-    }    
+    }  
 
-    @media (max-width: 500px ) { 
-        .card {
-            margin: 10px 25px;
-        }
-    } 
-
+    @media (max-width: 600px ) {.wrapper{max-width:550px;}}  
+    @media (max-width: 550px ) {.wrapper{max-width:500px;}}      
+    @media (max-width: 500px ) {.wrapper{max-width:450px;} .card{margin: 10px 25px;}} 
+    @media (max-width: 450px ) {.wrapper{max-width:400px;}} 
     @media (max-width: 400px ) { 
         .card {
             margin: 10px 15px;
@@ -217,7 +215,11 @@
         }
         #extra {display:block;}
         #chart01 {margin-left: -20px;}
+        .wrapper {max-width:350px;}
     }     
+
+    @media (max-width: 350px ) {.wrapper{max-width:300px;}}
+    @media (max-width: 300px ) {.wrapper{max-width:270px;}}
 
     </style>
 
