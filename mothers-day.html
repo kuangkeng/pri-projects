@@ -1,0 +1,953 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      color:#262228;
+    }
+
+    #quiz {
+      max-width: 600px;
+      background-color: #FFCE00;
+    }    
+
+    #questions {padding:0px 40px;}
+
+    #introTitle {
+      text-align: center;
+      margin-top: 20px; 
+      font-size: 32px; 
+      padding-left: 40px; 
+      padding-right: 40px;
+      color:#262228;
+      text-shadow: 1px 1px 2px #9a9a9a;
+      font-weight: 500;
+    }
+
+    #introIntro {
+      font-size: 22px; 
+      padding-left: 40px; 
+      padding-right: 40px; 
+      text-align: center; 
+      color:#262228;
+      text-shadow: 1px 1px 2px #9a9a9a;
+    }
+
+    #resultTitle {
+      margin-top: 40px;
+    }
+
+    #resultIntro {
+      text-align: center;
+    }
+
+    .question { 
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4em;
+      margin-bottom: 20px;
+    }   
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 200px;
+      margin-top: 40px !important;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }
+
+    .counter {
+      font-size: 12px;
+      color: #4188bc;
+      margin: 10px 0 10px 0;
+    }    
+
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+      text-align: center;
+    }
+
+    #salary {
+      color:#4188bc;
+      font-size: 40px;
+      margin:20px 0px;
+    }
+
+    #profile {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%}  
+    
+    .shareBox {
+      padding-bottom:20px;
+    }    
+
+    .imgbox {
+      margin: 0 auto;
+      width:200px;
+      padding:20px;
+    }
+
+    .imglead {
+      margin: 0 auto;
+      padding:10px;
+      width:400px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #questions input {width:100px;}
+
+    .chart {
+      width:100%;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+    #table01 {font-size: 12px}
+    th {font-size:14px;}
+    #chart01 {height:250px; padding-bottom: 20px;}
+    #chart02, #chart03 {height:400px; padding-bottom: 0px;}
+    #labelhour, #labelmin {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4em;
+    }
+
+    #labelwork, #labelkid {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4em; 
+    }
+    
+    .table-striped>tbody>tr:nth-child(even)>td, 
+    .table-striped>tbody>tr:nth-child(even)>th {
+       background-color: #b3d5e8;
+     }
+    .table-striped>thead>tr>th {background-color: #81bad9;} 
+    .leftcol {text-align: right;}
+    #sharemsg {margin-bottom: 0px;}
+    #result03Btn-back, #result03Btn-next, #result04Btn-back {margin-top: 0px !important;}
+
+    #chartbutton {width: 100%; margin-bottom: 20px;}
+    #col01, #col02 {width:48%;}
+    .button01 {text-align: right; margin-right: 3%}
+    .button02 {text-align: left; margin-left: 3%}
+    #button01, #button02 {border-radius: 5px; padding:5px 10px;}
+    #button01:hover {background-color:#67acd2;}
+    #button02:hover {background-color:#67acd2;}
+    #button01 {background-color:#0375B4;color:white;}
+    #button02 {background-color:white;color:#262228;}
+    #button01:focus, input[type="button"]:focus {outline: none;}
+    #button02:focus, input[type="button"]:focus {outline: none;}
+
+    @media (max-width: 600px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 16px; margin-bottom: 0px;}
+      .blurb {font-size: 14px; margin-top: 0px;}
+      .mybtn {font-size: 16px;}
+      .counter {font-size: 10px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 16px; 
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-bottom:20px;
+      }
+      #introTitle {
+        font-size: 22px;
+        margin-top: 10px; 
+        padding-left: 15px; 
+        padding-right: 15px;
+        padding-bottom: 20px;
+      }
+
+    }  
+
+    @media (max-width: 400px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 15px; margin-bottom: 0px;}
+      .blurb {font-size: 13px; margin-top: 0px;}
+      .mybtn {font-size: 14px; padding:4px 4px;}
+      .counter {font-size: 10px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 15px;
+        line-height: 17px;
+        padding-bottom: 15px;
+      }
+      #introTitle {
+        font-size: 17px;
+        margin-top: 10px; 
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 10px;
+      }
+
+    }
+</style>
+
+<body>
+  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="quiz" class="container">    
+      <div class="row"> 
+        <div id="intro" class="col-sm-12 col-xs-12">
+          <div id="introTitle">How much moms would earn if their works were paid?</div>
+          <div class="imglead"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/super-woman-blue-2.png?itok=Ka3uzuMq" class="img-responsive" id="imgwoman"></div>
+          <div id="introIntro" class="blurb">Tell us how much time you spend on each activity and we will calculate your 'salary' based on the national median salaries of corresponding occupations in the US. We will also compare the time you spend on housework and caregiving for your kids with the national average numbers.
+            </div>
+          <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+        </div>  <!-- END INTRO PAGE -->       
+
+        <div id="questions" class="col-sm-12 col-xs-12">
+          <div id="counter" class="counter">Question 0 of 0</div>
+          <div class="imgbox">img goes here</div>
+          <div id="theQuestion" class="question">Question goes here</div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-6 leftcol">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group" id="hourbox">
+                  <select class="form-control" id="inputhour">
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  </select>
+                  <label for="inputhour" id="labelhour">hours</label>
+                </div>  
+              </form>
+            </div>
+            <div class="col-sm-6 col-xs-6">
+              <form class="form-inline" method="get" action="#">
+                <div class="form-group" id="minbox">
+                  <select class="form-control" id="inputmin">
+                  <option>0</option>
+                  <option>10</option>
+                  <option>20</option>
+                  <option>30</option>
+                  <option>40</option>
+                  <option>50</option>
+                  </select>
+                  <label for="inputmin" id="labelmin">minutes</label>
+                </div>   
+              </form> 
+            </div>    
+          </div>
+          <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next question</div>
+        </div><!-- END QUESTION PAGE -->      
+
+        <div id="profilepage" class="col-sm-12 col-xs-12">
+          <div class="question"><br>Tell us about you so we can personalize your results.</div>  
+          <div id="profile">
+            <form>            
+              <div class="form-group">
+              <label for="inputkid" id="labelkid">How old is your youngest kid?</label>
+              <select class="form-control" id="inputkid">
+              <option>6-17</option>
+              <option>below 6</option>
+              </select>
+              </div>
+            
+              <div class="form-group">
+              <label for="inputwork" id="labelwork">Are you employed?</label>
+              <select class="form-control" id="inputwork">
+              <option>employed full-time</option>
+              <option>employed part-time</option>
+              <option>full-time mother</option>
+              </select>
+              </div>
+            </form>
+          </div>
+          <div id="result01Btn" class="btn btn-primary btn-lg center-block mybtn">See my results</div>
+        </div>  <!-- END PROFILE PAGE --> 
+
+        <div id="result01" class="col-sm-12 col-xs-12">
+          <div class="title" id="resultTitle">Whoa! You would've made<br><span id="salary">0</span><br>for all those works if they were paid.</div>
+          <div class="question">We calculated the potential wage of each task based on national median hourly rate of the corresponding occupation listed in the <a href="http://www.bls.gov/oes/current/oes_nat.htm" target="_blank">National Occupational Employment and Wage Estimates, May 2015</a>. Then we multiply the daily total by 365 days. Below is the corresponding occupations and their median hourly rate.</div>
+          <table class="table table-condensed table-striped" id="table01">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Occupation</th>
+                <th>Hourly rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Housework and cleaning</td>
+                <td>Janitors and cleaners</td>
+                <td class="rate">$11.27</td>
+              </tr>
+              <tr>
+                <td>Grocery shopping, meal planning and cooking</td>
+                <td>Chefs and head cooks</td>
+                <td class="rate">$19.95</td>
+              </tr>
+              <tr>
+                <td>Yard work</td>
+                <td>Landscaping and groundskeeping workers</td>
+                <td class="rate">$12.03</td>
+              </tr>
+              <tr>
+                <td>Laundry and dry cleaning</td>
+                <td>Laundry and dry-Cleaning workers</td>
+                <td class="rate">$10.01</td>
+              </tr>
+              <tr>
+                <td>Planning activities for family</td>
+                <td>Meeting, convention, and event planners</td>
+                <td class="rate">$22.52</td>
+              </tr>
+              <tr>
+                <td>Being the family’s CFO</td>
+                <td>Financial managers</td>
+                <td class="rate">$56.73</td>
+              </tr>
+              <tr>
+                <td>Playing with your children</td>
+                <td>Childcare workers</td>
+                <td class="rate">$9.77</td>
+              </tr>
+              <tr>
+                <td>Helping with schoolwork (age 6-17)</td>
+                <td>Other teachers and instructors</td>
+                <td class="rate">$14.79</td>
+              </tr>
+              <tr>
+                <td>Helping with schoolwork (age below 6)</td>
+                <td>Preschool and kindergarten teachers</td>
+                <td class="rate">$16.51</td>
+              </tr>
+              <tr>
+                <td>Taking care of kids' hygiene and health</td>
+                <td>Licensed practical and licensed vocational nurses </td>
+                <td class="rate">$20.76</td>
+              </tr>
+              <tr class="lastRow">
+                <td>Schlepping your kids</td>
+                <td>Taxi drivers and chauffeurs</td>
+                <td class="rate">$11.3</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="result02Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+          <div class="title" id="sharemsg">Let the world know your value!</div>
+          <div class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+              </tr> 
+            </table>
+          </div>
+        </div>
+        <div id="result02" class="col-sm-12 col-xs-12">
+          <div class="title" id="resultTitle">Compared your results with other mothers</div>
+          <div class="question">This chart compares the time you spent on household activities and caring for your children with the time spent of the average American mother of your employment status (employed full-time, part-time or full-time mother) and children's age group (6 to 17 or below 6). The numbers are average data for the combined years 2009 to 2013 from the <a href="http://www.bls.gov/tus/#tables" target="_blank">American Time Use Survey</a>.</div>
+          <div class="chart" id="chart01"></div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-6">
+              <div id="result03Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
+            </div>
+            <div class="col-sm-6 col-xs-6">
+              <div id="result03Btn-next" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+            </div>
+          </div> 
+          <div class="title" id="sharemsg">Share your results</div>
+          <div class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+              </tr> 
+            </table>
+          </div>
+        </div> 
+        <div id="result03" class="col-sm-12 col-xs-12">
+          <div class="title" id="resultTitle">What about American fathers?</div>
+          <div class="question">American fathers generally spent less time than their wives in houseworks and caring for kids. The two charts show the time spent for both spouses with kids in different age groups. Unfortunately, the <a href="http://www.bls.gov/tus/#tables" target="_blank">American Time Use Survey</a> does not include data of fathers who are employed part-time or stay-at-home dad. So for full-time fathers, too bad.</div>
+          <table id="chartbutton">
+            <tr>
+              <td id="col01"><div class="button01"><button id="button01">Children age below 6</button></div></td>
+              <td id="col02"><div class="button02"><button id="button02">Children age 6-17</button></div></td>
+            </tr>
+          </table>
+          <div class="chart" id="chart02"></div>
+          <div class="chart" id="chart03"></div>
+          <div id="result04Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
+          <div id="result04Btn-reset" class="btn btn-primary btn-lg center-block mybtn" onClick="history.go(0)">Calculate again</div>
+        </div> 
+      </div> 
+    </div>
+
+  </div>    
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var count = 0,
+    rate = [11.27,19.95,12.03,10.01,22.52,56.73,9.77,14.79,20.76,11.3],
+    salary = [],
+    total = 0,
+    annual = 0,
+    kid = 0,
+    work = 0,
+    house = 0,
+    house2 = 0,
+    caring = 0,
+    caring2 = 0,
+    unpaid = 0,
+    avghouse = 0,
+    avgcaring = 0,
+    diffhouse = 0,
+    diffcaring = 0,
+    status = "",
+    age = "",
+    datachart01 = [],
+    inputdata = [],
+    theQuestions = [];
+    theQuestions[0] = "How much time each day you spend on housework and cleaning?",
+    theQuestions[1] = "How much time per day you spend meal planning, grocery shopping and cooking?",
+    theQuestions[2] = "How much time per day you spend doing yard work?",
+    theQuestions[3] = "How about laundry and dry cleaning?",
+    theQuestions[4] = "Planning activities for your family?",
+    theQuestions[5] = "How much time each day you spend being the family's CFO such as budgeting, balancing the books etc.?",
+    theQuestions[6] = "How much time each day you spend playing with your children?",
+    theQuestions[7] = "How much time each day you spend helping them with their schoolwork?",
+    theQuestions[8] = "How about taking care of their hygiene and health?",
+    theQuestions[9] = "Finally, how much time each day you spend schlepping your kids to and from school and events?";
+
+var data = 
+  [{"employ":"full","yhouse":1.81,"ycare":2.43,"ohouse":2.2,"ocare":0.98},
+  {"employ":"part","yhouse":2.62,"ycare":3.01,"ohouse":3.05,"ocare":1.37},
+  {"employ":"unem","yhouse":3.42,"ycare":3.63,"ohouse":4.07,"ocare":1.85}];   
+
+var images =
+['<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cleaning-blue_0.png?itok=7_BYo-Cy" class="img-responsive" id="imgcleaning">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/grocery-blue.png?itok=G4SQdlvD" class="img-responsive" id="imggrocery">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/gardening-blue.png?itok=tcIRbVjZ" class="img-responsive" id="imggardening">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/laundry-blue.png?itok=_Mo9VQxb" class="img-responsive" id="imglaundry">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/planning-blue.png?itok=PPKp31V_" class="img-responsive" id="imgplanning">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/finance-blue.png?itok=Nh8-CM8w" class="img-responsive" id="imgfinance">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/playing-blue.png?itok=ZsNd_a4z" class="img-responsive" id="imgplaying">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/schoolwork-blue.png?itok=63TfFoxz" class="img-responsive" id="imgschoolwork">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/health-blue.png?itok=Ejs6qsrZ" class="img-responsive" id="imghealth">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/car-blue.png?itok=K2baZzuE" class="img-responsive" id="imgcar">',];
+    
+function init() { 
+  $("#questions, #profilepage, #result01, #result02, #result03").hide();
+  $("#startBtn").click(function(){
+    nextQuestion(count);
+  });
+
+  $("#nextBtn").click(function() {
+    setValue(count);
+    count++;
+    if (count < theQuestions.length) {                            
+      nextQuestion(count)
+    } else {
+      showProfile();
+    }
+  }); 
+
+  $("#result01Btn").click(function() {
+    showResults();
+  });
+  
+  $("#result02Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result01").hide();
+      $("#result02").show();
+    });
+    $('.container').slideDown(500);   
+  });
+
+  $("#result03Btn-back").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result02").hide();
+      $("#result01").show();
+    });
+    $('.container').slideDown(500);   
+  });
+
+  $("#result03Btn-next").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result02").hide();
+      $("#result03").show();
+    });
+    $('.container').slideDown(500);   
+  });  
+
+  $("#result04Btn-back").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result03").hide();
+      $("#result02").show();
+    });
+    $('.container').slideDown(500);   
+  });     
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+
+  var flip = "off";
+  $('#button01').click(function () {
+    if(flip=="on"){
+      flip="off";  
+      $('#button01').css('background-color','#0375B4');
+      $('#button01').css('color','white');
+      $('#button02').css('background-color','white');
+      $('#button02').css('color','#262228');
+      var chart02 = $('#chart02').highcharts();
+      chart02.series[0].setData([house,3.42,2.62,1.81]);
+      chart02.series[1].setData([null,1.05,1.3,1.26]);
+      var chart03 = $('#chart03').highcharts();
+      chart03.series[0].setData([caring,3.63,3.01,2.43]);
+      chart03.series[1].setData([null,1.25,1.57,1.61]);
+    }
+  });
+
+  $('#button02').click(function () {
+    if(flip=="off"){
+      flip = "on";
+      $('#button02').css('background-color','#0375B4');
+      $('#button02').css('color','white');
+      $('#button01').css('background-color','white');
+      $('#button01').css('color','#262228');
+      var chart02 = $('#chart02').highcharts();
+      chart02.series[0].setData([house,4.07,3.05,2.20]);
+      chart02.series[1].setData([null,1.13,1.25,1.45]);
+      var chart03 = $('#chart03').highcharts();
+      chart03.series[0].setData([caring,1.85,1.37,0.98]);
+      chart03.series[1].setData([null,0.51,0.63,0.64]);
+    }
+  });
+
+}
+
+function nextQuestion(which) {
+  $('.container').slideUp(500, function(){
+    $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
+    $(".imgbox").html(images[which]);
+    $("#theQuestion").text(theQuestions[which]);
+    $("#intro").hide();
+    $("#questions").show();
+  });
+  $('.container').slideDown(500);
+}
+
+function setValue(num) {
+  inputdata[num] = $('#inputhour').val()/10*10 + $('#inputmin').val()/60;
+  salary[num] = inputdata[num]*rate[num];
+  console.log("input single = " + inputdata[num]);
+  console.log("salary set = " + salary);
+  $('#inputhour').val(0);
+  $('#inputmin').val(0);
+
+} 
+
+function showProfile() {
+  $('.container').slideUp(500, function(){
+    $("#questions").hide();
+    $("#nextBtn").hide(); 
+    $("#profilepage").show();
+  });
+  $('.container').slideDown(500); 
+}  
+
+function showResults() {
+  //Calculation goes here
+  if($('#inputwork').val()=="employed full-time"){work = 0; status = "employed full-time"}
+  if($('#inputwork').val()=="employed part-time"){work = 1; status = "employed part-time"}
+  if($('#inputwork').val()=="full-time mother"){work = 2; status = "full-time mother"}
+
+  if($('#inputkid').val()=="6-17"){kid = 0; age = "6-17"} else{kid = 1; age = "below 6"}
+  if (kid == 1){salary[7]=inputdata[7]*16.51}  
+
+  for (var i = 0; i < salary.length; i++) {
+    total += salary[i];
+  }
+
+  console.log("total salary = " + total);
+  annual = Math.round(total*365); 
+  console.log("annual salary = " + annual);
+  annual2 = addThousandsSeparator(annual);
+  house = inputdata[0] + inputdata[1] + inputdata[2] + inputdata[3] + inputdata[5];
+  caring = inputdata[4] + inputdata[6] + inputdata[7] + inputdata[8] + inputdata[9];
+  for (var i = 0; i < inputdata.length; i++) {
+    unpaid += inputdata[i];
+  }
+  
+  if (kid == 0){
+    avghouse = data[work]["ohouse"]
+    avgcaring = data[work]["ocare"]
+    
+  }
+  if (kid == 1){
+    avghouse = data[work]["yhouse"]
+    avgcaring = data[work]["ycare"]
+  }
+  diffhouse = Math.round((house - avghouse)/avghouse*100);
+  diffcaring = Math.round((caring - avgcaring)/avgcaring*100);
+
+  house2 = house.toFixed(2);
+  caring2 = caring.toFixed(2);
+
+  $('.container').slideUp(500, function(){
+    $("#salary").text("$"+annual2);
+    $("#profilepage").hide();
+    $("#result01").show();
+    chart01();
+    chart02();
+    chart03();
+  });
+  $('.container').slideDown(500); 
+  sendData();
+}
+  
+function addThousandsSeparator(input) {
+    var output = input
+    if (parseFloat(input)) {
+        input = new String(input); // so you can perform string operations
+        var parts = input.split("."); // remove the decimal part
+        parts[0] = parts[0].split("").reverse().join("").replace(/(\d{3})(?!$)/g, "$1,").split("").reverse().join("");
+        output = parts.join(".");
+    }
+    return output;
+} 
+
+function chart01() {
+    $('#chart01').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#FFCE00',
+        },
+        title: {
+            text:''
+        },
+        subtitle: {
+            text: 'Negative value indicates your time use is lower than the average number while positive indicates your time use is higher than the average number. Hover over each bar for more details.',
+            align: 'left',
+            style: {
+                fontSize: '12',
+            }
+        },
+        xAxis: {
+            categories: ['Household activities', 'Caring for children<br>(including travel)'],
+        },
+        yAxis: {
+            title: {
+                text: 'Comparison in percentage',
+            },
+            labels: {
+                overflow: 'justify',
+                format: '{value}%'
+            },
+            endOnTick: false,
+            startOnTick: false,  
+        },
+        tooltip: {
+          formatter: function () {return '<b>' + this.point.name + '</b><br>' + this.point.line1 + '<br>Your time use: <b>' + this.point.line2 + '</b><br>Average time use: <b>' + this.point.line3 + '</b>';
+          },
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            data: [
+            {
+            y: diffhouse,
+            name: "Household activities",
+            line1: "Compared with mothers who are<br>" + status + " with kid(s) age " + age,
+            line2: house2 + " hours",
+            line3: avghouse + " hours"
+            }, 
+            {
+            y: diffcaring,
+            name: "Caring for children",
+            line1: "Compared with mothers who are<br>" + status + " with kid(s) age " + age,
+            line2: caring2 + " hours",
+            line3: avgcaring + " hours"
+            }],
+            color:'#0375B4',
+            negativeColor: '#007849',
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}%',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+}
+
+function chart02() {
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#chart02').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#FFCE00',
+        },
+        title: {
+            text: 'Time spent on household activies',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ['You','Mother unemployed<br>& father employed<br>full-time','Mother employed<br>part-time & father<br>employed full-time','Both spouses<br>employed full-time'],   
+        },
+        yAxis: {    
+            title: {
+                text: 'Hours',
+            },
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+          headerFormat: '<span style="font-size: 11px">{point.key}</span><br/>',
+          pointFormat: '{series.name}: <b>{point.y:,.2f}</b> hours',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.07,
+                pointPadding: 0.03,
+            }
+        },
+        series: [{
+            name: 'Mother',
+            data: [house,3.42,2.62,1.81],
+            color:"#007849",
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.2f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }, {
+            name: 'Father',
+            data: [null,1.05,1.3,1.26],
+            color:"#0375B4",
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.2f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }],
+    });
+}
+
+function chart03() {
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#chart03').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#FFCE00',
+        },
+        title: {
+            text: 'Time spent on caring for children (including travel)',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ['You','Mother unemployed<br>& father employed<br>full-time','Mother employed<br>part-time & father<br>employed full-time','Both spouses<br>employed full-time'],   
+        },
+        yAxis: {    
+            title: {
+                text: 'Hours',
+            },
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: true,
+        },
+        tooltip: {
+          headerFormat: '<span style="font-size: 11px">{point.key}</span><br/>',
+          pointFormat: '{series.name}: <b>{point.y:,.2f}</b> hours',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.07,
+                pointPadding: 0.03,
+            }
+        },
+        series: [{
+            name: 'Mother',
+            data: [caring,3.63,3.01,2.43],  
+            borderWidth: 0,
+            color:"#007849",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.2f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }, {
+            name: 'Father',
+            data: [null,1.25,1.57,1.61],
+            borderWidth: 0,
+            color:"#0375B4",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.2f}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }],
+    });
+}
+ 
+
+// function sendData() {
+//   $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+//     function(json) {
+//       $.ajax({
+//         type: 'POST',
+//         url: 'https://docs.google.com/forms/d/1oKwIKeJGVJMn-yn3-XEhH-ActDzlYLtWnD9-dzdws04/formResponse',
+//         data: { 
+//           "entry.1231873874": json.ip,
+//           "entry.1660054405": point,
+//           "entry.2108108592": document.referrer,
+//         }
+//       }); 
+//     }
+//   );   
+// }   
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("I got " + point + "/9 in this quiz on women's rights in Iran. Can you do better than me?");
+  tweet_url += ' pic.twitter.com/PQ5qRbadVY';
+  tweet_url += '&url=http://bit.ly/238HPG2&via=pri';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+var fbtitle = "I got " + point + "/9 in this quiz about women's rights in Iran. Can you do better than me?";
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-04-28/quiz-how-much-do-you-know-about-life-woman-iran',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/iran-women-campaign.jpg?itok=KNKTHHEo',
+  name: fbtitle,
+  description:"It remains a question whether the Iran nuclear deal would lead to improvement in human rights, especially for Iranian women."
+  }, function(response){});
+}
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1135342573184560',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

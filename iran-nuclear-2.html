@@ -7,6 +7,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.4/jquery.jcarousel.min.js"></script>
+        <script src="http://kuangkeng.github.io/pri-projects/jcarousel-swipe.min.js"></script>
 
     </head>
 
@@ -294,6 +295,8 @@
                         return '<a href="#' + page + '">' + page + '</a>';
                     }
                 });
+            $('.jcarousel')
+                .jcarouselSwipe(); // init jcarouselSwipe    
         });
     })(jQuery);
     </script>
