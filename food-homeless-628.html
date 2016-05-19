@@ -1,0 +1,157 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+}
+
+#title {
+    padding:10px 10px 10px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media (max-width: 400px ) { 
+    #title {font-size: 14px;}
+    #text {font-size: 13px;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper"> 
+    <div id="title">Changes in the amount of food distributed to homeless people<br>(Sept. 2014 - Aug. 2015)</div>   
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Mouseover each bar to see the total amount of food distributed.</div>
+        Source: 
+        <a href='https://www.usmayors.org/pressreleases/uploads/2015/1221-report-hhreport.pdf' target='_blank'>The US Conference of Mayors</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Charleston","San Antoni","Des Moine","Asheville","Philadelphia","Los Angele","Saint Paul","Washington DC","Santa Barbar","Nashville","San Francisc","Chicago","Cleveland","Dallas","Seattle","Norfolk","Memphis"],   
+        },
+        yAxis: {    
+            title: {
+              text: "changes (percentage)",
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+            endOnTick: false,
+            startOnTick: false,
+            minTickInterval: 10,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: 'Changes: <b>{point.y:,.1f}%</b><br>Food distributed: <b>{point.food:,.1f}</b>mil lbs',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.03,
+                pointPadding: 0,
+            }
+        },
+        series: [{
+            data: [
+                {y:12,food:2.8},
+                {y:11,food:58.0},
+                {y:10,food:2.5},
+                {y:9.9,food:4.2},
+                {y:8.7,food:26.6},
+                {y:7,food:61.5},
+                {y:6,food:89.4},
+                {y:5,food:44.4},
+                {y:4,food:3.2},
+                {y:3,food:3.4},
+                {y:1,food:40.2},
+                {y:0,food:68.0},
+                {y:0,food:40.5},
+                {y:-1,food:46.1},
+                {y:-2,food:11.9},
+                {y:-5,food:4.9},
+                {y:-20,food:10.6},
+            ],
+            color:'#d3401e',
+            negativeColor: '#4188bc',
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y:,.1f}%',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }],
+    });
+});
+</script>

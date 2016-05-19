@@ -1,0 +1,142 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Dashed lines are estimates based on data from 1988 to 2012.</div>
+        Source: 
+        <a href='http://www2.ed.gov/rschstat/eval/highered/racial-diversity/state-racial-diversity-workforce.pdf' target='_blank'>US Department of Education</a>, NCES <a href='http://nces.ed.gov/programs/digest/d14/tables/dt14_203.50.asp'>[1]</a>, <a href='http://nces.ed.gov/pubsearch/pubsinfo.asp?pubid=2010028' target='_blank'>[2]</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                defaultSeriesType: 'line',
+                renderTo: 'container',
+            },
+            title: {
+                text: 'The widening gap between teachers and students of color',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    year: '%Y'
+                },
+                tickInterval: 24 * 3600 * 1000 * 365 * 10,
+                showLastLabel: true,
+            },
+            yAxis: {
+                title: {
+                  text: 'Percentage',
+                  x: 0,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                labels: {
+                    format: '{value:,.0f}%'
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y:,.1f}%</b>',
+            },
+            plotOptions: {
+                series:{
+                    stickyTracking: false,
+                },
+            },
+            series: [ 
+                {name: "Teachers of color", color:"#d4301e", data:[
+                    [Date.UTC(1988,0,1),13],
+                    [Date.UTC(2012,0,1),18],
+                    [Date.UTC(2024,0,1),20.5],
+                    [Date.UTC(2116,0,1),40],
+                ],
+                    zones: [{
+                        value: 18,
+                    }, {
+                        value: 40,
+                        dashStyle: 'longdash',
+                    }]
+                },
+                {name: "Students of color", color:"#4188bc", data:[
+                    [Date.UTC(1988,0,1),31.7],
+                    [Date.UTC(1995,0,1),35.2],
+                    [Date.UTC(2002,0,1),40.6],
+                    [Date.UTC(2012,0,1),49],
+                    [Date.UTC(2024,0,1),54.4],
+                ]},    
+            ], 
+        });
+    });
+    
+});
+</script>

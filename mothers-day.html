@@ -16,14 +16,16 @@
     body {
       font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
       color:#262228;
+      
     }
 
-    #quiz {
-      max-width: 600px;
+    .container {
       background-color: #FFCE00;
+      max-width: 600px;
+      margin: 0 auto;
     }    
 
-    #questions {padding:0px 40px;}
+    #questions, #profile {padding:0px 40px;}
 
     #introTitle {
       text-align: center;
@@ -88,18 +90,15 @@
       text-align: center;
     }
 
+    #result03, #result02 {position:relative;}
+
     #salary {
       color:#4188bc;
       font-size: 40px;
-      margin:20px 0px;
+      margin-top: 20px;
     }
 
-    #profile {
-      max-width: 300px;
-      margin: 0 auto;
-    }
-
-    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    #sharecol1, #sharecol2, #sharecol3, #sharecol4 {width:45%; text-align: center; padding:10px 5px;}
     table {width:100%;}
     td {padding:0.5%;}
     .btnFB {float:right; height: 100%}
@@ -118,7 +117,7 @@
     .imglead {
       margin: 0 auto;
       padding:10px;
-      width:400px;
+      max-width:300px;
     }
 
     img {
@@ -132,6 +131,7 @@
       width:100%;
       max-width: 550px;
       margin: 0 auto;
+      margin-left: -10px;
     }
     #table01 {font-size: 12px}
     th {font-size:14px;}
@@ -175,14 +175,14 @@
       .title {font-size: 20px; margin-bottom: 10px;}
       .question { font-size: 16px; margin-bottom: 0px;}
       .blurb {font-size: 14px; margin-top: 0px;}
-      .mybtn {font-size: 16px;}
+      .mybtn {font-size: 16px; }
       .counter {font-size: 10px;}
       #resultTitle {margin-top: 40px; margin-bottom: 30px;}
       #introIntro {
         font-size: 16px; 
         padding-left: 0px; 
         padding-right: 0px; 
-        padding-bottom:20px;
+        padding-bottom: 20px;
       }
       #introTitle {
         font-size: 22px;
@@ -196,16 +196,16 @@
 
     @media (max-width: 400px ) { 
       #quiz { padding-bottom: 0px;}
-      .title {font-size: 20px; margin-bottom: 10px;}
-      .question { font-size: 15px; margin-bottom: 0px;}
-      .blurb {font-size: 13px; margin-top: 0px;}
-      .mybtn {font-size: 14px; padding:4px 4px;}
-      .counter {font-size: 10px;}
-      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      .title {font-size: 18px; margin-bottom: 10px;}
+      .question { font-size: 15px; margin-bottom: 10px;}
+      .mybtn {font-size: 14px; padding:4px 4px; margin-top: 0px !important;}
+      .counter {font-size: 12px;}
+      .imgbox {width:150px;}
+      #resultTitle {margin-top: 20px; margin-bottom: 20px;}
       #introIntro {
         font-size: 15px;
-        line-height: 17px;
-        padding-bottom: 15px;
+        line-height: 1.2em;
+        padding-bottom: 20px;
       }
       #introTitle {
         font-size: 17px;
@@ -214,209 +214,206 @@
         padding-right: 0px;
         padding-bottom: 10px;
       }
+      #questions, #profile {padding:0px 10px;}
+      .leftcol {text-align: left;}
+      #result03Btn-back, #result03Btn-next {width:100px;}
 
     }
 </style>
 
 <body>
-  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
-    <div id="quiz" class="container">    
-      <div class="row"> 
-        <div id="intro" class="col-sm-12 col-xs-12">
-          <div id="introTitle">How much moms would earn if their works were paid?</div>
-          <div class="imglead"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/super-woman-blue-2.png?itok=Ka3uzuMq" class="img-responsive" id="imgwoman"></div>
-          <div id="introIntro" class="blurb">Tell us how much time you spend on each activity and we will calculate your 'salary' based on the national median salaries of corresponding occupations in the US. We will also compare the time you spend on housework and caregiving for your kids with the national average numbers.
-            </div>
-          <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
-        </div>  <!-- END INTRO PAGE -->       
-
-        <div id="questions" class="col-sm-12 col-xs-12">
-          <div id="counter" class="counter">Question 0 of 0</div>
-          <div class="imgbox">img goes here</div>
-          <div id="theQuestion" class="question">Question goes here</div>
-          <div class="row">
-            <div class="col-sm-6 col-xs-6 leftcol">
-              <form class="form-inline" method="get" action="#">
-                <div class="form-group" id="hourbox">
-                  <select class="form-control" id="inputhour">
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  </select>
-                  <label for="inputhour" id="labelhour">hours</label>
-                </div>  
-              </form>
-            </div>
-            <div class="col-sm-6 col-xs-6">
-              <form class="form-inline" method="get" action="#">
-                <div class="form-group" id="minbox">
-                  <select class="form-control" id="inputmin">
-                  <option>0</option>
-                  <option>10</option>
-                  <option>20</option>
-                  <option>30</option>
-                  <option>40</option>
-                  <option>50</option>
-                  </select>
-                  <label for="inputmin" id="labelmin">minutes</label>
-                </div>   
-              </form> 
-            </div>    
-          </div>
-          <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next question</div>
-        </div><!-- END QUESTION PAGE -->      
-
-        <div id="profilepage" class="col-sm-12 col-xs-12">
-          <div class="question"><br>Tell us about you so we can personalize your results.</div>  
-          <div id="profile">
-            <form>            
-              <div class="form-group">
-              <label for="inputkid" id="labelkid">How old is your youngest kid?</label>
-              <select class="form-control" id="inputkid">
-              <option>6-17</option>
-              <option>below 6</option>
-              </select>
-              </div>
-            
-              <div class="form-group">
-              <label for="inputwork" id="labelwork">Are you employed?</label>
-              <select class="form-control" id="inputwork">
-              <option>employed full-time</option>
-              <option>employed part-time</option>
-              <option>full-time mother</option>
-              </select>
-              </div>
-            </form>
-          </div>
-          <div id="result01Btn" class="btn btn-primary btn-lg center-block mybtn">See my results</div>
-        </div>  <!-- END PROFILE PAGE --> 
-
-        <div id="result01" class="col-sm-12 col-xs-12">
-          <div class="title" id="resultTitle">Whoa! You would've made<br><span id="salary">0</span><br>for all those works if they were paid.</div>
-          <div class="question">We calculated the potential wage of each task based on national median hourly rate of the corresponding occupation listed in the <a href="http://www.bls.gov/oes/current/oes_nat.htm" target="_blank">National Occupational Employment and Wage Estimates, May 2015</a>. Then we multiply the daily total by 365 days. Below is the corresponding occupations and their median hourly rate.</div>
-          <table class="table table-condensed table-striped" id="table01">
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Occupation</th>
-                <th>Hourly rate</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Housework and cleaning</td>
-                <td>Janitors and cleaners</td>
-                <td class="rate">$11.27</td>
-              </tr>
-              <tr>
-                <td>Grocery shopping, meal planning and cooking</td>
-                <td>Chefs and head cooks</td>
-                <td class="rate">$19.95</td>
-              </tr>
-              <tr>
-                <td>Yard work</td>
-                <td>Landscaping and groundskeeping workers</td>
-                <td class="rate">$12.03</td>
-              </tr>
-              <tr>
-                <td>Laundry and dry cleaning</td>
-                <td>Laundry and dry-Cleaning workers</td>
-                <td class="rate">$10.01</td>
-              </tr>
-              <tr>
-                <td>Planning activities for family</td>
-                <td>Meeting, convention, and event planners</td>
-                <td class="rate">$22.52</td>
-              </tr>
-              <tr>
-                <td>Being the family’s CFO</td>
-                <td>Financial managers</td>
-                <td class="rate">$56.73</td>
-              </tr>
-              <tr>
-                <td>Playing with your children</td>
-                <td>Childcare workers</td>
-                <td class="rate">$9.77</td>
-              </tr>
-              <tr>
-                <td>Helping with schoolwork (age 6-17)</td>
-                <td>Other teachers and instructors</td>
-                <td class="rate">$14.79</td>
-              </tr>
-              <tr>
-                <td>Helping with schoolwork (age below 6)</td>
-                <td>Preschool and kindergarten teachers</td>
-                <td class="rate">$16.51</td>
-              </tr>
-              <tr>
-                <td>Taking care of kids' hygiene and health</td>
-                <td>Licensed practical and licensed vocational nurses </td>
-                <td class="rate">$20.76</td>
-              </tr>
-              <tr class="lastRow">
-                <td>Schlepping your kids</td>
-                <td>Taxi drivers and chauffeurs</td>
-                <td class="rate">$11.3</td>
-              </tr>
-            </tbody>
-          </table>
-          <div id="result02Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
-          <div class="title" id="sharemsg">Let the world know your value!</div>
-          <div class="shareBox">
-            <table> 
-              <tr>
-                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
-                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
-              </tr> 
-            </table>
-          </div>
+  <div id="quiz" class="container">    
+    <div id="intro">
+      <div id="introTitle">How much is unpaid domestic work worth?</div>
+      <div class="imglead"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/super-woman-blue-2.png?itok=Ka3uzuMq" class="img-responsive" id="imgwoman"></div>
+      <div id="introIntro">In many parts of the world, women are expected to be the chief caregivers for the household, basically performing a full-time job at no pay — and they are often undervalued. But what if women were paid for all the hours they spend caring for children and taking care of their homes? We calculate how much they would earn based on US data. See how the data apply to your life.
         </div>
-        <div id="result02" class="col-sm-12 col-xs-12">
-          <div class="title" id="resultTitle">Compared your results with other mothers</div>
-          <div class="question">This chart compares the time you spent on household activities and caring for your children with the time spent of the average American mother of your employment status (employed full-time, part-time or full-time mother) and children's age group (6 to 17 or below 6). The numbers are average data for the combined years 2009 to 2013 from the <a href="http://www.bls.gov/tus/#tables" target="_blank">American Time Use Survey</a>.</div>
-          <div class="chart" id="chart01"></div>
-          <div class="row">
-            <div class="col-sm-6 col-xs-6">
-              <div id="result03Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
-            </div>
-            <div class="col-sm-6 col-xs-6">
-              <div id="result03Btn-next" class="btn btn-primary btn-lg center-block mybtn">Next</div>
-            </div>
-          </div> 
-          <div class="title" id="sharemsg">Share your results</div>
-          <div class="shareBox">
-            <table> 
-              <tr>
-                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
-                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
-              </tr> 
-            </table>
-          </div>
-        </div> 
-        <div id="result03" class="col-sm-12 col-xs-12">
-          <div class="title" id="resultTitle">What about American fathers?</div>
-          <div class="question">American fathers generally spent less time than their wives in houseworks and caring for kids. The two charts show the time spent for both spouses with kids in different age groups. Unfortunately, the <a href="http://www.bls.gov/tus/#tables" target="_blank">American Time Use Survey</a> does not include data of fathers who are employed part-time or stay-at-home dad. So for full-time fathers, too bad.</div>
-          <table id="chartbutton">
-            <tr>
-              <td id="col01"><div class="button01"><button id="button01">Children age below 6</button></div></td>
-              <td id="col02"><div class="button02"><button id="button02">Children age 6-17</button></div></td>
-            </tr>
-          </table>
-          <div class="chart" id="chart02"></div>
-          <div class="chart" id="chart03"></div>
-          <div id="result04Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
-          <div id="result04Btn-reset" class="btn btn-primary btn-lg center-block mybtn" onClick="history.go(0)">Calculate again</div>
-        </div> 
-      </div> 
-    </div>
+      <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+    </div>  <!-- END INTRO PAGE -->       
 
-  </div>    
+    <div id="questions">
+      <div id="counter" class="counter">Question 0 of 0</div>
+      <div class="imgbox">img goes here</div>
+      <div id="theQuestion" class="question">Question goes here</div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6 leftcol">
+          <form class="form-inline" method="get" action="#">
+            <div class="form-group" id="hourbox">
+              <select class="form-control" id="inputhour">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              </select>
+              <label for="inputhour" id="labelhour">hours</label>
+            </div>  
+          </form>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <form class="form-inline" method="get" action="#">
+            <div class="form-group" id="minbox">
+              <select class="form-control" id="inputmin">
+              <option>0</option>
+              <option>10</option>
+              <option>20</option>
+              <option>30</option>
+              <option>40</option>
+              <option>50</option>
+              </select>
+              <label for="inputmin" id="labelmin">minutes</label>
+            </div>   
+          </form> 
+        </div>    
+      </div>
+      <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next question</div>
+    </div><!-- END QUESTION PAGE -->      
+
+    <div id="profilepage">
+      <div class="question"><br>Tell us about youself so we can personalize your results.</div>  
+      <div id="profile">
+        <div class="question">How old is your youngest kid?</div>
+        <form>            
+          <div class="form-group">
+          <select class="form-control" id="inputkid">
+          <option>6-17</option>
+          <option>below 6</option>
+          </select>
+          </div>
+          <div class="question">Are you employed?</div>
+          <div class="form-group">
+          <select class="form-control" id="inputwork">
+          <option>employed full-time</option>
+          <option>employed part-time</option>
+          <option>full-time caregiver</option>
+          </select>
+          </div>
+        </form>
+      </div>
+      <div id="result01Btn" class="btn btn-primary btn-lg center-block mybtn">See my results</div>
+    </div>  <!-- END PROFILE PAGE --> 
+
+    <div id="result01">
+      <div class="title" id="resultTitle">Whoa! You would've made<br><div id="salary">0</div><br>in a year for all that work if you were being paid.</div>
+      <div class="question">We calculated the potential wage of each task based on US national median hourly rates of the corresponding occupation listed in the <a href="http://www.bls.gov/oes/current/oes_nat.htm" target="_blank">National Occupational Employment and Wage Estimates, May 2015</a>. Then we multiplied the daily total by 365 days. Below are the corresponding occupations and their median hourly rate in the US.</div>
+      <table class="table table-condensed table-striped" id="table01">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Occupation</th>
+            <th>Hourly rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Housework and cleaning</td>
+            <td>Janitors and cleaners</td>
+            <td class="rate">$11.27</td>
+          </tr>
+          <tr>
+            <td>Grocery shopping, meal planning and cooking</td>
+            <td>Chefs and head cooks</td>
+            <td class="rate">$19.95</td>
+          </tr>
+          <tr>
+            <td>Yard work</td>
+            <td>Landscaping and groundskeeping workers</td>
+            <td class="rate">$12.03</td>
+          </tr>
+          <tr>
+            <td>Laundry and dry cleaning</td>
+            <td>Laundry and dry-Cleaning workers</td>
+            <td class="rate">$10.01</td>
+          </tr>
+          <tr>
+            <td>Planning activities for family</td>
+            <td>Meeting, convention, and event planners</td>
+            <td class="rate">$22.52</td>
+          </tr>
+          <tr>
+            <td>Being the family’s CFO</td>
+            <td>Financial managers</td>
+            <td class="rate">$56.73</td>
+          </tr>
+          <tr>
+            <td>Playing with your children</td>
+            <td>Childcare workers</td>
+            <td class="rate">$9.77</td>
+          </tr>
+          <tr>
+            <td>Helping with schoolwork (age 6-17)</td>
+            <td>Other teachers and instructors</td>
+            <td class="rate">$14.79</td>
+          </tr>
+          <tr>
+            <td>Helping with schoolwork (age below 6)</td>
+            <td>Preschool and kindergarten teachers</td>
+            <td class="rate">$16.51</td>
+          </tr>
+          <tr>
+            <td>Taking care of kids' hygiene and health</td>
+            <td>Licensed practical and licensed vocational nurses </td>
+            <td class="rate">$20.76</td>
+          </tr>
+          <tr class="lastRow">
+            <td>Schlepping your kids</td>
+            <td>Taxi drivers and chauffeurs</td>
+            <td class="rate">$11.3</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="result02Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div class="title" id="sharemsg">Let the world know your value!</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+    </div>
+    <div id="result02">
+      <div class="title" id="resultTitle">Compare your results with other mothers</div>
+      <div class="question">This chart compares the time you spend on household activities and caring for your children with how the average American mother in a similar situation (employed full-time, part-time or full-time caregiver, and with children 6 to 17 or below 6) spends her time. The numbers are average data for the combined years 2009 to 2013 from the <a href="http://www.bls.gov/tus/#tables" target="_blank">American Time Use Survey</a>.</div>
+      <div class="chart" id="chart01"></div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div id="result03Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <div id="result03Btn-next" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+        </div>
+      </div> 
+      <div class="title" id="sharemsg">Share your results</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td id="sharecol3"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td id="sharecol4"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+    </div> 
+    <div id="result03">
+      <div class="title" id="resultTitle">What about American fathers?</div>
+      <div class="question">American fathers generally spend less time than their partners doing housework and caring for children. These two charts show the time spent for both spouses with kids in different age groups. Unfortunately, the <a href="http://www.bls.gov/tus/#tables" target="_blank">American Time Use Survey</a> does not include data from fathers who are employed part-time or full-time caregivers.</div>
+      <table id="chartbutton">
+        <tr>
+          <td id="col01"><div class="button01"><button id="button01">Kids age below 6</button></div></td>
+          <td id="col02"><div class="button02"><button id="button02">Kids age 6-17</button></div></td>
+        </tr>
+      </table>
+      <div class="chart" id="chart02"></div>
+      <div class="chart" id="chart03"></div>
+      <div id="result04Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
+      <div id="result04Btn-reset" class="btn btn-primary btn-lg center-block mybtn" onClick="history.go(0)">Calculate again</div>
+    </div> 
+  </div>   
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -449,21 +446,23 @@ var count = 0,
     avgcaring = 0,
     diffhouse = 0,
     diffcaring = 0,
+    housemsg = "",
+    caringmsg = "",
     status = "",
     age = "",
     datachart01 = [],
     inputdata = [],
     theQuestions = [];
-    theQuestions[0] = "How much time each day you spend on housework and cleaning?",
-    theQuestions[1] = "How much time per day you spend meal planning, grocery shopping and cooking?",
-    theQuestions[2] = "How much time per day you spend doing yard work?",
+    theQuestions[0] = "How much time each day do you spend on housework and cleaning?",
+    theQuestions[1] = "How much time per day do you spend meal planning, grocery shopping and cooking?",
+    theQuestions[2] = "How much time per day do you spend doing yard work?",
     theQuestions[3] = "How about laundry and dry cleaning?",
     theQuestions[4] = "Planning activities for your family?",
-    theQuestions[5] = "How much time each day you spend being the family's CFO such as budgeting, balancing the books etc.?",
-    theQuestions[6] = "How much time each day you spend playing with your children?",
-    theQuestions[7] = "How much time each day you spend helping them with their schoolwork?",
+    theQuestions[5] = "How much time each day do you spend being the family's CFO? (Think budgeting, balancing the books etc.)",
+    theQuestions[6] = "How much time each day do you spend playing with your children?",
+    theQuestions[7] = "How much time each day do you spend helping them with their schoolwork?",
     theQuestions[8] = "How about taking care of their hygiene and health?",
-    theQuestions[9] = "Finally, how much time each day you spend schlepping your kids to and from school and events?";
+    theQuestions[9] = "Finally, how much time each day do you spend taking your kids to and from school and activities?";
 
 var data = 
   [{"employ":"full","yhouse":1.81,"ycare":2.43,"ohouse":2.2,"ocare":0.98},
@@ -534,8 +533,10 @@ function init() {
     $('.container').slideDown(500);   
   });     
 
-  $('#sharecol1').click(function (event) {facebook();});
-  $('#sharecol2').click(function (event) {tweet();});
+  $('#sharecol1').click(function (event) {facebook01();});
+  $('#sharecol2').click(function (event) {tweet01();});
+  $('#sharecol3').click(function (event) {facebook02();});
+  $('#sharecol4').click(function (event) {tweet02();});
 
   var flip = "off";
   $('#button01').click(function () {
@@ -606,7 +607,7 @@ function showResults() {
   //Calculation goes here
   if($('#inputwork').val()=="employed full-time"){work = 0; status = "employed full-time"}
   if($('#inputwork').val()=="employed part-time"){work = 1; status = "employed part-time"}
-  if($('#inputwork').val()=="full-time mother"){work = 2; status = "full-time mother"}
+  if($('#inputwork').val()=="full-time caregiver"){work = 2; status = "full-time caregiver"}
 
   if($('#inputkid').val()=="6-17"){kid = 0; age = "6-17"} else{kid = 1; age = "below 6"}
   if (kid == 1){salary[7]=inputdata[7]*16.51}  
@@ -636,6 +637,12 @@ function showResults() {
   }
   diffhouse = Math.round((house - avghouse)/avghouse*100);
   diffcaring = Math.round((caring - avgcaring)/avgcaring*100);
+
+  if(diffhouse<0){housemsg = Math.abs(diffhouse) + "% less than"} else {housemsg = diffhouse + "% more than"}
+  if(diffcaring<0){caringmsg = Math.abs(diffcaring) + "% less than"} else {caringmsg = diffcaring + "% more than"}
+
+    console.log("housemsg = " + housemsg);
+    console.log("caringmsg = " + caringmsg); 
 
   house2 = house.toFixed(2);
   caring2 = caring.toFixed(2);
@@ -673,7 +680,7 @@ function chart01() {
             text:''
         },
         subtitle: {
-            text: 'Negative value indicates your time use is lower than the average number while positive indicates your time use is higher than the average number. Hover over each bar for more details.',
+            text: 'Negative value indicates you spend less time than the average, while positive numbers indicate you spend more. Mouseover each bar for more details.',
             align: 'left',
             style: {
                 fontSize: '12',
@@ -685,6 +692,7 @@ function chart01() {
         yAxis: {
             title: {
                 text: 'Comparison in percentage',
+                x:-20,
             },
             labels: {
                 overflow: 'justify',
@@ -752,6 +760,7 @@ function chart02() {
         },
         title: {
             text: 'Time spent on household activities',
+            style: {fontSize: '14',}
         },
         subtitle: {
             enabled: false,
@@ -770,7 +779,7 @@ function chart02() {
             enabled: false,
         },
         tooltip: {
-          headerFormat: '<span style="font-size: 11px">{point.key}</span><br/>',
+          headerFormat: '<span style="font-size: 12px">{point.key}</span><br/>',
           pointFormat: '{series.name}: <b>{point.y:,.2f}</b> hours',
         },
         plotOptions: {
@@ -829,6 +838,7 @@ function chart03() {
         },
         title: {
             text: 'Time spent on caring for children (including travel)',
+            style: {fontSize: '14',}
         },
         subtitle: {
             enabled: false,
@@ -893,38 +903,59 @@ function chart03() {
 }
  
 
-// function sendData() {
-//   $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
-//     function(json) {
-//       $.ajax({
-//         type: 'POST',
-//         url: 'https://docs.google.com/forms/d/1oKwIKeJGVJMn-yn3-XEhH-ActDzlYLtWnD9-dzdws04/formResponse',
-//         data: { 
-//           "entry.1231873874": json.ip,
-//           "entry.1660054405": point,
-//           "entry.2108108592": document.referrer,
-//         }
-//       }); 
-//     }
-//   );   
-// }   
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1PUtOkALcYwqoLExvT9vzpebb0TyHgTTOSnjGpbthwxM/formResponse',
+        data: { 
+          "entry.1952544604": json.ip,
+          "entry.1403635690": annual,
+          "entry.1376485770": house2,
+          "entry.1713649518": caring2,
+          "entry.955486261": document.referrer,
+        }
+      }); 
+    }
+  );   
+}   
 
-function tweet() {
+function tweet01() {
   var tweet_url = 'https://twitter.com/intent/tweet?text=';
-  tweet_url += encodeURIComponent("I got " + point + "/9 in this quiz on women's rights in Iran. Can you do better than me?");
-  tweet_url += ' pic.twitter.com/PQ5qRbadVY';
-  tweet_url += '&url=http://bit.ly/238HPG2&via=pri';
+  tweet_url += encodeURIComponent("I should earn $"+annual2+" a year for all the work I've done as a mom. How about you?");
+  tweet_url += ' pic.twitter.com/3vMb5eF3cR';
+  tweet_url += '&url=http://bit.ly/1ZpKavl&via=pri';
   window.open(tweet_url,'_blank'); 
 }
 
-function facebook() {
-var fbtitle = "I got " + point + "/9 in this quiz about women's rights in Iran. Can you do better than me?";
+function tweet02() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("I spent " + caringmsg + " the average mom on caring for my children, how about you?");
+  tweet_url += ' pic.twitter.com/3vMb5eF3cR';
+  tweet_url += '&url=http://bit.ly/1ZpKavl&via=pri';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook01() {
+var fbtitle = "I should earn $"+annual2+" a year for all the work I've done as a mom! Calculate yours";
 FB.ui({
   method: 'feed',
-  link: 'http://www.pri.org/stories/2016-04-28/quiz-how-much-do-you-know-about-life-woman-iran',
-  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/iran-women-campaign.jpg?itok=KNKTHHEo',
+  link: 'www.pri.org/stories/2016-05-07/domestic-work-deserves-salary-and-how-much-we-should-pay-moms',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/mother-kiss-baby-cropped.jpg?itok=icNhUx60',
   name: fbtitle,
-  description:"It remains a question whether the Iran nuclear deal would lead to improvement in human rights, especially for Iranian women."
+  description:"How much mothers would earn if they were paid for all the hours they spend caring for children and taking care of their homes?"
+  }, function(response){});
+}
+
+function facebook02() {
+var fbtitle = "I spent " + caringmsg + " the average American mom on caring for my children. Calculate yours";
+FB.ui({
+  method: 'feed',
+  link: 'www.pri.org/stories/2016-05-07/domestic-work-deserves-salary-and-how-much-we-should-pay-moms',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/story/images/mother-kiss-baby-cropped.jpg?itok=icNhUx60',
+  name: fbtitle,
+  description:"How much mothers would earn if they were paid for all the hours they spend caring for children and taking care of their homes?"
   }, function(response){});
 }
 
@@ -936,7 +967,7 @@ $(document).ready(function(){
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '1135342573184560',
+      appId      : '497911367068408',
       xfbml      : true,
       version    : 'v2.6'
     });

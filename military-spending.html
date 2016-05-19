@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+
+<style>
+  body {
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; 
+    max-width: 500px; 
+    font-size: 18px;
+    margin:0px auto;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin:15px 0px;
+  }
+
+  .description {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .sliderbox {
+    margin-bottom: 15px;
+  }
+
+  .barbox {
+    margin-bottom: 15px;
+    background-color: #eeeeee;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .barblock {
+    width:1%;
+    background-color: #a5defd;
+    height:30px;
+    border-radius: 5px;
+  }
+
+  .barnum {
+    position:absolute;
+    top:50%;
+    margin-top: -10px;
+    font-weight: bold;
+  }
+
+  #barnum01 {
+    left:15px;
+  }
+
+  #barnum02 {
+    right:15px;
+  }
+
+  .itembox {
+    background-color: #fbfbfb;
+    height:330px;
+    overflow: auto;
+  }
+
+  .selectall {
+    text-align: center;
+    background-color: #0375B4;
+    border-radius:5px;
+    color:white;
+    padding:5px 0px;
+    cursor: pointer;
+  }
+
+  .note {
+    font-size: 14px;
+    text-align: center;
+    color:#333;
+    padding:5px 0px;
+    margin:5px 0px;
+    cursor: pointer;
+    background-color: #eeeeee;
+  }
+
+  .cost {font-weight: bold;}
+
+  .slider.ui-slider .ui-slider-handle {
+    border-radius:20px;
+  }
+
+  #percent {font-weight: bold;}
+
+  table {width:100%;}
+  .tablebox {border-collapse: collapse;}
+  #col01 {width:15%;padding-left: 4%;}
+  #col02 {width:20%;}
+  #col03 {width:65%;}
+  #clm01 {width:10%;}
+  #clm02 {width:90%;}
+  tr.border_bottom td {border-bottom: 1px solid #eeeeee;}
+  hr{border:1px solid #eeeeee;}
+
+
+  .page02 {
+    font-size: 14px;
+    max-height: 630px;
+  }
+
+  .return{
+    font-size: 12px;
+    text-align: center;
+    margin: 10px 0px;
+  }
+
+  .notetitle {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
+  .noteintro {
+    line-height: 1.4em;
+    margin-bottom: 10px;
+  }
+  .notehead {font-weight: bold;}
+  .notetext {
+    margin-bottom: 10px;
+    line-height: 1.4em;
+  }
+
+  @media (max-width: 400px ) { 
+    body {font-size: 14px;}
+    .title {
+      font-size: 16px;
+      margin:10px 0px;
+    }
+    .description {
+      font-size: 14px;
+    }
+    .sliderbox {margin-bottom: 5px;}
+    .itembox {height:300px;}
+    .barbox {margin-bottom: 10px;}
+    .barnum {margin-top: -9px}
+    #col01 {width:10%;padding-left: 2%;}
+    #col02 {width:15%;padding:2% 5%;}
+    #col03 {width:75%;}
+    img {height:70%;}
+    .note {font-size: 12px;}
+    .page02 {
+      font-size: 12px;
+      max-height: 554px;
+    }
+
+    .return{
+      font-size: 10px;
+      margin: 5px 0px;
+    }
+
+    .notetitle {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .notetext .noteintro {
+      line-height: 1.2em;
+      margin-bottom: 5px;
+    }
+  }
+
+
+</style>
+
+
+<body>
+<div class="container">  
+  <div class="page01">
+    <div class="title">What could've been done with global military spending?</div>
+    <div class="description">Decide what percentage to cut from the $1,676 billion global military spending</div>
+    <div class="sliderbox">
+      <table> 
+        <tr>
+          <td id="clm01"><span id="percent">8%</span></td>
+          <td id="clm02"><div class="slider" id="slider-range-min"></div></td>
+        </tr>
+      </table>    
+    </div>  
+    <div class="barbox">
+      <div class="barblock"></div>
+      <div class="barnum" id="barnum01">$<span id="spent">0</span>B of $<span id="budget">134</span>B available</div>
+      <div class="barnum" id="barnum02">$<span id="left">134</span>B left</div>
+    </div>
+    <hr>
+    <div class="description">Pick the projects you want to fund with the money</div>
+    <div class="itembox">
+      <table class="tablebox"> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box01"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/climate-logo-small.png?itok=daolvfof"></td>
+           <td id="col03"><div class="cost">$100B</div><div>Climate change mitigation in developing countries</div></td>
+        </tr> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box02"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/food-logo-small.png?itok=8la61vqs"></td>
+           <td id="col03"><div class="cost">$214B</div><div>Eliminate extreme poverty & hunger</div></td>
+        </tr> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box03"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/water-logo-small.png?itok=WVfv5EIo"></td>
+           <td id="col03"><div class="cost">$114B</div><div>Safe water & sanitation</div></td>
+        </tr>         
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box04"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/education-logo-small.png?itok=vasCPXLk"></td>
+           <td id="col03"><div class="cost">$39B</div><div>Universal education for low & lower-middle-income countries</div></td>
+        </tr> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box05"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/protection-logo-small.png?itok=w2Nu9frG"></td>
+           <td id="col03"><div class="cost">$42B</div><div>Social protection for low-income countries</div></td>
+        </tr> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box06"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/healthy-logo-small.png?itok=pNdct_38"></td>
+           <td id="col03"><div class="cost">$74B</div><div>Universal health coverage for low-income countries</div></td>
+        </tr> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box07"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/refugee-logo-small.png?itok=x7oWOlx-"></td>
+           <td id="col03"><div class="cost">$127.5B</div><div>Resettle 3 million Syrian refugees for the next 5 years</div></td>
+        </tr> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box08"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/aid-logo-small.png?itok=8mZuqhsk"></td>
+           <td id="col03"><div class="cost">$20.1B</div><div>Humanitarian assistance to over 87 million people</div></td>
+        </tr> 
+        <tr class="border_bottom">
+           <td id="col01"><input type="checkbox" class= "box" name="box" id="box09"></td>
+           <td id="col02"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/mosquito-logo-small.png?itok=eTqRfWGQ"></td>
+           <td id="col03"><div class="cost">$56M</div><div>Fight the Zika virus (first 6 months of 2016)</div></td>
+        </tr>        
+      </table>
+    </div>
+    <div class="selectall">Select all</div>
+    <div class="note">More: How did we get those figures?</div>
+  </div>  
+  <div class="page02">
+    <div class="notetitle">How did we get those figures?</div>
+    <div class="noteintro">The projects are based on the latest information published by international organizations and reports. The details are as follow: </div>
+    <div class="notetext"><span class="notehead">Climate change mitigation: </span>Annual aid pledged by high-income developed countries to fund green technology in developing countries to deal with the consequences of climate change. <a href="http://www.sipri.org/media/website-photos/milex-media-backgrounder-2016" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Eliminate extreme poverty & hunger: </span>To eliminate extreme poverty and hunger sustainably by 2030, which is the first and second goals of the UN's Sustainable Development Goals. <a href="http://unsdsn.org/resources/publications/sdg-investment-needs" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Safe water & sanitation: </span>To provide safe on-plot water supply and sanitation to every household, which is the 6.1 and 6.2 targets under the UN's Sustainable Development Goals. <a href="http://reliefweb.int/sites/reliefweb.int/files/resources/The0costs0of0m0ene000summary0report.pdf" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Universal education: </span>Financing gap for universal pre-primary, primary and secondary education in low and lower middle income countries between 2015 and 2030. <a href="http://unesdoc.unesco.org/images/0023/002321/232197E.pdf" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Social protection: </span>Annual budget to provide social protection programs to bring the poorest people closer to a decent standard of living in all low-income countries. <a href="https://www.odi.org/sites/odi.org.uk/files/odi-assets/publications-opinion-files/9595.pdf" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Universal health coverage: </span>To provide basic health package in low-income countries. <a href="https://www.odi.org/sites/odi.org.uk/files/odi-assets/publications-opinion-files/9595.pdf" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Resettle 3 million Syrian refugees: </span>The budget to resettle 20,000 Syrian refugees in the UK for the next five years is $850 million. The amount would be $127.5 billion to resettle the 3 million Syrian refugees outside of Syria. <a href="http://www.telegraph.co.uk/news/2016/04/13/resettlement-of-20000-syrian-refugees-estimated-to-cost-half-a-b/" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Humanitarian assistance: </span>This is the amount appealed by the UN in 2016 to provide life-saving aid to over 87.6 million people across 37 countries mainly Syria, Iraq, South Sudan and Yemen. <a href="http://www.un.org/sustainabledevelopment/blog/2015/12/un-launches-largest-ever-humanitarian-appeal-at-20-1-billion/" target="_blank">[Source]</a></div>
+    <div class="notetext"><span class="notehead">Fight the Zika virus: </span>The World Health Organization sought the amount for the first 6 months of 2016 to combat the Zika virus. The fund would be used to fast-track vaccines, carry out diagnostics and research, and virus control.  <a href="http://www.reuters.com/article/us-health-zika-who-idUSKCN0VQ141" target="_blank">[Source]</a></div>
+    <div class="return"><button id="return">Close this box</button></div>
+  </div>  
+</div>
+
+
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script>
+var end01 = 134.08,
+    start01 = 134.08,
+    start02 = 0,
+    end02 = 0,
+    selected = 0,
+    start03 = 134.08,
+    end03 = 0,
+    data = [100,214,114,39,42,74,127.5,20.1,0.056];
+
+function init() { 
+  $(".page02").hide();
+  $(".note").click(function () {
+    $(".page01").hide();
+    $(".page02").show();
+  });
+  $("#return").click(function () {
+    $(".page02").hide();
+    $(".page01").show();
+  });
+  // add multiple select / deselect functionality
+  $(".selectall").click(function () {
+    if(selected==0){
+      $(".box").prop("checked", true);
+      $(".border_bottom").css("background-color","#d6d6d6");
+      $(".selectall").text("Clear all");
+      selected = 1;
+      end02 = 731;
+      calculate02();
+      changebar();
+      calculate03();
+      start02 = end02;
+    } else {
+      $(".box").prop("checked", false);
+      $(".border_bottom").css("background-color","");
+      $(".selectall").text("Select all");
+      selected = 0;
+      end02 = 0;
+      calculate02();
+      changebar();
+      calculate03();
+      start02 = end02;
+    }
+  });
+
+  $(".box").click(function(){
+    var index = $(".box").index( this );
+    if($(this).prop("checked")==true){
+      $(this).parent().parent().css("background-color","#d6d6d6");
+      end02 = start02 + data[index];
+      calculate02();
+      changebar();
+      start02 = end02;
+      calculate03();
+    } else {
+      $(this).parent().parent().css("background-color","");
+      end02 = start02 - data[index];
+      calculate02();
+      changebar();
+      start02 = end02;
+      calculate03();
+    }
+
+    if($(".box").length == $(".box:checked").length) {
+      $(".selectall").text("Clear all");
+      selected = 1;
+    } else {
+      $(".selectall").text("Select all");
+      selected = 0; 
+    }
+  });
+
+  $( "#slider-range-min" ).slider({
+    range: "min",
+    value: 8,
+    min: 0,
+    max: 20,
+    slide: function( event, ui ) {
+      $( "#percent" ).text(ui.value + "%");
+      end01 = ui.value*16.76;
+      calculate01();
+      changebar();
+      start01 = end01;
+      calculate03();
+    }
+  });
+};
+
+function calculate01(){
+	$('#budget').each(function () {
+	    $(this).prop('Counter', start01).animate({
+	        Counter: end01
+	    }, {
+	        duration: 500,
+	        easing: 'swing',
+	        step: function (now) {
+	            $(this).text(Math.round(now));
+	        }
+	    });
+	});
+}
+
+function calculate02(){
+  $('#spent').each(function () {
+      $(this).prop('Counter', start02).animate({
+          Counter: end02
+      }, {
+          duration: 500,
+          easing: 'swing',
+          step: function (now) {
+              $(this).text(Math.ceil(now));
+          }
+      });
+  });
+}
+
+function calculate03(){
+  end03 = end01-end02;
+  $('#left').each(function () {
+      $(this).prop('Counter', start03).animate({
+          Counter: end03
+      }, {
+          duration: 500,
+          easing: 'swing',
+          step: function (now) {
+              $(this).text(Math.ceil(now));
+          }
+      });
+  });
+  start03 = end03;
+}
+
+function changebar(){
+  var length = Math.round(end02/end01*100);
+  if(length == 0){length = 1;}
+  $(".barblock" ).animate({width: length + "%"}, 500);
+  if(length<70){$(".barblock" ).css("background-color","#a5defd")}
+  if(length>70){$(".barblock" ).css("background-color","#fdf0a5")}
+  if(length>99){$(".barblock" ).css("background-color","#fda5b2")} 
+}
+
+$(document).ready(function(){
+  init();
+}); 
+
+</script>
+
+</body>
+</html>    

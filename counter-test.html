@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+
+<style>
+ .slider.ui-slider .ui-slider-handle {
+  border-radius:20px;
+  background: red;
+}
+</style>
+
+
+<body>
+<input type="text" id="amount">
+<div class="slider" id="slider-range-min"></div>
+<div id="count"></div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script>
+var end = 0;
+var start = 500;
+$( "#amount" ).val(5);
+
+$( "#slider-range-min" ).slider({
+  range: "min",
+  value: 5,
+  min: 0,
+  max: 50,
+  slide: function( event, ui ) {
+    $( "#amount" ).val( "$" + ui.value );
+    end = ui.value*100;
+    calculate();
+    start = end;
+    console.log("start = " + start)
+  }
+});
+
+function calculate(){
+	$('#count').each(function () {
+	    $(this).prop('Counter', start).animate({
+	        Counter: end
+	    }, {
+	        duration: 1000,
+	        easing: 'swing',
+	        step: function (now) {
+	            $(this).text(Math.ceil(now));
+	        }
+	    });
+	});
+}
+
+
+</script>
+
+</body>
+</html>    
