@@ -1,0 +1,133 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">To compare different weapons, SIPRI measures the export value using a common unit called <a href="http://www.sipri.org/databases/armstransfers/background/background_default#TIV-tables" target='_blank'>trend-indicator value (TIV)</a>, expressed in US dollar at constant 1990 prices.</div>
+        Source: 
+        <a href='http://www.sipri.org/databases/armstransfers' target='_blank'>SIPRI Arm Transfers Database</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Top arms exporters to Iran, 1950-2015',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["US","USSR/<br>Russia","China","UK","North<br>Korea","Italy","Others"],   
+            labels:{
+                style: {
+                    fontSize: '13px',
+              },  
+            }
+        },
+        yAxis: {    
+            title: {
+              text: "TIV in $ million (1990 constant USD)",
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },            
+            endOnTick: false,
+            minTickInterval: 10000,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: 'Total exports: <b>${point.y:,0f} mil</b>',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.07,
+                pointPadding: 0,
+            }
+        },
+        series: [{
+            name: 'Arms exports',
+            data: [{y:24943,color:"#4188bc"},6715,4259,3744,1527,1344,3601],
+            color:"#fcd116",
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '${point.y:,0f} mil',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }],
+    });
+});
+</script>

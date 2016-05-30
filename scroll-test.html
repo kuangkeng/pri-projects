@@ -1,8 +1,17 @@
 <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/ScrollMagic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/plugins/animation.gsap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
 
 <style>
+html, body {
+  height: 100%;
+}
+
+
 body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
   font-size: 112.5%;
@@ -16,6 +25,8 @@ body {
 }
 
 #wrapper {
+    display:inline-block;
+    position: relative;
     border:1px solid #D3D3D3;
     max-width: 850px; 
     margin: 0 auto;
@@ -53,6 +64,16 @@ body {
 #button01:hover {background-color:#67acd2;}
 #button01:focus, input[type="button"]:focus {outline: none;}
 
+
+#frame {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 10px;
+  outline: 1px dashed orange;
+  text-align: center;
+}
+
+
 @media (max-width: 600px ) { 
     #container {height: 450px;}
 } 
@@ -65,6 +86,7 @@ body {
 </head>
 
 <body>
+<div id="frame">  
 <div id="wrapper">    
     <div id="container"></div>
     <div id="note">
@@ -75,10 +97,33 @@ body {
         <div id="credit">Kuang Keng Kuek Ser / PRI</div>
     </div>
 </div>
+</div>
 </body>
 
 <script> 
 $(function () {
+
+
+  var controller = new ScrollMagic.Controller();
+  var scene = new ScrollMagic.Scene({
+      triggerElement: '#frame',
+      duration: 200
+    })
+    .setPin('#wrapper')
+    .addIndicators()
+    .offset(300)
+    .addTo(controller)
+    .on("progress", function (event) {
+      var num = event.progress;
+      if(num>0.5){
+      var chart = $('#container').highcharts();
+      chart.xAxis[0].setExtremes(30, 65); 
+      }
+    });
+
+
+
+
     var chart;   
     $(document).ready(function() {
 
@@ -210,6 +255,10 @@ $(function () {
     } 
   });
     
-});   
+}); 
+
+
+
+ 
 
 </script>

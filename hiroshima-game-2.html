@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style type="text/css">
+
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
+html {  -webkit-text-size-adjust: none; height: 100%; width: 100%; overflow: hidden; }
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+}
+h1 { text-align: center; font-size: 22px; font-size: 4vh; line-height: 22px; line-height: 4vh; font-weight: bold; color: #D3401E; }
+#map-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; }
+#white-canvas { position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 1; background-color: white; display:none;}
+
+.panel { position: absolute; bottom: 0px; left: 0; width: 100%; text-align: center; display: none; padding: 0px 10px; font-size: 14px; font-size: 2.5vh; line-height: 20px; line-height: 3vh; color: #000000; background-color: rgba(255,255,255,0.7); z-index: 1; margin-bottom: 0px;}
+
+button { width: 25%; }
+
+a {color: #666666;}
+
+#referral {padding:5px 0px;}
+
+#searchbox { width: 12em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: transparent; border: 1px solid #eee; color: #000000; }
+
+#findbutton { border: 1px solid #C3C3C3; width: 5em; padding: 5px 5px; font-size: 14px; font-size: 2vh; background: #EBEBEB; color: #000000; text-align: center;}
+
+#findbutton:hover {background: #F5F5F5;}
+
+#redbutton, #redbuttondark {
+    width:15%;
+    margin:0 auto;
+    cursor:pointer;
+}
+
+table {
+    width:100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding:0px 10px;
+}
+
+#indicator {height: 50%;}
+
+#container {height:300px;}
+
+#holder {height:40px;}
+
+#sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;padding:0.5%;height:40px;}
+.btnFB {float:right; height: 100%}
+.btnTW {float:left; height: 100%}  
+.shareBox {padding-bottom:10px;}   
+
+.arrow {padding:10px; cursor:pointer;} 
+
+@media (max-width: 500px ) { 
+  h1 {font-size: 2.5vh; line-height: 17px; margin:5px 0px;}
+  .panel{font-size: 2vh; line-height: 15px; padding: 5px 10px 5px 10px;}
+  #indicator {width:50%; height:auto;}
+  #referral{padding:0px;}
+  #table-result {padding:0px; margin-left: -10px; width:105%;}
+  #sharecol1, #sharecol2 {height:30px;}
+  .shareBox {padding-bottom:5px;}   
+  button {width:40% !important; padding:5px 10px !important; font-size: 12px !important; line-height: 1.5 !important; border-radius: 3px !important;} 
+  #redbutton, #redbuttondark {width:30%;}
+  .arrow {padding:0px; width:30px;} 
+  #holder {height:25px;}
+}
+
+</style>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.20&libraries=geometry,visualization&sensor=false"></script>
+
+
+<script>
+
+var sv;
+var map;
+var state = 0;
+
+var image = {
+  url: 'http://admin.pri.org/sites/default/files/target-icon-small-red.png',
+  size: new google.maps.Size(30, 30),
+  origin: new google.maps.Point(0, 0),
+  anchor: new google.maps.Point(15, 15)
+};
+
+var homeMarker = new google.maps.Marker({icon: image});
+var startPosition = new google.maps.LatLng(20,0);
+var startZoom = 2;
+var country_code;
+
+var mapOptions = {
+  zoom: startZoom,
+  minZoom: 1,
+  maxZoom: 21,
+  center: startPosition,
+  disableDefaultUI: true,
+  zoomControl: true,
+  zoomControlOptions: {
+        position: google.maps.ControlPosition.TOP_RIGHT
+    },
+  mapTypeId: google.maps.MapTypeId.HYBRID
+};
+
+var geocoder = new google.maps.Geocoder();
+
+function panel(id) {
+  $('.panel').slideUp(500);
+  $('#' + id).slideDown(500);
+}
+
+//to get the country code of users
+function codeLatLng(latlng) {
+  country_code = 'xx';
+  geocoder.geocode({'latLng': latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[0]) {
+        try {
+          var x;
+          for (var i=0;i<results[0].address_components.length;i++) {
+            x = results[0].address_components[i].types;
+            if (x.indexOf('country') != -1) {
+              country_code = results[0].address_components[i].short_name;
+            }
+          }
+        } catch(err) {
+          country_code = 'xx';
+        }
+      }
+    } else {
+      country_code = 'xx';
+    }
+  });
+}
+
+
+function handleClick(latLng) {
+
+  switch(state) {
+  
+    case 1:
+      homeMarker.setPosition(latLng);
+      homeMarker.setMap(map);
+      codeLatLng(latLng);
+      $('#home_placed').attr('disabled',false);
+      break;
+  }
+}
+
+function init() {
+  $("#redbuttondark, #marked, #target").hide();
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  map.setTilt(45);
+  var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-65,-20),
+                                                 new google.maps.LatLng(65,20));
+  map.fitBounds(worldBounds);
+
+
+  panel('instructions');
+  
+  $('#start').click(function () {
+    panel('you');
+    state = 1; 
+  });
+
+  $('#next').click(function () {
+    panel('results2');
+    $(function() {
+      setTimeout(drawchart, 500);
+    });
+  });
+
+  $('#back').click(function () {
+    panel('results');
+  });
+  
+  $('#home_placed').click(function () {
+    panel('dropbomb');
+  });
+
+  $('#arrow-down').click(function () {
+    panel('holder');
+  });
+
+  $('#arrow-up').click(function () {
+    panel('results');
+  });
+  
+  $('#redbutton').one("click", function () {
+    $("#redbutton").hide();
+    $("#redbuttondark").show();
+
+    $("#white-canvas").fadeIn(2000, function(){
+      $("#white-canvas").fadeOut(2000);
+      //console.log("homeMarker = " + homeMarker.position);
+      
+      //constuct a transparent circle to get bounds
+      var radiusOptions = {
+        strokeColor: "#FFFF00",
+        strokeOpacity: 1,
+        strokeWeight: 0,
+        fillColor: "#FFFF00",
+        fillOpacity: 0,
+        map: map,
+        center: homeMarker.position,
+        radius: 19312.1, //equals to 12 miles
+        };
+      var circle = new google.maps.Circle(radiusOptions);
+      var circlebounds = circle.getBounds();
+      //console.log("circlebounds = " + circlebounds);
+
+      //place the nukecirlce image based on circlebounds
+      var nukeOpacity = {opacity:0.7};
+      var nukeOverlay = new google.maps.GroundOverlay(
+      'http://kuangkeng.github.io/pri-projects/images/nukecircle.png',
+      circlebounds, nukeOpacity);
+      nukeOverlay.setMap(map); 
+
+      map.setCenter({lat: homeMarker.position.lat()-0.13, lng: homeMarker.position.lng()});
+      map.setZoom(11);
+      state = 3;
+      
+      panel('results');
+    });
+
+    $.ajax({
+      type: 'POST',
+      url: 'https://docs.google.com/forms/d/1CIHCvbUig1WkK32pAwJS6i7j4_eXqDhb9VBaHpqpAFQ/formResponse',
+      data: 
+      { 
+        "entry.1999796571": homeMarker.position.lat(),
+        "entry.975318110": homeMarker.position.lng(),
+        "entry.342761959": country_code,
+        "entry.1508904028": document.referrer,
+       }
+    });
+  });
+    
+  google.maps.event.addListener(map, 'click', function(event) {
+    handleClick(event.latLng);
+  });
+
+  $('#btnTW').click(function (event) {
+    tweet();
+  });  
+
+  $('#btnFB').click(function (event) {
+    facebook();
+  });
+
+  //detech button enter and link to the 'find'
+  $(document).keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+        $('#findbutton').click();   
+    }
+  });
+
+}
+google.maps.event.addDomListener(window, 'load', init);
+
+function jumptocitytext() {
+    var address = document.getElementById("searchbox").value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+    map.setZoom(13);
+    homeMarker.setPosition(results[0].geometry.location);
+    map.setCenter(homeMarker.getPosition());
+      };
+    });
+    $("#marked, #target").show();
+}
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("What would the #Hiroshima atomic bomb do to my hometown? I found out, you can too");
+  tweet_url += ' pic.twitter.com/JsJXPXdbyA';
+  tweet_url += '&url=http://bit.ly/1WTLbP1&via=pri';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-05-25/experience-hiroshima-what-if-atomic-bomb-hit-your-hometown',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/hiroshima-game-lead-image.png?itok=X8RLWHNM',
+  name: "Experience Hiroshima — What if the atomic bomb hit your hometown?",
+  description: 'This application allows you to simulate the damage of the atomic bomb attack on #Hiroshima 71 years ago on another location, such as your hometown.'
+  }, function(response){});
+}
+
+function drawchart() {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: null,
+            marginBottom: 45,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Little Boy (Hiroshima bomb)","TN80/81 (French)","B-83 (US)","Mk-5 (US)","Df-5A (China)","SS18 M6 (Russia)"],
+            labels: {enabled: false},
+            lineColor: '#808080',
+        },
+        yAxis: {
+            title: {
+              text: "yield (kiloton)",
+              style: {
+                color: '#808080',
+                fontSize: '12px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            endOnTick: false,
+            minTickInterval:2000,
+        },
+        credits: { enabled: false },
+        legend: {enabled: false},
+        tooltip: {
+            headerFormat: 'Weapon type (country): <b>{point.key}</b><br>',
+            pointFormat: 'Yield: <b>{point.y:,.0f}kt</b>',
+            style: {
+                    fontSize: '14px',
+                },            
+        },
+
+        series: [{
+            data: [{y:15,color:"#ffffb2"},{y:300,color:"#fed976"},{y:1200,color:"#feb24c"},{y:1820,color:"#fd8d3c"},{y:5000,color:"#f03b20"},{y:8000,color:"#bd0026"},],
+            borderWidth: 0,
+            groupPadding: 0.01,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#000000',
+                align: 'left',
+                format: '{key}<br>{point.y:,.0f}kt',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                }
+            }
+        }]
+    });
+};
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="map-canvas">
+</div>
+<div id="white-canvas">
+</div>
+
+<div id="instructions" class="panel">
+  <h1>What if your hometown were hit by the Hiroshima atomic bomb?</h1>
+  <p>Have you ever thought about the damage caused by the atomic bomb dropped on Hiroshima on August 6, 1945? What would be the damage if that same atomic bomb were dropped on your hometown?</p>
+  <p><button id="start" class="btn btn-primary btn-lg center-block mybtn">Start</button></p>
+</div>
+
+<div id="you" class="panel">
+  <h1>Where are you from?</h1>
+  <p>Type to find your hometown.</p>
+  <p><input type="text" id="searchbox"> <input id="findbutton" type="submit" value="Find" onclick="jumptocitytext(); return false;"></p>
+  <p id="marked">Now click on the map to mark your target.</p>
+  <p id="target"><button id="home_placed" class="btn btn-primary btn-lg center-block mybtn" disabled>Target marked</button></p>
+</div>
+
+<div id="dropbomb" class="panel">
+  <h1>Ready? Now drop the bomb</h1>
+  <div>
+    <img id="redbutton" src="http://admin.pri.org/sites/default/files/red-button.png">
+    <img id="redbuttondark" src="http://admin.pri.org/sites/default/files/red-button-dark.png">
+  </div>
+</div>
+
+<div id="results" class="panel">
+  <h1>The bomb would cause damage within a 12-mile radius of ground zero</h1>
+  <div id="details">
+    <table id="table-result">
+      <tr>
+        <td style="width:10%; vertical-align:top;"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator4.png"></td>
+        <td style="width:90%; text-align:left"><p><b>Within 0.5 miles:</b> 90% of people are killed by heavy fire and blast. Pregnant women who survive will experience miscarriage due to radiation.</p></td> 
+      </tr>
+      <tr>
+        <td style="width:10%; vertical-align:top;"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator3.png"></td>
+        <td style="width:90%; text-align:left"><p><b>Within 1 mile:</b> 70% of people are killed by heavy fire and blast. Everything up to this distance is completely destroyed by heavy fire from the explosion at ground zero.</p></td> 
+      </tr>
+      <tr>
+        <td style="width:10%; vertical-align:top;"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator2.png"></td>
+        <td style="width:90%; text-align:left"><p><b>Within 3 miles:</b> Buildings up to this distance are heavily destroyed by fire that spreads from ground zero.</p></td> 
+      </tr>
+      <tr>
+        <td style="width:10%; vertical-align:top;"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator1.png"></td>
+        <td style="width:90%; text-align:left"><p><b>Within 12 miles:</b> Buildings are safe but windows might be broken.</p></td> 
+      </tr>
+    </table>
+  </div>
+  <p><button id="next" class="btn btn-primary btn-lg center-block mybtn">Next</button></p>
+  <img id="arrow-down" src="http://admin.pri.org/sites/default/files/down-arrow.png" class="arrow img-responsive center-block" alt="Responsive image">
+  
+</div>
+<div id="results2" class="panel">
+  <h1>Nuclear bombs that are being deployed today are way more powerful</h1>
+  <div id="container"></div>
+  <p style="text-align:left; font-size:12px;">Source: <a href='http://bos.sagepub.com/cgi/collection/nuclearnotebook' target='_blank'>Bulletin of the Atomic Scientists</a></p>
+  <p style="text-align:left">'Yield' is the amount of explosive energy produced by a nuclear weapon. It is measured in terms of the quantity of Trinitrotoluene or TNT, an explosive material, that would generate the same amount of energy when it explodes. For example, the yield of Little Boy, the bomb dropped on Hiroshima, is 15 kiloton which means it generated the same amount of energy as does 15,000 tons of TNT.</p>
+  <div class="shareBox">
+    <table id="table-share"> 
+      <tr>
+         <td id="sharecol1"><img style="cursor:pointer" id="btnFB" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+         <td id="sharecol2"><img style="cursor:pointer" id="btnTW" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+      </tr> 
+    </table>
+  </div>
+  <p><button id="back" class="btn btn-primary btn-lg center-block mybtn">Back</button></p>
+  <div id="referral">More <a href="http://bit.ly/1gPKAeT" target="_blank">#Hiroshima70 stories</a> at PRI.org</div>
+</div>  
+<div id="holder" class="panel">
+  <img id="arrow-up" src="http://admin.pri.org/sites/default/files/up-arrow.png" class="arrow img-responsive center-block" alt="Responsive image">
+</div>  
+
+
+<div id="fb-root"></div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1794183647481106',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+
+</html>

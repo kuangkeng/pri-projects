@@ -50,10 +50,6 @@ button:disabled {
   font-weight: normal;
 }
 
-#credit {
-  position: absolute; bottom:5px; right:5px; font-size:1.5vh; color:#666666;
-}
-
 a {
     color: #666666;
 }
@@ -82,18 +78,28 @@ table {
 
 #indicator {height: 50%;}
 
+
+#sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;padding:0.5%;}
+.btnFB {float:right; height: 100%}
+.btnTW {float:left; height: 100%}  
+.shareBox {padding-bottom:10px;}    
+
+
 @media screen and (min-aspect-ratio: 1/1) {
 
   #results button { width: 30%; }
 }
 
 @media (max-width: 500px ) { 
-  h1 {font-size: 3vh; line-height: 20px;}
+  h1 {font-size: 2.5vh; line-height: 17px; margin:5px 0px;}
   .panel{font-size: 2vh; line-height: 15px; padding: 5px 10px 5px 10px;}
   .panel button {font-size: 2.5vh; width:50%;}
   #indicator {width:50%; height:auto;}
-  #credit {font-size: 1.3vh;}
-  #referral{margin-bottom: 10px;}
+  #referral{padding:0px;}
+  table {padding:0px; margin-left: -10px; width:105%;}
+  #sharecol1, #sharecol2 {height:30px;}
+  .shareBox {padding-bottom:0px;}    
+
 }
 
 .wait { cursor: wait; }
@@ -228,7 +234,7 @@ function init() {
       circlebounds, nukeOpacity);
       nukeOverlay.setMap(map); 
 
-      map.setCenter(homeMarker.position);
+      map.setCenter({lat: homeMarker.position.lat()-0.13, lng: homeMarker.position.lng()});
       map.setZoom(11);
       state = 3;
       
@@ -237,13 +243,13 @@ function init() {
 
     $.ajax({
       type: 'POST',
-      url: 'https://docs.google.com/forms/d/17Vh5O81bxciqpQH7cJN9xc8DaWfIxuonPA1TPhVlQrU/formResponse',
+      url: 'https://docs.google.com/forms/d/1jwWaB6SRysDSZIoIgi1chl-8i6602ewcrNx6SE4b6co/formResponse',
       data: 
       { 
-        "entry.1116206904": homeMarker.position.lat(),
-        "entry.1160078349": homeMarker.position.lng(),
-        "entry.1030596158": country_code,
-        "entry.1605355897": document.referrer,
+        "entry.1760102420": homeMarker.position.lat(),
+        "entry.1300730668": homeMarker.position.lng(),
+        "entry.1526086740": country_code,
+        "entry.1146017644": document.referrer,
        }
     });
   });
@@ -252,12 +258,12 @@ function init() {
     handleClick(event.latLng);
   });
 
-  $('#tweet').click(function (event) {
+  $('#sharecol2').click(function (event) {
   
     tweet();
   
   });  
-  $('#facebook').click(function (event) {
+  $('#sharecol1').click(function (event) {
   
     facebook();
   
@@ -333,31 +339,32 @@ FB.ui({
     <table>
       <tr>
         <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator4.png"></td>
-        <td style="width:90%; text-align:left">Within 0.5 miles: 90% of people are killed by heavy fire and blast. Pregnant women who survive will experience miscarriage due to radiation.</td> 
+        <td style="width:90%; text-align:left"><b>Within 0.5 miles:</b> 90% of people are killed by heavy fire and blast. Pregnant women who survive will experience miscarriage due to radiation.</td> 
       </tr>
       <tr>
         <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator3.png"></td>
-        <td style="width:90%; text-align:left">Within 1 mile: 70% of people are killed by heavy fire and blast. Everything up to this distance is completely destroyed by heavy fire from the explosion at ground zero.</td> 
+        <td style="width:90%; text-align:left"><b>Within 1 mile:</b> 70% of people are killed by heavy fire and blast. Everything up to this distance is completely destroyed by heavy fire from the explosion at ground zero.</td> 
       </tr>
       <tr>
         <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator2.png"></td>
-        <td style="width:90%; text-align:left">Within 3 miles: Buildings up to this distance are heavily destroyed by fire that spreads from ground zero.</td> 
+        <td style="width:90%; text-align:left"><b>Within 3 miles:</b> Buildings up to this distance are heavily destroyed by fire that spreads from ground zero.</td> 
       </tr>
       <tr>
         <td style="width:10%"><img id="indicator" src="http://admin.pri.org/sites/default/files/indicator1.png"></td>
-        <td style="width:90%; text-align:left">Within 12 miles: Buildings are safe but windows might be broken.</td> 
+        <td style="width:90%; text-align:left"><b>Within 12 miles:</b> Buildings are safe but windows might be broken.</td> 
       </tr>
     </table>
   </div>
-  <button id="tweet">Share on Twitter</button>
-  <button id="facebook">Share on Facebook</button>
+    <div class="shareBox">
+    <table id="table-share"> 
+      <tr>
+         <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+         <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+      </tr> 
+    </table>
+  </div>
   <div id="referral">More <a href="http://bit.ly/1gPKAeT" target="_blank">#Hiroshima70 stories</a> at PRI.org</div>
 </div>
-
-<div id="credit">
-  Created by <a href="https://twitter.com/kuangkeng" target="_blank">@kuangkeng</a><br>at <a href="http://www.pri.org/stories/2015-08-04/what-if-your-hometown-were-hit-hiroshima-atomic-bomb" target="_blank">PRI.org</a>
-</div>
-
 <div id="fb-root"></div>
 
 <script>
