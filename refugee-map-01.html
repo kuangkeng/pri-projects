@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <style>
+  	body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; 
+      max-width: 750px; 
+      font-size: 16px;
+    }
+
+  	.container {
+  		position:relative; 
+  		height:700px;
+  		border: solid 0.5px #D3D3D3
+  	}
+
+  	#map-canvas {
+  		position: absolute; 
+  		top: 0; 
+  		left: 0; 
+  		height: 100%; 
+  		width: 100%;
+  	}
+
+    .labels {
+      font-size: 16px;
+      font-weight: bold;
+      color:#800000;
+      text-shadow: 2px 2px 1px rgba(222, 222, 222, 1);
+    }
+
+  @media (max-width: 400px ) { 
+  	.container {
+  		height:550px;
+  	}
+
+  }
+
+  </style>
+
+<body>
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.22&libraries=geometry,visualization&sensor=false"></script>
+    <script src="http://kuangkeng.github.io/pri-projects/markerwithlabel.js"></script>
+
+<div class="container-fluid">  
+  <div class="row">
+  	<div class="col-sm-12 col-xs-12 container">
+	    <div id="map-canvas"></div>
+	  </div>     
+  </div>
+</div>
+
+<script>
+
+	var cities = [
+    [33.472918, 36.300952, "Yarmouk camp"],
+    [36.528044, 37.953815, "Manbij"],
+    [36.821742, 37.925747, "Turkey border"],
+	];
+
+	var markers = [];
+
+function init() {
+	var mapOptions = {
+    	streetViewControl: false,
+    	zoom: 7,
+      maxZoom: 10,
+    	zoomControl: true,
+      mapTypeControl: false,
+      mapTypeId: google.maps.MapTypeId.HYBRID,
+    	zoomControlOptions: {
+    	style: google.maps.ZoomControlStyle.SMALL,
+      position: google.maps.ControlPosition.LEFT_TOP
+		},
+		center: new google.maps.LatLng(35.019468, 37.066552)
+	};
+	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+	for (var i = 0; i < cities.length; i++) {
+		var city = cities[i];
+		var myLatLng = new google.maps.LatLng(city[0], city[1]);
+
+		// markers[i] = new google.maps.Marker({
+		//     position: myLatLng,
+		//     map: map,
+		//     label: city[2],
+		// });
+
+    markers[i] = new MarkerWithLabel({
+      position: myLatLng,
+      map: map,
+      labelContent: city[2],
+      labelAnchor: new google.maps.Point(-15, 25),
+      labelClass: "labels", // the CSS class for the label
+    });
+
+
+	}
+
+  var coordinates = [
+    {lat: 33.472918, lng: 36.300952},
+    {lat: 36.528044, lng: 37.953815},
+    {lat: 36.821742, lng: 37.925747},
+  ];
+
+  var lineSymbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    strokeColor: '#d3401e',
+    fillColor: 'yellow',
+    fillOpacity: 1,
+    strokeWeight: 2,
+  };
+
+  var route = new google.maps.Polyline({
+    path: coordinates,
+    icons: [{
+      icon: lineSymbol,
+      offset: '0%'
+    }],
+    geodesic: true,
+    strokeColor: '#8B0000',
+    strokeOpacity: 1,
+    strokeWeight: 3
+  });
+
+  route.setMap(map);
+  startanimate(route);
+
+}
+
+//function init finishes here 
+
+var count = 0;
+function startanimate(line) {
+    
+    var animate = setInterval(function() {
+      count = (count + 1) % 400;
+      var temp = line.get('icons');
+      temp[0].offset = (count / 4) + '%';
+      line.set('icons', temp);
+      //console.log("count "+ count);
+      if (count == 399) {
+          window.clearInterval(animate);
+          setTimeout(function(){startanimate(line);},2000);
+      }
+    }, 10);
+}
+
+google.maps.event.addDomListener(window, 'load', init);
+		
+</script>
+
+</body>
+</html>
+
