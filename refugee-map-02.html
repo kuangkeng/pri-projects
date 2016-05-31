@@ -39,12 +39,33 @@
   		width: 100%;
   	}
 
+    .panel {
+      position: absolute; 
+      bottom: 0px; 
+      left: 0; 
+      margin-bottom: 0px; 
+      width: 100%; 
+      display: block; 
+      font-size: 16px; 
+      line-height: 16px;
+      padding:10px; 
+      color: #000000; 
+      background-color: rgba(255,255,255,0.8); 
+      z-index:1; 
+      height:7%;
+    }
+
     .labels {
       font-size: 16px;
       font-weight: bold;
       color:#800000;
       text-shadow: 2px 2px 1px rgba(222, 222, 222, 1);
     }
+
+  @media (max-width: 500px ) { 
+    .container {
+      height:600px;
+  }
 
   @media (max-width: 400px ) { 
   	.container {
@@ -68,6 +89,7 @@
   <div class="row">
   	<div class="col-sm-12 col-xs-12 container">
 	    <div id="map-canvas"></div>
+      <div class="panel">Routes shown on the map are estimates.</div>
 	  </div>     
   </div>
 </div>
@@ -78,7 +100,7 @@
     [37.065341, 37.378420, "Gaziantep"],
     [39.933836, 32.858200, "Ankara"],
     [41.006017, 28.975067, "Instanbul"],
-    [38.424047, 27.142924, "Azmir"],
+    [38.424047, 27.142924, "Izmir"],
 	];
 
 	var markers = [];
@@ -86,7 +108,7 @@
 function init() {
 	var mapOptions = {
     	streetViewControl: false,
-    	zoom: 6,
+    	zoom: 5,
       maxZoom: 10,
     	zoomControl: true,
       mapTypeControl: false,
@@ -122,7 +144,10 @@ function init() {
   var coordinates = [
     {lat:37.065341, lng:37.378420}, 
     {lat:39.933836, lng:32.858200}, 
-    {lat:41.006017, lng:28.975067}, 
+    {lat:41.006017, lng:28.975067},
+    {lat:40.769308, lng:29.987182},
+    {lat:40.704954, lng:30.250036},
+    {lat:40.201743, lng:29.038117}, 
     {lat:38.424047, lng:27.142924}, 
   ];
 
@@ -167,7 +192,7 @@ function startanimate(line) {
           window.clearInterval(animate);
           setTimeout(function(){startanimate(line);},2000);
       }
-    }, 10);
+    }, 15);
 }
 
 google.maps.event.addDomListener(window, 'load', init);

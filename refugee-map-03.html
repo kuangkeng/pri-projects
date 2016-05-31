@@ -39,12 +39,33 @@
   		width: 100%;
   	}
 
+    .panel {
+      position: absolute; 
+      bottom: 0px; 
+      left: 0; 
+      margin-bottom: 0px; 
+      width: 100%; 
+      display: block; 
+      font-size: 16px; 
+      line-height: 16px;
+      padding:10px; 
+      color: #000000; 
+      background-color: rgba(255,255,255,0.8); 
+      z-index:1; 
+      height:7%;
+    }
+
     .labels {
       font-size: 16px;
       font-weight: bold;
       color:#800000;
       text-shadow: 1px 1px 1px rgba(222, 222, 222, 1);
     }
+
+  @media (max-width: 500px ) { 
+    .container {
+      height:600px;
+  }
 
   @media (max-width: 400px ) { 
   	.container {
@@ -68,6 +89,7 @@
   <div class="row">
   	<div class="col-sm-12 col-xs-12 container">
 	    <div id="map-canvas"></div>
+      <div class="panel">Routes shown on the map are estimates.</div>
 	  </div>     
   </div>
 </div>
@@ -75,8 +97,8 @@
 <script>
 
 	var cities = [
-    [38.424047, 27.142924, "Azmir"],
-    [37.476236, 26.993268, "Greek island of Nera"],
+    [38.424047, 27.142924, "Izmir"],
+    [37.476236, 26.993268, "Nera"],
 	];
 
 	var markers = [];
@@ -84,7 +106,7 @@
 function init() {
 	var mapOptions = {
     	streetViewControl: false,
-    	zoom: 9,
+    	zoom: 8,
       maxZoom: 10,
     	zoomControl: true,
       mapTypeControl: false,
@@ -119,6 +141,15 @@ function init() {
 
   var coordinates = [
     {lat:38.424047, lng:27.142924},
+    {lat:38.440005, lng:27.031604},
+    {lat:38.413398, lng:26.835953},
+    {lat:38.664925, lng:26.663474},
+    {lat:38.750472, lng:26.388676},
+    {lat:38.680901, lng:26.258586},
+    {lat:38.490092, lng:26.349211},
+    {lat:38.387051, lng:26.214735},
+    {lat:38.205800, lng:26.172346},
+    {lat:37.714860, lng:26.470531},
     {lat:37.476236, lng:26.993268},
   ];
 
@@ -163,7 +194,7 @@ function startanimate(line) {
           window.clearInterval(animate);
           setTimeout(function(){startanimate(line);},2000);
       }
-    }, 10);
+    }, 15);
 }
 
 google.maps.event.addDomListener(window, 'load', init);

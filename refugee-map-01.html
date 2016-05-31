@@ -39,12 +39,33 @@
   		width: 100%;
   	}
 
+    .panel {
+      position: absolute; 
+      bottom: 0px; 
+      left: 0; 
+      margin-bottom: 0px; 
+      width: 100%; 
+      display: block; 
+      font-size: 16px; 
+      line-height: 16px;
+      padding:10px; 
+      color: #000000; 
+      background-color: rgba(255,255,255,0.8); 
+      z-index:1; 
+      height:7%;
+    }
+
     .labels {
       font-size: 16px;
       font-weight: bold;
       color:#800000;
       text-shadow: 2px 2px 1px rgba(222, 222, 222, 1);
     }
+
+  @media (max-width: 500px ) { 
+    .container {
+      height:600px;
+  }
 
   @media (max-width: 400px ) { 
   	.container {
@@ -68,6 +89,7 @@
   <div class="row">
   	<div class="col-sm-12 col-xs-12 container">
 	    <div id="map-canvas"></div>
+      <div class="panel">Routes shown on the map are estimates.</div>
 	  </div>     
   </div>
 </div>
@@ -75,9 +97,9 @@
 <script>
 
 	var cities = [
-    [33.472918, 36.300952, "Yarmouk camp"],
+    [33.472918, 36.300952, "Yarmouk"],
     [36.528044, 37.953815, "Manbij"],
-    [36.821742, 37.925747, "Turkey border"],
+    [36.821742, 37.925747, "Turkish border"],
 	];
 
 	var markers = [];
@@ -115,12 +137,15 @@ function init() {
       labelAnchor: new google.maps.Point(-8, 25),
       labelClass: "labels", // the CSS class for the label
     });
-
-
 	}
 
   var coordinates = [
     {lat: 33.472918, lng: 36.300952},
+    {lat:34.017518, lng:36.722455},
+    {lat:34.738364, lng:36.711469},
+    {lat:35.134646, lng:36.755414},
+    {lat:35.640693, lng:36.667523},
+    {lat:36.210066, lng:37.139935},
     {lat: 36.528044, lng: 37.953815},
     {lat: 36.821742, lng: 37.925747},
   ];
@@ -166,7 +191,7 @@ function startanimate(line) {
           window.clearInterval(animate);
           setTimeout(function(){startanimate(line);},2000);
       }
-    }, 10);
+    }, 15);
 }
 
 google.maps.event.addDomListener(window, 'load', init);

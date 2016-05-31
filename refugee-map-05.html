@@ -39,12 +39,33 @@
   		width: 100%;
   	}
 
+    .panel {
+      position: absolute; 
+      bottom: 0px; 
+      left: 0; 
+      margin-bottom: 0px; 
+      width: 100%; 
+      display: block; 
+      font-size: 16px; 
+      line-height: 16px;
+      padding:10px; 
+      color: #000000; 
+      background-color: rgba(255,255,255,0.8); 
+      z-index:1; 
+      height:7%;
+    }
+
     .labels {
       font-size: 16px;
       font-weight: bold;
       color:#800000;
       text-shadow: 1px 1px 1px rgba(222, 222, 222, 1);
     }
+
+  @media (max-width: 500px ) { 
+    .container {
+      height:600px;
+  }
 
   @media (max-width: 400px ) { 
   	.container {
@@ -68,6 +89,7 @@
   <div class="row">
   	<div class="col-sm-12 col-xs-12 container">
 	    <div id="map-canvas"></div>
+      <div class="panel">Routes shown on the map are estimates.</div>
 	  </div>     
   </div>
 </div>

@@ -39,12 +39,33 @@
   		width: 100%;
   	}
 
+    .panel {
+      position: absolute; 
+      bottom: 0px; 
+      left: 0; 
+      margin-bottom: 0px; 
+      width: 100%; 
+      display: block; 
+      font-size: 16px; 
+      line-height: 16px;
+      padding:10px; 
+      color: #000000; 
+      background-color: rgba(255,255,255,0.8); 
+      z-index:1; 
+      height:7%;
+    }
+
     .labels {
       font-size: 16px;
       font-weight: bold;
       color:#800000;
       text-shadow: 1px 1px 1px rgba(222, 222, 222, 1);
     }
+
+  @media (max-width: 500px ) { 
+    .container {
+      height:600px;
+  }
 
   @media (max-width: 400px ) { 
   	.container {
@@ -68,6 +89,7 @@
   <div class="row">
   	<div class="col-sm-12 col-xs-12 container">
 	    <div id="map-canvas"></div>
+      <div class="panel">Routes shown on the map are estimates.</div>
 	  </div>     
   </div>
 </div>
@@ -75,11 +97,11 @@
 <script>
 
 	var cities = [
-    [37.476236, 26.993268, "Greek island of Nera"],
-    [36.888661, 27.286867, "Greek island of Kos"],
+    [37.476236, 26.993268, "Nera"],
+    [36.888661, 27.286867, "Kos"],
     [37.982579, 23.730614, "Athens"],
-    [40.914703, 21.418861, "Macedonia border"],
-    [42.243345, 21.707520, "Serbian border"],
+    [41.148493, 22.502734, "Gevgelija"],
+    [42.131202, 21.727335, "Kumanovo"],
     [46.176064, 19.979974, "Hungarian border"],
     [48.207788, 16.377306, "Vienna"],
     [48.566470, 13.433770, "Passau"],
@@ -99,7 +121,7 @@ function init() {
     	style: google.maps.ZoomControlStyle.SMALL,
       position: google.maps.ControlPosition.LEFT_TOP
 		},
-		center: new google.maps.LatLng(42.243345, 21.707520)
+		center: new google.maps.LatLng(44.358939, 20.366872)
 	};
 	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
@@ -125,9 +147,11 @@ function init() {
 
   var coordinates = [
     {lat:37.476236, lng:26.993268}, 
+    {lat:37.223229, lng:27.012594},
     {lat:36.888661, lng:27.286867}, 
-    {lat:37.982579, lng:23.730614}, 
-    {lat:40.914703, lng:21.418861}, 
+    {lat:37.982579, lng:23.730614},
+    {lat:41.148493, lng:22.502734},
+    {lat:42.131202, lng:21.727335}, 
     {lat:42.243345, lng:21.707520}, 
     {lat:46.176064, lng:19.979974}, 
     {lat:48.207788, lng:16.377306}, 
