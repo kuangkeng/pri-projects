@@ -1,0 +1,176 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    #container {height:370px;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div class="button01"><button id="button01">Show only monthly figures</button></div></td>
+        <div id="text"><i>The figures only show people who have applied for asylum status but many more people have arrived in Greece. Repeated applications and appeals are excluded.</i></div>
+        Source: 
+        <a href='http://popstats.unhcr.org/en/overview' target='_blank'>UNHCR</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+            },
+            title: {
+                text: 'Asylum applications submitted in Greece, Jan 2011-Feb 2016',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Jan '11","Feb '11","Mar '11","Apr '11","May '11","Jun '11","Jul '11","Aug '11","Sep '11","Oct '11","Nov '11","Dec '11","Jan '12","Feb '12","Mar '12","Apr '12","May '12","Jun '12","Jul '12","Aug '12","Sep '12","Oct '12","Nov '12","Dec '12","Jan '13","Feb '13","Mar '13","Apr '13","May '13","Jun '13","Jul '13","Aug '13","Sep '13","Oct '13","Nov '13","Dec '13","Jan '14","Feb '14","Mar '14","Apr '14","May '14","Jun '14","Jul '14","Aug '14","Sep '14","Oct '14","Nov '14","Dec '14","Jan '15","Feb '15","Mar '15","Apr '15","May '15","Jun '15","Jul '15","Aug '15","Sep '15","Oct '15","Nov '15","Dec '15","Jan '16","Feb '16"],  
+                tickmarkPlacement: 'on', 
+                tickPositions: [0,12,24,36,48,60] 
+            },
+            yAxis: {
+                title: {
+                  text: 'No. of applications',
+                  x: 0,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                labels: {
+                    
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {
+                
+            },
+            tooltip: {
+                
+            },
+            plotOptions: {
+                series:{
+                    stickyTracking: false,
+                },
+                area: {
+                  marker: {
+                      enabled: false
+                }
+              }
+            },
+series: [{
+            name: 'Cumulative',
+            color: '#d3401e',
+            type: 'area',
+            data: [606,1526,2529,2982,3797,4482,5471,6121,6910,7652,8525,9311,9867,10549,11259,12145,12863,13670,14259,15010,15754,17009,18039,18888,19642,20349,20957,21701,22295,22831,23607,24215,24891,25724,26485,27113,27822,28670,29412,30206,30999,31680,32519,32994,33623,34460,35075,35988,36869,37729,38475,39279,40240,41189,42225,43056,43952,44761,45726,46849,47897,49219],
+            tooltip: {
+                pointFormat: 'Cumulative: <b>{point.y:,.0f}</b>',
+            }
+
+        }, {
+            name: 'Monthly',
+            color: '#4188bc',
+            type: 'column',
+            data: [606,920,1003,453,815,685,989,650,789,742,873,786,556,682,710,886,718,807,589,751,744,1255,1030,849,754,707,608,744,594,536,776,608,676,833,761,628,709,848,742,794,793,681,839,475,629,837,615,913,881,860,746,804,961,949,1036,831,896,809,965,1123,1048,1322],
+            tooltip: {
+                pointFormat: 'Monthly: <b>{point.y:,.0f}</b>',
+            },
+            borderWidth: 0,
+            groupPadding: 0.02,
+            //pointPadding: 0.05,
+        }]
+            });
+    });
+    
+    var chart = $('#container').highcharts(),
+    $button = $('#button01');
+    $button.click(function () {
+        var series00 = chart.series[0];
+        var series01 = chart.series[1];
+        if (series00.visible) {
+            series00.hide();
+            series01.show();
+            $button.html('Show cumuluative and monthly figures');
+        } else {
+            series00.show();
+            series01.show();
+            $button.html('Show only monthly figures');
+        }
+    });
+
+});
+</script>

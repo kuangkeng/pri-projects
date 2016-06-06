@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<!--CSS starts here-->  
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #33333c;
+  max-width: 1170px;
+  margin:0px auto;
+} 
+
+/*
+ * Flipcards styles
+ */  
+
+#box_wrapper {
+  margin:0px auto;
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#box01, #box02, #box03, #box04, #box05, #box06 {
+  margin:5px;
+  display: inline-block;
+  position: relative;
+  width: 340px;
+  height:390px;
+}
+
+.front-label {
+  position: absolute;
+  bottom:2%;
+  right:2%;
+  color:#ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgba(178,0,0,0.8);
+  padding:0px 10px;
+  border-radius: 5px;
+  z-index: 3;
+}
+
+img:hover {opacity:0.9;}
+.front-label:hover {cursor: pointer; background-color: rgba(178,0,0,1);}
+
+.front-text {
+  position: absolute;
+  width: 100%;
+  left:0%;
+  bottom:1%;
+  text-align: center;
+  line-height: 40px;
+  z-index: 2;
+  font-size: 35px;
+  font-style: bold;
+  color:#ffffff;
+  padding:10px 0px;
+  background-color: rgba(255,255,255,0.3);
+  text-shadow: 2px 2px 3px #000000;
+}
+
+.front {
+  position:relative;
+  display: flex;
+  -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+}
+
+.front-img {
+  position:absolute;
+  top:0;
+  left:0;
+}
+  
+.front:hover {
+  background: #ffceba;
+}    
+
+.back {
+  position:relative;
+  background: #b20000;
+  -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+}
+
+.back-text {
+  font-size: 16px;
+  line-height: 22px;
+  padding:30px 15px 10px 15px;
+  color: #ffffff;
+  text-align: left;
+  text-shadow: 1px 1px 3px #000000;
+}
+
+.photo-text {
+  position: absolute;
+  font-size: 13px;
+  line-height: 16px;
+  bottom:3%;
+  left:0%;
+  width: 100%;
+  color:#ffffff;
+  text-align: left;
+  padding:10px 15px 0px 15px;
+}
+
+/*
+ * Table styles
+ */
+
+#chinese_head, #english_head, #date_head, #category_head {
+  text-align: center;
+  font-weight: bold;
+}
+
+td.chinese, td.date {text-align: center !important;}
+th.category {width: 25% !important;}
+
+.table_wrapper {
+  max-width: 98%;
+  border:1px solid #D3D3D3;
+  padding:5px;
+  margin:0px auto;
+}
+  
+table.dataTable {
+  width: 100%;
+  clear: both;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+@media (max-width: 580px) {
+  #weibo, #chinese_head, #english_head, #date_head, #category_head, .dataTables_info, label {font-size:14px; line-height: 15px}
+  table.dataTable tbody td {padding: 8px 5px;}
+}
+
+@media (max-width: 460px) {
+    #weibo, #chinese_head, #english_head, #date_head, #category_head,.dataTables_info, label {font-size: 13px;}
+    .date{font-size: 11px !important;}
+  .table_wrapper {padding:0px;max-width: 100%;}
+}
+
+@media (max-width: 710px ) {
+  #box01, #box02, #box03, #box04, #box05, #box06 {
+  margin:5px 5px;
+  width: 310px;
+  height:355px;
+  }
+  .front-label {font-size: 12px;padding:0px 8px;}
+  .front-text {line-height: 30px;font-size: 25px;padding:5px 0px;}
+  .photo-text {font-size: 12px;line-height: 14px;padding:5px 10px 0px 10px;}
+  .back-text {padding:15px 10px 0px 10px;}  
+}
+
+@media (max-width: 318px ) {
+  #box01, #box02, #box03, #box04, #box05, #box06 {width: 260px;height:298px;}
+  .back-text {font-size: 14px;line-height: 18px;padding:15px 10px 0px 10px;}  
+}  
+
+</style>
+
+<!--HTML starts here-->
+<body>
+<div id="box_wrapper">
+<div id="box01">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/RTXBJA9-cropped.jpg?itok=nwJquqS1"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">那天<br>That day</div>
+  </div> 
+  <div class="back">
+      <div class="back-text">Mundane phrases that may be used to refer to the day of the crackdown including “那天” (that day), “特殊的日子” (special day), “今天” (today) and “那年” (that year) were blocked.</div> 
+      <div class="photo-text">Photo: Chinese students carry a sign that reads, "Give me democracy or give me death," during a demonstration in Tiananmen Square May 14, 1989.<br><i style="font-size:10px; color:#c1c1c1">Credit: Dominic Dudouble/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box02">
+  <div class="front">
+    <div class="front-img"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR4PFAS-cropped.jpg?itok=IZBwFzCa"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">占占点<br>[pictogram]</div>
+  </div> 
+  <div class="back">
+    <div class="back-text">One of the most creative alternative phrases produced by Chinese Internet users to circumvent the censorship is “占占点” or “占点占”. The phrase itself has no meaning but graphically illustrates the scenario of tanks (占占) crushing protesters (灬). It was detected and blocked as well.</div> 
+    <div class="photo-text">Photo: A man stands in front of a convoy of tanks in the Avenue of Eternal Peace in Tiananmen Square in Beijing in this June 5, 1989 file photo.<br><i style="font-size:10px; color:#c1c1c1">Credit: Arthur Tsang/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box03">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/RTXDP87-cropped.jpg?itok=pFjxJYDv"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">八的平方<br>8<sup>2</sup></div>
+  </div> 
+  <div class="back">
+    <div class="back-text">Various combinations of numbers referring to the day of June 4 and year 1989 were blocked such as “64”, “六四” (64) , “玖捌” (89) and “玖捌” (98). Even formulas that equal to 64 were not spared including “8x8”, “八的平方” (square of 8), “65-1” and “5月35日”(May 35 which translates to June 4).</div>
+    <div class="photo-text">Photo: Hundreds of thousands of people fill Tiananmen Square on May 17, 1989 in front of the Monument to People's Heroes and Mao's mausoleum.<br><i style="font-size:10px; color:#c1c1c1">Credit: Ed Nachtrieb/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box04">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR3S5V7-cropped.jpg?itok=u1DG8Ioa"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">周年<br>Anniversary</div>
+  </div> 
+  <div class="back"> 
+    <div class="back-text">Phrases related to the annual candlelight vigil at Victoria Park, Hong Kong to commemorate the protest's anniversary were disallowed. Number of the anniversary like “二十五年” (25 years); the words "周年" (anniversary), “致敬” (pay respect), “悼念” (mourn) and places like “维园” (Victoria Park) and “广场” (public square, referring to Victoria Park) were all blocked.</div>
+    <div class="photo-text">Photo: Tens of thousands of people take part in a candlelight vigil at Hong Kong's Victoria Park June 4, 2014, to mark the 25th anniversary of the Tiananmen protest.<br><i style="font-size:10px; color:#c1c1c1">Credit: Bobby Yip/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box05">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR3S66B-cropped.jpg?itok=QvZRdFD8"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">蜡烛<br>Candle</div>
+  </div> 
+  <div class="back">
+    <div class="back-text">Sometimes general phrases or words were deemed sensitive when Chinese censors found out they have been used to discuss unwanted incidents. Examples include “蜡烛” (candle), “火” (fire), “推特” (Twitter) and “动” (move).</div>
+    <div class="photo-text">Photo: A participant looks on as she and others mourn those who killed during the Tiananmen Square protest, during a candlelight vigil at Hong Kong's Victoria Park June 4, 2014.<br><i style="font-size:10px; color:#c1c1c1">Credit: Bobby Yip/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box06">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR3S5XH-cropped.jpg?itok=VQd1tyTF"></div>
+    <div class="front-label">More</div><
+    <div class="front-text">股市<br>Stock market</div>
+  </div> 
+  <div class="back">
+    <div class="back-text">Chinese censors are extremely responsive to current issues. In 2012, the Shanghai Stock Exchange’s Composite Index fell exactly 64.89 points on June 4, the 23rd anniversary of the protest. The authority soon blocked phrases including “上证” (Shanghai Composite), “指数” (index), “股市” (stock market) and “下跌” (fall).</div>
+    <div class="photo-text">Photo: Tens of thousands of people take part in a candlelight vigil at Hong Kong's Victoria Park June 4, 2014, to mark the 25th anniversary of the Tiananmen Square protest.<br><i style="font-size:10px; color:#c1c1c1">Credit: Bobby Yip/Reuters</i></div>
+  </div> 
+</div>
+
+</div> 
+
+
+<div class="table_wrapper">
+<table id="weibo" class="stripe order-column hover">
+  <thead>
+    <tr>
+    <td class="chinese" id="chinese_head">Phrase</td>
+    <td class="english" id="english_head">Translation</td>
+    <td class="date" id="date_head">First censored date</td>
+    <td class="category" id="category_head">Category</td>
+    </tr>
+  </thead>
+  <tbody>
+  <tr class="firstRow">
+    <td class="chinese">反官倒</td>
+    <td class="english">oppose official profiteering</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">youxing</td>
+    <td class="english">demonstration</td>
+    <td class="date">2013-05-25</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">上街</td>
+    <td class="english">take to the streets</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">动</td>
+    <td class="english">move</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">宣言</td>
+    <td class="english">declaration</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">运</td>
+    <td class="english">movement</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">绝食书</td>
+    <td class="english">Hunger Strike Declaration</td>
+    <td class="date">2012-03-26</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">学潮</td>
+    <td class="english">student strike</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">示威</td>
+    <td class="english">demonstrate</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">罢课潮</td>
+    <td class="english">wave of student strikes</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">暴动</td>
+    <td class="english">insurrection</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">民运</td>
+    <td class="english">democracy movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">游行</td>
+    <td class="english">march</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Action</td>
+  </tr>
+  <tr>
+    <td class="chinese">26years</td>
+    <td class="english">26years</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">26周年</td>
+    <td class="english">26th Anniversary</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">26年</td>
+    <td class="english">26 years</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">二十六周年</td>
+    <td class="english">twenty-sixth Anniversary</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">二十六年</td>
+    <td class="english">twenty-six years</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">廿五周年</td>
+    <td class="english">twenty-fifth Anniversary</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">25years</td>
+    <td class="english">25years</td>
+    <td class="date">2014-05-27</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">25年</td>
+    <td class="english">25 years</td>
+    <td class="date">2014-05-27</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">二十五年</td>
+    <td class="english">twenty-five years</td>
+    <td class="date">2014-05-27</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">25周年</td>
+    <td class="english">25th Anniversary</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">25周年纪念</td>
+    <td class="english">25th anniversary Commemoration</td>
+    <td class="date">2014-04-28</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">Anniversary</td>
+    <td class="english">Anniversary</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">24年</td>
+    <td class="english">24 years</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">二十四</td>
+    <td class="english">twenty-four</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">二十四周年</td>
+    <td class="english">twenty-fourth Anniversary</td>
+    <td class="date">2013-05-28</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">24周年</td>
+    <td class="english">24th Anniversary</td>
+    <td class="date">2013-04-16</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">二十三</td>
+    <td class="english">twenty-three</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">周年</td>
+    <td class="english">Anniversary</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">廿三</td>
+    <td class="english">twenty-three</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">22周年</td>
+    <td class="english">22nd Anniversary</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">十二个春秋</td>
+    <td class="english">twenty springs and autumns</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Anniversary</td>
+  </tr>
+  <tr>
+    <td class="chinese">历史的伤口</td>
+    <td class="english">History's Wound</td>
+    <td class="date">2011-10-05</td>
+    <td class="category">Art</td>
+  </tr>
+  <tr>
+    <td class="chinese">天安门情人</td>
+    <td class="english">Tiananmen Lovers</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Art</td>
+  </tr>
+  <tr>
+    <td class="chinese">缅怀</td>
+    <td class="english">honor the memory of</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">致敬</td>
+    <td class="english">pay respects</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">祭奠</td>
+    <td class="english">memorial ceremony</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">晚会</td>
+    <td class="english">evening Event</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">勿忘</td>
+    <td class="english">never forget</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">悼念</td>
+    <td class="english">mourn</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">毋忘</td>
+    <td class="english">never forget</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">祭</td>
+    <td class="english">ceremony</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">纪念</td>
+    <td class="english">commemorate</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">追思</td>
+    <td class="english">recall</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">默哀</td>
+    <td class="english">silent tribute</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">平反</td>
+    <td class="english">redress</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Commemoration</td>
+  </tr>
+  <tr>
+    <td class="chinese">426＋四二六社论</td>
+    <td class="english">426 + four two six editorial</td>
+    <td class="date">2016-05-19</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">四二六社论</td>
+    <td class="english">four two six editorial</td>
+    <td class="date">2012-03-26</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">June 4</td>
+    <td class="english">June 4</td>
+    <td class="date">2016-04-14</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">屠杀＋四</td>
+    <td class="english">massacre + four</td>
+    <td class="date">2016-02-17</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">535</td>
+    <td class="english">May 35</td>
+    <td class="date">2015-08-06</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">6+si</td>
+    <td class="english">6+si</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">631日</td>
+    <td class="english">631 day</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">6four</td>
+    <td class="english">6four</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">8jiu</td>
+    <td class="english">8jiu</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">liu4</td>
+    <td class="english">liu4</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">six4</td>
+    <td class="english">six4</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">陆＋肆</td>
+    <td class="english">six + four</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">6+4</td>
+    <td class="english">6+4</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">8的平方</td>
+    <td class="english">square of 8</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">春夏之交</td>
+    <td class="english">when spring becomes summer</td>
+    <td class="date">2014-05-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">这一天</td>
+    <td class="english">this day</td>
+    <td class="date">2014-05-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">五月三十五</td>
+    <td class="english">May Thirty-five</td>
+    <td class="date">2014-05-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">四＋开枪</td>
+    <td class="english">four+open fire</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">64+屠杀</td>
+    <td class="english">64+massacre</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">64+开枪</td>
+    <td class="english">64+open fire</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">89</td>
+    <td class="english">89</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">64+24</td>
+    <td class="english">64+24</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">viiv</td>
+    <td class="english">viiv</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">八的平方</td>
+    <td class="english">square of eight</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">己巳月+乙未日</td>
+    <td class="english">Jisi month+Yiwei day</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">hk64</td>
+    <td class="english">hk64 (Hong Kong 64)</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">特殊的日子</td>
+    <td class="english">special day</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">那天</td>
+    <td class="english">that day</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">35</td>
+    <td class="english">35</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">63+1</td>
+    <td class="english">63+1</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">65-1</td>
+    <td class="english">65-1</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">6四</td>
+    <td class="english">6 four</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">Jun+4th</td>
+    <td class="english">Jun+4th</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">june</td>
+    <td class="english">june</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">six+four</td>
+    <td class="english">six+four</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">six四</td>
+    <td class="english">six four</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">八八</td>
+    <td class="english">eight eight</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六+四</td>
+    <td class="english">six+four</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六4</td>
+    <td class="english">six 4</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">陆四</td>
+    <td class="english">six four</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">明天</td>
+    <td class="english">tomorrow</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">昨天</td>
+    <td class="english">yesterday</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">那年</td>
+    <td class="english">that year</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">今天</td>
+    <td class="english">today</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">4</td>
+    <td class="english">4</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">6</td>
+    <td class="english">6</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">8</td>
+    <td class="english">8</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">9</td>
+    <td class="english">9</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">23</td>
+    <td class="english">23</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">35</td>
+    <td class="english">35</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">eight</td>
+    <td class="english">eight</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">four</td>
+    <td class="english">four</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">nine</td>
+    <td class="english">nine</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">six</td>
+    <td class="english">six</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">三十五</td>
+    <td class="english">thirty-five</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">九</td>
+    <td class="english">nine</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">八</td>
+    <td class="english">eight</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六</td>
+    <td class="english">six</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">四</td>
+    <td class="english">four</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">捌</td>
+    <td class="english">eight</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">玖</td>
+    <td class="english">nine</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">肆</td>
+    <td class="english">four</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">陆</td>
+    <td class="english">six</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">五四+一个月</td>
+    <td class="english">May Fourth + one month</td>
+    <td class="date">2012-05-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">玖捌</td>
+    <td class="english">nine eight</td>
+    <td class="date">2012-05-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">bajiu</td>
+    <td class="english">bajiu</td>
+    <td class="date">2011-10-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">liusi</td>
+    <td class="english">liusi</td>
+    <td class="date">2011-10-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">liu四</td>
+    <td class="english">liu four</td>
+    <td class="date">2011-10-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">八玖</td>
+    <td class="english">eight nine</td>
+    <td class="date">2011-10-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">刘四</td>
+    <td class="english">Liu four</td>
+    <td class="date">2011-10-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">捌九</td>
+    <td class="english">eight nine</td>
+    <td class="date">2011-10-27</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">一九八四</td>
+    <td class="english">nineteen eighty-nine</td>
+    <td class="date">2011-10-18</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">1989</td>
+    <td class="english">1989</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">8964</td>
+    <td class="english">8964</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">5月35日</td>
+    <td class="english">May 35th</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">8x8</td>
+    <td class="english">8x8</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">八九</td>
+    <td class="english">eight nine</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六四</td>
+    <td class="english">six four</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六肆</td>
+    <td class="english">six four</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">陆肆</td>
+    <td class="english">six four</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">64事件</td>
+    <td class="english">64 incident</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">64学潮</td>
+    <td class="english">64 student strike</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">64学运</td>
+    <td class="english">64 student movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">64运动</td>
+    <td class="english">64 movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六四事件</td>
+    <td class="english">Six-Four Incident</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六四学潮</td>
+    <td class="english">Six-Four student strike</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六四运动</td>
+    <td class="english">June Fourth Movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">六四学运</td>
+    <td class="english">Six-Four student movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Date</td>
+  </tr>
+  <tr>
+    <td class="chinese">89+动乱</td>
+    <td class="english">89+unrest</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">89事件</td>
+    <td class="english">89 incident</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">89学潮</td>
+    <td class="english">89 student strike</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">89学运</td>
+    <td class="english">89 student movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">89民运</td>
+    <td class="english">89 people's movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">89运动</td>
+    <td class="english">89 movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">八九学潮</td>
+    <td class="english">Eighty-Nine campus strike</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">八九学运</td>
+    <td class="english">Eighty-Nine student movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">八九民运</td>
+    <td class="english">Eighty-Nine democracy movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">八九运动</td>
+    <td class="english">Eighty-Nine movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Event</td>
+  </tr>
+  <tr>
+    <td class="chinese">天下围城</td>
+    <td class="english">empire beseiges the city</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Gov. action</td>
+  </tr>
+  <tr>
+    <td class="chinese">碾</td>
+    <td class="english">crush</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Gov. action</td>
+  </tr>
+  <tr>
+    <td class="chinese">屠杀</td>
+    <td class="english">massacre</td>
+    <td class="date">2011-11-02</td>
+    <td class="category">Gov. action</td>
+  </tr>
+  <tr>
+    <td class="chinese">镇压</td>
+    <td class="english">supress</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Gov. action</td>
+  </tr>
+  <tr>
+    <td class="chinese">戒严</td>
+    <td class="english">impose martial law</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Gov. action</td>
+  </tr>
+  <tr>
+    <td class="chinese">学生＋1989</td>
+    <td class="english">student + 1989</td>
+    <td class="date">2015-08-28</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">改革派</td>
+    <td class="english">reformist</td>
+    <td class="date">2013-04-16</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">三角政治联盟</td>
+    <td class="english">triangle political alliance</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">北高联</td>
+    <td class="english">Capital Autonomous Federation of University Students</td>
+    <td class="date">2012-01-09</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">高自联</td>
+    <td class="english">Capital Autonomous Federation of University Students</td>
+    <td class="date">2012-01-09</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">黄雀行动</td>
+    <td class="english">Operation Yellowbird</td>
+    <td class="date">2012-01-09</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">学联</td>
+    <td class="english">student federation</td>
+    <td class="date">2011-12-06</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">天安门母亲</td>
+    <td class="english">Tiananmen Mothers</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">学运</td>
+    <td class="english">student movement</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">天安门母亲运动</td>
+    <td class="english">Tiananmen Mothers movement</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Organization</td>
+  </tr>
+  <tr>
+    <td class="chinese">Jonathan Mirsky＋网站</td>
+    <td class="english">Jonathan Mirsky+website</td>
+    <td class="date">2014-05-27</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">全民倒共</td>
+    <td class="english">all the people topple communism</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">马云＋64</td>
+    <td class="english">Jack Ma+64</td>
+    <td class="date">2013-07-20</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">马云＋89</td>
+    <td class="english">Jack Ma+89</td>
+    <td class="date">2013-07-20</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">马云＋八九</td>
+    <td class="english">Jack Ma+Eight Nine</td>
+    <td class="date">2013-07-20</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">马云＋六四</td>
+    <td class="english">Jack Ma+Six Four</td>
+    <td class="date">2013-07-20</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">不适宜对外公开</td>
+    <td class="english">inappropriate for the public</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">敏感词</td>
+    <td class="english">sensitive word</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">烛光</td>
+    <td class="english">candlelight</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">网络封锁</td>
+    <td class="english">Internet block</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">蜡烛</td>
+    <td class="english">candle</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">主义</td>
+    <td class="english">-ism</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">小秘书</td>
+    <td class="english">Little Secretary</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">推特</td>
+    <td class="english">Twitter</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">政</td>
+    <td class="english">government</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">民</td>
+    <td class="english">People</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">火</td>
+    <td class="english">fire</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">烛</td>
+    <td class="english">candle</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">自治</td>
+    <td class="english">autonomous</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">血</td>
+    <td class="english">blood</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">黑衣</td>
+    <td class="english">black clothes</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">学生领袖</td>
+    <td class="english">student leader</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">祖国母亲</td>
+    <td class="english">mothers of the motherland</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">广场上的热血</td>
+    <td class="english">hot blood on the square</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">广场上的血</td>
+    <td class="english">blood on the square</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">Misc.</td>
+  </tr>
+  <tr>
+    <td class="chinese">tank man</td>
+    <td class="english">tank man</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">Object</td>
+  </tr>
+  <tr>
+    <td class="chinese">tank</td>
+    <td class="english">tank</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">Object</td>
+  </tr>
+  <tr>
+    <td class="chinese">坦</td>
+    <td class="english">tǎn (tank)</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Object</td>
+  </tr>
+  <tr>
+    <td class="chinese">民主女神</td>
+    <td class="english">Goddess of Democracy</td>
+    <td class="date">2011-10-05</td>
+    <td class="category">Object</td>
+  </tr>
+  <tr>
+    <td class="chinese">坦克</td>
+    <td class="english">tank</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Object</td>
+  </tr>
+  <tr>
+    <td class="chinese">Wu er kai xi</td>
+    <td class="english">Wu'erkaixi</td>
+    <td class="date">2015-08-06</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">习近平＋坦克</td>
+    <td class="english">Xi Jinping + tank</td>
+    <td class="date">2015-08-06</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">习近平＋言而无信</td>
+    <td class="english">Xi Jinping + go back on one's word</td>
+    <td class="date">2015-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">邓小平＋坦克</td>
+    <td class="english">Deng Xiaoping + tank</td>
+    <td class="date">2014-08-15</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">周锋锁</td>
+    <td class="english">Zhou Fengsuo</td>
+    <td class="date">2014-06-20</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">周封锁</td>
+    <td class="english">Zhou Fengsuo</td>
+    <td class="date">2014-06-20</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">邓屠夫</td>
+    <td class="english">Butcher Deng</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">习+影帝</td>
+    <td class="english">Xi+movie star</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">蟹农场</td>
+    <td class="english">Hexie Farm</td>
+    <td class="date">2013-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">张先玲</td>
+    <td class="english">Zhang Xianling</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">艾晓明</td>
+    <td class="english">Ai Xiaoming</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">司徒华</td>
+    <td class="english">Szeto Wah</td>
+    <td class="date">2013-05-28</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">鲍朴</td>
+    <td class="english">Bao Pu</td>
+    <td class="date">2013-05-25</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">耀邦</td>
+    <td class="english">(Hu) Yaobang</td>
+    <td class="date">2013-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">胡总书记</td>
+    <td class="english">Secretary-General Hu (Yaobang)</td>
+    <td class="date">2013-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">胡赵</td>
+    <td class="english">Hu Zhao</td>
+    <td class="date">2013-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">严家其</td>
+    <td class="english">Yan Jiaqi</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">北岛</td>
+    <td class="english">Bei Dao</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">国家安全沙皇</td>
+    <td class="english">national security czar</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">翟伟民</td>
+    <td class="english">Zhai Weimin</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">袁木</td>
+    <td class="english">Yuan Mu</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">邓力群</td>
+    <td class="english">Deng Liqun</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">陈子明</td>
+    <td class="english">Chen Ziming</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">韩东方</td>
+    <td class="english">Han Dongfang</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">励之</td>
+    <td class="english">(Fang) Lizhi</td>
+    <td class="date">2012-04-09</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">方lizhi</td>
+    <td class="english">Fang lizhi</td>
+    <td class="date">2012-04-09</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">方校长</td>
+    <td class="english">[University] President Fang</td>
+    <td class="date">2012-04-09</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">li长春</td>
+    <td class="english">li Changchun</td>
+    <td class="date">2012-03-26</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">封从德</td>
+    <td class="english">Feng Congde</td>
+    <td class="date">2012-03-26</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">月月鸟</td>
+    <td class="english">Moon Moon Bird [Li] (Peng)</td>
+    <td class="date">2012-03-12</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">lichangchun</td>
+    <td class="english">lichangchun</td>
+    <td class="date">2012-01-05</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">乌尔</td>
+    <td class="english">Wu'er (Wu'erkaixi)</td>
+    <td class="date">2011-12-06</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">方励之</td>
+    <td class="english">Fang Lizhi</td>
+    <td class="date">2011-10-27</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">丁子霖</td>
+    <td class="english">Ding Zilin</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">坦克人</td>
+    <td class="english">Tank Man</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">江泽民</td>
+    <td class="english">Jiang Zemin</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">胡耀邦</td>
+    <td class="english">Hu Yaobang</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">吾尔开希</td>
+    <td class="english">Wu'erkaixi</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">李鹏</td>
+    <td class="english">Li Peng</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">柴玲</td>
+    <td class="english">Chai Ling</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">王丹</td>
+    <td class="english">Wang Dan</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">紫阳</td>
+    <td class="english">(Zhao) Ziyang</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">赵总理</td>
+    <td class="english">Prime Minister Zhao</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">赵紫阳</td>
+    <td class="english">Zhao Ziyang</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">魏京生</td>
+    <td class="english">Wei Jingsheng</td>
+    <td class="date">2011-04-16</td>
+    <td class="category">People</td>
+  </tr>
+  <tr>
+    <td class="chinese">占占点</td>
+    <td class="english">[tanks rolling over person]</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">Pictographic</td>
+  </tr>
+  <tr>
+    <td class="chinese">占点占</td>
+    <td class="english">[tanks rolling over person]</td>
+    <td class="date">2014-06-04</td>
+    <td class="category">Pictographic</td>
+  </tr>
+  <tr>
+    <td class="chinese">占占人</td>
+    <td class="english">[tanks pointed at person]</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Pictographic</td>
+  </tr>
+  <tr>
+    <td class="chinese">北京＋暴力恐怖</td>
+    <td class="english">Beijing + violence and terror</td>
+    <td class="date">2016-03-16</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">天安门＋举牌</td>
+    <td class="english">Tiananmen + hold up a sign</td>
+    <td class="date">2015-03-13</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">天an门</td>
+    <td class="english">Tiananmen</td>
+    <td class="date">2014-05-22</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">TAM</td>
+    <td class="english">TAM</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">tiananmen</td>
+    <td class="english">tiananmen</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">广场</td>
+    <td class="english">public square</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">金水桥</td>
+    <td class="english">Jinshuiqiao</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">长安街</td>
+    <td class="english">Changan Avenue</td>
+    <td class="date">2013-06-03</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">维园+晚会</td>
+    <td class="english">Victoria Park+evening Event</td>
+    <td class="date">2013-05-28</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">公主坟</td>
+    <td class="english">Gongzhufen</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">公园</td>
+    <td class="english">(Victoria) park</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">北京屠城</td>
+    <td class="english">massacre of Beijing</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">木樨地</td>
+    <td class="english">Muxidi</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">维园</td>
+    <td class="english">Victoria Park</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">京城+戒严</td>
+    <td class="english">capital + impose martial law</td>
+    <td class="date">2012-03-26</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">北京+戒严</td>
+    <td class="english">Beijing + impose martial law</td>
+    <td class="date">2012-03-26</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">square</td>
+    <td class="english">square</td>
+    <td class="date">2012-01-05</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">天安门</td>
+    <td class="english">Tiananmen</td>
+    <td class="date">2011-06-04</td>
+    <td class="category">Places</td>
+  </tr>
+  <tr>
+    <td class="chinese">上证</td>
+    <td class="english">Shanghai Composite</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Stock market</td>
+  </tr>
+  <tr>
+    <td class="chinese">下跌</td>
+    <td class="english">fall [of price]</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Stock market</td>
+  </tr>
+  <tr>
+    <td class="chinese">指数</td>
+    <td class="english">index</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Stock market</td>
+  </tr>
+  <tr>
+    <td class="chinese">收盘</td>
+    <td class="english">closing quotation [in stock market]</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Stock market</td>
+  </tr>
+  <tr>
+    <td class="chinese">股市</td>
+    <td class="english">Stock market</td>
+    <td class="date">2012-06-04</td>
+    <td class="category">Stock market</td>
+  </tr>
+</table>
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="http://kuangkeng.github.io/weibo-censorship/jquery.flip.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+
+</body>
+
+<!--script starts here-->
+<script>
+
+var cardNum = 0;
+
+$(document).ready( function () {
+  $("#box01,#box02,#box03,#box04,#box05,#box06").flip();
+  
+  $("#box01").click(function() {
+      cardNum = 1;                        
+      sendData();   
+  });
+
+  $("#box02").click(function() {
+      cardNum = 2;                        
+      sendData();   
+  });
+
+  $("#box03").click(function() {
+      cardNum = 3;                        
+      sendData();   
+  }); 
+
+  $("#box04").click(function() {
+      cardNum = 4;                        
+      sendData();   
+  });
+
+  $("#box05").click(function() {
+      cardNum = 5;                        
+      sendData();   
+  });
+
+  $("#box06").click(function() {
+      cardNum = 6;                        
+      sendData();   
+  });     
+
+  var width = "";
+  if ($(window).width()>1050){width="1100px"}  
+  else if ($(window).width()>710&&$(window).width()<1050){width="700px"}
+  else if ($(window).width()<710){width="400px"}
+  
+  $('#weibo').DataTable(
+    {
+      responsive: true,
+      columnDefs: [
+          { responsivePriority: 1, targets: 0 },
+          { responsivePriority: 2, targets: 1 }
+      ],
+      "paging": false,
+      "scrollY": width,
+      "scrollCollapse": true,
+    }
+  );
+}); 
+
+//Get IP address with Ipify, send data to google sheet
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      console.log(json.ip);
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1LpIMumhAXsQpefTmPt_aiWEF9nj9N58pnlDJee0sPuU/formResponse',
+        data: { 
+          "entry.1469930818": json.ip, //ip
+          "entry.355559817": cardNum, //card number
+          "entry.1307341339": document.referrer,
+        }
+      }); 
+    }
+  );   
+} 
+
+</script>

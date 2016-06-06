@@ -125,18 +125,18 @@ function init() {
 		var city = cities[i];
 		var myLatLng = new google.maps.LatLng(city[0], city[1]);
 
-		markers[i] = new google.maps.Marker({
-		    position: myLatLng,
-		    map: map,
-		});
+		//markers[i] = new google.maps.Marker({
+		//    position: myLatLng,
+		//    map: map,
+		//});
 
-    // markers[i] = new MarkerWithLabel({
-    //   position: myLatLng,
-    //   map: map,
-    //   labelContent: city[2],
-    //   labelAnchor: new google.maps.Point(-15, 25),
-    //   labelClass: "labels", // the CSS class for the label
-    // });
+     markers[i] = new MarkerWithLabel({
+       position: myLatLng,
+       map: map,
+       labelContent: city[2],
+       labelAnchor: new google.maps.Point(-15, 25),
+       labelClass: "labels", // the CSS class for the label
+     });
 
 
 	}
