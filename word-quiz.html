@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      font-size: 16px;
+    }
+
+    #quiz {
+      max-width: 897px;
+      margin:0px auto;
+      text-align: center;
+    }
+    
+    .box {
+      cursor: pointer;
+      margin:5px;
+      display: inline-block;
+      position: relative;
+      width: 260px;
+      border-radius: 10px;
+      background: #335A9A;
+      -webkit-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 5px 5px 11px -5px rgba(119,119,119,0.88);
+
+    }
+
+    .box:hover {
+      background: #708bb8;
+    }
+
+    #bottombox {
+      position: fixed;
+      bottom:0px;
+      left:0px;
+      padding-bottom: 10px;
+      padding-top: 5px;
+      z-index: 1;
+      width:100%;
+      height:110px;
+      background-color: white;
+    }
+
+    .dropbox {
+      display: inline-block;
+      position: relative;
+      margin:0px 5px;
+      width: 260px;
+      height:100px;
+      background-color: #FFA300;
+      color: #262228;
+      -webkit-box-shadow: 7px 8px 11px -5px rgba(119,119,119,0.88);
+      -moz-box-shadow: 7px 8px 11px -5px rgba(119,119,119,0.88);
+      box-shadow: 7px 8px 11px -5px rgba(119,119,119,0.88);
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
+
+    .text {
+      display: flex;
+      color: #ffffff;
+      font-size: 15px;
+      padding:10px 13px; 
+      text-align: left;
+
+    }
+
+    .popup {
+      z-index: 3;
+      border-radius: 10px;
+      -webkit-box-shadow: 9px 10px 11px -5px rgba(50,50,50,0.88);
+      -moz-box-shadow: 9px 10px 11px -5px rgba(50,50,50,0.88);
+      box-shadow: 9px 10px 11px -5px rgba(50,50,50,0.88);
+    }
+
+    #correctbox, #wrongbox {   
+      width:300px;
+      height:300px;
+      position: fixed;
+      top:50%;
+      left:50%;
+      margin-top:-150px;
+      margin-left:-150px;
+      opacity:0.9;
+    }  
+
+    #correctbox {
+      background-color: #e55b00;
+    }
+
+    #wrongbox {
+      background-color: #a31d27;
+    }
+
+    #replaybox, #winbox {
+      position: fixed;
+      width:450px;
+      height:220px;
+      top:50%;
+      left:50%;
+      margin-top:-110px;
+      margin-left:-225px;
+    }    
+
+    #replaybox {
+      background-color: #a31d27;
+    }
+
+    #winbox {
+      background-color: #1d3d86;
+    }
+
+    #startbox {
+      width:550px;
+      height:370px;
+      background-color: #FFA300;
+      color:#262228;
+      position: fixed;
+      top:50%;
+      left:50%;
+      margin-top:-185px; 
+      margin-left:-275px;
+      z-index:3;
+    }
+
+    #bufferbox {
+      height:110px;
+      width:100%;
+    }
+
+    .word {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+
+    }
+
+    .wrongmsg {
+      margin-top: 5%;
+      color: white;
+      font-size: 50px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 2px 2px 3px #323232;
+    }
+
+    .wrongnum {
+      font-size: 110px;
+      font-weight: bold;
+      text-align: center;
+      color: white;
+      margin-top: -20px;
+      margin-bottom: -20px;
+      text-shadow: 2px 2px 3px #323232;
+    }
+
+    .wrongtext {
+      font-size: 25px;
+      text-align: center;
+      color:#ffffff;
+    }
+    
+    .startmsg {
+      padding:20px;
+      font-size: 36px;
+      text-shadow: 2px 2px 3px #cccccc;
+      font-weight: bold;
+    }
+
+    .starttext {
+      font-size: 18px;
+      padding:0px 30px 10px;
+      text-align: left;
+    }
+
+    .refresh {
+      margin-top: 30px;
+    }
+
+    .selected{
+      z-index: 2;
+      background-color: #708bb8;
+    }
+
+    .active {
+      background-color: #ffcc00;
+    }
+
+    .hover {
+      background-color: #ff6600;
+    }
+
+    @media (max-width: 820px ) { 
+      .box {margin:3px 0px; border-radius: 5px;}
+      #left-column {padding:0px;}
+      #startbox {
+        height:360px;
+        margin-top:-180px; 
+      }
+      .text {font-size: 13px;}
+      .word {font-size: 20px;}
+      #bottombox {height:130px;}
+      .dropbox {width:260px;height:35px;margin:3px 0px;}
+      #replaybox, #correctbox, #wrongbox, #startbox, #winbox {
+        width:250px;
+        margin-left:-125px; 
+      }
+      #replaybox {height:170px;margin-top:-85px; }
+      #correctbox {height:230px;margin-top:-115px; }
+      #wrongbox {height:270px;margin-top:-135px; }
+      .startmsg {
+        font-size: 20px;
+        padding-top: 15px;
+      }
+      .starttext {
+        font-size: 14px;
+        padding: 0px 20px 10px;
+      }
+      .wrongmsg {font-size: 30px;}
+      ul {padding-left: 20px;}
+    }
+
+  </style>
+
+  <body>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+    <div id="quiz">
+      <div class="row">
+        <div id="left-column" class="col-sm-12 col-xs-12">
+          <div id="box05" class="box" id2="5">
+            <div class="text">
+              A knobbly vegetable with black and white stripes. They taste disgusting but they are all the BFG has to eat, as he refuses to hunt human beans like other giants.
+            </div>
+          </div>
+          <div id="box06" class="box" id2="6">
+            <div class="text">
+              A deadly three-footed creature that lives in Loompaland and preys on Oompa-Loompas. All three of its feet are needed to make Wonka-Vite.
+            </div>
+          </div>
+          <div id="box01" class="box" id2="1">
+            <div class="text">
+              The people originally from Loompaland who work in Willy Wonka’s chocolate factory in exchange for chocolate, which is their favourite food.
+            </div>
+          </div>
+          <div id="box03" class="box" id2="3">
+            <div class="text">
+              A creature from outer space. They make regular visits to Giant Country and can communicate with the BFG.
+            </div>
+          </div>
+          <div id="box08" class="box" id2="8">
+            <div class="text">
+              It is needed to make dreams. The BFG whisks it with an egg-beater until it forms bubbles just like soapy water.
+            </div>
+          </div>
+          <div id="box09" class="box" id2="9">
+            <div class="text">
+              It means cheerful! The BFG says that a few gulps of frobscottle (a fizzy drink) always make him feel like this word.
+            </div>
+          </div>
+          <div id="box10" class="box" id2="10">
+            <div class="text">
+              In Gobblefunk, it is used to describe gas released from a bottom.
+            </div>
+          </div>
+          <div id="box11" class="box" id2="11">
+            <div class="text">
+              Your parents might use it to describe your room. It means messy.
+            </div>
+          </div>
+          <div id="box12" class="box" id2="12">
+            <div class="text">
+              Next time you're having your favourite dinner, you can say this word aloud. It means delicious.
+            </div>
+          </div>
+          <div id="box02" class="box" id2="2">
+            <div class="text">
+              A good dream that leaves you feeling happy when you wake up.
+            </div>
+          </div>
+
+          <div id="box04" class="box" id2="4">
+            <div class="text">
+              A type of berry you can eat.
+            </div>
+          </div>
+          <div id="box07" class="box" id2="7">
+            <div class="text">
+              It is one of the very worst nightmares you can have.
+            </div>
+          </div>
+          <div id="bufferbox"></div>
+        </div>
+      </div>
+      <div id="bottombox">
+        <div id="dropbox1" class="dropbox" id2="3">
+          <div class="word">Quogwinkle</div>
+        </div>        
+        <div id="dropbox2" class="dropbox" id2="1">
+          <div class="word">Oompa-Loompa</div>
+        </div>
+        <div id="dropbox3" class="dropbox" id2="8">
+          <div class="word">Zozimus</div>
+        </div>        
+        <div id="dropbox4" class="dropbox" id2="5">
+          <div class="word">Snozzcumber</div>
+        </div>
+        <div id="dropbox5" class="dropbox" id2="10">
+          <div class="word">Whizzpopping</div>
+        </div>        
+        <div id="dropbox6" class="dropbox" id2="6">
+          <div class="word">Snozzwanger</div>
+        </div>
+        <div id="dropbox7" class="dropbox" id2="12">
+          <div class="word">Delumptious</div>
+        </div>
+        <div id="dropbox8" class="dropbox" id2="9">
+          <div class="word">Hopscotchy</div>
+        </div>
+        <div id="dropbox9" class="dropbox" id2="11">
+          <div class="word">Ucky-mucky</div>
+        </div>
+        <div id="dropbox10" class="dropbox" id2="4">
+          <div class="word">Snozzberry</div>
+        </div>  
+        <div id="dropbox11" class="dropbox" id2="7">
+          <div class="word">Trogglehumper</div>
+        </div>
+        <div id="dropbox12" class="dropbox" id2="2">
+          <div class="word">Phizzwizard</div>
+        </div>                    
+      </div> 
+      <div id="correctbox" class="popup">
+        <div class="wrongmsg">Correct!</div>
+        <div class="wrongnum" id="wordnum">12</div> 
+        <div class="wrongtext">more words to go!</div> 
+      </div> 
+      <div id="wrongbox" class="popup">
+        <div class="wrongmsg">Wrong!</div>
+        <div class="wrongtext">You still have</div>  
+        <div class="wrongnum">3</div> 
+        <div class="wrongtext">chances</div> 
+      </div> 
+      <div id="replaybox" class="popup">
+        <div class="wrongmsg">Sorry, you lost</div>
+        <button type="button" class="btn btn-primary btn-lg center-block refresh" onclick="location.reload();sendreplay();">Play again</button>
+      </div> 
+      <div id="winbox" class="popup">
+        <div class="wrongmsg">Well done!</div>
+        <div class="wrongtext">You are now a Gobblefunk expert!</div>
+        <button type="button" class="btn btn-primary btn-lg center-block refresh" onclick="location.reload();sendreplay();">Play again</button>
+      </div>  
+      <div id="startbox" class="popup">
+        <div class="startmsg">Welcome to the world of Gobblefunk</div>
+        <div class="starttext">
+          <ul>
+            <li>Match the words with their definition by dragging the yellow box and drop it on the blue box.</li>
+            <li>Once you correctly match a word, another new word will show up.</li>
+            <li>You only have 3 chances to be wrong!</li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg center-block" id="start-btn">Let's start</button>
+      </div>  
+    </div>
+    
+
+    <script>
+
+      var counter = 12,
+          lives = 3;
+
+      function init() { 
+        $("#wrongbox, #correctbox, #replaybox, #winbox, .box, .dropbox").hide();
+        $("#start-btn").click(function(){
+          $("#startbox").hide();
+          $(".box, #dropbox1, #dropbox2, #dropbox3").fadeIn(1500);
+          sendstart();
+        });
+        $(function() {
+
+          $(".box").draggable({
+              cursor: "pointer",
+              revert: function(droppable){
+                  if($(droppable).attr("id2") == $(this).attr("id2"))
+                    {
+                      counter = counter-1;
+                      $($(droppable)).animate(
+                          {height:"0",width:"0"},1000,function(){$(droppable).remove();}
+                        );
+                      $(this).animate(
+                          {height:"0",width:"0"},1000,function(){this.remove();}
+                        );
+                      // $($(droppable)).fadeOut(1000);
+                      // $(this).fadeOut(1000);
+                      if(counter==0)
+                        {
+                          $("#winbox").fadeIn();
+                          sendwin();
+                          return false;
+                        }
+                        else{
+                          $("#wordnum").html(counter);
+                          $("#correctbox").fadeIn().delay(1000).fadeOut();
+                          if(counter>2&&counter<12){
+                            var num = 15-counter;
+                            $("#dropbox" + num).delay(1000).fadeIn();
+                          }
+                        }
+                    } 
+                    else {
+                      $(this).removeClass("selected");
+                      return true
+                    }
+              },
+              drag: function(){
+                  $(this).addClass("selected");
+                  
+              },
+
+          });
+
+          $( ".dropbox" ).droppable({
+              accept: ".box",
+              activeClass: "active",
+              hoverClass: "hover",
+              drop: function(event,ui) {
+                if($(ui.draggable).attr("id2")==$(this).attr("id2")){}
+                  else {
+                    lives = lives -1;
+                    if(lives>0){
+                      $(this).removeClass("selected");
+                      $("#wrongbox").find( ".wrongnum" ).html(lives);
+                      $("#wrongbox").fadeIn().delay(1000).fadeOut();
+                      return true;                    
+                    } else {
+                      $("#replaybox").fadeIn();
+                    }
+                  } 
+              }
+          });        
+
+        }); //close draggable and droppable function
+      }; //close init function
+
+      //Get IP address with Ipify, send data to google sheet
+      function sendstart() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1femTIloFlbVihGi93Aohh-zDDzwfdX36_SIVQ_FlWiQ/formResponse',
+              data: { 
+                "entry.2147143212": json.ip, //ip
+                "entry.153773942": "yes",
+                "entry.704866109": document.referrer,
+              }
+            }); 
+          }
+        );   
+      } 
+
+      function sendreplay() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1femTIloFlbVihGi93Aohh-zDDzwfdX36_SIVQ_FlWiQ/formResponse',
+              data: { 
+                "entry.2147143212": json.ip, //ip
+                "entry.481065729": "yes",
+              }
+            }); 
+          }
+        );   
+      }       
+
+      function sendwin() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+          function(json) {
+            $.ajax({
+              type: 'POST',
+              url: 'https://docs.google.com/forms/d/1femTIloFlbVihGi93Aohh-zDDzwfdX36_SIVQ_FlWiQ/formResponse',
+              data: { 
+                "entry.2147143212": json.ip, //ip
+                "entry.369764973": "yes",
+              }
+            }); 
+          }
+        );   
+      } 
+
+      $(document).ready(function(){
+        init();
+      });
+
+    </script>
+  </body>
+</html>  
+

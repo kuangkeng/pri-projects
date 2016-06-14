@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+    }
+    #quiz {max-width: 700px;}    
+
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+      text-align: center;
+    }
+
+    #introTitle {
+      margin-top: 30px; 
+      font-size: 32px; 
+      padding-left: 40px; 
+      padding-right: 40px;
+      padding-bottom: 30px;
+      color:white;
+      text-shadow: 4px 4px 5px #2e2e2e;
+      font-weight: 500;
+    }
+
+    #introIntro {
+      font-size: 22px; 
+      padding-left: 40px; 
+      padding-right: 40px; 
+      text-align: center; 
+      padding-bottom:40px;
+      color:white;
+      text-shadow: 2px 2px 3px #2e2e2e;
+    }
+
+    #resultTitle {
+      margin-top: 40px;
+    }
+
+    #resultIntro {
+      text-align: center;
+    }
+
+    .question { 
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+    }   
+
+    .blurb {
+      font-size: 16px;
+      color: #333;
+      margin: 20px 0 0 0;
+    }
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 100px;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }
+
+    .counter {
+      font-size: 12px;
+      color: #4188bc;
+      margin: 10px 0 10px 0;
+    }   
+
+    #intro {
+      background:url('http://cdn1.pri.org/sites/default/files/styles/original_image/public/ramdan-quiz-lead.jpg?itok=bR9mphRx')no-repeat;
+      min-height: 650px;
+      background-size: contain;
+    } 
+
+    input[type=radio], input[type=checkbox] {
+      margin: 3px 0 0 ;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 400 !important;
+      color: #173e43;
+      line-height: 1.4em;
+      padding: 5px 20px 5px 40px !important;
+      border-radius: 5px;
+    }
+
+    #nextBtn { margin-top: 20px; margin-bottom: 10px; }  
+
+    #container01{
+      height: 250px; 
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%}  
+    
+    .shareBox {
+      padding-top: 30px;
+      padding-bottom:40px;
+    }    
+
+    #notes {
+      font-style: italic;
+      padding-bottom: 40px;
+      text-align: center;
+    }
+
+    #credit {
+      font-size: 12px;
+      position:absolute;
+      bottom:5px;
+      left:10px;
+      color:#e5e5e5;
+    }
+
+    @media (max-width: 600px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 16px; margin-bottom: 0px;}
+      .blurb {font-size: 14px; margin-top: 0px;}
+      .mybtn {font-size: 16px;}
+      .counter {font-size: 10px;}
+      label {font-size: 14px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 16px; 
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-bottom:20px;
+      }
+      #introTitle {
+        font-size: 22px;
+        margin-top: 10px; 
+        padding-left: 15px; 
+        padding-right: 15px;
+        padding-bottom: 20px;
+      }
+
+    }  
+
+    @media (max-width: 400px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 15px; margin-bottom: 0px;}
+      .blurb {font-size: 13px; margin-top: 0px;}
+      .mybtn {font-size: 14px; padding:4px 4px;}
+      .counter {font-size: 10px;}
+      label {font-size: 13px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 15px;
+        line-height: 17px;
+        padding-bottom: 15px;
+      }
+      #introTitle {
+        font-size: 17px;
+        margin-top: 10px; 
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 10px;
+      }
+
+    }
+</style>
+
+<body>
+  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="quiz" class="container">    
+      <div class="row"> 
+        <div id="intro" class="col-sm-12 col-xs-12">
+          <div id="introTitle" class="title">How much do you know about Ramadan?</div>
+          <div id="introIntro" class="blurb">Millions of Muslims around the world have started to fast on June 6 to mark the beginning of Ramadan. Test your knowledge about this important Islamic event.</div>
+          <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+          <div id="credit">Photo credit: Reuters</div>
+        </div>  <!-- END INTRO PAGE -->       
+
+        <div id="questions" class="col-sm-12 col-xs-12">
+          <div id="counter" class="counter">Question 0 of 0</div>
+          <div id="theQuestion" class="question">Question goes here</div>
+          <div id="allChoices" class="radio">
+            <label><input class="choice">choice01</label>
+            <br />
+            <label><input class="choice">choice01</label>
+            <br />
+            <label><input class="choice">choice01</label>
+          </div>
+        </div><!-- END QUESTION PAGE -->  
+
+        <div id="answers" class="col-sm-12 col-xs-12">
+          <div id="answerTitle" class="title">Answer</div>
+          <div id="answerExplain" class="blurb">Explanation</div>
+          <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+        </div>  <!-- END ANSWERS PAGE -->     
+
+        <div id="results" class="col-sm-12 col-xs-12">
+          <div id="resultTitle" class="title">You got <span id="pointer">0</span> out of 9 right!</div>
+          <div id="result01" class="title">Congratulations! You can be an ambassador for Islam.</div>
+          <div id="result02" class="title">Not bad. Looks like you have good knowledge about Islam.</div>
+          <div id="result03" class="title">Is okay, at least you learned something new from this quiz, right?</div>
+          <div id="resultIntro" class="blurb">Learned something from this quiz? Share it with your friends and the world.</div>
+          <div class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+              </tr> 
+            </table>
+          </div>
+        </div>  <!-- END RESULTS PAGE -->       
+      </div> 
+    </div>
+
+  </div>    
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var count = 0;
+var point = 0;
+
+var theQuestions = [];
+    theQuestions[0] = 'What does Ramadan commemorate?';
+    theQuestions[1] = 'What are some of the spiritual principles behind Ramadan?';
+    theQuestions[2] = "Who are not exempted from fasting during Ramadan?";
+    theQuestions[3] = 'What time does fasting start and end during Ramadan?';
+    theQuestions[4] = 'At what point during the year does Ramadan occur?';
+    theQuestions[5] = 'During Ramadan, Muslims should also refrain from the following EXCEPT:';
+    theQuestions[6] = 'Muslims are also encouraged to do the following during Ramadan EXCEPT:';
+    theQuestions[7] = "What happens at the end of Ramadan?";
+    theQuestions[8] = "Can non-Muslims take part in Ramadan fasting?";
+
+var theChoices = [];
+    theChoices[0] = "The revelation of the Quran to the Prophet Muhammad.;The birth of the Prophet Muhammad.;The migration of the Prophet Muhammad from Mecca to Medina."
+    theChoices[1] = "Purification, self-restraint, empathy.;Truth, mercy, retribution.;Celebration, victory, freedom.";
+    theChoices[2] = "Athletes during tournaments.;Pregnant or breastfeeding woman.;Members of emergency services and law enforcement.";
+    theChoices[3] = "Sunrise and sunset.;6:00 am and 7:00 pm.;Varies based on the decision of local mosques.";
+    theChoices[4] = "The month of June.;In the summer but the exact starting day varies according to the appearance of the new moon.;It changes every year because it's in the ninth month of the Muslim calendar, which is a lunar calendar.";
+    theChoices[5] = "Smoking;Sexual intercourse;Sports";
+    theChoices[6] = "Read the whole Quran;Perform charitable acts;Preach to non-Muslims";
+    theChoices[7] = "Intense prayers in the last 10 days followed by a celebration.;Fasting is extended until midnight in the last 10 days followed by a food festival.;Worshipers observe a vow of silence at the last day of Ramadan followed by celebration of the Islamic new year.";
+    theChoices[8] = "No. It is disrespectful.;Yes. They are free to join.;Yes but only non-Muslim males.";
+
+var theExplain = [];
+    theExplain[0] = "<p>Muslims believe that the first verses of the Quran were revealed to Muhammad by God on a night known as “the night of power” during this month. Fasting during Ramadan is one of the five pillars of Islam which are the foundation of the religion, along with the testimony of faith, daily prayer, charity, and performing the hajj pilgrimage in Mecca.</p>";    
+    theExplain[1] = "<p>The purpose of fasting is to strengthen the powers of self-control and self-purification to guard against evil, bringing Muslims closer to God. Many Muslims spend more time praying at mosque during Ramadan month.</p><p>Through the deprivation of food and water, fasting allows Muslims to feel and empathize with those less fortunate. Good deeds receive higher rewards during Ramadan, hence Muslims often donate to charities and organize fundraising events during the month.</p>";
+    theExplain[2] = "<p>Young children, the elderly, those who are ill and travelers are also exempted from fasting. Fasting performed by menstruating or postpartum-bleeding women is not valid. Those who missed the fasting have to make up the days after Ramadan.</p>";
+    theExplain[3] = "<p>Eating and drinking are forbidden for observant Muslims from dawn to dusk during the entire month of Ramadan. They wake up before sunrise to pray and eat a pre-dawn meal known as ‘suhoor’ to get them through the day.</p><p>At sunset, many Muslims follow the way how Prophet Muhammad break his fast with some water and dates. It is followed by a prayer and a meal known as ‘iftar’. Iftar is sometimes organized as a social gathering with families, friends or coworkers.</p>";
+    theExplain[4] = "<p>Islamic calendar has 354 or 355 days in a year. Hence the dates of Ramadan shift each year in relation to western calendar. This year's Ramadan starts from June 6 to July 5.</p><p>In countries where summer is on its peak, Muslims have to fast for more than 16 hours. Muslims in the UK are having their <a href='http://www.bbc.com/news/uk-36459143' target='_blank'>longest fasting hours</a> in 33 years, between 16 to 19 hours. Some Muslims who live in northern Finland, where the sun barely sets, <a href='https://www.facebook.com/ajplusenglish/videos/741972329277610/'' target='_blank'>fast for 23 hours</a>.</p>";      
+    theExplain[5] = "<p>Ramadan is not just about fasting. It is a month for Muslims to purify themselves physically and spiritually by refraining from sinful behavior, negative emotions and worldly pleasures. They should not curse, gossip, lie or get involved in fight. In some Islamic countries such as the United Arab Emirates, nightclubs are closed and music concerts are not allowed during Ramadan.</p>";
+    theExplain[6] = "<p>After having their iftar dinner, many Muslims perform additional prayers known as ‘tarawih’ in mosque. Such prayers are held in mosque every night of the month with the aim of reciting the entire Quran by the end of Ramadan.</p><p>Across the Muslim world, mosques and charity organizations organize free daily iftar meals and fundraising activities for the less fortunate. The app ShareTheMeal by the World Food Programme <a href='http://www.aljazeera.com/news/2016/06/app-feed-syrian-refugee-children-ramadan-160602112938242.html' target='_blank'>launched its Arabic version</a> in conjunction with this year's Ramadan. It allows users to donate to feed Syrian refugee children.</p>";
+    theExplain[7] = "<p>As Muslims believe that God revealed the first verses of the Quran to Muhammad during the last 10 days of the holy month, intense prayers are performed at the end of Ramadan to have their prayers answered. Some pious Muslims spend all of their time in mosque during those final days.</p><p>The end of Ramadan is followed by a celebration known as ‘Eid al-Fitr’ or 'festival of breaking of the fast' which is a religious holiday across Muslim world. The celebration varies in different countries and cultures but usually lasts from one to three days that include prayers, feasts, decoration of houses, getting new clothes, and visits to friends and families. Muslims are encouraged to forgive any ill feeling occurred in the past year and ask for forgiveness from others.</p>";
+    theExplain[8] = "<p>Many non-Muslims join their Muslim friends or family members to fast for several days or the whole month to show solidarity. They are also welcomed to join iftar dinners as many such dinners are organized as social gatherings.</p><p>However, in some Islamic countries including <a href='http://bigstory.ap.org/article/b362dc520f4547e8aae6ca140801d4c9/many-muslims-begin-fasting-month-ramadan-monday' target='_blank'>Saudi Arabia</a>, <a href='http://www.dailymail.co.uk/news/article-2702774/Christian-sentenced-Iranian-judge-lips-burnt-cigarette-eating-Ramadan.html' target='_blank'>Iran</a> and <a href='' target='_blank'>the United Arab Emirates</a>, both non-Muslims and Muslims can be fined or even jailed for eating in public during the day.</p>";
+
+var theAnswers = [0,0,2,0,2,2,2,0,1];
+
+function init() { 
+  $("#questions, #answers, #results, #nextBtn, #result01, #result02, #result03").hide();
+  $("#startBtn").click(function(){
+    nextQuestion(count);
+  });
+
+  $("#nextBtn").click(function() {
+    count ++;
+    if (count < theQuestions.length) {                            
+      nextQuestion(count);
+    } else {
+      showResults();
+    }
+  });
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+}
+
+function setValue(theVal) {
+  var tmpAns = theVal; 
+  $(".btn-radio").attr("disabled",true);
+  $("#answers").show();
+  $("#nextBtn").show();
+  if (tmpAns==theAnswers[count]) {
+    $("#answerTitle").text("Correct!").css("color","#4188bc");
+    point ++;
+  }  else {
+    $("#answerTitle").text("Wrong!").css("color","#d3401e");
+  }
+  $("label:eq(" + theAnswers[count] + ")").css("background-color","#a6c8e0");
+  $("#answerExplain").html(theExplain[count]);
+} 
+
+function nextQuestion(which) {
+  $("#quiz").css("background-color","#eeeeee");
+  $('.container').slideUp(500, function(){
+    $("#nextBtn").hide(); 
+    $("#answers").hide();
+    $("#intro").hide();
+    $("#questions").show();
+    //DISPLAY QUESTION
+    $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
+    $("#theQuestion").text(theQuestions[which]);
+    //DISPLAY CHOICES
+    $("#allChoices").empty();
+    var tmpChoice = theChoices[count].split(";");
+    for (var i=0; i<tmpChoice.length; i++) {
+      $("#allChoices").append("<label><input class='btn-radio' type='radio' name='optionsRadios' id='btn-radio' onClick='setValue(" + i + ");'>" + tmpChoice[i] + "</label><br>");
+    }
+  });
+  $('.container').slideDown(500);
+}
+
+function showResults() {
+  $('.container').slideUp(500, function(){
+    $("#questions").hide();
+    $("#answers").hide();
+    $("#nextBtn").hide(); 
+    $("#results").show();
+    if(point>7){$("#result01").show();}
+    if(point>4&&point<8){$("#result02").show();}
+    if(point>0&&point<5){$("#result03").show();}
+    $("#pointer").text(point);
+  });
+  $('.container').slideDown(500); 
+  sendData();
+}
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1eh0y2liI6X3XGNDkzgK7AQ4HbcmpwI3LQ6LRRslHSXk/formResponse',
+        data: { 
+          "entry.1223222853": json.ip,
+          "entry.799139085": point,
+          "entry.904214253": document.referrer,
+        }
+      }); 
+    }
+  );   
+}   
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("I got " + point + "/9 in this quiz on Ramadan. Can you do better than me?");
+  tweet_url += ' pic.twitter.com/meibCBkwfg';
+  tweet_url += '&url=http://bit.ly/25M2KC1&via=pri';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+var fbtitle = "I got " + point + "/9 in this quiz about Ramadan. Can you do better than me?";
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-06-08/quiz-how-much-do-you-know-about-ramadan',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/ramadan-lantern-egypt.jpg?itok=yc_ats_-',
+  name: fbtitle,
+  description:"Do you know Muslims in some countries fast for more than 20 hours during the month of Ramadan?"
+  }, function(response){});
+}
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '183589505376268',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

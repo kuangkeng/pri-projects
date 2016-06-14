@@ -1,0 +1,139 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Scores are based on a scale of 0 to 100 with 0 representing the best level of freedom on the net progress and 100 the worst.</div>
+        Source: 
+        <a href='https://freedomhouse.org/report/freedom-net-2015/table-country-scores' target='_blank'>Freedom House</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Worst Internet freedom in Latin America',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Cuba","Venezuela","Mexico","Ecuador","Colombia","Brazil","Argentina"],   
+            labels:{
+                style: {
+                    fontSize: '13px',
+              },  
+            }
+        },
+        yAxis: {    
+            title: {
+              text: "Freedom score",
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },            
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            headerFormat: 'Status: <b>{point.key}</b><br>',
+            pointFormat: 'Score: <b>{point.y}</b>',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.07,
+                pointPadding: 0,
+            }
+        },
+        series: [{
+            data: [
+                {name: "Not Free",y:81,color:"#d3401e"},
+                {name: "Partly Free",y:57,color:"#fcd116"},
+                {name: "Partly Free",y:39,color:"#fcd116"},
+                {name: "Partly Free",y:37,color:"#fcd116"},
+                {name: "Partly Free",y:32,color:"#fcd116"},
+                {name: "Free",y:29,color:"#4188bc"},
+                {name: "Free",y:27,color:"#4188bc"},
+            ],        
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}<br>{point.name}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }],
+    });
+});
+</script>

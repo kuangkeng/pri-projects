@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 5px;
+  color:#33333c;
+}
+
+.button {text-align: center; margin-bottom: 10px;}
+#button {background-color: #e9e9e9;border-radius: 5px; font-size: 14px;}
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+    	   <div id="text">Numbers represent search interest relative to the highest point in the chart.</div>
+        <div>Source: <a href='https://www.google.com/trends/' target='_blank'>Google Trends</a>, Timezone: EDT</div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container').highcharts({
+          chart: {
+              type: 'line',
+              zoomType: 'y',
+          },
+          title: {
+              text: 'Anti-Muslim searches spike after Orlando shooting',
+              margin: 30,
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                  day: '%b %e',
+              },
+              tickInterval: 24 * 3600 * 1000,
+              plotLines: [{
+                  value: Date.UTC(2016,5,12,2),
+                  color: '#33333c',
+                  dashStyle: 'shortdash',
+                  width: 1,
+                  label: {
+                      useHTML: true,
+                      text: 'Orlando shooting starts',
+                      verticalAlign: 'bottom',
+                      y:-270,
+                      style: {
+                          fontSize: '11px',
+                          color: '#33333c',
+                      }
+                  }
+              }]
+          },
+          yAxis: {
+              title: {
+                text: null,
+              },
+              labels: {
+                  format: '{value:,.0f}'
+              },
+              endOnTick: false,
+          },
+          credits: { enabled: false, },
+
+          tooltip: {
+              shared: true,
+              pointFormat: "Phrase: <b>{point.series.name}</b><br>Search interest: <b>{point.y}</b><br>"
+          },
+          plotOptions: {
+              series: {
+                  pointStart: Date.UTC(2016, 5, 10),
+                  pointInterval: 3600 * 1000 // one day
+              },
+              line: {
+                  marker: {
+                      enabled: false
+                  }
+              }
+          },
+	        series: [
+	          {name: "'kill Muslims'", color:"#377eb8",
+	          data :[8,10,5,3,5,6,3,3,5,4,4,3,5,2,4,5,5,5,4,7,7,12,9,6,3,8,9,3,13,5,5,6,4,4,4,7,5,6,3,3,5,6,6,7,4,7,8,6,10,8,6,9,8,3,4,7,4,9,1,7,10,19,29,52,57,56,64,70,66,74,73,80,87,81,92,72,42,35,21,23,19,18,20,27,20]},
+	          {name: "'Muslims are terrorists'", color:"#4daf4a",
+	          data :[14,12,6,8,11,4,2,4,3,1,4,1,2,3,2,1,3,5,4,5,4,5,3,2,2,2,2,7,3,5,2,1,2,1,2,3,1,2,1,4,2,2,5,5,2,5,5,7,7,3,1,6,1,4,3,6,3,3,3,3,2,4,14,18,16,25,27,29,27,24,30,42,34,33,32,19,28,16,19,14,7,8,9,8,5]},
+            {name: "'stop Islam'", color:"#e41a1c",
+            data :[10,5,8,11,9,3,8,6,7,7,7,7,10,5,6,5,5,6,7,6,7,10,10,8,9,7,5,6,6,10,14,4,9,8,4,6,6,4,5,6,8,8,8,10,10,7,13,11,9,14,10,7,8,11,4,9,10,11,11,8,6,13,12,14,19,21,20,20,26,24,24,29,19,26,25,23,26,23,16,10,10,14,14,14,10]},
+            {name: "'hate Muslims'", color:"#ff7f00",
+            data :[12,11,10,10,15,12,6,8,5,9,6,6,6,10,7,9,7,6,8,13,14,9,10,14,15,17,6,10,9,13,9,6,6,7,3,8,8,4,15,8,9,12,11,9,10,7,10,11,17,15,13,17,12,6,10,11,11,13,14,11,14,26,36,52,64,76,81,65,71,79,83,100,85,87,95,87,69,55,35,22,22,17,26,35,21]},
+            {name: "'Muslim ban'", color:"#FF69B4",
+            data :[5,12,6,11,8,11,4,6,4,6,8,6,4,4,4,7,4,5,3,6,7,9,6,5,7,8,5,10,10,7,5,7,4,4,6,5,4,4,6,7,5,7,5,4,7,6,3,7,10,7,9,15,8,3,7,7,8,3,3,8,8,14,22,27,39,42,37,27,31,56,80,82,68,65,76,63,51,45,36,36,22,21,26,32,45]}
+            ],  
+  });
+
+});
+
+</script>
