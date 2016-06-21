@@ -1,0 +1,723 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      color:#262228;
+      
+    }
+
+    .container {
+      background-color: #FFCE00;
+      max-width: 600px;
+      margin: 0 auto;
+    }    
+
+    #questions, #profile {padding:0px 40px;}
+
+    #introTitle {
+      text-align: center;
+      margin-top: 20px; 
+      font-size: 32px; 
+      padding-left: 40px; 
+      padding-right: 40px;
+      color:#262228;
+      text-shadow: 1px 1px 2px #9a9a9a;
+      font-weight: 500;
+    }
+
+    #introIntro {
+      font-size: 22px; 
+      padding-left: 40px; 
+      padding-right: 40px; 
+      text-align: center; 
+      color:#262228;
+      text-shadow: 1px 1px 2px #9a9a9a;
+    }
+
+    #resultTitle {
+      margin-top: 40px;
+    }
+
+    #resultIntro {
+      text-align: center;
+    }
+
+    .question { 
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4em;
+      margin-bottom: 20px;
+    }   
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 200px;
+      margin-top: 40px !important;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }
+
+    .counter {
+      font-size: 12px;
+      color: #4188bc;
+      margin: 10px 0 10px 0;
+    }    
+
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+      text-align: center;
+    }
+
+    #result03, #result02 {position:relative;}
+
+    #timeresult {
+      color:#4188bc;
+      font-size: 45px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    } 
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%}  
+    
+    .shareBox {
+      padding-bottom:20px;
+    }    
+
+    .imgbox {
+      margin: 0 auto;
+      width:200px;
+      padding:20px;
+    }
+
+    .imglead {
+      margin: 0 auto;
+      padding:10px;
+      max-width:300px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #questions input {width:100px;}
+
+    .chart {
+      width:100%;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+    #table01 {font-size: 12px}
+    th {font-size:14px;}
+    #chart01 {height:700px; padding-bottom: 0px;}
+    #chart02 {height:700px; padding-bottom: 0px;}
+    #labelhour, #labelmin {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4em;
+    }
+
+    #labelwork, #labelkid {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4em; 
+    }
+    
+    .table-striped>tbody>tr:nth-child(even)>td, 
+    .table-striped>tbody>tr:nth-child(even)>th {
+       background-color: #b3d5e8;
+     }
+    .table-striped>thead>tr>th {background-color: #81bad9;} 
+    .leftcol {text-align: right;}
+    #sharemsg {margin-bottom: 0px;}
+    #result03Btn-back, #result03Btn-next {margin-top: 0px !important;}
+
+    #chartbutton {width: 100%; margin-bottom: 20px;}
+    #col01, #col02 {width:48%;}
+    .button01 {text-align: right; margin-right: 3%}
+    .button02 {text-align: left; margin-left: 3%}
+    #button01, #button02 {border-radius: 5px; padding:5px 10px;}
+    #button01:hover {background-color:#67acd2;}
+    #button02:hover {background-color:#67acd2;}
+    #button01 {background-color:#0375B4;color:white;}
+    #button02 {background-color:white;color:#262228;}
+    #button01:focus, input[type="button"]:focus {outline: none;}
+    #button02:focus, input[type="button"]:focus {outline: none;}
+
+    @media (max-width: 600px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 16px; margin-bottom: 0px;}
+      .blurb {font-size: 14px; margin-top: 0px;}
+      .mybtn {font-size: 16px; }
+      .counter {font-size: 10px;}
+      .chart {margin-left: -10px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 16px; 
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-bottom: 20px;
+      }
+      #introTitle {
+        font-size: 22px;
+        margin-top: 10px; 
+        padding-left: 15px; 
+        padding-right: 15px;
+        padding-bottom: 20px;
+      }
+
+    }  
+
+    @media (max-width: 400px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 18px; margin-bottom: 10px;}
+      .question { font-size: 15px; margin-bottom: 10px;}
+      .mybtn {font-size: 14px; padding:4px 4px; margin-top: 0px !important;}
+      .counter {font-size: 12px;}
+      .imgbox {width:150px;}
+      .chart {margin-left: -10px;}
+      #resultTitle {margin-top: 20px; margin-bottom: 20px;}
+      #introIntro {
+        font-size: 15px;
+        line-height: 1.2em;
+        padding-bottom: 20px;
+      }
+      #introTitle {
+        font-size: 17px;
+        margin-top: 10px; 
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 10px;
+      }
+      #questions, #profile {padding:0px 10px;}
+      .leftcol {text-align: left;}
+      #result03Btn-back, #result03Btn-next {width:100px;}
+
+    }
+</style>
+
+<body>
+  <div id="quiz" class="container">    
+    <div id="intro">
+      <div id="introTitle">Fathers, how much unpaid work at home have you done?</div>
+      <div class="imglead"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/superman-blue.png?itok=RSWZ7nTp" class="img-responsive" id="imgwoman"></div>
+      <div id="introIntro">In almost every country, housework and caregiving are conventionally done by women with no pay. But do we know how big the gap is between men and women in terms of the time they spend on unpaid housework? Let's calculate how much time you, as a father, spend on housework and caring for your kids, compared with fathers and mothers in other countries.</div>
+      <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+    </div>  <!-- END INTRO PAGE -->       
+
+    <div id="questions">
+      <div id="counter" class="counter">Question 0 of 0</div>
+      <div class="imgbox">img goes here</div>
+      <div id="theQuestion" class="question">Question goes here</div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6 leftcol">
+          <form class="form-inline" method="get" action="#">
+            <div class="form-group" id="hourbox">
+              <select class="form-control" id="inputhour">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              </select>
+              <label for="inputhour" id="labelhour">hours</label>
+            </div>  
+          </form>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <form class="form-inline" method="get" action="#">
+            <div class="form-group" id="minbox">
+              <select class="form-control" id="inputmin">
+              <option>0</option>
+              <option>10</option>
+              <option>20</option>
+              <option>30</option>
+              <option>40</option>
+              <option>50</option>
+              </select>
+              <label for="inputmin" id="labelmin">minutes</label>
+            </div>   
+          </form> 
+        </div>    
+      </div>
+      <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next question</div>
+      <div id="result01Btn" class="btn btn-primary btn-lg center-block mybtn">See my results</div>
+    </div><!-- END QUESTION PAGE -->      
+
+    <div id="result01">
+      <div class="title" id="resultTitle">You spend a total of <br><div id="timeresult"><span id="time">0</span> hours</div> each day on unpaid work, considered <span id="compare">null</span> compared to men in other countries.</div>
+      <div class="chart" id="chart01"></div>
+      <div class="question">Figures are from latest available data. Data of each country is not collected in the same year. They range from 1999 to 2014.<br>Source: <a href="https://www.oecd.org/gender/data/employment/" target="_blank">OECD Stat</a></div>
+      <div id="result02Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div class="title" id="sharemsg">Share your results</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+    </div> 
+    <div id="result02">
+      <div class="title" id="resultTitle">How about comparing with women?</div>
+      <div class="question">In all countries where data is available, women spend much more time on unpaid work than men, ranging from 30% in Denmark and Poland to 580% in India.</div>
+      <div class="chart" id="chart02"></div>
+      <div id="result03Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
+      <div id="result03Btn-reset" class="btn btn-primary btn-lg center-block mybtn" onClick="history.go(0)">Calculate again</div>
+    </div> 
+  </div>   
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var count = 0,
+    unpaid = 0,
+    unpaid2 = 0,
+    level = "",
+    inputdata = [],
+    datamen_cat = [],
+    datawomen_cat = [],
+    theQuestions = [];
+    theQuestions[0] = "How much time each day do you spend on housework and cleaning?",
+    theQuestions[1] = "How much time per day do you spend meal planning, grocery shopping and cooking?",
+    theQuestions[2] = "How much time per day do you spend doing yard work?",
+    theQuestions[3] = "How about laundry and dry cleaning?",
+    theQuestions[4] = "How much time each day do you spend playing with your children?",
+    theQuestions[5] = "How much time each day do you spend helping them with their schoolwork?",
+    theQuestions[6] = "How about taking care of their hygiene and health?",
+    theQuestions[7] = "How much time each day do you spend taking your kids to and from school and activities?";
+    theQuestions[8] = "Finally, how much time each day do you spend on other housework?";
+
+var datamen = [
+  {y:2.86, name:"Australia"}, 
+  {y:2.26, name:"Austria"}, 
+  {y:2.51, name:"Belgium"}, 
+  {y:2.66, name:"Canada"}, 
+  {y:3.10, name:"Denmark"}, 
+  {y:2.67, name:"Estonia"}, 
+  {y:2.65, name:"Finland"}, 
+  {y:2.38, name:"France"}, 
+  {y:2.73, name:"Germany"}, 
+  {y:2.12, name:"Hungary"}, 
+  {y:2.15, name:"Ireland"}, 
+  {y:1.73, name:"Italy"}, 
+  {y:1.03, name:"Japan"}, 
+  {y:0.75, name:"Korea"}, 
+  {y:1.88, name:"Mexico"}, 
+  {y:2.22, name:"Netherlands"}, 
+  {y:2.35, name:"New Zealand"}, 
+  {y:2.71, name:"Norway"}, 
+  {y:2.62, name:"Poland"}, 
+  {y:1.61, name:"Portugal"}, 
+  {y:2.78, name:"Slovenia"}, 
+  {y:2.57, name:"Spain"}, 
+  {y:2.57, name:"Sweden"}, 
+  {y:1.94, name:"Turkey"}, 
+  {y:2.34, name:"UK"}, 
+  {y:2.48, name:"US"}, 
+  {y:2.29, name:"OECD Average"}, 
+  {y:1.52, name:"China"}, 
+  {y:0.86, name:"India"}, 
+  {y:1.72, name:"South Africa"}, 
+];
+
+var datawomen = [
+  {y:5.18, name:"Australia"}, 
+  {y:4.48, name:"Austria"}, 
+  {y:4.08, name:"Belgium"}, 
+  {y:4.23, name:"Canada"}, 
+  {y:4.05, name:"Denmark"}, 
+  {y:4.15, name:"Estonia"}, 
+  {y:3.87, name:"Finland"}, 
+  {y:3.88, name:"France"}, 
+  {y:4.48, name:"Germany"}, 
+  {y:4.47, name:"Hungary"}, 
+  {y:4.94, name:"Ireland"}, 
+  {y:5.25, name:"Italy"}, 
+  {y:4.99, name:"Japan"}, 
+  {y:3.79, name:"Korea"}, 
+  {y:6.22, name:"Mexico"}, 
+  {y:4.24, name:"Netherlands"}, 
+  {y:4.40, name:"New Zealand"}, 
+  {y:3.52, name:"Norway"}, 
+  {y:4.93, name:"Poland"}, 
+  {y:5.47, name:"Portugal"}, 
+  {y:4.77, name:"Slovenia"}, 
+  {y:4.30, name:"Spain"}, 
+  {y:3.44, name:"Sweden"}, 
+  {y:6.28, name:"Turkey"}, 
+  {y:4.30, name:"UK"}, 
+  {y:4.04, name:"US"}, 
+  {y:4.53, name:"OECD Average"}, 
+  {y:3.90, name:"China"}, 
+  {y:5.87, name:"India"}, 
+  {y:4.16, name:"South Africa"}, 
+];  
+
+var images =
+['<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/cleaning-blue_0.png?itok=7_BYo-Cy" class="img-responsive" id="imgcleaning">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/grocery-blue.png?itok=G4SQdlvD" class="img-responsive" id="imggrocery">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/gardening-blue.png?itok=tcIRbVjZ" class="img-responsive" id="imggardening">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/laundry-blue.png?itok=_Mo9VQxb" class="img-responsive" id="imglaundry">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/playing-blue.png?itok=ZsNd_a4z" class="img-responsive" id="imgplaying">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/schoolwork-blue.png?itok=63TfFoxz" class="img-responsive" id="imgschoolwork">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/health-blue.png?itok=Ejs6qsrZ" class="img-responsive" id="imghealth">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/car-blue.png?itok=K2baZzuE" class="img-responsive" id="imgcar">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/assistant-blue.png?itok=_dSKuZCB" class="img-responsive" id="imgassistant">'];
+    
+function init() { 
+  $("#questions, #result01, #result02, #result01Btn").hide();
+  $("#startBtn").click(function(){
+    nextQuestion(count);
+  });
+
+  $("#nextBtn").click(function() {
+    setValue(count);
+    count++;
+    if (count < theQuestions.length) {                            
+      nextQuestion(count)
+    }
+  }); 
+
+  $("#result01Btn").click(function() {
+    setValue(count);
+    showResults();
+  });
+  
+  $("#result02Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result01").hide();
+      $("#result02").show();
+    });
+    $('.container').slideDown(500);   
+  });
+
+  $("#result03Btn-back").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result02").hide();
+      $("#result01").show();
+    });
+    $('.container').slideDown(500);   
+  });    
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+
+}
+
+function nextQuestion(which) {
+  $('.container').slideUp(500, function(){
+    $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
+    $(".imgbox").html(images[which]);
+    $("#theQuestion").text(theQuestions[which]);
+    $("#intro").hide();
+    $("#questions").show();
+    if (which==8){
+      $("#result01Btn").show();
+      $("#nextBtn").hide();
+    }
+  });
+  $('.container').slideDown(500);
+}
+
+function setValue(num) {
+  inputdata[num] = $('#inputhour').val()/10*10 + $('#inputmin').val()/60;
+  $('#inputhour').val(0);
+  $('#inputmin').val(0);
+
+}  
+
+function showResults() {
+  //Calculation goes here
+  for (var i = 0; i < inputdata.length; i++) {
+    unpaid += inputdata[i];
+  }
+  unpaid2 = Math.round(unpaid*100)/100;
+  datamen.push({name:"You", y:unpaid2, color:"#b4031d"});
+  datawomen.push({name:"You", y:unpaid2, color:"#b4031d"});
+  datamen = datamen.sort(function (a, b) {
+      return a.y - b.y;
+  });
+  datawomen = datawomen.sort(function (a, b) {
+      return a.y - b.y;
+  });
+
+  for (var i = 0; i < 31; i++){
+    datamen_cat.push(datamen[i].name);    
+    datawomen_cat.push(datawomen[i].name);
+  }
+
+  if(unpaid2<=2){$("#compare").text("low").css("color","#b4031d");level="lower than";}
+  else if (unpaid2>2&&unpaid2<2.6){$("#compare").text("moderate").css("color","#ff5400");level="about the same as";}
+  else {$("#compare").text("high").css("color","#007849");level="higher than";}
+
+  $('.container').slideUp(500, function(){
+    $("#time").text(unpaid2);
+    $("#questions").hide();
+    $("#nextBtn").hide(); 
+    $("#result01").show();
+    chart01();
+    chart02();
+  });
+  $('.container').slideDown(500); 
+  sendData();
+}
+  
+function addThousandsSeparator(input) {
+    var output = input
+    if (parseFloat(input)) {
+        input = new String(input); // so you can perform string operations
+        var parts = input.split("."); // remove the decimal part
+        parts[0] = parts[0].split("").reverse().join("").replace(/(\d{3})(?!$)/g, "$1,").split("").reverse().join("");
+        output = parts.join(".");
+    }
+    return output;
+} 
+
+function chart01() {
+    $('#chart01').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#FFCE00',
+        },
+        title: {
+            text:''
+        },
+        subtitle: {
+            text: '',
+            align: 'left',
+            style: {
+                fontSize: '12',
+            }
+        },
+        xAxis: {
+            categories: datamen_cat,
+            labels:{
+                style: {
+                    fontSize: '12px',
+                    color: '#FFFFFF',
+                    textOverflow: 'none',
+                    whiteSpace: 'nowrap',
+                },
+                align: 'left',
+                x:5,
+                reserveSpace: false,
+            },
+            tickColor: '#FFCE00',
+        },
+        yAxis: {
+            title: {
+                text: 'Time spent in unpaid work for men (hours/day)',
+                x:-20,
+            },
+            endOnTick: false, 
+            minTickInterval: 1,
+        },
+        tooltip: {
+          headerFormat: 'Men in {point.key}<br>',
+          pointFormat: "<b>{point.y}</b> hours"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.02,
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            data: datamen,
+            color:'#0375B4',
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+}
+
+function chart02() {
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#chart02').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#FFCE00',
+        },
+        title: {
+            text: '',
+            style: {fontSize: '14',}
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: datawomen_cat,   
+            labels:{
+                style: {
+                    fontSize: '12px',
+                    color: '#FFFFFF',
+                    textOverflow: 'none',
+                    whiteSpace: 'nowrap',
+                },
+                align: 'left',
+                x:5,
+                reserveSpace: false,
+            },
+            tickColor: '#FFCE00',
+        },
+        yAxis: {    
+            title: {
+                text: 'Time spent in unpaid work for women (hours/day)',
+                x:-20,
+            },
+            endOnTick: false, 
+            minTickInterval: 1,
+        },
+        credits: { enabled: false,},
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+          headerFormat: 'Women in {point.key}<br>',
+          pointFormat: "<b>{point.y}</b> hours"
+        },
+        plotOptions: {
+            series: {
+               groupPadding: 0.02,
+            }
+        },
+        series: [{
+            data: datawomen,
+            color:'#0375B4',
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+}
+ 
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/15OzvZ7tegZtbkwGXEzZeb2N04y51txTnZB33hDGZxlo/formResponse',
+        data: { 
+          "entry.96971384": json.ip,
+          "entry.289008104": unpaid2,
+          "entry.570840095": document.referrer,
+        }
+      }); 
+    }
+  );   
+}   
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("I spend "+unpaid2+" hrs/day in housework/caring for kids, "+level+" most fathers. You?");
+  tweet_url += ' pic.twitter.com/N86TPMcxuO';
+  tweet_url += '&url=http://bit.ly/267JQFO';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+var fbtitle = "I spend "+unpaid2+" hours per day in housework and caring for kids, "+level+" most fathers. How about you?";
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-06-17/how-much-housework-do-you-do-compared-other-fathers',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/fathers-day-interactive-screenshot-long.png?itok=cBCRo1oK',
+  name: fbtitle,
+  description:"This interactive calculates how much time you spend on housework and childcare and compare it with that of other fathers."
+  }, function(response){});
+}
+
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1105893536143305',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

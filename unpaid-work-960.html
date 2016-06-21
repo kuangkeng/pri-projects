@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 970px; 
+  width: 100%; 
+  max-width: 850px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02 {
+  height: 800px; 
+  width: 100%; 
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+@media (max-width: 900px ) { 
+  #container02 {
+    padding-right: 3%;
+  }
+} 
+
+@media (max-width: 600px ) { 
+  #container02 {
+    padding-right: 8%;
+  }
+}  
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Men vs women</a></li>
+    <li><a href="#tabs-2">The gap</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+    <div id="note">
+        <div id="text">Figures are from latest available data. Data of each country is not collected in the same year. They range from 1999 to 2014. Click the legend to hide/show category.</div>
+        Source: <a href="https://www.oecd.org/gender/data/employment/" target="_blank">OECD Stat</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+    <div id="note">
+        <div id="text">Figures are from latest available data. Data of each country is not collected in the same year. They range from 1999 to 2014.</div>
+        Source: <a href="https://www.oecd.org/gender/data/employment/" target="_blank">OECD Stat</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+</div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container01').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Time spent in unpaid work',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["Turkey","Mexico","India","Portugal","Italy","Australia","Japan","Ireland","Poland","Slovenia","Austria","Germany","Hungary","New Zealand","Spain","UK","Netherlands","Canada","South Africa","Estonia","Belgium","Denmark","US","China","France","Finland","Korea","Norway","Sweden"],   
+            labels:{
+                style: {
+                    fontSize: '13px',
+              },  
+            }
+        },
+        yAxis: {    
+            title: {
+              text: "hours/day",
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },            
+            endOnTick: false,
+            minTickInterval: 1,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: true,
+        },
+        tooltip: {
+            headerFormat: '{series.name} in {point.key}<br>',
+            pointFormat: '<b>{point.y}</b> hours/day',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0,
+                dataLabels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'left',
+                    format: '{point.y}',
+                    y: 0, // 10 pixels down from the top
+                    style: {
+                        fontSize: '11px',
+                    }
+                },
+            }
+        },
+        series: [ 
+            {name:"Women", color:"#ff5400", data:[6.28,6.22,5.87,5.47,5.25,5.18,4.99,4.94,4.93,4.77,4.48,4.48,4.47,4.40,4.30,4.30,4.24,4.23,4.16,4.15,4.08,4.05,4.04,3.90,3.88,3.87,3.79,3.52,3.44]},
+            {name:"Men", color:"#0375B4", data:[1.94,1.88,0.86,1.61,1.73,2.86,1.03,2.15,2.62,2.78,2.26,2.73,2.12,2.35,2.57,2.34,2.22,2.66,1.72,2.67,2.51,3.10,2.48,1.52,2.38,2.65,0.75,2.71,2.57]},
+        ],
+    });
+});
+
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container02').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'How much more time women spend on unpaid work than men?',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["India","Mexico","Turkey","Japan","Portugal","Italy","Korea","Ireland","South Africa","China","Hungary","Australia","Poland","Austria","New Zealand","Netherlands","Slovenia","UK","Germany","Spain","Belgium","Canada","US","France","Estonia","Finland","Denmark","Sweden","Norway"],   
+            labels:{
+                style: {
+                    fontSize: '13px',
+              },  
+            }
+        },
+        yAxis: {    
+            title: {
+              text: "hours/day",
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },            
+            endOnTick: false,
+            minTickInterval: 1,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b> hours/day',
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0,
+                dataLabels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'left',
+                    format: '{point.y}',
+                    y: 0, // 10 pixels down from the top
+                    style: {
+                        fontSize: '11px',
+                    }
+                },
+            }
+        },
+        series: [{ 
+            data:[6.28,6.22,5.87,5.47,5.25,5.18,4.99,4.94,4.93,4.77,4.48,4.48,4.47,4.40,4.30,4.30,4.24,4.23,4.16,4.15,4.08,4.05,4.04,3.90,3.88,3.87,3.79,3.52,3.44],color:"#b4031d", 
+        }],
+    });
+});
+</script>  
+</body>
+</html>  
+
