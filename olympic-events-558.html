@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 5px;
+  color:#33333c;
+}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+    	   <div id="text"></div>
+        <div>Source: <a href='https://stillmed.olympic.org/Documents/Reference_documents_Factsheets/Women_in_Olympic_Movement.pdf' target='_blank'>International Olympic Committee</a></div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container').highcharts({
+          chart: {
+              type: 'line',
+          },
+          title: {
+              text: "Women vs men events in Summer Olympic Games, 1896-2016",
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+              categories: ["1896","1900","1904","1908","1912","1920","1924","1928","1932","1936","1948","1952","1956","1960","1964","1968","1972","1976","1980","1984","1988","1992","1996","2000","2004","2008","2012","2016"],  
+              labels:{
+                rotation: 90,
+              },
+              tickmarkPlacement: "on", 
+          },
+          yAxis: {
+              title: {
+                text: "No. of events",
+              },
+              endOnTick: false,  
+              minTickInterval: 50,            
+          },
+          credits: { enabled: false, },
+          tooltip: {
+              shared: true,
+              headerFormat: "Year: <b>{point.key}</b><br>Total events: <b>{point.total}</b><br>",
+              pointFormat: "{point.series.name}: <b>{point.y}</b><br>"
+          },
+	        series: [
+	          {name: "Men-only events", color:"#253494",
+	          data :[
+              {year:1896, women:0, y:43, total:43, pct:0.0, part:0.0},
+              {year:1900, women:2, y:93, total:95, pct:2.1, part:2.2},
+              {year:1904, women:3, y:88, total:91, pct:3.3, part:0.9},
+              {year:1908, women:4, y:106, total:110, pct:3.6, part:1.8},
+              {year:1912, women:5, y:97, total:102, pct:4.9, part:2.0},
+              {year:1920, women:8, y:146, total:154, pct:5.2, part:2.4},
+              {year:1924, women:10, y:116, total:126, pct:7.9, part:4.4},
+              {year:1928, women:14, y:95, total:109, pct:12.8, part:9.6},
+              {year:1932, women:14, y:103, total:117, pct:12.0, part:9.0},
+              {year:1936, women:15, y:114, total:129, pct:11.6, part:8.3},
+              {year:1948, women:19, y:117, total:136, pct:14.0, part:9.5},
+              {year:1952, women:25, y:124, total:149, pct:16.8, part:10.5},
+              {year:1956, women:26, y:125, total:151, pct:17.2, part:13.3},
+              {year:1960, women:29, y:121, total:150, pct:19.3, part:11.4},
+              {year:1964, women:33, y:130, total:163, pct:20.2, part:13.2},
+              {year:1968, women:39, y:133, total:172, pct:22.7, part:14.2},
+              {year:1972, women:43, y:152, total:195, pct:22.1, part:14.6},
+              {year:1976, women:49, y:149, total:198, pct:24.7, part:20.7},
+              {year:1980, women:50, y:153, total:203, pct:24.6, part:21.5},
+              {year:1984, women:62, y:159, total:221, pct:28.1, part:23.0},
+              {year:1988, women:72, y:165, total:237, pct:30.4, part:26.1},
+              {year:1992, women:86, y:171, total:257, pct:33.5, part:28.8},
+              {year:1996, women:97, y:174, total:271, pct:35.8, part:34.0},
+              {year:2000, women:120, y:180, total:300, pct:40.0, part:38.2},
+              {year:2004, women:125, y:176, total:301, pct:41.5, part:40.7},
+              {year:2008, women:127, y:175, total:302, pct:42.1, part:42.4},
+              {year:2012, women:140, y:162, total:302, pct:46.4, part:44.2},
+              {year:2016, women:145, y:161, total:306, pct:47.4, part:45.0},
+            ]},
+            {name: "Women & mixed events", color:"#bd0026",
+            data :[
+              {year:1896, y:0, men:43, total:43, pct:0.0, part:0.0},
+              {year:1900, y:2, men:93, total:95, pct:2.1, part:2.2},
+              {year:1904, y:3, men:88, total:91, pct:3.3, part:0.9},
+              {year:1908, y:4, men:106, total:110, pct:3.6, part:1.8},
+              {year:1912, y:5, men:97, total:102, pct:4.9, part:2.0},
+              {year:1920, y:8, men:146, total:154, pct:5.2, part:2.4},
+              {year:1924, y:10, men:116, total:126, pct:7.9, part:4.4},
+              {year:1928, y:14, men:95, total:109, pct:12.8, part:9.6},
+              {year:1932, y:14, men:103, total:117, pct:12.0, part:9.0},
+              {year:1936, y:15, men:114, total:129, pct:11.6, part:8.3},
+              {year:1948, y:19, men:117, total:136, pct:14.0, part:9.5},
+              {year:1952, y:25, men:124, total:149, pct:16.8, part:10.5},
+              {year:1956, y:26, men:125, total:151, pct:17.2, part:13.3},
+              {year:1960, y:29, men:121, total:150, pct:19.3, part:11.4},
+              {year:1964, y:33, men:130, total:163, pct:20.2, part:13.2},
+              {year:1968, y:39, men:133, total:172, pct:22.7, part:14.2},
+              {year:1972, y:43, men:152, total:195, pct:22.1, part:14.6},
+              {year:1976, y:49, men:149, total:198, pct:24.7, part:20.7},
+              {year:1980, y:50, men:153, total:203, pct:24.6, part:21.5},
+              {year:1984, y:62, men:159, total:221, pct:28.1, part:23.0},
+              {year:1988, y:72, men:165, total:237, pct:30.4, part:26.1},
+              {year:1992, y:86, men:171, total:257, pct:33.5, part:28.8},
+              {year:1996, y:97, men:174, total:271, pct:35.8, part:34.0},
+              {year:2000, y:120, men:180, total:300, pct:40.0, part:38.2},
+              {year:2004, y:125, men:176, total:301, pct:41.5, part:40.7},
+              {year:2008, y:127, men:175, total:302, pct:42.1, part:42.4},
+              {year:2012, y:140, men:162, total:302, pct:46.4, part:44.2},
+              {year:2016, y:145, men:161, total:306, pct:47.4, part:45.0},
+            ]},            
+            ],  
+  });
+
+});
+
+</script>

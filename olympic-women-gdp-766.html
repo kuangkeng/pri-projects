@@ -1,0 +1,286 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+
+.button01 {text-align: center;}
+#button01 {background-color: #e9e9e9; border-radius: 5px; margin-bottom: 10px;}
+
+@media (max-width: 450px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    #container {height: 550px; }
+}    
+
+@media (max-width: 400px ) { 
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+    #container {height: 510px; }
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div class="button01"><button id="button01">Show outliers</button></div>
+        <div id="text">Countries with higher gender equality won more women's medals when the factor of GDP is removed.</div>
+        <div>Move your mouse or finger over each bubble for more details. Click the legend to hide/show countries.<br>Source: <a href='https://docs.google.com/spreadsheets/d/1r-4lEmijLu9M4zdP_MP44EZrmf_A6FGxstgawkw9EUY/edit?usp=sharing' target='_blank'>Medal figures</a> are from <a href='https://www.olympic.org/olympic-studies-centre' target='_blank'>IOC Olympic Studies Centre</a>. Gender Inequality Index (GII) figures shown are the average of multiple-year GII (2008-2014) from <a href='http://hdr.undp.org/en/global-reports' target='_blank'>UNDP</a>. GDP PPP figures are from <a href='http://www.imf.org/external/pubs/ft/weo/2015/02/weodata/index.aspx' target='_blank'>IMF World Economic Outlook Database, Oct. 2015,</a> except for Cuba (<a href='http://databank.worldbank.org/data/reports.aspx?source=2&series=NY.GDP.MKTP.PP.CD&country=' target='_blank'>World Bank</a>).</div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bubble',
+            zoomType: 'xy',
+        },
+        title: {
+            text: "Olympic women's medals and gender inequality<br>(per billion GDP)",
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },
+        xAxis: {
+            title: {
+              text:'GII (lower = less inequality)',
+            },
+            minTickInterval:0.1,
+        },
+        yAxis: {    
+            title: {
+                text: "No. of Olympic women's medals per billiion GDP (1996-2012)",
+            },
+            min:-0.01,
+            endOnTick: false,
+            startOnTick: false,
+            minTickInterval:0.1,
+        },
+        credits: { enabled: false, },
+        legend:{enabled: true,},
+         plotOptions : {
+            bubble : {
+                tooltip : {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat : "GII: <b>{point.x}</b><br>Women's medals: <b>{point.women}</b><br>GDP PPP: <b>${point.gdp:,.0f}bil</b><br>Women's medals per billion GDP: <b>{point.y}</b>",   
+                          },
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#D3401E'
+                        }
+                    }
+                },
+                minSize:1,
+                maxSize:10,
+            }
+        },
+series: [{
+        name: 'Africa',
+        color: '#984ea3',
+        data:
+            [
+                {name: "Zimbabwe", women:7, x:0.570, gdp:24.46, total:7, GGI:0.665, y:0.286, totalgdp: 0.286},
+                {name: "Kenya", women:12, x:0.615, gdp:115.67, total:47, GGI:0.671, y:0.104, totalgdp: 0.406},
+                {name: "South Africa", women:8, x:0.491, gdp:659.64, total:30, GGI:0.744, y:0.012, totalgdp: 0.045},
+                {name: "Cameroon", women:2, x:0.648, gdp:58.82, total:20, GGI:0.620, y:0.034, totalgdp: 0.340},
+                {name: "Tunisia", women:1, x:0.315, gdp:115.43, total:5, GGI:0.628, y:0.009, totalgdp: 0.043},
+                {name: "Morocco", women:3, x:0.526, gdp:233.98, total:13, GGI:0.584, y:0.013, totalgdp: 0.056},
+                {name: "Mozambique", women:2, x:0.630, gdp:26.19, total:2, GGI:0.727, y:0.076, totalgdp: 0.076},
+                {name: "Algeria", women:2, x:0.447, gdp:497.68, total:11, GGI:0.609, y:0.004, totalgdp: 0.022},
+                {name: "Namibia", women:0, x:0.477, gdp:20.70, total:2, GGI:0.716, y:0.000, totalgdp: 0.097},
+                {name: "Botswana", women:0, x:0.524, gdp:30.42, total:1, GGI:0.690, y:0.000, totalgdp: 0.033},
+                {name: "Mauritius", women:0, x:0.398, gdp:21.30, total:1, GGI:0.650, y:0.000, totalgdp: 0.047},
+                {name: "Burundi", women:0, x:0.515, gdp:7.44, total:1, GGI:0.741, y:0.000, totalgdp: 0.134},
+                {name: "Zambia", women:0, x:0.641, gdp:52.73, total:1, GGI:0.632, y:0.000, totalgdp: 0.019},
+                {name: "Egypt", women:0, x:0.614, gdp:878.52, total:8, GGI:0.591, y:0.000, totalgdp: 0.009},
+                {name: "Uganda", women:0, x:0.575, gdp:66.77, total:2, GGI:0.703, y:0.000, totalgdp: 0.030},
+            ]
+         }, {
+        name: 'Asia',
+        color: '#377eb8',
+        data:
+            [
+                {name: "Korea, South", women:137, x:0.160, gdp:1624.58, total:330, GGI:0.631, y:0.084, totalgdp: 0.203},
+                {name: "Singapore", women:7, x:0.124, gdp:409.18, total:7, GGI:0.684, y:0.017, totalgdp: 0.017},
+                {name: "Japan", women:175, x:0.160, gdp:4547.36, total:315, GGI:0.651, y:0.038, totalgdp: 0.069},
+                {name: "Bahrain", women:1, x:0.315, gdp:54.67, total:1, GGI:0.617, y:0.018, totalgdp: 0.018},
+                {name: "Mongolia", women:2, x:0.381, gdp:28.06, total:11, GGI:0.708, y:0.071, totalgdp: 0.392},
+                {name: "Azerbaijan", women:6, x:0.367, gdp:147.69, total:26, GGI:0.666, y:0.041, totalgdp: 0.176},
+                {name: "Kazakhstan", women:11, x:0.362, gdp:367.76, total:52, GGI:0.708, y:0.030, totalgdp: 0.141},
+                {name: "Armenia", women:1, x:0.379, gdp:22.03, total:12, GGI:0.665, y:0.045, totalgdp: 0.545},
+                {name: "China", women:389, x:0.244, gdp:15154.32, total:592, GGI:0.681, y:0.026, totalgdp: 0.039},
+                {name: "Thailand", women:10, x:0.414, gdp:998.47, total:21, GGI:0.692, y:0.010, totalgdp: 0.021},
+                {name: "Tajikistan", women:1, x:0.399, gdp:18.93, total:3, GGI:0.662, y:0.053, totalgdp: 0.159},
+                {name: "Turkey", women:7, x:0.430, gdp:1367.61, total:33, GGI:0.596, y:0.005, totalgdp: 0.024},
+                {name: "Sri Lanka", women:1, x:0.434, gdp:183.33, total:1, GGI:0.718, y:0.005, totalgdp: 0.005},
+                {name: "Indonesia", women:9, x:0.535, gdp:2344.88, total:28, GGI:0.661, y:0.004, totalgdp: 0.012},
+                {name: "Malaysia", women:1, x:0.291, gdp:671.12, total:6, GGI:0.650, y:0.001, totalgdp: 0.009},
+                {name: "Vietnam", women:1, x:0.353, gdp:444.11, total:2, GGI:0.683, y:0.002, totalgdp: 0.005},
+                {name: "India", women:3, x:0.620, gdp:6255.54, total:12, GGI:0.626, y:0.000, totalgdp: 0.002},
+                {name: "Qatar", women:0, x:0.563, gdp:272.96, total:3, GGI:0.618, y:0.000, totalgdp: 0.011},
+                {name: "Israel", women:0, x:0.165, gdp:248.77, total:5, GGI:0.698, y:0.000, totalgdp: 0.020},
+                {name: "Iran", women:0, x:0.536, gdp:1283.53, total:27, GGI:0.588, y:0.000, totalgdp: 0.021},
+                {name: "United Arab Emirates", women:0, x:0.283, gdp:547.65, total:1, GGI:0.630, y:0.000, totalgdp: 0.002},
+                {name: "Kyrgyzstan", women:0, x:0.398, gdp:16.26, total:3, GGI:0.694, y:0.000, totalgdp: 0.185},
+                {name: "Kuwait", women:0, x:0.326, gdp:271.02, total:2, GGI:0.636, y:0.000, totalgdp: 0.007},
+                {name: "Saudi Arabia", women:0, x:0.539, gdp:1466.83, total:6, GGI:0.573, y:0.000, totalgdp: 0.004},
+                {name: "Philippines", women:0, x:0.459, gdp:590.80, total:1, GGI:0.769, y:0.000, totalgdp: 0.002},
+            ]
+        }, {
+        name: 'Europe',
+        color: '#e41a1c',
+        data:
+            [
+                {name: "Norway", women:88, x:0.102, gdp:325.61, total:115, GGI:0.830, y:0.270, totalgdp: 0.353},
+                {name: "Netherlands", women:215, x:0.078, gdp:778.96, total:359, GGI:0.752, y:0.276, totalgdp: 0.461},
+                {name: "Denmark", women:59, x:0.086, gdp:241.24, total:112, GGI:0.769, y:0.245, totalgdp: 0.464},
+                {name: "Hungary", women:74, x:0.266, gdp:227.49, total:189, GGI:0.675, y:0.325, totalgdp: 0.831},
+                {name: "Belarus", women:63, x:0.151, gdp:162.96, total:112, GGI:0.734, y:0.387, totalgdp: 0.687},
+                {name: "Romania", women:124, x:0.358, gdp:358.71, total:161, GGI:0.685, y:0.346, totalgdp: 0.449},
+                {name: "Greece", women:38, x:0.182, gdp:285.17, total:67, GGI:0.675, y:0.133, totalgdp: 0.235},
+                {name: "Iceland", women:1, x:0.128, gdp:13.12, total:15, GGI:0.837, y:0.076, totalgdp: 1.143},
+                {name: "Germany", women:254, x:0.097, gdp:3557.47, total:587, GGI:0.759, y:0.071, totalgdp: 0.165},
+                {name: "Bulgaria", women:24, x:0.256, gdp:121.59, total:58, GGI:0.709, y:0.197, totalgdp: 0.477},
+                {name: "Slovenia", women:6, x:0.117, gdp:58.45, total:20, GGI:0.712, y:0.103, totalgdp: 0.342},
+                {name: "Sweden", women:24, x:0.085, gdp:421.01, total:105, GGI:0.813, y:0.057, totalgdp: 0.249},
+                {name: "Russia", women:361, x:0.336, gdp:3397.76, total:774, GGI:0.695, y:0.106, totalgdp: 0.228},
+                {name: "Lithuania", women:8, x:0.190, gdp:72.79, total:42, GGI:0.721, y:0.110, totalgdp: 0.577},
+                {name: "Switzerland", women:16, x:0.082, gdp:441.83, total:47, GGI:0.750, y:0.036, totalgdp: 0.106},
+                {name: "Spain", women:84, x:0.139, gdp:1519.71, total:273, GGI:0.738, y:0.055, totalgdp: 0.180},
+                {name: "United Kingdom", women:117, x:0.228, gdp:2375.32, total:341, GGI:0.743, y:0.049, totalgdp: 0.144},
+                {name: "Czech Republic", women:19, x:0.153, gdp:301.44, total:56, GGI:0.678, y:0.063, totalgdp: 0.186},
+                {name: "Ukraine", women:88, x:0.350, gdp:386.43, total:172, GGI:0.690, y:0.228, totalgdp: 0.445},
+                {name: "Finland", women:8, x:0.109, gdp:217.89, total:21, GGI:0.829, y:0.037, totalgdp: 0.096},
+                {name: "Belgium", women:16, x:0.116, gdp:461.61, total:24, GGI:0.743, y:0.035, totalgdp: 0.052},
+                {name: "France", women:95, x:0.123, gdp:2487.57, total:328, GGI:0.713, y:0.038, totalgdp: 0.132},
+                {name: "Italy", women:86, x:0.121, gdp:2111.86, total:348, GGI:0.679, y:0.041, totalgdp: 0.165},
+                {name: "Ireland", women:6, x:0.179, gdp:214.46, total:13, GGI:0.771, y:0.028, totalgdp: 0.061},
+                {name: "Croatia", women:6, x:0.203, gdp:87.14, total:99, GGI:0.705, y:0.069, totalgdp: 1.136},
+                {name: "Slovakia", women:7, x:0.209, gdp:142.78, total:34, GGI:0.680, y:0.049, totalgdp: 0.238},
+                {name: "Poland", women:34, x:0.181, gdp:882.98, total:89, GGI:0.698, y:0.039, totalgdp: 0.101},
+                {name: "Austria", women:6, x:0.128, gdp:381.55, total:18, GGI:0.719, y:0.016, totalgdp: 0.047},
+                {name: "Latvia", women:1, x:0.227, gdp:43.88, total:14, GGI:0.745, y:0.023, totalgdp: 0.319},
+                {name: "Portugal", women:3, x:0.158, gdp:274.36, total:12, GGI:0.709, y:0.011, totalgdp: 0.044},
+                {name: "Moldova", women:1, x:0.316, gdp:15.04, total:8, GGI:0.719, y:0.066, totalgdp: 0.532},
+                {name: "Serbia", women:2, x:0.176, gdp:92.12, total:31, GGI:0.711, y:0.022, totalgdp: 0.337},
+                {name: "Georgia", women:1, x:0.459, gdp:30.72, total:25, GGI:0.671, y:0.033, totalgdp: 0.814},
+                {name: "Estonia", women:0, x:0.216, gdp:34.07, total:11, GGI:0.706, y:0.000, totalgdp: 0.323},
+                {name: "Cyprus", women:0, x:0.164, gdp:28.79, total:1, GGI:0.665, y:0.000, totalgdp: 0.035},
+                {name: "Macedonia", women:0, x:0.160, gdp:25.19, total:1, GGI:0.697, y:0.000, totalgdp: 0.040},
+            ]
+        }, {
+        name: 'Latin America',
+        color: '#4daf4a',
+        data:
+            [
+                {name: "Bahamas", women:13, x:0.316, gdp:8.6, total:27, GGI:0.721, y:1.503, totalgdp: 3.121, dataLabels: {enabled: true, format:'Bahamas', y: 12, style: {fontSize: '12px'}}},
+                {name: "Jamaica", women:62, x:0.487, gdp:23.2, total:94, GGI:0.703, y:2.673, totalgdp: 4.052, dataLabels: {enabled: true, format:'Jamaica', y: 12, style: {fontSize: '12px'}}},
+                {name: "Cuba", women:71, x:0.374, gdp:224.82, total:249, GGI:0.721, y:0.316, totalgdp: 1.108},
+                {name: "Argentina", women:69, x:0.408, gdp:890.67, total:158, GGI:0.717, y:0.077, totalgdp: 0.177},
+                {name: "Costa Rica", women:3, x:0.380, gdp:64.41, total:3, GGI:0.717, y:0.047, totalgdp: 0.047},
+                {name: "Brazil", women:126, x:0.485, gdp:3082.02, total:284, GGI:0.676, y:0.041, totalgdp: 0.092},
+                {name: "Colombia", women:8, x:0.497, gdp:566.88, total:13, GGI:0.701, y:0.014, totalgdp: 0.023},
+                {name: "Mexico", women:13, x:0.431, gdp:2008.79, total:42, GGI:0.665, y:0.006, totalgdp: 0.021},
+                {name: "Venezuela", women:2, x:0.483, gdp:538.21, total:4, GGI:0.688, y:0.004, totalgdp: 0.007},
+                {name: "Trinidad and Tobago", women:0, x:0.362, gdp:41.02, total:20, GGI:0.716, y:0.000, totalgdp: 0.488},
+                {name: "Paraguay", women:0, x:0.504, gdp:47.51, total:17, GGI:0.671, y:0.000, totalgdp: 0.358},
+                {name: "Barbados", women:0, x:0.372, gdp:4.41, total:1, GGI:0.725, y:0.000, totalgdp: 0.227},
+                {name: "Chile", women:0, x:0.386, gdp:374.37, total:23, GGI:0.680, y:0.000, totalgdp: 0.061},
+                {name: "Dominican Republic", women:0, x:0.523, gdp:119.22, total:5, GGI:0.677, y:0.000, totalgdp: 0.042},
+                {name: "Panama", women:0, x:0.518, gdp:64.58, total:1, GGI:0.713, y:0.000, totalgdp: 0.015},
+                {name: "Uruguay", women:0, x:0.381, gdp:63.79, total:1, GGI:0.680, y:0.000, totalgdp: 0.016},
+                {name: "Ecuador", women:0, x:0.478, gdp:161.45, total:2, GGI:0.712, y:0.000, totalgdp: 0.012},
+                {name: "Guatemala", women:0, x:0.570, gdp:107.30, total:1, GGI:0.630, y:0.000, totalgdp: 0.009},
+            ]
+        }, {
+        name: 'North America',
+        color: '#ff7f00',
+        data:
+            [
+                {name: "Canada", women:111, x:0.163, gdp:1478.58, total:191, GGI:0.731, y:0.075, totalgdp: 0.129},
+                {name: "United States", women:727, x:0.299, gdp:16155.25, total:1334, GGI:0.728, y:0.045, totalgdp: 0.083},
+            ]
+        }, {
+        name: 'Oceania',
+        color: '#a9a9a9',
+        data:
+            [
+                {name: "Australia", women:373, x:0.154, gdp:1015.35, total:735, GGI:0.729, y:0.367, totalgdp: 0.724},
+                {name: "New Zealand", women:19, x:0.204, gdp:147.03, total:59, GGI:0.777, y:0.129, totalgdp: 0.401},
+            ]
+        }]              
+    });
+    
+    var chart = $('#container').highcharts();
+    chart.yAxis[0].setExtremes(-0.01, 0.4); 
+    var turn = 1;
+  $('#button01').click(function () {
+    if (turn==1){
+        chart.yAxis[0].setExtremes(-0.05, 2.7); 
+        $('#button01').text("Hide outliers");
+        turn = 0;
+    } else {
+        chart.yAxis[0].setExtremes(-0.01, 0.4); 
+        $('#button01').text("Show outliers");
+        turn = 1;
+    } 
+  });
+
+});
+</script>

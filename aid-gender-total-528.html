@@ -1,0 +1,148 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 600px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">An aid can either target gender equality as its “principal objective” or as a “secondary objective.” Data only shows bilateral aid, excluding contribution to multilateral institutions such as the UN.</div>
+        Source:  
+        <a href='http://stats.oecd.org/Index.aspx?DataSetCode=GENDER#' target='_blank'>OECD Stat</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+        },
+        title: {
+            text: "OECD aid for developing countries that supports gender equality",
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014"],  
+        },
+        yAxis: {
+            title: {
+              text: "billions of dollars at constant 2014 prices",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            // stackLabels: {
+            //     style: {
+            //         color: '#FFFFFF',
+            //         format: '{point.y}',
+            //         style: {
+            //             fontSize: '10px',
+            //         }
+            //     },
+            //     enabled: true,
+            //     formatter: function () {
+            //         return this.total;
+            //     }
+            // },
+            // minTickInterval: 10,
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            itemStyle: {
+                fontSize: '11px',
+            },  
+        },
+        tooltip: {
+            formatter: function () {
+                    if (this.series.name == 'Principal') {return "<b>" + this.x + "</b>" + "<br>Principal: <b>$" + this.y + "bil</b>"}
+                    if (this.series.name == 'Secondary') {return "<b>" + this.x + "</b>" + "<br>Secondary: <b>$" + this.y + "bil</b>"}    
+            }
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                groupPadding: 0.01,
+            }
+        },
+        series: [{
+            name: 'Secondary', color: "#8db7d6",
+            data: [10.2,9.3,11.3,13.6,17.7,17.2,24.6,27.5,23.4,23.8,25.6,29.1,30.0]
+        },{
+            name: 'Principal', color: "#4188bc",
+            data: [1.1,1.3,1.6,1.7,1.8,2.1,2.5,4.3,4.5,5.0,5.3,4.8,7.0],
+            // dataLabels: {
+            //     enabled: true,
+            //     format: '{point.y}',
+            // }
+        }]
+    });
+});
+</script>

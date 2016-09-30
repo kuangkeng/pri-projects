@@ -1,0 +1,162 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 600px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text, #note {font-size: 10px;line-height: 12px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">The Catholic University of Argentina's data for 2015 and 2016 are projections. The government index refers to Argentina’s urban population, while the university’s index is for the general population. Argentina’s population is 92 percent urban, according to the World Bank.</div>
+        Source:  
+        <a href='http://www.uca.edu.ar/uca/common/grupo68/files/2016-Observatorio-Barometro-Deuda-Social-Presentacion.pdf' target='_blank'>Catholic University of Argentina</a>, National Institute of Statistics and Census of Argentina<a href='http://data.un.org/Data.aspx?d=MDG&f=seriesRowID%3A582' target='_blank'>[1]</a> <a href='http://www.indec.gov.ar/uploads/informesdeprensa/eph_pobreza_01_16.pdf' target='_blank'>[2]</a>        
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'line',
+        },
+        title: {
+            text: "Argentina's contradictory poverty rates",
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["2010","2011","2012","2013","2014","2015","2016"],  
+            tickmarkPlacement: 'on',
+            plotBands: [{
+                color: '#ffffff',
+                from: 3,
+                to: 6,
+                label:{
+                    useHTML: true,
+                    text: "The government<br>didn't release data<br>in 2014 and 2015",
+                    x:20,
+                    y: 210,
+                    style: {
+                        fontSize: '11px',
+                        color: '#808080',
+                        textAlign:'center',
+                    }
+                }
+            }],
+        },
+        yAxis: {
+            title: {
+              text: "Percentage of population in poverty",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            itemStyle: {
+                fontSize: '11px',
+            },  
+        },
+        tooltip: {
+            formatter: function () {
+                    return "<b>" + this.x + "</b>" + "<br>Source: <b>" + this.series.name + "</b><br>Percentage: <b>" + this.y + "%<b>"
+            }
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+            }
+        },
+        series: [{
+            name: 'University', color: "#4188bc",
+            data: [28.2,24.7,26.2,27.4,28.7,29,32.6],
+            // zoneAxis: 'x',
+            // zones: [{
+            //     value: 4
+            //     }, {
+            //     dashStyle: 'LongDash'
+            // }]
+        },{
+            name: 'Government', color: "#e41a1c",
+            data: [9.9,6.5,5.4,4.7,null,null,32.2],
+            connectNulls: true,
+            zoneAxis: 'x',
+            zones: [{
+                value: 3
+                }, {
+                dashStyle: 'dot'
+            }]
+            // dataLabels: {
+            //     enabled: true,
+            //     format: '{point.y}',
+            // }
+        }]
+    });
+});
+</script>

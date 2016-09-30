@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 570px; 
+  width: 100%; 
+  max-width: 850px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02, #container03 {
+  height: 400px; 
+  width: 100%; 
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 900px ) { 
+  #container02, #container03  {
+    padding-right: 3%;
+  }
+} 
+
+@media (max-width: 600px ) { 
+  #container02, #container03  {
+    padding-right: 8%;
+  }
+}  
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Death rates</a></li>
+    <li><a href="#tabs-2">Total deaths</a></li>
+    <li><a href="#tabs-3">Population</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+    <div id="note">
+        <div id="text">97% of all Nepali migrant worker deaths occurred in these countries. Move your mouse or finger over each bar for more details.</div>
+        Source: 
+        <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_493777.pdf' target='_blank'>Nepali Foreign Employment Promotion Board</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+    <div id="note">
+        <div id="text">97% of all Nepali migrant worker deaths occurred in these countries. Move your mouse or finger over each bar for more details.</div>
+        Source: 
+        <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_493777.pdf' target='_blank'>Nepali Foreign Employment Promotion Board</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div> 
+  <div id="tabs-3">
+    <div id="container03"></div>
+    <div id="note">
+        <div id="text">The total number of Nepali migrant workers in these countries is based on the number of labor permits issued by the Nepali government. Move your mouse or finger over each bar for more details.</div>
+        Source: 
+        <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/---ilo-kathmandu/documents/publication/wcms_493777.pdf' target='_blank'>Nepali Foreign Employment Promotion Board</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div> 
+</div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+    var chart1;
+    var chart2;
+    var chart3;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container01',
+                type: 'bar',
+            },
+            title: {
+                text: 'Estimated death rate of Nepali migrant workers in top destination countries, 2008/09-2014/15',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Lebanon","Bahrain","Oman","Saudi Arabia","Kuwait","Qatar","Malaysia","South Korea","UAE"],  
+                tickColor: '#ffffff', 
+                labels: {
+                    x:10,
+                    align:'left',
+                    style: {
+                        color: '#ffffff',
+                        fontSize: '11px',
+                    },  
+                }
+            },
+            yAxis: {
+                title: {
+                  text: 'Death rate<br>(deaths per 1,000 of estimated population)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                minTickInterval:1,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Death rate: <b>{point.y:.2f}</b><br>Total deaths: <b>{point.death:,.0f}</b><br>Estimated population: <b>{point.pop:,.0f}</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Rates", color:"#FF1300", data: [
+                    {death:20, pop:6993, y:2.86},    
+                    {death:61, pop:23442, y:2.6},    
+                    {death:39, pop:16222, y:2.4},    
+                    {death:1162, pop:514588, y:2.26},    
+                    {death:129, pop:6748, y:1.92},   
+                    {death:932, pop:517643, y:1.8},  
+                    {death:1562, pop:908156, y:1.72},    
+                    {death:55, pop:33960, y:1.61},   
+                    {death:326, pop:267491, y:1.22}, 
+                ]},
+            ],
+            });
+
+        chart2 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container02',
+                type: 'bar',
+            },
+            title: {
+                text: 'Estimated total deaths of Nepali migrant workers in top destination countries, 2008/09-2014/15',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Malaysia","Saudi Arabia","Qatar","UAE","Kuwait","Bahrain","South Korea","Oman","Lebanon"],  
+                visible: false,
+                tickColor: '#ffffff', 
+                labels: {
+                    x:10,
+                    align:'left',
+                    style: {
+                        color: '#ffffff',
+                        fontSize: '11px',
+                    },  
+                }
+            },
+            yAxis: {
+                title: {
+                  text: 'Total deaths',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                minTickInterval:1,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Total deaths: <b>{point.y:,.0f}</b><br>Death rate: <b>{point.rate:.2f}</b><br>Estimated population: <b>{point.pop:,.0f}</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{key} {point.y:,.0f}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Deaths", color:"#FF1300", data: [
+                    {y:1562, pop:908156, rate:1.72},
+                    {y:1162, pop:514588, rate:2.26},
+                    {y:932, pop:517643, rate:1.8},
+                    {y:326, pop:267491, rate:1.22},
+                    {y:129, pop:6748, rate:1.92},
+                    {y:61, pop:23442, rate:2.6},
+                    {y:55, pop:33960, rate:1.61},
+                    {y:39, pop:16222, rate:2.4},
+                    {y:20, pop:6993, rate:2.86},
+                ]},
+            ],
+            });
+
+        chart3 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container03',
+                type: 'bar',
+            },
+            title: {
+                text: 'Estimated population of Nepali migrant workers in top destination countries, 2008/09-2014/15',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Malaysia","Qatar","Saudi Arabia","UAE","South Korea","Bahrain","Oman","Lebanon","Kuwait"],  
+                visible: false,
+                tickColor: '#ffffff', 
+                labels: {
+                    x:10,
+                    align:'left',
+                    style: {
+                        color: '#ffffff',
+                        fontSize: '11px',
+                    },  
+                }
+            },
+            yAxis: {
+                title: {
+                  text: 'Estimated population',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                minTickInterval: 300000,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Estimated population: <b>{point.y:,.0f}</b><br>Total deaths: <b>{point.death:,.0f}</b><br>Death rate: <b>{point.rate:.2f}</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{key} {point.y:,.0f}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Population", color:"#00e0ff", data: [
+                    {death: 1562, y:908156, rate:1.72},
+                    {death: 932, y:517643, rate:1.8},
+                    {death: 1162, y:514588, rate:2.26},
+                    {death: 326, y:267491, rate:1.22},
+                    {death: 55, y:33960, rate:1.61},
+                    {death: 61, y:23442, rate:2.6},
+                    {death: 39, y:16222, rate:2.4},
+                    {death: 20, y:6993, rate:2.86},
+                    {death: 129, y:6748, rate:1.92},
+                ]},
+            ],
+            });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

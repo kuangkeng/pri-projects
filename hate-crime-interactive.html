@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      color:#262228;
+      
+    }
+
+    .container {
+      background-color: #F3F3F3;
+      max-width: 600px;
+      margin: 0 auto;
+      padding:0px 40px;
+    }    
+
+    #introTitle {
+      text-align: center;
+      margin-top: 20px; 
+      font-size: 32px; 
+      color:#014C75;
+      font-weight: bold;
+    }
+
+    #introIntro ,.question {
+      margin-top: 20px;
+      font-size: 22px; 
+      text-align: left; 
+      color:#262228;
+    } 
+
+    #theQuestion {color:#014C75;}
+
+    .result {
+      margin-top: 10px;
+      font-size: 25px; 
+      text-align: left; 
+      color:#262228;
+    }
+
+    .charttitle {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      color:#606060;
+    }
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 200px;
+      margin-top: 30px !important;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }   
+
+    .title {
+      color:#014C75;
+      font-size: 25px;
+      font-weight: bold;
+      margin: 20px 0px;
+      line-height: 1.4em;
+      text-align: center;
+    }
+
+    .note {
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .row {
+      margin-bottom: 20px;
+    }
+
+    #result01 {padding-top: 10px;}
+
+
+    .leftcol {
+      text-align: right;
+      font-size: 16px;
+      position: relative;
+      top: 50%;
+      transform: translateY(20%);
+    }
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: auto; max-width: 100%;}
+    .btnTW {float:left; height: auto; max-width: 100%;}     
+
+    .imglead {
+      margin: 0 auto;
+      padding:10px;
+      max-width:300px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #questions input {width:100px;}
+
+    .chart {
+      width:100%;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    #chart01 {height:400px; padding-bottom: 0px;}
+    #chart02 {height:400px; padding-bottom: 0px;}
+    
+    #sharemsg {margin-bottom: 0px;}
+    #result03Btn-back {margin-bottom: 10px !important;}
+    #result03Btn-reset {margin-top: 0px !important;}
+
+    #col01, #col02 {width:48%;}
+
+    .resultstyle01 {color:#0375B4; font-weight: bold;}
+    .resultstyle02 {color:#FF8B00; font-weight: bold;}
+
+    @media (max-width: 600px ) { 
+      .container {padding:0px 20px;}
+      #quiz { padding-bottom: 0px;}
+      .imglead {max-width: 200px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 16px; margin-bottom: 10px;}
+      .note {font-size: 12px}
+      .result {font-size: 16px;}
+      .chart {margin-left: -20px;}
+      .charttitle {font-size: 16px;}
+      .mybtn {font-size: 16px; }
+      #introIntro {
+        font-size: 16px; 
+        padding-left: 0px; 
+        padding-right: 0px; 
+      }
+      #introTitle {
+        font-size: 22px;
+        margin-top: 10px; 
+        padding-left: 15px; 
+        padding-right: 15px;
+        padding-bottom: 20px;
+      }
+      .btnFB, .btnTW {max-width:90px;}
+
+    }  
+
+    @media (max-width: 400px ) { 
+      .title {font-size: 18px;}
+      .mybtn {font-size: 14px; padding:4px 4px; margin-top: 20px !important; width:160px;}
+      .leftcol {font-size: 14px;}
+      .charttitle {font-size: 14px;}
+      #introIntro {
+        line-height: 1.2em;
+        padding-bottom: 20px;
+      }
+      #introTitle {
+        font-size: 18px;
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 10px;
+      }
+      #questions {padding:0px 10px;}
+    }
+
+    @media (max-width: 300px ) { 
+      .container {padding:0px 10px;}
+      .chart {margin-left: -10px;}
+      .question {font-size: 14px;}
+      .title {font-size: 16px;}
+    }  
+
+</style>
+
+<body>
+  <div id="quiz" class="container">    
+    <div id="intro">
+      <div id="introTitle">Are you more likely to experience a hate crime today compared to before 9/11?</div>
+      <div class="imglead">
+        <img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/hate-crime-logo-cropped.png?itok=uRIAFma5" class="img-responsive">
+      </div>
+      <div id="introIntro">Using hate crime data from the FBI and population estimates, this tool calculates whether you have a higher chance of being targeted by a hate crime today than 15 years ago.</div>
+      <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+    </div>  <!-- END INTRO PAGE -->       
+
+    <div id="questions">
+      <div id="theQuestion" class="question">Please tell us about your race, religion and ethnicity.</div>
+      <div id="note01" class="note">The categories are based on how the FBI and the Census Bureau classify their data.</div> 
+      <div class="row" id="racerow">
+        <div class="col-sm-5 col-xs-5 leftcol">Race: </div>  
+        <div class="col-sm-7 col-xs-7">
+          <form class="form-inline" method="get" action="#">
+            <div class="form-group" id="racebox">
+              <select class="form-control" id="inputrace">
+                <option selected disabled>Pick one</option>
+                <option>white</option>
+                <option>black</option>
+                <option>American Indian or Alaska Native</option>
+                <option>Asian or Pacific Islander</option>
+                <option>None of the above</option>
+              </select>
+            </div>  
+          </form>
+        </div>
+       </div>
+       <div class="row" id="relirow"> 
+        <div class="col-sm-5 col-xs-5 leftcol">Religious tradition: </div>  
+        <div class="col-sm-7 col-xs-7">        
+          <form class="form-inline" method="get" action="#">
+            <div class="form-group" id="religionbox">
+              <select class="form-control" id="inputreli">
+                <option selected disabled>Pick one</option>
+                <option>Jewish</option>
+                <option>Catholic</option>
+                <option>Protestant</option>
+                <option>Muslim</option>
+                <option>None of the above</option>
+              </select>
+            </div>   
+          </form> 
+        </div>  
+      </div>
+      <div class="row" id="ethnrow">  
+        <div class="col-sm-5 col-xs-5 leftcol">Are you Hispanic/Latino? </div>  
+        <div class="col-sm-7 col-xs-7">     
+          <form id="inputethn">
+            <label class="radio-inline"><input type="radio" name="optradio" value="Yes">Yes</label>
+            <label class="radio-inline"><input type="radio" name="optradio" value="No">No</label>
+          </form>  
+        </div>  
+      </div>
+      <div id="result01Btn" class="btn btn-primary btn-lg center-block mybtn">See my results</div>
+    </div><!-- END QUESTION PAGE -->      
+
+    <div id="result01">
+      <div class="result" id="resultrace01"></div>
+      <div class="result" id="resultreli01"></div>
+      <div class="result" id="resultopt">Because you're <span class="resultstyle01">Hispanic</span>, you would be <span class="resultstyle02"> 66% less</span> likely to experience hate crime today than before 9/11.</div>
+      <div class="charttitle">Hate crime rate in 2000 and 2014</div>
+      <div class="chart" id="chart01"></div>
+      <div id="result02Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+    </div> 
+    <div id="result02">
+      <div class="title" id="resultTitle">When compared to other groups</div>
+      <div class="question">Overall, the total number of hate crimes has steadily dropped since 1996. But this trend is not true of all groups. Hate crimes against Muslims and American Indians or Alaska Natives have increased in the past 15 years. Mouse over or tap each bar for details.</div>
+      <div class="charttitle">Change of hate crime rate from 2000 to 2014</div>
+      <div class="chart" id="chart02"></div>
+      <div class="note" id="note01">The <a href='https://docs.google.com/spreadsheets/d/1OcBVU_H76qbKyPg8HUXxmOvfB4Odf76bTjn5pRhYav8/edit?usp=sharing' target='_blank'>latest hate crime data</a> from the <a href='https://ucr.fbi.gov/ucr-publications#Hate' target='_blank'>FBI</a> is for 2014. Population estimates for race and ethnicity groups for <a href='https://www.census.gov/popest/data/historical/2000s/vintage_2009/index.html' target='_blank'>2001</a> and <a href='http://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml' target='_blank'>2014</a> are from the Census Bureau. As the bureau is legally prohibited from asking question on religious affiliation, we used the 2001 population estimates for religious groups from the <a href='http://www.washingtonpost.com/wp-srv/metro/documents/aris030609.pdf' target='_blank'>2008 American Religious Identification Survey</a> and the 2014 population estimates for religious groups from the <a href='http://www.pewforum.org/religious-landscape-study/' target='_blank'>Pew Research Center</a>. Due to the lack of population data of sexual minority groups in the early 2000s, we cannot compare the hate crime rates based on sexual orientation.</div>
+      <div class="title" id="sharemsg">Share your results</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+      <div id="result03Btn-back" class="btn btn-primary btn-lg center-block mybtn">Back</div>
+      <div id="result03Btn-reset" class="btn btn-primary btn-lg center-block mybtn" onClick="history.go(0)">Calculate again</div>
+    </div>
+    <div id="resultnone">
+      <div class="title" id="resultTitle">Sorry, there's no data for your profile. Please restart and make different picks.</div>
+      <div id="result03Btn-reset" class="btn btn-primary btn-lg center-block mybtn" onClick="history.go(0)">Restart</div>
+    </div> 
+  </div>   
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var inputrace = 0,
+    inputreli = 0,
+    inputethn = 0,
+    sharemsg = 0,
+    resultrace = [],
+    resultreli = [],
+    resultethn = [],
+    totalarray = [],
+    data_cat = [],
+    data_2000 = [],
+    data_2014 = [];
+
+var data = [
+  {"name": "white", "rate00":3.84, "rate14":2.53, "change":-1.30, "pct":-33.9},
+  {"name": "black", "rate00":80.77, "rate14":40.14, "change":-40.63, "pct":-50.3},
+  {"name": "American Indian or Alaska Native", "rate00":21.40, "rate14":49.97, "change":28.57, "pct":133.5},
+  {"name": "Asian or Pacific Islander", "rate00":25.43, "rate14":8.29, "change":-17.13, "pct":-67.4},
+  {"name": "Jewish", "rate00":390.91, "rate14":100.52, "change":-290.38, "pct":-74.3},
+  {"name": "Catholic", "rate00":1.10, "rate14":0.96, "change":-0.14, "pct":-12.3},
+  {"name": "Protestant", "rate00":0.54, "rate14":0.16, "change":-0.39, "pct":-71.0},
+  {"name": "Muslim", "rate00":25.36, "rate14":53.66, "change":28.30, "pct":111.6},
+  {"name": "Hispanic", "rate00":15.78, "rate14":5.41, "change":-10.37, "pct":-65.7},
+];   
+    
+function init() { 
+  $("#questions, #result01, #result02, #result01Btn, #resultopt, #relirow, #ethnrow, #resultnone").hide();
+  $("#startBtn").click(function(){
+    $('.container').slideUp(500, function(){
+      $("#intro").hide();
+      $("#questions").show(); 
+    });
+    $('.container').slideDown(500);
+  });
+
+  $( "#racerow" ).change(function() {
+    $("#relirow").show();
+  });
+
+  $( "#relirow" ).change(function() {
+    $("#ethnrow").show();
+  });
+
+  $( "#inputethn input" ).change(function() {
+    $("#result01Btn").show();
+  });
+
+  $("#result01Btn").click(function() {
+    setValue();
+  });
+  
+  $("#result02Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result01").hide();
+      $("#result02").show();
+    });
+    $('.container').slideDown(500);   
+  });
+
+  $("#result03Btn-back").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result02").hide();
+      $("#result01").show();
+    });
+    $('.container').slideDown(500);   
+  });    
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+
+} 
+
+function setValue() {
+  inputrace = $('#inputrace').val();
+  inputreli = $('#inputreli').val();
+  inputethn = $('#inputethn input:checked').val();
+
+  if(inputrace=="None of the above"){$("#resultrace01").hide();}
+  else{
+    resultrace = jQuery.grep(data, function (n, i) {
+      return (n.name == inputrace);
+    },false); //find among data array for race that matches the race input, then pass the row into resultrace 
+    data_cat.push(resultrace[0]["name"]); 
+    data_2000.push(resultrace[0]["rate00"]);
+    data_2014.push(resultrace[0]["rate14"]);
+    //split resultrace into 3 arrays in data_cat, data_2000 and data_2014 to be used for chart later
+
+      if(resultrace[0]["pct"]>0){
+        $("#resultrace01").html("Because you're <span class='resultstyle01'>American Indian or Alaska Native</span>, you would be <span class='resultstyle02'>134% more</span> likely to experience a hate crime today than before 9/11.");
+      } else {
+        $("#resultrace01").html("Because you're <span class='resultstyle01'>"+ resultrace[0]["name"] +"</span>, you would be <span class='resultstyle02'>"+ Math.round(Math.abs(resultrace[0]["pct"])) +"% less</span> likely to experience a hate crime today than before 9/11.");
+      }   
+  }
+
+  if(inputreli=="None of the above"){$("#resultreli01").hide();}
+  else{
+    resultreli = jQuery.grep(data, function (n, i) {
+      return (n.name == inputreli);
+    },false); //find among data array for religion that matches the religion input, then pass the row into resultreli 
+    data_cat.push(resultreli[0]["name"]);
+    data_2000.push(resultreli[0]["rate00"]);
+    data_2014.push(resultreli[0]["rate14"]);
+    //split resultreli into 3 arrays in data_cat, data_2000 and data_2014 to be used for chart later
+  
+      if(resultreli[0]["pct"]>0){
+        $("#resultreli01").html("Because you're <span class='resultstyle01'>Muslim</span>, you would be <span class='resultstyle02'>112% more</span> likely to experience a hate crime today than before 9/11.");
+      } else {
+        $("#resultreli01").html("Because you're <span class='resultstyle01'>"+ resultreli[0]["name"] +"</span>, you would be <span class='resultstyle02'>"+  Math.round(Math.abs(resultreli[0]["pct"])) +"% less</span> likely to experience a hate crime today than before 9/11.");
+      } 
+      //this if statement is to customize "more likely" and "less likely" language in result page. The language "two times more" is not in the scenario of which the chance is lower.
+  }
+
+  if(inputethn=="Yes"){
+    $("#resultopt").show();
+    data_cat.push("Hispanic");
+    data_2000.push(data[8]["rate00"]);
+    data_2014.push(data[8]["rate14"]);
+    resultethn.push(data[8]);
+  } else {}
+  
+  if(data_cat==""){
+    $('.container').slideUp(500, function(){
+      $("#questions").hide();
+      $("#resultnone").show();
+    });
+    $('.container').slideDown(500); 
+    sendData();
+  } else {
+    $('.container').slideUp(500, function(){
+      $("#questions").hide();
+      $("#result01").show();
+      chart01();
+      chart02();
+    });
+    $('.container').slideDown(500); 
+    sharedata();
+    sendData();
+  }
+}
+  
+function addThousandsSeparator(input) {
+    var output = input
+    if (parseFloat(input)) {
+        input = new String(input); // so you can perform string operations
+        var parts = input.split("."); // remove the decimal part
+        parts[0] = parts[0].split("").reverse().join("").replace(/(\d{3})(?!$)/g, "$1,").split("").reverse().join("");
+        output = parts.join(".");
+    }
+    return output;
+} 
+
+function chart01() {
+    $('#chart01').highcharts({
+        chart: {
+            type: 'column',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: '',
+            align: 'left',
+            style: {
+                fontSize: '12',
+            }
+        },
+        xAxis: {
+            categories: data_cat,
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {
+            title: {
+                text: 'Hate crimes per one million population',
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Year: <b>{series.name}</b><br>Rate: <b>{point.y}</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0.02,
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '12px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: true,},
+        series: [{
+            name: '2000',
+            data: data_2000,
+            color:'#0375B4',
+        }, {
+            name: '2014',
+            data: data_2014,
+            color:'#FF8B00',
+        }],
+    }); 
+}
+
+function chart02() {
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#chart02').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["American Indian or Alaska Native","Muslim","Catholic","White","Black","Hispanic","Asian or Pacific Islander","Protestant","Jewish"],
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {    
+            title: {
+                text: 'Percentage',
+                x:-20,
+            },
+            endOnTick: false, 
+            minTickInterval: 1,
+        },
+        credits: { enabled: false,},
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Rate in 2000: <b>{point.rate00:.2f}</b><br>Rate in 2014: <b>{point.rate14:.2f}</b><br>Change: <b>{point.change:.2f}</b><br>Percentage: <b>{point.y:.1f}%</b><br>"
+        },
+        plotOptions: {
+            series: {
+               groupPadding: 0.02,
+
+            }
+        },
+        series: [{
+            data: [
+              {rate00:21.40, rate14:49.97, change:28.57, y:133.5, color:"#FF8B00"},
+              {rate00:25.36, rate14:53.66, change:28.30, y:111.6, color:"#FF8B00"},
+              {rate00:1.10, rate14:0.96, change:-0.14, y:-12.3},
+              {rate00:3.84, rate14:2.53, change:-1.30, y:-33.9},
+              {rate00:80.77, rate14:40.14, change:-40.63, y:-50.3},
+              {rate00:15.78, rate14:5.41, change:-10.37, y:-65.7},
+              {rate00:25.43, rate14:8.29, change:-17.13, y:-67.4},
+              {rate00:0.54, rate14:0.16, change:-0.39, y:-71.0},
+              {rate00:390.91, rate14:100.52, change:-290.38, y:-74.3},
+            ],
+            color:'#0375B4',
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                rotation: 0,
+                color: '#FFFFFF',
+                align: 'left',
+                format: '{point.y}%',
+                y: 0, // 10 pixels down from the top
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }]
+    });
+}
+ 
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLScOE258UCuCzvLByCvxUtFqgWVB151FZyTNfiYDhhwAMdHotQ/formResponse',
+        data: { 
+          "entry.540995103": json.ip,
+          "entry.56718147": inputrace,
+          "entry.730541533": inputreli,
+          "entry.642737123": inputethn,
+          "entry.81993927": document.referrer,
+
+        }
+      }); 
+    }
+  );   
+}  
+
+function sharedata () {
+  totalarray.push(resultrace[0],resultreli[0],resultethn[0]);
+  //insert all data selected by the user into a new array
+  totalarray = totalarray.sort(function (a, b) {return b.pct - a.pct;});
+  //we need to sort totalarray so group with highest pct will be at the top, so we can find muslim or american indian/alaska native in totalarray[0]
+  if (totalarray[0]["name" ]=="Muslim"){
+    sharemsg = "Because I'm Muslim, I'm 112% more likely to experience a hate crime today than before 9/11.";
+  } else if (totalarray[0]["name"]=="American Indian or Alaska Native"){
+    sharemsg = "Because I'm American Indian/Alaska Native, I'm 134% more likely to experience a hate crime than before 9/11.";
+  } else {
+    totalarray = totalarray.sort(function (a, b) {return a.pct - b.pct;}); 
+    //if there's no muslim or american indian/alaska native in totalarray, we want to use the group with lowest pct, hence we sort totalarray with the lowest at top, so we can use totalarray[0] in sharemsg.
+    sharemsg = "Because I'm " + totalarray[0]["name"] + ", I'm " + Math.round(Math.abs(totalarray[0]["pct"])) + "% less likely to experience a hate crime today than before 9/11."; 
+  }
+}
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent(sharemsg);
+  tweet_url += ' @PRI';
+  tweet_url += '&url=http://bit.ly/2cQEThF';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-09-19/how-likely-are-you-be-victim-hate-crime',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/Hate-crime_web.jpg?itok=BFZ8wBq5',
+  name: sharemsg,
+  description:"This tool calculates whether you have a higher chance of being targeted by a hate crime today than 15 years ago."
+  }, function(response){});
+}
+
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '978157612295467',
+      xfbml      : true,
+      version    : 'v2.7'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

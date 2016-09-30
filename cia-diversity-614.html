@@ -1,0 +1,142 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">The figures are from the 41.5 percent of CIA officers responded to the study's survey. Respondents could select more than one race/ethnicity.</div>
+        Source:  
+        <a href='https://www.cia.gov/library/reports/dls-report.pdf' target='_blank'>CIA Director's Diversity in Leadership Study, 2015</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Racial diversity of CIA officers, 2014',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["White/Caucasian","Black/<br>African American","Hispanic/Latino","Asian","American Indian/<br>Alaska Native","Biracial/<br>Multiracial","Middle Eastern/<br>Arab American","South Asian","Native Hawaiian/<br>Pacific Islander"],                   
+            },
+            yAxis: {
+                title: {
+                  text: 'Percentage',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: '<span style="font-size: 12px">{point.key}</span><br/>',
+                pointFormat: '{point.key}<br><b>{point.y}%</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{y}%',
+                        style: {
+                            fontSize: '11px',
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Percentage", color:"#4188bc", data: [78.8,11.4,6.1,4.5,2.3,2.2,1.1,1.0,0.6]},
+            ],
+            });
+    });
+});
+</script>

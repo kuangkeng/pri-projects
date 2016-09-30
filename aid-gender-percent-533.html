@@ -1,0 +1,140 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">An aid can either target gender equality as its “principal objective” or as a “secondary objective.” Data only shows bilateral aid, excluding contribution to multilateral institutions such as the UN.</div>
+        Source:  
+        <a href='http://stats.oecd.org/Index.aspx?DataSetCode=GENDER#' target='_blank'>OECD Stat</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: "How much of OECD aid for developing countries support gender equality?",
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    year: '%Y'
+                },
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,         
+            },
+            yAxis: {
+                title: {
+                  text: 'Percentage of total aid',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                min: 0,
+            },
+            credits: {enabled: false},
+            legend: {enabled: true},
+            tooltip: {
+                formatter:function() {
+                    return '<b>' + this.series.name + '</b><br>Year: <b>' + Highcharts.dateFormat('%Y',this.x) + '</b><br>Percentage: <b>' + Highcharts.numberFormat(this.point.y,1,'.',',') + '%</b>';
+                }
+            },
+            plotOptions: {
+                  series: {
+                      pointStart: Date.UTC(2002, 1, 1),
+                      pointInterval: 24 * 3600 * 1000 * 365
+                  },
+                  line: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+            },    
+            series: [ 
+                {name: "Principal + Secondary", color:"#4188bc",
+                data :[13.9,10.9,13.2,12.1,15.0,17.2,20.0,24.3,21.7,23.2,24.0,24.7,27.7],
+            },
+            {name: "Principal only", color:"#e41a1c",
+                data :[1.36,1.35,1.65,1.35,1.40,1.86,1.83,3.32,3.51,4.02,4.10,3.47,5.22],
+            },
+            ],
+            });
+    });
+
+});
+</script>

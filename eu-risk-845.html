@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  width: 100%;
+  max-width: 500px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 845px; 
+  width: 100%; 
+  max-width: 500px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02 {
+  width: 100%; 
+  max-width: 450px; 
+  margin: 0 auto;
+}
+#container01 {height:600px;}
+#container02 {height:650px;}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+.highcharts-title {width:100% !important;}
+
+.customlabel {font-size: 10px; font-weight: bold;}
+
+@media (max-width: 900px ) { 
+  #container02, #container03  {
+    padding-right: 3%;
+  }
+} 
+
+@media (max-width: 600px ) { 
+  #container02, #container03  {
+    padding-right: 8%;
+  }
+}  
+
+@media (max-width: 450px ) { 
+    #text {font-size: 11px;line-height: 13px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Risk of poverty</a></li>
+    <li><a href="#tabs-2">Changes</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+    <div id="note">
+        <div id="text"><span style="color:#4188bc">Blue bar:</span> Percentage of people at risk of poverty or social exlusion has reduced compared to 2005.<br><span style="color:#FF1300">Red bar:</span> Percentage of people at risk of poverty or social exlusion has increased compared to 2005.<br>This indicator measures disposable income and participation in labor market [<u><a href='http://ec.europa.eu/eurostat/tgm/web/table/description.jsp' target='_blank'>click for definition</a></u>]. Move your mouse or finger over each bar for more details.</div>
+        Source: 
+        <a href='http://ec.europa.eu/eurostat/tgm/refreshTableAction.do?tab=table&plugin=1&pcode=t2020_50&language=en' target='_blank'><u>Eurostat</u></a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+    <div id="note">
+        <div class="button01"><button id="button01">Zoom in</button></div></td>
+        <div id="text">This indicator measures disposable income and participation in labor market [<u><a href='http://ec.europa.eu/eurostat/tgm/web/table/description.jsp' target='_blank'>click for definition</a></u>]. Move your mouse or finger over each line for more details.</div>
+        Source: 
+        <a href='http://ec.europa.eu/eurostat/tgm/refreshTableAction.do?tab=table&plugin=1&pcode=t2020_50&language=en' target='_blank'><u>Eurostat</u></a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div> 
+</div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+    var chart1;
+    var chart2;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container01',
+                type: 'bar',
+            },
+            title: {
+                text: 'People at risk of poverty or social exclusion in key EU countries, 2014',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Bulgaria","Romania","Greece","Hungary","Spain","Italy","Ireland","Portugal","Poland","UK","Belgium","Germany","Austria","France","Slovakia","Denmark","Finland","Sweden","Netherlands","Czech",],  
+                tickColor: '#ffffff', 
+                labels: {
+                    x:10,
+                    align:'left',
+                    style: {
+                        color: '#ffffff',
+                        fontSize: '11px',
+                    },  
+                }
+            },
+            yAxis: {
+                title: {
+                  text: 'Percentage of total population',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                minTickInterval:10,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Percentage of population: <b>{point.y:.1f}%</b><br>Change since 2005: <b>{point.change:,.1f}</b><br>Percentage of change: <b>{point.pct:,.1f}%</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y + "%"
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Risk", data: [
+                    {y:40.1, change: -21.2, pct: -34.6, color:"#4188bc"},
+                    {y:39.5, change: -6.4, pct: -13.9, color:"#4188bc"},
+                    {y:36.0, change: 6.6, pct: 22.4, color:"#FF1300"},
+                    {y:31.8, change: -0.3, pct: -0.9, color:"#4188bc"},
+                    {y:29.2, change: 4.9, pct: 20.2, color:"#FF1300"},
+                    {y:28.3, change: 2.7, pct: 10.5, color:"#FF1300"},
+                    {y:27.6, change: 2.6, pct: 10.4, color:"#FF1300"},
+                    {y:27.5, change: 1.4, pct: 5.4, color:"#FF1300"},
+                    {y:24.7, change: -20.6, pct: -45.5, color:"#4188bc"},
+                    {y:24.1, change: -0.7, pct: -2.8, color:"#4188bc"},
+                    {y:21.2, change: -1.4, pct: -6.2, color:"#4188bc"},
+                    {y:20.6, change: 2.2, pct: 12.0, color:"#FF1300"},
+                    {y:19.2, change: 1.8, pct: 10.3, color:"#FF1300"},
+                    {y:18.5, change: -0.4, pct: -2.1, color:"#4188bc"},
+                    {y:18.4, change: -13.6, pct: -42.5, color:"#4188bc"},
+                    {y:17.9, change: 0.7, pct: 4.1, color:"#FF1300"},
+                    {y:17.3, change: 0.1, pct: 0.6, color:"#FF1300"},
+                    {y:16.9, change: 2.5, pct: 17.4, color:"#FF1300"},
+                    {y:16.5, change: -0.2, pct: -1.2, color:"#4188bc"},
+                    {y:14.8, change: -4.8, pct: -24.5, color:"#4188bc"},
+                ]},
+            ],
+            });
+
+        chart2 = new Highcharts.Chart({
+        chart: {
+          type: 'line',
+          renderTo: 'container02',
+          //marginRight: 50 //add margin for text
+        },
+        title: {
+            text: "Changes in the percentage of people at risk of poverty or social exclusion, 2005-2014",
+        },
+        subtitle: {
+            enabled: false,
+        },
+  
+        xAxis: {
+            categories: ["2005","2014"],
+            plotLines: [{
+              color: '#d8d8d8',
+              value: 0,
+              width: 1
+              },
+              {
+              color: '#d8d8d8',
+              value: 1,
+              width: 1
+              },
+            ],
+            tickmarkPlacement: 'on',
+        },
+        yAxis: {
+            title: {
+                text: null,
+            },
+            labels:{
+                x:-2,
+            },
+            minTickInterval:10,
+            //floor:23,
+            //celling: 39,
+            endOnTick: false,
+            startOnTick: false,
+            
+        },
+        tooltip: {
+            formatter: function() {
+                return this.x + "<br>Country: <b>" + this.series.name + "</b><br>" + "Percentage of people at risk: <b>" + this.point.y + "%</b><br>Change (2005-2014): <b>" +  this.point.change + "</b><br>Percentage of change: <b>" + this.point.pct + "%</b>"
+            },
+        },
+        
+        legend: {enabled: false},
+        credits: {enabled: false},
+        series: [
+            {name:"Bulgaria", data:[{y:61.3,change: -21.2, pct: -34.6, id:2},{y:40.1, change: -21.2, pct: -34.6, id:2}], color:"#4188bc"},
+            {name:"Romania", data:[{y:45.9,change: -6.4, pct: -13.9, id:2},{y:39.5, change: -6.4, pct: -13.9, id:0}], color:"#4188bc"},
+            {name:"Greece", data:[{y:29.4,change: 6.6, pct: 22.4, id:2},{y:36.0, change: 6.6, pct: 22.4, id:2}], color:"#FF1300"},
+            {name:"Hungary", data:[{y:32.1,change: -0.3, pct: -0.9, id:2},{y:31.8, change: -0.3, pct: -0.9, id:0}], color:"#4188bc"},
+            {name:"Spain", data:[{y:24.3,change: 4.9, pct: 20.2, id:2},{y:29.2, change: 4.9, pct: 20.2, id:0}], color:"#FF1300"},
+            {name:"Italy", data:[{y:25.6,change: 2.7, pct: 10.5, id:2},{y:28.3, change: 2.7, pct: 10.5, id:0}], color:"#FF1300"},
+            {name:"Ireland", data:[{y:25,change: 2.6, pct: 10.4, id:2},{y:27.6, change: 2.6, pct: 10.4, id:2}], color:"#FF1300"},
+            {name:"Portugal", data:[{y:26.1,change: 1.4, pct: 5.4, id:2},{y:27.5, change: 1.4, pct: 5.4, id:2}], color:"#FF1300"},
+            {name:"Poland", data:[{y:45.3,change: -20.6, pct: -45.5, id:2},{y:24.7, change: -20.6, pct: -45.5, id:2}], color:"#4188bc"},
+            {name:"UK", data:[{y:24.8,change: -0.7, pct: -2.8, id:2},{y:24.1, change: -0.7, pct: -2.8, id:0}], color:"#4188bc"},
+            {name:"Belgium", data:[{y:22.6,change: -1.4, pct: -6.2, id:2},{y:21.2, change: -1.4, pct: -6.2, id:2}], color:"#4188bc"},
+            {name:"Germany", data:[{y:18.4,change: 2.2, pct: 12.0, id:2},{y:20.6, change: 2.2, pct: 12.0, id:0}], color:"#FF1300"},
+            {name:"Austria", data:[{y:17.4,change: 1.8, pct: 10.3, id:2},{y:19.2, change: 1.8, pct: 10.3, id:0}], color:"#FF1300"},
+            {name:"France", data:[{y:18.9,change: -0.4, pct: -2.1, id:2},{y:18.5, change: -0.4, pct: -2.1, id:2}], color:"#4188bc"},
+            {name:"Slovakia", data:[{y:32,change: -13.6, pct: -42.5, id:2},{y:18.4, change: -13.6, pct: -42.5, id:2}], color:"#4188bc"},
+            {name:"Denmark", data:[{y:17.2,change: 0.7, pct: 4.1, id:2},{y:17.9, change: 0.7, pct: 4.1, id:0}], color:"#FF1300"},
+            {name:"Finland", data:[{y:17.2,change: 0.1, pct: 0.6, id:2},{y:17.3, change: 0.1, pct: 0.6, id:2}], color:"#FF1300"},
+            {name:"Sweden", data:[{y:14.4,change: 2.5, pct: 17.4, id:2},{y:16.9, change: 2.5, pct: 17.4, id:2}], color:"#FF1300"},
+            {name:"Netherlands", data:[{y:16.7,change: -0.2, pct: -1.2, id:2},{y:16.5, change: -0.2, pct: -1.2, id:0}], color:"#4188bc"},
+            {name:"Czech", data:[{y:19.6,change: -4.8, pct: -24.5, id:2},{y:14.8, change: -4.8, pct: -24.5, id:0}], color:"#4188bc"},
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                },
+                dataLabels: {
+                    enabled: true,
+                    align: 'right',
+                    x:0,
+                    y:10,
+                    allowOverlap: true,
+                    style: {
+                        fontSize: '10px',
+                    },
+                    formatter: function() {
+                        if (this.point.y===this.series.data[0].y && this.series.data[0].y!=this.series.data[1].y)
+                        {
+                            if (this.series.name=="Romania"){return "";}
+                            if (this.series.name=="Hungary"){return "";}
+                            if (this.series.name=="Italy"){return "";}
+                            if (this.series.name=="UK"){return "";}
+                            if (this.series.name=="Czech"){return "";}
+                            if (this.series.name=="Germany"){return "";}
+                            if (this.series.name=="Austria"){return "";}
+                            if (this.series.name=="Netherlands"){return "";}
+                            if (this.series.name=="Denmark"){return "";}
+                            if (this.series.name=="Spain"){return "";}
+                            else {return this.series.name;}    
+                        }
+                    },
+                }
+            },
+
+        },
+    });
+
+        $(chart2.series).each(function(){
+          var point = this.points[this.points.length-1];
+          if (point.id==0)
+            {
+          chart2.renderer.text(this.name,
+          point.plotX + chart2.plotLeft + 5,
+          point.plotY + chart2.plotTop + 5)
+          .attr({zIndex: 5, class:"customlabel"}).add();
+            }
+        });
+
+        var flip = "off";
+        $('#button01').click(function () {
+            if(flip=="off"){
+              flip="on";  
+              $('#button01').text("Zoom out");
+              chart2.yAxis[0].setExtremes(13, 35); 
+              $(".customlabel").remove();
+
+                $(chart2.series).each(function(){
+                  var point = this.points[this.points.length-1];
+                  if (point.id==0)
+                    {
+                  chart2.renderer.text(this.name,
+                  point.plotX + chart2.plotLeft + 5,
+                  point.plotY + chart2.plotTop + 5)
+                  .attr({zIndex: 5, class:"customlabel"}).add();
+                    }
+                });
+
+            } else {
+              flip = "off";
+              $('#button01').text("Zoom in");
+              chart2.yAxis[0].setExtremes(13, 62); 
+              $(".customlabel").remove();
+              
+                $(chart2.series).each(function(){
+                  var point = this.points[this.points.length-1];
+                  if (point.id==0)
+                    {
+                  chart2.renderer.text(this.name,
+                  point.plotX + chart2.plotLeft + 5,
+                  point.plotY + chart2.plotTop + 5)
+                  .attr({zIndex: 5, class:"customlabel"}).add();
+                    }
+                });
+
+            } 
+        });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

@@ -1,0 +1,140 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #container{height: 530px; }
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text"></div>
+        Source: Figures are from the <a href="http://convention.gop/monday-speakers" target="_blank">RNC</a>, <a href="https://www.demconvention.com/event-categories/july-25/" target="_blank">DNC</a> and <a href="http://www.latimes.com/nation/politics/trailguide/la-na-democratic-convention-2016-live-speakers-at-the-1469652486-htmlstory.html" target="_blank">LA Times</a>. Presidential and vice presidential candidates are excluded.<br>2016 voter diversity is projected by <a href="http://www.pewresearch.org/fact-tank/2016/02/03/2016-electorate-will-be-the-most-diverse-in-u-s-history/" target="_blank">Pew Research Center</a>. The total does not add up to 100 percent as Native Americans, Native Hawaiians/Pacific Islanders and multi-race Americans are not shown.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'Racial breakdown of speakers at RNC & DNC',
+                margin: -50,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["RNC","DNC","US voters<br>2016"], 
+            },
+            yAxis: {visible:false},
+            credits: {enabled: false},
+            legend: {reversed: true},
+            tooltip: {
+                pointFormat: "{point.series.name}: <b>{point.y}%</b>",
+            },
+            plotOptions: {
+                series:{
+                    stacking: 'normal',
+                    groupPadding: 0.2,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '14px',
+                        },
+                        formatter: function() {
+                            return this.y + "%"
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Native American", color:"#d7191c", data: [0.0, 0.8, 0]},
+                {name:"Asian", color:"#998ec3", data: [1.4, 2.3, 4]},
+                {name:"Latino", color:"#abdda4", data: [8.5, 14.3, 12]},
+                {name:"Black", color:"#2b83ba", data: [9.9, 27.1, 12]},
+                {name:"White", color:"#fdae61", data: [80.3, 55.6, 69]},
+            ],
+            });
+
+    });
+
+});
+</script>

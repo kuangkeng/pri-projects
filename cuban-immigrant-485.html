@@ -1,0 +1,150 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 600px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">*First 10 months of fiscal year 2016. Fiscal years start in October the previous calendar year.</div>
+        Source:  
+        <a href='http://www.pewresearch.org/fact-tank/2016/08/05/cuban-immigration-to-u-s-surges-as-relations-warm/?utm_source=Pew+Research+Center&utm_campaign=3f5deccecc-Weekly_August_11_20168_11_2016&utm_medium=email&utm_term=0_3e953b9b70-3f5deccecc-400235157' target='_blank'>US Customs and Border Protection</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'Number of Cubans entering the US',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016*"], 
+                title: {
+                  text: "Fiscal year",
+                }    
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                //pointFormat: '{key}<br>% of population {point.series.name}: <b>{point.y}%</b>',
+                //valueSuffix: '%',
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Cuban immigrants", color:"#4188bc", data: [7211,9064,10431,13014,11271,7054,7487,7821,12240,17696,24278,43159,46635]},
+            ],
+            });
+
+        $(chart.series).each(function(){
+          var point = this.points[10];
+          chart.renderer.label("Normalization of<br>US-Cuba relations<br>announced on Dec 17", point.plotX + chart.plotLeft - 80, point.plotY + chart.plotTop - 60,'callout',
+          point.plotX + chart.plotLeft,
+          point.plotY + chart.plotTop)
+          .css({color: '#FFFFFF'})
+          .attr({ fill: 'rgba(0, 0, 0, 0.5)',padding: 3,r: 5,zIndex: 6}).add();
+        });
+
+
+    });
+
+});
+</script>

@@ -1,0 +1,137 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 750px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 750px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text"></div>
+        Source:  
+        <a href='https://ucr.fbi.gov/ucr-publications#Hate' target='_blank'>FBI</a>. The latest data is for 2014.<br><a href='https://docs.google.com/spreadsheets/d/1OcBVU_H76qbKyPg8HUXxmOvfB4Odf76bTjn5pRhYav8/edit?usp=sharing' target='_blank'>Get the data</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'Hate crime incidents against Muslims spiked after 9/11',
+                margin: 30,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014"],   
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: 'Year: <b>{point.key}</b><br>',
+                //pointFormat: '{key}<br>% of population {point.series.name}: <b>{point.y}%</b>',
+                //valueSuffix: '%',
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Incidents", color:"#e41a1c", data: [27,28,21,32,28,{y:481,color:'#940808'},155,149,156,128,156,115,105,107,160,157,130,135,154]},
+            ],
+            });
+    });
+
+});
+</script>

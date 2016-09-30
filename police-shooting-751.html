@@ -1,0 +1,155 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #container{height: 550px; }
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Data was available for different time ranges in each country. Deaths per capita were calculated by dividing total deaths during those periods by the estimated population in the last year data was available. Move your mouse or finger over each column for details.</div>
+        Source:  
+        <a href="http://mappingpoliceviolence.org/" target="_blank">Mapping Police Violence</a>, <a href="http://www.aic.gov.au/publications/current%20series/rip/21-40/rip34.html" target="_blank">Australian Institute of Criminology</a>, <a href="https://www.politi.dk/NR/rdonlyres/20DE43AF-33F4-48C5-A710-6A58457E35D2/0/Engelskresum%C3%A9afendeligrapport.pdf" target="_blank">Danish National Police</a>, <a href="http://www.statewatch.org/analyses/no-213-holland-police-firearms.pdf" target="_blank">Statewatch</a>, <a href="http://www.dw.com/en/why-german-police-officers-rarely-reach-for-their-guns/a-17884779" target="_blank">Deutsche Welle</a>, <a href="http://m.nzherald.co.nz/auckland-region/news/article.cfm?l_id=117&objectid=11513839" target="_blank">NZ Herald</a>, <a href="http://www.inquest.org.uk/statistics/fatal-police-shootings" target="_blank">Inquest</a>, <a href="http://www.straitstimes.com/singapore/shangri-la-shooting-police-shootings-very-rare-in-singapore" target="_blank">The Straits Times</a>. Population data is from the <a href="http://data.worldbank.org/indicator/SP.POP.TOTL" target="_blank">World Bank</a>.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'People killed by police gunfire<br>(per 100 million people, annually)',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["US","Australia","Denmark","Netherlands","Germany","New Zealand","England & Wales","Singapore",], 
+                labels: {rotation: 270},  
+            },
+            yAxis: {
+                title: {
+                  text: 'Annual deaths per 100 million population',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                minTickInterval: 100,                
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                pointFormat: "Deaths per 100 mil: <b>{point.y}</b><br>Period: {point.duration}<br>Total deaths: {point.total:,0f}<br>Est. population in {point.end}: {point.pop:,2f}mil<br>Source: {point.source}",
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Deaths per capita", color:"#FF1300", data: [
+                    {y:3.11, total:3003, duration:"2013 to 2015", pop:321.42, end:2015, source:"Mapping Police Violence", url:"http://mappingpoliceviolence.org/"},
+                    {y:0.21, total:105, duration:"1990 to 2011", pop:22.34, end:2011, source:"Australian Institute of Criminology", url:"http://www.aic.gov.au/publications/current%20series/rip/21-40/rip34.html"},
+                    {y:0.18, total:11, duration:"1996 to 2006", pop:5.44, end:2006, source:"Danish National Police", url:"https://www.politi.dk/NR/rdonlyres/20DE43AF-33F4-48C5-A710-6A58457E35D2/0/Engelskresum%C3%A9afendeligrapport.pdf"},
+                    {y:0.14, total:12, duration:"2007 to 2011", pop:16.69, end:2011, source:"Statewatch", url:"http://www.statewatch.org/analyses/no-213-holland-police-firearms.pdf"},
+                    {y:0.10, total:117, duration:"1998 to 2012", pop:80.43, end:2012, source:"Deutsche Welle", url:"http://www.dw.com/en/why-german-police-officers-rarely-reach-for-their-guns/a-17884779"},
+                    {y:0.08, total:29, duration:"1941 to 2015", pop:4.60, end:2015, source:"NZ Herald", url:"http://m.nzherald.co.nz/auckland-region/news/article.cfm?l_id=117&objectid=11513839"},
+                    {y:0.04, total:58, duration:"1990 to 2015", pop:57.89, end:2015, source:"Inquest", url:"http://www.inquest.org.uk/statistics/fatal-police-shootings"},
+                    {y:0.03, total:3, duration:"2000 to 2015", pop:5.54, end:2015, source:"The Straits Times", url:"http://www.straitstimes.com/singapore/shangri-la-shooting-police-shootings-very-rare-in-singapore"},
+                ]},
+            ],
+            });
+
+    });
+
+});
+</script>

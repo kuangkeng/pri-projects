@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="http://code.highcharts.com/mapdata/custom/world.js"></script>
+    
+
+  </head>
+
+<style>
+@import "http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 700px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 5px;
+    margin-top:10px;
+    color:#33333c;
+}
+
+.highcharts-title {width:100% !important;}
+
+.align-center {text-align: center;}
+
+.btn {
+	margin: 5px; 
+	line-height: 16px;
+	background-color: #8EBCDE;
+	border-radius: 5px;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 14px;
+	padding:5px 10px 5px 10px;
+	outline:none;
+}
+
+.btn:focus{background:#4188bc; color:white;}
+.btn:hover{background:#4188bc;}
+.default {background:#4188bc; color:white;}
+
+@media (max-width: 400px ) { 
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+    #container{height: 300px;}
+    .btn {font-size: 13px; padding:5px; margin-right: 1px; margin-left: 1px;}
+    #text {font-size: 14px;}
+} 
+
+@media (max-width: 315px ) { 
+	.btn {font-size: 11px; padding:2px; margin-right: 1px; margin-left: 0px; line-height: 13px;}
+}	
+
+</style>
+
+</head>
+<body>
+
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+    	<div class="align-center">
+        	<button type="button" class="btn btn-info" id="button01">1995</button>
+        	<button type="button" class="btn btn-info" id="button02">2016</button>
+	    </div> 
+	    <div id="text">The data does not include acting or interim leaders who were not later elected or confirmed, as well as figurehead monarchs. It is updated until June 2016.</div>   
+    	Source:  
+        <a href='http://edition.cnn.com/interactive/2016/06/politics/women-world-leaders/' target='_blank'>CNN</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$("#button01").addClass("default");
+
+var data = [
+	{'hc-key':'lk', 'country':'Sri Lanka', 'leader':'Sirimavo Bandaranaike', 'value':2, 'year':1960},
+	{'hc-key':'in', 'country':'India', 'leader':'Indira Gandhi', 'value':2, 'year':1966},
+	{'hc-key':'il', 'country':'Israel', 'leader':'Golda Meir', 'value':2, 'year':1969},
+	{'hc-key':'ar', 'country':'Argentina', 'leader':'Isabel Perón', 'value':2, 'year':1974},
+	{'hc-key':'cf', 'country':'Central African Republic', 'leader':'Elisabeth Domitien', 'value':2, 'year':1975},
+	{'hc-key':'pt', 'country':'Portugal', 'leader':'Maria de Lourdes Pintasilgo', 'value':2, 'year':1979},
+	{'hc-key':'gb', 'country':'United Kingdom', 'leader':'Margaret Thatcher', 'value':2, 'year':1979},
+	{'hc-key':'dm', 'country':'Dominica', 'leader':'Eugenia Charles', 'value':2, 'year':1980},
+	{'hc-key':'is', 'country':'Iceland', 'leader':'Vigdís Finnbogadóttir', 'value':2, 'year':1980},
+	{'hc-key':'no', 'country':'Norway', 'leader':'Gro Harlem Brundtland', 'value':2, 'year':1981},
+	{'hc-key':'mt', 'country':'Malta', 'leader':'Agatha Barbara', 'value':2, 'year':1982},
+	{'hc-key':'ph', 'country':'Philippines', 'leader':'Corazon Aquino', 'value':2, 'year':1986},
+	{'hc-key':'pk', 'country':'Pakistan', 'leader':'Benazir Bhutto', 'value':2, 'year':1988},
+	{'hc-key':'ie', 'country':'Ireland', 'leader':'Mary Robinson', 'value':2, 'year':1990},
+	{'hc-key':'lt', 'country':'Lithuania', 'leader':'Kazimira Danutė Prunskienė', 'value':2, 'year':1990},
+	{'hc-key':'ni', 'country':'Nicaragua', 'leader':'Violeta Barrios Torres de Chamorro', 'value':2, 'year':1990},
+	{'hc-key':'bd', 'country':'Bangladesh', 'leader':'Khaleda Zia', 'value':2, 'year':1991},
+	{'hc-key':'fr', 'country':'France', 'leader':'Édith Cresson', 'value':2, 'year':1991},
+	{'hc-key':'pl', 'country':'Poland', 'leader':'Hanna Suchocka', 'value':2, 'year':1992},
+	{'hc-key':'bi', 'country':'Burundi', 'leader':'Sylvie Kinigi', 'value':2, 'year':1993},
+	{'hc-key':'ca', 'country':'Canada', 'leader':'Kim Campbell', 'value':2, 'year':1993},
+	{'hc-key':'rw', 'country':'Rwanda', 'leader':'Agathe Uwilingiyimana', 'value':2, 'year':1993},
+	{'hc-key':'tr', 'country':'Turkey', 'leader':'Tansu Çiller', 'value':2, 'year':1993},
+	{'hc-key':'ht', 'country':'Haiti', 'leader':'Claudette Werleigh', 'value':2, 'year':1995},
+];
+
+var chart = new Highcharts.Map({
+	chart: {
+		renderTo: 'container',
+		marginBottom: 90,
+	},
+    
+    title : {
+        text: 'Countries that have elected/appointed a female leader<br>1995',
+    },
+    subtitle : {enabled: false},
+    legend: { enabled: false },
+    mapNavigation: {
+    	enabled: true,
+        buttonOptions: {
+          verticalAlign: 'bottom',
+          align: 'right',
+          floating: true,
+        },
+    },
+
+    colorAxis: {
+        dataClasses: [
+        	{from:0, to:5, color: "#4188bc"},
+		]
+    },
+	tooltip: {
+		headerFormat: '',
+	  	pointFormatter: function () {
+            	if (this.value == 2) {return "<b>" + this.name + "</b>" + "<br>First leader: <b>" + this.leader + "</b><br>Year: <b>" + this.year + "</b>"}
+        }
+	},
+    credits: { enabled: false },
+    series: [{
+        mapData: Highcharts.maps['custom/world'],
+        joinBy: ['hc-key'],
+        data: data,
+        nullColor: '#e4e4e4',
+        dataLabels: {enabled: false,},
+        states: {
+                    hover: {
+                        color: '#939393',
+                    }
+                },
+    }]
+});
+
+
+$('#button01').click(function () {
+	$("#button01").removeClass("default");
+    var chart = $('#container').highcharts();
+    chart.series[0].setData(data);
+    chart.setTitle({text: "Countries that have elected/appointed a female leader<br>1995"});
+});
+
+$('#button02').click(function () {
+	$("#button01").removeClass("default");
+    var chart = $('#container').highcharts();
+    chart.setTitle({text: "Countries that have elected/appointed a female leader<br>2016"});
+    chart.series[0].setData([
+	{'hc-key':'lk', 'country':'Sri Lanka', 'leader':'Sirimavo Bandaranaike', 'value':2, 'year':1960},
+	{'hc-key':'in', 'country':'India', 'leader':'Indira Gandhi', 'value':2, 'year':1966},
+	{'hc-key':'il', 'country':'Israel', 'leader':'Golda Meir', 'value':2, 'year':1969},
+	{'hc-key':'ar', 'country':'Argentina', 'leader':'Isabel Perón', 'value':2, 'year':1974},
+	{'hc-key':'cf', 'country':'Central African Republic', 'leader':'Elisabeth Domitien', 'value':2, 'year':1975},
+	{'hc-key':'pt', 'country':'Portugal', 'leader':'Maria de Lourdes Pintasilgo', 'value':2, 'year':1979},
+	{'hc-key':'gb', 'country':'United Kingdom', 'leader':'Margaret Thatcher', 'value':2, 'year':1979},
+	{'hc-key':'dm', 'country':'Dominica', 'leader':'Eugenia Charles', 'value':2, 'year':1980},
+	{'hc-key':'is', 'country':'Iceland', 'leader':'Vigdís Finnbogadóttir', 'value':2, 'year':1980},
+	{'hc-key':'no', 'country':'Norway', 'leader':'Gro Harlem Brundtland', 'value':2, 'year':1981},
+	{'hc-key':'mt', 'country':'Malta', 'leader':'Agatha Barbara', 'value':2, 'year':1982},
+	{'hc-key':'ph', 'country':'Philippines', 'leader':'Corazon Aquino', 'value':2, 'year':1986},
+	{'hc-key':'pk', 'country':'Pakistan', 'leader':'Benazir Bhutto', 'value':2, 'year':1988},
+	{'hc-key':'ie', 'country':'Ireland', 'leader':'Mary Robinson', 'value':2, 'year':1990},
+	{'hc-key':'lt', 'country':'Lithuania', 'leader':'Kazimira Danutė Prunskienė', 'value':2, 'year':1990},
+	{'hc-key':'ni', 'country':'Nicaragua', 'leader':'Violeta Barrios Torres de Chamorro', 'value':2, 'year':1990},
+	{'hc-key':'bd', 'country':'Bangladesh', 'leader':'Khaleda Zia', 'value':2, 'year':1991},
+	{'hc-key':'fr', 'country':'France', 'leader':'Édith Cresson', 'value':2, 'year':1991},
+	{'hc-key':'pl', 'country':'Poland', 'leader':'Hanna Suchocka', 'value':2, 'year':1992},
+	{'hc-key':'bi', 'country':'Burundi', 'leader':'Sylvie Kinigi', 'value':2, 'year':1993},
+	{'hc-key':'ca', 'country':'Canada', 'leader':'Kim Campbell', 'value':2, 'year':1993},
+	{'hc-key':'rw', 'country':'Rwanda', 'leader':'Agathe Uwilingiyimana', 'value':2, 'year':1993},
+	{'hc-key':'tr', 'country':'Turkey', 'leader':'Tansu Çiller', 'value':2, 'year':1993},
+	{'hc-key':'ht', 'country':'Haiti', 'leader':'Claudette Werleigh', 'value':2, 'year':1995},
+	{'hc-key':'gy', 'country':'Guyana', 'leader':'Janet Rosenberg', 'value':2, 'year':1997},
+	{'hc-key':'nz', 'country':'New Zealand', 'leader':'Jenny Shipley', 'value':2, 'year':1997},
+	{'hc-key':'lv', 'country':'Latvia', 'leader':'Vaira Vīķe-Freiberga', 'value':2, 'year':1999},
+	{'hc-key':'pa', 'country':'Panama', 'leader':'Mireya Elisa Moscoso Rodríguez', 'value':2, 'year':1999},
+	{'hc-key':'ch', 'country':'Switzerland', 'leader':'Ruth Dreifuss', 'value':2, 'year':1999},
+	{'hc-key':'fi', 'country':'Finland', 'leader':'Tarja Halonen', 'value':2, 'year':2001},
+	{'hc-key':'id', 'country':'Indonesia', 'leader':'Megawati Sukarnoputri', 'value':2, 'year':2001},
+	{'hc-key':'sn', 'country':'Senegal', 'leader':'Mame Madior Boye', 'value':2, 'year':2001},
+	{'hc-key':'st', 'country':'Sao Tome and Principe', 'leader':'Maria das Neves', 'value':2, 'year':2002},
+	{'hc-key':'pe', 'country':'Peru', 'leader':'Beatriz Merino', 'value':2, 'year':2003},
+	{'hc-key':'mk', 'country':'Macedonia', 'leader':'Radmila Šekerinska', 'value':2, 'year':2004},
+	{'hc-key':'mz', 'country':'Mozambique', 'leader':'Luísa Diogo', 'value':2, 'year':2004},
+	{'hc-key':'de', 'country':'Germany', 'leader':'Angela Merkel', 'value':2, 'year':2005},
+	{'hc-key':'ua', 'country':'Ukraine', 'leader':'Yulia Tymoshenko', 'value':2, 'year':2005},
+	{'hc-key':'cl', 'country':'Chile', 'leader':'Michelle Bachelet', 'value':2, 'year':2006},
+	{'hc-key':'jm', 'country':'Jamaica', 'leader':'Portia Simpson-Miller', 'value':2, 'year':2006},
+	{'hc-key':'lr', 'country':'Liberia', 'leader':'Ellen Johnson Sirleaf', 'value':2, 'year':2006},
+	{'hc-key':'kr', 'country':'South Korea', 'leader':'Han Myung-sook', 'value':2, 'year':2006},
+	{'hc-key':'md', 'country':'Moldova', 'leader':'Zinaida Greceanîi', 'value':2, 'year':2008},
+	{'hc-key':'hr', 'country':'Croatia', 'leader':'Jadranka Kosor', 'value':2, 'year':2009},
+	{'hc-key':'au', 'country':'Australia', 'leader':'Julia Gillard', 'value':2, 'year':2010},
+	{'hc-key':'cr', 'country':'Costa Rica', 'leader':'Laura Chinchilla', 'value':2, 'year':2010},
+	{'hc-key':'kg', 'country':'Kyrgyzstan', 'leader':'Roza Otunbayeva', 'value':2, 'year':2010},
+	{'hc-key':'sk', 'country':'Slovakia', 'leader':'Iveta Radičová', 'value':2, 'year':2010},
+	{'hc-key':'tt', 'country':'Trinidad and Tobago', 'leader':'Kamla Persad-Bissessar', 'value':2, 'year':2010},
+	{'hc-key':'dk', 'country':'Denmark', 'leader':'Helle Thorning-Schmidt', 'value':2, 'year':2011},
+	{'hc-key':'kv', 'country':'Kosovo', 'leader':'Atifete Jahjaga', 'value':2, 'year':2011},
+	{'hc-key':'ml', 'country':'Mali', 'leader':'Cissé Mariam Kaïdama Sidibé', 'value':2, 'year':2011},
+	{'hc-key':'th', 'country':'Thailand', 'leader':'Yingluck Shinawatra', 'value':2, 'year':2011},
+	{'hc-key':'mw', 'country':'Malawi', 'leader':'Joyce Banda', 'value':2, 'year':2012},
+	{'hc-key':'si', 'country':'Slovenia', 'leader':'Alenka Bratušek', 'value':2, 'year':2013},
+	{'hc-key':'br', 'country':'Brazil', 'leader':'Dilma Rousseff', 'value':2, 'year':2014},
+	{'hc-key':'mu', 'country':'Mauritius', 'leader':'Ameenah Firdaus Gurib-Fakim', 'value':2, 'year':2015},
+	{'hc-key':'na', 'country':'Namibia', 'leader':'Saara Kuugongelwa-Amadhila', 'value':2, 'year':2015},
+	{'hc-key':'np', 'country':'Nepal', 'leader':'Bidhya Devi Bhandari', 'value':2, 'year':2015},
+	{'hc-key':'tw', 'country':'Taiwan', 'leader':'Tsai Ing-wen', 'value':2, 'year':2016},
+
+]);
+});
+
+</script>

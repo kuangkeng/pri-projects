@@ -1,0 +1,140 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 750px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 750px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Click the legend to hide/show categories.</div>
+        Source:  
+        <a href='https://ucr.fbi.gov/ucr-publications#Hate' target='_blank'>FBI</a><br><a href='https://docs.google.com/spreadsheets/d/1OcBVU_H76qbKyPg8HUXxmOvfB4Odf76bTjn5pRhYav8/edit?usp=sharing' target='_blank'>Get the data</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: 'Hate crime incidents by racial bias',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    year: '%Y'
+                },
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                itemWidth: 250,
+            },
+            tooltip: {
+                formatter:function() {
+                    return '<b>' + this.series.name + '</b><br>Year: <b>' + Highcharts.dateFormat('%Y',this.x) + '</b><br>Incidents: <b>' + Highcharts.numberFormat(this.point.y,0,',',',') + '</b>';
+                }
+            },
+            plotOptions: {
+                  series: {
+                      pointStart: Date.UTC(1996, 1, 1),
+                      pointInterval: 24 * 3600 * 1000 * 365
+                  },
+                  line: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+            },    
+            series: [ 
+                {name: "Anti-White", color:"#ff7f00", data :[1106,993,792,781,875,891,719,830,829,828,890,749,716,545,575,504,657,653,593],},
+                {name: "Anti-Black/African American", color:"#e41a1c", data :[3674,3120,2901,2958,2884,2899,2486,2548,2731,2630,2640,2658,2876,2284,2201,2076,1805,1856,1621],},
+                {name: "Anti-Asian/Pacific Islander", color:"#4188bc", data :[355,347,293,298,281,280,217,231,217,199,181,188,137,126,150,138,121,138,143],},                
+                {name: "Anti-American Indian/Alaska Native", color:"#4daf4a", data :[51,36,52,47,57,80,62,76,83,79,60,61,54,65,44,61,101,129,130],},
+                {name: "Anti-multiple races", color:"#FF69B4", data :[210,214,283,211,240,217,158,159,182,183,229,214,209,179,165,138,113,95,81],},
+            ],
+            });
+    });
+
+});
+</script>

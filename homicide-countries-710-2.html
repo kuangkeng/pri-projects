@@ -1,0 +1,161 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Country data are from 2014 or latest year. Data exclude deaths from war or armed conflict and suicides. Move your mouse or finger over each bar for more details. </div>
+        Source: 
+        <a href='https://data.unodc.org/' target='_blank'>United Nations Office on Drugs and Crime</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Homicide rates by country',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Honduras","El Salvador","Venezuela","Lesotho","Jamaica","Belize","Saint Kitts and Nevis","South Africa","Guatemala","Bahamas","Colombia","Trinidad & Tobago","Saint Vincent &<br>the Grenadines","Brazil","Saint Lucia","Guyana","Montserrat","Tuvalu","Puerto Rico","Dominican Republic"],   
+            },
+            yAxis: {
+                title: {
+                  text: 'Homicide rate (deaths per 100,000 population)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Homicide rate: <b>{point.y}</b><br>Year: {point.year}',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Others", color:"#377eb8", data: [
+                    {y:74.6,year:"2014"},
+                    {y:64.2,year:"2014"},
+                    {y:62,year:"2014",color:'#d4301e'},
+                    {y:38,year:"2010"},
+                    {y:36.1,year:"2014"},
+                    {y:34.4,year:"2014"},
+                    {y:33.6,year:"2012"},
+                    {y:33,year:"2014"},
+                    {y:31.2,year:"2014"},
+                    {y:29.8,year:"2012"},
+                    {y:27.9,year:"2014"},
+                    {y:25.9,year:"2014"},
+                    {y:25.6,year:"2012"},
+                    {y:24.6,year:"2014"},
+                    {y:21.6,year:"2012"},
+                    {y:20.4,year:"2013"},
+                    {y:20.4,year:"2008"},
+                    {y:20.3,year:"2012"},
+                    {y:18.5,year:"2014"},
+                    {y:17.4,year:"2014"},
+                ]},
+            ],
+            });
+    });
+});
+</script>

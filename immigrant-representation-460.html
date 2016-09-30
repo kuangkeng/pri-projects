@@ -1,0 +1,118 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text"></div>
+        Source: 
+        <a href='http://scholarship.law.upenn.edu/cgi/viewcontent.cgi?article=9502&context=penn_law_review' target='_blank'>University of Pennsylvania Law Review</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'pie'
+            },
+            title: {
+                text: 'Legal representation in US immigration courts, 2007-2012',
+            },
+            subtitle: {enabled: false,},
+            credits: {enabled: false,},
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Percentage: <b>{point.percentage}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name} {point.percentage}%',
+                        distance: -50,
+                        y: -15,
+                        x:10,
+                        style: {
+                            width: '100px',
+                            fontSize: '13px',
+                        },
+                    }
+                }
+            },    
+
+            series: [{
+                data: [
+                    {name:"No representation", color:"#e41a1c", sliced: true, y:63},
+                    {name:"Paid representation", color:"#87b5dc", y:35},
+                    {name:"Pro bono representation", color:"#377eb8", y:2},
+                ]
+            }]
+            });
+    });
+});
+</script>

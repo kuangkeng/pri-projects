@@ -1,0 +1,142 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Other Islamic militant groups are Great Eastern Islamic Raiders Front (IBDA-C) and Turkish Hezbollah. Marxist militant groups are Turkish Communist Party/Marxist (TKP-ML), Devrimici Halk Kurtulus Cephesi (DHKP/C) and Revolutionary Headquarters (Turkey).</div>
+        The perpetrator for the attack on the Istanbul airport on June 28, 2016 is categorized as “unknown” as the investigation is still ongoing.<br>
+        Source: Data until 2014 is from 
+        <a href='http://www.start.umd.edu/gtd/' target='_blank'>Global Terorrism Database</a>. Data for 2015 and 2016 is compiled from media reports.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Deaths by terrorist groups in Turkey, 2000-2016 June',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Kurdistan Workers'<br>Party (PKK)","ISIS","Unknown","Kurdistan Freedom<br>Hawks (TAK)","Al-Qaeda","Other Islamic<br>militant groups","Marxist<br>militant groups","Others"],   
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                minTickInterval:100,
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Deaths", color:"#00e0ff", data: [534,216,142,81,38,32,21,9]},
+            ],
+            });
+    });
+});
+</script>

@@ -1,0 +1,138 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 600px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    #container {height:370px;}
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text"></div>
+        Sources: 
+        <a href='http://www.bjs.gov/index.cfm?ty=nps' target='_blank'>US Bureau of Justice Statistics</a>, 
+        <a href='http://www.pc.gov.au/research/ongoing/report-on-government-services' target='_blank'>Report on Government Services, Australian government</a>, 
+        <a href='https://www.gov.uk/government/collections/prison-population-statistics' target='_blank'>UK Ministry of Justice</a>, 
+        <a href='http://www.gov.scot/Topics/Statistics/Browse/Crime-Justice/PubPrisons' target='_blank'>Scottish government</a>, 
+        <a href='http://www.corrections.govt.nz/resources/research_and_statistics/quarterly_prison_statistics/prison_stats_june_2016.html' target='_blank'>Department of Corrections, New Zealand</a>.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'Percentage of prisoners in private prisons (latest data)',
+                margin:30,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["England<br>& Wales","Australia","Scotland","New Zealand","US"],   
+            },
+            yAxis: {
+                title: {
+                  text: 'Percentage', 
+                },
+                endOnTick: true,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Percentage: <b>{point.y}%</b><br>Year: <b>{point.year}</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y + "%"
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Others", color:"#4188bc", data: [       
+                    {y:18.46, year:'2016 (Jul)'},
+                    {y:18.28, year:'2015'},
+                    {y:15.3, year:'2013'},
+                    {y:10, year:'2016 (Jun)'},
+                    {y:8.41, year:'2014', color:'#ffb24d'},
+                ]},
+            ],
+            });
+    });
+});
+</script>

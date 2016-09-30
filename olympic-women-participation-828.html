@@ -1,0 +1,2110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/heatmap.js"></script>
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container01, #container02{
+height: 500px; 
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+
+#guide {
+    font-size: 15px;
+    line-height: 16px;
+    margin-bottom: 10px;
+    color:#33333c;
+}
+
+#showyear {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 17px;
+    color:#33333c;
+}
+
+#showyearmo {
+  font-size: 16px;
+  font-weight: 600;
+  color:#33333c;
+}
+
+#title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    text-align: center;
+    margin:10px;
+}
+
+#yeardisplay {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.sliderbox {padding:0px 10px;}
+.sliderboxmo {display:none; padding:0px 10px;}
+.slider.ui-slider .ui-slider-handle {
+  border-radius:20px;
+}
+
+
+table {width: 100%;}
+#slidertable {margin-bottom: 10px;}
+
+#col01, #col02 {
+  width:50%;
+  text-align: center;
+}
+
+#clm01 {width:5%; text-align: center;}
+#clm02 {width:5%; text-align: center;}
+#clm03 {width:90%; padding-right: 5px;}
+
+#clm01mo {width:48%; padding-left:35%; text-align: right;}
+#clm02mo {width:48%; text-align: left;}
+
+.play {
+  position: relative;
+  border: 3px solid #33333c;
+  width: 25px; 
+  height: 25px; 
+  background-color: transparent;
+  border-radius: 50%; 
+}
+
+.play:before {
+  position: absolute;
+  left: 8px;
+  top: 5px;
+  content:'';
+  border-left:  12px solid #33333c;
+  border-top: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+.pause {
+  position: relative;
+  border: 3px solid #33333c;
+  width: 25px; 
+  height: 25px; 
+  background-color: transparent;
+  border-radius: 50%; 
+}
+
+.pause:before {
+    width: 4px;        
+    height: 13px;
+    background: #33333c;
+    position: absolute;
+    content: "";
+    top: 6px;
+    left: 7px;
+}
+ 
+.pause:after {
+    width: 4px;        
+    height: 13px;
+    background: #33333c;
+    position: absolute;
+    content: "";
+    top: 6px;
+    right: 7px;
+}
+
+@media (max-width: 550px ) { 
+  #container01, #container02 {height: 450px;} 
+}  
+
+@media (max-width: 450px ) { 
+    #title {font-size: 16px;line-height: 18px; margin:5px 5px 0px 5px;}
+    #yeardisplay {font-size: 20px;}
+    #container {height: 450px; }
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    #guide {font-size: 12px;line-height: 14px;margin-bottom: 5px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 13px !important; line-height: 14px !important;}
+    .highcharts-data-labels text {font-size: 9px !important; line-height: 10px !important;}
+    .sliderboxmo {display:block;}
+    #clm01, #clm02 {display: none;}
+} 
+
+@media (max-width: 400px ) { 
+  #container01, #container02 {height: 420px;}    
+  .highcharts-data-labels text {font-size: 6px !important; line-height: 6px !important;}
+}
+
+@media (max-width: 300px ) { 
+  #container01, #container02 {height: 390px;}    
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper"> 
+<div id="title">Men's and women's events in Summer Olympic Games</div><div id="yeardisplay">2016</div>  
+    <table>
+        <tr>
+          <td id="col01"><div id="container01"></div></td>
+          <td id="col02"><div id="container02"></div></td>
+        </tr>
+    </table>        
+        <div class="sliderbox">
+          <table id="slidertable"> 
+            <tr>
+              <td id="clm01"><span id="showyear">2016</span></td>
+              <td id="clm02"><div class="play" id="button"></div></td>
+              <td id="clm03"><div class="slider" id="selector"></div></td>
+            </tr>
+          </table>    
+        </div>
+        <div class="sliderboxmo">
+          <table> 
+            <tr>
+              <td id="clm01mo"><div class="play" id="buttonmo"></div></td>
+              <td id="clm02mo"><span id="showyearmo">2016</span></td>
+            </tr>
+          </table>    
+        </div> 
+    <div id="note">    
+        <div id="guide"><i>Click the play button to start animation. Move the slider to see data in different years. Move your mouse or finger over each box for more details.</i></div>  
+        <div id="text">The color tone of each sport box indicates the percentage of women's or men's events in that particular sport relative to the opposite gender. For example, in the 1908 games, there were four men's events and two women's events in tennis. That translates into 50 percent participation by women and 100 percent participation by men. Mixed-gender events are counted as both men's and women's events.</div>
+        <div>Source: <a href='https://www.olympic.org/olympic-studies-centre' target='_blank'>IOC Olympic Studies Centre</a>. PRI.org has made the data public <a href='https://docs.google.com/spreadsheets/d/1r-4lEmijLu9M4zdP_MP44EZrmf_A6FGxstgawkw9EUY/edit?usp=sharing' target='_blank'>here</a>.</div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+var datayear = [1896,1900,1904,1908,1912,1920,1924,1928,1932,1936,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016];
+
+var mendata = [];
+
+mendata[0] = [{x:0, y:9, value:100, sport: 'Aquatics', men:4, mix:0, women:0},
+{x:1, y:9, value:100, sport: 'Athletics', men:12, mix:0, women:0},
+{x:2, y:9, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:0, y:8, value:100, sport: 'Fencing', men:3, mix:0, women:0},
+{x:1, y:8, value:100, sport: 'Gymnastics', men:8, mix:0, women:0},
+{x:2, y:8, value:100, sport: 'Shooting', men:5, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Tennis', men:2, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Weightlifting', men:2, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Wrestling', men:1, mix:0, women:0},
+{x:0, y:6, value:0, color: "#fff"},
+{x:1, y:6, value:0, color: "#fff"},
+{x:2, y:6, value:0, color: "#fff"},
+{x:0, y:5, value:0, color: "#fff"},
+{x:1, y:5, value:0, color: "#fff"},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[1] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:4, women:0},
+{x:1, y:9, value:100, sport: 'Golf', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Sailing', men:0, mix:13, women:0},
+{x:0, y:8, value:100, sport: 'Tennis', men:2, mix:1, women:1},
+{x:1, y:8, value:100, sport: 'Aquatics', men:8, mix:0, women:0},
+{x:2, y:8, value:100, sport: 'Archery', men:6, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Athletics', men:23, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Basque<br>Pelota', men:1, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Cricket', men:1, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Croquet', men:3, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Cycling', men:2, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Fencing', men:7, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Gymnastics', men:1, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Rowing', men:5, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Rugby', men:1, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Shooting', men:9, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[2] = [{x:0, y:9, value:100, sport: 'Archery', men:3, mix:0, women:3},
+{x:1, y:9, value:100, sport: 'Aquatics', men:11, mix:0, women:0},
+{x:2, y:9, value:100, sport: 'Athletics', men:25, mix:0, women:0},
+{x:0, y:8, value:100, sport: 'Boxing', men:7, mix:0, women:0},
+{x:1, y:8, value:100, sport: 'Cycling', men:7, mix:0, women:0},
+{x:2, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Golf', men:2, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Gymnastics', men:11, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Lacrosse', men:1, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Roque', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Rowing', men:5, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Weightlifting', men:2, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Wrestling', men:7, mix:0, women:0},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[3] = [{x:0, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:1, y:9, value:100, sport: 'Skating', men:2, mix:1, women:1},
+{x:2, y:9, value:100, sport: 'Archery', men:2, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Tennis', men:4, mix:0, women:2},
+{x:1, y:8, value:100, sport: 'Aquatics', men:9, mix:0, women:0},
+{x:2, y:8, value:100, sport: 'Athletics', men:26, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Boxing', men:5, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Fencing', men:4, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Gymnastics', men:2, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Jeu de<br>paume', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Lacrosse', men:1, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Rackets', men:2, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Rowing', men:4, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Rugby', men:1, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Shooting', men:15, mix:0, women:0},
+{x:1, y:3, value:100, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Water<br>Motorsports', men:3, mix:0, women:0},
+{x:0, y:2, value:100, sport: 'Wrestling', men:9, mix:0, women:0},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[4] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:2, y:9, value:100, sport: 'Tennis', men:4, mix:2, women:2},
+{x:0, y:8, value:100, sport: 'Aquatics', men:11, mix:0, women:3},
+{x:1, y:8, value:100, sport: 'Shooting', men:15, mix:3, women:0},
+{x:2, y:8, value:100, sport: 'Athletics', men:30, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Cycling', men:2, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Fencing', men:5, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Gymnastics', men:4, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Rowing', men:4, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Wrestling', men:4, mix:0, women:0},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[5] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:7, women:0},
+{x:1, y:9, value:100, sport: 'Skating', men:1, mix:1, women:1},
+{x:2, y:9, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:0, y:8, value:100, sport: 'Sailing', men:2, mix:12, women:0},
+{x:1, y:8, value:100, sport: 'Aquatics', men:11, mix:0, women:5},
+{x:2, y:8, value:100, sport: 'Archery', men:10, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Athletics', men:29, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Boxing', men:8, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Fencing', men:6, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Gymnastics', men:4, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Ice Hockey', men:1, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Polo', men:1, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Rowing', men:5, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Rugby', men:1, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Shooting', men:21, mix:0, women:0},
+{x:1, y:3, value:100, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:0, y:2, value:100, sport: 'Wrestling', men:10, mix:0, women:0},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[6] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:3, women:0},
+{x:2, y:9, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:0, y:8, value:100, sport: 'Aquatics', men:10, mix:0, women:7},
+{x:1, y:8, value:100, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Athletics', men:27, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Boxing', men:8, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Gymnastics', men:9, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Rugby', men:1, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Shooting', men:10, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Wrestling', men:13, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[7] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:3, women:0},
+{x:2, y:9, value:100, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:100, sport: 'Athletics', men:22, mix:0, women:5},
+{x:1, y:8, value:100, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Gymnastics', men:7, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Boxing', men:8, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Wrestling', men:13, mix:0, women:0},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[8] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:2, y:9, value:100, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:100, sport: 'Athletics', men:23, mix:0, women:6},
+{x:1, y:8, value:100, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Boxing', men:8, mix:0, women:0},
+{x:0, y:7, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Gymnastics', men:11, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Shooting', men:2, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Wrestling', men:14, mix:0, women:0},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[9] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:2, y:9, value:100, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:100, sport: 'Athletics', men:23, mix:0, women:6},
+{x:1, y:8, value:100, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Gymnastics', men:8, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:1, y:7, value:100, sport: 'Boxing', men:8, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Canoe', men:9, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Handball', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Shooting', men:3, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Wrestling', men:14, mix:0, women:0},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+mendata[10] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:5, women:0},
+{x:2, y:9, value:100, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:100, sport: 'Athletics', men:24, mix:0, women:9},
+{x:1, y:8, value:100, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Canoe', men:8, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Gymnastics', men:8, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Boxing', men:8, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Shooting', men:4, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Weightlifting', men:6, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[11] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:2, y:9, value:100, sport: 'Sailing', men:1, mix:4, women:0},
+{x:0, y:8, value:100, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:1, y:8, value:100, sport: 'Athletics', men:24, mix:0, women:9},
+{x:2, y:8, value:100, sport: 'Fencing', men:6, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Canoe', men:8, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Boxing', men:10, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Shooting', men:7, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[12] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:2, y:9, value:100, sport: 'Aquatics', men:10, mix:0, women:8},
+{x:0, y:8, value:100, sport: 'Sailing', men:1, mix:4, women:0},
+{x:1, y:8, value:100, sport: 'Athletics', men:24, mix:0, women:9},
+{x:2, y:8, value:100, sport: 'Fencing', men:6, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Canoe', men:8, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Boxing', men:10, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Shooting', men:7, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[13] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:100, sport: 'Aquatics', men:11, mix:0, women:9},
+{x:2, y:9, value:100, sport: 'Sailing', men:1, mix:4, women:0},
+{x:0, y:8, value:100, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:1, y:8, value:100, sport: 'Athletics', men:24, mix:0, women:10},
+{x:2, y:8, value:100, sport: 'Canoe', men:5, mix:0, women:2},
+{x:0, y:7, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:7, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:100, sport: 'Boxing', men:10, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Shooting', men:6, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[14] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Sailing', men:1, mix:4, women:0},
+{x:0, y:8, value:100, sport: 'Aquatics', men:13, mix:0, women:10},
+{x:1, y:8, value:100, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:2, y:8, value:100, sport: 'Athletics', men:24, mix:0, women:12},
+{x:0, y:7, value:100, sport: 'Canoe', men:5, mix:0, women:2},
+{x:1, y:7, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:2, y:7, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Boxing', men:10, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Cycling', men:7, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Judo', men:4, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Shooting', men:6, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[15] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Aquatics', men:18, mix:0, women:16},
+{x:0, y:8, value:100, sport: 'Sailing', men:1, mix:4, women:0},
+{x:1, y:8, value:100, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:2, y:8, value:100, sport: 'Athletics', men:24, mix:0, women:12},
+{x:0, y:7, value:100, sport: 'Canoe', men:5, mix:0, women:2},
+{x:1, y:7, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:2, y:7, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:0, y:6, value:100, sport: 'Boxing', men:11, mix:0, women:0},
+{x:1, y:6, value:100, sport: 'Cycling', men:7, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Shooting', men:7, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[16] = [{x:0, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:1, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:9, value:100, sport: 'Shooting', men:0, mix:8, women:0},
+{x:0, y:8, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Aquatics', men:18, mix:0, women:16},
+{x:2, y:8, value:100, sport: 'Sailing', men:1, mix:5, women:0},
+{x:0, y:7, value:100, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:1, y:7, value:100, sport: 'Athletics', men:24, mix:0, women:14},
+{x:2, y:7, value:100, sport: 'Canoe', men:8, mix:0, women:3},
+{x:0, y:6, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:6, value:100, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:6, value:100, sport: 'Boxing', men:11, mix:0, women:0},
+{x:0, y:5, value:100, sport: 'Cycling', men:7, mix:0, women:0},
+{x:1, y:5, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Handball', men:1, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Judo', men:6, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:3, value:100, sport: 'Weightlifting', men:9, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[17] = [{x:0, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:1, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:0, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Shooting', men:0, mix:7, women:0},
+{x:2, y:8, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Aquatics', men:16, mix:0, women:15},
+{x:1, y:7, value:100, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:2, y:7, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:6, value:100, sport: 'Sailing', men:2, mix:4, women:0},
+{x:1, y:6, value:100, sport: 'Athletics', men:23, mix:0, women:14},
+{x:2, y:6, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:0, y:5, value:100, sport: 'Canoe', men:9, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Boxing', men:11, mix:0, women:0},
+{x:2, y:5, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Hockey', men:1, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Judo', men:6, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:3, value:100, sport: 'Weightlifting', men:9, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[18] = [{x:0, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:1, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:0, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Shooting', men:0, mix:7, women:0},
+{x:0, y:7, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Aquatics', men:16, mix:0, women:15},
+{x:2, y:7, value:100, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:0, y:6, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:1, y:6, value:100, sport: 'Sailing', men:2, mix:4, women:0},
+{x:2, y:6, value:100, sport: 'Athletics', men:24, mix:0, women:14},
+{x:0, y:5, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Canoe', men:9, mix:0, women:2},
+{x:2, y:5, value:100, sport: 'Boxing', men:11, mix:0, women:0},
+{x:0, y:4, value:100, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Judo', men:8, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:3, value:100, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[19] = [{x:0, y:9, value:100, sport: 'Aquatics', men:18, mix:0, women:18},
+{x:1, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:2, y:7, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:6, value:100, sport: 'Athletics', men:24, mix:0, women:17},
+{x:1, y:6, value:100, sport: 'Shooting', men:6, mix:2, women:3},
+{x:2, y:6, value:100, sport: 'Sailing', men:3, mix:4, women:0},
+{x:0, y:5, value:100, sport: 'Canoe', men:9, mix:0, women:3},
+{x:1, y:5, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:2, y:5, value:100, sport: 'Cycling', men:7, mix:0, women:1},
+{x:0, y:4, value:100, sport: 'Boxing', men:12, mix:0, women:0},
+{x:1, y:4, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:4, value:100, sport: 'Judo', men:8, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:3, value:100, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[20] = [{x:0, y:9, value:100, sport: 'Aquatics', men:19, mix:0, women:19},
+{x:1, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:7, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:7, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:0, y:6, value:100, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:1, y:6, value:100, sport: 'Athletics', men:24, mix:0, women:18},
+{x:2, y:6, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:5, value:100, sport: 'Sailing', men:3, mix:4, women:1},
+{x:1, y:5, value:100, sport: 'Shooting', men:7, mix:2, women:4},
+{x:2, y:5, value:100, sport: 'Canoe', men:9, mix:0, women:3},
+{x:0, y:4, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:4, value:100, sport: 'Cycling', men:7, mix:0, women:2},
+{x:2, y:4, value:100, sport: 'Boxing', men:12, mix:0, women:0},
+{x:0, y:3, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:3, value:100, sport: 'Judo', men:7, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:0, y:2, value:100, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:1, y:2, value:100, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[21] = [{x:0, y:9, value:100, sport: 'Aquatics', men:19, mix:0, women:19},
+{x:1, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:2, y:9, value:100, sport: 'Badminton', men:2, mix:0, women:2},
+{x:0, y:8, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:2, y:7, value:100, sport: 'Sailing', men:3, mix:4, women:3},
+{x:0, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:6, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:6, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:0, y:5, value:100, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:1, y:5, value:100, sport: 'Athletics', men:24, mix:0, women:19},
+{x:2, y:5, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:4, value:100, sport: 'Shooting', men:7, mix:2, women:4},
+{x:1, y:4, value:100, sport: 'Cycling', men:7, mix:0, women:3},
+{x:2, y:4, value:100, sport: 'Canoe', men:12, mix:0, women:4},
+{x:0, y:3, value:100, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:3, value:100, sport: 'Baseball', men:1, mix:0, women:0},
+{x:2, y:3, value:100, sport: 'Boxing', men:12, mix:0, women:0},
+{x:0, y:2, value:100, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:2, value:100, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:2, y:2, value:100, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:0, y:1, value:100, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[22] = [{x:0, y:9, value:100, sport: 'Aquatics', men:19, mix:0, women:19},
+{x:1, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:2, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:0, y:8, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Gymnastics', men:8, mix:0, women:8},
+{x:1, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:1, y:6, value:100, sport: 'Sailing', men:3, mix:4, women:3},
+{x:2, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:2, y:5, value:0, sport: 'Softball', men:0, mix:0, women:1},
+{x:0, y:4, value:100, sport: 'Athletics', men:24, mix:0, women:20},
+{x:1, y:4, value:100, sport: 'Cycling', men:8, mix:0, women:6},
+{x:2, y:4, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:3, value:100, sport: 'Fencing', men:6, mix:0, women:4},
+{x:1, y:3, value:100, sport: 'Shooting', men:10, mix:0, women:5},
+{x:2, y:3, value:100, sport: 'Canoe', men:12, mix:0, women:4},
+{x:0, y:2, value:100, sport: 'Baseball', men:1, mix:0, women:0},
+{x:1, y:2, value:100, sport: 'Boxing', men:12, mix:0, women:0},
+{x:2, y:2, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:0, y:1, value:100, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:1, y:1, value:100, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[23] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Sailing', men:3, mix:5, women:3},
+{x:2, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:5, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:4, value:91, sport: 'Aquatics', men:21, mix:0, women:23},
+{x:2, y:4, value:0, sport: 'Softball', men:0, mix:0, women:1},
+{x:0, y:3, value:100, sport: 'Athletics', men:24, mix:0, women:21},
+{x:1, y:3, value:100, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:2, y:3, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:2, value:100, sport: 'Shooting', men:10, mix:0, women:7},
+{x:1, y:2, value:100, sport: 'Fencing', men:6, mix:0, women:4},
+{x:2, y:2, value:100, sport: 'Cycling', men:11, mix:0, women:7},
+{x:0, y:1, value:100, sport: 'Canoe', men:12, mix:0, women:4},
+{x:1, y:1, value:100, sport: 'Baseball', men:1, mix:0, women:0},
+{x:2, y:1, value:100, sport: 'Boxing', men:12, mix:0, women:0},
+{x:0, y:0, value:100, sport: 'Wrestling', men:16, mix:0, women:0},];
+mendata[24] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Sailing', men:4, mix:3, women:4},
+{x:2, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:5, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:4, value:91, sport: 'Aquatics', men:21, mix:0, women:23},
+{x:2, y:4, value:0, sport: 'Softball', men:0, mix:0, women:1},
+{x:0, y:3, value:100, sport: 'Athletics', men:24, mix:0, women:22},
+{x:1, y:3, value:100, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:2, y:3, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:2, value:100, sport: 'Shooting', men:10, mix:0, women:7},
+{x:1, y:2, value:100, sport: 'Fencing', men:6, mix:0, women:4},
+{x:2, y:2, value:100, sport: 'Cycling', men:11, mix:0, women:7},
+{x:0, y:1, value:100, sport: 'Canoe', men:12, mix:0, women:4},
+{x:1, y:1, value:100, sport: 'Wrestling', men:14, mix:0, women:4},
+{x:2, y:1, value:100, sport: 'Baseball', men:1, mix:0, women:0},
+{x:0, y:0, value:100, sport: 'Boxing', men:11, mix:0, women:0},];
+mendata[25] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:2, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:1, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:1, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:2, y:6, value:100, sport: 'Sailing', men:4, mix:3, women:4},
+{x:0, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:2, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:0, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:1, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:2, y:4, value:92, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:0, y:3, value:0, sport: 'Softball', men:0, mix:0, women:1},
+{x:1, y:3, value:100, sport: 'Athletics', men:24, mix:0, women:23},
+{x:2, y:3, value:100, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:0, y:2, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:1, y:2, value:100, sport: 'Shooting', men:9, mix:0, women:6},
+{x:2, y:2, value:100, sport: 'Cycling', men:11, mix:0, women:7},
+{x:0, y:1, value:100, sport: 'Canoe', men:12, mix:0, women:4},
+{x:1, y:1, value:100, sport: 'Wrestling', men:14, mix:0, women:4},
+{x:2, y:1, value:100, sport: 'Baseball', men:1, mix:0, women:0},
+{x:0, y:0, value:100, sport: 'Boxing', men:11, mix:0, women:0},];
+mendata[26] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Cycling', men:9, mix:0, women:9},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:0, y:7, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:2, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:0, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:2, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:0, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:2, y:5, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:0, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:1, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:2, y:4, value:92, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:0, y:3, value:100, sport: 'Athletics', men:24, mix:0, women:23},
+{x:1, y:3, value:100, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:2, y:3, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:2, value:100, sport: 'Sailing', men:6, mix:0, women:4},
+{x:1, y:2, value:100, sport: 'Shooting', men:9, mix:0, women:6},
+{x:2, y:2, value:100, sport: 'Canoe', men:11, mix:0, women:5},
+{x:0, y:1, value:100, sport: 'Boxing', men:10, mix:0, women:3},
+{x:1, y:1, value:100, sport: 'Wrestling', men:14, mix:0, women:4},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+mendata[27] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Cycling', men:9, mix:0, women:9},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:0, y:7, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Golf', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:6, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:5, value:100, sport: 'Rugby<br>Sevens', men:1, mix:0, women:1},
+{x:2, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:4, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:4, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:2, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:3, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:3, value:92, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:2, y:3, value:100, sport: 'Athletics', men:24, mix:0, women:23},
+{x:0, y:2, value:100, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:1, y:2, value:100, sport: 'Sailing', men:5, mix:1, women:4},
+{x:2, y:2, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:1, value:100, sport: 'Shooting', men:9, mix:0, women:6},
+{x:1, y:1, value:100, sport: 'Wrestling', men:12, mix:0, women:6},
+{x:2, y:1, value:100, sport: 'Canoe', men:11, mix:0, women:5},
+{x:0, y:0, value:100, sport: 'Boxing', men:10, mix:0, women:3},];
+
+var womendata = [];
+womendata[0] = [{x:0, y:9, value:0, sport: 'Aquatics', men:4, mix:0, women:0},
+{x:1, y:9, value:0, sport: 'Athletics', men:12, mix:0, women:0},
+{x:2, y:9, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:0, y:8, value:0, sport: 'Fencing', men:3, mix:0, women:0},
+{x:1, y:8, value:0, sport: 'Gymnastics', men:8, mix:0, women:0},
+{x:2, y:8, value:0, sport: 'Shooting', men:5, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Tennis', men:2, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Weightlifting', men:2, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Wrestling', men:1, mix:0, women:0},
+{x:0, y:6, value:0, color: "#fff"},
+{x:1, y:6, value:0, color: "#fff"},
+{x:2, y:6, value:0, color: "#fff"},
+{x:0, y:5, value:0, color: "#fff"},
+{x:1, y:5, value:0, color: "#fff"},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[1] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:4, women:0},
+{x:1, y:9, value:100, sport: 'Golf', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Sailing', men:0, mix:13, women:0},
+{x:0, y:8, value:67, sport: 'Tennis', men:2, mix:1, women:1},
+{x:1, y:8, value:0, sport: 'Aquatics', men:8, mix:0, women:0},
+{x:2, y:8, value:0, sport: 'Archery', men:6, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Athletics', men:23, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Basque Pelota', men:1, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Cricket', men:1, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Croquet', men:3, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Cycling', men:2, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Fencing', men:7, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Gymnastics', men:1, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Rowing', men:5, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Rugby', men:1, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Shooting', men:9, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[2] = [{x:0, y:9, value:100, sport: 'Archery', men:3, mix:0, women:3},
+{x:1, y:9, value:0, sport: 'Aquatics', men:11, mix:0, women:0},
+{x:2, y:9, value:0, sport: 'Athletics', men:25, mix:0, women:0},
+{x:0, y:8, value:0, sport: 'Boxing', men:7, mix:0, women:0},
+{x:1, y:8, value:0, sport: 'Cycling', men:7, mix:0, women:0},
+{x:2, y:8, value:0, sport: 'Fencing', men:5, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Golf', men:2, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Gymnastics', men:11, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Lacrosse', men:1, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Roque', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Rowing', men:5, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Tennis', men:2, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Weightlifting', men:2, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Wrestling', men:7, mix:0, women:0},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[3] = [{x:0, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:1, y:9, value:67, sport: 'Skating', men:2, mix:1, women:1},
+{x:2, y:9, value:50, sport: 'Archery', men:2, mix:0, women:1},
+{x:0, y:8, value:50, sport: 'Tennis', men:4, mix:0, women:2},
+{x:1, y:8, value:0, sport: 'Aquatics', men:9, mix:0, women:0},
+{x:2, y:8, value:0, sport: 'Athletics', men:26, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Boxing', men:5, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Fencing', men:4, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Gymnastics', men:2, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Jeu de<br>paume', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Lacrosse', men:1, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Rackets', men:2, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Rowing', men:4, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Rugby', men:1, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Shooting', men:15, mix:0, women:0},
+{x:1, y:3, value:0, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Water<br>Motorsports', men:3, mix:0, women:0},
+{x:0, y:2, value:0, sport: 'Wrestling', men:9, mix:0, women:0},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[4] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:2, y:9, value:67, sport: 'Tennis', men:4, mix:2, women:2},
+{x:0, y:8, value:27, sport: 'Aquatics', men:11, mix:0, women:3},
+{x:1, y:8, value:17, sport: 'Shooting', men:15, mix:3, women:0},
+{x:2, y:8, value:0, sport: 'Athletics', men:30, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Cycling', men:2, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Fencing', men:5, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Gymnastics', men:4, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Rowing', men:4, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Wrestling', men:4, mix:0, women:0},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[5] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:7, women:0},
+{x:1, y:9, value:100, sport: 'Skating', men:1, mix:1, women:1},
+{x:2, y:9, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:0, y:8, value:86, sport: 'Sailing', men:2, mix:12, women:0},
+{x:1, y:8, value:45, sport: 'Aquatics', men:11, mix:0, women:5},
+{x:2, y:8, value:0, sport: 'Archery', men:10, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Athletics', men:29, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Boxing', men:8, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Fencing', men:6, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Gymnastics', men:4, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Ice Hockey', men:1, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Polo', men:1, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Rowing', men:5, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Rugby', men:1, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Shooting', men:21, mix:0, women:0},
+{x:1, y:3, value:0, sport: 'Tug of War', men:1, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:0, y:2, value:0, sport: 'Wrestling', men:10, mix:0, women:0},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[6] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:3, women:0},
+{x:2, y:9, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:0, y:8, value:70, sport: 'Aquatics', men:10, mix:0, women:7},
+{x:1, y:8, value:17, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:0, sport: 'Athletics', men:27, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Boxing', men:8, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Gymnastics', men:9, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Rugby', men:1, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Shooting', men:10, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Wrestling', men:13, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[7] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:3, women:0},
+{x:2, y:9, value:78, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:23, sport: 'Athletics', men:22, mix:0, women:5},
+{x:1, y:8, value:17, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:14, sport: 'Gymnastics', men:7, mix:0, women:1},
+{x:0, y:7, value:0, sport: 'Boxing', men:8, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Wrestling', men:13, mix:0, women:0},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[8] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:2, y:9, value:78, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:26, sport: 'Athletics', men:23, mix:0, women:6},
+{x:1, y:8, value:17, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:0, sport: 'Boxing', men:8, mix:0, women:0},
+{x:0, y:7, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Gymnastics', men:11, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Shooting', men:2, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Wrestling', men:14, mix:0, women:0},
+{x:2, y:5, value:0, color: "#fff"},
+{x:0, y:4, value:0, color: "#fff"},
+{x:1, y:4, value:0, color: "#fff"},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[9] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:4, women:0},
+{x:2, y:9, value:78, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:26, sport: 'Athletics', men:23, mix:0, women:6},
+{x:1, y:8, value:17, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:13, sport: 'Gymnastics', men:8, mix:0, women:1},
+{x:0, y:7, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:1, y:7, value:0, sport: 'Boxing', men:8, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Canoe', men:9, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Handball', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Polo', men:1, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Shooting', men:3, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Weightlifting', men:5, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Wrestling', men:14, mix:0, women:0},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},]; 
+womendata[10] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Sailing', men:0, mix:5, women:0},
+{x:2, y:9, value:78, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:0, y:8, value:38, sport: 'Athletics', men:24, mix:0, women:9},
+{x:1, y:8, value:17, sport: 'Fencing', men:6, mix:0, women:1},
+{x:2, y:8, value:13, sport: 'Canoe', men:8, mix:0, women:1},
+{x:0, y:7, value:13, sport: 'Gymnastics', men:8, mix:0, women:1},
+{x:1, y:7, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Boxing', men:8, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Shooting', men:4, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Weightlifting', men:6, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[11] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:88, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:2, y:9, value:80, sport: 'Sailing', men:1, mix:4, women:0},
+{x:0, y:8, value:78, sport: 'Aquatics', men:9, mix:0, women:7},
+{x:1, y:8, value:38, sport: 'Athletics', men:24, mix:0, women:9},
+{x:2, y:8, value:17, sport: 'Fencing', men:6, mix:0, women:1},
+{x:0, y:7, value:13, sport: 'Canoe', men:8, mix:0, women:1},
+{x:1, y:7, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Boxing', men:10, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Shooting', men:7, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[12] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:88, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:2, y:9, value:80, sport: 'Aquatics', men:10, mix:0, women:8},
+{x:0, y:8, value:80, sport: 'Sailing', men:1, mix:4, women:0},
+{x:1, y:8, value:38, sport: 'Athletics', men:24, mix:0, women:9},
+{x:2, y:8, value:17, sport: 'Fencing', men:6, mix:0, women:1},
+{x:0, y:7, value:13, sport: 'Canoe', men:8, mix:0, women:1},
+{x:1, y:7, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Boxing', men:10, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Shooting', men:7, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[13] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:5, women:0},
+{x:1, y:9, value:82, sport: 'Aquatics', men:11, mix:0, women:9},
+{x:2, y:9, value:80, sport: 'Sailing', men:1, mix:4, women:0},
+{x:0, y:8, value:75, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:1, y:8, value:42, sport: 'Athletics', men:24, mix:0, women:10},
+{x:2, y:8, value:40, sport: 'Canoe', men:5, mix:0, women:2},
+{x:0, y:7, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:7, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:7, value:0, sport: 'Boxing', men:10, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Shooting', men:6, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:2, y:4, value:0, color: "#fff"},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[14] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:2, y:9, value:80, sport: 'Sailing', men:1, mix:4, women:0},
+{x:0, y:8, value:77, sport: 'Aquatics', men:13, mix:0, women:10},
+{x:1, y:8, value:75, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:2, y:8, value:50, sport: 'Athletics', men:24, mix:0, women:12},
+{x:0, y:7, value:40, sport: 'Canoe', men:5, mix:0, women:2},
+{x:1, y:7, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:2, y:7, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Boxing', men:10, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Cycling', men:7, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Judo', men:4, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Shooting', men:6, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[15] = [{x:0, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:9, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:2, y:9, value:89, sport: 'Aquatics', men:18, mix:0, women:16},
+{x:0, y:8, value:80, sport: 'Sailing', men:1, mix:4, women:0},
+{x:1, y:8, value:75, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:2, y:8, value:50, sport: 'Athletics', men:24, mix:0, women:12},
+{x:0, y:7, value:40, sport: 'Canoe', men:5, mix:0, women:2},
+{x:1, y:7, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:2, y:7, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:0, y:6, value:0, sport: 'Boxing', men:11, mix:0, women:0},
+{x:1, y:6, value:0, sport: 'Cycling', men:7, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Shooting', men:7, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Weightlifting', men:7, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Wrestling', men:16, mix:0, women:0},
+{x:0, y:3, value:0, color: "#fff"},
+{x:1, y:3, value:0, color: "#fff"},
+{x:2, y:3, value:0, color: "#fff"},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[16] = [{x:0, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:1, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:9, value:100, sport: 'Shooting', men:0, mix:8, women:0},
+{x:0, y:8, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:1, y:8, value:89, sport: 'Aquatics', men:18, mix:0, women:16},
+{x:2, y:8, value:83, sport: 'Sailing', men:1, mix:5, women:0},
+{x:0, y:7, value:75, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:1, y:7, value:58, sport: 'Athletics', men:24, mix:0, women:14},
+{x:2, y:7, value:38, sport: 'Canoe', men:8, mix:0, women:3},
+{x:0, y:6, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:6, value:0, sport: 'Basketball', men:1, mix:0, women:0},
+{x:2, y:6, value:0, sport: 'Boxing', men:11, mix:0, women:0},
+{x:0, y:5, value:0, sport: 'Cycling', men:7, mix:0, women:0},
+{x:1, y:5, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Handball', men:1, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Judo', men:6, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Rowing', men:7, mix:0, women:0},
+{x:1, y:3, value:0, sport: 'Weightlifting', men:9, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[17] = [{x:0, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:1, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:0, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Shooting', men:0, mix:7, women:0},
+{x:2, y:8, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:0, y:7, value:94, sport: 'Aquatics', men:16, mix:0, women:15},
+{x:1, y:7, value:75, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:2, y:7, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:6, value:67, sport: 'Sailing', men:2, mix:4, women:0},
+{x:1, y:6, value:61, sport: 'Athletics', men:23, mix:0, women:14},
+{x:2, y:6, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:0, y:5, value:22, sport: 'Canoe', men:9, mix:0, women:2},
+{x:1, y:5, value:0, sport: 'Boxing', men:11, mix:0, women:0},
+{x:2, y:5, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Hockey', men:1, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Judo', men:6, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:3, value:0, sport: 'Weightlifting', men:9, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[18] = [{x:0, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:1, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:0, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Shooting', men:0, mix:7, women:0},
+{x:0, y:7, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:1, y:7, value:94, sport: 'Aquatics', men:16, mix:0, women:15},
+{x:2, y:7, value:75, sport: 'Gymnastics', men:8, mix:0, women:6},
+{x:0, y:6, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:1, y:6, value:67, sport: 'Sailing', men:2, mix:4, women:0},
+{x:2, y:6, value:58, sport: 'Athletics', men:24, mix:0, women:14},
+{x:0, y:5, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:5, value:22, sport: 'Canoe', men:9, mix:0, women:2},
+{x:2, y:5, value:0, sport: 'Boxing', men:11, mix:0, women:0},
+{x:0, y:4, value:0, sport: 'Cycling', men:6, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Judo', men:8, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:3, value:0, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[19] = [{x:0, y:9, value:100, sport: 'Aquatics', men:18, mix:0, women:18},
+{x:1, y:9, value:100, sport: 'Archery', men:1, mix:0, women:1},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:1, y:7, value:88, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:2, y:7, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:6, value:71, sport: 'Athletics', men:24, mix:0, women:17},
+{x:1, y:6, value:63, sport: 'Shooting', men:6, mix:2, women:3},
+{x:2, y:6, value:57, sport: 'Sailing', men:3, mix:4, women:0},
+{x:0, y:5, value:33, sport: 'Canoe', men:9, mix:0, women:3},
+{x:1, y:5, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:2, y:5, value:14, sport: 'Cycling', men:7, mix:0, women:1},
+{x:0, y:4, value:0, sport: 'Boxing', men:12, mix:0, women:0},
+{x:1, y:4, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:2, y:4, value:0, sport: 'Judo', men:8, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:1, y:3, value:0, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:0, y:2, value:0, color: "#fff"},
+{x:1, y:2, value:0, color: "#fff"},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[20] = [{x:0, y:9, value:100, sport: 'Aquatics', men:19, mix:0, women:19},
+{x:1, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:7, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:7, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:0, y:6, value:88, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:1, y:6, value:75, sport: 'Athletics', men:24, mix:0, women:18},
+{x:2, y:6, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:5, value:71, sport: 'Sailing', men:3, mix:4, women:1},
+{x:1, y:5, value:67, sport: 'Shooting', men:7, mix:2, women:4},
+{x:2, y:5, value:33, sport: 'Canoe', men:9, mix:0, women:3},
+{x:0, y:4, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:4, value:29, sport: 'Cycling', men:7, mix:0, women:2},
+{x:2, y:4, value:0, sport: 'Boxing', men:12, mix:0, women:0},
+{x:0, y:3, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:3, value:0, sport: 'Judo', men:7, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:0, y:2, value:0, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:1, y:2, value:0, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:2, y:2, value:0, color: "#fff"},
+{x:0, y:1, value:0, color: "#fff"},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[21] = [{x:0, y:9, value:100, sport: 'Aquatics', men:19, mix:0, women:19},
+{x:1, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:2, y:9, value:100, sport: 'Badminton', men:2, mix:0, women:2},
+{x:0, y:8, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:2, y:7, value:100, sport: 'Sailing', men:3, mix:4, women:3},
+{x:0, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:6, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:6, value:100, sport: 'Volleyball', men:1, mix:0, women:1},
+{x:0, y:5, value:88, sport: 'Gymnastics', men:8, mix:0, women:7},
+{x:1, y:5, value:79, sport: 'Athletics', men:24, mix:0, women:19},
+{x:2, y:5, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:4, value:67, sport: 'Shooting', men:7, mix:2, women:4},
+{x:1, y:4, value:43, sport: 'Cycling', men:7, mix:0, women:3},
+{x:2, y:4, value:33, sport: 'Canoe', men:12, mix:0, women:4},
+{x:0, y:3, value:33, sport: 'Fencing', men:6, mix:0, women:2},
+{x:1, y:3, value:0, sport: 'Baseball', men:1, mix:0, women:0},
+{x:2, y:3, value:0, sport: 'Boxing', men:12, mix:0, women:0},
+{x:0, y:2, value:0, sport: 'Football', men:1, mix:0, women:0},
+{x:1, y:2, value:0, sport: 'Modern<br>Pentathlon', men:2, mix:0, women:0},
+{x:2, y:2, value:0, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:0, y:1, value:0, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:1, y:1, value:0, color: "#fff"},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[22] = [{x:0, y:9, value:100, sport: 'Aquatics', men:19, mix:0, women:19},
+{x:1, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:2, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:0, y:8, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Gymnastics', men:8, mix:0, women:8},
+{x:1, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:1, y:6, value:100, sport: 'Sailing', men:3, mix:4, women:3},
+{x:2, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:2, y:5, value:100, sport: 'Softball', men:0, mix:0, women:1},
+{x:0, y:4, value:83, sport: 'Athletics', men:24, mix:0, women:20},
+{x:1, y:4, value:75, sport: 'Cycling', men:8, mix:0, women:6},
+{x:2, y:4, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:3, value:67, sport: 'Fencing', men:6, mix:0, women:4},
+{x:1, y:3, value:50, sport: 'Shooting', men:10, mix:0, women:5},
+{x:2, y:3, value:33, sport: 'Canoe', men:12, mix:0, women:4},
+{x:0, y:2, value:0, sport: 'Baseball', men:1, mix:0, women:0},
+{x:1, y:2, value:0, sport: 'Boxing', men:12, mix:0, women:0},
+{x:2, y:2, value:0, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:0},
+{x:0, y:1, value:0, sport: 'Weightlifting', men:10, mix:0, women:0},
+{x:1, y:1, value:0, sport: 'Wrestling', men:20, mix:0, women:0},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[23] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Sailing', men:3, mix:5, women:3},
+{x:2, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:5, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:4, value:100, sport: 'Aquatics', men:21, mix:0, women:23},
+{x:2, y:4, value:100, sport: 'Softball', men:0, mix:0, women:1},
+{x:0, y:3, value:88, sport: 'Athletics', men:24, mix:0, women:21},
+{x:1, y:3, value:88, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:2, y:3, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:2, value:70, sport: 'Shooting', men:10, mix:0, women:7},
+{x:1, y:2, value:67, sport: 'Fencing', men:6, mix:0, women:4},
+{x:2, y:2, value:64, sport: 'Cycling', men:11, mix:0, women:7},
+{x:0, y:1, value:33, sport: 'Canoe', men:12, mix:0, women:4},
+{x:1, y:1, value:0, sport: 'Baseball', men:1, mix:0, women:0},
+{x:2, y:1, value:0, sport: 'Boxing', men:12, mix:0, women:0},
+{x:0, y:0, value:0, sport: 'Wrestling', men:16, mix:0, women:0},];
+womendata[24] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:2, y:8, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Sailing', men:4, mix:3, women:4},
+{x:2, y:6, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:2, y:5, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:4, value:100, sport: 'Aquatics', men:21, mix:0, women:23},
+{x:2, y:4, value:100, sport: 'Softball', men:0, mix:0, women:1},
+{x:0, y:3, value:92, sport: 'Athletics', men:24, mix:0, women:22},
+{x:1, y:3, value:88, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:2, y:3, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:2, value:70, sport: 'Shooting', men:10, mix:0, women:7},
+{x:1, y:2, value:67, sport: 'Fencing', men:6, mix:0, women:4},
+{x:2, y:2, value:64, sport: 'Cycling', men:11, mix:0, women:7},
+{x:0, y:1, value:33, sport: 'Canoe', men:12, mix:0, women:4},
+{x:1, y:1, value:29, sport: 'Wrestling', men:14, mix:0, women:4},
+{x:2, y:1, value:0, sport: 'Baseball', men:1, mix:0, women:0},
+{x:0, y:0, value:0, sport: 'Boxing', men:11, mix:0, women:0},];
+womendata[25] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:1, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:2, y:8, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:0, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:1, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:0, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:1, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:2, y:6, value:100, sport: 'Sailing', men:4, mix:3, women:4},
+{x:0, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:2, y:5, value:100, sport: 'Tennis', men:2, mix:0, women:2},
+{x:0, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:1, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:2, y:4, value:100, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:0, y:3, value:100, sport: 'Softball', men:0, mix:0, women:1},
+{x:1, y:3, value:96, sport: 'Athletics', men:24, mix:0, women:23},
+{x:2, y:3, value:88, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:0, y:2, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:1, y:2, value:67, sport: 'Shooting', men:9, mix:0, women:6},
+{x:2, y:2, value:64, sport: 'Cycling', men:11, mix:0, women:7},
+{x:0, y:1, value:33, sport: 'Canoe', men:12, mix:0, women:4},
+{x:1, y:1, value:29, sport: 'Wrestling', men:14, mix:0, women:4},
+{x:2, y:1, value:0, sport: 'Baseball', men:1, mix:0, women:0},
+{x:0, y:0, value:0, sport: 'Boxing', men:11, mix:0, women:0},];
+womendata[26] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Cycling', men:9, mix:0, women:9},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:0, y:7, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:2, y:7, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:0, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:2, y:6, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:0, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:1, y:5, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:2, y:5, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:0, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:1, y:4, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:2, y:4, value:100, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:0, y:3, value:96, sport: 'Athletics', men:24, mix:0, women:23},
+{x:1, y:3, value:88, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:2, y:3, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:2, value:67, sport: 'Sailing', men:6, mix:0, women:4},
+{x:1, y:2, value:67, sport: 'Shooting', men:9, mix:0, women:6},
+{x:2, y:2, value:45, sport: 'Canoe', men:11, mix:0, women:5},
+{x:0, y:1, value:30, sport: 'Boxing', men:10, mix:0, women:3},
+{x:1, y:1, value:29, sport: 'Wrestling', men:14, mix:0, women:4},
+{x:2, y:1, value:0, color: "#fff"},
+{x:0, y:0, value:0, color: "#fff"},];
+womendata[27] = [{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Cycling', men:9, mix:0, women:9},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:0, y:7, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Golf', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:6, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:5, value:100, sport: 'Rugby<br>Sevens', men:1, mix:0, women:1},
+{x:2, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:4, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:4, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:2, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:3, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:3, value:100, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:2, y:3, value:96, sport: 'Athletics', men:24, mix:0, women:23},
+{x:0, y:2, value:88, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:1, y:2, value:83, sport: 'Sailing', men:5, mix:1, women:4},
+{x:2, y:2, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:1, value:67, sport: 'Shooting', men:9, mix:0, women:6},
+{x:1, y:1, value:50, sport: 'Wrestling', men:12, mix:0, women:6},
+{x:2, y:1, value:45, sport: 'Canoe', men:11, mix:0, women:5},
+{x:0, y:0, value:30, sport: 'Boxing', men:10, mix:0, women:3},];
+
+
+$(function () {
+
+    $('#container01').highcharts({
+
+        chart: {
+            type: 'heatmap',
+        },
+
+
+        title: {
+            text: 'Men events',
+            widthAdjust:0,
+            margin: 5,
+        },
+
+        xAxis: {
+            categories: ["0","1","2"],
+            visible: false,
+        },
+
+        yAxis: {
+            categories: ["8","7","6","5","4","3","2","1","0"],
+            title: null,
+            visible: false,
+        },
+
+        colorAxis: {
+            min: 0,
+            max: 100,
+            stops: [
+                [0,'#f1f1f1'],
+                [0.01, '#ffffb2'],
+                //[0.2, '#a1dab4'],
+                [0.5, '#41b6c4'],
+                //[0.6, '#2c7fb8'],
+                [1, '#253494'],
+            ],
+            labels: {
+                step: 2,
+                enabled: true,
+                formatter: function () {
+                    return this.value === 0 ? "0%" : "100%";    
+                }
+            }      
+                
+        },
+
+        legend: {
+            align: 'left',
+            layout: 'horizontal',
+            margin: 0,
+            verticalAlign: 'bottom',
+            symbolWidth: 120,
+        },
+
+        credits: { enabled: false, },
+
+        tooltip: {
+            formatter: function () {
+              if ([this.point.color]=="#fff"){return false;} else {
+                return "Sport: <b>" + [this.point.sport] + "<b><br>Men's events: <b>" + [this.point.men] + "</b><br>Women's events: <b>" + this.point.women + "</b><br>Mixed events: <b>" + [this.point.mix] + "</b><br>% relative to women: <b>" + [this.point.value] + "%</b>";}
+            }
+        },
+
+        series: [{
+            states: {hover: {color: '#808080'}},
+            borderWidth: 0.5,
+            borderColor: "#FFFFFF",
+            data: [
+{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Cycling', men:9, mix:0, women:9},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:0, y:7, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Golf', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:6, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:5, value:100, sport: 'Rugby<br>Sevens', men:1, mix:0, women:1},
+{x:2, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:4, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:4, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:2, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:3, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:3, value:92, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:2, y:3, value:100, sport: 'Athletics', men:24, mix:0, women:23},
+{x:0, y:2, value:100, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:1, y:2, value:100, sport: 'Sailing', men:5, mix:1, women:4},
+{x:2, y:2, value:100, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:1, value:100, sport: 'Shooting', men:9, mix:0, women:6},
+{x:1, y:1, value:100, sport: 'Wrestling', men:12, mix:0, women:6},
+{x:2, y:1, value:100, sport: 'Canoe', men:11, mix:0, women:5},
+{x:0, y:0, value:100, sport: 'Boxing', men:10, mix:0, women:3},
+            ],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.sport;
+                },
+                style: {
+                    fontSize: '10px',
+                }
+            }
+        }]
+
+    });
+});
+
+
+$(function () {
+
+    $('#container02').highcharts({
+
+        chart: {
+            type: 'heatmap',
+        },
+
+
+        title: {
+            text: 'Women events',
+            widthAdjust:0,
+            margin: 5,
+        },
+
+        xAxis: {
+            categories: ["0","1","2"],
+            visible: false,
+        },
+
+        yAxis: {
+            categories: ["8","7","6","5","4","3","2","1","0"],
+            title: null,
+            visible: false,
+        },
+
+        colorAxis: {
+            min: 0,
+            max: 100,
+            stops: [
+                [0,'#f1f1f1'],
+                [0.01, '#ffffb2'],
+                //[0.2, '#fecc5c'],
+                [0.5, '#fd8d3c'],
+                //[0.6, '#f03b20'],
+                [1, '#bd0026'],
+            ],
+            labels: {
+                step: 2,
+                enabled: true,
+                formatter: function () {
+                    return this.value === 0 ? "0%" : "100%";    
+                }
+            }      
+                
+        },
+
+        legend: {
+            align: 'right',
+            layout: 'horizontal',
+            margin: 5,
+            verticalAlign: 'bottom',
+            symbolWidth: 120,
+        },
+
+        credits: { enabled: false, },
+
+        tooltip: {
+            formatter: function () {
+              if ([this.point.color]=="#fff"){return false;} else {
+                return "Sport: <b>" + [this.point.sport] + "<b><br>Men's events: <b>" + [this.point.men] + "</b><br>Women's events: <b>" + this.point.women + "</b><br>Mixed events: <b>" + [this.point.mix] + "</b><br>% relative to men: <b>" + [this.point.value] + "%</b>";}
+            }
+        },
+
+        series: [{
+            states: {hover: {color: '#808080'}},
+            borderWidth: 1,
+            borderColor: "#ffffff",
+            data: [
+{x:0, y:9, value:100, sport: 'Archery', men:2, mix:0, women:2},
+{x:1, y:9, value:100, sport: 'Badminton', men:2, mix:1, women:2},
+{x:2, y:9, value:100, sport: 'Basketball', men:1, mix:0, women:1},
+{x:0, y:8, value:100, sport: 'Cycling', men:9, mix:0, women:9},
+{x:1, y:8, value:100, sport: 'Equestrian', men:0, mix:6, women:0},
+{x:2, y:8, value:100, sport: 'Fencing', men:5, mix:0, women:5},
+{x:0, y:7, value:100, sport: 'Football', men:1, mix:0, women:1},
+{x:1, y:7, value:100, sport: 'Golf', men:1, mix:0, women:1},
+{x:2, y:7, value:100, sport: 'Gymnastics', men:9, mix:0, women:9},
+{x:0, y:6, value:100, sport: 'Handball', men:1, mix:0, women:1},
+{x:1, y:6, value:100, sport: 'Hockey', men:1, mix:0, women:1},
+{x:2, y:6, value:100, sport: 'Judo', men:7, mix:0, women:7},
+{x:0, y:5, value:100, sport: 'Modern<br>Pentathlon', men:1, mix:0, women:1},
+{x:1, y:5, value:100, sport: 'Rugby<br>Sevens', men:1, mix:0, women:1},
+{x:2, y:5, value:100, sport: 'Table<br>Tennis', men:2, mix:0, women:2},
+{x:0, y:4, value:100, sport: 'Taekwondo', men:4, mix:0, women:4},
+{x:1, y:4, value:100, sport: 'Tennis', men:2, mix:1, women:2},
+{x:2, y:4, value:100, sport: 'Triathlon', men:1, mix:0, women:1},
+{x:0, y:3, value:100, sport: 'Volleyball', men:2, mix:0, women:2},
+{x:1, y:3, value:100, sport: 'Aquatics', men:22, mix:0, women:24},
+{x:2, y:3, value:96, sport: 'Athletics', men:24, mix:0, women:23},
+{x:0, y:2, value:88, sport: 'Weightlifting', men:8, mix:0, women:7},
+{x:1, y:2, value:83, sport: 'Sailing', men:5, mix:1, women:4},
+{x:2, y:2, value:75, sport: 'Rowing', men:8, mix:0, women:6},
+{x:0, y:1, value:67, sport: 'Shooting', men:9, mix:0, women:6},
+{x:1, y:1, value:50, sport: 'Wrestling', men:12, mix:0, women:6},
+{x:2, y:1, value:45, sport: 'Canoe', men:11, mix:0, women:5},
+{x:0, y:0, value:30, sport: 'Boxing', men:10, mix:0, women:3},
+            ],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.sport;
+                },
+                style: {
+                    fontSize: '10px',
+                }
+            }
+        }]
+
+    });
+
+});
+
+var count = 0;
+
+$( "#selector" ).slider({
+  value: 27,
+  min: 0,
+  max: 27,
+  animate: true,
+  change: function( event, ui ) {
+      var selectnum = ui.value;
+      var year = datayear[selectnum];
+      count = selectnum;
+      if (count==28){count =0}
+      $("#showyear, #showyearmo").text(year);
+      $("#yeardisplay").text(year);
+      calcmen(selectnum);
+      calcwomen(selectnum);
+  }
+});
+
+$("#button, #buttonmo").click(function () {
+  if($("#button, #buttonmo").attr("class")=="pause"){
+    clearInterval(animate);
+    $("#button, #buttonmo").removeClass("pause").addClass("play");
+  }
+  else {
+    animate = setInterval(function() {
+      $("#selector").slider('value', count);
+      count = count + 1;
+      if (count == 28) {
+          clearInterval(animate);
+          count = 0;
+          $("#button, #buttonmo").removeClass("pause").addClass("play");
+      }
+    }, 1000);
+    $("#button, #buttonmo").removeClass("play").addClass("pause");
+  }
+});
+
+function calcmen(i){
+    var chart = $('#container01').highcharts();
+    chart.series[0].remove(true);
+    chart.addSeries(
+        {
+            states: {hover: {color: '#808080'}},
+            borderWidth: 1,
+            borderColor: "#ffffff",
+            data: mendata[i],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.sport;
+                },
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }
+
+    )
+} 
+
+function calcwomen(i){
+    var chart = $('#container02').highcharts();
+    chart.series[0].remove(true);
+    chart.addSeries(
+        {
+            states: {hover: {color: '#808080'}},
+            borderWidth: 1,
+            borderColor: "#ffffff",
+            data: womendata[i],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                formatter: function () {
+                  return this.point.sport;
+                },
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        }
+
+    )
+}   
+
+</script>

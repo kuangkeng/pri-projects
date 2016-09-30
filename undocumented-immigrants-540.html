@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  width: 100%;
+  max-width: 850px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 540px; 
+  width: 100%; 
+  max-width: 850px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02, #container03 {
+  height: 350px; 
+  width: 100%; 
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+@media (max-width: 900px ) { 
+  #container02, #container03  {
+    padding-right: 3%;
+  }
+} 
+
+@media (max-width: 600px ) { 
+  #container02, #container03  {
+    padding-right: 8%;
+  }
+}  
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Parental status</a></li>
+    <li><a href="#tabs-2">Years of residence</a></li>
+    <li><a href="#tabs-3">Regions of birth</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+    <div id="note">
+        <div id="text">A snapshot of undocumented immigrants in the US. Move your mouse or finger over each slice for more details.</div>
+        Source: 
+        <a href='http://www.migrationpolicy.org/data/unauthorized-immigrant-population/state/US' target='_blank'>Migration Policy Institute, published in Jan 2015.</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+    <div id="note">
+        <div id="text">A snapshot of undocumented immigrants in the US. Move your mouse or finger over each slice for more details.</div>
+        Source: 
+        <a href='http://www.migrationpolicy.org/data/unauthorized-immigrant-population/state/US' target='_blank'>Migration Policy Institute, published in Jan 2015.</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+  <div id="tabs-3">
+    <div id="container03"></div>
+    <div id="note">
+        <div id="text">A snapshot of undocumented immigrants in the US. Move your mouse or finger over each slice for more details.</div>
+        Source: 
+        <a href='http://www.migrationpolicy.org/data/unauthorized-immigrant-population/state/US' target='_blank'>Migration Policy Institute, published in Jan 2015.</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>  
+</div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+    var chart1;
+    var chart2;
+    var chart3;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container01',
+                type: 'pie'
+            },
+            title: {
+                text: 'Parental status of undocumented immigrants'
+            },
+            tooltip: {
+                pointFormat: 'Percentage: <b>{point.percentage:.0f}%</b><br>Est. population: <b>{point.num:,0f}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.percentage:.0f}%',
+                        distance: -30,
+                        style: {
+                            width: '100px',
+                            fontSize: '13px',
+                        },
+                    }
+                }
+            },
+            legend: {enabled: false,},
+            credits: { enabled: false, },
+            series: [{
+                data: [
+                    {name:"One or more US-citizen child", color:"#ff7f00", sliced: true, y:33, num:3348000},
+                    {name:"All children are noncitizen", color:"#e41a1c", y:6, num:619000},
+                    {name:"No children", color:"#377eb8", y:61, num:6313000},
+                ]
+            }]
+        });
+
+        chart2 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container02',
+                type: 'pie'
+            },
+            title: {
+                text: 'Years of US residence'
+            },
+            tooltip: {
+                pointFormat: 'Percentage: <b>{point.percentage:.0f}%</b><br>Est. population: <b>{point.num:,0f}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.percentage:.0f}%',
+                        distance: -30,
+                        style: {
+                            width: '120px',
+                            fontSize: '13px',
+                        },
+                    }
+                }
+            },
+            legend: {enabled: false,},
+            credits: { enabled: false, },
+            series: [{
+                data: [
+                    {name:"Less than 5", color:"#ff7f00", y:21, num: 2290000}, 
+                    {name:"5 to 9", color:"#FFCE00", y:29, num: 3184000}, 
+                    {name:"10 to 14", color:"#4daf4a", y:24, num: 2696000}, 
+                    {name:"15 to 19", color:"#377eb8", y:11, num: 1260000}, 
+                    {name:"20 or more", color:"#e41a1c", y:14, num: 1591000}, 
+                ]
+            }]
+        });
+
+
+        chart3 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container03',
+                type: 'pie'
+            },
+            title: {
+                text: 'Regions of birth'
+            },
+            tooltip: {
+                pointFormat: 'Percentage: <b>{point.percentage:.0f}%</b><br>Est. population: <b>{point.num:,0f}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.percentage:.0f}%',
+                        distance: -30,
+                        style: {
+                            width: '120px',
+                            fontSize: '11px',
+                        },
+                    }
+                }
+            },
+            legend: {enabled: false,},
+            credits: { enabled: false, },
+            series: [{
+                data: [
+                    {name:"Mexico and Central America", color:"#ff7f00", y:71, num:7797000},
+                    {name:"Caribbean", color:"#FFCE00", y:2, num:260000},
+                    {name:"South America", color:"#4daf4a", y:6, num:690000},
+                    {name:"Europe/Canada/ Oceania", color:"#FF69B4", y:4, num:423000},
+                    {name:"Asia", color:"#377eb8", y:14, num:1509000},
+                    {name:"Africa", color:"#e41a1c", y:3, num:342000},
+                ]
+            }]
+        });
+
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

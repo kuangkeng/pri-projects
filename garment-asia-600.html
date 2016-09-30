@@ -1,0 +1,150 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">In countries that have different minimum wages for different regions, the chart lists both the lowest and the highest minimum wage to show the range of minimum wages in that country.</div>
+        Source:  
+        <a href='http://www.ilo.org/wcmsp5/groups/public/---asia/---ro-bangkok/documents/publication/wcms_436867.pdf' target='_blank'>International Labour Organization</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+            marginRight: 40,
+        },
+        title: {
+            text: "Garment sector monthly minimum wages for Asia's 10 biggest garment exporters, 2015",
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            categories: ["China","Malaysia","Indonesia","Thailand","Vietnam","India","Cambodia","Pakistan","Bangladesh","Sri Lanka"],  
+        },
+        yAxis: {
+            title: {
+              text: "US dollars",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            stackLabels: {
+                style: {
+                    color: '#FFFFFF',
+                    format: '${point.y}',
+                    style: {
+                        fontSize: '10px',
+                    }
+                },
+                enabled: true,
+                formatter: function () {
+                    return "$" + this.total;
+                }
+            },
+            minTickInterval: 10,
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            
+            itemStyle: {
+                fontSize: '11px',
+            },  
+        },
+        tooltip: {
+            formatter: function () {
+                    if (this.series.name == 'Lowest rate for unskilled garment workers') {return "<b>" + this.x + "</b>" + "<br>Lowest rate: <b>$" + this.y + "</b>"}
+                    if (this.series.name == 'Highest rate for unskilled garment workers') {return "<b>" + this.x + "</b>" + "<br>Highest rate: <b>$" + this.total + "</b>"}    
+            }
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                groupPadding: 0.01,
+            }
+        },
+        series: [{
+            name: 'Highest rate for unskilled garment workers', color: "#8db7d6",
+            data: [142,28,155,0,45,58,0,20,0,0]
+        },{
+            name: 'Lowest rate for unskilled garment workers', color: "#4188bc",
+            data: [155,225,92,237,100,78,128,99,68,66],
+            dataLabels: {
+                enabled: true,
+                format: '${point.y}',
+            }
+        }]
+    });
+});
+</script>

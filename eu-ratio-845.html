@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  width: 100%;
+  max-width: 500px;
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 845px; 
+  width: 100%; 
+  max-width: 500px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02, #container03 {
+  height: 600px; 
+  width: 100%; 
+  max-width: 450px; 
+  margin: 0 auto;
+}
+
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+.highcharts-title {width:100% !important;}
+
+.customlabel {font-size: 10px; font-weight: bold;}
+
+@media (max-width: 900px ) { 
+  #container02, #container03  {
+    padding-right: 3%;
+  }
+} 
+
+@media (max-width: 600px ) { 
+  #container02, #container03  {
+    padding-right: 8%;
+  }
+}  
+
+@media (max-width: 450px ) { 
+    #text {font-size: 11px;line-height: 13px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">S80/S20 ratio</a></li>
+    <li><a href="#tabs-2">Changes</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+    <div id="note">
+        <div id="text"><span style="color:#4188bc">Blue bar:</span> Inequality has narrowed compared to 2005.<br><span style="color:#FF1300">Red bar:</span> Inequality has widen compared to 2005.<br>S80/S20 ratio is a measure of the inequality of income distribution. It is the ratio of the average income of the richest 20% of the population to the average income of the poorest 20% of the population. Move your mouse or finger over each bar for more details.</div>
+        Source: 
+        <a href='http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&plugin=1&language=en&pcode=tsdsc260' target='_blank'><u>Eurostat</u></a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+    <div id="note">
+        <div id="text">Higher S80/S20 ratio means higher income inequality. A drop in the ratio indicates income inequality has narrowed and vice versa. Move your mouse or finger over each line for more details.</div>
+        Source: 
+        <a href='http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&plugin=1&language=en&pcode=tsdsc260' target='_blank'><u>Eurostat</u></a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div> 
+</div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+    var chart1;
+    var chart2;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container01',
+                type: 'bar',
+            },
+            title: {
+                text: 'Income inequality in key EU countries, 2014',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Romania","Bulgaria","Spain","Greece","Portugal","Italy","Germany","UK","Poland","Ireland","France","Hungary","Denmark","Austria","Slovakia","Sweden","Belgium","Netherlands","Finland","Czech",],  
+                tickColor: '#ffffff', 
+                labels: {
+                    x:10,
+                    align:'left',
+                    style: {
+                        color: '#ffffff',
+                        fontSize: '11px',
+                    },  
+                }
+            },
+            yAxis: {
+                title: {
+                  text: 'S80/S20 ratio<br>(larger value indicates higher inequality)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Ratio: <b>{point.y:.1f}</b><br>Change since 2005: <b>{point.change:,.1f}</b><br>Percentage of change: <b>{point.pct:,.1f}%</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Ratio", data: [
+                    {y:7.2, change: -0.6, pct: -7.7, color:"#4188bc"},
+                    {y:6.8, change: 1.7, pct: 33.3, color:"#FF1300"},
+                    {y:6.8, change: 1.3, pct: 23.6, color:"#FF1300"},
+                    {y:6.5, change: 0.7, pct: 12.1, color:"#FF1300"},
+                    {y:6.2, change: -0.8, pct: -11.4, color:"#4188bc"},
+                    {y:5.8, change: 0.2, pct: 3.6, color:"#FF1300"},
+                    {y:5.1, change: 1.3, pct: 34.2, color:"#FF1300"},
+                    {y:5.1, change: -0.8, pct: -13.6, color:"#4188bc"},
+                    {y:4.9, change: -1.7, pct: -25.8, color:"#4188bc"},
+                    {y:4.8, change: -0.2, pct: -4.0, color:"#4188bc"},
+                    {y:4.3, change: 0.3, pct: 7.5, color:"#FF1300"},
+                    {y:4.3, change: 0.3, pct: 7.5, color:"#FF1300"},
+                    {y:4.1, change: 0.6, pct: 17.1, color:"#FF1300"},
+                    {y:4.1, change: 0.3, pct: 7.9, color:"#FF1300"},
+                    {y:3.9, change: 0, pct: 0.0, color:"#4188bc"},
+                    {y:3.9, change: 0.6, pct: 18.2, color:"#FF1300"},
+                    {y:3.8, change: -0.2, pct: -5.0, color:"#4188bc"},
+                    {y:3.8, change: -0.2, pct: -5.0, color:"#4188bc"},
+                    {y:3.6, change: 0, pct: 0.0, color:"#4188bc"},
+                    {y:3.5, change: -0.2, pct: -5.4, color:"#4188bc"},
+                ]},
+            ],
+            });
+
+        chart2 = new Highcharts.Chart({
+        chart: {
+          type: 'line',
+          renderTo: 'container02',
+          //marginRight: 50 //add margin for text
+        },
+        title: {
+            text: "Changes in S80/S20 ratio, 2005-2014",
+        },
+        subtitle: {
+            enabled: false,
+        },
+  
+        xAxis: {
+            categories: ["2005","2014"],
+            plotLines: [{
+              color: '#d8d8d8',
+              value: 0,
+              width: 1
+              },
+              {
+              color: '#d8d8d8',
+              value: 1,
+              width: 1
+              },
+            ],
+            tickmarkPlacement: 'on',
+        },
+        yAxis: {
+            title: {
+                text: null,
+            },
+            labels:{
+                x:-2,
+            },
+            minTickInterval:1,
+            //floor:23,
+            //celling: 39,
+            endOnTick: false,
+            startOnTick: false,
+            
+        },
+        tooltip: {
+            formatter: function() {
+                return this.x + "<br>Country: <b>" + this.series.name + "</b><br>" + "S80/S20 ratio: <b>" + this.point.y + "</b><br>Change (2005-2014): <b>" +  this.point.change + "</b><br>Percentage of change: <b>" + this.point.pct + "%</b>"
+            },
+        },
+        
+        legend: {enabled: false},
+        credits: {enabled: false},
+        series: [
+            {name: "Romania", data:[{y:7.8, change: -0.6, pct: -7.7, id:2}, {y:7.2, change: -0.6, pct: -7.7, id:2}], color:"#4188bc"},
+            {name: "Bulgaria", data:[{y:5.1, change: 1.7, pct: 33.3, id:2}, {y:6.8, change: 1.7, pct: 33.3, id:2}], color:"#FF1300"},
+            {name: "Spain", data:[{y:5.5, change: 1.3, pct: 23.6, id:2}, {y:6.8, change: 1.3, pct: 23.6, id:2}], color:"#FF1300"},
+            {name: "Greece", data:[{y:5.8, change: 0.7, pct: 12.1, id:2}, {y:6.5, change: 0.7, pct: 12.1, id:2}], color:"#FF1300"},
+            {name: "Portugal", data:[{y:7, change: -0.8, pct: -11.4, id:2}, {y:6.2, change: -0.8, pct: -11.4, id:2}], color:"#4188bc"},
+            {name: "Italy", data:[{y:5.6, change: 0.2, pct: 3.6, id:2}, {y:5.8, change: 0.2, pct: 3.6, id:2}], color:"#FF1300"},
+            {name: "Germany", data:[{y:3.8, change: 1.3, pct: 34.2, id:2}, {y:5.1, change: 1.3, pct: 34.2, id:2}], color:"#FF1300"},
+            {name: "UK", data:[{y:5.9, change: -0.8, pct: -13.6, id:2}, {y:5.1, change: -0.8, pct: -13.6, id:2}], color:"#4188bc"},
+            {name: "Poland", data:[{y:6.6, change: -1.7, pct: -25.8, id:2}, {y:4.9, change: -1.7, pct: -25.8, id:2}], color:"#4188bc"},
+            {name: "Ireland", data:[{y:5, change: -0.2, pct: -4.0, id:2}, {y:4.8, change: -0.2, pct: -4.0, id:2}], color:"#4188bc"},
+            {name: "France & Hungary", data:[{y:4, change: 0.3, pct: 7.5, id:0}, {y:4.3, change: 0.3, pct: 7.5, id:0}], color:"#FF1300"},
+            {name: "Denmark", data:[{y:3.5, change: 0.6, pct: 17.1, id:2}, {y:4.1, change: 0.6, pct: 17.1, id:2}], color:"#FF1300"},
+            {name: "Austria", data:[{y:3.8, change: 0.3, pct: 7.9, id:0}, {y:4.1, change: 0.3, pct: 7.9, id:0}], color:"#FF1300"},
+            {name: "Slovakia", data:[{y:3.9, change: 0, pct: 0, id:1}, {y:3.9, change: 0, pct: 0, id:2}], color:"#4188bc"},
+            {name: "Sweden", data:[{y:3.3, change: 0.6, pct: 18.2, id:2}, {y:3.9, change: 0.6, pct: 18.2, id:2}], color:"#FF1300"},
+            {name: "Netherlands & Belgium", data:[{y:4, change: -0.2, pct: -5.0, id:0}, {y:3.8, change: -0.2, pct: -5.0, id:0}], color:"#4188bc"},
+            {name: "Finland", data:[{y:3.6, change: 0, pct: 0, id:1}, {y:3.6, change: 0, pct: 0, id:2}], color:"#4188bc"},
+            {name: "Czech", data:[{y:3.7, change: -0.2, pct: -5.4, id:2}, {y:3.5, change: -0.2, pct: -5.4, id:2}], color:"#4188bc"},
+        ], 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                },
+                dataLabels: {
+                    enabled: true,
+                    align: 'right',
+                    x:0,
+                    y:10,
+                    allowOverlap: true,
+                    style: {
+                        fontSize: '10px',
+                    },
+                    formatter: function() {
+                        if (this.point.y===this.series.data[0].y && this.series.data[0].y!=this.series.data[1].y)
+                        {
+                            if (this.series.name=="Netherlands & Belgium"){return "";}
+                            if (this.series.name=="France & Hungary"){return "";}
+                            if (this.series.name=="Austria"){return "";}
+                            else {return this.series.name;}    
+                        }
+                        if (this.point.id==1){return this.series.name;}
+                    },
+                }
+            },
+
+        },
+    });
+
+        $(chart2.series).each(function(){
+          var point = this.points[this.points.length-1];
+          if (point.id==0)
+            {
+          chart2.renderer.text(this.name,
+          point.plotX + chart2.plotLeft + 5,
+          point.plotY + chart2.plotTop + 5)
+          .attr({zIndex: 5, class:"customlabel"}).add();
+            }
+        });
+
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

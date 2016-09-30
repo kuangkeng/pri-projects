@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+  </head>  
+
+<style type="text/css">	
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: #33333c;
+  margin:0px auto;
+      } 
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+    padding:10px;
+}      
+
+.tableA {
+  text-align: center;
+}
+
+#title {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 10px 20px 10px;
+}
+#legend {
+  margin:0px 10px 10px 10px;
+}
+
+/*
+ * Table styles
+ */
+
+.table_wrapper {
+  width:100%;
+  margin:0px auto;
+}
+
+#table01 tbody tr {height:27px;}
+
+.left {text-align: left;}
+.right {text-align: right;}
+
+@media (max-width: 400px) {
+  #wrapper {padding:5px;}
+  #title {font-size: 16px; line-height: 20px; margin: 10px 5px 20px 5px;}
+  .dataTables_scrollBody {max-height:415px !important;}
+  #table01, th {font-size: 11px; line-height: 12px;}
+}
+
+@media (max-width: 300px) {
+  th {font-size: 13px; line-height: 14px}
+  #wrapper {padding:0px;}
+  #title {margin-bottom: 10px;}
+  #legend {font-size: 12px; line-height: 13px;}
+}
+
+</style>
+
+
+<body>
+<div id="wrapper">  
+  <div id="title" >Medals per capita in Rio Olympic Games</div>   
+    <div id="legend">
+      <div>Gold-p = Gold medals per million population</div>
+      <div>Total-p = Total medals per million population</div>
+      <div>Pop = 2015 population in thousands</div>
+    </div>   
+  <div class="table_wrapper">        
+    <div class="tableA">
+      <table id="table01" class="stripe order-column hover compact" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th class="rank" id="rank_head">Rank</th>
+            <th class="country" id="country_head">Country</th>
+            <th class="gold" id="gold_head">Gold</th>
+            <th class="silver" id="silver_head">Silver</th>
+            <th class="bronze" id="bronze_head">Bronze</th>
+            <th class="total" id="total_head">Total</th>
+            <th class="total" id="goldp_head">Gold-p</th>
+            <th class="total" id="totalp_head">Total-p</th>
+            <th class="total" id="pop_head">Pop</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+$(document).ready( function () {
+
+	var data = [
+{'noc':'BAH', 'country':'Bahamas', 'rank':1, 'gold':1, 'silver':0, 'bronze':1, 'total':2, 'pop':388, 'goldp':2.58, 'totalp':5.15},
+{'noc':'JAM', 'country':'Jamaica', 'rank':2, 'gold':6, 'silver':3, 'bronze':2, 'total':11, 'pop':2793, 'goldp':2.15, 'totalp':3.94},
+{'noc':'CRO', 'country':'Croatia', 'rank':3, 'gold':5, 'silver':3, 'bronze':2, 'total':10, 'pop':4240, 'goldp':1.18, 'totalp':2.36},
+{'noc':'FIJ', 'country':'Fiji', 'rank':4, 'gold':1, 'silver':0, 'bronze':0, 'total':1, 'pop':892, 'goldp':1.12, 'totalp':1.12},
+{'noc':'NZL', 'country':'New Zealand', 'rank':5, 'gold':4, 'silver':9, 'bronze':5, 'total':18, 'pop':4529, 'goldp':0.88, 'totalp':3.97},
+{'noc':'HUN', 'country':'Hungary', 'rank':6, 'gold':8, 'silver':3, 'bronze':4, 'total':15, 'pop':9855, 'goldp':0.81, 'totalp':1.52},
+{'noc':'BRN', 'country':'Bahrain', 'rank':7, 'gold':1, 'silver':1, 'bronze':0, 'total':2, 'pop':1377, 'goldp':0.73, 'totalp':1.45},
+{'noc':'KOS', 'country':'Kosovo', 'rank':8, 'gold':1, 'silver':0, 'bronze':0, 'total':1, 'pop':1797, 'goldp':0.56, 'totalp':0.56},
+{'noc':'GEO', 'country':'Georgia', 'rank':9, 'gold':2, 'silver':1, 'bronze':4, 'total':7, 'pop':4000, 'goldp':0.5, 'totalp':1.75},
+{'noc':'SLO', 'country':'Slovenia', 'rank':10, 'gold':1, 'silver':2, 'bronze':1, 'total':4, 'pop':2068, 'goldp':0.48, 'totalp':1.93},
+{'noc':'NED', 'country':'Netherlands', 'rank':11, 'gold':8, 'silver':7, 'bronze':4, 'total':19, 'pop':16925, 'goldp':0.47, 'totalp':1.12},
+{'noc':'CUB', 'country':'Cuba', 'rank':12, 'gold':5, 'silver':2, 'bronze':4, 'total':11, 'pop':11390, 'goldp':0.44, 'totalp':0.97},
+{'noc':'GBR', 'country':'Great Britain', 'rank':13, 'gold':27, 'silver':23, 'bronze':17, 'total':67, 'pop':64716, 'goldp':0.42, 'totalp':1.04},
+{'noc':'SVK', 'country':'Slovakia', 'rank':14, 'gold':2, 'silver':2, 'bronze':0, 'total':4, 'pop':5426, 'goldp':0.37, 'totalp':0.74},
+{'noc':'SUI', 'country':'Switzerland', 'rank':15, 'gold':3, 'silver':2, 'bronze':2, 'total':7, 'pop':8299, 'goldp':0.36, 'totalp':0.84},
+{'noc':'DEN', 'country':'Denmark', 'rank':16, 'gold':2, 'silver':6, 'bronze':7, 'total':15, 'pop':5669, 'goldp':0.35, 'totalp':2.65},
+{'noc':'AUS', 'country':'Australia', 'rank':17, 'gold':8, 'silver':11, 'bronze':10, 'total':29, 'pop':23969, 'goldp':0.33, 'totalp':1.21},
+{'noc':'ARM', 'country':'Armenia', 'rank':18, 'gold':1, 'silver':3, 'bronze':0, 'total':4, 'pop':3018, 'goldp':0.33, 'totalp':1.33},
+{'noc':'GRE', 'country':'Greece', 'rank':19, 'gold':3, 'silver':1, 'bronze':2, 'total':6, 'pop':10955, 'goldp':0.27, 'totalp':0.55},
+{'noc':'PUR', 'country':'Puerto Rico', 'rank':20, 'gold':1, 'silver':0, 'bronze':0, 'total':1, 'pop':3683, 'goldp':0.27, 'totalp':0.27},
+{'noc':'SRB', 'country':'Serbia', 'rank':21, 'gold':2, 'silver':4, 'bronze':2, 'total':8, 'pop':8851, 'goldp':0.23, 'totalp':0.9},
+{'noc':'GER', 'country':'Germany', 'rank':22, 'gold':17, 'silver':10, 'bronze':15, 'total':42, 'pop':80689, 'goldp':0.21, 'totalp':0.52},
+{'noc':'SWE', 'country':'Sweden', 'rank':23, 'gold':2, 'silver':6, 'bronze':3, 'total':11, 'pop':9779, 'goldp':0.2, 'totalp':1.12},
+{'noc':'KOR', 'country':'Republic Of Korea', 'rank':24, 'gold':9, 'silver':3, 'bronze':9, 'total':21, 'pop':50293, 'goldp':0.18, 'totalp':0.42},
+{'noc':'SIN', 'country':'Singapore', 'rank':25, 'gold':1, 'silver':0, 'bronze':0, 'total':1, 'pop':5604, 'goldp':0.18, 'totalp':0.18},
+{'noc':'BEL', 'country':'Belgium', 'rank':26, 'gold':2, 'silver':2, 'bronze':2, 'total':6, 'pop':11299, 'goldp':0.18, 'totalp':0.53},
+{'noc':'KAZ', 'country':'Kazakhstan', 'rank':27, 'gold':3, 'silver':5, 'bronze':9, 'total':17, 'pop':17625, 'goldp':0.17, 'totalp':0.96},
+{'noc':'FRA', 'country':'France', 'rank':28, 'gold':10, 'silver':18, 'bronze':14, 'total':42, 'pop':64395, 'goldp':0.16, 'totalp':0.65},
+{'noc':'ESP', 'country':'Spain', 'rank':29, 'gold':7, 'silver':4, 'bronze':6, 'total':17, 'pop':46122, 'goldp':0.15, 'totalp':0.37},
+{'noc':'USA', 'country':'United States', 'rank':30, 'gold':46, 'silver':37, 'bronze':38, 'total':121, 'pop':321774, 'goldp':0.14, 'totalp':0.38},
+{'noc':'UZB', 'country':'Uzbekistan', 'rank':31, 'gold':4, 'silver':2, 'bronze':7, 'total':13, 'pop':29893, 'goldp':0.13, 'totalp':0.43},
+{'noc':'ITA', 'country':'Italy', 'rank':32, 'gold':8, 'silver':12, 'bronze':8, 'total':28, 'pop':59798, 'goldp':0.13, 'totalp':0.47},
+{'noc':'RUS', 'country':'Russian Federation', 'rank':33, 'gold':19, 'silver':18, 'bronze':19, 'total':56, 'pop':143457, 'goldp':0.13, 'totalp':0.39},
+{'noc':'JOR', 'country':'Jordan', 'rank':34, 'gold':1, 'silver':0, 'bronze':0, 'total':1, 'pop':7595, 'goldp':0.13, 'totalp':0.13},
+{'noc':'KEN', 'country':'Kenya', 'rank':35, 'gold':6, 'silver':6, 'bronze':1, 'total':13, 'pop':46050, 'goldp':0.13, 'totalp':0.28},
+{'noc':'TJK', 'country':'Tajikistan', 'rank':36, 'gold':1, 'silver':0, 'bronze':0, 'total':1, 'pop':8482, 'goldp':0.12, 'totalp':0.12},
+{'noc':'CAN', 'country':'Canada', 'rank':37, 'gold':4, 'silver':3, 'bronze':15, 'total':22, 'pop':35940, 'goldp':0.11, 'totalp':0.61},
+{'noc':'BLR', 'country':'Belarus', 'rank':38, 'gold':1, 'silver':4, 'bronze':4, 'total':9, 'pop':9496, 'goldp':0.11, 'totalp':0.95},
+{'noc':'AZE', 'country':'Azerbaijan', 'rank':39, 'gold':1, 'silver':7, 'bronze':10, 'total':18, 'pop':9754, 'goldp':0.1, 'totalp':1.85},
+{'noc':'CZE', 'country':'Czech Republic', 'rank':40, 'gold':1, 'silver':2, 'bronze':7, 'total':10, 'pop':10543, 'goldp':0.09, 'totalp':0.95},
+{'noc':'JPN', 'country':'Japan', 'rank':41, 'gold':12, 'silver':8, 'bronze':21, 'total':41, 'pop':126573, 'goldp':0.09, 'totalp':0.32},
+{'noc':'PRK', 'country':'Dpr Korea', 'rank':42, 'gold':2, 'silver':3, 'bronze':2, 'total':7, 'pop':25155, 'goldp':0.08, 'totalp':0.28},
+{'noc':'ARG', 'country':'Argentina', 'rank':43, 'gold':3, 'silver':1, 'bronze':0, 'total':4, 'pop':43417, 'goldp':0.07, 'totalp':0.09},
+{'noc':'COL', 'country':'Colombia', 'rank':44, 'gold':3, 'silver':2, 'bronze':3, 'total':8, 'pop':48229, 'goldp':0.06, 'totalp':0.17},
+{'noc':'POL', 'country':'Poland', 'rank':45, 'gold':2, 'silver':3, 'bronze':6, 'total':11, 'pop':38612, 'goldp':0.05, 'totalp':0.28},
+{'noc':'ROU', 'country':'Romania', 'rank':46, 'gold':1, 'silver':1, 'bronze':3, 'total':5, 'pop':19511, 'goldp':0.05, 'totalp':0.26},
+{'noc':'UKR', 'country':'Ukraine', 'rank':47, 'gold':2, 'silver':5, 'bronze':4, 'total':11, 'pop':44824, 'goldp':0.04, 'totalp':0.25},
+{'noc':'CIV', 'country':'Ivory coast', 'rank':48, 'gold':1, 'silver':0, 'bronze':1, 'total':2, 'pop':22702, 'goldp':0.04, 'totalp':0.09},
+{'noc':'TPE', 'country':'Taipei (Chinese Taipei)', 'rank':49, 'gold':1, 'silver':0, 'bronze':2, 'total':3, 'pop':23381, 'goldp':0.04, 'totalp':0.13},
+{'noc':'IRI', 'country':'Iran', 'rank':50, 'gold':3, 'silver':1, 'bronze':4, 'total':8, 'pop':79109, 'goldp':0.04, 'totalp':0.1},
+{'noc':'RSA', 'country':'South Africa', 'rank':51, 'gold':2, 'silver':6, 'bronze':2, 'total':10, 'pop':54490, 'goldp':0.04, 'totalp':0.18},
+{'noc':'BRA', 'country':'Brazil', 'rank':52, 'gold':7, 'silver':6, 'bronze':6, 'total':19, 'pop':207848, 'goldp':0.03, 'totalp':0.09},
+{'noc':'THA', 'country':'Thailand', 'rank':53, 'gold':2, 'silver':2, 'bronze':2, 'total':6, 'pop':67959, 'goldp':0.03, 'totalp':0.09},
+{'noc':'CHN', 'country':'China', 'rank':54, 'gold':26, 'silver':18, 'bronze':26, 'total':70, 'pop':1376049, 'goldp':0.02, 'totalp':0.05},
+{'noc':'TUR', 'country':'Turkey', 'rank':55, 'gold':1, 'silver':3, 'bronze':4, 'total':8, 'pop':78666, 'goldp':0.01, 'totalp':0.1},
+{'noc':'VIE', 'country':'Vietnam', 'rank':56, 'gold':1, 'silver':1, 'bronze':0, 'total':2, 'pop':93448, 'goldp':0.01, 'totalp':0.02},
+{'noc':'ETH', 'country':'Ethiopia', 'rank':57, 'gold':1, 'silver':2, 'bronze':5, 'total':8, 'pop':99391, 'goldp':0.01, 'totalp':0.08},
+{'noc':'INA', 'country':'Indonesia', 'rank':58, 'gold':1, 'silver':2, 'bronze':0, 'total':3, 'pop':257564, 'goldp':0, 'totalp':0.01},
+{'noc':'GRN', 'country':'Grenada', 'rank':59, 'gold':0, 'silver':1, 'bronze':0, 'total':1, 'pop':107, 'goldp':0, 'totalp':9.35},
+{'noc':'LTU', 'country':'Lithuania', 'rank':60, 'gold':0, 'silver':1, 'bronze':3, 'total':4, 'pop':2878, 'goldp':0, 'totalp':1.39},
+{'noc':'NOR', 'country':'Norway', 'rank':61, 'gold':0, 'silver':0, 'bronze':4, 'total':4, 'pop':5211, 'goldp':0, 'totalp':0.77},
+{'noc':'EST', 'country':'Estonia', 'rank':62, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':1313, 'goldp':0, 'totalp':0.76},
+{'noc':'TTO', 'country':'Trinidad and Tobago', 'rank':63, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':1360, 'goldp':0, 'totalp':0.74},
+{'noc':'MGL', 'country':'Mongolia', 'rank':64, 'gold':0, 'silver':1, 'bronze':1, 'total':2, 'pop':2959, 'goldp':0, 'totalp':0.68},
+{'noc':'QAT', 'country':'Qatar', 'rank':65, 'gold':0, 'silver':1, 'bronze':0, 'total':1, 'pop':2235, 'goldp':0, 'totalp':0.45},
+{'noc':'IRL', 'country':'Ireland', 'rank':66, 'gold':0, 'silver':2, 'bronze':0, 'total':2, 'pop':4688, 'goldp':0, 'totalp':0.43},
+{'noc':'BUL', 'country':'Bulgaria', 'rank':67, 'gold':0, 'silver':1, 'bronze':2, 'total':3, 'pop':7150, 'goldp':0, 'totalp':0.42},
+{'noc':'TUN', 'country':'Tunisia', 'rank':68, 'gold':0, 'silver':0, 'bronze':3, 'total':3, 'pop':11254, 'goldp':0, 'totalp':0.27},
+{'noc':'ISR', 'country':'Israel', 'rank':69, 'gold':0, 'silver':0, 'bronze':2, 'total':2, 'pop':8064, 'goldp':0, 'totalp':0.25},
+{'noc':'MDA', 'country':'Republic Of Moldova', 'rank':70, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':4069, 'goldp':0, 'totalp':0.25},
+{'noc':'FIN', 'country':'Finland', 'rank':71, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':5503, 'goldp':0, 'totalp':0.18},
+{'noc':'MAS', 'country':'Malaysia', 'rank':72, 'gold':0, 'silver':4, 'bronze':1, 'total':5, 'pop':30331, 'goldp':0, 'totalp':0.16},
+{'noc':'AUT', 'country':'Austria', 'rank':73, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':8545, 'goldp':0, 'totalp':0.12},
+{'noc':'UAE', 'country':'United Arab Emirates', 'rank':74, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':9157, 'goldp':0, 'totalp':0.11},
+{'noc':'POR', 'country':'Portugal', 'rank':75, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':10350, 'goldp':0, 'totalp':0.1},
+{'noc':'VEN', 'country':'Venezuela', 'rank':76, 'gold':0, 'silver':1, 'bronze':2, 'total':3, 'pop':31108, 'goldp':0, 'totalp':0.1},
+{'noc':'DOM', 'country':'Dominican Republic', 'rank':77, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':10528, 'goldp':0, 'totalp':0.09},
+{'noc':'BDI', 'country':'Burundi', 'rank':78, 'gold':0, 'silver':1, 'bronze':0, 'total':1, 'pop':11179, 'goldp':0, 'totalp':0.09},
+{'noc':'ALG', 'country':'Algeria', 'rank':79, 'gold':0, 'silver':2, 'bronze':0, 'total':2, 'pop':39667, 'goldp':0, 'totalp':0.05},
+{'noc':'NIG', 'country':'Niger', 'rank':80, 'gold':0, 'silver':1, 'bronze':0, 'total':1, 'pop':19899, 'goldp':0, 'totalp':0.05},
+{'noc':'MEX', 'country':'Mexico', 'rank':81, 'gold':0, 'silver':3, 'bronze':2, 'total':5, 'pop':127017, 'goldp':0, 'totalp':0.04},
+{'noc':'EGY', 'country':'Egypt', 'rank':82, 'gold':0, 'silver':0, 'bronze':3, 'total':3, 'pop':91508, 'goldp':0, 'totalp':0.03},
+{'noc':'MAR', 'country':'Morocco', 'rank':83, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':34378, 'goldp':0, 'totalp':0.03},
+{'noc':'PHI', 'country':'Philippines', 'rank':84, 'gold':0, 'silver':1, 'bronze':0, 'total':1, 'pop':100699, 'goldp':0, 'totalp':0.01},
+{'noc':'NGR', 'country':'Nigeria', 'rank':85, 'gold':0, 'silver':0, 'bronze':1, 'total':1, 'pop':182202, 'goldp':0, 'totalp':0.01},
+{'noc':'IND', 'country':'India', 'rank':86, 'gold':0, 'silver':1, 'bronze':1, 'total':2, 'pop':1311051, 'goldp':0, 'totalp':0},
+	];
+
+    $('#table01').DataTable(
+	    {
+	    	data: data,
+        columns: [
+          { data: 'rank' },
+          { data: 'country' },
+          { data: 'gold' },
+          { data: 'silver' },
+          { data: 'bronze' },
+          { data: 'total' },
+          { data: 'goldp' },
+          { data: 'totalp' },
+          { data: 'pop' },
+        ],
+	    	responsive: true,
+	    	columnDefs: [
+		        { responsivePriority: 2, targets: 1 },
+		        { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 3, targets: 6 },
+            { responsivePriority: 4, targets: 7 },
+            { responsivePriority: 5, targets: 2 },
+            { responsivePriority: 6, targets: 5 },
+            { responsivePriority: 7, targets: 3 },
+            { responsivePriority: 8, targets: 4 },
+            { responsivePriority: 9, targets: 8 },
+            { className: "left", "targets": [ 1 ] },
+            { className: "right", "targets": [ 8 ] },
+            { render: $.fn.dataTable.render.number( ','), "targets": [ 8 ] },
+		    ],
+	    	"paging": false,
+	    	"scrollY": "400px",
+	    	"scrollCollapse": true,
+        "info": false,
+		  }
+    );
+
+});
+
+
+</script>
+
+</body>	
+</html>

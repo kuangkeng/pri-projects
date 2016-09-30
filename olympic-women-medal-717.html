@@ -1,0 +1,266 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;;
+}
+
+@media (max-width: 450px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    #container {height: 550px; }
+} 
+
+@media (max-width: 400px ) { 
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+    #container {height: 520px; }
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Size of the bubble represents GDP (PPP) of 2012 in current <a href='https://datahelpdesk.worldbank.org/knowledgebase/articles/114944-what-is-an-international-dollar' target='_blank'>international dollar</a>.</div>
+        <div>Move your mouse or finger over each bubble for more details. Click the legend to hide/show countries.<br>Source: <a href='https://docs.google.com/spreadsheets/d/1r-4lEmijLu9M4zdP_MP44EZrmf_A6FGxstgawkw9EUY/edit?usp=sharing' target='_blank'>Medal figures</a> are from <a href='https://www.olympic.org/olympic-studies-centre' target='_blank'>IOC Olympic Studies Centre</a>. Gender Inequality Index (GII) figures shown are the average of multiple-year GII (2008-2014) from <a href='http://hdr.undp.org/en/global-reports' target='_blank'>UNDP</a>. GDP PPP figures are from <a href='http://www.imf.org/external/pubs/ft/weo/2015/02/weodata/index.aspx' target='_blank'>IMF World Economic Outlook Database, Oct. 2015,</a> except for Cuba (<a href='http://databank.worldbank.org/data/reports.aspx?source=2&series=NY.GDP.MKTP.PP.CD&country=' target='_blank'>World Bank</a>).</div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bubble',
+            zoomType: 'xy',
+        },
+        title: {
+            text: "Olympic women's medals and gender inequality",
+            margin: 20,
+        },
+        subtitle: {
+            enabled: false,
+        },
+        xAxis: {
+            title: {
+              text:'GII (lower = less inequality)',
+            },
+            minTickInterval:0.1,
+        },
+        yAxis: {    
+            title: {
+                text: "Number of Olympic women's medals (1996-2012)",
+            },
+            floor:-30,
+            endOnTick: false,
+            startOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend:{enabled: true,},
+         plotOptions : {
+            bubble : {
+                tooltip : {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat : "GII: <b>{point.x}</b><br>Women's medals: <b>{point.y}</b><br>GDP PPP: <b>${point.z:,.0f}bil</b>",   
+                          },
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: '#D3401E'
+                        }
+                    }
+                },
+                minSize:5,
+                maxSize:30,
+            }
+        },
+series: [{
+        name: 'Africa',
+        color: '#984ea3',
+        data:
+            [
+                {name: "Zimbabwe", y:7, x:0.570, z:24.46, total:7, GGI:0.665, medalgdp:0.286, totalgdp: 0.286},
+                {name: "Kenya", y:12, x:0.615, z:115.67, total:47, GGI:0.671, medalgdp:0.104, totalgdp: 0.406},
+                {name: "South Africa", y:8, x:0.491, z:659.64, total:30, GGI:0.744, medalgdp:0.012, totalgdp: 0.045},
+                {name: "Cameroon", y:2, x:0.648, z:58.82, total:20, GGI:0.620, medalgdp:0.034, totalgdp: 0.340},
+                {name: "Tunisia", y:1, x:0.315, z:115.43, total:5, GGI:0.628, medalgdp:0.009, totalgdp: 0.043},
+                {name: "Morocco", y:3, x:0.526, z:233.98, total:13, GGI:0.584, medalgdp:0.013, totalgdp: 0.056},
+                {name: "Mozambique", y:2, x:0.630, z:26.19, total:2, GGI:0.727, medalgdp:0.076, totalgdp: 0.076},
+                {name: "Algeria", y:2, x:0.447, z:497.68, total:11, GGI:0.609, medalgdp:0.004, totalgdp: 0.022},
+                {name: "Namibia", y:0, x:0.477, z:20.70, total:2, GGI:0.716, medalgdp:0.000, totalgdp: 0.097},
+                {name: "Botswana", y:0, x:0.524, z:30.42, total:1, GGI:0.690, medalgdp:0.000, totalgdp: 0.033},
+                {name: "Mauritius", y:0, x:0.398, z:21.30, total:1, GGI:0.650, medalgdp:0.000, totalgdp: 0.047},
+                {name: "Burundi", y:0, x:0.515, z:7.44, total:1, GGI:0.741, medalgdp:0.000, totalgdp: 0.134},
+                {name: "Zambia", y:0, x:0.641, z:52.73, total:1, GGI:0.632, medalgdp:0.000, totalgdp: 0.019},
+                {name: "Egypt", y:0, x:0.614, z:878.52, total:8, GGI:0.591, medalgdp:0.000, totalgdp: 0.009},
+                {name: "Uganda", y:0, x:0.575, z:66.77, total:2, GGI:0.703, medalgdp:0.000, totalgdp: 0.030},
+            ]
+         }, {
+        name: 'Asia',
+        color: '#377eb8',
+        data:
+            [
+                {name: "Korea, South", y:137, x:0.160, z:1624.58, total:330, GGI:0.631, medalgdp:0.084, totalgdp: 0.203},
+                {name: "Singapore", y:7, x:0.124, z:409.18, total:7, GGI:0.684, medalgdp:0.017, totalgdp: 0.017},
+                {name: "Japan", y:175, x:0.160, z:4547.36, total:315, GGI:0.651, medalgdp:0.038, totalgdp: 0.069},
+                {name: "Bahrain", y:1, x:0.315, z:54.67, total:1, GGI:0.617, medalgdp:0.018, totalgdp: 0.018},
+                {name: "Mongolia", y:2, x:0.381, z:28.06, total:11, GGI:0.708, medalgdp:0.071, totalgdp: 0.392},
+                {name: "Azerbaijan", y:6, x:0.367, z:147.69, total:26, GGI:0.666, medalgdp:0.041, totalgdp: 0.176},
+                {name: "Kazakhstan", y:11, x:0.362, z:367.76, total:52, GGI:0.708, medalgdp:0.030, totalgdp: 0.141},
+                {name: "Armenia", y:1, x:0.379, z:22.03, total:12, GGI:0.665, medalgdp:0.045, totalgdp: 0.545},
+                {name: "China", y:389, x:0.244, z:15154.32, total:592, GGI:0.681, medalgdp:0.026, totalgdp: 0.039},
+                {name: "Thailand", y:10, x:0.414, z:998.47, total:21, GGI:0.692, medalgdp:0.010, totalgdp: 0.021},
+                {name: "Tajikistan", y:1, x:0.399, z:18.93, total:3, GGI:0.662, medalgdp:0.053, totalgdp: 0.159},
+                {name: "Turkey", y:7, x:0.430, z:1367.61, total:33, GGI:0.596, medalgdp:0.005, totalgdp: 0.024},
+                {name: "Sri Lanka", y:1, x:0.434, z:183.33, total:1, GGI:0.718, medalgdp:0.005, totalgdp: 0.005},
+                {name: "Indonesia", y:9, x:0.535, z:2344.88, total:28, GGI:0.661, medalgdp:0.004, totalgdp: 0.012},
+                {name: "Malaysia", y:1, x:0.291, z:671.12, total:6, GGI:0.650, medalgdp:0.001, totalgdp: 0.009},
+                {name: "Vietnam", y:1, x:0.353, z:444.11, total:2, GGI:0.683, medalgdp:0.002, totalgdp: 0.005},
+                {name: "India", y:3, x:0.620, z:6255.54, total:12, GGI:0.626, medalgdp:0.000, totalgdp: 0.002},
+                {name: "Qatar", y:0, x:0.563, z:272.96, total:3, GGI:0.618, medalgdp:0.000, totalgdp: 0.011},
+                {name: "Israel", y:0, x:0.165, z:248.77, total:5, GGI:0.698, medalgdp:0.000, totalgdp: 0.020},
+                {name: "Iran", y:0, x:0.536, z:1283.53, total:27, GGI:0.588, medalgdp:0.000, totalgdp: 0.021},
+                {name: "United Arab Emirates", y:0, x:0.283, z:547.65, total:1, GGI:0.630, medalgdp:0.000, totalgdp: 0.002},
+                {name: "Kyrgyzstan", y:0, x:0.398, z:16.26, total:3, GGI:0.694, medalgdp:0.000, totalgdp: 0.185},
+                {name: "Kuwait", y:0, x:0.326, z:271.02, total:2, GGI:0.636, medalgdp:0.000, totalgdp: 0.007},
+                {name: "Saudi Arabia", y:0, x:0.539, z:1466.83, total:6, GGI:0.573, medalgdp:0.000, totalgdp: 0.004},
+                {name: "Philippines", y:0, x:0.459, z:590.80, total:1, GGI:0.769, medalgdp:0.000, totalgdp: 0.002},
+            ]
+        }, {
+        name: 'Europe',
+        color: '#e41a1c',
+        data:
+            [
+                {name: "Norway", y:88, x:0.102, z:325.61, total:115, GGI:0.830, medalgdp:0.270, totalgdp: 0.353},
+                {name: "Netherlands", y:215, x:0.078, z:778.96, total:359, GGI:0.752, medalgdp:0.276, totalgdp: 0.461},
+                {name: "Denmark", y:59, x:0.086, z:241.24, total:112, GGI:0.769, medalgdp:0.245, totalgdp: 0.464},
+                {name: "Hungary", y:74, x:0.266, z:227.49, total:189, GGI:0.675, medalgdp:0.325, totalgdp: 0.831},
+                {name: "Belarus", y:63, x:0.151, z:162.96, total:112, GGI:0.734, medalgdp:0.387, totalgdp: 0.687},
+                {name: "Romania", y:124, x:0.358, z:358.71, total:161, GGI:0.685, medalgdp:0.346, totalgdp: 0.449},
+                {name: "Greece", y:38, x:0.182, z:285.17, total:67, GGI:0.675, medalgdp:0.133, totalgdp: 0.235},
+                {name: "Iceland", y:1, x:0.128, z:13.12, total:15, GGI:0.837, medalgdp:0.076, totalgdp: 1.143},
+                {name: "Germany", y:254, x:0.097, z:3557.47, total:587, GGI:0.759, medalgdp:0.071, totalgdp: 0.165},
+                {name: "Bulgaria", y:24, x:0.256, z:121.59, total:58, GGI:0.709, medalgdp:0.197, totalgdp: 0.477},
+                {name: "Slovenia", y:6, x:0.117, z:58.45, total:20, GGI:0.712, medalgdp:0.103, totalgdp: 0.342},
+                {name: "Sweden", y:24, x:0.085, z:421.01, total:105, GGI:0.813, medalgdp:0.057, totalgdp: 0.249},
+                {name: "Russia", y:361, x:0.336, z:3397.76, total:774, GGI:0.695, medalgdp:0.106, totalgdp: 0.228},
+                {name: "Lithuania", y:8, x:0.190, z:72.79, total:42, GGI:0.721, medalgdp:0.110, totalgdp: 0.577},
+                {name: "Switzerland", y:16, x:0.082, z:441.83, total:47, GGI:0.750, medalgdp:0.036, totalgdp: 0.106},
+                {name: "Spain", y:84, x:0.139, z:1519.71, total:273, GGI:0.738, medalgdp:0.055, totalgdp: 0.180},
+                {name: "United Kingdom", y:117, x:0.228, z:2375.32, total:341, GGI:0.743, medalgdp:0.049, totalgdp: 0.144},
+                {name: "Czech Republic", y:19, x:0.153, z:301.44, total:56, GGI:0.678, medalgdp:0.063, totalgdp: 0.186},
+                {name: "Ukraine", y:88, x:0.350, z:386.43, total:172, GGI:0.690, medalgdp:0.228, totalgdp: 0.445},
+                {name: "Finland", y:8, x:0.109, z:217.89, total:21, GGI:0.829, medalgdp:0.037, totalgdp: 0.096},
+                {name: "Belgium", y:16, x:0.116, z:461.61, total:24, GGI:0.743, medalgdp:0.035, totalgdp: 0.052},
+                {name: "France", y:95, x:0.123, z:2487.57, total:328, GGI:0.713, medalgdp:0.038, totalgdp: 0.132},
+                {name: "Italy", y:86, x:0.121, z:2111.86, total:348, GGI:0.679, medalgdp:0.041, totalgdp: 0.165},
+                {name: "Ireland", y:6, x:0.179, z:214.46, total:13, GGI:0.771, medalgdp:0.028, totalgdp: 0.061},
+                {name: "Croatia", y:6, x:0.203, z:87.14, total:99, GGI:0.705, medalgdp:0.069, totalgdp: 1.136},
+                {name: "Slovakia", y:7, x:0.209, z:142.78, total:34, GGI:0.680, medalgdp:0.049, totalgdp: 0.238},
+                {name: "Poland", y:34, x:0.181, z:882.98, total:89, GGI:0.698, medalgdp:0.039, totalgdp: 0.101},
+                {name: "Austria", y:6, x:0.128, z:381.55, total:18, GGI:0.719, medalgdp:0.016, totalgdp: 0.047},
+                {name: "Latvia", y:1, x:0.227, z:43.88, total:14, GGI:0.745, medalgdp:0.023, totalgdp: 0.319},
+                {name: "Portugal", y:3, x:0.158, z:274.36, total:12, GGI:0.709, medalgdp:0.011, totalgdp: 0.044},
+                {name: "Moldova", y:1, x:0.316, z:15.04, total:8, GGI:0.719, medalgdp:0.066, totalgdp: 0.532},
+                {name: "Serbia", y:2, x:0.176, z:92.12, total:31, GGI:0.711, medalgdp:0.022, totalgdp: 0.337},
+                {name: "Georgia", y:1, x:0.459, z:30.72, total:25, GGI:0.671, medalgdp:0.033, totalgdp: 0.814},
+                {name: "Estonia", y:0, x:0.216, z:34.07, total:11, GGI:0.706, medalgdp:0.000, totalgdp: 0.323},
+                {name: "Cyprus", y:0, x:0.164, z:28.79, total:1, GGI:0.665, medalgdp:0.000, totalgdp: 0.035},
+                {name: "Macedonia", y:0, x:0.160, z:25.19, total:1, GGI:0.697, medalgdp:0.000, totalgdp: 0.040},
+            ]
+        }, {
+        name: 'Latin America',
+        color: '#4daf4a',
+        data:
+            [
+                {name: "Bahamas", y:13, x:0.316, z:8.6, total:27, GGI:0.721, medalgdp:1.503, totalgdp: 3.121,},
+                {name: "Jamaica", y:62, x:0.487, z:23.2, total:94, GGI:0.703, medalgdp:2.673, totalgdp: 4.052},
+                {name: "Cuba", y:71, x:0.374, z:224.82, total:249, GGI:0.721, medalgdp:0.316, totalgdp: 1.108},
+                {name: "Argentina", y:69, x:0.408, z:890.67, total:158, GGI:0.717, medalgdp:0.077, totalgdp: 0.177},
+                {name: "Costa Rica", y:3, x:0.380, z:64.41, total:3, GGI:0.717, medalgdp:0.047, totalgdp: 0.047},
+                {name: "Brazil", y:126, x:0.485, z:3082.02, total:284, GGI:0.676, medalgdp:0.041, totalgdp: 0.092},
+                {name: "Colombia", y:8, x:0.497, z:566.88, total:13, GGI:0.701, medalgdp:0.014, totalgdp: 0.023},
+                {name: "Mexico", y:13, x:0.431, z:2008.79, total:42, GGI:0.665, medalgdp:0.006, totalgdp: 0.021},
+                {name: "Venezuela", y:2, x:0.483, z:538.21, total:4, GGI:0.688, medalgdp:0.004, totalgdp: 0.007},
+                {name: "Trinidad and Tobago", y:0, x:0.362, z:41.02, total:20, GGI:0.716, medalgdp:0.000, totalgdp: 0.488},
+                {name: "Paraguay", y:0, x:0.504, z:47.51, total:17, GGI:0.671, medalgdp:0.000, totalgdp: 0.358},
+                {name: "Barbados", y:0, x:0.372, z:4.41, total:1, GGI:0.725, medalgdp:0.000, totalgdp: 0.227},
+                {name: "Chile", y:0, x:0.386, z:374.37, total:23, GGI:0.680, medalgdp:0.000, totalgdp: 0.061},
+                {name: "Dominican Republic", y:0, x:0.523, z:119.22, total:5, GGI:0.677, medalgdp:0.000, totalgdp: 0.042},
+                {name: "Panama", y:0, x:0.518, z:64.58, total:1, GGI:0.713, medalgdp:0.000, totalgdp: 0.015},
+                {name: "Uruguay", y:0, x:0.381, z:63.79, total:1, GGI:0.680, medalgdp:0.000, totalgdp: 0.016},
+                {name: "Ecuador", y:0, x:0.478, z:161.45, total:2, GGI:0.712, medalgdp:0.000, totalgdp: 0.012},
+                {name: "Guatemala", y:0, x:0.570, z:107.30, total:1, GGI:0.630, medalgdp:0.000, totalgdp: 0.009},
+            ]
+        }, {
+        name: 'North America',
+        color: '#ff7f00',
+        data:
+            [
+                {name: "Canada", y:111, x:0.163, z:1478.58, total:191, GGI:0.731, medalgdp:0.075, totalgdp: 0.129},
+                {name: "United States", y:727, x:0.299, z:16155.25, total:1334, GGI:0.728, medalgdp:0.045, totalgdp: 0.083},
+            ]
+        }, {
+        name: 'Oceania',
+        color: '#a9a9a9',
+        data:
+            [
+                {name: "Australia", y:373, x:0.154, z:1015.35, total:735, GGI:0.729, medalgdp:0.367, totalgdp: 0.724},
+                {name: "New Zealand", y:19, x:0.204, z:147.03, total:59, GGI:0.777, medalgdp:0.129, totalgdp: 0.401},
+            ]
+        }]              
+    });
+
+});
+</script>

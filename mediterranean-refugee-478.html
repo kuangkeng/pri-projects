@@ -1,0 +1,148 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 750px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 750px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Figure for 2016 is until August 30, 2016.</div>
+        Source:  
+        <a href='http://data.unhcr.org/mediterranean/regional.php' target='_blank'>UNHCR</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'No. of refugees & migrants arrive in Europe via the Mediterranean Sea',
+                //margin: 30,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["2008","2009","2010","2011","2012","2013","2014","2015","2016"],   
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: 'Year: {point.key}<br>',
+                //pointFormat: '{key}<br>% of population {point.series.name}: <b>{point.y}%</b>',
+                //valueSuffix: '%',
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Refugees/migrants", color:"#FF1300", data: [59000,56252,9654,70402,22439,59421,216054,1015078,271676]},
+            ],
+            });
+
+        $(chart.series).each(function(){
+          var point = this.points[3];
+          chart.renderer.label("Syrian civil war<br>started in 2011", point.plotX + chart.plotLeft - 80, point.plotY + chart.plotTop - 50,'callout',
+          point.plotX + chart.plotLeft,
+          point.plotY + chart.plotTop)
+          .css({color: '#FFFFFF'})
+          .attr({ fill: 'rgba(0, 0, 0, 0.5)',padding: 3,r: 5,zIndex: 6}).add();
+        });
+
+
+    });
+
+});
+</script>

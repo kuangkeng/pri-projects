@@ -1,0 +1,141 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Successful outcomes refer to termination of government's charges or grant of relief from removal by an immigration judge.</div>
+        Source: 
+        <a href='http://scholarship.law.upenn.edu/cgi/viewcontent.cgi?article=9502&context=penn_law_review' target='_blank'>University of Pennsylvania Law Review</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'Impact of legal representation in immigration court, 2007-2012',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Detained", "Released", "Never detained"],   
+            },
+            yAxis: {
+                title: {
+                  text: 'Successful rate (percentage)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: true},
+            tooltip: {
+                headerFormat: 'Detention status: <b>{point.key}</b><br>Representation status: <b>{point.series.name}</b><br>',
+                pointFormat: 'Successful rate: <b>{point.y}</b>',
+                valueSuffix: '%',
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '12px',
+                        },
+                        formatter: function() {
+                            return this.y + "%"
+                        },
+                    }
+                },
+            },    
+            series: [{
+                name: 'With counsel',
+                data: [21, 39, 60],
+                color:'#4188bc',
+            }, {
+                name: 'Without counsel',
+                data: [2, 7, 17],
+                color:'#e41a1c',
+            }],
+            });
+    });
+
+});
+</script>

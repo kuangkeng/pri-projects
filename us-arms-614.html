@@ -1,0 +1,142 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">To compare different weapons, SIPRI measures the export value using a common unit called <a href="http://www.sipri.org/databases/armstransfers/background/background_default#TIV-tables" target='_blank'>trend-indicator value (TIV)</a>, expressed in US dollars at constant 1990 prices.</div>
+        Source:  
+        <a href='http://www.sipri.org/databases/armstransfers' target='_blank'>SIPRI Arms Transfers Database</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'US arms exports to the Middle East, 2006-2015',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["UAE","Saudi Arabia","Israel","Turkey","Iraq","Egypt","Kuwait","Qatar","Oman","Jordan","Bahrain","Lebanon","Yemen"],                   
+            },
+            yAxis: {
+                title: {
+                  text: 'TIV in billions of dollars (1990 constant prices)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                pointFormat: 'TIV: <b>${point.y} billion</b>',
+                //valueSuffix: ',000',
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"TIV", color:"#4188bc", data: [6.98,5.69,{y:3.33, color:'#e41a1c'},3.23,3.15,3.00,1.48,1.24,0.92,0.46,0.17,0.12,0.04]},
+            ],
+            });
+    });
+});
+</script>

@@ -1,0 +1,188 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+    height:500px;
+    max-width: 800px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 800px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#67acd2;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 600px ) { 
+    #container {height: 450px;}
+} 
+
+@media (max-width: 500px ) { 
+    #container {height: 350px;}
+    #text {font-size: 12px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">
+          <b>1962:</b> Following the military coup, General Ne Win formed a single-party state and his Socialist Programme Party became the only political party.<br>
+          <b>1989:</b> Under the martial law, pro-democracy activists were arrested. Aung San Suu Kyi, the leader of opposition National League for Democracy was put under house arrest.<br>
+          <p><i>To compare different weapons, SIPRI measures the export value using a common unit called <a href="http://www.sipri.org/databases/armstransfers/background/background_default#TIV-tables" target='_blank'>trend-indicator value (TIV)</a>, expressed in US dollar at constant 1990 prices.</i></p></div>
+        Source: 
+        <a href='http://www.sipri.org/databases/armstransfers' target='_blank'>SIPRI Arm Transfers Database</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script> 
+$(function () {
+    var chart;   
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'area',
+                zoomType: 'x',
+            },
+            title: {
+                text: 'Arms exports to Myanmar, 1960-2015',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015"],  
+                tickmarkPlacement: 'on', 
+                minTickInterval:10,
+                plotLines: [{
+                  value: 29,
+                  color: '#808080',
+                  dashStyle: 'shortdash',
+                  width: 2,
+                  label: {
+                      useHTML: true,
+                      text: 'Marshal law<br>declared (1989)',
+                      align: 'left',
+                      x:18,
+                      y:0,
+                      style: {
+                          fontSize: '11px',
+                          color: '#808080',
+                          textAlign:'left',
+                      }
+                  }
+                },{
+                  value: 2,
+                  color: '#808080',
+                  dashStyle: 'shortdash',
+                  width: 2,
+                  label: {
+                      useHTML: true,
+                      text: 'Military coup (1962)',
+                      align: 'left',
+                      x:5,
+                      y:0,
+                      style: {
+                          fontSize: '11px',
+                          color: '#808080',
+                          textAlign:'left',
+                      }
+                  }
+                }],
+            },
+            yAxis: {
+                title: {
+                  text: 'TIV in $ million (1990 constant USD)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                headerFormat: 'Year: {point.key}<br>',
+                pointFormat: '{series.name}: <b>${point.y:,0f}</b> mil<br>',
+                shared: true,
+            },
+            plotOptions: {
+                series:{
+                    stickyTracking: false,
+                },
+                area: {
+                  lineWidth: 0,
+                  stacking: 'normal',
+                  marker: {
+                      enabled: false
+                }
+              }
+            },
+            series: [ 
+                {name: "USA", color:"#377eb8", data:[8,11,14,42,15,11,3,13,6,0,0,22,4,0,0,53,3,7,14,0,17,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+                {name: "USSR/Russia", color:"#e41a1c", data:[0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,34,0,0,0,87,134,0,120,137,151,127,14,14,38,377,149,60,34,6]},
+                {name: "China", color:"#FFCE00", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,217,182,14,323,93,176,118,197,156,116,3,50,9,57,74,23,10,2,10,17,5,277,329,178,267,288]},
+                {name: "Others", color:"#4daf4a", data:[5,5,0,3,3,8,0,1,0,22,4,1,0,0,0,0,7,2,11,19,24,0,36,0,0,0,8,0,0,0,49,49,50,0,3,0,0,0,0,25,14,12,15,26,0,0,14,9,69,21,20,9,0,0,0,27]},
+            ],
+            });
+    });    
+});   
+
+</script>

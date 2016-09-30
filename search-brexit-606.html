@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 5px;
+  color:#33333c;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#67acd2;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div class="button01"><button id="button01">With reference point</button></div></td>
+    	   <div id="text">Numbers represent search interest relative to the highest point in the chart. Click the blue button to show the search interest of 'weather forecast' in morning as reference point.</div>
+        <div>Source: <a href='https://www.google.com/trends/' target='_blank'>Google Trends</a>, Timezone: GMT+1</div>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+      Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+      }),
+
+      $('#container').highcharts({
+          chart: {
+              type: 'line',
+              zoomType: 'y',
+          },
+          title: {
+              text: 'Google searches in UK after Brexit polls',
+              margin: 30,
+          },
+          subtitle: {
+              enabled: false,
+          },        
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                  day: '%b %e',
+              },
+              tickInterval: 24 * 3600 * 1000,
+              plotBands: [{
+                  color: '#f2f2f2',
+                  from: Date.UTC(2016,5,23,7),
+                  to: Date.UTC(2016,5,23,22),
+                  label:{
+                      useHTML: true,
+                      text: "Voting<br>time",
+                      y: 80,
+                      style: {
+                        fontSize: '11px',
+                        color: '#808080',
+                        textAlign:'center',
+                      }
+                  }
+              }],              
+          },
+          yAxis: {
+              title: {
+                text: null,
+              },
+              labels: {
+                  format: '{value:,.0f}'
+              },
+              endOnTick: false,
+              plotLines: [{
+                  value: 145,
+                  color: '#FF69B4',
+                  dashStyle: 'shortdash',
+                  width: 1,
+                  label: {
+                      useHTML: true,
+                      text: "Peak of 'weather forecast'<br>searches in morning'",
+                      y:-20,
+                      style: {
+                          fontSize: '11px',
+                          color: '#808080',
+                      }
+                  }
+              }]              
+          },
+          credits: { enabled: false, },
+
+          tooltip: {
+              shared: true,
+              pointFormat: "Phrase: <b>{point.series.name}</b><br>Search interest: <b>{point.y}</b><br>"
+          },
+          plotOptions: {
+              series: {
+                  pointStart: Date.UTC(2016, 5, 22),
+                  pointInterval: 3600 * 1000 // one day
+              },
+              line: {
+                  marker: {
+                      enabled: false
+                  }
+              }
+          },
+	        series: [
+	          {name: "'second referendum'", color:"#377eb8",
+	          data :[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,3,4,3,3,7,16,19,32,36,36,35,40,38,37,34,32,29,28,32,36,36,31,31,26,27,31,42,43,47,53,54,100,83,76,80,67,59,62,66,65,57,55,56,55,51,48,39,40,37,49,62,65,61,54,52,50,48,43,37,31,28,26,26,25,21,21,23,23,23,18,17,15,18,23,30,25,24,20,17,16,16,15]},
+	          {name: "'What is EU'", color:"#4daf4a",
+	          data :[5,5,4,3,3,5,5,5,6,5,6,5,6,5,4,5,5,6,9,7,7,12,9,10,8,6,7,8,6,8,10,9,10,9,9,9,9,9,8,9,10,11,10,10,13,22,23,30,42,48,63,65,61,61,62,47,39,31,28,22,20,17,17,18,20,21,19,16,17,20,17,17,17,18,17,13,12,13,14,13,12,10,10,10,9,9,8,8,8,8,9,9,9,9,9,9,8,9,9,8,7,7,9,8,7,8,7,7,6,6,5,5,5,5,5,5,5,5,5,6,5,6,5,5,6,4,4,4,5,4,4,4,3]},
+            {name: "'What is Brexit'", color:"#e41a1c",
+            data :[2,2,2,2,3,2,3,2,2,2,2,2,2,2,2,2,2,2,4,3,3,4,4,4,3,3,2,3,4,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,4,6,7,8,12,16,22,25,27,28,30,24,21,19,16,14,14,12,11,11,12,16,12,11,10,15,13,13,14,15,15,13,12,12,12,10,9,7,6,7,6,5,6,5,5,5,6,6,5,6,6,6,6,6,8,6,7,7,6,7,6,6,5,4,4,4,3,4,4,5,5,4,4,6,5,6,6,6,6,4,7,7,9,6,4,4,3,4,3]},
+            {name: "'second referendum petition'", color:"#ff7f00",
+            data :[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,8,9,13,19,20,20,23,23,21,20,18,15,15,17,18,16,13,11,9,9,13,22,23,25,34,35,69,55,48,50,40,35,36,40,39,34,32,33,31,29,26,20,19,21,29,38,42,39,33,31,33,31,27,23,18,17,15,14,13,11,12,13,12,11,9,9,6,8,14,17,14,14,11,9,9,8,8]},
+            ],  
+  });
+  var chart = $('#container').highcharts();
+  var flip = "on";  
+  $('#button01').click(function () {
+    if(flip=="off"){
+      flip="on";  
+      $('#button01').text("With reference point");
+      chart.yAxis[0].setExtremes(0, 100); 
+    } else {
+      flip = "off";
+      $('#button01').text("Without reference point");
+      chart.yAxis[0].setExtremes(0, 150); 
+    } 
+  });
+
+});
+
+</script>

@@ -1,0 +1,159 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+    height:400px;
+    max-width: 800px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 800px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#67acd2;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 600px ) { 
+    #container {height: 370px;}
+} 
+
+@media (max-width: 500px ) { 
+    #container {height: 350px;}
+    #text {font-size: 12px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">
+          Click the legend to hide/show countries.<br>
+          Figures are estimates from various sources. Click the sources for details.<br>
+        Sources: 
+        <a href='http://www.unodc.org/wdr2015/' target='_blank'>UNODC's World Drug Report 2015</a>, <a href='http://www.state.gov/j/inl/rls/nrcrpt/2016/index.htm
+' target='_blank'>INCSR 2016</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script> 
+$(function () {
+    var chart;   
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'area',
+                zoomType: 'x',
+            },
+            title: {
+                text: 'Estimated global production of opium in major countries, 1999-2014',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014"],  
+                tickmarkPlacement: 'on', 
+                
+            },
+            yAxis: {
+                title: {
+                  text: 'Tons',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                headerFormat: 'Year: {point.key}<br>',
+                pointFormat: '{series.name}: <b>{point.y:,0f}</b><br>',
+                shared: true,
+            },
+            plotOptions: {
+                series:{
+                    stickyTracking: false,
+                },
+                area: {
+                  lineWidth: 0,
+                  stacking: 'normal',
+                  marker: {
+                      enabled: false
+                }
+              }
+            },
+            series: [ 
+                {name: "Afghanistan", color:"#ff7f00", data:[4565,3276,185,3400,3600,4200,4100,5300,7400,5900,4000,3600,5800,3700,5500,6400]},
+                {name: "Myanmar", color:"#FFCE00", data:[895,1087,1097,828,810,370,312,315,460,410,330,580,610,690,870,670]},
+                {name: "Mexico", color:"#e41a1c", data:[43,21,91,58,101,73,71,108,150,325,425,300,250,220,225,360]},
+                {name: "Others", color:"#377eb8", data:[92,73,134,128,203,188,170,163,208,512,603,524,540,437,469,567]},   
+                {name: "Laos", color:"#4daf4a", data:[124,167,134,112,120,43,14,20,9,10,11,18,25,41,23,92]},         
+                {name: "Columbia", color:"ffffff", data:[88,88,80,52,50,49,24,13,14,10,9,8,8,8,11,0]},
+                
+                
+                
+                
+            ],
+            });
+    });    
+});   
+
+</script>

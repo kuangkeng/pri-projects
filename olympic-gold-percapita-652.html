@@ -1,0 +1,154 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 560px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 400px ) { 
+    #container {height:550px;}
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Mouse over or tap each bar for more details.</div>
+        Source: <a href='https://esa.un.org/unpd/wpp/DataQuery/' target='_blank'>UN, Department of Economic and Social Affairs, Population Division (2015)</a>, <a href='https://www.rio2016.com/en/medal-count-country' target='_blank'>IOC</a>.
+        
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Gold medals per capita<br>Top 10 + US, UK & China',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Bahamas","Jamaica","Croatia","Fiji","New Zealand","Hungary","Bahrain","Kosovo","Georgia","Slovenia","Great Britain","United States","China"],   
+            },
+            yAxis: {
+                title: {
+                  text: 'Number of gold medals<br>per million population', 
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Gold medals: <b>{point.gold}</b><br>Silver medals: <b>{point.silver}</b><br>Bronze medals: <b>{point.bronze}</b><br>Total medals: <b>{point.total}</b><br>Population 2015: <b>{point.pop:,0f},000</b><br>Gold medals per million population: <b>{point.y}</b>',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Others", color:"#4188bc", data: [
+{y:2.58, y2:5.15, gold:1, silver:0, bronze:1, total:2, pop:388},
+{y:2.15, y2:3.94, gold:6, silver:3, bronze:2, total:11, pop:2793},
+{y:1.18, y2:2.36, gold:5, silver:3, bronze:2, total:10, pop:4240},
+{y:1.12, y2:1.12, gold:1, silver:0, bronze:0, total:1, pop:892},
+{y:0.88, y2:3.97, gold:4, silver:9, bronze:5, total:18, pop:4529},
+{y:0.81, y2:1.52, gold:8, silver:3, bronze:4, total:15, pop:9855},
+{y:0.73, y2:1.45, gold:1, silver:1, bronze:0, total:2, pop:1377},
+{y:0.56, y2:0.56, gold:1, silver:0, bronze:0, total:1, pop:1797},
+{y:0.5, y2:1.75, gold:2, silver:1, bronze:4, total:7, pop:4000},
+{y:0.48, y2:1.93, gold:1, silver:2, bronze:1, total:4, pop:2068},
+{y:0.42, y2:1.04, gold:27, silver:23, bronze:17, total:67, pop:64716, color:"#88bc41"},
+{y1:0.14, y:0.38, gold:46, silver:37, bronze:38, total:121, pop:321774, color:"#88bc41"},
+{y1:0.02, y:0.05, gold:26, silver:18, bronze:26, total:70, pop:1376049, color:"#88bc41"},
+
+                ]},
+            ],
+            });
+    });
+});
+</script>

@@ -1,0 +1,181 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#67acd2;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 500px ) { 
+    #container{height: 370px; }
+}    
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+    #container{height: 340px; }
+}   
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div class="button01"><button id="button01">Remove US</button></div></td>
+        <div id="text">Figures shown are the latest data published by each country. US figures include federal and state prisons. Data for England and Wales before 2007 is not available online. New Zealand reopened its private prison in 2011 after it was banned in 2005.</div>
+        Sources: 
+        <a href='http://www.bjs.gov/index.cfm?ty=nps' target='_blank'>US Bureau of Justice Statistics</a>, 
+        <a href='http://www.pc.gov.au/research/ongoing/report-on-government-services' target='_blank'>Report on Government Services, Australian government</a>, 
+        <a href='https://www.gov.uk/government/collections/prison-population-statistics' target='_blank'>UK Ministry of Justice</a>, 
+        <a href='http://www.gov.scot/Topics/Statistics/Browse/Crime-Justice/PubPrisons' target='_blank'>Scottish government</a>, 
+        <a href='http://www.corrections.govt.nz/resources/research_and_statistics/quarterly_prison_statistics/prison_stats_june_2016.html' target='_blank'>Department of Corrections, New Zealand</a>.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'line',
+        },
+        title: {
+            text: "Number of prisoners in private prisons",
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                year: '%Y'
+            },
+            //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+              text: "Population",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            endOnTick: false,
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: true,
+        },
+        tooltip: {
+            formatter:function() {
+                return '<b>' + this.series.name + '</b><br>Year: <b>' + Highcharts.dateFormat('%Y',this.x) + '</b><br>Population: <b>' + this.y + '</br>';
+            }
+        },
+        plotOptions: {
+              series: {
+                  pointStart: Date.UTC(2000, 1, 1),
+                  pointInterval: 24 * 3600 * 1000 * 365
+              },
+              line: {
+                  marker: {
+                      enabled: false
+                  }
+              }
+        },
+        series: [
+            {name: "US", color:"#4188bc",
+                data :[91579,86421,88370,90123,92569,107433,113697,124150,129482,129333,127945,130972,137220,133363,131261,null,null],
+            },
+            {name: "England and Wales", color:"#e41a1c",
+                data :[null,null,null,null,null,null,null,10035,10087,10482,10847,11260,12602,12892,14737,15415,15555],
+            },
+            {name: "Australia", color:"#ff7f00",
+                data :[3188,3265,3630,4171,4281,4303,4385,4395,4398,4449,5175,5520,5510,5632,6044,6394,null],
+            },
+            {name: "New Zealand", color:"#4daf4a",
+                data :[null,null,null,null,null,null,null,null,null,null,null,925,898,876,952,957,947],
+            },
+            {name: "Scotland", color:"#FF69B4",
+                data :[512,533,541,584,583,592,599,641,748,1253,1269,1408,1349,1205,null,null,null],
+            },                                                            
+        ], 
+
+    });
+
+  var chart = $('#container').highcharts();
+  var flip = "on";  
+  $('#button01').click(function () {
+    if(flip=="off"){
+      flip="on";  
+      $('#button01').text("Remove US");
+      chart.yAxis[0].setExtremes(0, 140000); 
+    } else {
+      flip = "off";
+      $('#button01').text("Include US");
+      chart.yAxis[0].setExtremes(0, 16000); 
+    } 
+  });
+
+
+});
+</script>

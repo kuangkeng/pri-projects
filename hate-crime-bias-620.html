@@ -1,0 +1,140 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 750px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 750px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 500px ) { #container {height: 420px;} }
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Hate crimes against people with disabilities were only collected since 1997. Multiple-bias incidents which are motivated by two or more biases are not shown as the figures are too small. The race category refers to White, Black, American Indian/Alaska Native, Asian/Pacific Islander and multiple races. The ethnicity category refers to Hispanic/Latino or other ethnicity/national origin.</div>
+        Source:  
+        <a href='https://ucr.fbi.gov/ucr-publications#Hate' target='_blank'>FBI</a><br><a href='https://docs.google.com/spreadsheets/d/1OcBVU_H76qbKyPg8HUXxmOvfB4Odf76bTjn5pRhYav8/edit?usp=sharing' target='_blank'>Get the data</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: 'Hate crime incidents in the US by bias motivation',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    year: '%Y'
+                },
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: true},
+            tooltip: {
+                formatter:function() {
+                    return '<b>' + this.series.name + '</b><br>Year: <b>' + Highcharts.dateFormat('%Y',this.x) + '</b><br>Incidents: <b>' + Highcharts.numberFormat(this.point.y,0,',',',') + '</b>';
+                }
+            },
+            plotOptions: {
+                  series: {
+                      pointStart: Date.UTC(1996, 1, 1),
+                      pointInterval: 24 * 3600 * 1000 * 365
+                  },
+                  line: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+            },    
+            series: [ 
+                {name: "Race", color:"#4188bc", data :[5396,4710,4321,4295,4337,4367,3642,3844,4042,3919,4000,3870,3992,3199,3135,2917,2797,2871,2568],},
+                {name: "Religion", color:"#e41a1c", data :[1401,1385,1390,1411,1472,1828,1426,1343,1374,1227,1462,1400,1519,1303,1322,1233,1099,1031,1014],},
+                {name: "Sexual Orientation", color:"#4daf4a", data :[1016,1102,1260,1317,1299,1393,1244,1239,1197,1017,1195,1265,1297,1223,1277,1293,1135,1233,1017],},
+                {name: "Ethnicity", color:"#ff7f00", data :[940,836,754,829,911,2098,1102,1026,972,944,984,1007,894,777,847,720,667,655,648],},
+                {name: "Disability", color:"#FF69B4", data :[null,12,25,19,36,35,45,33,57,53,79,79,78,96,43,53,92,83,84],},
+            ],
+            });
+    });
+
+});
+</script>

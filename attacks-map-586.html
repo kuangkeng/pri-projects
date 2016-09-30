@@ -23,13 +23,14 @@ max-width: 850px;
 }
 
 #note {
-    font-size: 14px;
-    color: #808080;
-    line-height: 18px;
-    padding:10px 10px 10px 10px;
+    font-size: 18px;
+    color: #33333c;
+    line-height: 20px;
+    padding:10px 10px 5px 10px;
 }
 
 #credit {
+    color: #808080;
     font-size: 10px;
     padding-top: 10px;
     text-align: right;
@@ -52,12 +53,16 @@ max-width: 850px;
 }
 #date, #fatalities {line-height: 18px;}
 #date {font-size: 12px;}
-#first, #second {line-height: 16px;}
-#second {margin-top: 5px;}
+#first, #second, #third {line-height: 16px;}
+#second, #third {margin-top: 10px;}
+#summary {line-height: 18px;}
+
+@media (max-width: 300px ) { 
+    #note {font-size: 16px;line-height: 18px;}
+}
 
 </style>
 </head>
-
 <body>
 <div id="wrapper">    
     <div id="container"></div>
@@ -83,18 +88,26 @@ max-width: 850px;
     [39.933395,32.859675,"Ankara, Turkey"],
     [2.047105,45.318319,"Mogadishu, Somalia"],
     [5.225919,-3.753613,"Grand-Bassam, Ivory Coast"],
+    [14.541035, 49.127331,"Port of Mukalla, Yemen"],
+    [50.284486, 57.167336,"Aktobe, Kazakhstan"],
+    [28.519620, -81.376515, "Orlando, US"],
+    [23.802816, 90.416711,"Dhaka, Bangladesh"],
   ];
 
   var info =[
-["<div id='window'><div id='location'>Bamako, Mali</div><div id='date'>Nov 20, 2015</div><div id='fatalities'>Fatalies: <b>20</b></div></div>"],
-["<div id='window'><div id='location'>Tunis, Tunisia</div><div id='date'>Nov 24, 2015</div><div id='fatalities'>Fatalies: <b>13</b></div></div>"],
-["<div id='window'><div id='location'>San Bernardino, US</div><di id='date'v>Dec 2, 2015</div><div id='fatalities'>Fatalies: <b>14</b></div></div>"],
-["<div id='window'><div id='location'>Istanbul, Turkey</div><div id='date'>Jan 12, 2016</div><div id='fatalities'>Fatalies: <b>13</b></div></div>"],
-["<div id='window'><div id='location'>Jakarta, Indonesia</div><div id='date'>Jan 14, 2016</div><div id='fatalities'>Fatalies: <b>8</b></div></div>"],
-["<div id='window'><div id='location'>Ouagadougou, Burkina Faso</div><div id='date'>Jan 15, 2016</div><div id='fatalities'>Fatalies: <b>At least 30</b></div></div>"],
-["<div id='window'><div id='location'>Ankara, Turkey</div><div id='first'><b>First attack</b></div><div id='date'>Feb 17, 2016</div><div id='fatalities'>Fatalies: <b>At least 29</b></div><div id='second'><b>Second attack</b></div><div id='date'>Mar 13, 2016</div><div id='fatalities'>Fatalies: <b>37</b></div></div>"],
-["<div id='window'><div id='location'>Mogadishu, Somalia</div><div id='date'>Feb 25, 2016</div><div id='fatalities'>Fatalies: <b>At least 15</b></div></div>"],
-["<div id='window'><div id='location'>Grand-Bassam, Ivory Coast</div><div id='date'>Mar 13, 2016</div><div id='fatalities'>Fatalies: <b>At least 18</b></div></div>"],
+["<div id='window'><div id='location'>Bamako, Mali</div><div id='date'>Nov 20, 2015</div><div id='fatalities'>Fatalies: <b>20</b></div><div id='summary'>A group of al-Qaeda-linked militants took 170 people hostage, ultimately killing 20, during a mass shooting at a Radisson Blu hotel in Bamako, the capital of Mali in West Africa.<br>Malian commadoes ultimately raided the hotel and freed the hostages, killing the two assailants. Another seven people were wounded.</div></div>"],
+["<div id='window'><div id='location'>Tunis, Tunisia</div><div id='date'>Nov 24, 2015</div><div id='fatalities'>Fatalies: <b>13</b></div><div id='summary'>A bus loaded with Tunisian presidential guards was struck by a suicide bomber linked to the so-called Islamic State.<br>The lone bomber killed 13 people in what was the third significant attack attributed to ISIS in Tunisia in 2015. </div></div>"],
+["<div id='window'><div id='location'>San Bernardino, US</div><div id='date'v>Dec 2, 2015</div><div id='fatalities'>Fatalies: <b>14</b></div><div id='summary'>In the most prominent terrorist attack in the US since Paris, two shooters, a husband and wife team, opened fire on the husband's colleagues at the San Bernardino County Department of Public Health.<br>In the attack, 14 people were killed and another 22 were seriously injured.<br>A manhunt ensued and the two perpetrators, Syed Rizwan Farook and Tashfeen Malik were killed in a shootout with police. The FBI said the two shooters were 'inspire' by ISIS, but conducted the attacks on their own.</div></div>"],
+["<div id='window'><div id='location'>Istanbul, Turkey</div><div id='first'><b>First attack</b></div><div id='date'>Jan 12, 2016</div><div id='fatalities'>Fatalies: <b>13</b></div><div id='summary'>A suicide bombing in a popular central square in Istanbul, Turkey's largest city, left 13 people dead and 14 people injured. All of the dead were foreigners.<br>The perpetrator was identified as Nabil Fadli, an ISIS follower from Syria.</div><div id='second'><b>Second attack</b></div><div id='date'>Mar 19, 2016</div><div id='fatalities'>Fatalies: <b>At least 4</b></div><div id='summary'>At least four people were killed by a suicide bomber that has rocked the residents of Istanbul to their core. Another 36 people were wounded by the attack on Istanbul's main shopping street.<br>About one-third of the injured were foreign tourists. Thus far, no one has claimed responsibility.</div><div id='third'><b>Third attack (Ataturk Airport)</b></div><div id='date'>Jun 28, 2016</div><div id='fatalities'>Fatalies: <b>45</b></div><div id='summary'>A trio of suicide attacks at the heavily guarded Istanbul Ataturk International Airport left 45 people dead and more than 200 people wounded. All three attackers were also killed, either in the blasts or shot by law enforcement.<br>No one has claimed responsibility for the attack — but it has been blamed on ISIS.</div></div>"],
+["<div id='window'><div id='location'>Jakarta, Indonesia</div><div id='date'>Jan 14, 2016</div><div id='fatalities'>Fatalies: <b>8</b></div><div id='summary'>A series of suicide bombings and shootings in Indonesia's capital left eight people dead, including four assailants. Another 24 people were wounded.<br>ISIS claimed responsibility for the attack, which was conducted by an unknown number of assailants. Though four assailants were killed, as many as 10 others may have been involved.</div></div>"],
+["<div id='window'><div id='location'>Ouagadougou, Burkina Faso</div><div id='date'>Jan 15, 2016</div><div id='fatalities'>Fatalies: <b>At least 30</b></div><div id='summary'>A group of al-Qaeda backed militants attacked the Splendid Hotel in Ouagadougou, the capital of Burkina Faso. At least 30 people were killed, and another 56 were wounded.<br>Government forces mounted a raid and freed more than 170 hostages. Four assailants were killed and another two or three escaped.</div></div>"],
+["<div id='window'><div id='location'>Ankara, Turkey</div><div id='first'><b>First attack</b></div><div id='date'>Feb 17, 2016</div><div id='fatalities'>Fatalies: <b>At least 29</b></div><div id='summary'>Kurdish freedom fighters attacked a convoy of buses killing military personnel and civilians during evening rush hour. At least 29 people were killed and another 60 people were injured.<br>The attack, which was carried out by a car bomb, was targeted at military forces, the Kurdistan Freedom Falcons said. One perpetrator died in the attacks.</div><div id='second'><b>Second attack</b></div><div id='date'>Mar 13, 2016</div><div id='fatalities'>Fatalies: <b>37</b></div><div id='summary'>A second attack in Ankara this year saw the deaths of 37 people and another 127 people injured. As with the first attack, the Kurdistan Freedom Falcons claimed responsibility for the assault.<br>The perpetrator was killed in the attack, which targeted a transportation hub. The Kurdish group said civilians weren't its main target, but more civilian casualties were inevitable.</div></div>"],
+["<div id='window'><div id='location'>Mogadishu, Somalia</div><div id='first'><b>First attack</b></div><div id='date'>Feb 26, 2016</div><div id='fatalities'>Fatalies: <b>At least 15</b></div><div id='summary'>A group of militants linked to al-Shabbab killed at least 15 people and left others wounded after a suicide bomber detonated a bomb at the gate of the SYL hotel in Mogadishu.<br>Four gunmen forced their way past the first security barrier before being killed in a shootout with guards manning the hotel's last security line. More than a dozen people were wounded.</div><div id='second'><b>Second attack (Ambassador Hotel)</b></div><div id='date'>Jun 2, 2016</div><div id='fatalities'>Fatalies: <b>At least 16</b></div><div id='summary'>At least 16 people were killed and dozens more wounded when Al Shabab attacked the Ambassador Hotel in Mogadishu, Somalia. Armed men stormed the hotel before being repelled by armed guards and security agents.<br>A second assault in Mogadishu in June had a similar death toll.</div></div>"],
+["<div id='window'><div id='location'>Grand-Bassam, Ivory Coast</div><div id='date'>Mar 13, 2016</div><div id='fatalities'>Fatalies: <b>At least 18</b></div><div id='summary'>At least 18 people were killed and another 33 were injured when an al-Qaeda-linked group attacked the Étoile du Sud hotel. Among the deceased were 15 civilians and three special forces soldiers who  were part of the response.<br>The hotel is popular with ex-pats in Ivory Coast. At least three assailants involved in the attack were killed and another as many as three escaped.</div></div>"],
+["<div id='window'><div id='location'>Port of Mukalla, Yemen</div><div id='date'>May 15, 2016</div><div id='fatalities'>Fatalies: <b>47</b></div><div id='summary'>An ISIS suicide bombing and attack killed 47 people in the Yemeni port of Mukalla. The attack targeted police cadets, killing at least 41 of them.Another 60 people were wounded.</div></div>"],
+["<div id='window'><div id='location'>Aktobe, Kazakhstan</div><div id='date'>Jun 5-10, 2016</div><div id='fatalities'>Fatalies: <b>7</b></div><div id='summary'>Twenty-five people died, 18 of them terrorists, in a series of shootings in Aktobe, Kazakhstan. Seven civilians were killed and another 40-plus were wounded.<br>The attack was blamed on Islamic radicals, some of whom were believed to have return from fighting for ISIS in Syria. </div></div>"],
+["<div id='window'><div id='location'>Orlando, US (Pulse nightclub)</div><div id='date'>Jun 12, 2016</div><div id='fatalities'>Fatalies: <b>49</b></div><div id='summary'>A lone gunman walked into a nightclub in Orlando popular with the LGBT community where he shot and killed 49 people and wounded another 53 before being killed himself by law enforcement. The gunman, Omar Mateen, proclaimed his loyalty to ISIS.</div></div>"],
+["<div id='window'><div id='location'>Dhaka, Bangladesh</div><div id='date'>Jul 1, 2016</div><div id='fatalities'>Fatalies: <b>At least 22</b></div><div id='summary'>At least 22 people, plus six attackers, were killed after a group linked to ISIS assaulted and took hostages in the diplomatic neighborhood of Gulshan, in Dhaka, Bangaldesh.<br>Among the dead were 20 civilians and two police officers. One gunman was captured and 13 hostages were rescued.</div></div>"],
 
   ];
 
@@ -114,6 +127,7 @@ max-width: 850px;
       center: new google.maps.LatLng(0, 0)
     };
     var map = new google.maps.Map(document.getElementById('container'),mapOptions);
+    var infowindow;
 
     for (var i = 0; i < points.length; i++) {
       var point = points[i];
@@ -126,11 +140,14 @@ max-width: 850px;
 
       (function(marker,i){
           google.maps.event.addListener(marker, 'click', function(){ 
-            var infowindow = new google.maps.InfoWindow({
-              content: info[i][0]
+                if (infowindow) {
+        infowindow.close();
+    }
+            infowindow = new google.maps.InfoWindow({
+              content: info[i][0],
+              maxWidth: 300,
             });
             infowindow.open(map, marker);
-            console.log(info[i][0]);
           }); 
       }(markers[i],i));      
 

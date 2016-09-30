@@ -1,0 +1,144 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 750px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 750px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #container{height: 420px; }
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Figures of each country are for different period of time. Mouse over or tap each bar for more details.</div>
+        Source:  
+        <a href='http://www.wrapsnet.org/Reports/AdmissionsArrivals/tabid/211/Default.aspx' target='_blank'>US Department of State</a>, <a href='http://www.cic.gc.ca/english/refugees/welcome/milestones.asp' target='_blank'>Government of Canada</a>, <a href='http://data.unhcr.org/syrianrefugees/asylum.php' target='_blank'>UNHCR</a>.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'Number of Syrian refugees admitted by country',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Germany","Sweden","Netherlands","Canada","US","UK"],   
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: 'Country: <b>{point.key}</b><br>',
+                pointFormat: 'Refugees: <b>{point.y}</b><br>Period: <b>{point.date}</b>',
+                //valueSuffix: '%',
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Incidents", color:"#4188bc", data: [
+                    {y:401018, date:"Apr 2011-Jul 2016"},
+                    {y:109044, date:"Apr 2011-Jul 2016"},
+                    {y:32289, date:"Apr 2011-Jul 2016"},
+                    {y:30371, date:"Nov 2015-Sep 5, 2016"},
+                    {y:12594, date:"Oct 2011-Aug 2016", color:"#ffb24d"},
+                    {y:9897, date:"Apr 2011-Jul 2016"},
+                ]},
+            ],
+            });
+    });
+
+});
+</script>

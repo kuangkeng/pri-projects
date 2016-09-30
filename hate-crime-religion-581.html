@@ -1,0 +1,141 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 750px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 750px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Click the legend to hide/show categories. Hate crime incidents for anti-atheism/agnosticism are not shown as the figures are too small.</div>
+        Source:  
+        <a href='https://ucr.fbi.gov/ucr-publications#Hate' target='_blank'>FBI</a>. The latest data is for 2014.<br><a href='https://docs.google.com/spreadsheets/d/1OcBVU_H76qbKyPg8HUXxmOvfB4Odf76bTjn5pRhYav8/edit?usp=sharing' target='_blank'>Get the data</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: 'Hate crime incidents by religious bias',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    year: '%Y'
+                },
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                itemWidth: 170,
+            },
+            tooltip: {
+                formatter:function() {
+                    return '<b>' + this.series.name + '</b><br>Year: <b>' + Highcharts.dateFormat('%Y',this.x) + '</b><br>Incidents: <b>' + Highcharts.numberFormat(this.point.y,0,',',',') + '</b>';
+                }
+            },
+            plotOptions: {
+                  series: {
+                      pointStart: Date.UTC(1996, 1, 1),
+                      pointInterval: 24 * 3600 * 1000 * 365
+                  },
+                  line: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+            },    
+            series: [ 
+                {name: "Anti-Jewish", color:"#ff7f00", data :[1109,1087,1081,1109,1109,1043,931,927,954,848,967,969,1013,931,887,771,674,625,609],},
+                {name: "Anti-Catholic", color:"#4daf4a", data :[35,31,61,36,56,38,53,76,57,58,76,61,75,51,58,67,70,70,64],},
+                {name: "Anti-Protestant", color:"#15507a", data :[75,53,59,48,59,35,55,49,38,57,59,57,56,38,41,44,33,35,25],},                
+                {name: "Anti-Islamic", color:"#e41a1c", data :[27,28,21,32,28,481,155,149,156,128,156,115,105,107,160,157,130,135,154],},
+                {name: "Anti-Other Religion", color:"#71b0de", data :[129,159,125,151,172,181,198,109,128,93,124,130,191,109,123,130,92,117,107],},
+                {name: "Anti-multiple religions", color:"#FF69B4", data :[24,24,41,31,44,45,31,24,35,39,73,62,65,57,48,60,88,42,44],},
+            ],
+            });
+    });
+
+});
+</script>

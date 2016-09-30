@@ -6,27 +6,66 @@
 <script src="http://code.highcharts.com/modules/heatmap.js"></script>
 <style>
 body {
-  width: 100%;
-  max-width: 850px;
-  margin:0px auto;
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
   font-size: 112.5%;
   line-height: 1.5em;
   color: #33333c;
       }  
 
-#container {
-  height: 530px; 
-  width:100%; 
-  max-width: 850px; 
-  margin: 0 auto;
-  border:1px solid #D3D3D3;
+#container{
+height: 530px; 
+max-width: 850px;
 }
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+    .highcharts-data-labels tspan {font-size: 9px !important;}
+} 
+
 </style>
 </head>
 
 <body>
-<div id="container"></div>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">*Refers to the abortion law of England, Wales and Scotland, excluding Northern Ireland.</div>
+        Source: 
+        <a href='http://www.un.org/en/development/desa/population/publications/policy/abortionPoliciesAndReproductiveHealth.shtml' target='_blank'>United Nations.</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
 </body>
 
 <script>
@@ -36,29 +75,21 @@ $(function () {
 
         chart: {
             type: 'heatmap',
-            marginTop: 60,
-            marginBottom: 180,
+            marginBottom: 120,
             plotBorderWidth: 1
         },
         title: {
             text: 'Legal grounds for abortion in northern Europe, 2013',
-
-            
         },
-        subtitle: {
-            text: 'Source: <a href="http://www.un.org/en/development/desa/population/publications/policy/abortionPoliciesAndReproductiveHealth.shtml" target="_blank">United Nations</a><br>*Refers to the abortion law of England, Wales and Scotland, excluding Northern Ireland.',
-            useHTML: true,
-            floating: true,
-            align: 'left',
-            verticalAlign: 'bottom',
-            y: -30,
-            style: {
-                color: '#808080',
-                fontSize: '10px',
-            },
-        },
+        subtitle: {enabled: false,},
         xAxis: {
-            categories: ["Save Woman's Life","Physical Health","Mental Health","Rape/Incest","Fetal Impairment","Economic/Social Reasons","On Request"]
+            categories: ["Save woman's life","Physical health","Mental health","Rape/incest","Fetal impairment","Economic/social reasons","On request"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '12px',
+              }
+            }
         },
 
         yAxis: {
@@ -66,7 +97,7 @@ $(function () {
             title: null,
             labels: {
               style: {
-                fontSize: '14px',
+                fontSize: '12px',
               }
             }  
         },
@@ -77,16 +108,14 @@ $(function () {
             maxColor: Highcharts.getOptions().colors[0]
         },
 
-        legend: {
-            enabled: false
-        },
+        credits: {enabled: false,},
+        legend: {enabled: false,},
 
         tooltip: {
             formatter: function () {
                 return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Reason: ' + this.series.xAxis.categories[this.point.x] + '<br>Legal: <b>' + this.point.word + '<b>';
             }
         },
-        credits: { text: 'Kuang Keng Kuek Ser / PRI', href: 'https://twitter.com/kuangkeng'  },
         series: [{
             name: 'Legal Grounds',
             borderWidth: 1,

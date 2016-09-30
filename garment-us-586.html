@@ -1,0 +1,141 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Real wages refer to wages that have been adjusted for inflation.</div>
+        Source:  
+        <a href='https://cdn.americanprogress.org/wp-content/uploads/2013/07/RealWageStudy-3.pdf' target='_blank'>Worker Rights Consortium</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: 'Monthly real wages in top 5 apparel exporters to the US',
+        },
+        subtitle: {enabled:false,},        
+        xAxis: {
+            categories: ["Mexico","China","Vietnam","Indonesia","Bangladesh"],     
+        },
+        yAxis: {
+            title: {
+              text: "US dollars in 2001 currency",
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value}'
+            },
+            minTickInterval: 10,
+            endOnTick: false,
+        },
+        credits: { enabled:false, },
+        legend: {
+            itemStyle: {
+                fontSize: '11px',
+            },  
+        },
+        tooltip: {
+            enabled: true,
+            valuePrefix: "$",
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0,
+                dataLabels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'left',
+                    format: '${point.y}',
+                    y: 0, // 10 pixels down from the top
+                    style: {
+                        fontSize: '14px',
+                    }
+                }    
+            }
+        },
+        series: [{
+            name: '2011', color: "#4188bc",
+            data: [536.57,324.9,254.78,186.64,91.45]
+        },{
+            name: '2001', color: "#8db7d6",
+            data: [755.14,144.86,182.43,134.9,93.67],
+        }]
+    });
+});
+</script>

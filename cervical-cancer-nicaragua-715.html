@@ -1,0 +1,161 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}
+
+@media (max-width: 400px ) { 
+    #container {height:550px;}
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Country data are from 2009 or latest year. Move your mouse or finger over each bar for more details. Age-standardized mortality rate (ASMR) is a technique used to compare different populations when their age profiles are different.</div>
+        Source: 
+        <a href='http://www.who.int/bulletin/volumes/91/9/BLT-12-116699-table-T2.html' target='_blank'>WHO</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Cervical cancer mortality rate in the Americas',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Paraguay","Nicaragua","El Salvador","Peru","Belize","Venezuela","Ecuador","Trinidad & Tobago","Guyana","Colombia","Panama","Brazil","Suriname","Mexico","Argentina","Cuba","Chile","Costa Rica","Puerto Rico","US","Canada"],   
+            },
+            yAxis: {
+                title: {
+                  text: 'Age-standardized mortality rate<br>(deaths per 100,000 population)', 
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Mortality rate: <b>{point.y}</b><br>Year: {point.year}',
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Others", color:"#4188bc", data: [
+                    {y:20.5, year:2009},
+                    {y:19.4, year:2009, color:"#d3401e"},
+                    {y:17.9, year:2008},
+                    {y:16.3, year:2007},
+                    {y:15.5, year:2008},
+                    {y:14.9, year:2007},
+                    {y:13.3, year:2009},
+                    {y:12.9, year:2007},
+                    {y:12.7, year:2006},
+                    {y:12, year:2008},
+                    {y:8.5, year:2009},
+                    {y:8.4, year:2009},
+                    {y:8.3, year:2007},
+                    {y:8, year:2009},
+                    {y:7.6, year:2009},
+                    {y:7, year:2009},
+                    {y:6.1, year:2008},
+                    {y:5.1, year:2009},
+                    {y:3.4, year:2007},
+                    {y:3.1, year:2007},
+                    {y:2.4, year:2007},
+                ]},
+            ],
+            });
+    });
+});
+</script>
