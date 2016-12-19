@@ -1,0 +1,986 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+body {
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  color: #33333c;
+}  
+
+.container {
+  border:1px solid #D3D3D3;
+  max-width: 500px;
+  margin: 0 auto;
+  padding:0px 20px;
+}
+
+.chart{
+  height: 110px; 
+  max-width: 230px;
+  padding:0px;
+}
+
+.chartb{
+  height: 70px; 
+  max-width: 230px;
+  padding:0px;
+}
+
+#credit {
+  font-size: 10px;
+  padding-top: 10px;
+  text-align: right;
+}
+
+table {width:100%;}
+.col {width:50%; text-align: center;}
+.col1 {padding-right: 3%;}
+.col2 {padding-left: 3%;}
+.title {text-align: left; font-size: 14px; margin-left: 10px;}
+
+#introTitle {
+  text-align: center;
+  margin-top: 20px; 
+  font-size: 32px; 
+  font-weight: bold;
+  line-height: 38px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin: 10px 0px 10px 0px;
+}
+
+.resulttext {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.imglead {
+  margin: 0 auto;
+  padding:10px;
+  width:40%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.userinput {width:250px; margin: 0 auto;}
+
+.note {
+  font-style: italic;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.note-small {
+  font-style: italic;
+  margin-bottom: 30px;
+  font-size: 12px; 
+  color: #808080;
+}
+
+#intronote {
+  color: #808080;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.row {margin-bottom: 5px;}
+
+.leftcol {
+  text-align: right;
+  font-size: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(20%);
+}
+
+.mybtn {
+  font-size: 18px;
+  font-weight: 400;
+  width: 140px;
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}    
+
+#showbox { margin: 30px 0px 50px 0px;}
+
+#showBtn1, #showBtn2 {
+  font-size: 16px;
+  font-weight: 400;
+  width: 230px;
+} 
+
+.bigfont {font-size: 22px;}
+.highlight1 {color:#FF8B00; font-weight: bold;}
+.highlight2 {color:red;}
+.center {text-align: center;}
+.category {
+    margin: 20px 0px 10px 0px; 
+    font-weight: bold;
+    font-size: 18px;
+}
+.subhead {margin-top: 40px !important;}
+
+.sharecol1, .sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+.shareBox {margin-bottom: 30px;}
+.shareBox table {width:100%;}
+.shareBox td {padding:0.5%;}
+.btnFB {float:right; height: auto; max-width: 100%;}
+.btnTW {float:left; height: auto; max-width: 100%;}  
+
+#sharemsg {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#credit {
+  font-size: 12px;
+  position:relative;
+  bottom:5px;
+  color: #808080;
+}
+
+.legendbox {text-align: left; margin-left: 10px;}
+.legend {padding-bottom: 10px;}
+.legenditem {display: inline-block; text-align: left;}
+.legend table {width:130px; font-size: 14px; line-height: 12px;}
+.lcol1 {width:10%;}
+.lcol2 {width:90%; padding-left: 5%;}
+#cat1 {background-color: #FF8B00;}
+#cat2 {background-color: #FFBF73;}
+#cat3 {background-color: #086CA2;}
+#cat4 {background-color: #64AAD0;}
+#cat5 {background-color: #00B454;}
+#cat6 {background-color: #C030C0;}
+#cat7 {background-color: #FFEE40;}
+
+@media (max-width: 400px ) { 
+    .container {padding:0px 10px;}
+    #introTitle {font-size:18px ;line-height: 24px;}
+    .subtitle {font-size: 15px;}
+    .leftcol {font-size: 15px; padding-right: 0px !important;}
+    .form-group {margin-bottom: 5px;}
+    #intronote {font-size: 12px;}
+    .bigfont, #sharemsg {font-size: 18px;}
+    .resulttext {margin-bottom: 10px; margin-top: 10px;}
+    #showbox { margin: 10px 0px 20px 0px;}
+    .mybtn {font-size:14px; margin-top: 15px !important;margin-bottom: 15px !important; padding:4px 8px;}    
+    #sharemsg {margin-top: 15px; font-size: 15px; line-height: 17px;}
+    .shareBox {margin-bottom: 15px; max-width: 180px;}
+    .title {line-height:15px;}
+    .note {font-size: 12px; line-height: 14px;}
+} 
+
+
+</style>
+</head>
+
+<body>
+  <div id="quiz" class="container">    
+    <div id="intro">
+        <div id="introTitle">How likely are you to experience online harassment?</div>
+        <div class="imglead">
+        <img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/onilne%20harassment%20icon-orange.png?itok=wY6qr3UZ" class="img-responsive">
+        </div>
+        <div class="subtitle">This tool calculates whether you have a higher chance of being a victim of online harassment compared with other groups in the US based on your demographics.</div>
+        <div class="row" id="genderrow">
+            <div class="col-sm-5 col-xs-6 leftcol">Your gender: </div>  
+            <div class="col-sm-7 col-xs-6">
+                <form class="form-inline" method="get" action="#">
+                    <div class="form-group" id="genderbox">
+                      <select class="form-control" id="inputgender">
+                        <option>Male</option>
+                        <option>Female</option>
+                      </select>
+                    </div>  
+                </form>
+            </div>
+        </div>
+        <div class="row" id="agerow"> 
+            <div class="col-sm-5 col-xs-6 leftcol">Age: </div>  
+            <div class="col-sm-7 col-xs-6">  
+                <form class="form-inline" method="get" action="#">
+                    <div class="form-group" id="agebox">
+                      <select class="form-control" id="inputage">
+                        <option>15 - 29</option>
+                        <option>30 or above</option>
+                      </select>
+                    </div>  
+                </form>
+            </div>  
+        </div>
+        <div class="row" id="ethnrow">  
+            <div class="col-sm-5 col-xs-6 leftcol">Sexual orientation:</div>  
+            <div class="col-sm-7 col-xs-6">     
+                <form class="form-inline" method="get" action="#">
+                    <div class="form-group" id="sexbox">
+                      <select class="form-control" id="inputsex">
+                        <option selected disabled>Pick one</option>
+                        <option>LGBTQ</option>
+                        <option>Heterosexual</option>
+                      </select>
+                    </div>  
+                </form> 
+            </div>  
+        </div>     
+      <div class="note" id="intronote">*The choices are based on classifications used in the report.</div>
+      <div id="startBtn" class="btn btn-primary btn-sm center-block mybtn">See my results</div>
+      <div id="credit">Graphics credit: Rockicon</div>
+    </div>  
+    <!-- END INTRO PAGE -->           
+
+    <div class="resultpage" id="result01">
+        <div class="subtitle resulttext">
+          <p><span class="bigfont">Almost half or <span class="highlight1">47%</span> of American internet users have experienced online harassment or abuse.</span><p><p>Harassing behaviors includes <b>direct harassment</b>, <b>invasion of privacy</b> and <b>denial of access</b>.</p>
+          <div class="subtitle center category">DIRECT HARASSMENT</div>
+          <p>About one third or <span class="highlight1">36%</span> of users have experienced <b>direct harassment</b> but certain groups are more likely to be targeted.</p></div>
+        <div class="legendbox">
+            <div class="legend">
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat1"></td>
+                            <td class="lcol2">Women 15-29</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat2"></td>
+                            <td class="lcol2">Women 30+</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat3"></td>
+                            <td class="lcol2">Men 15-29</td>
+                        </tr>
+                    </table>
+                </div>   
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat4"></td>
+                            <td class="lcol2">Men 30+</td>
+                        </tr>
+                    </table>
+                </div> 
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat5"></td>
+                            <td class="lcol2">All groups</td>
+                        </tr>
+                    </table>
+                </div>                     
+            </div>  
+        </div>
+        <table> 
+          <tr>
+             <td class="col col1"><div class="title" id="title1"></div><div class="chart" id="chart1"></div></td>
+             <td class="col col2"><div class="title" id="title2"></div><div class="chart" id="chart2"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title3"></div><div class="chart" id="chart3"></div></td>
+             <td class="col col2"><div class="title" id="title4"></div><div class="chart" id="chart4"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title5"></div><div class="chart" id="chart5"></div></td>
+             <td class="col col2"><div class="title" id="title6"></div><div class="chart" id="chart6"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title7"></div><div class="chart" id="chart7"></div></td>
+             <td class="col col2"><div class="title" id="title8"></div><div class="chart" id="chart8"></div></td>
+          </tr>
+          <tr>
+             <td class="col col1"><div class="title" id="title9"></div><div class="chart" id="chart9"></div></td>
+             <td class="col col2"><div class="title" id="title10"></div><div class="chart" id="chart10"></div></td>
+          </tr>              
+        </table>
+        <div class="note-small">*The abuser encourages or enables others to harass the victim.</div>
+        <div id="showbox">
+          <div id="showBtn1" class="btn btn-danger btn-sm center-block mybtn">Who is more vulnerable?</div>
+          <div class="subtitle" id="resulthide1"><p><span class="highlight2"><b>Younger women (age 15-29)</b></span> are much more likely to experience certain types of direct harassment — <b>sexual harassment</b>, <b>damaging rumors</b>, <b>harassment over long period of time</b> and <b>attempt to harm in person after online harassment</b>. Scroll up to see bars highlighted in red.</p></div>
+        </div>        
+        <div id="result01Btn" class="btn btn-primary btn-sm center-block mybtn">Next</div>
+    </div> 
+<!-- end of result01 -->
+    <div class="resultpage" id="result02">
+        <div class="subtitle resulttext">
+          <div class="subtitle center category">INVASION OF PRIVACY & DENIAL OF ACCESS</div>
+          <p>About one third or <span class="highlight1">30%</span> of users have experienced harassment through <b>invasion of privacy</b> while <span class="highlight1">17%</span> have experienced <b>denial of access to essential digital platforms</b>.</p></div>     
+        <div class="subtitle center category">Invasion of privacy</div>
+        <div class="legendbox">
+            <div class="legend">
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat1"></td>
+                            <td class="lcol2">Women 15-29</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat2"></td>
+                            <td class="lcol2">Women 30+</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat3"></td>
+                            <td class="lcol2">Men 15-29</td>
+                        </tr>
+                    </table>
+                </div>   
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat4"></td>
+                            <td class="lcol2">Men 30+</td>
+                        </tr>
+                    </table>
+                </div> 
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat5"></td>
+                            <td class="lcol2">All groups</td>
+                        </tr>
+                    </table>
+                </div>                     
+            </div>  
+        </div>        
+        <table> 
+          <tr>
+             <td class="col col1"><div class="title" id="title11"></div><div class="chart" id="chart11"></div></td>
+             <td class="col col2"><div class="title" id="title12"></div><div class="chart" id="chart12"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title13"></div><div class="chart" id="chart13"></div></td>
+             <td class="col col2"><div class="title" id="title14"></div><div class="chart" id="chart14"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title15"></div><div class="chart" id="chart15"></div></td>
+             <td class="col col2"><div class="title" id="title16"></div><div class="chart" id="chart16"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title17"></div><div class="chart" id="chart17"></div></td>
+             <td class="col col2"></td>
+          </tr>             
+        </table>
+        <div class="subtitle center category">Denial of access</div>
+        <table> 
+          <tr>
+             <td class="col col1"><div class="title" id="title18"></div><div class="chart" id="chart18"></div></td>
+             <td class="col col2"><div class="title" id="title19"></div><div class="chart" id="chart19"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title20"></div><div class="chart" id="chart20"></div></td>
+             <td class="col col2"></td>
+          </tr>             
+        </table>
+        <div class="note-small">**A denial of service attack (DoS attack) is a cyber attack on a network designed to bring it down by overwhelming it with useless traffic.</div>
+      <div id="showbox">
+          <div id="showBtn2" class="btn btn-danger btn-sm center-block mybtn">Who is more vulnerable?</div>
+          <div class="subtitle" id="resulthide2"><p>Again, <span class="highlight2"><b>younger women (age 15-29)</b></span> are much more likely to experience certain types of harassment: <b>the use of social media information to make the victim feel uncomfortable</b>, <b>damaging exposure of sensitive information</b> and <b>message bombing</b>. See bars highlighted in red.</p></div>
+      </div> 
+      <div id="result02Btn" class="btn btn-primary btn-sm center-block mybtn">Next</div>
+      <div id="result02Btn-back" class="btn btn-primary btn-sm center-block mybtn btnback">Back</div>
+    </div> 
+<!-- end of result02 -->
+    <div class="resultpage" id="result03">
+        <div class="subtitle resulttext">
+          <div class="subtitle center category">THE MOST VULNERABLE</div>
+          <p>LGBTQ users are more likely to experience <span class="highlight1">all types</span> of harassment.</p></div>
+        <div class="subtitle center category">Direct harassment</div>
+        <div class="legendbox">
+            <div class="legend">
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat6"></td>
+                            <td class="lcol2">LGBTQ</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat7"></td>
+                            <td class="lcol2">Heterosexual</td>
+                        </tr>
+                    </table>
+                </div>                    
+            </div>  
+        </div>        
+        <table> 
+          <tr>
+             <td class="col col1"><div class="title" id="title21"></div><div class="chartb" id="chart21"></div></td>
+             <td class="col col2"><div class="title" id="title22"></div><div class="chartb" id="chart22"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title23"></div><div class="chartb" id="chart23"></div></td>
+             <td class="col col2"><div class="title" id="title24"></div><div class="chartb" id="chart24"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title25"></div><div class="chartb" id="chart25"></div></td>
+             <td class="col col2"><div class="title" id="title26"></div><div class="chartb" id="chart26"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title27"></div><div class="chartb" id="chart27"></div></td>
+             <td class="col col2"><div class="title" id="title28"></div><div class="chartb" id="chart28"></div></td>
+          </tr>
+          <tr>
+             <td class="col col1"><div class="title" id="title29"></div><div class="chartb" id="chart29"></div></td>
+             <td class="col col2"><div class="title" id="title30"></div><div class="chartb" id="chart30"></div></td>
+          </tr>                       
+        </table>
+        <div class="subtitle center category">Invasion of privacy</div>
+        <table> 
+          <tr>
+             <td class="col col1"><div class="title" id="title31"></div><div class="chartb" id="chart31"></div></td>
+             <td class="col col2"><div class="title" id="title32"></div><div class="chartb" id="chart32"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title33"></div><div class="chartb" id="chart33"></div></td>
+             <td class="col col2"><div class="title" id="title34"></div><div class="chartb" id="chart34"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title35"></div><div class="chartb" id="chart35"></div></td>
+             <td class="col col2"><div class="title" id="title36"></div><div class="chartb" id="chart36"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title37"></div><div class="chartb" id="chart37"></div></td>
+             <td class="col col2"></td>
+          </tr>             
+        </table>
+        <div class="subtitle center category">Denial of access</div>
+        <table> 
+          <tr>
+             <td class="col col1"><div class="title" id="title38"></div><div class="chartb" id="chart38"></div></td>
+             <td class="col col2"><div class="title" id="title39"></div><div class="chartb" id="chart39"></div></td>
+          </tr> 
+          <tr>
+             <td class="col col1"><div class="title" id="title40"></div><div class="chartb" id="chart40"></div></td>
+             <td class="col col2"></td>
+          </tr>             
+        </table>
+      <div class="note-small">*The abuser encourages or enables others to harass the victim.<br>**Denial of service attack or DoS attack is a type of cyber attack on a network that is designed to bring the network to its knees by flooding it with useless traffic.</div>
+      <div class="note" id="note01"><b>Note & source</b><br>Data comes from <a href="https://datasociety.net/blog/2016/11/21/online-harassment/" target="_blank">“Online Harassment, Digital Abuse and Cyberstalking in America”</a>, a report produced by the Data & Society Research Institute and the Center for Innovative Public Health Research. The report is based on the results of a nationally representative survey of 3,002 Americans 15 and older conducted from May 17 through July 31, 2016.</div>
+      <div class="shareBox center-block">
+        <table> 
+          <tr>
+             <td class="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td class="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+      <div class="btn btn-primary btn-sm center-block mybtn btnback">Back</div>
+      <div class="btn btn-primary btn-sm center-block mybtn" onClick="history.go(0)">Replay</div>
+    </div> 
+<!-- end of result03 -->
+  </div> 
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+<script>
+    var data = {
+        A1: [{y:42, color:'#FF8B00'}, {y:14, color:'#FFBF73'}, {y:47, color:'#086CA2'}, {y:20, color:'#64AAD0'}, {y:25, color:'#00B454'}, {y:61, color:'#C030C0'}, {y:23, color:'#FFEE40'}],
+        A2: [{y:39, color:'#FF8B00'}, {y:14, color:'#FFBF73'}, {y:39, color:'#086CA2'}, {y:19, color:'#64AAD0'}, {y:23, color:'#00B454'}, {y:49, color:'#C030C0'}, {y:22, color:'#FFEE40'}],
+        A3: [{y:20, color:'#FF8B00'}, {y:7, color:'#FFBF73'}, {y:7, color:'#086CA2'}, {y:4, color:'#64AAD0'}, {y:8, color:'#00B454'}, {y:33, color:'#C030C0'}, {y:6, color:'#FFEE40'}],
+        A4: [{y:19, color:'#FF8B00'}, {y:6, color:'#FFBF73'}, {y:24, color:'#086CA2'}, {y:8, color:'#64AAD0'}, {y:11, color:'#00B454'}, {y:31, color:'#C030C0'}, {y:10, color:'#FFEE40'}],
+        A5: [{y:17, color:'#FF8B00'}, {y:5, color:'#FFBF73'}, {y:14, color:'#086CA2'}, {y:6, color:'#64AAD0'}, {y:8, color:'#00B454'}, {y:28, color:'#C030C0'}, {y:7, color:'#FFEE40'}],
+        A6: [{y:17, color:'#FF8B00'}, {y:5, color:'#FFBF73'}, {y:11, color:'#086CA2'}, {y:4, color:'#64AAD0'}, {y:7, color:'#00B454'}, {y:24, color:'#C030C0'}, {y:6, color:'#FFEE40'}],
+        A7: [{y:13, color:'#FF8B00'}, {y:5, color:'#FFBF73'}, {y:5, color:'#086CA2'}, {y:3, color:'#64AAD0'}, {y:5, color:'#00B454'}, {y:18, color:'#C030C0'}, {y:5, color:'#FFEE40'}],
+        A8: [{y:10, color:'#FF8B00'}, {y:3, color:'#FFBF73'}, {y:7, color:'#086CA2'}, {y:2, color:'#64AAD0'}, {y:4, color:'#00B454'}, {y:18, color:'#C030C0'}, {y:4, color:'#FFEE40'}],
+        A9: [{y:10, color:'#FF8B00'}, {y:5, color:'#FFBF73'}, {y:8, color:'#086CA2'}, {y:4, color:'#64AAD0'}, {y:6, color:'#00B454'}, {y:13, color:'#C030C0'}, {y:6, color:'#FFEE40'}],
+        A10: [{y:6, color:'#FF8B00'}, {y:2, color:'#FFBF73'}, {y:3, color:'#086CA2'}, {y:2, color:'#64AAD0'}, {y:3, color:'#00B454'}, {y:12, color:'#C030C0'}, {y:2, color:'#FFEE40'}],
+        A11: [{y:17, color:'#FF8B00'}, {y:11, color:'#FFBF73'}, {y:16, color:'#086CA2'}, {y:14, color:'#64AAD0'}, {y:14, color:'#00B454'}, {y:28, color:'#C030C0'}, {y:13, color:'#FFEE40'}],
+        A12: [{y:13, color:'#FF8B00'}, {y:13, color:'#FFBF73'}, {y:16, color:'#086CA2'}, {y:13, color:'#64AAD0'}, {y:13, color:'#00B454'}, {y:17, color:'#C030C0'}, {y:13, color:'#FFEE40'}],
+        A13: [{y:13, color:'#FF8B00'}, {y:6, color:'#FFBF73'}, {y:11, color:'#086CA2'}, {y:5, color:'#64AAD0'}, {y:7, color:'#00B454'}, {y:19, color:'#C030C0'}, {y:7, color:'#FFEE40'}],
+        A14: [{y:11, color:'#FF8B00'}, {y:7, color:'#FFBF73'}, {y:11, color:'#086CA2'}, {y:8, color:'#64AAD0'}, {y:9, color:'#00B454'}, {y:13, color:'#C030C0'}, {y:9, color:'#FFEE40'}],
+        A15: [{y:10, color:'#FF8B00'}, {y:4, color:'#FFBF73'}, {y:6, color:'#086CA2'}, {y:3, color:'#64AAD0'}, {y:5, color:'#00B454'}, {y:18, color:'#C030C0'}, {y:4, color:'#FFEE40'}],
+        A16: [{y:10, color:'#FF8B00'}, {y:4, color:'#FFBF73'}, {y:5, color:'#086CA2'}, {y:4, color:'#64AAD0'}, {y:5, color:'#00B454'}, {y:20, color:'#C030C0'}, {y:4, color:'#FFEE40'}],
+        A17: [{y:8, color:'#FF8B00'}, {y:5, color:'#FFBF73'}, {y:8, color:'#086CA2'}, {y:4, color:'#64AAD0'}, {y:5, color:'#00B454'}, {y:15, color:'#C030C0'}, {y:5, color:'#FFEE40'}],
+        A18: [{y:25, color:'#FF8B00'}, {y:10, color:'#FFBF73'}, {y:16, color:'#086CA2'}, {y:7, color:'#64AAD0'}, {y:12, color:'#00B454'}, {y:33, color:'#C030C0'}, {y:11, color:'#FFEE40'}],
+        A19: [{y:4, color:'#FF8B00'}, {y:6, color:'#FFBF73'}, {y:9, color:'#086CA2'}, {y:9, color:'#64AAD0'}, {y:7, color:'#00B454'}, {y:14, color:'#C030C0'}, {y:7, color:'#FFEE40'}],
+        A20: [{y:4, color:'#FF8B00'}, {y:3, color:'#FFBF73'}, {y:3, color:'#086CA2'}, {y:3, color:'#64AAD0'}, {y:3, color:'#00B454'}, {y:8, color:'#C030C0'}, {y:3, color:'#FFEE40'}],
+    };
+
+    var titles = [
+        "Called offensive names",
+        "Tried to embarrass you",
+        "Sexually harassed",
+        "Physical threats",
+        "Romantic partner hurt you",
+        "Damaging rumors",
+        "Harassed over long period of time",
+        "Brigading*",
+        "Impersonated you/someone else",
+        "Attempted harm in person after online harassment",
+        "Monitored your online or phone activity",
+        "Hacked your accounts and stole info",
+        "Read messages without your permission",
+        "Tracked your location",
+        "Used social media info and made you feel uncomfortable",
+        "Damaging exposure of sensitive information",
+        "Stolen or coerced password",
+        "Message bombing",
+        "Denial of service attacks**",
+        "Misused reporting tool to prevent use of online account"
+    ];
+    // var test = data['T20'].length;
+    // var test2 = data['T20'].splice(0,5);
+    // alert(JSON.stringify(test2));
+    
+    var num,
+        num2,
+        inputgender,
+        inputage,
+        inputsex,
+        fire1 = 0,
+        fire2 = 0,
+        fire3 = 0,
+        fire4 = 0;
+
+    function init() { 
+
+        $(".resultpage, #startBtn, #resulthide1, #resulthide2").hide();
+        $( "#inputsex" ).change(function() {
+            $("#startBtn").show();
+        });
+
+        $("#startBtn").click(function(){
+            $('.container').slideUp(500, function(){
+              $("#intro").hide();
+              $("#result01").show(); 
+              setTimeout(function(){setValue1();},300)
+            });
+            $('.container').slideDown(500);
+            sendData();
+        });
+
+        $("#result01Btn").click(function() {
+            $('.container').slideUp(500, function(){
+              $("#result01").hide();
+              $("#result02").show(); 
+              if(fire1==0){setTimeout(function(){setValue2();},300); fire1 = 1;} else{}
+            });
+            $('.container').slideDown(500);            
+        });  
+
+        $("#result02Btn").click(function() {
+            $('.container').slideUp(500, function(){
+              $("#result02").hide();
+              $("#result03").show(); 
+              if(fire2==0){setTimeout(function(){setValue3();},300); fire2 = 1;} else{}
+            });
+            $('.container').slideDown(500);            
+        });         
+
+        $(".btnback").click(function() {
+          var result_id = $(this).parent().attr("id");
+          var num_id = result_id.substr(result_id.length - 1);
+          var itr_id = parseInt(num_id);
+          var back_id = num_id - 1;
+          $('.container').slideUp(500, function(){
+            $("#result0" + itr_id).hide();
+            $("#result0" + back_id).show();
+          });
+          $('.container').slideDown(500);   
+        }); 
+
+        $("#showBtn1").click(function() {
+          if(fire3==0){
+            onchart1(); 
+            $("#resulthide1").show(); 
+            fire3=1;
+          } else{}
+        }); 
+
+        $("#showBtn2").click(function() {
+          if(fire4==0){
+            onchart2(); 
+            $("#resulthide2").show(); 
+            fire4=1;
+          } else{}
+        });
+
+        $('.btnFB').click(function (event) {facebook();});
+        $('.btnTW').click(function (event) {tweet();});         
+
+    };
+
+function setValue1() {
+    inputgender = $('#inputgender').val();
+    inputage = $('#inputage').val();
+    inputsex = $('#inputsex').val();
+
+    if(inputgender == "Female" && inputage == "15 - 29"){num = 0}
+    if(inputgender == "Female" && inputage == "30 or above"){num = 1}
+    if(inputgender == "Male" && inputage == "15 - 29"){num = 2}
+    if(inputgender == "Male" && inputage == "30 or above"){num = 3}   
+    if(inputsex == "LGBTQ"){num2 = 0}   
+    if(inputsex == "Heterosexual"){num2 = 1}  
+
+    for (i = 1; i<11; i++){
+        $("#title"+i).text(titles[i-1]);
+        var data2 = data["A"+i].slice(0,5);
+        data2[num].dataLabels = {enabled: true, format: "You",};
+        var chart;
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+        
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart' + i,
+                type: 'bar',
+                marginTop: 5,
+            },
+            title: {
+                text: null,
+                style: {
+                    color: '#808080',
+                    fontSize: 12,
+                  },  
+                margin: 0,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Women 15-29","Women 30+","Men 15-29","Men 30+","Total"],
+                labels:{enabled:false},
+                tickWidth: 0,
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                max:50,
+                minTickInterval: 25,
+                labels: {
+                    format: '{value}%',
+                    fontSize: 10,
+                },
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: false,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '<b>{point.y}%</b>',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+            series: [ 
+                {name:"changes", data: data2},
+            ],
+        });
+
+    };
+}
+
+function setValue2() {
+    for (i = 11; i<21; i++){
+        $("#title"+i).text(titles[i-1]);
+        data2 = data["A"+i].slice(0,5);
+        data2[num].dataLabels = {enabled: true, format: "You",};
+
+        var chart;
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+        
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart' + i,
+                type: 'bar',
+                marginTop: 5,
+            },
+            title: {
+                text: null,
+                style: {
+                    color: '#808080',
+                    fontSize: 12,
+                  },  
+                margin: 0,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Women 15-29","Women 30+","Men 15-29","Men 30+","Total"],
+                labels:{enabled:false},
+                tickWidth: 0,
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                max:50,
+                minTickInterval: 25,
+                labels: {
+                    format: '{value}%',
+                    fontSize: 10,
+                },
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: false,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '<b>{point.y}%</b>',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+            series: [ 
+                {name:"changes", data: data2},
+            ],
+        });
+
+    };
+}
+
+
+function setValue3() { 
+    for (i = 21; i<41; i++){
+        $("#title"+i).text(titles[i-21]);
+        var data3 = data["A"+(i-20)].slice(5,7);
+        data3[num2].dataLabels = {enabled: true, format: "You",};
+
+        var chart;
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+        
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart' + i,
+                type: 'bar',
+                marginTop: 5,
+            },
+            title: {
+                text: null,
+                style: {
+                    color: '#808080',
+                    fontSize: 12,
+                  },  
+                margin: 0,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["LGBTQ","Heterosexual"],
+                labels:{enabled:false},
+                tickWidth: 0,
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                max:65,
+                minTickInterval: 20,
+                labels: {
+                    format: '{value}%',
+                    fontSize: 10,
+                },
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: false,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '<b>{point.y}%</b>',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+            series: [ 
+                {name:"changes", data: data3},
+            ],
+        });
+
+    };
+}
+
+function onchart1() { 
+  var highlight = [3,6,7,10];
+  for (i = 0; i<4; i++){
+    var chartsel = $('#chart'+highlight[i]).highcharts();
+    chartsel.series[0].data[0].update({color: 'red',});
+  }  
+} 
+
+function onchart2() { 
+  var highlight = [15,16,18];
+  for (i = 0; i<3; i++){
+    var chartsel = $('#chart'+highlight[i]).highcharts();
+    chartsel.series[0].data[0].update({color: 'red',});
+  }  
+}  
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSdbK6CghFsORC4aNWeL9TF4npsD2-ut8YL7mmnmdnDcqv9-lQ/formResponse',
+        data: { 
+          "entry.1073901279": json.ip,
+          "entry.584607856": inputgender,
+          "entry.1562638872": inputage,
+          "entry.1820436915": inputsex,
+          "entry.394251461": document.referrer,
+        }
+      }); 
+    }
+  );   
+}
+
+function tweet() {
+  sharemsg = 'How likely are you to be harassed online? Find out with this tool.';
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent(sharemsg);
+  tweet_url += ' @PRI';
+  tweet_url += '&url=http://bit.ly/2dJviK4';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-11-28/quiz-how-likely-are-you-be-harassed-online',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/story_main/public/women%20use%20smartphone-cropped.jpg?itok=nsA6Ej-g',
+  name: 'How likely are you to be harassed online?',
+  description:"Almost half of American internet users say they have experienced online harassment. Find out your chances for different kinds of online harassment with this interactive tool."
+  }, function(response){});
+}
+
+
+$(document).ready(function(){
+  init();
+}); 
+    
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '243315762757023',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+</body>
+</html>  
+

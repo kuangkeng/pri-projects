@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+body {
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  color: #33333c;
+}  
+
+.container {
+  border:1px solid #D3D3D3;
+  max-width: 650px;
+  margin: 0 auto;
+  padding:0px 20px;
+}
+
+.chartbox {
+  width:100%;
+  margin: 0 auto;
+}
+
+.chart{
+  height: 450px; 
+  width: 100%;
+  padding:0px;
+}
+
+#credit {
+  font-size: 10px;
+  padding-top: 10px;
+  text-align: right;
+}
+
+table {width:100%;}
+.col {width:50%; text-align: center;}
+.col1 {padding-right: 3%;}
+.col2 {padding-left: 3%;}
+
+.charttitle {
+  text-align: center; 
+  font-size: 18px; 
+  font-weight: bold;
+}
+
+#introTitle {
+  text-align: center;
+  margin-top: 20px; 
+  font-size: 32px; 
+  font-weight: bold;
+  line-height: 38px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin: 10px 0px 10px 0px;
+}
+
+.resulttext {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.imglead {
+  margin: 0 auto;
+  padding:10px;
+  width:100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-group {width:60px;}
+
+.note {
+  font-style: italic;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+.click {
+  font-style: italic;
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+
+#intronote {
+  color: #808080;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.row {margin-bottom: 5px;}
+
+.leftcol {
+  text-align: right;
+  font-size: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(20%);
+}
+
+.mybtn {
+  font-size: 18px;
+  font-weight: 400;
+  width: 180px;
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}  
+
+#button01, #button02 {
+  font-size: 16px;
+  margin-top: 10px !important;
+  margin-bottom: 40px !important;
+}  
+
+.bigfont {font-size: 22px;}
+.highlight1, .year {color:#FF8B00; font-weight: bold;}
+.highlight2 {color:red;}
+.center, .year {text-align: center;}
+.year {font-size: 50px; margin-top: -10px;}
+.category {
+    margin: 20px 0px 10px 0px; 
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sharecol1, .sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+.shareBox table {width:100%;}
+.shareBox td {padding:0.5%;}
+.btnFB {float:right; height: auto; max-width: 100%;}
+.btnTW {float:left; height: auto; max-width: 100%;}  
+
+#sharemsg {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#credit {
+  font-size: 12px;
+  position:relative;
+  bottom:5px;
+  color: #808080;
+}
+
+@media (max-width: 550px ) { 
+  .chart{height: 400px; }
+}
+
+@media (max-width: 500px ) { 
+  .chart{height: 350px; }
+  .container {padding:0px 10px;}
+}  
+
+@media (max-width: 400px ) { 
+    #introTitle {font-size:24px ;line-height: 28px;}
+    .subtitle {font-size: 15px;}
+    .leftcol {font-size: 15px; padding-right: 0px !important;}
+    .form-group {margin-bottom: 5px;}
+    #intronote {font-size: 12px;}
+    .bigfont, #sharemsg {font-size: 18px;}
+    .resulttext {margin-bottom: 20px; margin-top: 10px;}
+    .note{font-size: 13px;}
+    #button01, #button02 {font-size: 14px; margin-bottom: 20px !important;} 
+    .charttitle {font-size: 16px;}
+} 
+
+@media (max-width: 290px ) { 
+  .chart{height: 300px; }
+}  
+
+</style>
+</head>
+
+<body>
+  <div id="quiz" class="container">    
+    <div id="intro">
+        <div id="introTitle">World nuclear forces when you were born</div>
+        <div class="imglead">
+        <img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/atomic%20nuclear%20bomb%20mushroom%20cloud-cropped.jpg?itok=Y1EgJwcz" class="img-responsive">
+        </div>
+        <div class="subtitle center bigfont">What did nuclear armament look like on the day you were born?</div>
+        <div class="row" id="yearrow">
+            <div class="col-sm-7 col-xs-7 leftcol">What year were you born?</div>  
+            <div class="col-sm-5 col-xs-5">
+                <form class="form-inline" method="get" action="#">
+                    <div class="form-group" id="yearbox">
+                      <select class="form-control" id="inputyear">
+                        <option selected disabled>Year</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                        <option>2014</option>
+                        <option>2013</option>
+                        <option>2012</option>
+                        <option>2011</option>
+                        <option>2010</option>
+                        <option>2009</option>
+                        <option>2008</option>
+                        <option>2007</option>
+                        <option>2006</option>
+                        <option>2005</option>
+                        <option>2004</option>
+                        <option>2003</option>
+                        <option>2002</option>
+                        <option>2001</option>
+                        <option>2000</option>
+                        <option>1999</option>
+                        <option>1998</option>
+                        <option>1997</option>
+                        <option>1996</option>
+                        <option>1995</option>
+                        <option>1994</option>
+                        <option>1993</option>
+                        <option>1992</option>
+                        <option>1991</option>
+                        <option>1990</option>
+                        <option>1989</option>
+                        <option>1988</option>
+                        <option>1987</option>
+                        <option>1986</option>
+                        <option>1985</option>
+                        <option>1984</option>
+                        <option>1983</option>
+                        <option>1982</option>
+                        <option>1981</option>
+                        <option>1980</option>
+                        <option>1979</option>
+                        <option>1978</option>
+                        <option>1977</option>
+                        <option>1976</option>
+                        <option>1975</option>
+                        <option>1974</option>
+                        <option>1973</option>
+                        <option>1972</option>
+                        <option>1971</option>
+                        <option>1970</option>
+                        <option>1969</option>
+                        <option>1968</option>
+                        <option>1967</option>
+                        <option>1966</option>
+                        <option>1965</option>
+                        <option>1964</option>
+                        <option>1963</option>
+                        <option>1962</option>
+                        <option>1961</option>
+                        <option>1960</option>
+                        <option>1959</option>
+                        <option>1958</option>
+                        <option>1957</option>
+                        <option>1956</option>
+                        <option>1955</option>
+                        <option>1954</option>
+                        <option>1953</option>
+                        <option>1952</option>
+                        <option>1951</option>
+                        <option>1950</option>
+                        <option>1949</option>
+                        <option>1948</option>
+                        <option>1947</option>
+                        <option>1946</option>
+                        <option>1945</option>
+                        <option>1944</option>
+                        <option>1943</option>
+                        <option>1942</option>
+                        <option>1941</option>
+                        <option>1940</option>
+                        <option>1939</option>
+                        <option>1938</option>
+                        <option>1937</option>
+                        <option>1936</option>
+                        <option>1935</option>
+                        <option>1934</option>
+                        <option>1933</option>
+                        <option>1932</option>
+                        <option>1931</option>
+                        <option>1930</option>
+                      </select>
+                    </div>  
+                </form>
+            </div>
+        </div>    
+      <div id="startBtn" class="btn btn-primary btn-sm center-block mybtn">See my results</div>
+      <div id="credit">Developed by Kuang Keng Kuek Ser/PRI.org<br>Photo by Reuters</div>
+    </div>  
+    <!-- END INTRO PAGE -->           
+
+    <div class="resultpage" id="result01">
+      <div class="subtitle resulttext">
+        <div class="bigfont">
+          <div class="center"><b>You were born in the year</b></div>
+          <div class="year" id="yearno">yearno</div>
+          <div id="resulta">That year there were <span class="highlight1" id="testno">testno</span> detected nuclear tests conducted by <span class="highlight1" id="countrytest">testcountryno</span> countries and approximately <span class="highlight1" id="warheadno">warheadno</span> nuclear warheads controlled by <span class="highlight1" id="countrystock">countryno</span> countries.</div>
+          <div id="resultb">It was a world free from nuclear weapons. The first test of an atomic weapon was conducted on July 16, 1945 near Alamogordo, New Mexico, during the Manhattan Project — a research and development project, led by the US Army Corps of Engineers, established to produce a nuclear weapon during World War II.</div>
+        </div>
+      </div>
+      <div class="chartbox">
+        <div class="charttitle">Nuclear explosion tests by country</div>
+        <div class="chart" id="chart1"></div>
+        <div class="click center">Click the legend to hide/show countries.</div>  
+        <div class="btn btn-primary btn-sm center-block mybtn" id="button01">Zoom into 1990-2016</div>
+      </div>  
+      <div class="subtitle resulttext">
+        <p>Four years after the US dropped two atomic bombs on Japan, the Soviet Union detonated its first atomic bomb on Aug. 29, 1949, setting the stage for an intensive nuclear arm race between the two superpowers.</p>
+        <p>The race was temporarily halted when the US and the Soviet Union, together with the UK — the third country with nuclear weapons — reached a moratorium on nuclear testing at the end of 1958.</p>
+        <p>Once the moratorium was lifted in 1961, nuclear tests peaked in 1962 with 178 tests detected in just one year.</p>
+      </div> 
+      <div class="chartbox"> 
+        <div class="charttitle">Nuclear warhead stockpile by country</div>
+        <div class="chart" id="chart2"></div> 
+        <div class="click center">Click the legend to hide/show countries.</div>
+        <div class="btn btn-primary btn-sm center-block mybtn" id="button02">Hide US & Russia</div>
+      </div>    
+      <div class="subtitle resulttext">
+        <p>The US and the Soviet Union then spent more than 20 years expanding their nuclear arsenals. The global stockpile of nuclear warheads reached its highest point in 1986 with more than 60,000 warheads excluding retired warheads.</p>
+        <p>Both nuclear tests and nuclear stockpiles were significantly reduced after the end of Cold War in 1991. In 1996, the Comprehensive Nuclear-Test-Ban Treaty, which bans nuclear explosions, was opened for signature. After 1996, only a handful of nuclear tests were conducted — by Pakistan, India and North Korea.</p>
+      </div>
+      <div class="subtitle center category">Note & Source</div>
+      <div class="note" id="note01">
+        Nuclear test data is from the <a href="https://datasociety.net/blog/2016/11/21/online-harassment/" target="_blank">Arms Control Association</a>.<br> 
+        Nuclear stockpile data is from the <a href="http://bos.sagepub.com/cgi/collection/nuclearnotebook" target="_blank">Bulletin of the Atomic Scientists' Nuclear Notebook</a>. Figures are approximate estimates. They exclude retired warheads waiting to be dismantled.
+      </div>
+      <div id="sharemsg">Learned something new?<br>Share it with friends and the world.</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td class="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td class="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+      <div id="resetBtn" class="btn btn-primary btn-sm center-block mybtn" onClick="history.go(0)">Replay</div>
+    </div> 
+<!-- end of result01 -->      
+  </div> 
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+<script>
+    var data = [
+      {"year":1945, "test":1, "stock":2, "countrytest":1, "countrystock":1},
+      {"year":1946, "test":2, "stock":9, "countrytest":1, "countrystock":1},
+      {"year":1947, "test":0, "stock":13, "countrytest":0, "countrystock":1},
+      {"year":1948, "test":3, "stock":50, "countrytest":1, "countrystock":1},
+      {"year":1949, "test":1, "stock":171, "countrytest":1, "countrystock":2},
+      {"year":1950, "test":0, "stock":304, "countrytest":0, "countrystock":2},
+      {"year":1951, "test":18, "stock":463, "countrytest":2, "countrystock":2},
+      {"year":1952, "test":11, "stock":891, "countrytest":2, "countrystock":2},
+      {"year":1953, "test":18, "stock":1290, "countrytest":3, "countrystock":3},
+      {"year":1954, "test":16, "stock":1858, "countrytest":2, "countrystock":3},
+      {"year":1955, "test":24, "stock":2632, "countrytest":2, "countrystock":3},
+      {"year":1956, "test":33, "stock":4168, "countrytest":3, "countrystock":3},
+      {"year":1957, "test":55, "stock":6261, "countrytest":3, "countrystock":3},
+      {"year":1958, "test":116, "stock":8268, "countrytest":3, "countrystock":3},
+      {"year":1959, "test":0, "stock":13424, "countrytest":0, "countrystock":3},
+      {"year":1960, "test":3, "stock":20370, "countrytest":1, "countrystock":3},
+      {"year":1961, "test":71, "stock":24876, "countrytest":3, "countrystock":3},
+      {"year":1962, "test":178, "stock":29097, "countrytest":4, "countrystock":3},
+      {"year":1963, "test":50, "stock":32648, "countrytest":2, "countrystock":3},
+      {"year":1964, "test":60, "stock":34981, "countrytest":5, "countrystock":5},
+      {"year":1965, "test":58, "stock":37591, "countrytest":5, "countrystock":5},
+      {"year":1966, "test":76, "stock":38603, "countrytest":4, "countrystock":5},
+      {"year":1967, "test":64, "stock":40073, "countrytest":4, "countrystock":6},
+      {"year":1968, "test":79, "stock":39443, "countrytest":4, "countrystock":6},
+      {"year":1969, "test":67, "stock":38591, "countrytest":3, "countrystock":6},
+      {"year":1970, "test":64, "stock":38238, "countrytest":4, "countrystock":6},
+      {"year":1971, "test":53, "stock":39677, "countrytest":4, "countrystock":6},
+      {"year":1972, "test":57, "stock":41752, "countrytest":4, "countrystock":6},
+      {"year":1973, "test":48, "stock":44494, "countrytest":4, "countrystock":6},
+      {"year":1974, "test":55, "stock":46655, "countrytest":6, "countrystock":6},
+      {"year":1975, "test":44, "stock":47642, "countrytest":4, "countrystock":6},
+      {"year":1976, "test":51, "stock":48993, "countrytest":5, "countrystock":6},
+      {"year":1977, "test":54, "stock":50755, "countrytest":4, "countrystock":6},
+      {"year":1978, "test":66, "stock":51538, "countrytest":5, "countrystock":6},
+      {"year":1979, "test":58, "stock":53355, "countrytest":5, "countrystock":6},
+      {"year":1980, "test":54, "stock":55755, "countrytest":5, "countrystock":6},
+      {"year":1981, "test":50, "stock":56371, "countrytest":4, "countrystock":6},
+      {"year":1982, "test":49, "stock":57282, "countrytest":5, "countrystock":6},
+      {"year":1983, "test":55, "stock":59350, "countrytest":5, "countrystock":6},
+      {"year":1984, "test":57, "stock":61174, "countrytest":5, "countrystock":6},
+      {"year":1985, "test":36, "stock":62924, "countrytest":4, "countrystock":6},
+      {"year":1986, "test":23, "stock":64449, "countrytest":3, "countrystock":6},
+      {"year":1987, "test":47, "stock":62725, "countrytest":5, "countrystock":6},
+      {"year":1988, "test":40, "stock":60780, "countrytest":4, "countrystock":6},
+      {"year":1989, "test":28, "stock":58336, "countrytest":4, "countrystock":6},
+      {"year":1990, "test":18, "stock":55512, "countrytest":5, "countrystock":6},
+      {"year":1991, "test":14, "stock":49342, "countrytest":3, "countrystock":6},
+      {"year":1992, "test":8, "stock":41524, "countrytest":2, "countrystock":6},
+      {"year":1993, "test":1, "stock":36983, "countrytest":1, "countrystock":6},
+      {"year":1994, "test":2, "stock":33374, "countrytest":1, "countrystock":6},
+      {"year":1995, "test":7, "stock":30114, "countrytest":2, "countrystock":6},
+      {"year":1996, "test":3, "stock":27904, "countrytest":2, "countrystock":6},
+      {"year":1997, "test":0, "stock":27296, "countrytest":0, "countrystock":6},
+      {"year":1998, "test":4, "stock":26095, "countrytest":2, "countrystock":8},
+      {"year":1999, "test":0, "stock":24881, "countrytest":0, "countrystock":8},
+      {"year":2000, "test":0, "stock":23846, "countrytest":0, "countrystock":8},
+      {"year":2001, "test":0, "stock":22655, "countrytest":0, "countrystock":8},
+      {"year":2002, "test":0, "stock":21561, "countrytest":0, "countrystock":8},
+      {"year":2003, "test":0, "stock":20106, "countrytest":0, "countrystock":8},
+      {"year":2004, "test":0, "stock":17624, "countrytest":0, "countrystock":8},
+      {"year":2005, "test":0, "stock":16387, "countrytest":0, "countrystock":8},
+      {"year":2006, "test":1, "stock":15479, "countrytest":1, "countrystock":8},
+      {"year":2007, "test":0, "stock":12995, "countrytest":0, "countrystock":8},
+      {"year":2008, "test":0, "stock":12172, "countrytest":0, "countrystock":8},
+      {"year":2009, "test":1, "stock":11635, "countrytest":1, "countrystock":8},
+      {"year":2010, "test":0, "stock":11296, "countrytest":1, "countrystock":8},
+      {"year":2011, "test":0, "stock":10790, "countrytest":0, "countrystock":8},
+      {"year":2012, "test":0, "stock":10436, "countrytest":0, "countrystock":8},
+      {"year":2013, "test":1, "stock":10369, "countrytest":1, "countrystock":8},
+      {"year":2014, "test":0, "stock":10145, "countrytest":0, "countrystock":8},
+      {"year":2015, "test":0, "stock":10305, "countrytest":0, "countrystock":8},
+      {"year":2016, "test":2, "stock":10095, "countrytest":1, "countrystock":8},
+    ];
+
+    var num = null,
+        inputyear,
+        stock,
+        sharemsg;
+
+    var resultdata = [];    
+
+    function init() { 
+
+        $(".resultpage, #startBtn, #resulta, #resultb").hide();
+        $( "#inputyear" ).change(function() {
+            $("#startBtn").show();
+        });
+
+        $("#startBtn").click(function(){
+            $('.container').slideUp(500, function(){
+              setValue();
+              sendData();
+              $("#intro").hide();
+              $("#result01").show(); 
+              setTimeout(function(){drawChart();},300)
+            });
+            $('.container').slideDown(500);
+            
+        });
+
+        $('.sharecol1').click(function (event) {facebook();});
+        $('.sharecol2').click(function (event) {tweet();});         
+
+    };
+
+function setValue() {
+  inputyear = $('#inputyear').val();
+  $("#yearno").text(inputyear);
+
+  if(inputyear > 1944){
+    resultdata = jQuery.grep(data, function (n, i) {
+      return (n.year == inputyear);
+    },false); //find among data array for object that matches the year input, then pass the row into resultdata 
+
+    stock = addThousandsSeparator(resultdata[0]["stock"]);
+
+    $("#testno").text(resultdata[0]["test"]);
+    $("#warheadno").text(stock);
+    $("#countrytest").text(resultdata[0]["countrytest"]);
+    $("#countrystock").text(resultdata[0]["countrystock"]);
+    $("#resulta").show(); 
+    num = inputyear - 1945;
+    sharemsg = 'When I was born in ' + inputyear + ', there were ' + resultdata[0]["test"] + ' nuclear tests and approximately ' + stock + ' nuclear warheads in the world';
+  } else {
+    $("#resultb").show();
+    sharemsg = 'What did nuclear armament look like on the day you were born? Find out here';
+  }
+}
+
+function addThousandsSeparator(input) {
+    var output = input
+    if (parseFloat(input)) {
+        input = new String(input); // so you can perform string operations
+        var parts = input.split("."); // remove the decimal part
+        parts[0] = parts[0].split("").reverse().join("").replace(/(\d{3})(?!$)/g, "$1,").split("").reverse().join("");
+        output = parts.join(".");
+    }
+    return output;
+} 
+
+
+function drawChart() {
+      var chart1;
+      var chart2;
+      Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+      }),
+      
+      chart1 = new Highcharts.Chart({
+          chart: {
+              renderTo: 'chart1',
+              type: 'column',
+          },
+          title: {
+              text: null,
+          },
+          subtitle: {
+              enabled: false,
+          },
+          xAxis: {
+              categories: ["1945","1946","1947","1948","1949","1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016"],   
+              tickmarkPlacement: 'on', 
+              tickPositions: [5, 15, 25, 35, 45, 55, 65, 75]
+          },
+          yAxis: {
+              title: {
+                text: null,
+                x: 0,
+                style: {
+                  color: '#808080',
+                  fontSize: '11px',
+                },  
+              },
+              endOnTick: false,
+              minTickInterval:5,
+          },
+          credits: { enabled: false, },
+          legend: {reversed: true,},
+          tooltip: {
+              pointFormat: 'Total tests: <b>{point.stackTotal}</b><br>by {point.series.name}: <b>{point.y:,.0f}</b>',
+          },
+          plotOptions: {
+              series:{
+                  stickyTracking: false,
+              },
+              column:{
+                  stacking: 'normal',
+              },
+              series: {
+                  groupPadding: 0.03,
+                  pointPadding: 0.03,
+              }
+          },
+          series: [ 
+              {name:"North Korea", color:"#00e0ff", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,2,0,0,1,0,0,2]},
+              {name:"Pakistan", color:"#ff69b4", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+              {name:"India", color:"#984ea3", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+              {name:"China", color:"#ff7f00", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,2,1,2,1,1,2,1,1,1,4,1,3,1,1,0,1,2,2,0,0,1,1,0,2,0,2,1,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+              {name:"France", color:"#FFCC00", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,1,3,3,4,7,3,5,0,8,5,4,6,9,2,5,9,11,10,12,12,10,9,8,8,8,8,8,9,6,6,0,0,0,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+              {name:"UK", color:"#006d2c", data:[0,0,0,0,0,0,0,1,2,0,0,6,7,5,0,0,0,2,0,2,1,0,0,0,0,0,0,0,0,1,0,1,0,2,1,3,1,1,1,2,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+              {name:"Russia/USSR", color:"#e41a1c", data:[0,0,0,0,1,0,2,0,5,10,6,9,16,34,0,0,59,79,0,9,14,18,17,17,19,16,23,24,17,21,19,21,24,31,31,24,21,19,25,27,10,0,23,16,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+              {name:"US", color:"#377eb8", data:[1,2,0,3,0,0,16,10,11,6,18,18,32,77,0,0,10,96,47,45,38,48,42,56,46,39,24,27,24,22,22,20,20,19,15,14,16,18,18,18,17,14,14,15,11,8,7,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+          ],
+      });
+
+      var chart1 = $('#chart1').highcharts();
+
+      if(inputyear > 1944){
+        var point1 = chart1.series[0].points[num];
+        chart1.renderer.label("You were born", point1.plotX + chart1.plotLeft - 20, point1.plotY + chart1.plotTop - 30,'callout',
+          point1.plotX + chart1.plotLeft,
+          point1.plotY + chart1.plotTop)
+          .css({color: '#FFFFFF'})
+          .attr({fill: 'rgba(0, 0, 0, 0.5)', padding: 3, r: 5, zIndex: 6, id :'label'}).add();
+      } 
+
+      var flip = "off";  
+      $('#button01').click(function () {
+        if(flip=="off"){
+          flip="on";  
+          $('#button01').text("Zoom out");
+          chart1.xAxis[0].setExtremes(45, 71); 
+          $("#label").hide();
+        } else {
+          flip = "off";
+          $('#button01').text("Zoom into 1990-2016");
+          chart1.xAxis[0].setExtremes(0, 71);
+          $("#label").show();
+        } 
+      });
+
+
+      chart2 = new Highcharts.Chart({
+          chart: {
+              renderTo: 'chart2',
+              type: 'line',
+          },
+          title: {
+              text: null,
+          },
+          subtitle: {
+              enabled: false,
+          },
+          xAxis: {
+              categories: ["1945","1946","1947","1948","1949","1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016"],   
+              tickmarkPlacement: 'on', 
+              tickPositions: [5, 15, 25, 35, 45, 55, 65]
+          },
+          yAxis: {
+              title: {
+                text: 'Nuclear warheads',
+                x: 0,
+                style: {
+                  color: '#808080',
+                  fontSize: '11px',
+                },  
+              },
+              endOnTick: false,
+          },
+          credits: { enabled: false, },
+          legend: {},
+          tooltip: {
+              shared: true,
+              pointFormat: '{point.series.name}: <b>{point.y:,.0f}</b><br>',
+          },
+          plotOptions: {
+              series:{
+                  stickyTracking: false,
+              },
+              line: {
+                marker: {
+                    enabled: false
+              }
+            }
+          },
+          series: [ 
+              {name: "US", color:"#377eb8", data:[2,9,13,50,170,299,438,841,1169,1703,2422,3692,5543,7345,12298,18638,22229,25540,28133,29463,31139,31175,31255,29561,27522,26008,25830,26516,27835,28537,27519,25914,25542,24418,24138,24104,23208,22886,23305,23459,23368,23317,23575,23205,22217,21392,19008,13708,11511,10979,10904,11011,10903,10732,10685,10577,10526,10457,10027,8570,8360,7853,5709,5273,5113,5066,4897,4881,4804,4760,4700,4500]},
+              {name: "Russia/USSR", color:"#e41a1c", data:[0,0,0,0,1,5,25,50,120,150,200,426,660,863,1048,1627,2492,3346,4259,5242,6144,7091,8400,9490,10671,11736,13279,14600,15878,17286,19235,22165,24281,26169,28258,30665,32146,33486,35130,36825,38582,40159,38107,36538,35078,32980,29154,26734,24403,21339,18179,15942,15442,14368,13188,12188,11152,10114,9076,8038,7000,6643,6286,5929,5527,5215,4858,4500,4480,4300,4500,4490]},
+              {name: "UK", color:"#006d2c", data:[0,0,0,0,0,0,0,0,1,5,10,50,58,60,78,105,155,211,256,271,271,281,355,317,306,375,412,423,500,500,500,500,500,500,500,500,500,385,380,350,350,350,350,350,350,350,350,250,250,250,234,203,203,240,240,280,280,280,280,280,280,225,225,225,225,225,225,225,225,225,215,215]},
+              {name: "France", color:"#FFCC00", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,32,36,36,36,36,36,45,70,116,145,188,212,228,235,235,250,274,274,279,280,360,355,420,410,410,505,540,540,525,510,500,450,450,450,450,470,350,350,350,350,350,350,350,300,300,300,300,300,300,300,300,300]},
+              {name: "China", color:"#ff7f00", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,20,25,35,50,75,100,130,150,170,180,180,180,190,195,205,210,216,218,220,222,224,226,228,230,232,234,234,234,234,234,234,232,232,232,232,235,235,235,235,235,235,235,235,240,240,240,240,250,250,260,260]},
+              {name: "Israel", color:"#a1d99b", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,4,6,8,11,13,15,17,20,22,24,26,29,31,33,35,38,40,42,44,47,49,51,53,56,58,60,62,63,64,66,68,70,72,74,76,78,80,80,80,80,80,80,80,80,80,80,80,80,80]},
+              {name: "India", color:"#984ea3", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,8,13,18,23,28,33,38,43,50,60,70,80,90,100,110,110,120,120]},
+              {name: "Pakistan", color:"#ff69b4", data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,8,14,20,26,32,38,44,50,60,70,80,90,100,110,120,120,130,130]},
+          ],
+      });
+
+    var chart2 = $('#chart2').highcharts(),
+        $button = $('#button02');
+    $button.click(function () {
+        var series00 = chart2.series[0];
+        var series01 = chart2.series[1];
+        if (series00.visible) {
+            series00.hide();
+            series01.hide();
+            $button.html('Show US & Russia');
+        } else {
+            series00.show();
+            series01.show();
+            $button.html('Hide US & Russia');
+        }
+    });
+
+    if(inputyear > 1944){
+      var point2 = chart2.series[0].points[num];
+      chart2.renderer.label("You were born", point2.plotX + chart2.plotLeft - 20, point2.plotY + chart2.plotTop - 30,'callout',
+        point2.plotX + chart2.plotLeft,
+        point2.plotY + chart2.plotTop)
+        .css({color: '#FFFFFF'})
+        .attr({fill: 'rgba(0, 0, 0, 0.5)', padding: 3, r: 5, zIndex: 6}).add();
+    } 
+
+} 
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSdRvqafDKj4nBx82W0OPTdj2f3zJTLoWH4ItnrVZQDjaql9ug/formResponse',
+        data: { 
+          "entry.387191148": json.ip,
+          "entry.1314601248": inputyear,
+          "entry.1112436415": document.referrer,
+        }
+      }); 
+    }
+  );   
+}
+
+function tweet() {
+  
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent(sharemsg);
+  tweet_url += ' @PRI';
+  tweet_url += '&url=http://bit.ly/2g4PHtI';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-12-02/americas-missileers-stand-ready-launch-nuclear-weapons-and-pray-they-wont-have',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/atomic%20nuclear%20bomb%20mushroom%20cloud-cropped.jpg?itok=Y1EgJwcz',
+  name: sharemsg,
+  description:"What did nuclear armament look like on the day you were born?"
+  }, function(response){});
+}
+
+
+$(document).ready(function(){
+  init();
+}); 
+    
+</script> 
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1146966912025381',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+</body>
+</html>  
+

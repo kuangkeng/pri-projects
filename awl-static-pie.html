@@ -1,0 +1,120 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Figures shown are proposed budget for 2017. </div>
+        Source: 
+        <a href='http://www.state.gov/documents/organization/252733.pdf' target='_blank'>Congressional Budget Justification report 2017</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'pie'
+            },
+            title: {
+                text: 'US foreign aid for gender equality 2017',
+                margin: 20,
+            },
+            subtitle: {enabled: false,},
+            credits: {enabled: false,},
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Percentage: <b>{point.percentage:.1f}%</b><br>Aid: <b>${point.num:.1f} mil</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        padding: 10,
+                        
+                        format: '',
+                        distance: -50,
+                        y: -10,
+                        x: 0,
+                        style: {
+                            width: '100px',
+                            fontSize: '13px',
+                        },
+                    }
+                }
+            },    
+
+            series: [{
+                data: [
+                    {name:"Secondary", color:"#9df53d", y:0, num:930.999},
+                    {name:"Primary", color:"#ff6b3f", y:100, num:248.929},
+                ]
+            }]
+            });
+    });
+});
+</script>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="http://code.highcharts.com/mapdata/custom/world.js"></script>
+    
+
+  </head>
+
+<style>
+@import "http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 1000px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 1000px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 5px;
+    margin-top:10px;
+    color:#33333c;
+}
+
+.highcharts-title {width:100% !important;}
+
+.align-center {text-align: center;}
+
+.btn {
+    margin: 5px; 
+    line-height: 16px;
+    background-color: #31B0D5;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    padding:5px 10px 5px 10px;
+}
+
+.btn:focus{background:#4188bc; color:white;}
+.btn:hover{background:#4188bc;}
+.default {background:#4188bc; color:white;}
+
+@media (max-width: 600px ) { 
+    #container {height: 460px;}
+}
+
+@media (max-width: 400px ) { 
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+    #container{height: 400px;}
+    .btn {font-size: 13px; padding:5px; margin-right: 1px; margin-left: 1px;}
+    #text {font-size: 14px;}
+} 
+
+@media (max-width: 315px ) { 
+    .btn {font-size: 11px; padding:2px; margin-right: 1px; margin-left: 0px; line-height: 13px;}
+}   
+
+</style>
+
+</head>
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Figures shown are proposed budget for 2017. Non-country specific aid including aid for regional agencies and other bodies is not shown.</div>
+        Source:  
+        Aid data is from the <a href='http://www.state.gov/documents/organization/252733.pdf' target='_blank'>Congressional Budget Justification report 2017</a>. Population data is from the <a href="https://esa.un.org/unpd/wpp/DataQuery/" target="_blank">UN Population Division</a> except for Kosovo and West Bank and Gaza which is from the <a href="http://data.worldbank.org/data-catalog/gender-statistics" target="_blank">World Bank</a>.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</div>
+</body>
+
+<script>
+
+$("#button01").addClass("default");
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Map({
+            chart: {
+                renderTo: 'container',
+                marginTop: 80,
+            },
+            
+            title : {
+                text: 'US foreign aid for gender equality, 2017 (per woman)',
+                y:40,
+                style:{
+                    fontSize: 30,
+                }
+            },
+            subtitle : {enabled: false},
+            legend: { 
+                title: {
+                    text: '$ per woman'
+                }, 
+                align: 'left',
+                verticalAlign: 'bottom',
+                floating: true,
+            },
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                  verticalAlign: 'bottom',
+                  align: 'right',
+                  floating: true,
+                },
+            },
+
+            colorAxis: {
+                min: 0,
+                max: 20,
+                // type: 'logarithmic',
+                minColor: '#bbbbff',
+                maxColor: '#000022',
+                stops: [
+                    [0, '#bbbbff'],
+                    [0.3, '#4444FF'],
+                    [1, '#000022']
+                ]
+            },
+            tooltip: {
+                headerFormat: null,
+                pointFormat: "<b>{point.cou}</b><br>Aid per woman: <b>${point.value}</b><br>Women's population: <b>{point.pop:,0f},000</b><br>Total aid: <b>${point.aid:,0f},000</b>"
+            },
+            credits: { enabled: false },
+            series: [{
+                mapData: Highcharts.maps['custom/world'],
+                joinBy: ['hc-key'],
+                data: [
+                    {'hc-key':'af', 'aid':253000, 'pct':19.4, 'pop':15753, 'value':16.06, 'cou':'Afghanistan'},
+                    {'hc-key':'lr', 'aid':23472, 'pct':1.8, 'pop':2234, 'value':10.51, 'cou':'Liberia'},
+                    {'hc-key':'lb', 'aid':21340, 'pct':1.6, 'pop':2912, 'value':7.33, 'cou':'Lebanon'},
+                    {'hc-key':'rw', 'aid':35642, 'pct':2.7, 'pop':6050, 'value':5.89, 'cou':'Rwanda'},
+                    {'hc-key':'zm', 'aid':40672, 'pct':3.1, 'pop':8118, 'value':5.01, 'cou':'Zambia'},
+                    {'hc-key':'ss', 'aid':23610, 'pct':1.8, 'pop':6161, 'value':3.83, 'cou':'South Sudan'},
+                    {'hc-key':'so', 'aid':19440, 'pct':1.5, 'pop':5419, 'value':3.59, 'cou':'Somalia'},
+                    {'hc-key':'sn', 'aid':26650, 'pct':2.0, 'pop':7701, 'value':3.46, 'cou':'Senegal'},
+                    {'hc-key':'jo', 'aid':11050, 'pct':0.8, 'pop':3706, 'value':2.98, 'cou':'Jordan'},
+                    {'hc-key':'sz', 'aid':1868, 'pct':0.1, 'pop':651, 'value':2.87, 'cou':'Swaziland'},
+                    {'hc-key':'zw', 'aid':22569, 'pct':1.7, 'pop':7915, 'value':2.85, 'cou':'Zimbabwe'},
+                    {'hc-key':'bj', 'aid':15000, 'pct':1.1, 'pop':5454, 'value':2.75, 'cou':'Benin'},
+                    {'hc-key':'ba', 'aid':5080, 'pct':0.4, 'pop':1914, 'value':2.65, 'cou':'Bosnia and Herzegovina'},
+                    {'hc-key':'ht', 'aid':13863, 'pct':1.1, 'pop':5414, 'value':2.56, 'cou':'Haiti'},
+                    {'hc-key':'tz', 'aid':68178, 'pct':5.2, 'pop':26896, 'value':2.53, 'cou':'Tanzania'},
+                    {'hc-key':'ml', 'aid':20200, 'pct':1.5, 'pop':8715, 'value':2.32, 'cou':'Mali'},
+                    {'hc-key':'kv', 'aid':1877, 'pct':0.1, 'pop':871, 'value':2.15, 'cou':'Kosovo'},
+                    {'hc-key':'mw', 'aid':18428, 'pct':1.4, 'pop':8622, 'value':2.14, 'cou':'Malawi'},
+                    {'hc-key':'hn', 'aid':8500, 'pct':0.7, 'pop':4039, 'value':2.10, 'cou':'Honduras'},
+                    {'hc-key':'sv', 'aid':6250, 'pct':0.5, 'pop':3251, 'value':1.92, 'cou':'El Salvador'},
+                    {'hc-key':'np', 'aid':26520, 'pct':2.0, 'pop':14697, 'value':1.80, 'cou':'Nepal'},
+                    {'hc-key':'gt', 'aid':14895, 'pct':1.1, 'pop':8350, 'value':1.78, 'cou':'Guatemala'},
+                    {'hc-key':'gn', 'aid':10210, 'pct':0.8, 'pop':6286, 'value':1.62, 'cou':'Guinea'},
+                    {'hc-key':'il', 'aid':3510, 'pct':0.3, 'pop':2180, 'value':1.61, 'cou':'West Bank and Gaza'},
+                    {'hc-key':'gh', 'aid':17663, 'pct':1.4, 'pop':13774, 'value':1.28, 'cou':'Ghana'},
+                    {'hc-key':'sl', 'aid':3780, 'pct':0.3, 'pop':3260, 'value':1.16, 'cou':'Sierra Leone'},
+                    {'hc-key':'dj', 'aid':500, 'pct':0.0, 'pop':442, 'value':1.13, 'cou':'Djibouti'},
+                    {'hc-key':'ly', 'aid':3250, 'pct':0.2, 'pop':3122, 'value':1.04, 'cou':'Libya'},
+                    {'hc-key':'ye', 'aid':13000, 'pct':1.0, 'pop':13279, 'value':0.98, 'cou':'Yemen'},
+                    {'hc-key':'ke', 'aid':22097, 'pct':1.7, 'pop':23033, 'value':0.96, 'cou':'Kenya'},
+                    {'hc-key':'ao', 'aid':11858, 'pct':0.9, 'pop':12606, 'value':0.94, 'cou':'Angola'},
+                    {'hc-key':'et', 'aid':43315, 'pct':3.3, 'pop':49783, 'value':0.87, 'cou':'Ethiopia'},
+                    {'hc-key':'pe', 'aid':13300, 'pct':1.0, 'pop':15704, 'value':0.85, 'cou':'Peru'},
+                    {'hc-key':'cd', 'aid':32266, 'pct':2.5, 'pop':38734, 'value':0.83, 'cou':'Democratic Republic of the Congo'},
+                    {'hc-key':'eg', 'aid':36500, 'pct':2.8, 'pop':45268, 'value':0.81, 'cou':'Egypt'},
+                    {'hc-key':'bw', 'aid':897, 'pct':0.1, 'pop':1132, 'value':0.79, 'cou':'Botswana'},
+                    {'hc-key':'kh', 'aid':5899, 'pct':0.5, 'pop':7980, 'value':0.74, 'cou':'Cambodia'},
+                    {'hc-key':'bb', 'aid':500, 'pct':0.0, 'pop':691, 'value':0.72, 'cou':'Barbados and Eastern Caribbean'},
+                    {'hc-key':'ag', 'aid':500, 'pct':0.0, 'pop':691, 'value':0.72, 'cou':'Barbados and Eastern Caribbean'},
+                    {'hc-key':'dm', 'aid':500, 'pct':0.0, 'pop':691, 'value':0.72, 'cou':'Barbados and Eastern Caribbean'},
+                    {'hc-key':'gd', 'aid':500, 'pct':0.0, 'pop':691, 'value':0.72, 'cou':'Barbados and Eastern Caribbean'},
+                    {'hc-key':'kn', 'aid':500, 'pct':0.0, 'pop':691, 'value':0.72, 'cou':'Barbados and Eastern Caribbean'},
+                    {'hc-key':'lc', 'aid':500, 'pct':0.0, 'pop':691, 'value':0.72, 'cou':'Barbados and Eastern Caribbean'},
+                    {'hc-key':'vc', 'aid':500, 'pct':0.0, 'pop':691, 'value':0.72, 'cou':'Barbados and Eastern Caribbean'},
+                    {'hc-key':'ni', 'aid':1900, 'pct':0.1, 'pop':3084, 'value':0.62, 'cou':'Nicaragua'},
+                    {'hc-key':'do', 'aid':3253, 'pct':0.2, 'pop':5282, 'value':0.62, 'cou':'Dominican Republic'},
+                    {'hc-key':'bi', 'aid':3250, 'pct':0.2, 'pop':5655, 'value':0.57, 'cou':'Burundi'},
+                    {'hc-key':'ge', 'aid':1200, 'pct':0.1, 'pop':2092, 'value':0.57, 'cou':'Georgia'},
+                    {'hc-key':'pk', 'aid':49700, 'pct':3.8, 'pop':91873, 'value':0.54, 'cou':'Pakistan'},
+                    {'hc-key':'mg', 'aid':6125, 'pct':0.5, 'pop':12153, 'value':0.50, 'cou':'Madagascar'},
+                    {'hc-key':'mz', 'aid':6515, 'pct':0.5, 'pop':14312, 'value':0.46, 'cou':'Mozambique'},
+                    {'hc-key':'mm', 'aid':12400, 'pct':0.9, 'pop':27562, 'value':0.45, 'cou':'Burma'},
+                    {'hc-key':'la', 'aid':1500, 'pct':0.1, 'pop':3417, 'value':0.44, 'cou':'Laos'},
+                    {'hc-key':'co', 'aid':10490, 'pct':0.8, 'pop':24485, 'value':0.43, 'cou':'Colombia'},
+                    {'hc-key':'za', 'aid':11669, 'pct':0.9, 'pop':27693, 'value':0.42, 'cou':'South Africa'},
+                    {'hc-key':'ug', 'aid':8158, 'pct':0.6, 'pop':19525, 'value':0.42, 'cou':'Uganda'},
+                    {'hc-key':'kg', 'aid':1210, 'pct':0.1, 'pop':3000, 'value':0.40, 'cou':'Kyrgyz Republic'},
+                    {'hc-key':'ng', 'aid':35212, 'pct':2.7, 'pop':89413, 'value':0.39, 'cou':'Nigeria'},
+                    {'hc-key':'ls', 'aid':402, 'pct':0.0, 'pop':1078, 'value':0.37, 'cou':'Lesotho'},
+                    {'hc-key':'tj', 'aid':1500, 'pct':0.1, 'pop':4186, 'value':0.36, 'cou':'Tajikistan'},
+                    {'hc-key':'tn', 'aid':2000, 'pct':0.2, 'pop':5692, 'value':0.35, 'cou':'Tunisia'},
+                    {'hc-key':'am', 'aid':500, 'pct':0.0, 'pop':1618, 'value':0.31, 'cou':'Armenia'},
+                    {'hc-key':'bd', 'aid':23200, 'pct':1.8, 'pop':79719, 'value':0.29, 'cou':'Bangladesh'},
+                    {'hc-key':'jm', 'aid':400, 'pct':0.0, 'pop':1402, 'value':0.29, 'cou':'Jamaica'},
+                    {'hc-key':'iq', 'aid':5000, 'pct':0.4, 'pop':17986, 'value':0.28, 'cou':'Iraq'},
+                    {'hc-key':'bf', 'aid':2500, 'pct':0.2, 'pop':9121, 'value':0.27, 'cou':'Burkina Faso'},
+                    {'hc-key':'al', 'aid':400, 'pct':0.0, 'pop':1460, 'value':0.27, 'cou':'Albania'},
+                    {'hc-key':'py', 'aid':735, 'pct':0.1, 'pop':3270, 'value':0.22, 'cou':'Paraguay'},
+                    {'hc-key':'by', 'aid':1050, 'pct':0.1, 'pop':5082, 'value':0.21, 'cou':'Belarus'},
+                    {'hc-key':'cf', 'aid':500, 'pct':0.0, 'pop':2485, 'value':0.20, 'cou':'Central African Republic'},
+                    {'hc-key':'md', 'aid':400, 'pct':0.0, 'pop':2113, 'value':0.19, 'cou':'Moldova'},
+                    {'hc-key':'ci', 'aid':2012, 'pct':0.2, 'pop':11155, 'value':0.18, 'cou':"Cote d'Ivoire"},
+                    {'hc-key':'pg', 'aid':597, 'pct':0.0, 'pop':3733, 'value':0.16, 'cou':'Papua New Guinea'},
+                    {'hc-key':'id', 'aid':19376, 'pct':1.5, 'pop':127876, 'value':0.15, 'cou':'Indonesia'},
+                    {'hc-key':'mk', 'aid':153, 'pct':0.0, 'pop':1044, 'value':0.15, 'cou':'Macedonia'},
+                    {'hc-key':'rs', 'aid':640, 'pct':0.0, 'pop':4531, 'value':0.14, 'cou':'Serbia'},
+                    {'hc-key':'sd', 'aid':2824, 'pct':0.2, 'pop':20038, 'value':0.14, 'cou':'Sudan'},
+                    {'hc-key':'na', 'aid':155, 'pct':0.0, 'pop':1262, 'value':0.12, 'cou':'Namibia'},
+                    {'hc-key':'az', 'aid':590, 'pct':0.0, 'pop':4898, 'value':0.12, 'cou':'Azerbaijan'},
+                    {'hc-key':'ua', 'aid':2677, 'pct':0.2, 'pop':24064, 'value':0.11, 'cou':'Ukraine'},
+                    {'hc-key':'tm', 'aid':300, 'pct':0.0, 'pop':2733, 'value':0.11, 'cou':'Turkmenistan'},
+                    {'hc-key':'lk', 'aid':1000, 'pct':0.1, 'pop':10736, 'value':0.09, 'cou':'Sri Lanka'},
+                    {'hc-key':'ma', 'aid':1600, 'pct':0.1, 'pop':17388, 'value':0.09, 'cou':'Morocco'},
+                    {'hc-key':'mx', 'aid':4100, 'pct':0.3, 'pop':63836, 'value':0.06, 'cou':'Mexico'},
+                    {'hc-key':'ph', 'aid':2560, 'pct':0.2, 'pop':49887, 'value':0.05, 'cou':'Philippines'},
+                    {'hc-key':'ne', 'aid':500, 'pct':0.0, 'pop':9870, 'value':0.05, 'cou':'Niger'},
+                    {'hc-key':'cm', 'aid':587, 'pct':0.0, 'pop':11672, 'value':0.05, 'cou':'Cameroon'},
+                    {'hc-key':'vn', 'aid':1473, 'pct':0.1, 'pop':47223, 'value':0.03, 'cou':'Vietnam'},
+                    {'hc-key':'th', 'aid':1065, 'pct':0.1, 'pop':34465, 'value':0.03, 'cou':'Thailand'},
+                    {'hc-key':'in', 'aid':14295, 'pct':1.1, 'pop':631502, 'value':0.02, 'cou':'India'},
+                    {'hc-key':'ve', 'aid':200, 'pct':0.0, 'pop':15621, 'value':0.01, 'cou':'Venezuela'},
+                    {'hc-key':'cn', 'aid':200, 'pct':0.0, 'pop':667072, 'value':0.00, 'cou':'China'},
+                ],
+                dataLabels: {enabled: false,},
+                states: {
+                            hover: {
+                                color: '#FFA123',
+                            }
+                        },
+            }]
+        });
+
+
+
+    });
+});
+</script>

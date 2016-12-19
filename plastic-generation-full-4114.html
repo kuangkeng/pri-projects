@@ -1,0 +1,333 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+    height: 4000px; 
+    max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">The study only covers plastic waste produced by populations living within 50km of a coast in 192 coastal countries in 2010.</div>
+        Source: <a href='http://science.sciencemag.org/content/347/6223/768' target='_blank'>Plastic waste inputs from land into the ocean, Science.</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Plastic waste generation rate per capita by countries, 2010',
+                margin: 20,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Kuwait","Antigua & Barbuda","Saint Kitts and Nevis","Guyana","Barbados","Saint Lucia","Germany","Ireland","Netherlands","Hong Kong","Trinidad and Tobago","Bahamas","Macao","Seychelles","Sri Lanka","US","New Zealand","Grenada","Maldives","Israel","Vanuatu","Iceland","Guatemala","Norway","Spain","Portugal","Costa Rica","Cocos Islands","Christmas Island","Niue","Falkland Islands","Saint Pierre","Anguilla","Dhekelia","Turks and Caicos Islands","British Virgin Islands","Gibraltar","Monaco","Saint-Martin","Faroe Islands","Cayman Islands","Guernsey","Greenland","Bermuda","Isle of Man","Jersey","Northern Mariana Islands","Virgin Islands, US","Aruba","Curacao","Channel Islands","Guam","Netherlands Antilles","New Caledonia","French Polynesia","Martinique","Croatia","Uruguay","Puerto Rico","Venezuela","Taiwan","Cyprus","South Africa","Finland","Mauritius","Tonga","Saint Vincent and Grenadines","UK","Malta","Turkey","Comoros","Greece","UAE","Malaysia","Singapore","Marshall Islands","France","Fiji","Honduras","Argentina","Syria","Egypt","Estonia","Belize","Japan","Brazil","Suriname","Qatar","Saudi Arabia","Bulgaria","Dominica","Ecuador","El Salvador","Slovenia","Panama","Montserrat","Saint Helena","Tuvalu","Nauru","Cook Islands","Palau","Jordan","Namibia","French Guiana","Montenegro","Equatorial Guinea","Guadeloupe","Bosnia and Herzegovina","Reunion","Libya","Tunisia","Colombia","Dominican Republic","Iran","Peru","Algeria","Thailand","Nicaragua","World average","Italy","Lithuania","Bahrain","Latvia","China","Chile","Russia","South Korea","Australia","Tokelau","Norfolk Island","Svalbard","Kiribati","Micronesia","Sao Tome and Principe","Samoa","Solomon Islands","Djibouti","Iraq","East Timor","Sudan","Papua New Guinea","Yemen","Ivory Coast","Ukraine","Senegal","Pakistan","Nigeria","Vietnam","Poland","Lebanon","Canada","Haiti","Cuba","Mexico","Liberia","Oman","Belgium","Philippines","Myanmar","Morocco","Albania","Rep Congo","Georgia","Cambodia","Cape Verde","Palestine","Angola","Togo","Indonesia","Gabon","Guinea-Bissau","Somalia","North Korea","Sweden","Gambia","Cameroon","Denmark","Mauritania","Dr Congo","Eritrea","Benin","Romania","Sierra Leone","Ghana","Bangladesh","Jamaica","Guinea","Kenya","Brunei","Tanzania","Madagascar","Mozambique","India"],                   
+            },
+            yAxis: {
+                title: {
+                  text: 'Plastic waste generation rate<br>(gram per person per day)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: '{point.key}<br>',
+                pointFormat: "Plastic waste generation rate: <b>{point.y}</b>g/person/day"
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Plastic waste generation rate per capita", color:'#FF8B00', data: [
+                    {y:683.5, 'pop':2293604, 'plastic':1567.8},
+                    {y:657.3, 'pop':66843, 'plastic':43.9},
+                    {y:651.3, 'pop':36102, 'plastic':23.5},
+                    {y:583.6, 'pop':513235, 'plastic':299.5},
+                    {y:567.6, 'pop':276784, 'plastic':157.1},
+                    {y:519.8, 'pop':163227, 'plastic':84.8},
+                    {y:484.2, 'pop':8837035, 'plastic':4279.3},
+                    {y:427.8, 'pop':3749576, 'plastic':1604.1},
+                    {y:422.9, 'pop':8971770, 'plastic':3794.5},
+                    {y:397, 'pop':7573074, 'plastic':3006.5},
+                    {y:396.7, 'pop':1358433, 'plastic':538.9},
+                    {y:388.4, 'pop':341145, 'plastic':132.5},
+                    {y:366.8, 'pop':257911, 'plastic':94.6},
+                    {y:356.1, 'pop':91361, 'plastic':32.5},
+                    {y:354.5, 'pop':14568174, 'plastic':5163.7},
+                    {y:334.1, 'pop':112925034, 'plastic':37729.4},
+                    {y:329.4, 'pop':3862054, 'plastic':1272},
+                    {y:323.8, 'pop':96121, 'plastic':31.1},
+                    {y:321.2, 'pop':392567, 'plastic':126.1},
+                    {y:295.7, 'pop':6677810, 'plastic':1974.9},
+                    {y:293.6, 'pop':251851, 'plastic':73.9},
+                    {y:280, 'pop':292708, 'plastic':82},
+                    {y:279, 'pop':2392442, 'plastic':667.5},
+                    {y:278.6, 'pop':4131679, 'plastic':1151.1},
+                    {y:275.8, 'pop':22771488, 'plastic':6281.2},
+                    {y:264.1, 'pop':8507951, 'plastic':2246.9},
+                    {y:257.7, 'pop':2479298, 'plastic':639},
+                    {y:251, 'pop':596, 'plastic':0.1},
+                    {y:251, 'pop':1402, 'plastic':0.4},
+                    {y:251, 'pop':1799, 'plastic':0.5},
+                    {y:251, 'pop':2602, 'plastic':0.7},
+                    {y:251, 'pop':5888, 'plastic':1.5},
+                    {y:251, 'pop':14561, 'plastic':3.7},
+                    {y:251, 'pop':15700, 'plastic':3.9},
+                    {y:251, 'pop':22570, 'plastic':5.7},
+                    {y:251, 'pop':29674, 'plastic':7.4},
+                    {y:251, 'pop':33483, 'plastic':8.4},
+                    {y:251, 'pop':34050, 'plastic':8.5},
+                    {y:251, 'pop':37429, 'plastic':9.4},
+                    {y:251, 'pop':50554, 'plastic':12.7},
+                    {y:251, 'pop':51864, 'plastic':13},
+                    {y:251, 'pop':56289, 'plastic':14.1},
+                    {y:251, 'pop':57068, 'plastic':14.3},
+                    {y:251, 'pop':66966, 'plastic':16.8},
+                    {y:251, 'pop':81222, 'plastic':20.4},
+                    {y:251, 'pop':90076, 'plastic':22.6},
+                    {y:251, 'pop':106256, 'plastic':26.7},
+                    {y:251, 'pop':134219, 'plastic':33.7},
+                    {y:251, 'pop':137910, 'plastic':34.6},
+                    {y:251, 'pop':143784, 'plastic':36.1},
+                    {y:251, 'pop':153352, 'plastic':38.5},
+                    {y:251, 'pop':190809, 'plastic':47.9},
+                    {y:251, 'pop':227165, 'plastic':57},
+                    {y:251, 'pop':257904, 'plastic':64.7},
+                    {y:251, 'pop':270618, 'plastic':67.9},
+                    {y:251, 'pop':402257, 'plastic':100.9},
+                    {y:251, 'pop':1602782, 'plastic':402.2},
+                    {y:251, 'pop':2433597, 'plastic':610.7},
+                    {y:251, 'pop':4249848, 'plastic':1066.5},
+                    {y:251, 'pop':16094897, 'plastic':4039},
+                    {y:251, 'pop':22211567, 'plastic':5574},
+                    {y:247.4, 'pop':840556, 'plastic':207.9},
+                    {y:239, 'pop':12899201, 'plastic':3082.9},
+                    {y:233.2, 'pop':2927674, 'plastic':682.8},
+                    {y:228.9, 'pop':1255952, 'plastic':287.4},
+                    {y:220.7, 'pop':102872, 'plastic':22.7},
+                    {y:220.2, 'pop':120149, 'plastic':26.5},
+                    {y:213.9, 'pop':43258889, 'plastic':9253.3},
+                    {y:212.7, 'pop':404707, 'plastic':86.1},
+                    {y:211.5, 'pop':34042862, 'plastic':7200.6},
+                    {y:199.6, 'pop':938595, 'plastic':187.3},
+                    {y:199, 'pop':9794702, 'plastic':1949.1},
+                    {y:198.4, 'pop':2018302, 'plastic':400.4},
+                    {y:196.8, 'pop':22890252, 'plastic':4505.7},
+                    {y:193, 'pop':4492494, 'plastic':866.8},
+                    {y:191.4, 'pop':58086, 'plastic':11.1},
+                    {y:191, 'pop':17287280, 'plastic':3302.6},
+                    {y:188, 'pop':896145, 'plastic':168.4},
+                    {y:187.8, 'pop':3324144, 'plastic':624.2},
+                    {y:182.4, 'pop':16449245, 'plastic':3000.2},
+                    {y:177.4, 'pop':3621997, 'plastic':642.6},
+                    {y:177.4, 'pop':21750943, 'plastic':3858.9},
+                    {y:175.7, 'pop':878021, 'plastic':154.2},
+                    {y:170.8, 'pop':202429, 'plastic':34.6},
+                    {y:170.1, 'pop':115228891, 'plastic':19605.6},
+                    {y:164.3, 'pop':74696771, 'plastic':12271.6},
+                    {y:162.5, 'pop':402263, 'plastic':65.4},
+                    {y:158.9, 'pop':653007, 'plastic':103.8},
+                    {y:155.4, 'pop':3593471, 'plastic':558.2},
+                    {y:153, 'pop':1002695, 'plastic':153.4},
+                    {y:148.2, 'pop':70138, 'plastic':10.4},
+                    {y:146.3, 'pop':6400048, 'plastic':936.6},
+                    {y:146.3, 'pop':6410726, 'plastic':938.1},
+                    {y:144.6, 'pop':336594, 'plastic':48.7},
+                    {y:144.6, 'pop':3249531, 'plastic':469.9},
+                    {y:143.4, 'pop':5173, 'plastic':0.7},
+                    {y:143.4, 'pop':6839, 'plastic':1},
+                    {y:143.4, 'pop':11563, 'plastic':1.7},
+                    {y:143.4, 'pop':15289, 'plastic':2.2},
+                    {y:143.4, 'pop':20934, 'plastic':3},
+                    {y:143.4, 'pop':23446, 'plastic':3.4},
+                    {y:143.4, 'pop':55392, 'plastic':7.9},
+                    {y:143.4, 'pop':155084, 'plastic':22.2},
+                    {y:143.4, 'pop':167631, 'plastic':24},
+                    {y:143.4, 'pop':260336, 'plastic':37.3},
+                    {y:143.4, 'pop':351600, 'plastic':50.4},
+                    {y:143.4, 'pop':466166, 'plastic':66.8},
+                    {y:143.4, 'pop':585582, 'plastic':84},
+                    {y:143.4, 'pop':809426, 'plastic':116.1},
+                    {y:143.4, 'pop':4050128, 'plastic':580.8},
+                    {y:143.4, 'pop':7274973, 'plastic':1043.2},
+                    {y:143.4, 'pop':7498563, 'plastic':1075.3},
+                    {y:143.4, 'pop':8232586, 'plastic':1180.6},
+                    {y:143.4, 'pop':9099695, 'plastic':1304.9},
+                    {y:143.4, 'pop':13765608, 'plastic':1974},
+                    {y:143.4, 'pop':16556580, 'plastic':2374.2},
+                    {y:143.4, 'pop':26043442, 'plastic':3734.6},
+                    {y:142.5, 'pop':3482653, 'plastic':496.1},
+                    {y:134.8, 'pop':2022788014, 'plastic':272676.2, color:"#0375B4"},
+                    {y:132.7, 'pop':33822532, 'plastic':4487.7},
+                    {y:131.5, 'pop':443894, 'plastic':58.3},
+                    {y:131.5, 'pop':743574, 'plastic':97.7},
+                    {y:123.1, 'pop':1432078, 'plastic':176.3},
+                    {y:120.5, 'pop':262892387, 'plastic':31665.4},
+                    {y:118.3, 'pop':5621550, 'plastic':664.8},
+                    {y:111.1, 'pop':10812537, 'plastic':1201.7},
+                    {y:111, 'pop':41654619, 'plastic':4622.8},
+                    {y:110.4, 'pop':17235954, 'plastic':1902.6},
+                    {y:102.3, 'pop':1379, 'plastic':0.1},
+                    {y:102.3, 'pop':2156, 'plastic':0.2},
+                    {y:102.3, 'pop':2226, 'plastic':0.2},
+                    {y:102.3, 'pop':94487, 'plastic':9.7},
+                    {y:102.3, 'pop':154895, 'plastic':15.8},
+                    {y:102.3, 'pop':163740, 'plastic':16.8},
+                    {y:102.3, 'pop':168025, 'plastic':17.2},
+                    {y:102.3, 'pop':618678, 'plastic':63.3},
+                    {y:102.3, 'pop':621744, 'plastic':63.6},
+                    {y:102.3, 'pop':639228, 'plastic':65.4},
+                    {y:102.3, 'pop':668749, 'plastic':68.4},
+                    {y:102.3, 'pop':752529, 'plastic':77},
+                    {y:102.3, 'pop':2747514, 'plastic':281.1},
+                    {y:102.3, 'pop':6048920, 'plastic':618.8},
+                    {y:102.3, 'pop':6230583, 'plastic':637.4},
+                    {y:102.3, 'pop':6812799, 'plastic':697},
+                    {y:102.3, 'pop':8125063, 'plastic':831.2},
+                    {y:102.3, 'pop':14581952, 'plastic':1491.8},
+                    {y:102.3, 'pop':27477112, 'plastic':2811},
+                    {y:102.3, 'pop':55858245, 'plastic':5714.6},
+                    {y:96.4, 'pop':3272933, 'plastic':315.4},
+                    {y:93.8, 'pop':3890871, 'plastic':365},
+                    {y:92, 'pop':11846863, 'plastic':1090.3},
+                    {y:89.5, 'pop':9155693, 'plastic':819.4},
+                    {y:88.7, 'pop':11333471, 'plastic':1005.2},
+                    {y:86.2, 'pop':22647771, 'plastic':1951.8},
+                    {y:83.7, 'pop':2148271, 'plastic':179.8},
+                    {y:83.7, 'pop':2597556, 'plastic':217.3},
+                    {y:79.1, 'pop':4747957, 'plastic':375.7},
+                    {y:74.8, 'pop':83446862, 'plastic':6237.7},
+                    {y:74.6, 'pop':18988522, 'plastic':1416.2},
+                    {y:72.3, 'pop':17303431, 'plastic':1250.5},
+                    {y:68.9, 'pop':2530533, 'plastic':174.4},
+                    {y:68.6, 'pop':847807, 'plastic':58.2},
+                    {y:66.8, 'pop':1124249, 'plastic':75},
+                    {y:65.7, 'pop':1391254, 'plastic':91.4},
+                    {y:64.8, 'pop':522245, 'plastic':33.8},
+                    {y:62.8, 'pop':3045258, 'plastic':191.3},
+                    {y:62.2, 'pop':3790041, 'plastic':235.6},
+                    {y:56.9, 'pop':1991642, 'plastic':113.4},
+                    {y:56.9, 'pop':187223476, 'plastic':10660.5},
+                    {y:53.8, 'pop':862328, 'plastic':46.4},
+                    {y:53.7, 'pop':1208106, 'plastic':64.9},
+                    {y:53.7, 'pop':5971169, 'plastic':320.7},
+                    {y:53.7, 'pop':17327483, 'plastic':930.5},
+                    {y:47.5, 'pop':6202234, 'plastic':294.6},
+                    {y:47.4, 'pop':1324214, 'plastic':62.8},
+                    {y:45.8, 'pop':1986723, 'plastic':91},
+                    {y:45.6, 'pop':5376386, 'plastic':245.3},
+                    {y:44.8, 'pop':1005481, 'plastic':45},
+                    {y:44.8, 'pop':1076056, 'plastic':48.2},
+                    {y:44.8, 'pop':1266222, 'plastic':56.7},
+                    {y:42.9, 'pop':3235418, 'plastic':138.9},
+                    {y:41.1, 'pop':875170, 'plastic':36},
+                    {y:40.3, 'pop':2887017, 'plastic':116.3},
+                    {y:39.1, 'pop':7727702, 'plastic':302.2},
+                    {y:34.2, 'pop':70874124, 'plastic':2422.8},
+                    {y:34.1, 'pop':2820558, 'plastic':96.2},
+                    {y:29.7, 'pop':1996496, 'plastic':59.3},
+                    {y:26.9, 'pop':2729945, 'plastic':73.3},
+                    {y:25.7, 'pop':359871, 'plastic':9.2},
+                    {y:23.3, 'pop':6688695, 'plastic':155.6},
+                    {y:15.6, 'pop':7062413, 'plastic':110.2},
+                    {y:15.3, 'pop':9566559, 'plastic':146.7},
+                    {y:10, 'pop':187493433, 'plastic':1880.6},
+
+                ]},
+            ],
+            });
+    });
+});
+</script>

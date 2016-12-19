@@ -1,0 +1,144 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+    height: 500px; 
+    max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">LUCF or change in land-use and forestry is a type of greenhouse gas emission due to human-induced land use such as logging and converting forest to agricultural land.</div>
+        Source: <a href='http://cait.wri.org/' target='_blank'>CAIT Climate Data Explorer</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Top 10 countries with the largest greenhouse gas (GHG) emissions in 2012',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["China","US","EU","India","Russia","Indonesia","Brazil","Japan","Canada","Germany"],    
+            },
+            yAxis: {
+                title: {
+                  text: "metric tons of CO₂ equivalent (MtCO₂e‍)",
+                  x: -20,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '{series.name}: <b>{point.y}</b> MtCO₂e‍',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"GHG emissions including LUCF", color:"#006d2c", data: [10684,5823,4123,2887,2254,1981,1823,1207,856,810]},
+                {name: 'GHG emissions excluding LUCF',color: "#ffba00", data: [10975,6235,4399,3014,2322,761,1013,1345,714,887]}
+            ],
+        });
+
+
+        
+    });
+});
+</script>

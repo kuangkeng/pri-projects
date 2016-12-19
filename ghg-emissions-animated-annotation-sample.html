@@ -1,0 +1,259 @@
+
+
+
+
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#frame {
+    margin: 0 auto;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    width:100%;
+    max-width: 750px; 
+    display: inline-block;
+    position: fixed;
+    left:0px;
+    top: 0px;
+    z-index: 90;
+    margin-left: 0;
+    height: 500px;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+#sections {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height:1100px;
+  top: 0px;
+}
+
+.button01 {text-align: center;}
+#button01, #button02 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01, #button02 :hover {background-color:#3689b6;}
+#button01, #button02 :focus, input[type="button"]:focus {outline: none;}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id='frame'>
+    <div id='sections'>
+    </div>
+    <div id="wrapper">    
+        <div id="container"></div>
+        <div id="note">
+            <div id="text"></div>
+            Source:  
+            <a href='http://cait.wri.org/' target='_blank'>CAIT Climate Data Explorer</a>
+            <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Top 10 emitters of greenhouse gas, 2012',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["China","US","EU","India","Russia","Indonesia","Brazil","Japan","Canada","Germany"],    
+            },
+            yAxis: {
+                title: {
+                  text: "metric tons of CO₂ equivalent (MtCO₂e‍)",
+                  x: -20,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '{series.name}: <b>{point.y}</b> MtCO₂e‍',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.1,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"GHG emissions including LUCF", color:"#006d2c", data: [10684,5823,4123,2887,2254,1981,1823,1207,856,810]},
+            ],
+        });
+
+        var annotate = chart.renderer.text('Indonesia is the 6th largest greenhouse gas<br>emission country in 2012.', chart.plotWidth*0.5, chart.plotHeight-30)
+            .attr({
+                zIndex: 5,
+            })
+            .css({
+                color: '#33333c',
+                fontSize: '14px',
+                background:'#808080',
+            })
+            .add();
+        var box = annotate.getBBox();
+        var annotate2;
+
+        var border = chart.renderer.rect(box.x - 5, box.y - 5, box.width + 10, box.height + 10, 5)
+            .attr({
+                fill: '#fafafa',
+                stroke: '#D3D3D3',
+                'stroke-width': 1,
+                zIndex: 4
+            })
+            .add();
+        
+        var counter01 = 1, 
+            counter02 = 1, 
+            counter03 = 1;
+
+        $(window).scroll(function() {
+            console.log($(this).scrollTop());
+ 
+            if ($(this).scrollTop() > 200 && counter01 == 1) {
+                    chart.addSeries(
+                        {name: 'GHG emissions excluding LUCF',color: "#d7191c", data: [10975,6235,4399,3014,2322,761,1013,1345,714,887]}
+                    );
+                    border.destroy();
+                    annotate.attr({ text: 
+                        "But if we look at greenhouse gas emissions excluding<br>those caused by the change in land-use and forestry,<br>most countries' emissions would increase except<br>Indonesia, Brazil and Canada."});
+                    box = annotate.getBBox();
+                    border = chart.renderer.rect(box.x - 5, box.y - 5, box.width + 10, box.height + 10, 5)
+                    .attr({
+                        fill: '#fafafa',
+                        stroke: '#D3D3D3',
+                        'stroke-width': 1,
+                        zIndex: 4
+                    })
+                    .add();
+                    counter01 = 0;
+            }
+
+            if ($(this).scrollTop() > 350 && counter02 == 1) {
+                chart.series[1].remove();
+                chart.series[0].remove();
+                chart.addSeries(
+                    {name: 'GHG emissions by LUCF',color:"#006d2c", negativeColor: '#d7191c', data: [-291,-412,-277,-127,-68,1220,811,-137,142,-77]}
+                );
+
+                annotate.destroy();
+                border.destroy();
+                annotate = chart.renderer.text("That's because part of their emissions came from change in land-use and forestry such as logging and converting forest to agricultural land (positive bars). Other countries reversed the emissions (negative bars) by absorbing greenhouse gas through activities like reforestation or natural regrowth.", chart.plotWidth*0.5, chart.plotHeight*0.2)
+                .attr({
+                    zIndex: 5,
+                })
+                .css({
+                    color: '#33333c',
+                    fontSize: '14px',
+                    background:'#808080',
+                    width:chart.plotWidth*0.6,
+                })
+                .add();
+
+                counter02 = 0;
+            }
+
+
+        });
+
+
+        $('#button01').click(function () {
+
+
+        });
+
+        $('#button02').click(function () {
+
+        });        
+
+
+
+
+    });
+
+});
+</script>

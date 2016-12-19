@@ -1,0 +1,224 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 600px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#title {
+    padding:10px;
+    text-align: center;
+    font-size: 30px;
+    line-height: 35px;
+    font-weight: bold;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+.legend {margin-bottom: 10px;}
+.legenditem {display: inline-block; margin-bottom:5px;}
+table {width:190px; font-size: 18px; line-height: 12px; color: #33333c;}
+.col1 {width:10%;}
+.col2 {width:90%; padding-left: 5px;}
+#cat1 {background-color: #984ea3;}
+#cat2 {background-color: #e41a1c;}
+#cat3 {background-color: #ffe823;}
+#cat4 {background-color: #4daf4a;}
+#cat5 {background-color: #377eb8;}
+
+@media (max-width: 400px ) { 
+    #container{ height: 550px; }
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper"> 
+    <div id="title">Top 20 recipient countries of US gender equality aid per woman, 2017</div>     
+    <div id="container"></div>
+    <div id="note">
+        <div class="legend">
+            <div class="legenditem">
+                <table>
+                    <tr>
+                        <td class="col1" id="cat1"></td>
+                        <td class="col2">South & Central Asia</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="legenditem">
+                <table>
+                    <tr>
+                        <td class="col1" id="cat2"></td>
+                        <td class="col2">Africa</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="legenditem">
+                <table>
+                    <tr>
+                        <td class="col1" id="cat3"></td>
+                        <td class="col2">Near East</td>
+                    </tr>
+                </table>
+            </div>   
+            <div class="legenditem">
+                <table>
+                    <tr>
+                        <td class="col1" id="cat4"></td>
+                        <td class="col2">Europe & Eurasia</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="legenditem">
+                <table>
+                    <tr>
+                        <td class="col1" id="cat5"></td>
+                        <td class="col2">West Hemisphere</td>
+                    </tr>
+                </table>
+            </div>                     
+        </div>
+        <div id="text">Figures shown are proposed budget for 2017. Non-country specific aid including aid for regional agencies and other bodies is not shown.</div>
+        Source:  
+        <a href='http://www.state.gov/documents/organization/252733.pdf' target='_blank'>Congressional Budget Justification report 2017</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Afghanistan","Liberia","Lebanon","Rwanda","Zambia","South Sudan","Somalia","Senegal","Jordan","Swaziland","Zimbabwe","Benin","Bosnia and<br>Herzegovina","Haiti","Tanzania","Mali","Kosovo","Malawi","Honduras","El Salvador"],   
+                labels:{
+                    style: {
+                        fontSize: 16,
+                    }
+                }  
+            },
+            yAxis: {
+                title: {
+                  text: "$ per woman",
+                  style: {
+                    color: '#808080',
+                    fontSize: '14px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: "Aid per woman: <b>${point.y}</b><br>Total aid: <b>${point.aid:,0f},000</b><br>Women's population: <b>{point.pop:,0f},000</b>",
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y 
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Aid per woman", color:"#4188bc", data: [
+                    {y:16.06, 'aid': 253000, 'pop': 15753, color: "#984ea3"},
+                    {y:10.51, 'aid': 23472, 'pop': 2234, color: "#e41a1c"},
+                    {y:7.33, 'aid': 21340, 'pop': 2912, color: "#ffe823"},
+                    {y:5.89, 'aid': 35642, 'pop': 6050, color: "#e41a1c"},
+                    {y:5.01, 'aid': 40672, 'pop': 8118, color: "#e41a1c"},
+                    {y:3.83, 'aid': 23610, 'pop': 6161, color: "#e41a1c"},
+                    {y:3.59, 'aid': 19440, 'pop': 5419, color: "#e41a1c"},
+                    {y:3.46, 'aid': 26650, 'pop': 7701, color: "#e41a1c"},
+                    {y:2.98, 'aid': 11050, 'pop': 3706, color: "#ffe823"},
+                    {y:2.87, 'aid': 1868, 'pop': 651, color: "#e41a1c"},
+                    {y:2.85, 'aid': 22569, 'pop': 7915, color: "#e41a1c"},
+                    {y:2.75, 'aid': 15000, 'pop': 5454, color: "#e41a1c"},
+                    {y:2.65, 'aid': 5080, 'pop': 1914, color: "#4daf4a"},
+                    {y:2.56, 'aid': 13863, 'pop': 5414, color: "#377eb8"},
+                    {y:2.53, 'aid': 68178, 'pop': 26896, color: "#e41a1c"},
+                    {y:2.32, 'aid': 20200, 'pop': 8715, color: "#e41a1c"},
+                    {y:2.15, 'aid': 1877, 'pop': 871, color: "#4daf4a"},
+                    {y:2.14, 'aid': 18428, 'pop': 8622, color: "#e41a1c"},
+                    {y:2.10, 'aid': 8500, 'pop': 4039, color: "#377eb8"},
+                    {y:1.92, 'aid': 6250, 'pop': 3251, color: "#377eb8"},
+                ]},
+            ],
+            });
+
+    });
+
+});
+</script>

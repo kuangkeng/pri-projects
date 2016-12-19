@@ -1,0 +1,137 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+#head {
+    color: #33333c;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .highcharts-data-label tspan {font-size: 12px !important;}
+} 
+
+@media (max-width: 310px ) { 
+    .highcharts-data-label tspan {font-size: 11px !important;}
+    #container{ height: 380px; }
+} 
+
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="head">Total accumulated notifications: 9,862</div>
+        <div id="text">Data from 2015 to Oct 15, 2016. Move your mouse or finger over each bar for more details.</div>
+        Source: Health Ministry of Brazil
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'pie'
+            },
+            title: {
+                text: 'Notifications of birth defects in Brazil',
+                margin: 20,
+            },
+            subtitle: {enabled: false,},
+            credits: {enabled: false,},
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: 'Cases: <b>{point.y:,0f}</b><br>Percentage: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        padding: 10,
+                        enabled: true,
+                        format: '{point.name} {point.percentage:.1f}%',
+                        distance: -45,
+                        y: -30,
+                        x: 0,
+                        style: {
+                            width: '100px',
+                            fontSize: '13px',
+                        },
+                    }
+                }
+            },    
+
+            series: [{
+                data: [
+                    {name: "Under investigation",   y:3035, color:"#87b1d4", dataLabels:{y:50}},
+                    {name: "Birth defects with unconfirmed Zika link",  y:1678, color:"#377eb8"},
+                    {name: "Discarded", y:4764, color:"#808080"},
+                    {name: "Confirmed by lab as linked to Zika",    y:385, color:"#163249"},
+                ]
+            }]
+            });
+    });
+});
+</script>

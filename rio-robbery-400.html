@@ -1,0 +1,132 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 300px; 
+max-width: 300px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 300px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .highcharts-title {font-size: 16px !important;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Street robbery includes muggings, theft of cell phones and group robbery.</div>
+        Source:  
+        <a href='http://www.isp.rj.gov.br/Noticias.asp?ident=369' target='_blank'>Institute of Public Security, Brazil</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: 'Street robberies in Rio de Janeiro',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Jan-Oct<br>2015","Jan-Oct<br>2016"],   
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: '',
+                pointFormat: '{point.date}<br>{point.series.name}: <b>{point.y}</b><br>Increase 2015-2016: <b>47.8%</b>',
+            },
+            plotOptions: {
+                series:{
+                    //groupPadding: 0.1,
+                    //pointPadding: 0.1,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        // formatter: function() {
+                        //     return this.y
+                        // },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Street robberies", color:"#4188bc", data: [{y:70582, "date":"Jan-Oct 2015"}, {y:104302, "date":"Jan-Oct 2016"}]},
+            ],
+            });
+    });
+
+});
+</script>

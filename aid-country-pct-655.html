@@ -1,0 +1,138 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 450px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+    #container{ height: 420px; }
+}
+
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">*The US is not among the top 10 donors. It is included for comparison. US data is based only on reports since 2011.<br>Data only shows bilateral aid, excluding contributions to multilateral institutions, such as the UN.</div>
+        Source:  
+        <a href='http://stats.oecd.org/Index.aspx?DataSetCode=GENDER#' target='_blank'>OECD Stat</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: 'Donors with the highest portion of aid to gender equality programs, 2002-2014',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Iceland","Sweden","New Zealand","Belgium","Australia","Canada","Germany","Finland","Denmark","UK","US*"],    
+            },
+            yAxis: {
+                title: {
+                  text: "Percentage of total aid",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                itemStyle: {
+                    fontSize: '11px',
+                },  
+            },
+            tooltip: {
+                formatter: function () {
+                    if (this.series.name == 'Principal') {return "<b>" + this.x + "</b>" + "<br>Total: <b>" + this.total + "%</b>" + "<br>Principal: <b>" + this.y + "%</b>"}
+                    if (this.series.name == 'Secondary') {return "<b>" + this.x + "</b>" + "<br>Total: <b>" + this.total + "%</b>" + "<br>Secondary: <b>" + this.y + "%</b>"}    
+                }
+            },
+            plotOptions: {
+                series:{
+                    stacking: 'normal',
+                    groupPadding: 0.01,
+                },
+            },    
+
+            series: [ 
+                {name: "Secondary", color:"#8db7d6",
+                data :[70.6,59.1,59.8,47.6,40.8,30.2,41.5,34.9,33.0,29.6,{y:12.1,color:"#F27C7C"}],
+            },
+            {name: "Principal", color:"#4188bc",
+                data :[10.3,11.0,4.5,7.2,6.1,16.3,2.4,2.8,3.6,6.2,{y:5.1, color:"#e41a1c"}], 
+            },
+            ],
+        });
+
+    });
+
+});
+</script>

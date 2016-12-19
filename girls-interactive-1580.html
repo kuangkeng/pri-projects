@@ -1,0 +1,1629 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      color:#262228;
+      
+    }
+
+    .container {
+      background-color: #F3F3F3;
+      max-width: 600px;
+      margin: 0 auto;
+      padding:0px 40px;
+    }    
+
+    #introTitle {
+      text-align: center;
+      margin-top: 20px; 
+      font-size: 32px; 
+      color:#014C75;
+      font-weight: bold;
+    }
+
+    .result, .resultsubtitle {
+      margin-top: 10px;
+      font-size: 25px; 
+      text-align: left; 
+      color:#262228;
+    }
+
+    .resultsubtitle {
+      font-size: 16px; 
+    }
+
+    .charttitle, .chartsubtitle {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      padding-top: 30px;
+      color:#606060;
+    }
+
+    .chartsubtitle {
+      font-size: 16px;
+      margin-top: 0px;
+      padding-top: 10px;
+    }
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 200px;
+      margin-top: 30px !important;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }   
+
+    .note {
+      font-style: italic;
+      margin-bottom: 30px;
+      margin-top: 30px;
+      font-size: 16px;
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      color:#262228;
+    }
+
+    #countryInput {width:250px; margin: 0 auto;}
+    #intro {padding-bottom: 30px;}
+    #intronote {text-align: center;}
+    #chartnote {margin-bottom: 0px; margin-top: 0px;}
+
+    .leftcol {
+      text-align: right;
+      font-size: 16px;
+      position: relative;
+      top: 50%;
+      transform: translateY(20%);
+    }
+
+    .sharecol1, .sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: auto; max-width: 100%;}
+    .btnTW {float:left; height: auto; max-width: 100%;}     
+
+    .imglead {
+      margin: 0 auto;
+      padding:10px;
+      max-width:450px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .chart {
+      width:100%;
+      max-width: 550px;
+      margin: 0 auto;
+      height:800px;
+    }
+
+    #chart01b {
+      height:2500px;
+      margin-left:-5px;
+      width:80%;
+    }
+    
+    #sharemsg {
+      margin-bottom: 0px;
+      color:#014C75;
+      font-size: 25px;
+      font-weight: bold;
+      line-height: 1.4em;
+      text-align: center;
+    }
+
+    #resetBtn {margin-top: 0px !important;}
+
+    #col01, #col02 {width:48%;}
+
+    .resultstyle01 {color:#0375B4; font-weight: bold;}
+    .resultstyle02 {color:#FF8B00; font-weight: bold;}
+
+    #tabs-1, #tabs-2 {
+      background-color: #F3F3F3;
+      padding:0;
+    } 
+
+    #tabs { 
+        padding: 0px; 
+        margin-top: 10px;
+        background: none; 
+        border-width: 0px; 
+    } 
+
+    #tabs .ui-tabs-panel { 
+        background: #f3f3f3 repeat-x scroll 50% top; 
+        border-width: 0px 1px 1px 1px; 
+    }
+    .ui-widget-header {background-color: #F3F3F3;}
+    .panel{
+        height: 900px;
+        overflow: auto;
+    }
+    #chartnote {padding:10px;}
+
+    @media (max-width: 600px ) { 
+      .container {padding:0px 20px;}
+      #quiz { padding-bottom: 0px;}
+      .imglead {max-width: 200px;}
+      .note {font-size: 12px}
+      .resultsubtitle {font-size: 12px}
+      .result {font-size: 16px;}
+      .charttitle {font-size: 16px;}
+      .chartsubtitle {font-size: 14px;}
+      .mybtn {font-size: 16px; }
+      #introTitle {
+        font-size: 22px;
+        margin-top: 10px; 
+        padding-left: 15px; 
+        padding-right: 15px;
+        padding-bottom: 20px;
+      }
+      .btnFB, .btnTW {max-width:90px;}
+      #tabs {font-size: 12px;}
+
+    }  
+
+    @media (max-width: 400px ) { 
+      .mybtn {font-size: 14px; padding:4px 4px; margin-top: 20px !important; width:160px;}
+      .leftcol {font-size: 14px;}
+      .charttitle {font-size: 14px;}
+      .chartsubtitle {font-size: 12px;}
+      #introTitle {
+        font-size: 18px;
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 10px;
+      }
+      .imglead {margin-bottom: 0px;}
+
+    }
+
+    @media (max-width: 300px ) { 
+      .container {padding:0px 10px;}
+      .title {font-size: 16px;}
+    }  
+
+</style>
+
+<body>
+  <div id="quiz" class="container">    
+    <div id="intro">
+      <div id="introTitle">Where does your country rank on the Girl’s Opportunity Index?</div>
+      <div class="imglead">
+        <img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/happy%20cuban%20girls-cropped.jpg?itok=bRJFPUzt" class="img-responsive">
+      </div>
+          <select class="form-control" id="countryInput">
+            <option selected disabled>Select your country</option>
+            <option>Afghanistan</option>
+            <option>Albania</option>
+            <option>Algeria</option>
+            <option>Armenia</option>
+            <option>Australia</option>
+            <option>Austria</option>
+            <option>Azerbaijan</option>
+            <option>Bangladesh</option>
+            <option>Barbados</option>
+            <option>Belarus</option>
+            <option>Belgium</option>
+            <option>Belize</option>
+            <option>Benin</option>
+            <option>Bhutan</option>
+            <option>Bolivia</option>
+            <option>Bosnia & Herzegovina</option>
+            <option>Brazil</option>
+            <option>Burkina Faso</option>
+            <option>Burundi</option>
+            <option>Cambodia</option>
+            <option>Cameroon</option>
+            <option>Canada</option>
+            <option>Central African Rep</option>
+            <option>Chad</option>
+            <option>Chile</option>
+            <option>Colombia</option>
+            <option>Comoros</option>
+            <option>Costa Rica</option>
+            <option>Cuba</option>
+            <option>Czech Republic</option>
+            <option>Denmark</option>
+            <option>Djibouti</option>
+            <option>Dominican Rep</option>
+            <option>DR Congo</option>
+            <option>Egypt</option>
+            <option>El Salvador</option>
+            <option>Equatorial Guinea</option>
+            <option>Eritrea</option>
+            <option>Estonia</option>
+            <option>Ethiopia</option>
+            <option>Finland</option>
+            <option>France</option>
+            <option>Gabon</option>
+            <option>Gambia</option>
+            <option>Georgia</option>
+            <option>Germany</option>
+            <option>Ghana</option>
+            <option>Greece</option>
+            <option>Guatemala</option>
+            <option>Guinea</option>
+            <option>Guinea-Bissau</option>
+            <option>Guyana</option>
+            <option>Haiti</option>
+            <option>Honduras</option>
+            <option>Hungary</option>
+            <option>India</option>
+            <option>Indonesia</option>
+            <option>Iran</option>
+            <option>Iraq</option>
+            <option>Ireland</option>
+            <option>Israel</option>
+            <option>Italy</option>
+            <option>Ivory Coast</option>
+            <option>Jamaica</option>
+            <option>Japan</option>
+            <option>Jordan</option>
+            <option>Kazakhstan</option>
+            <option>Kenya</option>
+            <option>Kiribati</option>
+            <option>Kyrgyzstan</option>
+            <option>Laos</option>
+            <option>Lebanon</option>
+            <option>Lesotho</option>
+            <option>Liberia</option>
+            <option>Luxembourg</option>
+            <option>Macedonia</option>
+            <option>Madagascar</option>
+            <option>Malawi</option>
+            <option>Maldives</option>
+            <option>Mali</option>
+            <option>Malta</option>
+            <option>Mauritania</option>
+            <option>Mexico</option>
+            <option>Moldova</option>
+            <option>Mongolia</option>
+            <option>Montenegro</option>
+            <option>Mozambique</option>
+            <option>Namibia</option>
+            <option>Nepal</option>
+            <option>Netherlands</option>
+            <option>New Zealand</option>
+            <option>Nicaragua</option>
+            <option>Niger</option>
+            <option>Nigeria</option>
+            <option>Norway</option>
+            <option>Pakistan</option>
+            <option>Panama</option>
+            <option>Papua New Guinea</option>
+            <option>Peru</option>
+            <option>Philippines</option>
+            <option>Poland</option>
+            <option>Portugal</option>
+            <option>Qatar</option>
+            <option>Rep Congo</option>
+            <option>Rwanda</option>
+            <option>Samoa</option>
+            <option>Sao Tome & Principe</option>
+            <option>Senegal</option>
+            <option>Serbia</option>
+            <option>Sierra Leone</option>
+            <option>Slovakia</option>
+            <option>Slovenia</option>
+            <option>Solomon Islands</option>
+            <option>Somalia</option>
+            <option>South Korea</option>
+            <option>South Sudan</option>
+            <option>Spain</option>
+            <option>Sri Lanka</option>
+            <option>St. Lucia</option>
+            <option>Sudan</option>
+            <option>Suriname</option>
+            <option>Swaziland</option>
+            <option>Sweden</option>
+            <option>Switzerland</option>
+            <option>Syria</option>
+            <option>Tajikistan</option>
+            <option>Tanzania</option>
+            <option>Thailand</option>
+            <option>Timor-Leste</option>
+            <option>Togo</option>
+            <option>Trinidad & Tobago</option>
+            <option>Tunisia</option>
+            <option>Turkey</option>
+            <option>Uganda</option>
+            <option>Ukraine</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+            <option>Uruguay</option>
+            <option>Uzbekistan</option>
+            <option>Vanuatu</option>
+            <option>Vietnam</option>
+            <option>Yemen</option>
+            <option>Zambia</option>
+            <option>Zimbabwe</option>
+          </select>      
+      <div class="note" id="intronote">The study covers only 144 countries where reliable data are available.</div>
+      <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+    </div>  <!-- END INTRO PAGE -->           
+
+    <div class="resultpage" id="result01">
+      <div class="result" id="result01title">Out of the 144 countries worldwide included in the study, <span class='resultstyle01 resultcountry'>Your country</span> is ranked <span class='resultstyle02' id='resultrank1b'>ranking no</span> in the Girls' Opportunity Index.<br>Among the <span class='resultstyle01 resultindex'>index number </span> <span class='resultstyle01 resultincome'>income group</span></span> countries, <span class='resultstyle01 resultcountry'>Your country</span> is ranked <span class='resultstyle02' id='resultrank01'>ranking no</span>. The index ranks the best and worst countries for girls.</div>
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1"><span class="resultincome">income group</span></a></li>
+          <li><a href="#tabs-2">worldwide</a></li>
+        </ul>
+        <div id="tabs-1">
+          <div class="charttitle">Girls' Opportunity Index</div>
+          <div class="chartsubtitle">Compared with countries of the same income group</div>
+          <div class="chart" id="chart01"></div>
+          <div class="note" id="chartnote">Tap or mouseover each bar for full index figure.</div>
+        </div>
+        <div id="tabs-2" class="panel">
+          <div class="charttitle">Girls' Opportunity Index</div>
+          <div class="chartsubtitle">Compared with all 144 countries included in the study</div>
+          <div class="chart" id="chart01b"></div>
+          <div class="note" id="chartnote">Tap or mouseover each bar for full index figure.</div>
+        </div>
+      </div>  
+
+      <div class="resultsubtitle">The higher a country ranks on the index, the more opportunities that girls have to shape their futures. The bigger the index score, the increasingly worse the country is for a girl. The index is constructed with five commonly used indicators, which are also part of the United Nation's <a href="http://www.un.org/sustainabledevelopment/sustainable-development-goals/" target='_blank'>Sustainable Development Goals</a> monitoring framework. The study covers only 144 countries where reliable data are available. Click next to see your country's performance in each of the indicators.</div>
+      <div id="result01Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div id="sharemsg">Share your results</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td class="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td class="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+    </div> 
+
+    <div class="resultpage" id="result02">
+      <div class="result" id="result02title"><span class='resultstyle01 resultcountry'>Your country</span> is ranked <span class='resultstyle02' id='resultrank02'>ranking no</span> among <span class='resultstyle01 resultindex'>index number </span> <span class='resultstyle01 resultincome'>income group</span></span> countries in terms of the rate of child marriage among girls which is measured by the percentage of women age 20-24 who were first married before 18.</div>
+      <div class="charttitle">Child Marriage</div>
+      <div class="chart" id="chart02"></div>
+      <div class="resultsubtitle">Data source: <a href="http://data.unicef.org/topic/child-protection/child-marriage/" target='_blank'>UNICEF</a><br>Countries with the same child marriage rate share the same ranking. Their positions in the chart are insignificant.</div>
+      <div id="result02Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div id="result02Btn-back" class="btn btn-primary btn-lg center-block mybtn btnback">Back</div>
+    </div> 
+
+    <div class="resultpage" id="result03">
+      <div class="result" id="result03title"><span class='resultstyle01 resultcountry'>Your country</span> is ranked <span class='resultstyle02' id='resultrank03'>ranking no</span> among <span class='resultstyle01 resultindex'>index number </span> <span class='resultstyle01 resultincome'>income group</span></span> countries in terms of adolescent fertility rate which is measured by the number of births per 1,000 women age 15 to 19 in the country.</div>
+      <div class="charttitle">Adolescent fertility rate</div>
+      <div class="chart" id="chart03"></div>
+      <div class="resultsubtitle">Data source: <a href="https://esa.un.org/unpd/wpp/DataQuery/" target='_blank'>UN Population Division</a></div>
+      <div id="result03Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div id="result03Btn-back" class="btn btn-primary btn-lg center-block mybtn btnback">Back</div>
+    </div> 
+
+    <div class="resultpage" id="result04">
+      <div class="result" id="result04title"><span class='resultstyle01 resultcountry'>Your country</span> is ranked <span class='resultstyle02' id='resultrank04'>ranking no</span> among <span class='resultstyle01 resultindex'>index number </span> <span class='resultstyle01 resultincome'>income group</span></span> countries in terms of the maternal mortality ratio which is measured by the number of deaths per 100,000 live births.</div>
+      <div class="charttitle">Maternal mortality ratio</div>
+      <div class="chart" id="chart04"></div>
+      <div class="resultsubtitle">Data source: <a href="http://data.worldbank.org/indicator/SH.STA.MMRT" target='_blank'>World Bank</a><br>Countries with the same maternal mortality ratio share the same ranking. Their positions in the chart are insignificant.</div>
+      <div id="result04Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div id="result04Btn-back" class="btn btn-primary btn-lg center-block mybtn btnback">Back</div>
+    </div> 
+
+    <div class="resultpage" id="result05">
+      <div class="result" id="result05title"><span class='resultstyle01 resultcountry'>Your country</span> is ranked <span class='resultstyle02' id='resultrank05'>ranking no</span> among <span class='resultstyle01 resultindex'>index number </span> <span class='resultstyle01 resultincome'>income group</span></span> countries in terms of women's representation in parliament which is measured by the percentage of seats held by women in national parliament.</div>
+      <div class="charttitle">Percentage of women's representation in parliament</div>
+      <div class="chart" id="chart05"></div>
+      <div class="resultsubtitle">Data source: <a href="http://www.ipu.org/wmn-e/classif.htm" target='_blank'>Inter-Parliamentary Union</a><br>Countries with the same percentage of women's representation in parliament share the same ranking. Their positions in the chart are insignificant.</div>
+      <div id="result05Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div id="result05Btn-back" class="btn btn-primary btn-lg center-block mybtn btnback">Back</div>
+    </div> 
+
+    <div class="resultpage" id="result06">
+      <div class="result" id="result06title"><span class='resultstyle01 resultcountry'>Your country</span> is ranked <span class='resultstyle02' id='resultrank06'>ranking no</span> among <span class='resultstyle01 resultindex'>index number </span> <span class='resultstyle01 resultincome'>income group</span></span> countries in terms of the percentage of girls in their age group that completed lower-secondary school.</div>
+      <div class="charttitle">Girls' completion rate in lower-secondary school</div>
+      <div class="chart" id="chart06"></div>
+      <div class="resultsubtitle">Data source: <a href="http://data.uis.unesco.org/Index.aspx?DataSetCode=EDULIT_DS" target='_blank'>UNESCO Institute for Statistics</a><br>According to the <a href="https://nces.ed.gov/Pubs/eiip/eiip1s01.asp" target="_blank">US National Center for Education Statistics</a>, lower-secondary school is equivalent to grades 7 through 9 in the US.<br>Countries with the same completion rate share the same ranking. Their positions in the chart are insignificant.</div>
+      <div id="result06Btn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+      <div id="result06Btn-back" class="btn btn-primary btn-lg center-block mybtn btnback">Back</div>
+    </div>
+
+    <div class="resultpage" id="result07">
+      <div class="note" id="note01">The Girls' Opportunity Index is constructed and published by Save the Children, an international non-governmental organization that promotes children's rights, provides relief and helps support children in developing countries. The index is inlcluded in a report entittled <a href="http://www.savethechildren.org/atf/cf/%7B9def2ebe-10ae-432c-9bd0-df91d2eba74a%7D/EVERY%20LAST%20GIRL%20REPORT%20FINAL.PDF" target='_blank'>"Every Last Girl"</a> published on Oct 11, 2016, the <a href="http://www.un.org/en/events/girlchild/" target='_blank'>International Day of the Girl Child</a>. Further details of methodology and technical note of the index can be found in the report. The classification of countries by income is based on the <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups" target="_blank">World Bank's definition.</a></div>
+      <div class="note" id="note01"></div>
+      <div id="sharemsg">Share your results</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td class="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td class="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+      <div id="result07Btn-back" class="btn btn-primary btn-lg center-block mybtn btnback">Back</div>
+      <div id="resetBtn" class="btn btn-primary btn-lg center-block mybtn" onClick="history.go(0)">Calculate again</div>
+    </div>   
+  </div>   
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var inputcountry = "none";
+var sharemsg = "none"
+var index1 = 0;
+var index1b = 0;
+var index1b2 = 0;
+var index2 = 0;
+var index3 = 0;
+var index4 = 0;
+var index4b = 0;
+var index5 = 0;
+var index5b = 0;
+var index6 = 0;
+var data_cat1 = [];
+var data_cat2 = [];
+var data_cat3 = [];
+var data_cat4 = [];
+var data_cat5 = [];
+var data_cat6 = [];
+var data_grp = [];
+var data_ind = [];
+var data_mar = [];
+var data_ado = [];
+var data_mat = [];
+var data_mps = [];
+var data_sch = [];
+var data_ind0 = [];
+var data_mar0 = [];
+var data_ado0 = [];
+var data_mat0 = [];
+var data_mps0 = [];
+var data_sch0 = [];
+var fire2 = 0;
+var fire3 = 0;
+var fire4 = 0;
+var fire5 = 0;
+var fire6 = 0;
+var sharerank = 0;
+var shareinc = 0;
+var sharegrp = 0;
+
+var data_g = [
+  {'name':'Sweden' , 'inc':'high-income', 'pos':1},
+  {'name':'Finland' , 'inc':'high-income', 'pos':2},
+  {'name':'Norway' , 'inc':'high-income', 'pos':3},
+  {'name':'Netherlands' , 'inc':'high-income', 'pos':4},
+  {'name':'Belgium' , 'inc':'high-income', 'pos':5},
+  {'name':'Denmark' , 'inc':'high-income', 'pos':6},
+  {'name':'Slovenia' , 'inc':'high-income', 'pos':7},
+  {'name':'Portugal' , 'inc':'high-income', 'pos':8},
+  {'name':'Switzerland' , 'inc':'high-income', 'pos':9},
+  {'name':'Italy' , 'inc':'high-income', 'pos':10},
+  {'name':'Spain' , 'inc':'high-income', 'pos':11},
+  {'name':'Germany' , 'inc':'high-income', 'pos':12},
+  {'name':'Austria' , 'inc':'high-income', 'pos':13},
+  {'name':'Luxembourg' , 'inc':'high-income', 'pos':14},
+  {'name':'United Kingdom' , 'inc':'high-income', 'pos':15},
+  {'name':'New Zealand' , 'inc':'high-income', 'pos':16},
+  {'name':'Israel' , 'inc':'high-income', 'pos':17},
+  {'name':'France' , 'inc':'high-income', 'pos':18},
+  {'name':'Canada' , 'inc':'high-income', 'pos':19},
+  {'name':'Serbia' , 'inc':'upper middle-income', 'pos':20},
+  {'name':'Australia' , 'inc':'high-income', 'pos':21},
+  {'name':'Poland' , 'inc':'high-income', 'pos':22},
+  {'name':'Estonia' , 'inc':'high-income', 'pos':23},
+  {'name':'Belarus' , 'inc':'upper middle-income', 'pos':24},
+  {'name':'Czech Republic' , 'inc':'high-income', 'pos':25},
+  {'name':'Greece' , 'inc':'high-income', 'pos':26},
+  {'name':'South Korea' , 'inc':'high-income', 'pos':27},
+  {'name':'Macedonia' , 'inc':'upper middle-income', 'pos':28},
+  {'name':'Ireland' , 'inc':'high-income', 'pos':29},
+  {'name':'Kazakhstan' , 'inc':'upper middle-income', 'pos':30},
+  {'name':'Algeria' , 'inc':'upper middle-income', 'pos':31},
+  {'name':'United States' , 'inc':'high-income', 'pos':32},
+  {'name':'Tunisia' , 'inc':'lower middle-income', 'pos':33},
+  {'name':'Cuba' , 'inc':'upper middle-income', 'pos':34},
+  {'name':'Japan' , 'inc':'high-income', 'pos':35},
+  {'name':'Montenegro' , 'inc':'upper middle-income', 'pos':36},
+  {'name':'Mongolia' , 'inc':'lower middle-income', 'pos':37},
+  {'name':'Uzbekistan' , 'inc':'lower middle-income', 'pos':38},
+  {'name':'Trinidad & Tobago' , 'inc':'high-income', 'pos':39},
+  {'name':'Bosnia & Herzegovina' , 'inc':'upper middle-income', 'pos':40},
+  {'name':'Hungary' , 'inc':'high-income', 'pos':41},
+  {'name':'Slovakia' , 'inc':'high-income', 'pos':42},
+  {'name':'Malta' , 'inc':'high-income', 'pos':43},
+  {'name':'Albania' , 'inc':'upper middle-income', 'pos':44},
+  {'name':'Bolivia' , 'inc':'lower middle-income', 'pos':45},
+  {'name':'Armenia' , 'inc':'lower middle-income', 'pos':46},
+  {'name':'Vietnam' , 'inc':'lower middle-income', 'pos':47},
+  {'name':'Chile' , 'inc':'high-income', 'pos':48},
+  {'name':'Rwanda' , 'inc':'low-income', 'pos':49},
+  {'name':'Maldives' , 'inc':'upper middle-income', 'pos':50},
+  {'name':'Ukraine' , 'inc':'lower middle-income', 'pos':51},
+  {'name':'Moldova' , 'inc':'lower middle-income', 'pos':52},
+  {'name':'Qatar' , 'inc':'high-income', 'pos':53},
+  {'name':'Barbados' , 'inc':'high-income', 'pos':54},
+  {'name':'Turkey' , 'inc':'upper middle-income', 'pos':55},
+  {'name':'Mexico' , 'inc':'upper middle-income', 'pos':56},
+  {'name':'Tajikistan' , 'inc':'lower middle-income', 'pos':57},
+  {'name':'Jordan' , 'inc':'upper middle-income', 'pos':58},
+  {'name':'Kyrgyzstan' , 'inc':'lower middle-income', 'pos':59},
+  {'name':'Sri Lanka' , 'inc':'lower middle-income', 'pos':60},
+  {'name':'Samoa' , 'inc':'lower middle-income', 'pos':61},
+  {'name':'Georgia' , 'inc':'upper middle-income', 'pos':62},
+  {'name':'St. Lucia' , 'inc':'upper middle-income', 'pos':63},
+  {'name':'Philippines' , 'inc':'lower middle-income', 'pos':64},
+  {'name':'Kiribati' , 'inc':'lower middle-income', 'pos':65},
+  {'name':'Timor-Leste' , 'inc':'lower middle-income', 'pos':66},
+  {'name':'El Salvador' , 'inc':'lower middle-income', 'pos':67},
+  {'name':'Peru' , 'inc':'upper middle-income', 'pos':68},
+  {'name':'Azerbaijan' , 'inc':'upper middle-income', 'pos':69},
+  {'name':'Iran' , 'inc':'upper middle-income', 'pos':70},
+  {'name':'Jamaica' , 'inc':'upper middle-income', 'pos':71},
+  {'name':'Namibia' , 'inc':'upper middle-income', 'pos':72},
+  {'name':'Indonesia' , 'inc':'lower middle-income', 'pos':73},
+  {'name':'Costa Rica' , 'inc':'upper middle-income', 'pos':74},
+  {'name':'Colombia' , 'inc':'upper middle-income', 'pos':75},
+  {'name':'Lebanon' , 'inc':'upper middle-income', 'pos':76},
+  {'name':'Uruguay' , 'inc':'high-income', 'pos':77},
+  {'name':'Syria' , 'inc':'lower middle-income', 'pos':78},
+  {'name':'Suriname' , 'inc':'upper middle-income', 'pos':79},
+  {'name':'Bhutan' , 'inc':'lower middle-income', 'pos':80},
+  {'name':'Thailand' , 'inc':'upper middle-income', 'pos':81},
+  {'name':'Guyana' , 'inc':'upper middle-income', 'pos':82},
+  {'name':'Egypt' , 'inc':'lower middle-income', 'pos':83},
+  {'name':'Nicaragua' , 'inc':'lower middle-income', 'pos':84},
+  {'name':'Nepal' , 'inc':'low-income', 'pos':85},
+  {'name':'Panama' , 'inc':'upper middle-income', 'pos':86},
+  {'name':'Djibouti' , 'inc':'lower middle-income', 'pos':87},
+  {'name':'Pakistan' , 'inc':'lower middle-income', 'pos':88},
+  {'name':'Cambodia' , 'inc':'lower middle-income', 'pos':89},
+  {'name':'India' , 'inc':'lower middle-income', 'pos':90},
+  {'name':'Honduras' , 'inc':'lower middle-income', 'pos':91},
+  {'name':'Dominican Rep' , 'inc':'upper middle-income', 'pos':92},
+  {'name':'Sao Tome & Principe' , 'inc':'lower middle-income', 'pos':93},
+  {'name':'Iraq' , 'inc':'upper middle-income', 'pos':94},
+  {'name':'Solomon Islands' , 'inc':'lower middle-income', 'pos':95},
+  {'name':'Belize' , 'inc':'upper middle-income', 'pos':96},
+  {'name':'Kenya' , 'inc':'lower middle-income', 'pos':97},
+  {'name':'Senegal' , 'inc':'low-income', 'pos':98},
+  {'name':'Vanuatu' , 'inc':'lower middle-income', 'pos':99},
+  {'name':'Ghana' , 'inc':'lower middle-income', 'pos':100},
+  {'name':'Laos' , 'inc':'lower middle-income', 'pos':101},
+  {'name':'Brazil' , 'inc':'upper middle-income', 'pos':102},
+  {'name':'Guatemala' , 'inc':'lower middle-income', 'pos':103},
+  {'name':'Papua New Guinea' , 'inc':'lower middle-income', 'pos':104},
+  {'name':'Haiti' , 'inc':'low-income', 'pos':105},
+  {'name':'Sudan' , 'inc':'lower middle-income', 'pos':106},
+  {'name':'Burundi' , 'inc':'low-income', 'pos':107},
+  {'name':'Swaziland' , 'inc':'lower middle-income', 'pos':108},
+  {'name':'Zimbabwe' , 'inc':'low-income', 'pos':109},
+  {'name':'Lesotho' , 'inc':'lower middle-income', 'pos':110},
+  {'name':'Bangladesh' , 'inc':'lower middle-income', 'pos':111},
+  {'name':'Ethiopia' , 'inc':'low-income', 'pos':112},
+  {'name':'Eritrea' , 'inc':'low-income', 'pos':113},
+  {'name':'Zambia' , 'inc':'lower middle-income', 'pos':114},
+  {'name':'Gabon' , 'inc':'upper middle-income', 'pos':115},
+  {'name':'Togo' , 'inc':'low-income', 'pos':116},
+  {'name':'Comoros' , 'inc':'low-income', 'pos':117},
+  {'name':'Tanzania' , 'inc':'low-income', 'pos':118},
+  {'name':'Equatorial Guinea' , 'inc':'upper middle-income', 'pos':119},
+  {'name':'Uganda' , 'inc':'low-income', 'pos':120},
+  {'name':'Afghanistan' , 'inc':'low-income', 'pos':121},
+  {'name':'Mauritania' , 'inc':'lower middle-income', 'pos':122},
+  {'name':'Yemen' , 'inc':'lower middle-income', 'pos':123},
+  {'name':'Cameroon' , 'inc':'lower middle-income', 'pos':124},
+  {'name':'Guinea-Bissau' , 'inc':'low-income', 'pos':125},
+  {'name':'Benin' , 'inc':'low-income', 'pos':126},
+  {'name':'Madagascar' , 'inc':'low-income', 'pos':127},
+  {'name':'Gambia' , 'inc':'low-income', 'pos':128},
+  {'name':'Rep Congo' , 'inc':'lower middle-income', 'pos':129},
+  {'name':'Mozambique' , 'inc':'low-income', 'pos':130},
+  {'name':'Liberia' , 'inc':'low-income', 'pos':131},
+  {'name':'South Sudan' , 'inc':'low-income', 'pos':132},
+  {'name':'Burkina Faso' , 'inc':'low-income', 'pos':133},
+  {'name':'DR Congo' , 'inc':'low-income', 'pos':134},
+  {'name':'Ivory Coast' , 'inc':'lower middle-income', 'pos':135},
+  {'name':'Nigeria' , 'inc':'lower middle-income', 'pos':136},
+  {'name':'Guinea' , 'inc':'low-income', 'pos':137},
+  {'name':'Malawi' , 'inc':'low-income', 'pos':138},
+  {'name':'Sierra Leone' , 'inc':'low-income', 'pos':139},
+  {'name':'Somalia' , 'inc':'low-income', 'pos':140},
+  {'name':'Mali' , 'inc':'low-income', 'pos':141},
+  {'name':'Central African Rep' , 'inc':'low-income', 'pos':142},
+  {'name':'Chad' , 'inc':'low-income', 'pos':143},
+  {'name':'Niger' , 'inc':'low-income', 'pos':144},
+];
+
+
+var data_h = [
+  {'name': 'Sweden', 'mar':0, 'ado':5.618, 'mat':4, 'mps':43.6, 'sch':97.4515, 'ind':0.0725402, 'pos':1, 'posmat':4, 'posmps':1},
+  {'name': 'Finland', 'mar':0, 'ado':6.6682, 'mat':3, 'mps':41.5, 'sch':98.2078, 'ind':0.0784881, 'pos':2, 'posmat':1, 'posmps':2},
+  {'name': 'Norway', 'mar':0, 'ado':5.9398, 'mat':5, 'mps':39.6, 'sch':99.8731, 'ind':0.0806534, 'pos':3, 'posmat':8, 'posmps':4},
+  {'name': 'Netherlands', 'mar':0, 'ado':4.0888, 'mat':7, 'mps':37.3, 'sch':96.70818, 'ind':0.0860686, 'pos':4, 'posmat':17, 'posmps':7},
+  {'name': 'Belgium', 'mar':0, 'ado':8.3764, 'mat':7, 'mps':39.3, 'sch':97.2363, 'ind':0.0896286, 'pos':5, 'posmat':17, 'posmps':5},
+  {'name': 'Denmark', 'mar':0, 'ado':4.1192, 'mat':6, 'mps':37.4, 'sch':98.0149, 'ind':0.0896482, 'pos':6, 'posmat':13, 'posmps':6},
+  {'name': 'Slovenia', 'mar':0, 'ado':3.9208, 'mat':9, 'mps':36.7, 'sch':95.0713, 'ind':0.0980349, 'pos':7, 'posmat':22, 'posmps':8},
+  {'name': 'Portugal', 'mar':0, 'ado':10.2834, 'mat':10, 'mps':34.8, 'sch':96.70818, 'ind':0.1004827, 'pos':8, 'posmat':26, 'posmps':10},
+  {'name': 'Switzerland', 'mar':0, 'ado':3.0578, 'mat':5, 'mps':32, 'sch':98.3393, 'ind':0.1047221, 'pos':9, 'posmat':8, 'posmps':11},
+  {'name': 'Italy', 'mar':0, 'ado':6.0838, 'mat':4, 'mps':31, 'sch':100, 'ind':0.1073515, 'pos':10, 'posmat':4, 'posmps':13},
+  {'name': 'Spain', 'mar':0, 'ado':8.522, 'mat':5, 'mps':41.1, 'sch':85.3546, 'ind':0.1078388, 'pos':11, 'posmat':8, 'posmps':3},
+  {'name': 'Germany', 'mar':0, 'ado':6.9604, 'mat':6, 'mps':36.5, 'sch':87.2669, 'ind':0.1169964, 'pos':12, 'posmat':13, 'posmps':9},
+  {'name': 'Austria', 'mar':0, 'ado':7.379, 'mat':4, 'mps':30.6, 'sch':95.9622, 'ind':0.1180453, 'pos':13, 'posmat':4, 'posmps':15},
+  {'name': 'Luxembourg', 'mar':0, 'ado':6.1496, 'mat':10, 'mps':28.3, 'sch':98.4796, 'ind':0.1198364, 'pos':14, 'posmat':26, 'posmps':17},
+  {'name': 'United Kingdom', 'mar':0, 'ado':15.3342, 'mat':9, 'mps':29.4, 'sch':96.70818, 'ind':0.1222653, 'pos':15, 'posmat':22, 'posmps':16},
+  {'name': 'New Zealand', 'mar':0, 'ado':23.9378, 'mat':11, 'mps':31.4, 'sch':96.70818, 'ind':0.1248112, 'pos':16, 'posmat':28, 'posmps':12},
+  {'name': 'Israel', 'mar':0, 'ado':10.0612, 'mat':5, 'mps':26.7, 'sch':100, 'ind':0.1249176, 'pos':17, 'posmat':8, 'posmps':19},
+  {'name': 'France', 'mar':0, 'ado':9.0482, 'mat':8, 'mps':26.2, 'sch':100, 'ind':0.1259239, 'pos':18, 'posmat':20, 'posmps':21},
+  {'name': 'Canada', 'mar':0, 'ado':10.0832, 'mat':7, 'mps':26, 'sch':96.70818, 'ind':0.1274285, 'pos':19, 'posmat':17, 'posmps':22},
+  {'name': 'Australia', 'mar':0, 'ado':14.405, 'mat':6, 'mps':26.7, 'sch':96.70818, 'ind':0.1293669, 'pos':20, 'posmat':13, 'posmps':19},
+  {'name': 'Poland', 'mar':0, 'ado':13.664, 'mat':3, 'mps':27.4, 'sch':94.9287, 'ind':0.1362416, 'pos':21, 'posmat':1, 'posmps':18},
+  {'name': 'Estonia', 'mar':0, 'ado':13.6678, 'mat':9, 'mps':23.8, 'sch':100, 'ind':0.1381699, 'pos':22, 'posmat':22, 'posmps':23},
+  {'name': 'Czech Republic', 'mar':0, 'ado':10.1304, 'mat':4, 'mps':20, 'sch':98.0592, 'ind':0.1497627, 'pos':23, 'posmat':4, 'posmps':24},
+  {'name': 'Greece', 'mar':0, 'ado':7.6694, 'mat':3, 'mps':19.7, 'sch':96.9965, 'ind':0.1502653, 'pos':24, 'posmat':1, 'posmps':25},
+  {'name': 'South Korea', 'mar':0, 'ado':1.6584, 'mat':11, 'mps':16.3, 'sch':96.6577, 'ind':0.156834, 'pos':25, 'posmat':28, 'posmps':29},
+  {'name': 'Ireland', 'mar':0, 'ado':10.7732, 'mat':8, 'mps':16.3, 'sch':100, 'ind':0.1586667, 'pos':26, 'posmat':20, 'posmps':29},
+  {'name': 'United States', 'mar':0, 'ado':24.1102, 'mat':14, 'mps':19.4, 'sch':96.70818, 'ind':0.1630417, 'pos':27, 'posmat':31, 'posmps':26},
+  {'name': 'Japan', 'mar':0, 'ado':4.1584, 'mat':5, 'mps':9.5, 'sch':96.70818, 'ind':0.1729901, 'pos':28, 'posmat':8, 'posmps':35},
+  {'name': 'Trinidad & Tobago', 'mar':8.1, 'ado':32.1586, 'mat':63, 'mps':31, 'sch':85.6263, 'ind':0.1921405, 'pos':29, 'posmat':36, 'posmps':13},
+  {'name': 'Hungary', 'mar':0, 'ado':18.2126, 'mat':17, 'mps':10.1, 'sch':95.4193, 'ind':0.1960506, 'pos':30, 'posmat':33, 'posmps':34},
+  {'name': 'Slovakia', 'mar':0, 'ado':20.4052, 'mat':6, 'mps':18.7, 'sch':79.4797, 'ind':0.2018428, 'pos':31, 'posmat':13, 'posmps':27},
+  {'name': 'Malta', 'mar':0, 'ado':16.8426, 'mat':9, 'mps':12.9, 'sch':86.9481, 'ind':0.2018508, 'pos':32, 'posmat':22, 'posmps':33},
+  {'name': 'Chile', 'mar':0, 'ado':48.1088, 'mat':22, 'mps':15.8, 'sch':94.2862, 'ind':0.2108164, 'pos':33, 'posmat':34, 'posmps':32},
+  {'name': 'Qatar', 'mar':4.2, 'ado':10.8858, 'mat':13, 'mps':0, 'sch':98.911, 'ind':0.2238215, 'pos':34, 'posmat':30, 'posmps':36},
+  {'name': 'Barbados', 'mar':10.7, 'ado':41.9272, 'mat':27, 'mps':16.7, 'sch':96.1358, 'ind':0.2269206, 'pos':35, 'posmat':35, 'posmps':28},
+  {'name': 'Uruguay', 'mar':24.6, 'ado':56.5144, 'mat':15, 'mps':16.2, 'sch':83.9752, 'ind':0.302168, 'pos':36, 'posmat':32, 'posmps':31},
+]; 
+
+var data_l = [
+  {'name': 'Rwanda', 'mar':8.1, 'ado':27.0462, 'mat':290, 'mps':63.8, 'sch':37.5613, 'ind':0.2148132, 'pos':1, 'posmat':2, 'posmps':1},
+  {'name': 'Nepal', 'mar':36.6, 'ado':72.5268, 'mat':258, 'mps':29.5, 'sch':86.2935, 'ind':0.338919, 'pos':2, 'posmat':1, 'posmps':9},
+  {'name': 'Senegal', 'mar':32.3, 'ado':80.2572, 'mat':315, 'mps':42.7, 'sch':40.0558, 'ind':0.3957347, 'pos':3, 'posmat':3, 'posmps':2},
+  {'name': 'Haiti', 'mar':17.5, 'ado':39.675, 'mat':359, 'mps':4.2, 'sch':50.0478, 'ind':0.423738, 'pos':4, 'posmat':8, 'posmps':29},
+  {'name': 'Burundi', 'mar':20.4, 'ado':28.6552, 'mat':712, 'mps':36.4, 'sch':22.7695, 'ind':0.4266197, 'pos':5, 'posmat':24, 'posmps':5},
+  {'name': 'Zimbabwe', 'mar':33.5, 'ado':110.402, 'mat':443, 'mps':31.5, 'sch':65.2394, 'ind':0.4318335, 'pos':6, 'posmat':14, 'posmps':8},
+  {'name': 'Ethiopia', 'mar':41, 'ado':60.1198, 'mat':353, 'mps':38.8, 'sch':27.9544, 'ind':0.4408696, 'pos':7, 'posmat':6, 'posmps':4},
+  {'name': 'Eritrea', 'mar':40.7, 'ado':55.6712, 'mat':501, 'mps':22, 'sch':54.3704, 'ind':0.4567893, 'pos':8, 'posmat':16, 'posmps':12},
+  {'name': 'Togo', 'mar':21.8, 'ado':91.9554, 'mat':368, 'mps':17.6, 'sch':29.2188, 'ind':0.488185, 'pos':9, 'posmat':9, 'posmps':15},
+  {'name': 'Comoros', 'mar':31.6, 'ado':69.5516, 'mat':335, 'mps':3, 'sch':48.646, 'ind':0.4933426, 'pos':10, 'posmat':4, 'posmps':30},
+  {'name': 'Tanzania', 'mar':36.9, 'ado':119.383, 'mat':398, 'mps':36, 'sch':32.282, 'ind':0.4954819, 'pos':11, 'posmat':12, 'posmps':6},
+  {'name': 'Uganda', 'mar':39.7, 'ado':114.846, 'mat':343, 'mps':35, 'sch':27.5779, 'ind':0.50286, 'pos':12, 'posmat':5, 'posmps':7},
+  {'name': 'Afghanistan', 'mar':32.8, 'ado':76.7336, 'mat':396, 'mps':27.7, 'sch':10, 'ind':0.5132345, 'pos':13, 'posmat':11, 'posmps':10},
+  {'name': 'Guinea-Bissau', 'mar':22, 'ado':91.3858, 'mat':549, 'mps':13.7, 'sch':27.7811, 'ind':0.5299518, 'pos':14, 'posmat':17, 'posmps':19},
+  {'name': 'Benin', 'mar':31.9, 'ado':84.59, 'mat':405, 'mps':7.2, 'sch':33.5325, 'ind':0.5367055, 'pos':15, 'posmat':13, 'posmps':28},
+  {'name': 'Madagascar', 'mar':41.2, 'ado':117.494, 'mat':353, 'mps':20.5, 'sch':36.7715, 'ind':0.5377697, 'pos':16, 'posmat':6, 'posmps':14},
+  {'name': 'Gambia', 'mar':30.4, 'ado':113.584, 'mat':706, 'mps':9.4, 'sch':61.8871, 'ind':0.5416723, 'pos':17, 'posmat':23, 'posmps':24},
+  {'name': 'Mozambique', 'mar':48.2, 'ado':142.533, 'mat':489, 'mps':39.6, 'sch':21.0221, 'ind':0.5729027, 'pos':18, 'posmat':15, 'posmps':3},
+  {'name': 'Liberia', 'mar':35.9, 'ado':110.555, 'mat':725, 'mps':11, 'sch':31.8621, 'ind':0.6115305, 'pos':19, 'posmat':25, 'posmps':23},
+  {'name': 'South Sudan', 'mar':51.5, 'ado':68.3108, 'mat':789, 'mps':26.5, 'sch':11.8443, 'ind':0.6118677, 'pos':20, 'posmat':27, 'posmps':11},
+  {'name': 'Burkina Faso', 'mar':51.6, 'ado':109.904, 'mat':371, 'mps':9.4, 'sch':23.0632, 'ind':0.6226563, 'pos':21, 'posmat':10, 'posmps':24},
+  {'name': 'DR Congo', 'mar':37.3, 'ado':122.948, 'mat':693, 'mps':8.9, 'sch':34.4959, 'ind':0.6240197, 'pos':22, 'posmat':22, 'posmps':26},
+  {'name': 'Guinea', 'mar':51.7, 'ado':141.672, 'mat':679, 'mps':21.9, 'sch':27.8566, 'ind':0.6509061, 'pos':23, 'posmat':21, 'posmps':13},
+  {'name': 'Malawi', 'mar':46.3, 'ado':136.972, 'mat':634, 'mps':16.7, 'sch':20.0505, 'ind':0.6575353, 'pos':24, 'posmat':20, 'posmps':16},
+  {'name': 'Sierra Leone', 'mar':38.9, 'ado':119.601, 'mat':1360, 'mps':12.4, 'sch':48.1547, 'ind':0.6846387, 'pos':25, 'posmat':30, 'posmps':22},
+  {'name': 'Somalia', 'mar':45.3, 'ado':105.202, 'mat':732, 'mps':13.8, 'sch':1, 'ind':0.6854705, 'pos':26, 'posmat':26, 'posmps':18},
+  {'name': 'Mali', 'mar':55, 'ado':175.444, 'mat':587, 'mps':8.8, 'sch':29.1287, 'ind':0.7179394, 'pos':27, 'posmat':19, 'posmps':27},
+  {'name': 'Central African Rep', 'mar':67.9, 'ado':93.2172, 'mat':882, 'mps':12.5, 'sch':8.30718, 'ind':0.7442619, 'pos':28, 'posmat':29, 'posmps':21},
+  {'name': 'Chad', 'mar':68.1, 'ado':137.173, 'mat':856, 'mps':14.9, 'sch':10.3787, 'ind':0.772778, 'pos':29, 'posmat':28, 'posmps':17},
+  {'name': 'Niger', 'mar':76.3, 'ado':203.604, 'mat':553, 'mps':13.3, 'sch':10.1133, 'ind':0.8209577, 'pos':30, 'posmat':18, 'posmps':20},
+]; 
+
+var data_lm = [
+  {'name': 'Tunisia', 'mar':1.6, 'ado':6.7968, 'mat':62, 'mps':31.3, 'sch':78.0781, 'ind':0.1641461, 'pos':1, 'posmat':12, 'posmps':5},
+  {'name': 'Mongolia', 'mar':4.7, 'ado':16.3448, 'mat':44, 'mps':14.5, 'sch':100, 'ind':0.1874529, 'pos':2, 'posmat':8, 'posmps':24},
+  {'name': 'Uzbekistan', 'mar':7.2, 'ado':17.8178, 'mat':36, 'mps':16, 'sch':100, 'ind':0.1895835, 'pos':3, 'posmat':7, 'posmps':23},
+  {'name': 'Bolivia', 'mar':21.7, 'ado':71.147, 'mat':206, 'mps':53.1, 'sch':90.3782, 'ind':0.2085991, 'pos':4, 'posmat':30, 'posmps':1},
+  {'name': 'Armenia', 'mar':7.2, 'ado':23.5084, 'mat':25, 'mps':10.7, 'sch':100, 'ind':0.2102125, 'pos':5, 'posmat':3, 'posmps':32},
+  {'name': 'Vietnam', 'mar':10.6, 'ado':38.1194, 'mat':54, 'mps':24.3, 'sch':92.3978, 'ind':0.2105938, 'pos':6, 'posmat':10, 'posmps':13},
+  {'name': 'Ukraine', 'mar':9.1, 'ado':24.885, 'mat':24, 'mps':12.1, 'sch':95.484, 'ind':0.2211433, 'pos':7, 'posmat':2, 'posmps':29},
+  {'name': 'Moldova', 'mar':12.2, 'ado':23.236, 'mat':23, 'mps':21.8, 'sch':82.5943, 'ind':0.2231209, 'pos':8, 'posmat':1, 'posmps':14},
+  {'name': 'Tajikistan', 'mar':11.6, 'ado':38.3492, 'mat':32, 'mps':19, 'sch':89.6157, 'ind':0.232435, 'pos':9, 'posmat':5, 'posmps':20},
+  {'name': 'Kyrgyzstan', 'mar':11.6, 'ado':39.9964, 'mat':76, 'mps':19.2, 'sch':91.048, 'ind':0.2370307, 'pos':10, 'posmat':14, 'posmps':19},
+  {'name': 'Sri Lanka', 'mar':11.8, 'ado':15.361, 'mat':30, 'mps':4.9, 'sch':96.2519, 'ind':0.2406919, 'pos':11, 'posmat':4, 'posmps':40},
+  {'name': 'Samoa', 'mar':10.8, 'ado':25.6102, 'mat':51, 'mps':6.1, 'sch':97.7325, 'ind':0.2445633, 'pos':12, 'posmat':9, 'posmps':38},
+  {'name': 'Philippines', 'mar':15, 'ado':60.7682, 'mat':114, 'mps':27.2, 'sch':87.511, 'ind':0.2541822, 'pos':13, 'posmat':18, 'posmps':8},
+  {'name': 'Kiribati', 'mar':20.3, 'ado':17.9648, 'mat':90, 'mps':8.7, 'sch':100, 'ind':0.25491, 'pos':14, 'posmat':17, 'posmps':34},
+  {'name': 'Timor-Leste', 'mar':18.9, 'ado':47.723, 'mat':215, 'mps':38.5, 'sch':75.522, 'ind':0.2551683, 'pos':15, 'posmat':31, 'posmps':3},
+  {'name': 'El Salvador', 'mar':25.4, 'ado':65.5554, 'mat':54, 'mps':32.1, 'sch':88.9536, 'ind':0.2590663, 'pos':16, 'posmat':10, 'posmps':4},
+  {'name': 'Indonesia', 'mar':13.6, 'ado':50.001, 'mat':126, 'mps':17.1, 'sch':83.3339, 'ind':0.2817177, 'pos':17, 'posmat':20, 'posmps':22},
+  {'name': 'Syria', 'mar':13.3, 'ado':40.0214, 'mat':68, 'mps':12.4, 'sch':68.1203, 'ind':0.3079677, 'pos':18, 'posmat':13, 'posmps':28},
+  {'name': 'Bhutan', 'mar':25.8, 'ado':22.694, 'mat':148, 'mps':8.5, 'sch':83.8205, 'ind':0.3158715, 'pos':19, 'posmat':22, 'posmps':35},
+  {'name': 'Egypt', 'mar':17.4, 'ado':52.4352, 'mat':33, 'mps':2, 'sch':78.1538, 'ind':0.3381827, 'pos':20, 'posmat':6, 'posmps':42},
+  {'name': 'Nicaragua', 'mar':40.6, 'ado':89.6316, 'mat':150, 'mps':41.3, 'sch':73.791, 'ind':0.3386935, 'pos':21, 'posmat':23, 'posmps':2},
+  {'name': 'Djibouti', 'mar':5.4, 'ado':21.8254, 'mat':229, 'mps':12.7, 'sch':38.6735, 'ind':0.3515161, 'pos':22, 'posmat':34, 'posmps':26},
+  {'name': 'Pakistan', 'mar':21, 'ado':39.156, 'mat':178, 'mps':20.6, 'sch':45.6767, 'ind':0.3631416, 'pos':23, 'posmat':28, 'posmps':15},
+  {'name': 'Cambodia', 'mar':18.5, 'ado':51.0532, 'mat':161, 'mps':20.3, 'sch':45.4729, 'ind':0.3672178, 'pos':24, 'posmat':25, 'posmps':16},
+  {'name': 'India', 'mar':47.4, 'ado':25.6746, 'mat':174, 'mps':12, 'sch':83.4151, 'ind':0.3691212, 'pos':25, 'posmat':26, 'posmps':30},
+  {'name': 'Honduras', 'mar':33.6, 'ado':65.6586, 'mat':129, 'mps':25.8, 'sch':59.4709, 'ind':0.3710266, 'pos':26, 'posmat':21, 'posmps':9},
+  {'name': 'Sao Tome & Principe', 'mar':34.4, 'ado':85.168, 'mat':156, 'mps':18.2, 'sch':79.5379, 'ind':0.3797095, 'pos':27, 'posmat':24, 'posmps':21},
+  {'name': 'Solomon Islands', 'mar':22.4, 'ado':49.4696, 'mat':114, 'mps':2, 'sch':65.0382, 'ind':0.3867861, 'pos':28, 'posmat':18, 'posmps':42},
+  {'name': 'Kenya', 'mar':22.9, 'ado':91.531, 'mat':510, 'mps':19.7, 'sch':83.5206, 'ind':0.3952928, 'pos':29, 'posmat':41, 'posmps':18},
+  {'name': 'Vanuatu', 'mar':21.4, 'ado':43.4342, 'mat':78, 'mps':0, 'sch':55.3375, 'ind':0.3987488, 'pos':30, 'posmat':15, 'posmps':44},
+  {'name': 'Ghana', 'mar':20.7, 'ado':67.5004, 'mat':319, 'mps':10.9, 'sch':66.4609, 'ind':0.399627, 'pos':31, 'posmat':36, 'posmps':31},
+  {'name': 'Laos', 'mar':35.4, 'ado':64.541, 'mat':197, 'mps':25, 'sch':51.7051, 'ind':0.4028564, 'pos':32, 'posmat':29, 'posmps':11},
+  {'name': 'Guatemala', 'mar':30.3, 'ado':81.404, 'mat':88, 'mps':13.9, 'sch':56.9871, 'ind':0.4142494, 'pos':33, 'posmat':16, 'posmps':25},
+  {'name': 'Papua New Guinea', 'mar':21.3, 'ado':55.251, 'mat':215, 'mps':2.7, 'sch':57.7382, 'ind':0.4170673, 'pos':34, 'posmat':31, 'posmps':41},
+  {'name': 'Sudan', 'mar':32.9, 'ado':76.022, 'mat':311, 'mps':30.5, 'sch':42.7216, 'ind':0.4253826, 'pos':35, 'posmat':35, 'posmps':7},
+  {'name': 'Swaziland', 'mar':6.5, 'ado':73.6144, 'mat':389, 'mps':6.2, 'sch':49.9049, 'ind':0.4269575, 'pos':36, 'posmat':38, 'posmps':37},
+  {'name': 'Lesotho', 'mar':18.8, 'ado':92.2794, 'mat':487, 'mps':25, 'sch':49.9199, 'ind':0.4331629, 'pos':37, 'posmat':40, 'posmps':11},
+  {'name': 'Bangladesh', 'mar':52.3, 'ado':83.49, 'mat':176, 'mps':20, 'sch':73.478, 'ind':0.4345149, 'pos':38, 'posmat':27, 'posmps':17},
+  {'name': 'Zambia', 'mar':31.4, 'ado':93.0156, 'mat':224, 'mps':12.7, 'sch':51.4216, 'ind':0.4636818, 'pos':39, 'posmat':33, 'posmps':26},
+  {'name': 'Mauritania', 'mar':34.3, 'ado':79.3816, 'mat':602, 'mps':25.2, 'sch':28.0845, 'ind':0.5214526, 'pos':40, 'posmat':43, 'posmps':10},
+  {'name': 'Yemen', 'mar':31.9, 'ado':62.2136, 'mat':385, 'mps':0, 'sch':39.5576, 'ind':0.5219956, 'pos':41, 'posmat':37, 'posmps':44},
+  {'name': 'Cameroon', 'mar':38.4, 'ado':106.853, 'mat':596, 'mps':31.1, 'sch':34.8826, 'ind':0.5262932, 'pos':42, 'posmat':42, 'posmps':6},
+  {'name': 'Rep Congo', 'mar':32.6, 'ado':119.234, 'mat':442, 'mps':7.4, 'sch':51.2013, 'ind':0.5419823, 'pos':43, 'posmat':39, 'posmps':36},
+  {'name': 'Ivory Coast', 'mar':33.2, 'ado':135.464, 'mat':645, 'mps':9.2, 'sch':26.8877, 'ind':0.6330234, 'pos':44, 'posmat':44, 'posmps':33},
+  {'name': 'Nigeria', 'mar':42.8, 'ado':111.886, 'mat':814, 'mps':5.6, 'sch':45, 'ind':0.634439, 'pos':45, 'posmat':45, 'posmps':39},
+]; 
+
+var data_um = [
+  {'name': 'Serbia', 'mar':3.2, 'ado':19.3334, 'mat':17, 'mps':34, 'sch':96.7714, 'ind':0.1278954, 'pos':1, 'posmat':8, 'posmps':4},
+  {'name': 'Belarus', 'mar':3.2, 'ado':18.84, 'mat':4, 'mps':27.3, 'sch':100, 'ind':0.1399715, 'pos':2, 'posmat':1, 'posmps':9},
+  {'name': 'Macedonia', 'mar':6.9, 'ado':17.8554, 'mat':8, 'mps':33.3, 'sch':86.8272, 'ind':0.1570874, 'pos':3, 'posmat':3, 'posmps':5},
+  {'name': 'Kazakhstan', 'mar':6.1, 'ado':28.586, 'mat':12, 'mps':26.2, 'sch':100, 'ind':0.1618525, 'pos':4, 'posmat':5, 'posmps':11},
+  {'name': 'Algeria', 'mar':2.5, 'ado':10.7914, 'mat':140, 'mps':31.6, 'sch':87.1759, 'ind':0.1626374, 'pos':5, 'posmat':28, 'posmps':7},
+  {'name': 'Cuba', 'mar':26, 'ado':46.1674, 'mat':39, 'mps':48.9, 'sch':98.6598, 'ind':0.166954, 'pos':6, 'posmat':17, 'posmps':1},
+  {'name': 'Montenegro', 'mar':4.5, 'ado':12.464, 'mat':7, 'mps':17.3, 'sch':93.6333, 'ind':0.1817166, 'pos':7, 'posmat':2, 'posmps':20},
+  {'name': 'Bosnia & Herzegovina', 'mar':3.5, 'ado':9.1124, 'mat':11, 'mps':21.4, 'sch':79, 'ind':0.1930752, 'pos':8, 'posmat':4, 'posmps':15},
+  {'name': 'Albania', 'mar':9.6, 'ado':21.4896, 'mat':29, 'mps':20.7, 'sch':90.7345, 'ind':0.2024639, 'pos':9, 'posmat':14, 'posmps':17},
+  {'name': 'Maldives', 'mar':3.9, 'ado':7.276, 'mat':68, 'mps':5.9, 'sch':94.6662, 'ind':0.2176463, 'pos':10, 'posmat':23, 'posmps':30},
+  {'name': 'Turkey', 'mar':14.7, 'ado':28.416, 'mat':16, 'mps':14.9, 'sch':96.4405, 'ind':0.2274304, 'pos':11, 'posmat':7, 'posmps':23},
+  {'name': 'Mexico', 'mar':22.9, 'ado':63.4592, 'mat':38, 'mps':42.4, 'sch':81.6781, 'ind':0.2304886, 'pos':12, 'posmat':16, 'posmps':2},
+  {'name': 'Jordan', 'mar':8.4, 'ado':23.7632, 'mat':58, 'mps':12, 'sch':88.8746, 'ind':0.2368743, 'pos':13, 'posmat':21, 'posmps':26},
+  {'name': 'Georgia', 'mar':14, 'ado':41.1308, 'mat':36, 'mps':11.3, 'sch':99.7371, 'ind':0.2457609, 'pos':14, 'posmat':15, 'posmps':27},
+  {'name': 'St. Lucia', 'mar':7.5, 'ado':54.3862, 'mat':48, 'mps':16.7, 'sch':87.1091, 'ind':0.2522025, 'pos':15, 'posmat':19, 'posmps':22},
+  {'name': 'Peru', 'mar':18.6, 'ado':49.6782, 'mat':68, 'mps':22.3, 'sch':87.2498, 'ind':0.2617441, 'pos':16, 'posmat':23, 'posmps':14},
+  {'name': 'Azerbaijan', 'mar':11, 'ado':58.5604, 'mat':25, 'mps':16.9, 'sch':86.1227, 'ind':0.2634867, 'pos':17, 'posmat':10, 'posmps':21},
+  {'name': 'Iran', 'mar':16.7, 'ado':27.0988, 'mat':25, 'mps':3.1, 'sch':96.9314, 'ind':0.2686937, 'pos':18, 'posmat':10, 'posmps':31},
+  {'name': 'Jamaica', 'mar':7.9, 'ado':60.5584, 'mat':89, 'mps':12.7, 'sch':88.9646, 'ind':0.2741971, 'pos':19, 'posmat':25, 'posmps':25},
+  {'name': 'Namibia', 'mar':6.9, 'ado':77.4004, 'mat':265, 'mps':41.3, 'sch':62.7029, 'ind':0.277594, 'pos':20, 'posmat':31, 'posmps':3},
+  {'name': 'Costa Rica', 'mar':21.2, 'ado':57.0388, 'mat':25, 'mps':33.3, 'sch':62.6336, 'ind':0.2847584, 'pos':21, 'posmat':10, 'posmps':5},
+  {'name': 'Colombia', 'mar':23, 'ado':51.6738, 'mat':64, 'mps':19.9, 'sch':83.5294, 'ind':0.2897038, 'pos':22, 'posmat':22, 'posmps':18},
+  {'name': 'Lebanon', 'mar':6.1, 'ado':12.6554, 'mat':15, 'mps':3.1, 'sch':61.8993, 'ind':0.2959024, 'pos':23, 'posmat':6, 'posmps':31},
+  {'name': 'Suriname', 'mar':18.8, 'ado':46.5188, 'mat':155, 'mps':25.5, 'sch':62.5758, 'ind':0.3117768, 'pos':24, 'posmat':29, 'posmps':12},
+  {'name': 'Thailand', 'mar':22.1, 'ado':44.6358, 'mat':20, 'mps':6.1, 'sch':83.3117, 'ind':0.3175896, 'pos':25, 'posmat':9, 'posmps':29},
+  {'name': 'Guyana', 'mar':23, 'ado':88.4178, 'mat':229, 'mps':30.4, 'sch':81.5502, 'ind':0.3214951, 'pos':26, 'posmat':30, 'posmps':8},
+  {'name': 'Panama', 'mar':26.4, 'ado':75.3262, 'mat':94, 'mps':18.3, 'sch':77.727, 'ind':0.3431997, 'pos':27, 'posmat':27, 'posmps':19},
+  {'name': 'Dominican Rep', 'mar':36.5, 'ado':98.4344, 'mat':92, 'mps':20.8, 'sch':80.2174, 'ind':0.3793969, 'pos':28, 'posmat':26, 'posmps':16},
+  {'name': 'Iraq', 'mar':24.3, 'ado':83.2342, 'mat':50, 'mps':26.5, 'sch':44.0174, 'ind':0.3814369, 'pos':29, 'posmat':20, 'posmps':10},
+  {'name': 'Belize', 'mar':25.9, 'ado':66.673, 'mat':28, 'mps':3.1, 'sch':68.7387, 'ind':0.389399, 'pos':30, 'posmat':13, 'posmps':31},
+  {'name': 'Brazil', 'mar':35.6, 'ado':67.3106, 'mat':44, 'mps':9.9, 'sch':65, 'ind':0.4040509, 'pos':31, 'posmat':18, 'posmps':28},
+  {'name': 'Gabon', 'mar':21.9, 'ado':102.2, 'mat':291, 'mps':14.2, 'sch':35, 'ind':0.4862235, 'pos':32, 'posmat':32, 'posmps':24},
+  {'name': 'Equatorial Guinea', 'mar':29.5, 'ado':109.797, 'mat':342, 'mps':24, 'sch':30.2949, 'ind':0.4999695, 'pos':33, 'posmat':33, 'posmps':13},
+];
+    
+function init() { 
+  $( "#tabs" ).tabs();
+  $(".resultpage, #startBtn").hide();
+
+  $( "#countryInput" ).change(function() {
+    $("#startBtn").show();
+  });
+
+  $("#startBtn").click(function(){
+    setValue();
+    sendData();
+    $('.container').slideUp(500, function(){
+      $("#intro").hide();
+      $("#result01").show(); 
+      setTimeout(function(){chart01();chart01b();},500)
+    });
+    $('.container').slideDown(500);
+  });
+
+  $("#result01Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result01").hide();
+      $("#result02").show();
+      if(fire2==0){setTimeout(function(){chart02();},500); fire2 = 1;} else{}
+    });
+    $('.container').slideDown(500);   
+  });
+  
+  $("#result02Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result02").hide();
+      $("#result03").show();
+      if(fire3==0){setTimeout(function(){chart03();},500); fire3 = 1;} else{}
+    });
+    $('.container').slideDown(500);   
+  });
+
+  $("#result03Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result03").hide();
+      $("#result04").show();
+      if(fire4==0){setTimeout(function(){chart04();},500); fire4 = 1;} else{}
+    });
+    $('.container').slideDown(500);   
+  });    
+
+  $("#result04Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result04").hide();
+      $("#result05").show();
+      if(fire5==0){setTimeout(function(){chart05();},500); fire5 = 1;} else{}
+    });
+    $('.container').slideDown(500);   
+  });  
+
+  $("#result05Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result05").hide();
+      $("#result06").show();
+      if(fire6==0){setTimeout(function(){chart06();},500); fire6 = 1;} else{}
+    });
+    $('.container').slideDown(500);   
+  }); 
+
+  $("#result06Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result06").hide();
+      $("#result07").show();
+    });
+    $('.container').slideDown(500);   
+  });  
+
+  $(".btnback").click(function() {
+    var result_id = $(this).parent().attr("id");
+    var num_id = result_id.substr(result_id.length - 1);
+    var itr_id = parseInt(num_id);
+    var back_id = num_id - 1;
+    $('.container').slideUp(500, function(){
+      $("#result0" + itr_id).hide();
+      $("#result0" + back_id).show();
+    });
+    $('.container').slideDown(500);   
+  });       
+
+  $('.sharecol1').click(function (event) {facebook();});
+  $('.sharecol2').click(function (event) {tweet();});
+
+} 
+
+function setValue() {
+  inputcountry = $('#countryInput').val();
+  selectcountry = jQuery.grep(data_g, function (n, i) {
+      return (n.name == inputcountry);
+  },false); //find among data_g array for label that matches the country input, then pass the object into selectcountry
+  
+  if (selectcountry[0]["inc"]=="high-income"){data_grp = data_h;}
+  else if (selectcountry[0]["inc"]=="low-income"){data_grp = data_l;}
+  else if (selectcountry[0]["inc"]=="lower middle-income"){data_grp = data_lm;}  
+  else {data_grp = data_um} //select the countries in differnet income groups
+  
+  //now we need to sort the countries according to the object we want to visualize
+    //you need to make a copy of data_grp using .slice() because .sort will change the original sequence of data_grp.
+
+  data_mar0 = data_grp.slice().sort(function (a, b) {return a.mar - b.mar;}); 
+  data_ado0 = data_grp.slice().sort(function (a, b) {return a.ado - b.ado;}); 
+  data_mat0 = data_grp.slice().sort(function (a, b) {return a.mat - b.mat;}); 
+  data_mps0 = data_grp.slice().sort(function (a, b) {return b.mps - a.mps;}); 
+  data_sch0 = data_grp.slice().sort(function (a, b) {return b.sch - a.sch;}); 
+
+
+  for (var i = 0; i < data_grp.length; i++){
+    data_cat1.push(data_grp[i].name);
+    data_cat2.push(data_mar0[i].name);
+    data_cat3.push(data_ado0[i].name);
+    data_cat4.push(data_mat0[i].name);
+    data_cat5.push(data_mps0[i].name);
+    data_cat6.push(data_sch0[i].name);
+    data_ind.push(data_grp[i].ind);
+    data_mar.push(data_mar0[i].mar); 
+    data_ado.push(data_ado0[i].ado);  
+    data_mat.push(data_mat0[i].mat);  
+    data_mps.push(data_mps0[i].mps);  
+    data_sch.push(data_sch0[i].sch);   
+  }
+  
+  index1 = $.inArray(inputcountry,data_cat1);
+  index1b = ($.grep(data_g, function(n){return n.name == inputcountry}))[0]["pos"]; //get the object from the array data_g when its "name" matches "inputcountry", then get the value of "pos". 
+  index1b2 = $.inArray(inputcountry,data_g);
+  index1b2 = data_g.findIndex(x => x.name==inputcountry);
+  index2 = $.inArray(inputcountry,data_cat2);
+  index3 = $.inArray(inputcountry,data_cat3);
+  index4 = ($.grep(data_mat0, function(n){return n.name == inputcountry}))[0]["posmat"];
+  index4b = $.inArray(inputcountry,data_cat4);
+  index5 = ($.grep(data_mps0, function(n){return n.name == inputcountry}))[0]["posmps"];
+  index5b = $.inArray(inputcountry,data_cat5);
+  index6 = $.inArray(inputcountry,data_cat6);
+
+  //populate the result pages
+
+  if (selectcountry[0]["inc"]=="high-income"&&data_mar[index2]==0){
+    $("#result02title").html("<span class='resultstyle01 resultcountry'>Your country</span> is at the <span class='resultstyle02'>top</span> along with <span class='resultstyle01'>31 other </span> <span class='resultstyle01 resultincome'>income group</span></span> countries that have zero rate of child marriage among girls which is measured by the percentage of women age 20-24 who were first married before 18.");
+  }
+    else{$("#resultrank02").text(index2+1);}
+
+  $(".resultcountry").text(inputcountry);
+  $("#resultrank01").text(index1+1);
+  $("#resultrank1b").text(index1b);
+  $("#resultrank02").text(index2);
+  $(".resultindex").text(data_grp.length);
+  $(".resultincome").text(selectcountry[0]["inc"]);  
+  $("#resultrank03").text(index3+1);
+  $("#resultrank04").text(index4);
+  $("#resultrank05").text(index5);
+
+  if(data_sch[index6]==100){$("#resultrank06").text("1");} 
+    else if (data_sch[index6]==96.70818){$("#resultrank06").text("16");} 
+    else {$("#resultrank06").text(index6+1);}
+}
+  
+// function addThousandsSeparator(input) {
+//     var output = input
+//     if (parseFloat(input)) {
+//         input = new String(input); // so you can perform string operations
+//         var parts = input.split("."); // remove the decimal part
+//         parts[0] = parts[0].split("").reverse().join("").replace(/(\d{3})(?!$)/g, "$1,").split("").reverse().join("");
+//         output = parts.join(".");
+//     }
+//     return output;
+// } 
+
+function chart01() {    
+    $('#chart01').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: null,
+        },
+        xAxis: {
+            categories: data_cat1,
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {
+            title: {
+                text: 'Index score',
+                x: -40,
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Girls' Opportunity Index: <b>{point.y:.7f}</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y:.2f}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            name: 'Index score',
+            data: data_ind,
+            color:'#FF8B00',
+        }],
+    }); 
+
+    var chart = $('#chart01').highcharts();
+    chart.series[0].data[index1].update({
+      color:"#0375B4",
+    });
+
+}
+
+function chart01b() {   
+console.log("index1b2 = " + index1b2); 
+    $('#chart01b').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: null,
+        },
+        xAxis: {
+            categories: ["Sweden","Finland","Norway","Netherlands","Belgium","Denmark","Slovenia","Portugal","Switzerland","Italy","Spain","Germany","Austria","Luxembourg","United Kingdom","New Zealand","Israel","France","Canada","Serbia","Australia","Poland","Estonia","Belarus","Czech Republic","Greece","South Korea","Macedonia","Ireland","Kazakhstan","Algeria","United States","Tunisia","Cuba","Japan","Montenegro","Mongolia","Uzbekistan","Trinidad & Tobago","Bosnia & Herzegovina","Hungary","Slovakia","Malta","Albania","Bolivia","Armenia","Vietnam","Chile","Rwanda","Maldives","Ukraine","Moldova","Qatar","Barbados","Turkey","Mexico","Tajikistan","Jordan","Kyrgyzstan","Sri Lanka","Samoa","Georgia","St. Lucia","Philippines","Kiribati","Timor-Leste","El Salvador","Peru","Azerbaijan","Iran","Jamaica","Namibia","Indonesia","Costa Rica","Colombia","Lebanon","Uruguay","Syria","Suriname","Bhutan","Thailand","Guyana","Egypt","Nicaragua","Nepal","Panama","Djibouti","Pakistan","Cambodia","India","Honduras","Dominican Rep","Sao Tome & Principe","Iraq","Solomon Islands","Belize","Kenya","Senegal","Vanuatu","Ghana","Laos","Brazil","Guatemala","Papua New Guinea","Haiti","Sudan","Burundi","Swaziland","Zimbabwe","Lesotho","Bangladesh","Ethiopia","Eritrea","Zambia","Gabon","Togo","Comoros","Tanzania","Equatorial Guinea","Uganda","Afghanistan","Mauritania","Yemen","Cameroon","Guinea-Bissau","Benin","Madagascar","Gambia","Rep Congo","Mozambique","Liberia","South Sudan","Burkina Faso","DR Congo","Ivory Coast","Nigeria","Guinea","Malawi","Sierra Leone","Somalia","Mali","Central African Rep","Chad","Niger"],
+            tickColor: '#F3F3F3',
+            labels:{
+              style: {
+                fontSize: '10px',
+                    }
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Index score',
+                x: -40,
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Girls' Opportunity Index: <b>{point.y:.7f}</b><br>Income group: <b>{point.grp}</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y:.2f}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            name: 'Index score',
+            data: [
+              {"grp":"High income",  y:0.0725402},
+              {"grp":"High income", y:0.0784881},
+              {"grp":"High income", y:0.0806534},
+              {"grp":"High income", y:0.0860686},
+              {"grp":"High income", y:0.0896286},
+              {"grp":"High income", y:0.0896482},
+              {"grp":"High income", y:0.0980349},
+              {"grp":"High income", y:0.1004827},
+              {"grp":"High income", y:0.1047221},
+              {"grp":"High income", y:0.1073515},
+              {"grp":"High income", y:0.1078388},
+              {"grp":"High income", y:0.1169964},
+              {"grp":"High income", y:0.1180453},
+              {"grp":"High income", y:0.1198364},
+              {"grp":"High income", y:0.1222653},
+              {"grp":"High income", y:0.1248112},
+              {"grp":"High income", y:0.1249176},
+              {"grp":"High income", y:0.1259239},
+              {"grp":"High income", y:0.1274285},
+              {"grp":"Upper middle income", y:0.1278954},
+              {"grp":"High income", y:0.1293669},
+              {"grp":"High income", y:0.1362416},
+              {"grp":"High income", y:0.1381699},
+              {"grp":"Upper middle income", y:0.1399715},
+              {"grp":"High income", y:0.1497627},
+              {"grp":"High income", y:0.1502653},
+              {"grp":"High income", y:0.156834},
+              {"grp":"Upper middle income", y:0.1570874},
+              {"grp":"High income", y:0.1586667},
+              {"grp":"Upper middle income", y:0.1618525},
+              {"grp":"Upper middle income", y:0.1626374},
+              {"grp":"High income", y:0.1630417},
+              {"grp":"Lower middle income", y:0.1641461},
+              {"grp":"Upper middle income", y:0.166954},
+              {"grp":"High income", y:0.1729901},
+              {"grp":"Upper middle income", y:0.1817166},
+              {"grp":"Lower middle income", y:0.1874529},
+              {"grp":"Lower middle income", y:0.1895835},
+              {"grp":"High income", y:0.1921405},
+              {"grp":"Upper middle income", y:0.1930752},
+              {"grp":"High income", y:0.1960506},
+              {"grp":"High income", y:0.2018428},
+              {"grp":"High income", y:0.2018508},
+              {"grp":"Upper middle income", y:0.2024639},
+              {"grp":"Lower middle income", y:0.2085991},
+              {"grp":"Lower middle income", y:0.2102125},
+              {"grp":"Lower middle income", y:0.2105938},
+              {"grp":"High income", y:0.2108164},
+              {"grp":"Low income",  y:0.2148132},
+              {"grp":"Upper middle income", y:0.2176463},
+              {"grp":"Lower middle income", y:0.2211433},
+              {"grp":"Lower middle income", y:0.2231209},
+              {"grp":"High income", y:0.2238215},
+              {"grp":"High income", y:0.2269206},
+              {"grp":"Upper middle income", y:0.2274304},
+              {"grp":"Upper middle income", y:0.2304886},
+              {"grp":"Lower middle income", y:0.232435},
+              {"grp":"Upper middle income", y:0.2368743},
+              {"grp":"Lower middle income", y:0.2370307},
+              {"grp":"Lower middle income", y:0.2406919},
+              {"grp":"Lower middle income", y:0.2445633},
+              {"grp":"Upper middle income", y:0.2457609},
+              {"grp":"Upper middle income", y:0.2522025},
+              {"grp":"Lower middle income", y:0.2541822},
+              {"grp":"Lower middle income", y:0.25491},
+              {"grp":"Lower middle income", y:0.2551683},
+              {"grp":"Lower middle income", y:0.2590663},
+              {"grp":"Upper middle income", y:0.2617441},
+              {"grp":"Upper middle income", y:0.2634867},
+              {"grp":"Upper middle income", y:0.2686937},
+              {"grp":"Upper middle income", y:0.2741971},
+              {"grp":"Upper middle income", y:0.277594},
+              {"grp":"Lower middle income", y:0.2817177},
+              {"grp":"Upper middle income", y:0.2847584},
+              {"grp":"Upper middle income", y:0.2897038},
+              {"grp":"Upper middle income", y:0.2959024},
+              {"grp":"High income", y:0.302168},
+              {"grp":"Lower middle income", y:0.3079677},
+              {"grp":"Upper middle income", y:0.3117768},
+              {"grp":"Lower middle income", y:0.3158715},
+              {"grp":"Upper middle income", y:0.3175896},
+              {"grp":"Upper middle income", y:0.3214951},
+              {"grp":"Lower middle income", y:0.3381827},
+              {"grp":"Lower middle income", y:0.3386935},
+              {"grp":"Low income",  y:0.338919},
+              {"grp":"Upper middle income", y:0.3431997},
+              {"grp":"Lower middle income", y:0.3515161},
+              {"grp":"Lower middle income", y:0.3631416},
+              {"grp":"Lower middle income", y:0.3672178},
+              {"grp":"Lower middle income", y:0.3691212},
+              {"grp":"Lower middle income", y:0.3710266},
+              {"grp":"Upper middle income", y:0.3793969},
+              {"grp":"Lower middle income", y:0.3797095},
+              {"grp":"Upper middle income", y:0.3814369},
+              {"grp":"Lower middle income", y:0.3867861},
+              {"grp":"Upper middle income", y:0.389399},
+              {"grp":"Lower middle income", y:0.3952928},
+              {"grp":"Low income",  y:0.3957347},
+              {"grp":"Lower middle income", y:0.3987488},
+              {"grp":"Lower middle income", y:0.399627},
+              {"grp":"Lower middle income", y:0.4028564},
+              {"grp":"Upper middle income", y:0.4040509},
+              {"grp":"Lower middle income", y:0.4142494},
+              {"grp":"Lower middle income", y:0.4170673},
+              {"grp":"Low income",  y:0.423738},
+              {"grp":"Lower middle income", y:0.4253826},
+              {"grp":"Low income",  y:0.4266197},
+              {"grp":"Lower middle income", y:0.4269575},
+              {"grp":"Low income",  y:0.4318335},
+              {"grp":"Lower middle income", y:0.4331629},
+              {"grp":"Lower middle income", y:0.4345149},
+              {"grp":"Low income",  y:0.4408696},
+              {"grp":"Low income",  y:0.4567893},
+              {"grp":"Lower middle income", y:0.4636818},
+              {"grp":"Upper middle income", y:0.4862235},
+              {"grp":"Low income",  y:0.488185},
+              {"grp":"Low income",  y:0.4933426},
+              {"grp":"Low income",  y:0.4954819},
+              {"grp":"Upper middle income", y:0.4999695},
+              {"grp":"Low income",  y:0.50286},
+              {"grp":"Low income",  y:0.5132345},
+              {"grp":"Lower middle income", y:0.5214526},
+              {"grp":"Lower middle income", y:0.5219956},
+              {"grp":"Lower middle income", y:0.5262932},
+              {"grp":"Low income",  y:0.5299518},
+              {"grp":"Low income",  y:0.5367055},
+              {"grp":"Low income",  y:0.5377697},
+              {"grp":"Low income",  y:0.5416723},
+              {"grp":"Lower middle income", y:0.5419823},
+              {"grp":"Low income",  y:0.5729027},
+              {"grp":"Low income",  y:0.6115305},
+              {"grp":"Low income",  y:0.6118677},
+              {"grp":"Low income",  y:0.6226563},
+              {"grp":"Low income",  y:0.6240197},
+              {"grp":"Lower middle income", y:0.6330234},
+              {"grp":"Lower middle income", y:0.634439},
+              {"grp":"Low income",  y:0.6509061},
+              {"grp":"Low income",  y:0.6575353},
+              {"grp":"Low income",  y:0.6846387},
+              {"grp":"Low income",  y:0.6854705},
+              {"grp":"Low income",  y:0.7179394},
+              {"grp":"Low income",  y:0.7442619},
+              {"grp":"Low income",  y:0.772778},
+              {"grp":"Low income",  y:0.8209577},],
+            color:'#FF8B00',
+        }],
+    }); 
+
+    var chart = $('#chart01b').highcharts();
+    chart.series[0].data[index1b2].update({
+      color:"#0375B4",
+    });
+
+}
+
+function chart02() {    
+    $('#chart02').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: null,
+        },
+        xAxis: {
+            categories: data_cat2,
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of women age 20-24<br>who were first married before 18',
+                x: -40,
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Percentage: <b>{point.y:.1f}%</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y:.1f}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            name: 'Index score',
+            data: data_mar,
+            color:'#FF8B00',
+        }],
+    }); 
+
+    var chart = $('#chart02').highcharts();
+    chart.series[0].data[index2].update({
+      color:"#0375B4",
+    });
+
+}
+
+function chart03() {    
+    $('#chart03').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: null,
+        },
+        xAxis: {
+            categories: data_cat3,
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {
+            title: {
+                text: 'Births per 1,000 women age 15-19',
+                x: -40,
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Births per 1,000 women: <b>{point.y:.2f}</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y:.2f}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            name: 'Index score',
+            data: data_ado,
+            color:'#FF8B00',
+        }],
+    }); 
+
+    var chart = $('#chart03').highcharts();
+    chart.series[0].data[index3].update({
+      color:"#0375B4",
+    });
+
+}
+
+function chart04() {    
+    $('#chart04').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: null,
+        },
+        xAxis: {
+            categories: data_cat4,
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {
+            title: {
+                text: 'Deaths per 100,000 live births',
+                x: -40,
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Deaths per 100,000 live births: <b>{point.y}</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            name: 'Index score',
+            data: data_mat,
+            color:'#FF8B00',
+        }],
+    }); 
+
+    var chart = $('#chart04').highcharts();
+    chart.series[0].data[index4b].update({
+      color:"#0375B4",
+    });
+
+}
+
+
+function chart05() {    
+    $('#chart05').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: null,
+        },
+        xAxis: {
+            categories: data_cat5,
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of seats held by women',
+                x: -40,
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Percentage: <b>{point.y:.1f}%</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y:.1f}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            name: 'Index score',
+            data: data_mps,
+            color:'#FF8B00',
+        }],
+    }); 
+
+    var chart = $('#chart05').highcharts();
+    chart.series[0].data[index5b].update({
+      color:"#0375B4",
+    });
+
+}
+
+
+function chart06() {    
+    $('#chart06').highcharts({
+        chart: {
+            type: 'bar',
+            backgroundColor: '#F3F3F3',
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            text: null,
+        },
+        xAxis: {
+            categories: data_cat6,
+            tickColor: '#F3F3F3',
+        },
+        yAxis: {
+            title: {
+                text: 'Percentage of relevant age group',
+                x: -40,
+            },
+            endOnTick: false, 
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: "Percentage: <b>{point.y:.2f}%</b>"
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0.01,
+                
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  rotation: 0,
+                  color: '#FFFFFF',
+                  format: '{point.y:.2f}',
+                  y: 0, // 10 pixels down from the top
+                  style: {
+                      fontSize: '11px',
+                  }
+                }
+            },
+        },
+        credits: {enabled: false,},
+        legend:{enabled: false,},
+        series: [{
+            name: 'Index score',
+            data: data_sch,
+            color:'#FF8B00',
+        }],
+    }); 
+
+    var chart = $('#chart06').highcharts();
+    chart.series[0].data[index6].update({
+      color:"#0375B4",
+    });
+
+} 
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSe2CKbpWWzeIkgW-2M_2qomigrwLhx5xIx8iIb1TD-YZnI6zw/formResponse',
+        data: { 
+          "entry.1847573218": json.ip,
+          "entry.442757367": inputcountry,
+          "entry.268015536": document.referrer,
+        }
+      }); 
+    }
+  );   
+} 
+
+function tweet() {
+  //sharerank = index1b;
+  //shareinc = selectcountry[0]["inc"];
+  //sharegrp = data_grp.length;
+  sharemsg = inputcountry + " is ranked " + index1b + " out of 144 countries in the #GirlsOpportunityIndex. What about your country?"
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent(sharemsg);
+  tweet_url += ' @PRI';
+  tweet_url += '&url=http://bit.ly/2dJviK4';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+  // sharerank = index1+1;
+  // shareinc = selectcountry[0]["inc"];
+  // sharegrp = data_grp.length;  
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-10-12/best-and-worst-countries-be-girl',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/refugee%20girl%20happy-cropped.jpg?itok=RML7t9-Y',
+  name: inputcountry + " is ranked " + index1b + " out of 144 countries in the Girls' Opportunity Index",
+  description:"Find out how good or bad your country is to be a girl"
+  }, function(response){});
+}
+
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '315389648825831',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

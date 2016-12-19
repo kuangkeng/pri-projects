@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="http://code.highcharts.com/mapdata/custom/world-highres.js"></script>
+    
+
+  </head>
+
+<style>
+@import "http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 1000px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 1000px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 5px;
+    margin-top:10px;
+    color:#33333c;
+}
+
+.highcharts-title {width:100% !important;}
+
+.align-center {text-align: center;}
+
+#frame {
+    position: relative;
+}
+.legendbox {
+    position: absolute;
+    bottom:0;
+    left:10;
+    z-index: 5;
+}
+
+.legendbox {text-align: left; margin-left: 10px;}
+.legend {padding-bottom: 10px; font-size: 14px; line-height: 15px;}
+.legenditem {text-align: left; font-size: 14px;}
+.legend table {width:130px;}
+.lcol1 {width:10%;}
+.lcol2 {width:90%; padding-left: 5%;}
+#cat1 {background-color: #ffffb2;}
+#cat2 {background-color: #fed976;}
+#cat3 {background-color: #feb24c;}
+#cat4 {background-color: #fd8d3c;}
+#cat5 {background-color: #f03b20;}
+#cat6 {background-color: #bd0026;}
+
+@media (max-width: 600px ) { 
+    #container {height: 460px;}
+    .legend {font-size: 12px; line-height: 13px}
+    .legenditem {font-size: 12px;}
+}
+
+@media (max-width: 400px ) { 
+    .highcharts-title {font-size: 14px !important;}
+    #container {height: 400px;}
+    #text {font-size: 14px;}
+} 
+
+@media (max-width: 315px ) { 
+    .btn {font-size: 11px; padding:2px; margin-right: 1px; margin-left: 0px; line-height: 13px;}
+}   
+
+</style>
+
+</head>
+<body>
+<div id="wrapper"> 
+    <div id="frame">   
+        <div id="container"></div>
+        <div class="legendbox">
+            <div class="legend">
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat1"></td>
+                            <td class="lcol2">0 - 1</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat2"></td>
+                            <td class="lcol2">1 - 10</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat3"></td>
+                            <td class="lcol2">10 - 100</td>
+                        </tr>
+                    </table>
+                </div>   
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat4"></td>
+                            <td class="lcol2">100 - 1000</td>
+                        </tr>
+                    </table>
+                </div> 
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat5"></td>
+                            <td class="lcol2">1000 - 5000</td>
+                        </tr>
+                    </table>
+                </div>   
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat6"></td>
+                            <td class="lcol2">> 5000</td>
+                        </tr>
+                    </table>
+                </div> 
+                in thousands metric tons                  
+            </div>  
+        </div>
+    </div>    
+    <div id="note">
+        <div id="text">
+            The study covers 192 coastal countries. Mismanaged plastic waste consists of plastic material that is either littered or inadequately disposed of by populations living within 50km of a coast. This waste is not fully contained, so could eventually enter the ocean via inland waterways, wastewater outflows and transport by wind or tides. See <span class="hyperlink"><a href='http://science.sciencemag.org/content/sci/suppl/2015/02/11/347.6223.768.DC1/Jambeck.SM.pdf' target='_blank'>methodology</a></span> for details.</div>
+        Source:  
+        <span class="hyperlink"><a href='http://science.sciencemag.org/content/347/6223/768' target='_blank'>Plastic waste inputs from land into the ocean, Science.</a></span>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Map({
+            chart: {
+                renderTo: 'container',
+                events: {
+                    load: function () {
+                    this.get('TH').zoomTo();
+                    this.mapZoom(4);
+                    }
+                }
+            },
+            
+            title : {
+                text: 'Mismanaged plastic waste estimates, 2010',
+            },
+            subtitle : {enabled: false},
+            legend: { 
+                enabled:false,
+                title: {
+                    text: 'in thousand metric tons'
+                }, 
+                align: 'left',
+                verticalAlign: 'bottom',
+                floating: true,
+            },
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                  verticalAlign: 'bottom',
+                  align: 'right',
+                  floating: true,
+                },
+            },
+
+            colorAxis: {
+                dataClasses: [
+                    {from:0, to:1, color:"#ffffb2"},
+                    {from:1.01, to:10, color:"#fed976"},
+                    {from:10.01, to:100, color:"#feb24c"},
+                    {from:100.01, to:1000, color:"#fd8d3c"},
+                    {from:1000.01, to:5000, color:"#f03b20"},
+                    {from:5000.01, to:10000, color:"#bd0026"},
+                ],    
+            },
+            tooltip: {
+                headerFormat: null,
+                pointFormat: "<b>{point.name}</b><br>Mismanaged plastic waste in 2010:<br><b>{point.value:,.0f},000 metric tons</b><br>Mismanaged plastic waste per capita:<br><b>{point.gpd} gram/person/day</b>"
+            },
+            credits: { enabled: false },
+            series: [{
+                mapData: Highcharts.maps['custom/world-highres'],
+                joinBy: ['iso-a2'],
+                data: [
+                    {'iso-a2':'CN', 'id':'CN', 'value':8819.72, 'gpd':91.91, 'w2025':17814.78},
+                    {'iso-a2':'ID', 'id':'ID', 'value':3216.86, 'gpd':47.07, 'w2025':7415.2},
+                    {'iso-a2':'PH', 'id':'PH', 'value':1883.66, 'gpd':61.84, 'w2025':5088.39},
+                    {'iso-a2':'VN', 'id':'VN', 'value':1833.82, 'gpd':89.94, 'w2025':4172.83},
+                    {'iso-a2':'LK', 'id':'LK', 'value':1591.18, 'gpd':299.24, 'w2025':1918.67},
+                    {'iso-a2':'TH', 'id':'TH', 'value':1027.74, 'gpd':108.12, 'w2025':2179.51},
+                    {'iso-a2':'EG', 'id':'EG', 'value':967.01, 'gpd':121.8, 'w2025':1937.43},
+                    {'iso-a2':'MY', 'id':'MY', 'value':936.82, 'gpd':112.13, 'w2025':1765.98},
+                    {'iso-a2':'NG', 'id':'NG', 'value':851.49, 'gpd':84.9, 'w2025':2481.01},
+                    {'iso-a2':'BD', 'id':'BD', 'value':787.33, 'gpd':30.44, 'w2025':2210.23},
+                    {'iso-a2':'ZA', 'id':'ZA', 'value':630, 'gpd':133.81, 'w2025':836.28},
+                    {'iso-a2':'IN', 'id':'IN', 'value':599.82, 'gpd':8.76, 'w2025':2881.29},
+                    {'iso-a2':'DZ', 'id':'DZ', 'value':520.55, 'gpd':86.14, 'w2025':1017.44},
+                    {'iso-a2':'TR', 'id':'TR', 'value':485.94, 'gpd':39.11, 'w2025':790.23},
+                    {'iso-a2':'PK', 'id':'PK', 'value':480.49, 'gpd':90.28, 'w2025':1221.46},
+                    {'iso-a2':'BR', 'id':'BR', 'value':471.4, 'gpd':17.29, 'w2025':954.2},
+                    {'iso-a2':'MM', 'id':'MM', 'value':458.27, 'gpd':66.12, 'w2025':1149.27},
+                    {'iso-a2':'MA', 'id':'MA', 'value':310.13, 'gpd':49.1, 'w2025':706.58},
+                    {'iso-a2':'KP', 'id':'KP', 'value':304.33, 'gpd':48.12, 'w2025':610.61},
+                    {'iso-a2':'US', 'id':'US', 'value':275.42, 'gpd':6.68, 'w2025':336.82},
+                    {'iso-a2':'SN', 'id':'SN', 'value':254.77, 'gpd':85.91, 'w2025':738.26},
+                    {'iso-a2':'IR', 'id':'IR', 'value':247.4, 'gpd':74.49, 'w2025':460.07},
+                    {'iso-a2':'TN', 'id':'TN', 'value':234.31, 'gpd':88.24, 'w2025':440.7},
+                    {'iso-a2':'CI', 'id':'CI', 'value':194.56, 'gpd':85.55, 'w2025':537.16},
+                    {'iso-a2':'PE', 'id':'PE', 'value':194.45, 'gpd':38.7, 'w2025':377.11},
+                    {'iso-a2':'YE', 'id':'YE', 'value':169.18, 'gpd':76.63, 'w2025':513.91},
+                    {'iso-a2':'SY', 'id':'SY', 'value':157.9, 'gpd':119.44, 'w2025':304.96},
+                    {'iso-a2':'AR', 'id':'AR', 'value':157.78, 'gpd':26.28, 'w2025':320.2},
+                    {'iso-a2':'HT', 'id':'HT', 'value':147.39, 'gpd':44.1, 'w2025':324.18},
+                    {'iso-a2':'JP', 'id':'JP', 'value':143.12, 'gpd':3.4, 'w2025':177.24},
+                    {'iso-a2':'UA', 'id':'UA', 'value':128.76, 'gpd':51.78, 'w2025':233.39},
+                    {'iso-a2':'SV', 'id':'SV', 'value':118.73, 'gpd':50.74, 'w2025':226.86},
+                    {'iso-a2':'DO', 'id':'DO', 'value':118.23, 'gpd':39.34, 'w2025':228.67},
+                    {'iso-a2':'EC', 'id':'EC', 'value':109.38, 'gpd':46.82, 'w2025':211.02},
+                    {'iso-a2':'VE', 'id':'VE', 'value':102.33, 'gpd':17.42, 'w2025':154.24},
+                    {'iso-a2':'SO', 'id':'SO', 'value':101.53, 'gpd':46.58, 'w2025':289.6},
+                    {'iso-a2':'MX', 'id':'MX', 'value':101.34, 'gpd':12.26, 'w2025':233.39},
+                    {'iso-a2':'HN', 'id':'HN', 'value':95.64, 'gpd':78.82, 'w2025':189.17},
+                    {'iso-a2':'TT', 'id':'TT', 'value':94.07, 'gpd':189.71, 'w2025':73.51},
+                    {'iso-a2':'CO', 'id':'CO', 'value':92.17, 'gpd':33.68, 'w2025':179.97},
+                    {'iso-a2':'GH', 'id':'GH', 'value':91.57, 'gpd':32.46, 'w2025':325.12},
+                    {'iso-a2':'GT', 'id':'GT', 'value':91.56, 'gpd':104.85, 'w2025':157.7},
+                    {'iso-a2':'CU', 'id':'CU', 'value':90.63, 'gpd':21.91, 'w2025':180.45},
+                    {'iso-a2':'PG', 'id':'PG', 'value':89.84, 'gpd':89.58, 'w2025':242.33},
+                    {'iso-a2':'NI', 'id':'NI', 'value':84.42, 'gpd':66.41, 'w2025':169.44},
+                    {'iso-a2':'RU', 'id':'RU', 'value':80.76, 'gpd':20.46, 'w2025':128.95},
+                    {'iso-a2':'GB', 'id':'GB', 'value':67.55, 'gpd':4.28, 'w2025':94.16},
+                    {'iso-a2':'AO', 'id':'AO', 'value':62.53, 'gpd':45.2, 'w2025':136.77},
+                    {'iso-a2':'KM', 'id':'KM', 'value':58.03, 'gpd':169.39, 'w2025':100.87},
+                    {'iso-a2':'LR', 'id':'LR', 'value':56.73, 'gpd':72.35, 'w2025':142.79},
+                    {'iso-a2':'MU', 'id':'MU', 'value':56.05, 'gpd':122.27, 'w2025':73.17},
+                    {'iso-a2':'LY', 'id':'LY', 'value':52.78, 'gpd':35.7, 'w2025':102.58},
+                    {'iso-a2':'FJ', 'id':'FJ', 'value':49.26, 'gpd':150.59, 'w2025':71},
+                    {'iso-a2':'TZ', 'id':'TZ', 'value':48.59, 'gpd':19.9, 'w2025':214.2},
+                    {'iso-a2':'LB', 'id':'LB', 'value':47.81, 'gpd':33.67, 'w2025':101.85},
+                    {'iso-a2':'MZ', 'id':'MZ', 'value':46, 'gpd':13.17, 'w2025':287.07},
+                    {'iso-a2':'ES', 'id':'ES', 'value':45.85, 'gpd':5.52, 'w2025':58.93},
+                    {'iso-a2':'TW', 'id':'TW', 'value':45.72, 'gpd':5.64, 'w2025':64.63},
+                    {'iso-a2':'BJ', 'id':'BJ', 'value':43.02, 'gpd':36.43, 'w2025':119.47},
+                    {'iso-a2':'CR', 'id':'CR', 'value':42.09, 'gpd':46.51, 'w2025':75.89},
+                    {'iso-a2':'GY', 'id':'GY', 'value':42, 'gpd':224.22, 'w2025':36.1},
+                    {'iso-a2':'SL', 'id':'SL', 'value':36.41, 'gpd':34.55, 'w2025':121.31},
+                    {'iso-a2':'TG', 'id':'TG', 'value':35.4, 'gpd':48.7, 'w2025':96.99},
+                    {'iso-a2':'MG', 'id':'MG', 'value':34.52, 'gpd':13.39, 'w2025':177.63},
+                    {'iso-a2':'PA', 'id':'PA', 'value':34.39, 'gpd':28.99, 'w2025':70.76},
+                    {'iso-a2':'KR', 'id':'KR', 'value':33.75, 'gpd':0.92, 'w2025':52.76},
+                    {'iso-a2':'IT', 'id':'IT', 'value':32.76, 'gpd':2.65, 'w2025':45.06},
+                    {'iso-a2':'MV', 'id':'MV', 'value':31.47, 'gpd':219.62, 'w2025':40.14},
+                    {'iso-a2':'DE', 'id':'DE', 'value':31.24, 'gpd':9.68, 'w2025':33.32},
+                    {'iso-a2':'AL', 'id':'AL', 'value':29.71, 'gpd':32.16, 'w2025':63.05},
+                    {'iso-a2':'KH', 'id':'KH', 'value':29.69, 'gpd':58.46, 'w2025':62.83},
+                    {'iso-a2':'HK', 'id':'HK', 'value':28.51, 'gpd':10.31, 'w2025':37.61},
+                    {'iso-a2':'CM', 'id':'CM', 'value':27.71, 'gpd':38.22, 'w2025':71.86},
+                    {'iso-a2':'NL', 'id':'NL', 'value':27.7, 'gpd':8.46, 'w2025':32.39},
+                    {'iso-a2':'FR', 'id':'FR', 'value':24.11, 'gpd':3.82, 'w2025':34.67},
+                    {'iso-a2':'SD', 'id':'SD', 'value':22.93, 'gpd':83.47, 'w2025':52.06},
+                    {'iso-a2':'KE', 'id':'KE', 'value':22.66, 'gpd':22.74, 'w2025':87.11},
+                    {'iso-a2':'VU', 'id':'VU', 'value':22.48, 'gpd':244.52, 'w2025':38.01},
+                    {'iso-a2':'CL', 'id':'CL', 'value':21.75, 'gpd':10.6, 'w2025':42.56},
+                    {'iso-a2':'UY', 'id':'UY', 'value':21.56, 'gpd':24.27, 'w2025':8.04},
+                    {'iso-a2':'TL', 'id':'TL', 'value':20.69, 'gpd':84.76, 'w2025':64.2},
+                    {'iso-a2':'SA', 'id':'SA', 'value':20.55, 'gpd':15.67, 'w2025':43.86},
+                    {'iso-a2':'SB', 'id':'SB', 'value':20.39, 'gpd':90.31, 'w2025':176.59},
+                    {'iso-a2':'GW', 'id':'GW', 'value':20.24, 'gpd':45.9, 'w2025':51.95},
+                    {'iso-a2':'GM', 'id':'GM', 'value':19.62, 'gpd':40.58, 'w2025':53.5},
+                    {'iso-a2':'IL', 'id':'IL', 'value':19.01, 'gpd':7.8, 'w2025':28.21},
+                    {'iso-a2':'BG', 'id':'BG', 'value':18.74, 'gpd':51.2, 'w2025':25.77},
+                    {'iso-a2':'GN', 'id':'GN', 'value':18.51, 'gpd':25.41, 'w2025':59.89},
+                    {'iso-a2':'DJ', 'id':'DJ', 'value':17.32, 'gpd':76.34, 'w2025':45.61},
+                    {'iso-a2':'CG', 'id':'CG', 'value':16.77, 'gpd':54.18, 'w2025':39.85},
+                    {'iso-a2':'PR', 'id':'PR', 'value':16.52, 'gpd':10.65, 'w2025':20.48},
+                    {'iso-a2':'HR', 'id':'HR', 'value':16.46, 'gpd':28.14, 'w2025':19.59},
+                    {'iso-a2':'PT', 'id':'PT', 'value':16.4, 'gpd':5.28, 'w2025':19.38},
+                    {'iso-a2':'ER', 'id':'ER', 'value':16.26, 'gpd':35.18, 'w2025':43.48},
+                    {'iso-a2':'PL', 'id':'PL', 'value':15.7, 'gpd':13.15, 'w2025':26.86},
+                    {'iso-a2':'IQ', 'id':'IQ', 'value':15.56, 'gpd':66.7, 'w2025':47.69},
+                    {'iso-a2':'CD', 'id':'CD', 'value':15.21, 'gpd':38.72, 'w2025':43.48},
+                    {'iso-a2':'GE', 'id':'GE', 'value':14.47, 'gpd':35.27, 'w2025':24.53},
+                    {'iso-a2':'GR', 'id':'GR', 'value':14.23, 'gpd':3.98, 'w2025':18.62},
+                    {'iso-a2':'AU', 'id':'AU', 'value':13.89, 'gpd':2.21, 'w2025':24.65},
+                    {'iso-a2':'MR', 'id':'MR', 'value':13.85, 'gpd':37.75, 'w2025':39.75},
+                    {'iso-a2':'BA', 'id':'BA', 'value':12.95, 'gpd':60.61, 'w2025':20.2},
+                    {'iso-a2':'IE', 'id':'IE', 'value':11.71, 'gpd':8.56, 'w2025':14.04},
+                    {'iso-a2':'KW', 'id':'KW', 'value':11.49, 'gpd':13.72, 'w2025':13.48},
+                    {'iso-a2':'LV', 'id':'LV', 'value':10.28, 'gpd':19.68, 'w2025':16.65},
+                    {'iso-a2':'JM', 'id':'JM', 'value':10.02, 'gpd':9.73, 'w2025':59.57},
+                    {'iso-a2':'CV', 'id':'CV', 'value':9.35, 'gpd':49.04, 'w2025':18.48},
+                    {'iso-a2':'NZ', 'id':'NZ', 'value':9.29, 'gpd':6.59, 'w2025':11.52},
+                    {'iso-a2':'NO', 'id':'NO', 'value':8.4, 'gpd':5.57, 'w2025':9.8},
+                    {'iso-a2':'CA', 'id':'CA', 'value':7.96, 'gpd':1.84, 'w2025':14.67},
+                    {'iso-a2':'LC', 'id':'LC', 'value':6.71, 'gpd':112.61, 'w2025':8.61},
+                    {'iso-a2':'TO', 'id':'TO', 'value':6.62, 'gpd':176.41, 'w2025':10.27},
+                    {'iso-a2':'GP', 'id':'GP', 'value':6.56, 'gpd':38.58, 'w2025':11.5},
+                    {'iso-a2':'SG', 'id':'SG', 'value':6.47, 'gpd':3.95, 'w2025':10.88},
+                    {'iso-a2':'GA', 'id':'GA', 'value':6.09, 'gpd':19.34, 'w2025':15.45},
+                    {'iso-a2':'EE', 'id':'EE', 'value':5.98, 'gpd':18.66, 'w2025':8.37},
+                    {'iso-a2':'GQ', 'id':'GQ', 'value':5.98, 'gpd':46.57, 'w2025':14.12},
+                    {'iso-a2':'PS', 'id':'PS', 'value':5.6, 'gpd':5.04, 'w2025':18.68},
+                    {'iso-a2':'NA', 'id':'NA', 'value':5.48, 'gpd':96.82, 'w2025':11.34},
+                    {'iso-a2':'WS', 'id':'WS', 'value':5.12, 'gpd':83.51, 'w2025':10.99},
+                    {'iso-a2':'ST', 'id':'ST', 'value':5.08, 'gpd':85.02, 'w2025':13.31},
+                    {'iso-a2':'FI', 'id':'FI', 'value':4.98, 'gpd':4.66, 'w2025':6.42},
+                    {'iso-a2':'FM', 'id':'FM', 'value':4.79, 'gpd':84.8, 'w2025':10.7},
+                    {'iso-a2':'OM', 'id':'OM', 'value':4.66, 'gpd':4.91, 'w2025':11.77},
+                    {'iso-a2':'SC', 'id':'SC', 'value':4.62, 'gpd':138.52, 'w2025':5.48},
+                    {'iso-a2':'ME', 'id':'ME', 'value':4.42, 'gpd':46.48, 'w2025':7.24},
+                    {'iso-a2':'BH', 'id':'BH', 'value':4.38, 'gpd':16.12, 'w2025':9.91},
+                    {'iso-a2':'SR', 'id':'SR', 'value':3.94, 'gpd':26.85, 'w2025':6.39},
+                    {'iso-a2':'BZ', 'id':'BZ', 'value':3.89, 'gpd':52.68, 'w2025':6.04},
+                    {'iso-a2':'RO', 'id':'RO', 'value':3.61, 'gpd':11.3, 'w2025':8.26},
+                    {'iso-a2':'BB', 'id':'BB', 'value':3.48, 'gpd':34.47, 'w2025':3.72},
+                    {'iso-a2':'LT', 'id':'LT', 'value':3.48, 'gpd':21.47, 'w2025':5.48},
+                    {'iso-a2':'MH', 'id':'MH', 'value':3.19, 'gpd':150.33, 'w2025':5.72},
+                    {'iso-a2':'KI', 'id':'KI', 'value':3.04, 'gpd':88.28, 'w2025':6.98},
+                    {'iso-a2':'AE', 'id':'AE', 'value':3.02, 'gpd':4.09, 'w2025':5.91},
+                    {'iso-a2':'BE', 'id':'BE', 'value':2.74, 'gpd':1.58, 'w2025':5.74},
+                    {'iso-a2':'MT', 'id':'MT', 'value':2.62, 'gpd':17.74, 'w2025':3.76},
+                    {'iso-a2':'GF', 'id':'GF', 'value':2.36, 'gpd':38.58, 'w2025':5.58},
+                    {'iso-a2':'GD', 'id':'GD', 'value':2.25, 'gpd':64.07, 'w2025':2.45},
+                    {'iso-a2':'VC', 'id':'VC', 'value':2.24, 'gpd':51.18, 'w2025':3},
+                    {'iso-a2':'SE', 'id':'SE', 'value':2.15, 'gpd':0.95, 'w2025':5.25},
+                    {'iso-a2':'CY', 'id':'CY', 'value':1.82, 'gpd':5.94, 'w2025':2.61},
+                    {'iso-a2':'DK', 'id':'DK', 'value':1.79, 'gpd':0.91, 'w2025':4.23},
+                    {'iso-a2':'JO', 'id':'JO', 'value':1.74, 'gpd':85.91, 'w2025':2.97},
+                    {'iso-a2':'BS', 'id':'BS', 'value':1.33, 'gpd':10.7, 'w2025':1.72},
+                    {'iso-a2':'PF', 'id':'PF', 'value':1.29, 'gpd':13.02, 'w2025':1.82},
+                    {'iso-a2':'AG', 'id':'AG', 'value':1.25, 'gpd':51.37, 'w2025':1.39},
+                    {'iso-a2':'RE', 'id':'RE', 'value':0.85, 'gpd':2.87, 'w2025':1.61},
+                    {'iso-a2':'DM', 'id':'DM', 'value':0.78, 'gpd':30.59, 'w2025':1.43},
+                    {'iso-a2':'QA', 'id':'QA', 'value':0.76, 'gpd':3.18, 'w2025':1.56},
+                    {'iso-a2':'MQ', 'id':'MQ', 'value':0.75, 'gpd':5.1, 'w2025':0.96},
+                    {'iso-a2':'PW', 'id':'PW', 'value':0.72, 'gpd':83.71, 'w2025':1.35},
+                    {'iso-a2':'KN', 'id':'KN', 'value':0.71, 'gpd':54.26, 'w2025':0.74},
+                    {'iso-a2':'MO', 'id':'MO', 'value':0.7, 'gpd':7.42, 'w2025':1.15},
+                    {'iso-a2':'IS', 'id':'IS', 'value':0.6, 'gpd':5.6, 'w2025':0.88},
+                    {'iso-a2':'SI', 'id':'SI', 'value':0.56, 'gpd':4.53, 'w2025':0.98},
+                    {'iso-a2':'NR', 'id':'NR', 'value':0.55, 'gpd':99.19, 'w2025':1.04},
+                    {'iso-a2':'NC', 'id':'NC', 'value':0.47, 'gpd':5.02, 'w2025':0.7},
+                    {'iso-a2':'TV', 'id':'TV', 'value':0.46, 'gpd':108.25, 'w2025':0.86},
+                    {'iso-a2':'AN', 'id':'AN', 'value':0.42, 'gpd':5.02, 'w2025':0.37},
+                    {'iso-a2':'CK', 'id':'CK', 'value':0.42, 'gpd':54.42, 'w2025':0.78},
+                    {'iso-a2':'GU', 'id':'GU', 'value':0.39, 'gpd':5.64, 'w2025':0.57},
+                    {'iso-a2':'AW', 'id':'AW', 'value':0.37, 'gpd':7.38, 'w2025':0.48},
+                    {'iso-a2':'CW', 'id':'CW', 'value':0.27, 'gpd':5.1, 'w2025':0.38},
+                    {'iso-a2':'VI', 'id':'VI', 'value':0.25, 'gpd':5.1, 'w2025':0.3},
+                    {'iso-a2':'MP', 'id':'MP', 'value':0.22, 'gpd':5.64, 'w2025':0.31},
+                    {'iso-a2':'JE', 'id':'JE', 'value':0.17, 'gpd':5.02, 'w2025':0.23},
+                    {'iso-a2':'IM', 'id':'IM', 'value':0.15, 'gpd':5.02, 'w2025':0.21},
+                    {'iso-a2':'BM', 'id':'BM', 'value':0.12, 'gpd':5.02, 'w2025':0.17},
+                    {'iso-a2':'GL', 'id':'GL', 'value':0.1, 'gpd':5.02, 'w2025':0.15},
+                    {'iso-a2':'GG', 'id':'GG', 'value':0.1, 'gpd':5.02, 'w2025':0.15},
+                    {'iso-a2':'SH', 'id':'SH', 'value':0.1, 'gpd':38.58, 'w2025':0.18},
+                    {'iso-a2':'KY', 'id':'KY', 'value':0.1, 'gpd':5.02, 'w2025':0.13},
+                    {'iso-a2':'BN', 'id':'BN', 'value':0.09, 'gpd':0.71, 'w2025':0.34},
+                    {'iso-a2':'FO', 'id':'FO', 'value':0.09, 'gpd':5.02, 'w2025':0.13},
+                    {'iso-a2':'MF', 'id':'MF', 'value':0.07, 'gpd':5.1, 'w2025':0.1},
+                    {'iso-a2':'NF', 'id':'NF', 'value':0.07, 'gpd':86.3, 'w2025':0.16},
+                    {'iso-a2':'GI', 'id':'GI', 'value':0.06, 'gpd':5.3, 'w2025':0.09},
+                    {'iso-a2':'MC', 'id':'MC', 'value':0.06, 'gpd':5.02, 'w2025':0.09},
+                    {'iso-a2':'VG', 'id':'VG', 'value':0.06, 'gpd':5.12, 'w2025':0.08},
+                    {'iso-a2':'AI', 'id':'AI', 'value':0.05, 'gpd':9.71, 'w2025':0.07},
+                    {'iso-a2':'TC', 'id':'TC', 'value':0.05, 'gpd':6, 'w2025':0.07},
+                    {'iso-a2':'TK', 'id':'TK', 'value':0.04, 'gpd':86.3, 'w2025':0.1},
+                    {'iso-a2':'MS', 'id':'MS', 'value':0.04, 'gpd':20.07, 'w2025':0.07},
+                    {'iso-a2':'PM', 'id':'PM', 'value':0.01, 'gpd':5.1, 'w2025':0.02},
+                    {'iso-a2':'FK', 'id':'FK', 'value':0, 'gpd':5.1, 'w2025':0.01},
+                    {'iso-a2':'NU', 'id':'NU', 'value':0, 'gpd':5.64, 'w2025':0.01},
+                    {'iso-a2':'CX', 'id':'CX', 'value':0, 'gpd':5.02, 'w2025':0},
+                    {'iso-a2':'SJ', 'id':'SJ', 'value':0, 'gpd':2.05, 'w2025':0},
+                    {'iso-a2':'CC', 'id':'CC', 'value':0, 'gpd':5.02, 'w2025':0},
+                ],
+                dataLabels: {enabled: false,},
+                states: {
+                            hover: {
+                                color: '#636363',
+                            }
+                        },
+            }]
+        });
+    });
+});
+
+
+
+
+</script>

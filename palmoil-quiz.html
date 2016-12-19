@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+    }
+    #quiz {max-width: 700px;}    
+
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.2em;
+      text-align: center;
+    }
+
+    #introTitle {
+      margin-top: 20px; 
+      font-size: 32px; 
+      padding-left: 40px; 
+      padding-right: 40px;
+      padding-bottom: 30px;
+      color:white;
+      text-shadow: 1px 1px 2px #9a9a9a;
+      font-weight: 500;
+    }
+
+    #introIntro {
+      font-size: 22px; 
+      padding-left: 40px; 
+      padding-right: 40px; 
+      text-align: center; 
+      padding-bottom:40px;
+      color:white;
+      text-shadow: 1px 1px 2px #9a9a9a;
+    }
+
+    #resultTitle {
+      margin-top: 40px;
+    }
+
+    #resultIntro {
+      text-align: center;
+    }
+
+    .question { 
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+    }   
+
+    .blurb {
+      font-size: 16px;
+      color: #333;
+      margin: 20px 0 0 0;
+    }
+
+    .mybtn {
+      font-size: 18px;
+      font-weight: 400;
+      width: 100px;
+      margin-bottom: 30px !important;
+    }    
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }
+
+    .counter {
+      font-size: 12px;
+      color: #4188bc;
+      margin: 10px 0 10px 0;
+    }   
+
+    #intro {
+      background:url('http://cdn1.pri.org/sites/default/files/styles/original_image/public/iran-quiz-lead-2.jpg')no-repeat;
+      min-height: 650px;
+      background-size: contain;
+    } 
+
+    input[type=radio], input[type=checkbox] {
+      margin: 3px 0 0 ;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 400 !important;
+      color: #173e43;
+      line-height: 1.4em;
+      padding: 5px 20px 5px 40px !important;
+      border-radius: 5px;
+    }
+
+    #nextBtn { margin-top: 20px; margin-bottom: 10px; }  
+
+    #container01{
+      height: 250px; 
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    .shareBox table {width:100%;}
+    .shareBox td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%}  
+
+    .photos table {
+      border-spacing: 10px 10px;
+      border-collapse: separate;
+    }
+    #photocol0, #photocol1 {
+      text-align: center;
+      background-color: white; 
+      border:0.5px solid #bebebe;
+    }
+
+    #photocol0:hover, #photocol1:hover {
+      background-color: #fff195; 
+    }
+
+    .imgbox {padding:10px 10px 0px 10px;}
+    .textbox {
+      padding:5px;
+      font-size: 18px;
+    }
+
+    .shareBox {
+      padding-top: 30px;
+      padding-bottom:40px;
+    }    
+
+    #notes {
+      font-style: italic;
+      padding-bottom: 40px;
+      text-align: center;
+    }
+
+    #credit {
+      font-size: 12px;
+      position:absolute;
+      bottom:5px;
+      left:10px;
+      color:#e5e5e5;
+    }
+
+    @media (max-width: 600px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 16px; margin-bottom: 0px;}
+      .blurb {font-size: 14px; margin-top: 0px;}
+      .mybtn {font-size: 16px;}
+      .counter {font-size: 10px;}
+      label {font-size: 14px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 16px; 
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-bottom:20px;
+      }
+      #introTitle {
+        font-size: 22px;
+        margin-top: 10px; 
+        padding-left: 15px; 
+        padding-right: 15px;
+        padding-bottom: 20px;
+      }
+
+    }  
+
+    @media (max-width: 400px ) { 
+      #quiz { padding-bottom: 0px;}
+      .title {font-size: 20px; margin-bottom: 10px;}
+      .question { font-size: 15px; margin-bottom: 0px;}
+      .blurb {font-size: 13px; margin-top: 0px;}
+      .mybtn {font-size: 14px; padding:4px 4px;}
+      .counter {font-size: 10px;}
+      label {font-size: 13px;}
+      #resultTitle {margin-top: 40px; margin-bottom: 30px;}
+      #introIntro {
+        font-size: 15px;
+        line-height: 17px;
+        padding-bottom: 15px;
+      }
+      #introTitle {
+        font-size: 17px;
+        margin-top: 10px; 
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 10px;
+      }
+
+    }
+</style>
+
+<body>
+  <div id="mycon" class="parent" style="width:100%; padding-bottom:5px;">
+    <div id="quiz" class="container">    
+      <div class="row"> 
+        <div id="intro" class="col-sm-12 col-xs-12">
+          <div id="introTitle" class="title">How much do you know about women's rights in Iran?</div>
+          <div id="introIntro" class="blurb">Put yourself in the shoes of an Iranian woman and test your knowledge about what it's like to live in Iran today. What are some of the restrictions you might experience?</div>
+          <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Start</div>
+          <div id="credit">Photo credit: Reuters</div>
+        </div>  <!-- END INTRO PAGE -->       
+
+        <div id="questions" class="col-sm-12 col-xs-12">
+          <div id="counter" class="counter">Question 0 of 0</div>
+          <div id="theQuestion" class="question">Question goes here</div>
+          <div id="allChoices" class="photos">Choices go here</div>
+        </div><!-- END QUESTION PAGE -->  
+
+        <div id="answers" class="col-sm-12 col-xs-12">
+          <div id="answerTitle" class="title">Answer</div>
+          <div id="answerExplain" class="blurb">Explanation</div>
+          <div id="nextBtn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+        </div>  <!-- END ANSWERS PAGE -->     
+
+        <div id="results" class="col-sm-12 col-xs-12">
+          <div id="resultTitle" class="title">You got <span id="pointer">0</span> out of 9 right!</div>
+          <div id="result01" class="title">Congratulations! You should probably add this into your résumé.</div>
+          <div id="result02" class="title">Not bad. Looks like you have good knowledge about Iran.</div>
+          <div id="result03" class="title">Is okay, at least you learned something new from this quiz, right?</div>
+          <div id="resultIntro" class="blurb">Learned something from this quiz? Share it with your friends and the world.</div>
+          <div class="shareBox">
+            <table> 
+              <tr>
+                 <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+                 <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+              </tr> 
+            </table>
+          </div>
+        </div>  <!-- END RESULTS PAGE -->       
+      </div> 
+    </div>
+
+  </div>    
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var count = 0;
+var point = 0;
+var onoff = 0;
+
+var theQuestions = [];
+    theQuestions[0] = 'You are offered a teaching position at a university in a new city. You need to move to that city but your husband refuses to follow. Can you insist and move?';
+    theQuestions[1] = 'Your family is facing economic hardship. A wealthy businessman offers to marry your daughter and take care of her and your family, but she is just 13 years old. Can she get married legally?';
+    theQuestions[2] = "You are the president of a prominent women’s rights group in Tehran. Your colleagues encourage you to run for office in the general elections as they believe it is the right platform to advance your work. Can you do it?";
+    theQuestions[3] = 'Your boss asks you to attend a two-week training in Singapore. You know this is a good opportunity but you have to:';
+    theQuestions[4] = 'You study law and want to become a judge one day. What are the obstacles you need to overcome?';
+    theQuestions[5] = 'Your friend has invited you to watch a soccer match with her at the local stadium. Can you say yes?';
+    theQuestions[6] = 'You want to go shopping with your sisters. You open your wardrobe and start to dress up, what would you wear on your head?';
+    theQuestions[7] = "You have found your dream job. It pays much higher than what your husband is earning but it also requires long hours. You hesitate to accept the job because:";
+    theQuestions[8] = "Your daughter is working hard on her studies so she can get into a good university. What are the chances of her getting into a university in Iran?";
+
+var thePhotos = [];
+    thePhotos[0] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[1] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[2] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[3] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[4] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[5] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[6] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[7] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+    thePhotos[8] = "http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb;http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-bw.jpg?itok=tBr2M9Lv";
+
+var theChoices = [];
+    theChoices[0] = "item1;item2";
+    theChoices[1] = "item1;item2";
+    theChoices[2] = "item1;item2";
+    theChoices[3] = "item1;item2";
+    theChoices[4] = "item1;item2";
+    theChoices[5] = "item1;item2";
+    theChoices[6] = "item1;item2";
+    theChoices[7] = "item1;item2";
+    theChoices[8] = "item1;item2";
+
+var theExplain = [];
+    theExplain[0] = "<p>You can move to a new city only if your husband approves it. <a href='http://impactiran.org/wp-content/uploads/Women-Living-Under-Muslim-Laws_Irans-UPR_second-cycle.pdf' target='_blank'>Iranian civil laws</a> state that the position of the head of the family is the exclusive right of the husband. The wife must stay in the house assigned by the husband unless there is consent from the husband or the court. It is also the wife's obligation to fulfill the <a href='http://impactiran.org/wp-content/uploads/Women-Living-Under-Muslim-Laws_Irans-UPR_second-cycle.pdf' target='_blank'>duties of a wife</a> at all times including her husband's sexual needs or else she could lose access to her 'cost of maintenance' which is the statutory financial support from the husband.</p>";
+    theExplain[1] = "<p>The legal age to get married in Iran is 13 for girls and 15 for boys. Girls below 13 can still be wed subject to the permission of their father and the court. Government statistics reveal that the number of officially registered marriages involving girls under the age of 15 <a href='http://impactiran.org/wp-content/uploads/Women-Living-Under-Muslim-Laws_Irans-UPR_second-cycle.pdf' target='_blank'>have increased</a> from 33,383 in 2006 to 39,831 in 2011.</p>";
+    theExplain[2] = "<p>Yes, women have the right to run for office in general elections however there are many obstacles and the numbers of female candidates and elected members are still low.</p><p>In the latest legislative elections in February, a <a href='http://www.al-monitor.com/pulse/originals/2016/02/iran-parliamentary-elections-women-elected-double-mps.html#' target='_blank'>new record</a> was set with at least 14 seats in the Islamic Consultative Assembly, or Majlis, went to female candidates (the second round of election has yet to be held). However the number only represents five percent of the total seats of 290.</p><p>One of the reasons behind the low number is because only 586 out of 1,234 women who registered as candidates were listed as 'qualified' by Iran's Guardian Council of the Constitution to run in the elections. All 12 members in the Guardian Council are appointed by Iran's Supreme Leader and the chief judge, who is also appointed by the Supreme Leader.</p><p>The Guardian Council also disqualified all 16 women who registered candidates to run for the 88-member Assembly of Experts, a constitutional body in charge of electing the Supreme Leader. No woman has ever been elected to the assembly since its establishment in 1982.</p>";
+    theExplain[3] = "<p>You need to get your husband's approval. Married women in Iran need a written agreement from their husband to get a passport. Iranian men also have the authority to ban their wives from traveling abroad. It happened to Iran's national soccer team captain Niloufar Ardalan. She could not play in this year's Asian Football Confederation's women's soccer championship in Malaysia because her husband, a sports journalist and TV presenter <a href='http://www.rferl.org/content/iran-female-soccer-star-protests-husband-travel-ban/27248135.html' target='_blank'>refused to sign her passport renewal form</a>. The reason? He did not want her to miss the first day of school of their 7-year-old son.</p>";
+    theExplain[4] = "<p>There is a ban on women judges in Iran. There's no female judge in Iran after the 1979 Islamic Revolution. The government sometimes refer to some female legal officials as judges but they are merely counselors, investigators or assistants to male judges with no power to make rulings. The <a href='http://iranhrdc.org/english/publications/legal-commentary/1000000261-gender-inequality-and-discrimination-the-case-of-iranian-women.html#27' target='_blank'>reason behind the ban</a> is largely due to conservative Islamic view that believe women are emotional and lack a mental capability to make reasonable decision.</p>";
+    theExplain[5] = "<p>Women cannot attend sporting events in Iran. Since the Islamic Revolution in 1979, women have been banned from watching live sporting events. A 25-year-old woman named Ghoncheh Ghavami was <a href='http://www.theguardian.com/world/iran-blog/2015/jul/03/fifa-women-football-iran-ban' target='_blank'>arrested and sentenced</a> to a year in jail after she tried to attend a volleyball match in Tehran. She was later released after an international uproar against the sentencing. Conservative clerics claim that women would unnecessarily be mixing with men outside of their families if allowed to attend matches.</p>";
+    theExplain[6] = "<p>It is legally compulsory for Iranian women to wear Islamic hijab when they are in public places. Violation of the law could amount to a penalty of 10 days to two months of jail or a fine of 50,000 ($1.65) to 500,000 ($16.54) rials. Although they don't have to cover their face with niqab leaving only their eyes visible, they should cover their bodies with the exception of face, hands from the wrist and feet from the ankle.</p>";
+    theExplain[7] = "<p>Iranian women have the right to work but it could be restricted by their husbands. <a href='http://impactiran.org/wp-content/uploads/Women-Living-Under-Muslim-Laws_Irans-UPR_second-cycle.pdf' target='_blank'>Article 1117 of the Civil Code</a> allows your husband to 'prevent his wife from an occupation or technical profession which is incompatible with the family’s interests or the dignity of him or his wife.'</p>";
+    theExplain[8] = "Many Iranian women are highly educated and they make up a huge portion of university population. Since the Islamic Revolution in 1979, Iran has significantly increased the percentage of women in higher education from below 40 percent to more than half. <a href='http://data.uis.unesco.org/' target='_blank'>UNESCO data</a> show that the number dipped by 2014 when 47.4 percent of students in tertiary education were women. And, in 2012, in an apparent move to reduce the participation of women in education, the government <a href='http://www.bbc.com/news/world-middle-east-19665615' target='_blank'>banned</a> women from enrolling into almost 80 degree courses ranging from engineering, computer science to English literature and business.";
+
+var theAnswers = [1,1,1,1,0,1,0,0,1];
+
+function init() { 
+  $("#questions, #answers, #results, #nextBtn, #result01, #result02, #result03").hide();
+  $("#startBtn").click(function(){
+    nextQuestion(count);
+  });
+
+  $("#nextBtn").click(function() {
+    count ++;
+    if (count < theQuestions.length) {                            
+      nextQuestion(count);
+    } else {
+      showResults();
+    }
+  });
+
+  $('#sharecol1').click(function (event) {facebook();});
+  $('#sharecol2').click(function (event) {tweet();});
+}
+
+function nextQuestion(which) {
+  $("#quiz").css("background-color","#eeeeee");
+  $('.container').slideUp(500, function(){
+    $("#nextBtn").hide(); 
+    $("#answers").hide();
+    $("#intro").hide();
+    $("#questions").show();
+    //DISPLAY QUESTION
+    $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
+    $("#theQuestion").text(theQuestions[which]);
+    //DISPLAY CHOICES
+    $("#allChoices").empty();
+    var tmpChoice = theChoices[count].split(";");
+    var tmpPhoto = thePhotos[count].split(";");
+    $("#allChoices").append('<table><tr><td class="photocol" id="photocol0" style="cursor:pointer" onClick="setValue(0)"><div class="imgbox"><img class="img-responsive" src="'+ tmpPhoto[0] + '"></div><div class="textbox" id="textbox0">' + tmpChoice[0] + '</div></td><td class="photocol" id="photocol1" style="cursor:pointer" onClick="setValue(1)"><div class="imgbox"><img class="img-responsive" src="' + tmpPhoto[1] + '"></div><div class="textbox" id="textbox1">' + tmpChoice[1] + '</div></td></tr></table>');    
+  });
+  $('.container').slideDown(500);
+  onoff = 0;
+}
+
+function setValue(value) {
+  if(onoff==0){
+    var tmpAns = value;
+    var wrongAns = Math.abs(theAnswers[count]-1);
+    $(".photocol").css("background-color","white");
+    $("#photocol"+value).css("background-color","#fff195");
+    $("#photocol"+theAnswers[count]).css("border","2px solid green");
+    $("#photocol"+wrongAns).css("border","2px solid red");
+    $("#answers").show();
+    $("#nextBtn").show();
+    if (tmpAns==theAnswers[count]) {
+      $("#answerTitle").text("Correct!").css("color","#4188bc");
+      point ++;
+    }  else {
+      $("#answerTitle").text("Wrong!").css("color","#d3401e");
+    }
+    $("#answerExplain").html(theExplain[count]);
+    onoff = 1;
+  } else {} 
+}
+
+function showResults() {
+  $('.container').slideUp(500, function(){
+    $("#questions").hide();
+    $("#answers").hide();
+    $("#nextBtn").hide(); 
+    $("#results").show();
+    if(point>7){$("#result01").show();}
+    if(point>4&&point<8){$("#result02").show();}
+    if(point>0&&point<5){$("#result03").show();}
+    $("#pointer").text(point);
+  });
+  $('.container').slideDown(500); 
+  //sendData();
+}
+
+// function sendData() {
+//   $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+//     function(json) {
+//       $.ajax({
+//         type: 'POST',
+//         url: 'https://docs.google.com/forms/d/1oKwIKeJGVJMn-yn3-XEhH-ActDzlYLtWnD9-dzdws04/formResponse',
+//         data: { 
+//           "entry.1231873874": json.ip,
+//           "entry.1660054405": point,
+//           "entry.2108108592": document.referrer,
+//         }
+//       }); 
+//     }
+//   );   
+// }   
+
+// function tweet() {
+//   var tweet_url = 'https://twitter.com/intent/tweet?text=';
+//   tweet_url += encodeURIComponent("I got " + point + "/9 in this quiz on women's rights in Iran. Can you do better than me?");
+//   tweet_url += ' pic.twitter.com/PQ5qRbadVY';
+//   tweet_url += '&url=http://bit.ly/238HPG2&via=pri';
+//   window.open(tweet_url,'_blank'); 
+// }
+
+// function facebook() {
+// var fbtitle = "I got " + point + "/9 in this quiz about women's rights in Iran. Can you do better than me?";
+// FB.ui({
+//   method: 'feed',
+//   link: 'http://www.pri.org/stories/2016-04-28/quiz-how-much-do-you-know-about-life-woman-iran',
+//   picture: 'http://cdn1.pri.org/sites/default/files/styles/original_image/public/iran-women-campaign.jpg?itok=KNKTHHEo',
+//   name: fbtitle,
+//   description:"It remains a question whether the Iran nuclear deal would lead to improvement in human rights, especially for Iranian women."
+//   }, function(response){});
+// }
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1135342573184560',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

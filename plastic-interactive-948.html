@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      color:#33333c;
+      font-size: 22px;
+    }
+
+    label {
+      margin-left:10px; 
+      font-weight: normal;
+    }
+
+    .container {
+      border:1px solid #D3D3D3;
+      max-width: 600px;
+      padding:0px 20px;
+    }  
+
+    .question {margin-top: 10px;}
+
+    .chart {
+      max-width: 570px;
+      width:100%;
+      height:350px;
+      padding:0px 0px 10px 0px;
+    }
+
+    #credit {
+      font-size: 10px;
+      padding-top: 10px;
+      text-align: left;
+    }   
+
+    .charttitle {
+      font-size: 22px; 
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+      padding:0px 40px;
+    } 
+
+    #introTitle {
+      text-align: center;
+      margin-top: 20px; 
+      font-size: 28px; 
+      font-weight: bold;
+      line-height: 34px;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn {
+      width: 180px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }   
+
+    .btnback {
+      margin-top:0px !important;
+      margin-bottom:10px !important;
+    } 
+
+    .btnreset {margin-top:0px !important;}
+
+    .counter {
+      font-size: 14px;
+      color: #4188bc;
+      margin: 10px 0px 10px 0px;
+    }   
+
+    .imgbox {
+      margin: 0 auto;
+      height:300px;
+    }   
+
+    .selectbox {
+      text-align: center;
+      margin-top: 20px;
+    }  
+
+    .hint {font-size: 16px; color: #707076;}
+
+    #inputnum {
+      width:70px;
+      margin-bottom: 10px;
+      margin:0 auto;
+      display:inline-block;
+    }
+
+    .subtitle {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    #sharemsg {margin-bottom: 0px !important;}
+
+    .highlight1 {font-weight: bold; color:#FF8B00;}
+    .highlight2 {font-weight: bold; color:#FF8B00; font-size: 45px;}
+
+    .text {font-size: 16px;}
+    .note {
+      margin-top:20px;
+      font-size: 14px;
+      line-height: 16px;
+      font-style: italic;
+    }
+
+    #result03, #result02 {position:relative;}
+
+    #sharecol1, #sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: 100%}
+    .btnTW {float:left; height: 100%}  
+    
+    .shareBox {
+      padding-bottom:20px;
+    }    
+
+    #frame {position: relative;}
+    .legendbox {
+        position: absolute;
+        bottom:0;
+        left:10;
+        z-index: 5;
+        text-align: left; 
+        margin-left: 10px;
+    }
+    .legend {padding-bottom: 10px; font-size: 12px; line-height: 15px;}
+    .legenditem {text-align: left; font-size: 12px;}
+    .legend table {width:130px;}
+    .lcol1 {width:10%;}
+    .lcol2 {width:90%; padding-left: 5%;}
+    #cat1 {background-color: #ffffb2;}
+    #cat2 {background-color: #fed976;}
+    #cat3 {background-color: #feb24c;}
+    #cat4 {background-color: #fd8d3c;}
+    #cat5 {background-color: #f03b20;}
+    #cat6 {background-color: #bd0026;}
+
+    @media (max-width: 500px ) { 
+      #introTitle {font-size:22px ;line-height: 28px;}
+      .subtitle {font-size: 16px; line-height: 18px; margin-top: 15px;}
+      .text {font-size:14px; line-height: 16px;}
+      .highlight2 {font-size: 22px; margin: 10px 0px; }
+      body {font-size: 16px;}
+      .charttitle {font-size:14px; line-height: 18px; padding:0px; margin-top: 10px;}
+      .btn {font-size: 14px; width:120px; margin-top: 15px !important; margin-bottom:10px !important;}
+      .imgbox {height:150px;}
+      .hint {font-size: 12px;}
+      .question-img {max-height: 150px;}
+      .container {padding:0px 10px;}
+      .shareBox {width:250px;}
+      #inputbox {margin-bottom: 5px;}
+      #chart03 {height:290px;}
+      .chart {margin-left: -10px;}
+
+
+    }  
+
+</style>
+
+<body>
+  <div id="quiz" class="container center-block">    
+    <div id="intro">
+      <div id="introTitle">How much plastic trash do you throw away compared to the rest of the world?</div>
+      <div class="imglead"><img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/plastic-waste-river-cropped.jpg?itok=cDcEJNgP" class="img-responsive center-block"></div>
+      <div class="intro">Plastic trash could change humanity faster than climate change. Especially when it reaches the sea, where it leeches toxins into the water for centuries. Have you ever wondered how much you contribute to this problem? This tool helps you calculate how much plastic trash you dump per day, compared to the world average.</div>
+      <button type="button" class="btn btn-primary btn-lg center-block" id="startBtn">Start</button>
+      <div id="credit">Developed by Kuang Keng Kuek Ser/PRI.org<br>Photo by Reuters</div>
+    </div>  <!-- END INTRO PAGE -->       
+
+    <div id="questions">
+      <div id="counter" class="counter">Question 0 of 0</div>
+      <div class="imgbox">img goes here</div>
+      <div class="question">
+        <div id="theQuestion">Question goes here</div>
+        <div id="theHint" class="hint">Hint goes here</div>
+      </div>
+      <div class="selectbox">
+          <form class="form-inline" method="get" action="#">
+            <div class="form-group" id="inputbox">
+              <select class="form-control" id="inputnum">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <option>30</option>
+                <option>31</option>
+                <option>32</option>
+                <option>33</option>
+                <option>34</option>
+                <option>35</option>
+                <option>36</option>
+                <option>37</option>
+                <option>38</option>
+                <option>39</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+                <option>43</option>
+                <option>44</option>
+                <option>45</option>
+                <option>46</option>
+                <option>47</option>
+                <option>48</option>
+                <option>49</option>
+                <option>50</option>
+                <option>51</option>
+                <option>52</option>
+                <option>53</option>
+                <option>54</option>
+                <option>55</option>
+                <option>56</option>
+                <option>57</option>
+                <option>58</option>
+                <option>59</option>
+                <option>60</option>
+                <option>61</option>
+                <option>62</option>
+                <option>63</option>
+                <option>64</option>
+                <option>65</option>
+                <option>66</option>
+                <option>67</option>
+                <option>68</option>
+                <option>69</option>
+                <option>70</option>
+                <option>71</option>
+                <option>72</option>
+                <option>73</option>
+                <option>74</option>
+                <option>75</option>
+                <option>76</option>
+                <option>77</option>
+                <option>78</option>
+                <option>79</option>
+                <option>80</option>
+                <option>81</option>
+                <option>82</option>
+                <option>83</option>
+                <option>84</option>
+                <option>85</option>
+                <option>86</option>
+                <option>87</option>
+                <option>88</option>
+                <option>89</option>
+                <option>90</option>
+                <option>91</option>
+                <option>92</option>
+                <option>93</option>
+                <option>94</option>
+                <option>95</option>
+                <option>96</option>
+                <option>97</option>
+                <option>98</option>
+                <option>99</option>
+              </select>
+            </div>  
+          </form>
+          <div id="subtotal" class="hint">Subtotal: <span id="subtotal_oz">0.0</span>oz / <span id="subtotal_g">0.0</span>g</div>
+      </div>
+      <button type="button" class="btn btn-primary btn-lg center-block" id="nextBtn">Next</button>
+      <button type="button" class="btn btn-primary btn-lg center-block" id="result01Btn">See my results</button>
+    </div><!-- END QUESTION PAGE -->      
+
+    <div id="result01">
+      <div class="subtitle">
+        <div>You throw away <span class="highlight1" id="weektotal"></span> of plastic trash every week or</div>
+        <div class="highlight2" id="daytotal"></div>
+        <div>which is <span id="compare" class="highlight1">lower</span> than the global average.</div>
+      </div>
+      <div class="charttitle">Global average and the top 10 countries that produce the most plastic trash per capita</div>
+      <div class="chart" id="chart01"></div>
+      <div class="text">
+        <p>The worst offenders in terms of per capita plastic trash include both high-income developed countries — like Germany, the Netherlands and Ireland — as well as low-income countries like Sri Lanka and Guyana.</p>
+        <p>Small island countries have high per capita rates, probably due to their heavily coastal populations (mouse over or tap each bar to see details).</p>
+        <p>Click next to see countries with the lowest per capita rates.</p>
+      </div>
+      <button type="button" class="btn btn-primary btn-lg center-block" id="result02Btn">Next</button>
+    </div> 
+    <div id="result02">
+      <div class="charttitle">Top 10 countries that produce the least plastic trash per capita</div>
+      <div class="chart" id="chart02"></div>
+      <div class="text">
+        <p>Most wealthy and highly industrialized countries consume more plastic products than poor countries, which leads to higher plastic waste. That's why none of the countries in this chart are developed or high-income nations.</p>
+        <p><a href="http://admin.pri.org/sites/default/files/plastic-generation-full-4114.html" target="_blank">Click here</a> to see data for all countries and areas.</p>
+        <p>Surprisingly, among all 192 countries and areas included in this study, Indians throw away the least amount of plastic per person. However, if we look at total plastic waste produced by a country, India is one of the world's biggest plastic litterers, especially due to its huge coastal population.</p>
+        <p>Click next to see the differences when we categorize the countries by their total amount of plastic waste generated.</p>
+      </div> 
+      <button type="button" class="btn btn-primary btn-lg center-block" id="result03Btn">Next</button>
+      <button type="button" class="btn btn-primary btn-lg center-block btnback">Back</button>
+    </div> 
+    <div id="result03">
+      <div class="charttitle">Total plastic waste produced per day</div>
+      <div id="frame">
+        <div class="chart" id="chart03"></div>
+        <div class="legendbox">
+            <div class="legend">
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat1"></td>
+                            <td class="lcol2">0 - 10</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat2"></td>
+                            <td class="lcol2">10 - 100</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat3"></td>
+                            <td class="lcol2">100 - 1000</td>
+                        </tr>
+                    </table>
+                </div>   
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat4"></td>
+                            <td class="lcol2">1000 - 5000</td>
+                        </tr>
+                    </table>
+                </div> 
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat5"></td>
+                            <td class="lcol2">5000 - 10000</td>
+                        </tr>
+                    </table>
+                </div>   
+                <div class="legenditem">
+                    <table>
+                        <tr>
+                            <td class="lcol1" id="cat6"></td>
+                            <td class="lcol2">> 10000</td>
+                        </tr>
+                    </table>
+                </div> 
+                metric ton per day                  
+            </div>  
+        </div>
+      </div>
+      <div class="note">
+        <p>Data comes from <a href="http://science.sciencemag.org/content/347/6223/768" target="_blank">"Plastic waste inputs from land into the ocean,"</a> a study that estimated plastic trash produced by populations living within 50km of a coast in 192 countries in 2010.</p>
+        <p>The estimated weights of different plastic trash types were obtained from various sources, including weighing by this application's developer.</p>
+        <p>The plastic trash figures in this quiz represent totals before recycling and other solid waste processing. Countries with high plastic trash generation rate could reduce their plastic waste discarded into the environment through adequate waste management.</p>
+      </div>       
+      <div class="text"><b>Read our in-depth story <a href="http://www.pri.org/stories/2016-12-13/climate-change-meet-your-apocalyptic-twin-oceans-poisoned-plastic" target="_blank">"Climate change, meet your apocalyptic twin: oceans poisoned by plastic"</a> for more analysis of plastic waste and its impacts on humans.</b></div>
+      <div class="subtitle" id="sharemsg">Share your results</div>
+      <div class="shareBox center-block">
+        <table> 
+          <tr>
+             <td id="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td id="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+      <button type="button" class="btn btn-primary btn-lg center-block btnback">Back</button>
+      <button type="button" class="btn btn-primary btn-lg center-block btnreset" onClick="history.go(0)">Calculate again</div>
+    </div>    
+  </div>   
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="http://code.highcharts.com/mapdata/custom/world-highres.js"></script>
+
+    <div id="fb-root"></div>
+
+
+<script>
+
+var count = 0,
+    subtotaldis_oz = 0,
+    subtotaldis_g = 0,
+    weektotal_g = 0,
+    weektotal_oz = 0,
+    daytotal_g = 0,
+    daytotal_oz = 0,
+    weektotal_g2 = 0,
+    weektotal_oz2 = 0,
+    daytotal_g2 = 0,
+    daytotal_oz2 = 0,    
+    inputdata = [],
+    data1_cat = [],
+    data2_cat = [],
+    theQuestions = [];
+    theQuestions[0] = "How many PET plastic soda bottles (ranging from 5.1fl.oz./150ml to 0.5gal./1.89L) do you throw away in one week?",
+    theQuestions[1] = "How many HDPE plastic bottles (usually for milk and detergent, ranging from 0.5gal./1.89L to 1gal/3.79L) do you throw away in one week?",
+    theQuestions[2] = "How many plastic grocery bags do you throw away in one week?",
+    theQuestions[3] = "How many plastic utensils (could include a knife, fork, spoon or cup) do you throw away in one week?",
+    theQuestions[4] = "How many food wrappers do you throw away in one week? Examples are plastic packaging for processed food like snack and fresh food like vegetables or meat sold in stores.",
+    theQuestions[5] = "How many plastic straws do you throw away in one week?",
+    theQuestions[6] = "The previous questions asked you about some of the most common types of plastic trash found in the ocean. Here, please estimate the total weight of other plastic waste you throw away in one week.";
+
+var theHints = [];
+
+    theHints[0] = "[Average weight: 1oz/28g]",
+    theHints[1] = "[Average weight: 3.4oz/95g]",
+    theHints[2] = "[Average weight: 0.3oz/8g]",
+    theHints[3] = "[Average weight: 0.14oz/4g]",
+    theHints[4] = "[Average weight: 0.5oz/15g]",
+    theHints[5] = "[Average weight: 0.02oz/0.5g]",
+    theHints[6] = "";
+
+var data1 = [
+    {'name':'Kuwait', y:683.5, 'pop':2293604, 'plastic':1567.8},
+    {'name':'Antigua & Barbuda', y:657.3, 'pop':66843, 'plastic':43.9},
+    {'name':'Saint Kitts and Nevis', y:651.3, 'pop':36102, 'plastic':23.5},
+    {'name':'Guyana', y:583.6, 'pop':513235, 'plastic':299.5},
+    {'name':'Barbados', y:567.6, 'pop':276784, 'plastic':157.1},
+    {'name':'Saint Lucia', y:519.8, 'pop':163227, 'plastic':84.8},
+    {'name':'Germany', y:484.2, 'pop':8837035, 'plastic':4279.3},
+    {'name':'Ireland', y:427.8, 'pop':3749576, 'plastic':1604.1},
+    {'name':'Netherlands', y:422.9, 'pop':8971770, 'plastic':3794.5},
+    {'name':'Hong Kong', y:397, 'pop':7573074, 'plastic':3006.5},
+    {'name':'Global average', y:134.8, 'pop':2022788014, 'plastic':272676.2, color:"#0375B4"},
+];
+
+var data2 = [
+    {'name':'Ghana', y:39.1, 'pop':7727702, 'plastic':302.2},
+    {'name':'Bangladesh', y:34.2, 'pop':70874124, 'plastic':2422.8},
+    {'name':'Jamaica', y:34.1, 'pop':2820558, 'plastic':96.2},
+    {'name':'Guinea', y:29.7, 'pop':1996496, 'plastic':59.3},
+    {'name':'Kenya', y:26.9, 'pop':2729945, 'plastic':73.3},
+    {'name':'Brunei', y:25.7, 'pop':359871, 'plastic':9.2},
+    {'name':'Tanzania', y:23.3, 'pop':6688695, 'plastic':155.6},
+    {'name':'Madagascar', y:15.6, 'pop':7062413, 'plastic':110.2},
+    {'name':'Mozambique', y:15.3, 'pop':9566559, 'plastic':146.7},
+    {'name':'India', y:10, 'pop':187493433, 'plastic':1880.6},
+]; 
+
+var items = [28,95,8,4,15,0.5,1];
+
+var images =
+['<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/plastic-bottle-PET-cropped-2.jpg?itok=OWyjyM29" class="img-responsive center-block question-img">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/plastic-bottle-HDPE-cropped-2.jpg?itok=-PP1hFel" class="img-responsive center-block question-img">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/plastic-grocery-bag-cropped-2.jpg?itok=C1-BU1BO" class="img-responsive center-block question-img">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/plastic-utensil-cropped-2.jpg?itok=adeojqJo" class="img-responsive center-block question-img">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/food-wrapper-cropped-3.jpg?itok=9hrZFMHy" class="img-responsive center-block question-img">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/straw-cropped-2.jpg?itok=3DFw6GJW" class="img-responsive center-block question-img">',
+'<img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/other-plastic-cropped-2.jpg?itok=9fzrLxrI" class="img-responsive center-block question-img">',];
+
+
+function init() { 
+  $("#questions, #result01, #result02, #result03, #result01Btn").hide();
+  $("#startBtn").click(function(){
+    nextQuestion(count);
+  });
+
+  $( "#inputnum" ).change(function() { 
+    subtotaldis_g = ($('#inputnum').val()*items[count]).toFixed(1);
+    subtotaldis_oz = (subtotaldis_g*0.03527).toFixed(1);
+    $("#subtotal_oz").text(subtotaldis_oz);
+    $("#subtotal_g").text(subtotaldis_g);
+  });
+
+  $("#nextBtn").click(function() {
+    setValue(count);
+    count++;
+    if (count < theQuestions.length) {                            
+      nextQuestion(count)
+    }
+  }); 
+
+  $("#result01Btn").click(function() {
+    setValue(count);
+    showResults();
+  });
+  
+  $("#result02Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result01").hide();
+      $("#result02").show();
+    });
+    $('.container').slideDown(500);   
+  });
+
+  $("#result03Btn").click(function() {
+    $('.container').slideUp(500, function(){
+      $("#result02").hide();
+      $("#result03").show();
+    });
+    $('.container').slideDown(500);   
+  });  
+
+  $(".btnback").click(function() {
+    var result_id = $(this).parent().attr("id");
+    var num_id = result_id.substr(result_id.length - 1);
+    var itr_id = parseInt(num_id);
+    var back_id = num_id - 1;
+    $('.container').slideUp(500, function(){
+      $("#result0" + itr_id).hide();
+      $("#result0" + back_id).show();
+    });
+    $('.container').slideDown(500);   
+  });    
+
+  $('.btnFB').click(function (event) {facebook();});
+  $('.btnTW').click(function (event) {tweet();});
+
+}
+
+function nextQuestion(which) {
+  $('.container').slideUp(500, function(){
+    $("#counter").text("Question " + (count+1) + " of " + (theQuestions.length));
+    $(".imgbox").html(images[which]);
+    $("#theQuestion").text(theQuestions[which]);
+    $("#theHint").text(theHints[which]);
+    $("#subtotal_oz").text(0);
+    $("#subtotal_g").text(0);
+    $('#inputnum').val(0);
+    $("#intro").hide();
+    $("#questions").show();
+    if(which==6){
+      $("#inputbox").html('<select class="form-control" id="inputnum"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option><option>60</option><option>70</option><option>80</option><option>90</option><option>100</option></select><label for="inputnum"> oz</label>');
+      $("#subtotal").text("1oz = 28.3g");
+    }
+    if (which==6){
+      $("#result01Btn").show();
+      $("#nextBtn").hide();
+    }
+  });
+  $('.container').slideDown(500);
+}
+
+function setValue(num) {
+  if (num==6){inputdata[num] = $('#inputnum').val()*items[num]*28.3496;}
+  else {
+    inputdata[num] = $('#inputnum').val()*items[num];  
+  }
+}  
+
+function showResults() {
+  //Calculation goes here
+
+  for (var i = 0; i < inputdata.length; i++) {
+    weektotal_g += inputdata[i];
+  }
+  
+  weektotal_oz = weektotal_g*0.03527;
+  daytotal_g = weektotal_g/7;
+  daytotal_oz = weektotal_oz/7;
+
+  data1.push({'name':'You', y:daytotal_g, 'pop':null, 'plastic':null, color:"#f03b20"});
+  data2.push({'name':'You', y:daytotal_g, 'pop':null, 'plastic':null, color:"#f03b20"});
+  
+  data1 = data1.sort(function (a, b) {
+      return b.y - a.y;
+  });
+
+  data2 = data2.sort(function (a, b) {
+      return a.y - b.y;
+  });
+
+  for (var i = 0; i < data1.length; i++){
+    data1_cat.push(data1[i].name);    
+  }
+
+  for (var i = 0; i < data2.length; i++){
+    data2_cat.push(data2[i].name);    
+  }  
+
+  if(daytotal_g>134.8){compare="higher";}
+  else{compare="lower";}
+
+  weektotal_oz2 = addThousandsSeparator(weektotal_oz.toFixed(1));
+  weektotal_g2 = addThousandsSeparator(Math.round(weektotal_g));
+  daytotal_oz2 = addThousandsSeparator(daytotal_oz.toFixed(1));
+  daytotal_g2 = addThousandsSeparator(daytotal_g.toFixed(1));
+
+  $('.container').slideUp(500, function(){
+    $("#weektotal").text(weektotal_oz2 + "oz / " + weektotal_g2 + "g");
+    $("#daytotal").text(daytotal_oz2 + "oz / " + daytotal_g2 + "g per day");
+    $("#compare").text(compare);
+    $("#questions").hide();
+    $("#nextBtn").hide(); 
+    $("#result01").show();
+    chart01();
+    chart02();
+    chart03();
+  });
+  $('.container').slideDown(500); 
+  sendData();
+}
+  
+function addThousandsSeparator(input) {
+    var output = input
+    if (parseFloat(input)) {
+        input = new String(input); // so you can perform string operations
+        var parts = input.split("."); // remove the decimal part
+        parts[0] = parts[0].split("").reverse().join("").replace(/(\d{3})(?!$)/g, "$1,").split("").reverse().join("");
+        output = parts.join(".");
+    }
+    return output;
+} 
+
+function chart01() {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart01',
+                type: 'bar',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: data1_cat,                   
+            },
+            yAxis: {
+                title: {
+                  text: 'per capita rate (gram per person per day)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+              formatter: function () {
+                      if (this.point.name == 'You') {return this.point.name + "<br>Per capita: <b>" + Highcharts.numberFormat(this.y,1,'.',',') + "</b>g/person/day"} 
+                      else {return this.key + "<br>Per capita: <b>" + Highcharts.numberFormat(this.y,1,'.',',') + "</b>g/person/day<br>Country total: <b>" + Highcharts.numberFormat(this.point.plastic,1,'.',',') + "</b> metric ton/day</b><br>Coastal population: <b>" + Highcharts.numberFormat(this.point.pop,0,'.',',') + "</b>"} 
+              }             
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Plastic waste generation rate per capita", color:'#FF8B00', data: data1},
+            ],
+            });
+    });
+}
+
+function chart02() {
+
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart02',
+                type: 'bar',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: data2_cat,                   
+            },
+            yAxis: {
+                title: {
+                  text: 'per capita rate (gram per person per day)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+              formatter: function () {
+                      if (this.point.name == 'You') {return this.point.name + "<br>Per capita: <b>" + Highcharts.numberFormat(this.y,1,'.',',') + "</b>g/person/day"} 
+                      else {return this.key + "<br>Per capita: <b>" + Highcharts.numberFormat(this.y,1,'.',',') + "</b>g/person/day<br>Country total: <b>" + Highcharts.numberFormat(this.point.plastic,1,'.',',') + "</b> metric ton/day</b><br>Coastal population: <b>" + Highcharts.numberFormat(this.point.pop,0,'.',',') + "</b>"} 
+              }             
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Plastic waste generation rate per capita", color:'#FF8B00', data: data2},
+            ],
+            });
+    });  
+
+}
+ 
+function chart03() {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Map({
+            chart: {
+                renderTo: 'chart03',
+            },
+            
+            title : {
+                text: null,
+            },
+            subtitle : {enabled: false},
+            legend: { 
+                enabled:false,
+                title: {
+                    text: 'in thousand metric tons'
+                }, 
+                align: 'left',
+                verticalAlign: 'bottom',
+                floating: true,
+            },
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                  verticalAlign: 'bottom',
+                  align: 'right',
+                  floating: true,
+                },
+            },
+
+            colorAxis: {
+                dataClasses: [
+                    {from:0, to:10, color:"#ffffb2"},
+                    {from:10.01, to:100, color:"#fed976"},
+                    {from:100.01, to:1000, color:"#feb24c"},
+                    {from:1000.01, to:5000, color:"#fd8d3c"},
+                    {from:5000.01, to:10000, color:"#f03b20"},
+                    {from:10000.01, to:50000, color:"#bd0026"},
+                ],    
+            },
+            tooltip: {
+                headerFormat: null,
+                pointFormat: "{point.name}<br>Country total: <b>{point.value}</b> metric ton/day<br>Per capita:<b>{point.ppd} g/person/day</b>"
+            },
+            credits: { enabled: false },
+            series: [{
+                mapData: Highcharts.maps['custom/world-highres'],
+                joinBy: ['iso-a2'],
+                data: [
+                  {'iso-a2':'KW', 'value':1567.8, 'ppd':683.5},
+                  {'iso-a2':'AG', 'value':43.9, 'ppd':657.3},
+                  {'iso-a2':'KN', 'value':23.5, 'ppd':651.3},
+                  {'iso-a2':'GY', 'value':299.5, 'ppd':583.6},
+                  {'iso-a2':'BB', 'value':157.1, 'ppd':567.6},
+                  {'iso-a2':'LC', 'value':84.8, 'ppd':519.8},
+                  {'iso-a2':'DE', 'value':4279.3, 'ppd':484.2},
+                  {'iso-a2':'IE', 'value':1604.1, 'ppd':427.8},
+                  {'iso-a2':'NL', 'value':3794.5, 'ppd':422.9},
+                  {'iso-a2':'HK', 'value':3006.5, 'ppd':397},
+                  {'iso-a2':'TT', 'value':538.9, 'ppd':396.7},
+                  {'iso-a2':'BS', 'value':132.5, 'ppd':388.4},
+                  {'iso-a2':'MO', 'value':94.6, 'ppd':366.8},
+                  {'iso-a2':'SC', 'value':32.5, 'ppd':356.1},
+                  {'iso-a2':'LK', 'value':5163.7, 'ppd':354.5},
+                  {'iso-a2':'US', 'value':37729.4, 'ppd':334.1},
+                  {'iso-a2':'NZ', 'value':1272, 'ppd':329.4},
+                  {'iso-a2':'GD', 'value':31.1, 'ppd':323.8},
+                  {'iso-a2':'MV', 'value':126.1, 'ppd':321.2},
+                  {'iso-a2':'IL', 'value':1974.9, 'ppd':295.7},
+                  {'iso-a2':'VU', 'value':73.9, 'ppd':293.6},
+                  {'iso-a2':'IS', 'value':82, 'ppd':280},
+                  {'iso-a2':'GT', 'value':667.5, 'ppd':279},
+                  {'iso-a2':'NO', 'value':1151.1, 'ppd':278.6},
+                  {'iso-a2':'ES', 'value':6281.2, 'ppd':275.8},
+                  {'iso-a2':'PT', 'value':2246.9, 'ppd':264.1},
+                  {'iso-a2':'CR', 'value':639, 'ppd':257.7},
+                  {'iso-a2':'CC', 'value':0.1, 'ppd':251},
+                  {'iso-a2':'CX', 'value':0.4, 'ppd':251},
+                  {'iso-a2':'NU', 'value':0.5, 'ppd':251},
+                  {'iso-a2':'FK', 'value':0.7, 'ppd':251},
+                  {'iso-a2':'PM', 'value':1.5, 'ppd':251},
+                  {'iso-a2':'AI', 'value':3.7, 'ppd':251},
+                  {'iso-a2':'TC', 'value':5.7, 'ppd':251},
+                  {'iso-a2':'VG', 'value':7.4, 'ppd':251},
+                  {'iso-a2':'GI', 'value':8.4, 'ppd':251},
+                  {'iso-a2':'MC', 'value':8.5, 'ppd':251},
+                  {'iso-a2':'MF', 'value':9.4, 'ppd':251},
+                  {'iso-a2':'FO', 'value':12.7, 'ppd':251},
+                  {'iso-a2':'KY', 'value':13, 'ppd':251},
+                  {'iso-a2':'GG', 'value':14.1, 'ppd':251},
+                  {'iso-a2':'GL', 'value':14.3, 'ppd':251},
+                  {'iso-a2':'BM', 'value':16.8, 'ppd':251},
+                  {'iso-a2':'IM', 'value':20.4, 'ppd':251},
+                  {'iso-a2':'JE', 'value':22.6, 'ppd':251},
+                  {'iso-a2':'MP', 'value':26.7, 'ppd':251},
+                  {'iso-a2':'VI', 'value':33.7, 'ppd':251},
+                  {'iso-a2':'AW', 'value':34.6, 'ppd':251},
+                  {'iso-a2':'CW', 'value':36.1, 'ppd':251},
+                  {'iso-a2':'GU', 'value':47.9, 'ppd':251},
+                  {'iso-a2':'AN', 'value':57, 'ppd':251},
+                  {'iso-a2':'NC', 'value':64.7, 'ppd':251},
+                  {'iso-a2':'PF', 'value':67.9, 'ppd':251},
+                  {'iso-a2':'MQ', 'value':100.9, 'ppd':251},
+                  {'iso-a2':'HR', 'value':402.2, 'ppd':251},
+                  {'iso-a2':'UY', 'value':610.7, 'ppd':251},
+                  {'iso-a2':'PR', 'value':1066.5, 'ppd':251},
+                  {'iso-a2':'VE', 'value':4039, 'ppd':251},
+                  {'iso-a2':'TW', 'value':5574, 'ppd':251},
+                  {'iso-a2':'CY', 'value':207.9, 'ppd':247.4},
+                  {'iso-a2':'ZA', 'value':3082.9, 'ppd':239},
+                  {'iso-a2':'FI', 'value':682.8, 'ppd':233.2},
+                  {'iso-a2':'MU', 'value':287.4, 'ppd':228.9},
+                  {'iso-a2':'TO', 'value':22.7, 'ppd':220.7},
+                  {'iso-a2':'VC', 'value':26.5, 'ppd':220.2},
+                  {'iso-a2':'GB', 'value':9253.3, 'ppd':213.9},
+                  {'iso-a2':'MT', 'value':86.1, 'ppd':212.7},
+                  {'iso-a2':'TR', 'value':7200.6, 'ppd':211.5},
+                  {'iso-a2':'KM', 'value':187.3, 'ppd':199.6},
+                  {'iso-a2':'GR', 'value':1949.1, 'ppd':199},
+                  {'iso-a2':'AE', 'value':400.4, 'ppd':198.4},
+                  {'iso-a2':'MY', 'value':4505.7, 'ppd':196.8},
+                  {'iso-a2':'SG', 'value':866.8, 'ppd':193},
+                  {'iso-a2':'MH', 'value':11.1, 'ppd':191.4},
+                  {'iso-a2':'FR', 'value':3302.6, 'ppd':191},
+                  {'iso-a2':'FJ', 'value':168.4, 'ppd':188},
+                  {'iso-a2':'HN', 'value':624.2, 'ppd':187.8},
+                  {'iso-a2':'AR', 'value':3000.2, 'ppd':182.4},
+                  {'iso-a2':'SY', 'value':642.6, 'ppd':177.4},
+                  {'iso-a2':'EG', 'value':3858.9, 'ppd':177.4},
+                  {'iso-a2':'EE', 'value':154.2, 'ppd':175.7},
+                  {'iso-a2':'BZ', 'value':34.6, 'ppd':170.8},
+                  {'iso-a2':'JP', 'value':19605.6, 'ppd':170.1},
+                  {'iso-a2':'BR', 'value':12271.6, 'ppd':164.3},
+                  {'iso-a2':'SR', 'value':65.4, 'ppd':162.5},
+                  {'iso-a2':'QA', 'value':103.8, 'ppd':158.9},
+                  {'iso-a2':'SA', 'value':558.2, 'ppd':155.4},
+                  {'iso-a2':'BG', 'value':153.4, 'ppd':153},
+                  {'iso-a2':'DM', 'value':10.4, 'ppd':148.2},
+                  {'iso-a2':'EC', 'value':936.6, 'ppd':146.3},
+                  {'iso-a2':'SV', 'value':938.1, 'ppd':146.3},
+                  {'iso-a2':'SI', 'value':48.7, 'ppd':144.6},
+                  {'iso-a2':'PA', 'value':469.9, 'ppd':144.6},
+                  {'iso-a2':'MS', 'value':0.7, 'ppd':143.4},
+                  {'iso-a2':'SH', 'value':1, 'ppd':143.4},
+                  {'iso-a2':'TV', 'value':1.7, 'ppd':143.4},
+                  {'iso-a2':'NR', 'value':2.2, 'ppd':143.4},
+                  {'iso-a2':'CK', 'value':3, 'ppd':143.4},
+                  {'iso-a2':'PW', 'value':3.4, 'ppd':143.4},
+                  {'iso-a2':'JO', 'value':7.9, 'ppd':143.4},
+                  {'iso-a2':'NA', 'value':22.2, 'ppd':143.4},
+                  {'iso-a2':'GF', 'value':24, 'ppd':143.4},
+                  {'iso-a2':'ME', 'value':37.3, 'ppd':143.4},
+                  {'iso-a2':'GQ', 'value':50.4, 'ppd':143.4},
+                  {'iso-a2':'GP', 'value':66.8, 'ppd':143.4},
+                  {'iso-a2':'BA', 'value':84, 'ppd':143.4},
+                  {'iso-a2':'RE', 'value':116.1, 'ppd':143.4},
+                  {'iso-a2':'LY', 'value':580.8, 'ppd':143.4},
+                  {'iso-a2':'TN', 'value':1043.2, 'ppd':143.4},
+                  {'iso-a2':'CO', 'value':1075.3, 'ppd':143.4},
+                  {'iso-a2':'DO', 'value':1180.6, 'ppd':143.4},
+                  {'iso-a2':'IR', 'value':1304.9, 'ppd':143.4},
+                  {'iso-a2':'PE', 'value':1974, 'ppd':143.4},
+                  {'iso-a2':'DZ', 'value':2374.2, 'ppd':143.4},
+                  {'iso-a2':'TH', 'value':3734.6, 'ppd':143.4},
+                  {'iso-a2':'NI', 'value':496.1, 'ppd':142.5},
+                  {'iso-a2':'IT', 'value':4487.7, 'ppd':132.7},
+                  {'iso-a2':'LT', 'value':58.3, 'ppd':131.5},
+                  {'iso-a2':'BH', 'value':97.7, 'ppd':131.5},
+                  {'iso-a2':'LV', 'value':176.3, 'ppd':123.1},
+                  {'iso-a2':'CN', 'value':31665.4, 'ppd':120.5},
+                  {'iso-a2':'CL', 'value':664.8, 'ppd':118.3},
+                  {'iso-a2':'RU', 'value':1201.7, 'ppd':111.1},
+                  {'iso-a2':'KR', 'value':4622.8, 'ppd':111},
+                  {'iso-a2':'AU', 'value':1902.6, 'ppd':110.4},
+                  {'iso-a2':'TK', 'value':0.1, 'ppd':102.3},
+                  {'iso-a2':'NF', 'value':0.2, 'ppd':102.3},
+                  {'iso-a2':'SJ', 'value':0.2, 'ppd':102.3},
+                  {'iso-a2':'KI', 'value':9.7, 'ppd':102.3},
+                  {'iso-a2':'FM', 'value':15.8, 'ppd':102.3},
+                  {'iso-a2':'ST', 'value':16.8, 'ppd':102.3},
+                  {'iso-a2':'WS', 'value':17.2, 'ppd':102.3},
+                  {'iso-a2':'SB', 'value':63.3, 'ppd':102.3},
+                  {'iso-a2':'DJ', 'value':63.6, 'ppd':102.3},
+                  {'iso-a2':'IQ', 'value':65.4, 'ppd':102.3},
+                  {'iso-a2':'TL', 'value':68.4, 'ppd':102.3},
+                  {'iso-a2':'SD', 'value':77, 'ppd':102.3},
+                  {'iso-a2':'PG', 'value':281.1, 'ppd':102.3},
+                  {'iso-a2':'YE', 'value':618.8, 'ppd':102.3},
+                  {'iso-a2':'CI', 'value':637.4, 'ppd':102.3},
+                  {'iso-a2':'UA', 'value':697, 'ppd':102.3},
+                  {'iso-a2':'SN', 'value':831.2, 'ppd':102.3},
+                  {'iso-a2':'PK', 'value':1491.8, 'ppd':102.3},
+                  {'iso-a2':'NG', 'value':2811, 'ppd':102.3},
+                  {'iso-a2':'VN', 'value':5714.6, 'ppd':102.3},
+                  {'iso-a2':'PL', 'value':315.4, 'ppd':96.4},
+                  {'iso-a2':'LB', 'value':365, 'ppd':93.8},
+                  {'iso-a2':'CA', 'value':1090.3, 'ppd':92},
+                  {'iso-a2':'HT', 'value':819.4, 'ppd':89.5},
+                  {'iso-a2':'CU', 'value':1005.2, 'ppd':88.7},
+                  {'iso-a2':'MX', 'value':1951.8, 'ppd':86.2},
+                  {'iso-a2':'LR', 'value':179.8, 'ppd':83.7},
+                  {'iso-a2':'OM', 'value':217.3, 'ppd':83.7},
+                  {'iso-a2':'BE', 'value':375.7, 'ppd':79.1},
+                  {'iso-a2':'PH', 'value':6237.7, 'ppd':74.8},
+                  {'iso-a2':'MM', 'value':1416.2, 'ppd':74.6},
+                  {'iso-a2':'MA', 'value':1250.5, 'ppd':72.3},
+                  {'iso-a2':'AL', 'value':174.4, 'ppd':68.9},
+                  {'iso-a2':'CG', 'value':58.2, 'ppd':68.6},
+                  {'iso-a2':'GE', 'value':75, 'ppd':66.8},
+                  {'iso-a2':'KH', 'value':91.4, 'ppd':65.7},
+                  {'iso-a2':'CV', 'value':33.8, 'ppd':64.8},
+                  {'iso-a2':'PS', 'value':191.3, 'ppd':62.8},
+                  {'iso-a2':'AO', 'value':235.6, 'ppd':62.2},
+                  {'iso-a2':'TG', 'value':113.4, 'ppd':56.9},
+                  {'iso-a2':'ID', 'value':10660.5, 'ppd':56.9},
+                  {'iso-a2':'GA', 'value':46.4, 'ppd':53.8},
+                  {'iso-a2':'GW', 'value':64.9, 'ppd':53.7},
+                  {'iso-a2':'SO', 'value':320.7, 'ppd':53.7},
+                  {'iso-a2':'KP', 'value':930.5, 'ppd':53.7},
+                  {'iso-a2':'SE', 'value':294.6, 'ppd':47.5},
+                  {'iso-a2':'GM', 'value':62.8, 'ppd':47.4},
+                  {'iso-a2':'CM', 'value':91, 'ppd':45.8},
+                  {'iso-a2':'DK', 'value':245.3, 'ppd':45.6},
+                  {'iso-a2':'MR', 'value':45, 'ppd':44.8},
+                  {'iso-a2':'CD', 'value':48.2, 'ppd':44.8},
+                  {'iso-a2':'ER', 'value':56.7, 'ppd':44.8},
+                  {'iso-a2':'BJ', 'value':138.9, 'ppd':42.9},
+                  {'iso-a2':'RO', 'value':36, 'ppd':41.1},
+                  {'iso-a2':'SL', 'value':116.3, 'ppd':40.3},
+                  {'iso-a2':'GH', 'value':302.2, 'ppd':39.1},
+                  {'iso-a2':'BD', 'value':2422.8, 'ppd':34.2},
+                  {'iso-a2':'JM', 'value':96.2, 'ppd':34.1},
+                  {'iso-a2':'GN', 'value':59.3, 'ppd':29.7},
+                  {'iso-a2':'KE', 'value':73.3, 'ppd':26.9},
+                  {'iso-a2':'BN', 'value':9.2, 'ppd':25.7},
+                  {'iso-a2':'TZ', 'value':155.6, 'ppd':23.3},
+                  {'iso-a2':'MG', 'value':110.2, 'ppd':15.6},
+                  {'iso-a2':'MZ', 'value':146.7, 'ppd':15.3},
+                  {'iso-a2':'IN', 'value':1880.6, 'ppd':10},
+                ],
+                dataLabels: {enabled: false,},
+                states: {
+                            hover: {
+                                color: '#636363',
+                            }
+                        },
+            }]
+        });
+    });
+}
+
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/13lm19HsMGKcdbZLzBXPkfrmVZ91Y5iI64BBX5NQHzg0/formResponse',
+        data: { 
+          "entry.736355436": json.ip,
+          "entry.704413734": inputdata[0],
+          "entry.1719875845": inputdata[1],
+          "entry.1100271510": inputdata[2],
+          "entry.658772858": inputdata[3],
+          "entry.1266714803": inputdata[4],
+          "entry.685790022": inputdata[5],
+          "entry.111221758": inputdata[6],
+          "entry.1870325580": compare,
+          "entry.934560419": document.referrer,
+        }
+      }); 
+    }
+  );   
+}   
+
+function tweet() {
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent("I throw away " + daytotal_oz2 + "oz/" +daytotal_g2 + "g of plastic trash every day, " + compare + " than the global average! Calculate yours here ");
+  tweet_url += ' @PRI';
+  tweet_url += '&url=http://bit.ly/2h9r6lE';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+var fbtitle = "I throw away " + daytotal_oz2 + "oz/" +daytotal_g2 + "g of plastic trash every day, " + compare + " than the global average!";
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-12-15/calculate-how-much-plastic-trash-you-throw-away',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/story_main/public/plastic-waste-river-cropped.jpg?itok=zGSmQYIm',
+  name: fbtitle,
+  description:"Our tool helps you calculate how much plastic trash you dump per day and compare it with the rest of the world."
+  }, function(response){});
+}
+
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '353129901720234',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

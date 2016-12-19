@@ -1,0 +1,141 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 500px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    #text {font-size: 14px;line-height: 16px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+    #container{ height: 480px; }
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Data before 2011 is not included, as most of the aid from prior years has not been categorized for gender purpose. Aid can either target gender equality as its "principal objective" or as a "secondary objective." Data only shows bilateral aid, excluding contributions to multilateral institutions, such as the UN.</div>
+        Source:  
+        <a href='http://stats.oecd.org/Index.aspx?DataSetCode=GENDER#' target='_blank'>OECD Stat</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: "How much US aid for developing countries supports gender equality?",
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    year: '%Y'
+                },
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,         
+            },
+            yAxis: {
+                title: {
+                  text: 'Percentage',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                min: 0,
+            },
+            credits: {enabled: false},
+            legend: {enabled: true},
+            tooltip: {
+                formatter:function() {
+                    return '<b>' + this.series.name + '</b><br>Year: <b>' + Highcharts.dateFormat('%Y',this.x) + '</b><br>Percentage: <b>' + Highcharts.numberFormat(this.point.y,1,'.',',') + '%</b>';
+                }
+            },
+            plotOptions: {
+                  series: {
+                      stacking: 'normal',
+                      groupPadding: 0.01,
+                      pointStart: Date.UTC(2011, 1, 1),
+                      pointInterval: 24 * 3600 * 1000 * 365
+                  },
+            },    
+            series: [ 
+                {name: "Non-gender equality", color:"#F27C7C",
+                data :[86.5,81.5,82.4,80.1],
+            },
+                {name: "Secondary", color:"#8db7d6",
+                data :[9.1,12.6,13.5,13.5],
+            },
+            {name: "Principal", color:"#4188bc",
+                data :[4.3,5.9,4.1,6.4],
+            },
+            ],
+            });
+    });
+
+});
+</script>

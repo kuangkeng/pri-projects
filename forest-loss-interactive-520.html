@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<style>
+    body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+      color:#262228;
+      
+    }
+
+    .container {
+      background-color: #F3F3F3;
+      max-width: 400px;
+      margin: 0 auto;
+    }    
+
+    #introTitle {
+      text-align: center;
+      margin: 20px 0px; 
+      font-size: 28px; 
+      line-height: 32px;
+      color:#3f3f3f;
+      font-weight: bold;
+    }
+
+    .result{
+      font-size: 24px; 
+      text-align: center; 
+    }
+
+    #resulttitle {margin-top: 20px;}
+
+    #resultarea {
+      font-weight: bold;
+      color:#FF8B00;
+    }
+
+    #resultno {
+      text-align: center; 
+      font-size: 48px;
+      font-weight: bold;
+      color:#d7191c;
+    }
+
+    .resultsubtitle {
+      margin-top: 20px;
+      font-size: 16px; 
+      font-style: italic;
+      padding:10px;
+    }
+
+    .credit {
+      font-size: 12px; 
+      font-style: italic;
+      text-align: right;
+    }
+
+    .question {
+      text-align: center; 
+      font-size: 20px; 
+      margin-top: 20px;
+      margin-bottom: 10px; 
+    } 
+
+    .mybtn {
+      font-size: 18px; 
+      font-weight: 400;
+      padding:4px 4px; 
+      margin-top: 20px !important; 
+      width:150px;
+    }
+
+    .mybtn:hover {
+      color: #fff;
+      background-color: #7aabd0;
+      cursor: pointer;
+    }   
+
+    #inputhour {width:100px; margin: 0 auto;}
+    #intro, #result01 {padding-bottom: 20px;}
+
+    .sharecol1, .sharecol2 {width:45%; text-align: center; padding:10px 5px;}
+    table {width:100%;}
+    td {padding:0.5%;}
+    .btnFB {float:right; height: auto; max-width: 100%;}
+    .btnTW {float:left; height: auto; max-width: 100%;}     
+
+    .imglead {
+      margin: 0 auto;
+      max-width:400px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    #sharemsg {
+      margin-top: 20px;
+      margin-bottom: 0px;
+      color:#014C75;
+      font-size: 25px;
+      font-weight: bold;
+      line-height: 1.4em;
+      text-align: center;
+    }
+
+    #resetBtn {margin-top: 0px !important;}
+    .resultstyle {color:#0375B4; font-weight: bold;}
+
+    .panel{
+        height: 900px;
+        overflow: auto;
+    }
+
+    @media (max-width: 400px ) { 
+      .container {padding:0px 10px;}
+      #quiz { padding-bottom: 0px;}
+      .resultsubtitle {font-size: 14px; padding:0px;}
+      .credit {font-size: 12px;}
+      .result {font-size: 18px;}
+      #introTitle {
+        font-size: 20px;
+        line-height: 22px;
+        padding-left: 0px; 
+        padding-right: 0px;
+        padding-bottom: 10px;
+      }
+      .question {font-size: 16px;}
+      .btnFB, .btnTW {max-width:90px;}
+      .imglead {margin-bottom: 0px;}
+      #sharemsg {font-size: 18px;}
+    }   
+
+</style>
+
+<body>
+  <div id="quiz" class="container">    
+    <div id="intro">
+      <div id="introTitle">How much forest do we lose in a night's sleep?</div>
+      <div class="imglead">
+        <img src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/logging-color.jpg?itok=0R8iIFQb" class="img-responsive">
+      </div>
+      <div class="question">How many hours do you sleep per day?</div>
+          <select class="form-control" id="inputhour">
+            <option selected disabled></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+          </select>      
+      <div id="startBtn" class="btn btn-primary btn-lg center-block mybtn">Next</div>
+    </div>  <!-- END INTRO PAGE -->           
+
+    <div class="resultpage" id="result01">
+      <div class="result" id="resulttitle">Every night while you are sleeping, the world loses <span id='resultarea'>area</span> of forest, equal to </div>
+      <div id="resultno">00</div>
+      <div class="result">football fields covered in trees.</div>
+ 
+
+      <div class="resultsubtitle">This is based on the average forest loss rate between 2005 and 2015 measured by the <a href="http://data.worldbank.org/indicator/AG.LND.FRST.K2" target='_blank'>Food and Agriculture Organization</a>.</div>
+      <div class="credit">Photo credit: David Mercado/Reuters</div>
+      <div id="sharemsg">Share your result</div>
+      <div class="shareBox">
+        <table> 
+          <tr>
+             <td class="sharecol1"><img style="cursor:pointer" class="img-responsive btnFB" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/fb-button.png"></td>
+             <td class="sharecol2"><img style="cursor:pointer" class="img-responsive btnTW" src="http://cdn1.pri.org/sites/default/files/styles/original_image/public/tw-button.png"></td>
+          </tr> 
+        </table>
+      </div>
+    </div>   
+  </div>   
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <div id="fb-root"></div>
+
+
+<script>
+
+var i,
+    field,
+    area,
+    outfield,
+    outarea,
+    o,
+    p,
+    sharemsg;
+
+function init() { 
+  $(".resultpage, #startBtn").hide();
+
+  $( "#inputhour" ).change(function() {
+    $("#startBtn").show();
+  });
+
+  $("#startBtn").click(function(){
+    setValue();
+    sendData();
+    $('.container').slideUp(500, function(){
+      $("#intro").hide();
+      $("#result01").show(); 
+    });
+    $('.container').slideDown(500);   
+  });    
+
+  // $('.sharecol1').click(function (event) {facebook();});
+  $('.sharecol2').click(function (event) {tweet();});
+
+} 
+
+function setValue() {
+  i = $('#inputhour').val();
+  area = i * 94.805686
+  field = i * 71.69972;
+  o = Math.round(area);
+  p = Math.round(field);
+  outarea = addThousandsSeparator(o);
+  outfield = addThousandsSeparator(p);
+
+  //populate the result pages
+  $("#resultarea").text(outarea + " acres");
+  $("#resultno").text(outfield);
+
+}
+  
+function addThousandsSeparator(input) {
+    var output = input
+    if (parseFloat(input)) {
+        input = new String(input); // so you can perform string operations
+        var parts = input.split("."); // remove the decimal part
+        parts[0] = parts[0].split("").reverse().join("").replace(/(\d{3})(?!$)/g, "$1,").split("").reverse().join("");
+        output = parts.join(".");
+    }
+    return output;
+} 
+
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSfb8HIMwC1zpnOaF26rvfSt94Wpz7kAM6U4uNybhnvPrhwtBw/formResponse',
+        data: { 
+          "entry.1622184679": json.ip,
+          "entry.1746129801": i,
+          "entry.154016792": document.referrer,
+        }
+      }); 
+    }
+  );   
+} 
+
+function tweet() {
+  sharemsg = "Every night while I'm asleep the world loses " + outfield + " football fields of forest. Calculate yours.";
+  var tweet_url = 'https://twitter.com/intent/tweet?text=';
+  tweet_url += encodeURIComponent(sharemsg);
+  tweet_url += ' @PRI';
+  tweet_url += '&url=http://bit.ly/2dJviK4';
+  window.open(tweet_url,'_blank'); 
+}
+
+function facebook() {
+FB.ui({
+  method: 'feed',
+  link: 'http://www.pri.org/stories/2016-10-12/best-and-worst-countries-be-girl',
+  picture: 'http://cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/refugee%20girl%20happy-cropped.jpg?itok=RML7t9-Y',
+  name: sharemsg,
+  description:"How much forest we lost in a night's sleep?"
+  }, function(response){});
+}
+
+
+$(document).ready(function(){
+  init();
+}); 
+</script>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '315389648825831',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>

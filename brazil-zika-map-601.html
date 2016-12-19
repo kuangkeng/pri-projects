@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/br/br-all.js"></script>
+    
+
+  </head>
+
+<style>
+@import "http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 500px; 
+max-width: 1000px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 1000px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 5px;
+    margin-top:10px;
+    color:#33333c;
+}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 400px ) { 
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+    #container{height: 450px;}
+    
+    #text {font-size: 14px;}
+} 	
+
+</style>
+
+</head>
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">Data as of Oct. 20, 2016. Move your mouse or finger over each state for more details.</div>
+        Source: Health Ministry of Brazil
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</div>
+</body>
+
+<script>
+
+$("#button01").addClass("default");
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Map({
+        	chart: {
+        		renderTo: 'container',
+        	},
+            
+            title : {
+                text: 'Where were birth defects reported in Brazil?',
+            },
+            subtitle : {enabled: false},
+            legend: { 
+                title: {
+                    text: 'Number of reported cases'
+                }, 
+                align: 'left',
+                verticalAlign: 'bottom',
+                floating: true,
+            },
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                  verticalAlign: 'bottom',
+                  align: 'right',
+                  floating: true,
+                },
+            },
+
+            colorAxis: {
+                min:1,
+                max:400,
+                //type: 'logarithmic',
+                minColor: '#EEEEFF',
+                maxColor: '#000022',
+                stops: [
+                    [0, '#EFEFFF'],
+                    [0.67, '#4444FF'],
+                    [1, '#000022']
+                ]
+            },
+        	tooltip: {
+                headerFormat: null,
+        		pointFormat: "Region: <b>{point.region}</b><br>State: <b>{point.brstate}</b><br>Notifications: <b>{point.value:,0f}</b>"
+        	},
+            credits: { enabled: false },
+            series: [{
+                mapData: Highcharts.maps['countries/br/br-all'],
+                joinBy: ['hc-key'],
+                data: [
+                    {'hc-key':'br-al', 'brstate':'Alagoas', 'region':'Northeast', value:84},
+                    {'hc-key':'br-ba', 'brstate':'Bahia', 'region':'Northeast', value:323},
+                    {'hc-key':'br-ce', 'brstate':'Ceará', 'region':'Northeast', value:150},
+                    {'hc-key':'br-ma', 'brstate':'Maranhão', 'region':'Northeast', value:158},
+                    {'hc-key':'br-pb', 'brstate':'Paraíba', 'region':'Northeast', value:182},
+                    {'hc-key':'br-pe', 'brstate':'Pernambuco', 'region':'Northeast', value:390},
+                    {'hc-key':'br-pi', 'brstate':'Piauí', 'region':'Northeast', value:99},
+                    {'hc-key':'br-rn', 'brstate':'Rio Grande do Norte', 'region':'Northeast', value:140},
+                    {'hc-key':'br-se', 'brstate':'Sergipe', 'region':'Northeast', value:124},
+                    {'hc-key':'br-es', 'brstate':'Espírito Santo', 'region':'Southeast', value:31},
+                    {'hc-key':'br-mg', 'brstate':'Minas Gerais', 'region':'Southeast', value:9},
+                    {'hc-key':'br-rj', 'brstate':'Rio de Janeiro', 'region':'Southeast', value:135},
+                    {'hc-key':'br-sp', 'brstate':'São Paulo', 'region':'Southeast', value:44},
+                    {'hc-key':'br-ac', 'brstate':'Acre', 'region':'North', value:2},
+                    {'hc-key':'br-ap', 'brstate':'Amapá', 'region':'North', value:9},
+                    {'hc-key':'br-am', 'brstate':'Amazonas', 'region':'North', value:20},
+                    {'hc-key':'br-pa', 'brstate':'Pará', 'region':'North', value:1},
+                    {'hc-key':'br-ro', 'brstate':'Rondônia', 'region':'North', value:8},
+                    {'hc-key':'br-rr', 'brstate':'Roraima', 'region':'North', value:10},
+                    {'hc-key':'br-to', 'brstate':'Tocantins', 'region':'North', value:18},
+                    {'hc-key':'br-df', 'brstate':'Distrito Federal', 'region':'Centre-West', value:9},
+                    {'hc-key':'br-go', 'brstate':'Goiás', 'region':'Centre-West', value:29},
+                    {'hc-key':'br-mt', 'brstate':'Mato Grosso', 'region':'Centre-West', value:48},
+                    {'hc-key':'br-ms', 'brstate':'Mato Grosso do Sul', 'region':'Centre-West', value:21},
+                    {'hc-key':'br-pr', 'brstate':'Paraná', 'region':'South', value:4},
+                    {'hc-key':'br-sc', 'brstate':'Santa Catarina', 'region':'South', value:4},
+                    {'hc-key':'br-rs', 'brstate':'Rio Grande do Sul', 'region':'South', value:11},
+                ],
+                dataLabels: {enabled: false,},
+                states: {
+                            hover: {
+                                color: '#ffff99',
+                            }
+                        },
+            }]
+        });
+
+        // $(chart.series).each(function(){
+        //   var point = this.points[0];
+        //   chart.renderer.label("Afghanistan receives<br>the highest aid", point.plotX + chart.plotLeft - 30, point.plotY + chart.plotTop - 50,'callout',
+        //   point.plotX + chart.plotLeft, point.plotY + chart.plotTop)
+        //   .css({color: '#FFFFFF'})
+        //   .attr({ fill: 'rgba(0, 0, 0, 0.5)',padding: 3,r: 5,zIndex: 6}).add();
+        // });
+
+
+    });
+});
+</script>

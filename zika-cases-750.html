@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  margin:0px auto;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#tabs {
+  height: 800px; 
+  width: 100%; 
+  max-width: 500px; 
+  margin: 0 auto; 
+}
+
+#container01, #container02 {
+  height: 600px; 
+  width: 100%; 
+  max-width: 500px; 
+  margin: 0 auto;
+}
+
+#container02  {
+    padding-right: 3%;
+  }
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color:#333;
+    line-height: 20px;
+}
+
+@media (max-width: 500px ) { 
+  #container02  {
+    padding-right: 8%;
+  }
+  .highcharts-title {font-size: 14px !important;}
+}  
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Total cases</a></li>
+    <li><a href="#tabs-2">Per capita</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div id="container01"></div>
+    <div id="note">
+        <div id="text">Estimates include the total suspected and confirmed number of Zika virus infections reported in each country, plus all imported cases, as of Oct. 20. Move your mouse or finger over each bar for more details.</div>
+        Source: 
+        <a href='http://www.paho.org/hq/index.php?option=com_content&view=article&id=11599&Itemid=41691&lang=en' target='_blank'>Pan American Health Organization</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div>
+  <div id="tabs-2">
+    <div id="container02"></div>
+    <div id="note">
+        <div id="text">Data as of Oct 20, 2016. Move your mouse or finger over each bar for more details.</div>
+        Source: 
+        <a href='http://www.paho.org/hq/index.php?option=com_content&view=article&id=11599&Itemid=41691&lang=en' target='_blank'>Pan American Health Organization</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+  </div> 
+</div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+$(function () {
+    var chart1;
+    var chart2;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container01',
+                type: 'bar',
+            },
+            title: {
+                text: 'Estimated cases of Zika',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Brazil","Colombia","Venezuela","Honduras","Puerto Rico","El Salvador","Dominican Republic","Mexico","US","Haiti","ecuador","Guatemala","Costa Rica","Nicaragua","Panama","Argentina","Bolivia","Paraguay","Canada","Peru","Cuba","Chile"],    
+            },
+            yAxis: {
+                title: {
+                  text: "Number of cases",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: "Total cases: <b>{point.y:,0f}</b><br>Population: <b>{point.pop:,0f},000</b><br>Cases per capita: <b>{point.cap} per 100,000 population</b>",
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: "{point.y:,0f}" ,
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Total Zika cases", color:"#4188bc", data: [
+                    {y:200465, 'pop':209568, 'cap':95.7},
+                    {y:95793, 'pop':48654, 'cap':196.9},
+                    {y:58591, 'pop':31519, 'cap':185.9},
+                    {y:31648, 'pop':8190, 'cap':386.4},
+                    {y:29085, 'pop':3681, 'cap':790.1},
+                    {y:11264, 'pop':6146, 'cap':183.3},
+                    {y:4875, 'pop':10649, 'cap':45.8},
+                    {y:4852, 'pop':128632, 'cap':3.8},
+                    {y:4015, 'pop':324119, 'cap':1.2},
+                    {y:2955, 'pop':10848, 'cap':27.2},
+                    {y:2721, 'pop':16385, 'cap':16.6},
+                    {y:2535, 'pop':16673, 'cap':15.2},
+                    {y:2356, 'pop':4857, 'cap':48.5},
+                    {y:2005, 'pop':6150, 'cap':32.6},
+                    {y:1860, 'pop':3990, 'cap':46.6},
+                    {y:1848, 'pop':43847, 'cap':4.2},
+                    {y:601, 'pop':10888, 'cap':5.5},
+                    {y:545, 'pop':6725, 'cap':8.1},
+                    {y:344, 'pop':36286, 'cap':0.9},
+                    {y:127, 'pop':31374, 'cap':0.4},
+                    {y:33, 'pop':11393, 'cap':0.3},
+                    {y:25, 'pop':18132, 'cap':0.1},
+                ]},
+            ],
+            });
+
+
+        chart2 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container02',
+                type: 'bar',
+            },
+            title: {
+                text: 'Incidence rate of Zika',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Puerto Rico","Honduras","Colombia","Venezuela","El Salvador","Brazil","Costa Rica","Panama","Dominican Republic","Nicaragua","Haiti","Ecuador","Guatemala","Paraguay","Bolivia","Argentina","Mexico","US","Canada","Peru","Cuba","Chile"],    
+            },
+            yAxis: {
+                title: {
+                  text: "Incidence rate (cases per 100,000 population)",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  }, 
+                  x:-30, 
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: "Incidence rate: <b>{point.y}</b><br>Population: <b>{point.pop:,0f},000</b><br>Total cases: <b>{point.case:,0f}</b>",
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y 
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Zika cases per capita", color:"#4188bc", data: [
+                    {'case':29085, 'pop':3681, y:790.1},
+                    {'case':31648, 'pop':8190, y:386.4},
+                    {'case':95793, 'pop':48654, y:196.9},
+                    {'case':58591, 'pop':31519, y:185.9},
+                    {'case':11264, 'pop':6146, y:183.3},
+                    {'case':200465, 'pop':209568, y:95.7},
+                    {'case':2356, 'pop':4857, y:48.5},
+                    {'case':1860, 'pop':3990, y:46.6},
+                    {'case':4875, 'pop':10649, y:45.8},
+                    {'case':2005, 'pop':6150, y:32.6},
+                    {'case':2955, 'pop':10848, y:27.2},
+                    {'case':2721, 'pop':16385, y:16.6},
+                    {'case':2535, 'pop':16673, y:15.2},
+                    {'case':545, 'pop':6725, y:8.1},
+                    {'case':601, 'pop':10888, y:5.5},
+                    {'case':1848, 'pop':43847, y:4.2},
+                    {'case':4852, 'pop':128632, y:3.8},
+                    {'case':4015, 'pop':324119, y:1.2},
+                    {'case':344, 'pop':36286, y:0.9},
+                    {'case':127, 'pop':31374, y:0.4},
+                    {'case':33, 'pop':11393, y:0.3},
+                    {'case':25, 'pop':18132, y:0.1},
+                ]},
+            ],
+            });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

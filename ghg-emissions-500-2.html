@@ -1,0 +1,486 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#frame {
+    width:100%;
+    max-width: 750px;
+    height:500px;
+}
+
+#wrapper {
+    width:65%;
+    max-width:500px;
+    display: inline-block;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    margin-left: 20px;
+    height: 500px;
+}
+
+#container {height: 450px;}
+
+#frame2 {
+    display:none;
+}
+#container1, #container2, #container3 {max-width: 750px;}
+#container1 {height: 400px; } 
+#container2 {height: 380px; }
+#container3 {height: 350px; }
+
+#wrapper1, #wrapper2, #wrapper3 {
+    border:1px solid #D3D3D3;
+    max-width: 750px; 
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 16px;
+}
+
+#sections {
+  position: relative;
+  display: inline-block;
+  width: 30%;
+  top: 0px;
+  z-index: 90;
+  font-size: 16px;
+}
+
+#section01 {
+  margin-top: 80px;
+  opacity:1 !important;
+}
+
+#section04 {margin-bottom: 220px !important;}
+
+.step {
+  margin-bottom: 250px;
+  padding-left:20px;
+  line-height: 20px;
+  opacity:0;
+}
+
+.title {font-size: 20px; font-weight: bold; line-height: 24px;}
+
+.highcharts-title {width:100% !important;}
+
+@media (max-width: 550px ) { 
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 16px !important;}
+    #frame2 {display:inline;}
+    #frame {display:none;}
+}
+
+</style>
+</head>
+
+<body>
+<div id='frame'>
+    <div id='sections'>
+      <section class="step" id="section01">
+        <div class="title">How is Indonesia different from other countries in terms of greenhouse gas emission (GHG)?</div>
+      </section>
+      <section class="step" id="section02">
+        Indonesia had the sixth-highest amount of greenhouse gas emissions in 2012.
+      </section>
+      <section class="step" id="section03">
+        A large portion of Indonesia’s greenhouse gas emissions come from changes in land-use and forestry (LUCF). That’s true in Brazil and Canada too.
+      </section>  
+      <section class="step" id="section04">
+        In Indonesia, Brazil and Canada, changes in land use including logging and converting forest to agriculture contributed to greenhouse gas emissions. Land use changes like reforestation and natural growth absorbed greenhouse gasses in the rest of the countries.
+      </section>    
+    </div>
+    <div id="wrapper">    
+        <div id="container"></div>
+        <div id="note">
+            <div id="text"></div>
+            Source:  
+            <a href='http://cait.wri.org/' target='_blank'>CAIT Climate Data Explorer</a>
+            <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+        </div>
+    </div>   
+</div>
+
+
+<div id='frame2'>
+    <div id="wrapper1">    
+        <div id="container1"></div>
+        <div id="note">
+            <div id="text">Indonesia had the sixth-highest amount of greenhouse gas (GHG) emissions in 2012.</div>
+        </div>
+    </div> 
+    <div id="wrapper2">    
+        <div id="container2"></div>
+        <div id="note">
+            <div id="text">A large portion of Indonesia’s greenhouse gas emissions come from changes in land-use and forestry (LUCF). That’s true in Brazil and Canada too.</div>
+        </div>
+    </div> 
+    <div id="wrapper3">    
+        <div id="container3"></div>
+        <div id="note">
+            <div id="text">In Indonesia, Brazil and Canada, changes in land use including logging and converting forest to agriculture contributed to greenhouse gas emissions. Land use changes like reforestation and natural growth absorbed greenhouse gasses in the rest of the countries.</div>
+            Source:  
+            <a href='http://cait.wri.org/' target='_blank'>CAIT Climate Data Explorer</a>
+            <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+        </div>
+    </div> 
+</div>  
+
+</body>
+
+<script>
+$(function () {
+    var chart,
+        chart1,
+        chart2,
+        chart3;
+
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+                animation: {duration:1000},
+            },
+            title: {
+                text: 'Top 10 emitters of greenhouse gas, 2012',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["China","US","EU","India","Russia","Indonesia","Brazil","Japan","Canada","Germany"],    
+            },
+            yAxis: {
+                title: {
+                  text: "metric tons of CO₂ equivalent (MtCO₂e‍)",
+                  x: -20,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '{series.name}: <b>{point.y}</b> MtCO₂e‍',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"GHG emissions including LUCF", color:"#006d2c", data: [10684,5823,4123,2887,2254,1981,1823,1207,856,810]},
+            ],
+        });
+
+        var counter01 = 1,
+            counter02 = 1,
+            counter03 = 1,
+            counter04 = 1,
+            counter05 = 1;
+
+        $(window).scroll(function() {
+            console.log("scroll unit = " + $(this).scrollTop());
+
+          var winh = jQuery(window).height(),
+              elh1 = $("#section01").height(),
+              o1 = $("#section01")[0].getBoundingClientRect(),
+              x1 = o1.top - winh, y1 = o1.top + elh1;
+
+          var elh2 = $("#section02").height(),
+              o2 = $("#section02")[0].getBoundingClientRect(),
+              x2 = o2.top - winh, y2 = o2.top + elh2;
+
+          var elh3 = $("#section03").height(),
+              o3 = $("#section03")[0].getBoundingClientRect(),
+              x3 = o3.top - winh, y3 = o3.top + elh3;        
+
+          var elh4 = $("#section04").height(),
+              o4 = $("#section04")[0].getBoundingClientRect(),
+              x4 = o4.top - winh, y4 = o4.top + elh4;  
+          
+          var distance01 = Math.max(0, Math.min((0 - x1) / (y1 - x1), 1)),
+              distance02 = Math.max(0, Math.min((0 - x2) / (y2 - x2), 1)),
+              distance03 = Math.max(0, Math.min((0 - x3) / (y3 - x3), 1)),
+              distance04 = Math.max(0, Math.min((0 - x4) / (y4 - x4), 1));
+          
+          console.log("distance01 = " + distance01);
+          console.log("distance02 = " + distance02);
+          console.log("distance03 = " + distance03);
+          console.log("distance04 = " + distance04);
+
+            if (distance01<0.8 && distance01>0.3){$("#section01").css("opacity",1);} else{$("#section01").css("opacity",0.2);}
+            if (distance02<0.8 && distance02>0.3){$("#section02").css("opacity",1);} else{$("#section02").css("opacity",0.2);}
+            if (distance03<0.8 && distance03>0.3){$("#section03").css("opacity",1);} else{$("#section03").css("opacity",0.2);}
+            if (distance04<0.8 && distance04>0.3){$("#section04").css("opacity",1);} else{$("#section04").css("opacity",0.2);}
+
+            if (distance02>0.3 && counter01 == 1) {
+              chart.series[0].data[5].update({color:"#00ba4b"})
+              counter01 = 0;
+            }
+
+
+            if (distance02>0.9 && counter02 == 1) {
+              chart.addSeries(
+                  {name: 'GHG emissions excluding LUCF',color: "#ffba00", data: [10975,6235,4399,3014,2322,761,1013,1345,714,887]}
+              );
+              counter02 = 0;
+            }
+
+            if (distance03 > 0.9 && counter03 == 1) {
+              chart.series[1].remove();
+              chart.series[0].remove();
+              chart.addSeries(
+                  {name: 'GHG emissions by LUCF',color:"#006d2c", negativeColor: '#ffba00', data: [-291,-412,-277,-127,-68,1220,811,-137,142,-77]}
+              );
+              counter03 = 0;
+            }
+
+            if (distance02 < 0.9 && counter02 == 0) {
+              chart.series[1].remove();
+              chart.series[0].remove();
+              chart.addSeries(
+                  {name:"GHG emissions including LUCF", color:"#006d2c", data: [10684,5823,4123,2887,2254,1981,1823,1207,856,810]}
+              );
+              counter02 = 1;
+            }
+
+            if (distance03 < 0.9 && counter03 == 0) {
+              chart.series[0].remove();
+              chart.addSeries(
+                  {name:"GHG emissions including LUCF", color:"#006d2c", data: [10684,5823,4123,2887,2254,1981,1823,1207,856,810]}
+              );
+              chart.addSeries(
+                  {name: 'GHG emissions excluding LUCF',color: "#ffba00", data: [10975,6235,4399,3014,2322,761,1013,1345,714,887]}
+              );    
+              counter03 = 1;
+            }            
+        });
+
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container1',
+                type: 'bar',
+                animation: {duration:1000},
+            },
+            title: {
+                text: 'Top 10 emitters of greenhouse gas, 2012',
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["China","US","EU","India","Russia","Indonesia","Brazil","Japan","Canada","Germany"],    
+            },
+            yAxis: {
+                title: {
+                  text: "metric tons of CO₂ equivalent (MtCO₂e‍)",
+                  x: -20,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: false,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '{series.name}: <b>{point.y}</b> MtCO₂e‍',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"GHG emissions including LUCF", color:"#006d2c", data: [10684,5823,4123,2887,2254,1981,1823,1207,856,810]},
+            ],
+        });    
+
+
+        chart2 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container2',
+                type: 'bar',
+                animation: {duration:1000},
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["China","US","EU","India","Russia","Indonesia","Brazil","Japan","Canada","Germany"],    
+            },
+            yAxis: {
+                title: {
+                  text: "metric tons of CO₂ equivalent (MtCO₂e‍)",
+                  x: -20,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '{series.name}: <b>{point.y}</b> MtCO₂e‍',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"GHG emissions including LUCF", color:"#006d2c", data: [10684,5823,4123,2887,2254,1981,1823,1207,856,810]},
+                {name: 'GHG emissions excluding LUCF',color: "#ffba00", data: [10975,6235,4399,3014,2322,761,1013,1345,714,887]}
+            ],
+        });
+
+
+        chart3 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container3',
+                type: 'bar',
+                animation: {duration:1000},
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["China","US","EU","India","Russia","Indonesia","Brazil","Japan","Canada","Germany"],    
+            },
+            yAxis: {
+                title: {
+                  text: "metric tons of CO₂ equivalent (MtCO₂e‍)",
+                  x: -20,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: true,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                pointFormat: '{series.name}: <b>{point.y}</b> MtCO₂e‍',                
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name: 'GHG emissions by LUCF',color:"#006d2c", negativeColor: '#ffba00', data: [-291,-412,-277,-127,-68,1220,811,-137,142,-77]}
+            ],
+        });
+
+
+    });
+
+});
+</script>
