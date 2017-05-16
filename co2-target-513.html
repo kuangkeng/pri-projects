@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pledge to reduce GHG emission by 2030</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 350px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 530px ) { 
+    #container{height: 300px; }
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+    #container{height: 250px; }
+} 
+
+</style>
+
+<body>
+<div id="wrapper">    
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Pledges to reduce GHG emissions by 2030 under the Paris Agreement</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Under their respective reduction pledges, Russia, China and India will still emit more GHG in 2030 than in 2005.</div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='http://www.pbl.nl/sites/default/files/cms/publicaties/pbl-2015-assessing-intended-nationally-determined-contributions-to-the-paris-climate-agreement_1879.pdf' target='_blank'>Netherlands Environmental Assessment Agency (PBL)</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>As each country set its target differently using different parameters and base year for comparison, the figures in this chart are calculated and/or extrapolated by the PBL using each country's emissions data to allow apples-to-apples comparison. Rollover/tap each bar to see the target stated by each country in its pledge submitted to the UN.
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["Brazil","US","EU28","Canada","Australia","Japan","Russia","China","India"],   
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: 'Percentage of change relative to<br>the amount of GHG emissions in 2005',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+            },
+            credits: { enabled: false, },
+
+            //Disable the legend if there's only one series of data
+            legend: {enabled: false,},
+
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-696".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                pointFormat: 'Relative to 2005 levels: <b>{point.y}%</b><br>Stated target: <b>{point.target}</b>',
+            },
+            plotOptions: {
+                series:{
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y}%',
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object such as '{y:17.7, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Relative to 2005 levels", color:"#FF8B00", data: [
+                    {y:-43, "target":"37% below 2005 levels by 2025"},
+                    {y:-37, "target":"26-28% below 2005 levels by 2025"},
+                    {y:-35, "target":"At least 40% below 1990 by 2030"},
+                    {y:-30, "target":"30% below 2005 levels by 2030"},
+                    {y:-27, "target":"26-28% below 2005 levels by 2030"},
+                    {y:-23, "target":"26% below 2013 levels by 2030"},
+                    {y:14.20, "target":"25-30% below 1990 levels by 2030"},
+                    {y:98, "target":"Peak CO2 emissions around 2030,<br><b>60-65% reduction in carbon intensity by 2030 on 2005 level<b>"},
+                    {y:130, "target":"Lower the ratio of emission to GDP<br><b>by 33-35% below 2005 levels by 2030<b>"},
+                ], negativeColor: '#4188bc',},
+            ],
+            });
+    });
+});
+</script>

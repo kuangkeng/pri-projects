@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Presidential language has gotten less analytic</title>
+    <meta name="description" content="Analysis of ~30,000 informal and formal remarks shows decrease in analytic thinking expressed">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; 
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+    padding-bottom: 10px;
+}
+@media (max-width: 500px ) { 
+    #container {height: 250px;}
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+    #container {height: 200px;}
+}  
+
+</style>
+
+<body>
+<div id="wrapper">   
+    <div class="head">
+        <div class="headline">Presidential language has gotten increasingly less analytic over the years</div>
+        <div id="text">Researchers analyzed 30,000 informal and formal statements to find decreasing trend</div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">Source: 
+        <a href='http://liwc.wpengine.com/' target='_blank'>Linguistic Inquiry and Word Count</a>, University of Texas at Austin
+        <!--<br>Data from ~ 30,000 informal and formal presidential remarks.-->
+        <br>All scores are based on a 100-point scale. Low scores near 0 indicate a more intuitive/informal thinking style while high scores near 100 indicate a more analytic/formal thinking style. Average score for Trump calculated from remarks to date and may change over the course of the year.
+        <div id="credit">Sophie Chou / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'line',
+        },
+        title: {
+            text: '',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                year: '%Y'
+            },
+            tickInterval: 24 * 3600 * 10000 * 365 * 5,
+            showLastLabel: true,
+        },
+        yAxis: { 
+            max:100,
+            title: {
+              text: 'Analytic score',
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+
+            plotLines: [{
+              value: 60, //Position of the plotline based on the index of the data point which starts from 0.
+              zIndex: 10,
+              color: '#ff7f00',
+              dashStyle: 'shortdash', //Style of the line. Check Highcharts API for more options (http://api.highcharts.com/highcharts/xAxis.plotLines.dashStyle)
+              width: 1,
+              label: {
+                  //rotation: 270,
+                  useHTML: true,
+                  text: "Trump average to date",
+                  x:0,
+                  y:0,
+                  style: {
+                      fontSize: '11px',
+                      color: '#808080',
+                      textAlign:'center',
+                  }
+              }
+          }]  
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            headerFormat: '{point.x: %Y}<br>',
+            pointFormat: 'Analytic score: <b>{point.y:,.2f}</b>'
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0,
+            },
+            line: {
+                marker: {
+                    enabled: false
+                }
+            },
+        },
+
+        series: [
+            {name: "Analytic", color:"#4188bc",
+            //INPUT: the 3 figures inside Date.UTC() represents YYYY, MM-1, DD. The following figure outside of Date.UTC() is the data value. Note that the figure for month (MM) starts from 0, e.g. January is 0, June is 5, November is 11.
+                data :[
+                [Date.UTC(1789,0,1),90.55058824],
+                [Date.UTC(1790,0,1),97.5046875],
+                [Date.UTC(1791,0,1),97.2216129],
+                    [Date.UTC(1792,0,1),97.25961538],
+                [Date.UTC(1793,0,1),95.23875],
+                [Date.UTC(1794,0,1),97.69],
+                [Date.UTC(1795,0,1),96.59352941],
+                [Date.UTC(1796,0,1),97.39833333],
+                [Date.UTC(1797,0,1),95.90227273],
+                [Date.UTC(1798,0,1),97.23],
+                [Date.UTC(1799,0,1),96.67875],
+                [Date.UTC(1800,0,1),94.85333333],
+                [Date.UTC(1801,0,1),96.705625],
+                [Date.UTC(1802,0,1),97.31821429],
+                [Date.UTC(1803,0,1),97.07391304],
+                [Date.UTC(1804,0,1),98.41],
+                [Date.UTC(1805,0,1),95.99846154],
+                [Date.UTC(1806,0,1),97.3564],
+                [Date.UTC(1807,0,1),97.58857143],
+                [Date.UTC(1808,0,1),96.68864865],
+                [Date.UTC(1809,0,1),98.50666667],
+                [Date.UTC(1810,0,1),98.86555556],
+                [Date.UTC(1811,0,1),98.44],
+                [Date.UTC(1812,0,1),98.33705882],
+                [Date.UTC(1813,0,1),97.86909091],
+                [Date.UTC(1814,0,1),98.78555556],
+                [Date.UTC(1815,0,1),98.6475],
+                [Date.UTC(1816,0,1),98.58538462],
+                [Date.UTC(1817,0,1),97.97076923],
+                [Date.UTC(1818,0,1),98.30552632],
+                [Date.UTC(1819,0,1),98.4235],
+                [Date.UTC(1820,0,1),97.82833333],
+                [Date.UTC(1821,0,1),98.41545455],
+                [Date.UTC(1822,0,1),97.91021277],
+                [Date.UTC(1823,0,1),98.84142857],
+                [Date.UTC(1824,0,1),98.1322],
+                [Date.UTC(1825,0,1),97.98472222],
+                [Date.UTC(1826,0,1),98.78446429],
+                [Date.UTC(1827,0,1),98.92142857],
+                [Date.UTC(1828,0,1),98.9654],
+                [Date.UTC(1829,0,1),98.59394737],
+                [Date.UTC(1830,0,1),98.10925926],
+                [Date.UTC(1831,0,1),98.606875],
+                [Date.UTC(1832,0,1),98.3625],
+                [Date.UTC(1833,0,1),98.33710526],
+                [Date.UTC(1834,0,1),97.7152381],
+                [Date.UTC(1835,0,1),98.18875],
+                [Date.UTC(1836,0,1),98.4425],
+                [Date.UTC(1837,0,1),98.26354167],
+                [Date.UTC(1838,0,1),98.79084746],
+                [Date.UTC(1839,0,1),98.79372549],
+                [Date.UTC(1840,0,1),98.8690411],
+                [Date.UTC(1841,0,1),98.21730769],
+                [Date.UTC(1842,0,1),98.61727273],
+                [Date.UTC(1843,0,1),98.33851852],
+                [Date.UTC(1844,0,1),98.81],
+                [Date.UTC(1845,0,1),98.12285714],
+                [Date.UTC(1846,0,1),98.33450704],
+                [Date.UTC(1847,0,1),98.2195],
+                [Date.UTC(1848,0,1),98.27385714],
+                [Date.UTC(1849,0,1),98.63],
+                [Date.UTC(1850,0,1),98.56735294],
+                [Date.UTC(1851,0,1),98.63166667],
+                [Date.UTC(1852,0,1),98.63291667],
+                [Date.UTC(1853,0,1),98.55190476],
+                [Date.UTC(1854,0,1),98.85505747],
+                [Date.UTC(1855,0,1),98.95188679],
+                [Date.UTC(1856,0,1),98.96],
+                [Date.UTC(1857,0,1),98.66257143],
+                [Date.UTC(1858,0,1),98.68351852],
+                [Date.UTC(1859,0,1),98.23710526],
+                [Date.UTC(1860,0,1),97.99712121],
+                [Date.UTC(1861,0,1),96.41081633],
+                [Date.UTC(1862,0,1),94.19846154],
+                [Date.UTC(1863,0,1),96.98392157],
+                [Date.UTC(1864,0,1),95.25360656],
+                [Date.UTC(1865,0,1),95.92],
+                [Date.UTC(1866,0,1),98.81612613],
+                [Date.UTC(1867,0,1),98.20892857],
+                [Date.UTC(1868,0,1),98.6487963],
+                [Date.UTC(1869,0,1),98.70337349],
+                [Date.UTC(1870,0,1),98.38848837],
+                [Date.UTC(1871,0,1),98.32369565],
+                [Date.UTC(1872,0,1),98.71087719],
+                [Date.UTC(1873,0,1),97.77],
+                [Date.UTC(1874,0,1),98.70888889],
+                [Date.UTC(1875,0,1),98.2055],
+                [Date.UTC(1876,0,1),98.35868852],
+                [Date.UTC(1877,0,1),98.36],
+                [Date.UTC(1878,0,1),98.82411765],
+                [Date.UTC(1879,0,1),98.84882353],
+                [Date.UTC(1880,0,1),98.52588235],
+                [Date.UTC(1881,0,1),98.59210526],
+                [Date.UTC(1882,0,1),98.81150538],
+                [Date.UTC(1883,0,1),98.91323077],
+                [Date.UTC(1884,0,1),98.7996],
+                [Date.UTC(1885,0,1),98.881875],
+                [Date.UTC(1889,0,1),86.42454545],
+                [Date.UTC(1890,0,1),97.46988636],
+                [Date.UTC(1891,0,1),96.2824],
+                [Date.UTC(1892,0,1),97.01365385],
+                [Date.UTC(1893,0,1),98.2415625],
+                [Date.UTC(1894,0,1),98.49093023],
+                [Date.UTC(1895,0,1),97.26885714],
+                [Date.UTC(1896,0,1),97.96862745],
+                [Date.UTC(1897,0,1),97.03613636],
+                [Date.UTC(1898,0,1),98.74588235],
+                [Date.UTC(1899,0,1),98.77352941],
+                [Date.UTC(1900,0,1),98.24833333],
+                [Date.UTC(1901,0,1),97.30529412],
+                [Date.UTC(1902,0,1),97.38411765],
+                [Date.UTC(1903,0,1),86.44383178],
+                [Date.UTC(1904,0,1),98.74695652],
+                [Date.UTC(1905,0,1),97.24806452],
+                [Date.UTC(1906,0,1),95.24666667],
+                [Date.UTC(1907,0,1),95.5125],
+                [Date.UTC(1908,0,1),93.637],
+                [Date.UTC(1909,0,1),97.01666667],
+                [Date.UTC(1910,0,1),98.54208333],
+                [Date.UTC(1911,0,1),96.505],
+                [Date.UTC(1912,0,1),98.28],
+                [Date.UTC(1913,0,1),77.89777778],
+                [Date.UTC(1914,0,1),75.46333333],
+                [Date.UTC(1915,0,1),69.67],
+                [Date.UTC(1916,0,1),69.27892857],
+                [Date.UTC(1917,0,1),76.33454545],
+                [Date.UTC(1918,0,1),69.52571429],
+                [Date.UTC(1919,0,1),71.23671429],
+                [Date.UTC(1920,0,1),94.155],
+                [Date.UTC(1921,0,1),89.69666667],
+                [Date.UTC(1922,0,1),91.3],
+                [Date.UTC(1923,0,1),90.97],
+                [Date.UTC(1924,0,1),84.12833333],
+                [Date.UTC(1925,0,1),87.37818182],
+                [Date.UTC(1926,0,1),88.83875],
+                [Date.UTC(1927,0,1),90.43736842],
+                [Date.UTC(1928,0,1),89.92],
+                [Date.UTC(1929,0,1),89.56113636],
+                [Date.UTC(1930,0,1),91.90910053],
+                [Date.UTC(1931,0,1),92.1121466],
+                [Date.UTC(1932,0,1),90.54687225],
+                [Date.UTC(1933,0,1),90.21460784],
+                [Date.UTC(1934,0,1),87.61877193],
+                [Date.UTC(1935,0,1),90.51385321],
+                [Date.UTC(1936,0,1),83.96005495],
+                [Date.UTC(1937,0,1),92.91033058],
+                [Date.UTC(1938,0,1),90.86039216],
+                [Date.UTC(1939,0,1),90.88840426],
+                [Date.UTC(1940,0,1),90.976],
+                [Date.UTC(1941,0,1),87.34211268],
+                [Date.UTC(1942,0,1),87.36632653],
+                [Date.UTC(1943,0,1),86.237],
+                [Date.UTC(1944,0,1),81.03347826],
+                [Date.UTC(1945,0,1),91.77323232],
+                [Date.UTC(1946,0,1),89.12522727],
+                [Date.UTC(1947,0,1),92.34009901],
+                [Date.UTC(1948,0,1),82.21805556],
+                [Date.UTC(1949,0,1),82.58],
+                [Date.UTC(1950,0,1),86.43702564],
+                [Date.UTC(1951,0,1),75.51833333],
+                [Date.UTC(1952,0,1),76.95071429],
+                [Date.UTC(1953,0,1),82.05353333],
+                [Date.UTC(1954,0,1),78.54701754],
+                [Date.UTC(1955,0,1),79.91117647],
+                [Date.UTC(1956,0,1),82.17931034],
+                [Date.UTC(1957,0,1),80.56614679],
+                [Date.UTC(1958,0,1),84.71461538],
+                [Date.UTC(1959,0,1),78.64949438],
+                [Date.UTC(1960,0,1),77.46051163],
+                [Date.UTC(1961,0,1),85.51594502],
+                [Date.UTC(1962,0,1),79.31817629],
+                [Date.UTC(1963,0,1),79.76867978],
+                [Date.UTC(1964,0,1),75.67357616],
+                [Date.UTC(1965,0,1),80.81714724],
+                [Date.UTC(1966,0,1),79.05181269],
+                [Date.UTC(1967,0,1),80.78521739],
+                [Date.UTC(1968,0,1),79.44160563],
+                [Date.UTC(1969,0,1),76.89168605],
+                [Date.UTC(1970,0,1),77.72109929],
+                [Date.UTC(1971,0,1),80.37205479],
+                [Date.UTC(1972,0,1),81.37970588],
+                [Date.UTC(1973,0,1),81.73463768],
+                [Date.UTC(1974,0,1),79.91899408],
+                [Date.UTC(1975,0,1),84.18599567],
+                [Date.UTC(1976,0,1),79.07479936],
+                [Date.UTC(1977,0,1),85.24034091],
+                [Date.UTC(1978,0,1),82.84891008],
+                [Date.UTC(1979,0,1),85.30702186],
+                [Date.UTC(1980,0,1),82.87435065],
+                [Date.UTC(1981,0,1),78.34964052],
+                [Date.UTC(1982,0,1),80.98077922],
+                [Date.UTC(1983,0,1),81.45662562],
+                [Date.UTC(1984,0,1),77.43413567],
+                [Date.UTC(1985,0,1),81.54433803],
+                [Date.UTC(1986,0,1),80.96506812],
+                [Date.UTC(1987,0,1),81.77857895],
+                [Date.UTC(1988,0,1),80.16305],
+                [Date.UTC(1989,0,1),79.56135678],
+                [Date.UTC(1990,0,1),81.47648961],
+                [Date.UTC(1991,0,1),80.14497664],
+                [Date.UTC(1992,0,1),76.46352941],
+                [Date.UTC(1993,0,1),80.63465164],
+                [Date.UTC(1994,0,1),78.46625],
+                [Date.UTC(1995,0,1),80.01032258],
+                [Date.UTC(1996,0,1),75.37755853],
+                [Date.UTC(1997,0,1),79.80994465],
+                [Date.UTC(1998,0,1),79.35513591],
+                [Date.UTC(1999,0,1),83.63546318],
+                [Date.UTC(2000,0,1),93.00007092],
+                [Date.UTC(2001,0,1),81.21182342],
+                [Date.UTC(2002,0,1),78.41162437],
+                [Date.UTC(2003,0,1),86.08344689],
+                [Date.UTC(2004,0,1),80.74709434],
+                [Date.UTC(2005,0,1),82.67117794],
+                [Date.UTC(2006,0,1),79.71545817],
+                [Date.UTC(2007,0,1),80.62239892],
+                [Date.UTC(2008,0,1),91.7645509],
+                [Date.UTC(2009,0,1),70.66916468],
+                [Date.UTC(2010,0,1),70.98470449],
+                [Date.UTC(2011,0,1),68.85270423],
+                [Date.UTC(2012,0,1),61.7044226],
+                [Date.UTC(2013,0,1),68.38761468],
+                [Date.UTC(2014,0,1),71.6674344],
+                [Date.UTC(2015,0,1),70.27949853],
+                [Date.UTC(2016,0,1),71.41992806],
+                ],
+                dataLabels: {
+                    enabled: false,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:,.2f}',
+                    y: 0,
+                    style: {
+                        fontSize: '11px',
+                    }
+                },
+            },
+        ], 
+
+    });
+});
+</script>

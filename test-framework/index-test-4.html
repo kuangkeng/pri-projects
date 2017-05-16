@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="//cdn1.pri.org/sites/default/files/favicon_0.ico" type="image/vnd.microsoft.icon" />
+<meta http-equiv="x-dns-prefetch-control" content="on" />
+<meta name="robots" content="follow, index" />
+<meta property="fb:admins" content="16800048" />
+<meta property="fb:app_id" content="142079625983010" />
+<meta property="og:site_name" content="Public Radio International" />
+<meta property="article:publisher" content="https://www.facebook.com/publicradiointernational" />
+<meta property="og:locale" content="en_US" />
+
+<!-- ### Story Metadata, Important for social sharing. Look for the word Insert and add in custom data there.-->
+<link rel="canonical" href="Insert URL" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="Insert URL" />
+<meta name="twitter:url" content="Insert URL" />
+<meta name="twitter:title" content="Insert Story Title" />
+<meta property="og:title" content="Insert Story Title" />
+<meta name="twitter:title" content="Insert Story Title" />
+<meta property="og:description" content="Insert Story Teaser" />
+<meta property="og:image" content="Insert Image URL" />
+<meta name="twitter:image:src" content="Insert Image URL" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="news_keywords" content="Insert Story Categories">
+<title>Test page for Carto and Arcgis map | Public Radio International</title>
+
+<meta name="viewport" content="width=device-width">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="cleartype" content="on">
+
+<!-- ### Loading in base styles These should not be changed -->
+<link href="//cdn1.pri.org/interactive/themes/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900,400italic|Alegreya+Sans&subset=latin,vietnamese,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<!-- ### KEEP for bootstrap - HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- ### Add in additional CSS Libraries here -->
+<!--<link rel="stylesheet" type="text/css" href="/interactive/libraries/misc/ui/jquery.ui.core.css" media="screen" />-->
+
+
+<!--### Keep! Google Analytics-->
+<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+  ga("create", "UA-2145282-1", {"cookieDomain":"auto"});
+  ga("require", "displayfeatures");ga("set", "dimension2", "Insert Story Program"); // Program: ex: PRI\u0026#039;s The World
+  ga("set", "dimension3", "2017-02-14"); // Published Date ex: 2017-02-14
+  ga("set", "dimension4", "Insert Story Tags"); // Story tags: comma separated, lowercase, hypen-ated, ex: michael-jordan
+  ga("set", "dimension5", "Insert Categories"); // Sections, Verticals, Collections and Series: comma separated, lowercase, hypen-ated example: global-nation, across-womens-lives
+  ga("send", "pageview");
+</script>
+
+<!--### Feel free to insert custom styles here -->
+<style>
+  /* Needed for full height bgs */
+  html,body {
+    height:100%;
+    margin:0;
+  }
+  html>body .header.cover {
+    height:auto;
+
+  }
+  .header.cover {
+    background: url('https://cdn1.pri.org/sites/default/files/styles/original_image/public/google%20trend%20chart%20paris%20beirut.png') no-repeat center center fixed #222;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  /*CSS FOR ARCGIS MAP*/
+
+  .embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} 
+  .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}
+
+  @media (max-width: 400px ) { 
+    .embed-container {padding-bottom: 130%}
+  }
+
+
+</style>
+</head>
+<body class="interactive">
+  <!--### Select Navbar Style -->
+  <nav class="navbar pri orange">
+    <h2>
+      <a href="https://www.pri.org" class="icon-pri"><span class="hidden">PRI - Public Radio International</span></a>
+    </h2>
+  </nav>
+
+  <!-- ### example of header with a cover image -->
+  <header class="header cover">
+    <div class="container text">
+      <p id="primary-category" class="field-terms-sections">
+        <a href="[primary_category:url]">Test</a>
+      </p>
+      <h1 id="title">Test page for Carto and Arcgis map</h1>
+      <div class="teaser">
+          <p>To test how Carto and Arcgis interactive maps work in this framework.</p>
+        </div>
+      <div class="story__meta-container">
+        <div class="story__meta-inner">
+        <p class="field-ref-program story__program story__meta"><a href="[organization_program:url]">Test</a></p>
+        <p class="field-date-published story__meta">
+          <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2015-07-28T16:30:00-04:00">May 31, 2016 · 12:15 PM EDT</span>
+        </p>
+        <!--<p class="field-fc-story-creators story__meta"><span>By</span> <a href="[author:bio:url]">Insert Author here</a></p>-->
+        </div>
+        <!--<div class="story__meta-right">
+          <a href="/programs?id=7ad3c9a722225c95b7ab426d476f7a4f" class="logo"><img typeof="foaf:Image" src="//test-services.pri.org/image/2016/08/29/3f7f6c40430240928f6049b6878aedd8/logo-tw.png" width="85" height="85"></a>
+          <a href="/programs?id=7ad3c9a722225c95b7ab426d476f7a4f" class="logo"><img typeof="foaf:Image" src="https://test-services.pri.org/image/2016/09/30/3c186a13031c4d0682fe910da6345ff9/AWL_white.jpg" width="85" height="85"></a>
+        </div>-->
+      </div>
+      <div class="embed embed-lede">
+        <div class="primary__audio">
+          <div class="embed embed-audio embed-primary-audio collasped">
+            <p class="listen-label">Listen to this story</p>
+            <div class="item-list">
+              <h3>Player utilities</h3>
+              <ul class="player-utilities">
+                <li class="first">
+                  <a href="[primary_audio:url]" title="Download"><i class="fa fa-download" aria-label="Download"></i></a>
+                </li>
+                <li class="last">
+                  <a href="/audio-player/embed/[content_object_id]" target="_blank" onclick="javascript: window.open(this.href, 'Listen', 'left=20,top=20,width=500,height=500'); return false;" title="Open the player in a new window."><i class="fa fa-expand" aria-label="Popout Player"></i></a>
+                </li>
+              </ul>
+            </div>
+            <audio class="collapsable" src="https://www.podtrac.com/pts/redirect.mp3/cdn.pri.org/sites/default/files/segment-audio/07282015_01.mp3" preload="none"></audio>
+          </div>
+        </div><!--End Audio-->
+      </div>
+    </div>
+    <!--<a href="#story" class="scroll" aria-label="Keep scrolling"><i class="ss-icon ss-standard">navigatedown</i></a>-->
+  </header>
+
+<!-- ### Start Standard Header -->
+<!--### End standard header -->
+
+<!--### Start body -->
+  <article role="main">
+    <div class="container text" role="main">
+      <div class="lead"><p><span class="drop-cap">T</span>his blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p></div>
+      <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+      <blockquote>
+        <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </blockquote>
+      <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+      <h2>Carto map here:</h2>
+     <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+      
+      <!-- Carto map starts here -->
+        <div class="embed-container"><iframe width="100%" height="450" frameborder="0" src="https://kkeng.carto.com/builder/2a8d0f12-feb8-11e6-94d9-0ecd1babdde5/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></div>
+      <!-- carto map ends here -->
+
+      <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      <br>
+      <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+
+      <h2>Arcgis map here:</h2>
+      <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+      
+      <!-- Arcgis map starts here -->
+        <div class="embed-container"><iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="sanctuary-map" src="//wgbh.maps.arcgis.com/apps/Embed/index.html?webmap=2bdb3849cba64eeb80e00ff52484d3ff&amp;extent=-142.8223,16.2077,-56.6895,53.7444&amp;zoom=true&amp;scale=true&amp;disable_scroll=true&amp;theme=light"></iframe></div>
+      <!-- Arcgis map ends here -->
+      
+      <!-- ### Optional Story Sharebar -->
+      <aside class="sharing-links--story">
+        <span class="share-label">Share</span>
+        <ul>
+          <li>
+            <a href="http://www.facebook.com/sharer.php?u=https%3A//pri.org/insert-url-path" target="_blank" onclick="javascript: window.open(this.href, 'Insert Story Title','width=320, height=420'); return false;"><i class="sharing-links__icon fa fa-facebook" aria-hidden="true"></i> <span class="share__text">Facebook</span></a>
+          </li>
+          <li>
+            <a href="http://twitter.com/share?url=https%3A//pri.org/insert-url-path&amp;text=Insert%20Story%20Title&amp;hashtags=" target="_blank" onclick="javascript: window.open(this.href, 'Insert Story Title', 'width=320, height=420'); return false;"><i class="sharing-links__icon fa fa-twitter" aria-hidden="true"></i> <span class="share__text">Twitter</span></a>
+          </li>
+          <li class="googleplus">
+            <a href="https://plus.google.com/share?url=https%3A//pri.org/insert-url-path" target="_blank" onclick="javascript:window.open(this.href,
+            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=500');return false;"><i class="sharing-links__icon fa fa-google-plus" aria-hidden="true"></i> <span class="share__text">Google +</span></a>
+          </li>
+          <li><a href="mailto:?subject=Insert Story Title?&body=https://www.pri.org/insert-url-path"><i class="sharing-links__icon fa fa-envelope" aria-hidden="true"></i><span class="share__text">Email</span></a></li>
+        </ul>
+      </aside>
+      <div class="story__categories">
+        <p class="categories">
+          <strong>In</strong>
+          <span><a href="#">Seeing The News</a></span>
+          <span><a href="#">Conflict &amp; Justice</a></span>
+          <span><a href="#">Conflict</a></span>
+          <span><a href="#">Across Women's Lives</a>.</span>
+        </p>
+        <p class="categories tags">
+          <strong>Tagged:</strong>
+          <span><a href="#">Vilvoorde</a></span>
+          <span><a href="#">Europe</a></span>
+          <span><a href="#">Belgium</a></span>
+          <span><a href="#">Poulomi Basu</a></span>
+          <span><a href="#">ISIS</a></span>
+          <span><a href="#">terrorism</a>.</span>
+        </p>
+      </div>
+    </div> <!-- /quiz-container -->
+  </article>
+  <!-- ### END BODY -->
+  <aside class="related gray">
+    <div class="quiz-container">
+      <h3 class="text-center" class="alternate" style="font-size: 20px;">Related</h3>
+      <div class="row">
+        <div class="col-sm-4">
+          <a href="http://www.pri.org/stories/2016-12-20/indonesia-s-forests-are-key-saving-orangutans-and-slowing-climate-change"><img src="//cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/orangutan_01.jpg?itok=CS5DZjBx" /></a>
+          <h4><strong><a href="http://www.pri.org/stories/2016-12-20/indonesia-s-forests-are-key-saving-orangutans-and-slowing-climate-change">Indonesia’s forests are key for saving orangutans — and slowing climate change</a></strong></h4>
+        </div>
+        <div class="col-sm-4">
+          <a href="http://www.pri.org/stories/2016-12-20/indonesia-s-forests-are-key-saving-orangutans-and-slowing-climate-change"><img src="//cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/CLINICEXTERIOR.jpg?itok=THGyE1EA" /></a>
+          <h4><strong><a class="story-list__title-link" href="http://www.pri.org/stories/2016-12-21/protecting-indonesias-forests-one-doctors-appointment-time">Protecting Indonesia's forests, one doctor's appointment at a time</a></strong></h4>
+        </div>
+        <div class="col-sm-4">
+          <a href="http://www.pri.org/stories/2016-12-20/indonesia-s-forests-are-key-saving-orangutans-and-slowing-climate-change"><img src="//cdn1.pri.org/sites/default/files/styles/story_main/public/story/images/HidayatEdited.jpg?itok=KoLZI5lM" /></a>
+          <h4><strong><a class="story-list__title-link" href="http://www.pri.org/stories/2016-12-23/one-man-planting-mangroves-indonesia-stave-tragedy">One man is planting mangroves in Indonesia to stave off tragedy</a></strong></h4>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="footer white">
+      <p class="text-center small">&copy;2017 <a href="https://www.pri.org">Public Radio International</a></p>
+  </footer>
+
+  <footer class="footer gray">
+      <p class="text-center small">&copy;2017 <a href="https://www.pri.org">Public Radio International</a></p>
+  </footer>
+
+  <footer class="footer dark">
+      <p class="text-center small">&copy;2017 <a href="https://www.pri.org">Public Radio International</a></p>
+  </footer>
+
+  <!-- ### KEEP  Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="//cdn1.pri.org/interactive/themes/bootstrap/dist/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="//cdn1.pri.org/interactive/themes/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- ### Insert additional Jquery libraries and scripts here. Common ones are referenced below -->
+
+
+
+  <!-- ### iframeResizer library -->
+  <script type="text/javascript" src="//cdn2.pri.org/libraries/iframe-resizer/js/iframeResizer.min.js"></script>
+  <script type="text/javascript">
+
+  // MY SCRIPT STARTS
+ 
+
+  // MY SCRIPT ENDS
+
+
+  // ### AUDIO PLAYER CUSTOM SCRIPT
+  $('.embed-primary-audio .mejs-playpause-button button').click(function() {
+    $('.embed-primary-audio').removeClass('collasped');
+  });
+
+  // Initiates Iframe Resizer with parent class of responsive. See: http://davidjbradshaw.github.io/iframe-resizer/
+  $('iframe.auto-resize').iFrameResize( [{log:true}] );
+  </script>
+  <!--KEEP - ensures Chartbeat and comscore can track the page -->
+  <script type='text/javascript'>
+  var _sf_async_config = _sf_async_config || {};
+  /** CONFIGURATION START **/
+  _sf_async_config.uid = 'b22210fd3057cf608499874b24fc112c';
+  _sf_async_config.domain = 'pri.org';
+  _sf_async_config.useCanonical = true;
+  _sf_async_config.sections = 'Interactive'; //CHANGE THIS to variable
+  _sf_async_config.authors = 'Insert Author Name'; //CHANGE THIS to variable
+  /** CONFIGURATION END **/
+  (function() {
+      function loadChartbeat() {
+          window._sf_endpt = (new Date()).getTime();
+          var e = document.createElement('script');
+          e.setAttribute('language', 'javascript');
+          e.setAttribute('type', 'text/javascript');
+          e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+          document.body.appendChild(e);
+      }
+      var oldonload = window.onload;
+      window.onload = (typeof window.onload != 'function') ?
+          loadChartbeat : function() {
+              oldonload();
+              loadChartbeat();
+          };
+  })();
+  </script>
+  <script>
+  setTimeout(function(){var a=document.createElement("script");
+  var b=document.getElementsByTagName('script')[0];
+  a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0022/4394.js";
+  a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+</body>
+</html>

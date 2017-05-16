@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Projected impacts of CPP on coal-fired electricity generation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+#button {
+  background-color: #e9e9e9; 
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 500px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+@media (max-width: 400px ) { 
+    #container{height: 270px; }
+}
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Projected impacts of CPP on coal-fired electricity generation</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text"></div> 
+    </div>  
+    <div id="container"></div>
+    <div class="note">
+        <div id="button-container"><div class="button"><button id="button">Zoom in</button></div></div>
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='https://www.eia.gov/totalenergy/data/monthly/' target='_blank'>EIA's Feb 2017 Monthly Energy Review</a>, <a href='https://www.epa.gov/sites/production/files/2015-08/documents/cpp-final-rule-ria.pdf' target='_blank'>EPA's Regulatory Impact Analysis for the CPP</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>The projected figures under CPP is based on the rate-based approach.
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //the unit of xAxis is time-based. If your xAxis unit is not time or date, use the line-category template.
+            xAxis: {
+                type: 'datetime',
+            //how the time/date unit should be displayed on xAxis, check Highcharts API for other options (http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats)    
+                dateTimeLabelFormats: {
+                    year: '%Y'
+                },
+            //set the interval between units displayed on xAxis (the current setting is for 5 years), remove this line if you want Highcharts to decide for you.        
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+            //INPUT: the unit of yAxis    
+                title: {
+                  text: 'Percentage of electricity net generation from coal',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  y:30,
+                },
+                endOnTick: false,
+                min: 0,
+                max: 60,
+            },
+            credits: {enabled: false},
+            //Disable the legend if there's only one series of data
+            legend: {
+                // enabled: false,
+                itemStyle: {
+                    "color": '#33333c',
+                },                
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function.
+            tooltip: {
+                xDateFormat: '%Y',
+                valueSuffix: "%",
+            },
+            plotOptions: {
+                series: {
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.0f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,.0f}',
+                    },
+                },
+                //MODIFY: Show/hide the data point marker.
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object like '{y:1185, color:"#FF7F00"}', or see the chart "iraq-married-401".
+            series: [ 
+                {name: "Actual", color:"#FF7F00",
+                data :[
+                    [Date.UTC(1949,0,1), 45.74],
+                    [Date.UTC(1950,0,1), 46.25],
+                    [Date.UTC(1951,0,1), 49.35],
+                    [Date.UTC(1952,0,1), 48.40],
+                    [Date.UTC(1953,0,1), 48.95],
+                    [Date.UTC(1954,0,1), 50.21],
+                    [Date.UTC(1955,0,1), 54.76],
+                    [Date.UTC(1956,0,1), 56.06],
+                    [Date.UTC(1957,0,1), 54.58],
+                    [Date.UTC(1958,0,1), 53.11],
+                    [Date.UTC(1959,0,1), 53.05],
+                    [Date.UTC(1960,0,1), 53.09],
+                    [Date.UTC(1961,0,1), 52.92],
+                    [Date.UTC(1962,0,1), 52.48],
+                    [Date.UTC(1963,0,1), 53.69],
+                    [Date.UTC(1964,0,1), 53.30],
+                    [Date.UTC(1965,0,1), 53.94],
+                    [Date.UTC(1966,0,1), 53.46],
+                    [Date.UTC(1967,0,1), 51.77],
+                    [Date.UTC(1968,0,1), 51.39],
+                    [Date.UTC(1969,0,1), 48.84],
+                    [Date.UTC(1970,0,1), 45.89],
+                    [Date.UTC(1971,0,1), 44.13],
+                    [Date.UTC(1972,0,1), 43.99],
+                    [Date.UTC(1973,0,1), 45.47],
+                    [Date.UTC(1974,0,1), 44.29],
+                    [Date.UTC(1975,0,1), 44.40],
+                    [Date.UTC(1976,0,1), 46.27],
+                    [Date.UTC(1977,0,1), 46.31],
+                    [Date.UTC(1978,0,1), 44.16],
+                    [Date.UTC(1979,0,1), 47.77],
+                    [Date.UTC(1980,0,1), 50.73],
+                    [Date.UTC(1981,0,1), 52.36],
+                    [Date.UTC(1982,0,1), 53.11],
+                    [Date.UTC(1983,0,1), 54.44],
+                    [Date.UTC(1984,0,1), 55.45],
+                    [Date.UTC(1985,0,1), 56.70],
+                    [Date.UTC(1986,0,1), 55.65],
+                    [Date.UTC(1987,0,1), 56.84],
+                    [Date.UTC(1988,0,1), 56.91],
+                    [Date.UTC(1989,0,1), 53.38],
+                    [Date.UTC(1990,0,1), 52.47],
+                    [Date.UTC(1991,0,1), 51.75],
+                    [Date.UTC(1992,0,1), 52.57],
+                    [Date.UTC(1993,0,1), 52.86],
+                    [Date.UTC(1994,0,1), 52.06],
+                    [Date.UTC(1995,0,1), 50.97],
+                    [Date.UTC(1996,0,1), 52.12],
+                    [Date.UTC(1997,0,1), 52.83],
+                    [Date.UTC(1998,0,1), 51.75],
+                    [Date.UTC(1999,0,1), 50.91],
+                    [Date.UTC(2000,0,1), 51.72],
+                    [Date.UTC(2001,0,1), 50.95],
+                    [Date.UTC(2002,0,1), 50.10],
+                    [Date.UTC(2003,0,1), 50.83],
+                    [Date.UTC(2004,0,1), 49.82],
+                    [Date.UTC(2005,0,1), 49.63],
+                    [Date.UTC(2006,0,1), 48.97],
+                    [Date.UTC(2007,0,1), 48.51],
+                    [Date.UTC(2008,0,1), 48.21],
+                    [Date.UTC(2009,0,1), 44.45],
+                    [Date.UTC(2010,0,1), 44.78],
+                    [Date.UTC(2011,0,1), 42.28],
+                    [Date.UTC(2012,0,1), 37.40],
+                    [Date.UTC(2013,0,1), 38.89],
+                    [Date.UTC(2014,0,1), 38.64],
+                    [Date.UTC(2015,0,1), 33.17],
+                ]},
+                {name: "Projection (without CPP)", color:"#FF7F00", dashStyle: "ShortDash",
+                data:[
+                    [Date.UTC(2015,0,1), 33.17],
+                    [Date.UTC(2020,0,1), 34.89],
+                    [Date.UTC(2025,0,1), 32.99],
+                    [Date.UTC(2030,0,1), 32.82],
+                ]},
+                {name: "Projection (with CPP)", color:"#4188BC", dashStyle: "ShortDash",
+                data:[
+                    [Date.UTC(2015,0,1), 33.17],
+                    [Date.UTC(2020,0,1), 33.44],
+                    [Date.UTC(2025,0,1), 30.43],
+                    [Date.UTC(2030,0,1), 27.44],
+                ]},               
+            ],
+        });
+
+        var button = 0;
+        $('#button').click(function () {
+            if (button == 0){
+              chart.yAxis[0].setExtremes(20, 50); 
+              chart.xAxis[0].setExtremes(Date.UTC(2005,0,1),Date.UTC(2030,0,1)); 
+              $('#button').text("Zoom out");
+              button = 1;
+            } else {
+              chart.yAxis[0].setExtremes(0, 60); 
+              chart.xAxis[0].setExtremes(Date.UTC(1949,0,1),Date.UTC(2030,0,1)); 
+              $('#button').text("Zoom in");
+              button = 0;
+            }
+        });
+
+    });
+
+});
+</script>

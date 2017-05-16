@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>How Trump's formal addresses have scored in linguistic analysis</title>
+    <meta name="description" content="Scientists have measured qualities in Donald Trump's formal addresses">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 400px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 500px ) { 
+    #container {height: 360px;}
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}  
+
+</style>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Trump's Congressional address was unusual for him</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Trump's analytic score for the speech to Congress was much higher and his authentic score much lower when compared with his inaugural. Reseachers say his inaugural more reflected the speaking style they've analyzed from debates and interviews.</div> 
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='https://liwc.wpengine.com/' target='_blank'>Linguistic Inquiry and Word Count</a>, University of Texas at Austin
+        <!-- INPUT: additional notes for the chart -->
+        <br>All scores are based on a 100-point scale.
+        <!-- INPUT: credit -->
+        <div id="credit">Alex Newman / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["Analytic","Authentic","Tone"],    
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: "score",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                //minTickInterval:10,
+            },
+            credits: {enabled: false},
+            //Display the legend
+            legend: {
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-696".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                //pointFormat: '<b>{point.y}</b>',
+                shared:true,
+            },
+            plotOptions: {
+                series:{
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.1,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,0f}',
+                    }
+                },
+            },    
+            //INPUT: Each data series is an object in "series". The first series will be stacked at the top of the bar. You can set the name and color for each series. 'Name' of the series will appear in the default tooltip. In each series, your data points should be in an array called "data". Color applies to all data points. If you want to change the color of a particular data point, replace that data value with an object such as '{y:489, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Address to Congress", color:"#ff744c", data: [77.4,21.6,68.55]},
+                {name:"Inaugural", color:"#FFe399", data: [56.4,40.3,87.8]},
+                {name:"RNC", color:"#c6dbea", data: [68.9,33.4,30.8]},
+                {name:"Candidacy annoucement", color:"#d0b9e4", data: [19.8,24.8,65.5]},
+                
+            ],
+            });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

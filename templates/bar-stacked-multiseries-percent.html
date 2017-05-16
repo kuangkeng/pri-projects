@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stacked bar chart with multiple series data in percentage</title>
+    <meta name="description" content="This is a template file to build a stacked horizontal bar chart with multiple series data in percentage.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <!-- Google Analytics script -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-2145282-16', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 700px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}  
+
+</style>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Chart title</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Chart description</div> 
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='https://www.justice.gov/pardon/clemency-statistics' target='_blank'>DOJ clemency statistics</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>Other notes for the chart
+        <!-- INPUT: credit -->
+        <div id="credit">Alex Newman / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["FDR","Wilson","Truman","Coolidge","Obama","Hoover","LBJ","Eisenhower","Roosevelt","Nixon","Taft","Harding","JFK","Carter","Clinton","McKinley","Ford","Reagan","GW Bush","HW Bush"],    
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: "percentage",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                //minTickInterval:10,
+            },
+            credits: {enabled: false},
+            //Display the legend
+            legend: {
+                reversed: true,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-696".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                //pointFormat: '<b>{point.y}</b>',
+                shared:true,
+            },
+            plotOptions: {
+                series:{
+                    //adding this line "stacking: 'percent'" turns the chart into a stacked chart with data in percentage.
+                    stacking: 'percent',
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.1,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    borderWidth: 0,
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,0f}',
+                    }
+                },
+            },    
+            //INPUT: Each data series is an object in "series". The first series will be stacked at the top of the bar. You can set the name and color for each series. 'Name' of the series will appear in the default tooltip. In each series, your data points should be in an array called "data". Color applies to all data points. If you want to change the color of a particular data point, replace that data value with an object such as '{y:489, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Other granted", color:"#FF3900", data: [489,374,13,145,0,121,1,0,68,3,87,87,3,3,2,32,5,0,0,0]},
+                {name:"Commutations", color:"#FFBA00", data: [488,1366,118,774,1385,405,226,47,363,60,361,386,100,29,61,123,22,13,11,3]},
+                {name:"Pardons", color:"#4188BC", data: [2819,1087,1913,773,212,672,960,1110,668,863,383,300,472,534,396,291,382,393,189,74]},
+                
+            ],
+            });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

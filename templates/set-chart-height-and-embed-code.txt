@@ -1,0 +1,20 @@
+How to set the height of your embeds and embed them in story post?
+
+Before proceeding, you should know that there's no fixed height and width for our charts. It depends on the information in the chart. For example, if you have a column chart (vertical bar) with only 3 columns, you should keep the chart narrow to prevent seeing fat columns. Same goes to bar chart (horizontal bar), when you have 10 bars, the chart should have a larger height so the bars won't be cramped.
+The general style is try to keep your chart size below 750px width and 600px height.
+Now let's go into the steps.
+
+1. Once you've completed your embed, test it on a sandbox like Codepen.io.
+2. In Codepen.io, right-click the chart and select "inspect".
+3. Under the "element" tab (if you are using Chrome), move your mouse to <body> and you will see your chart in codepen is highlighted and there's a text box either on the top of bottom of the highlighted area showing the size of your chart html body, e.g.: "body 800 x 492". The first figure is the width of <body> and the second figure is the height of <body>. Jot down/remember the height.
+4. The height of the chart will change when the viewport width changes due to text being cut into more lines. We need to make sure the chart is not longer than the height we set when it is viewed on a narrower screen. Hence we need to determine the maximum height of the chart. Also, the chart description and title are mobile responsive, which means they will change to smaller size when the viewport width goes smaller than 400px (this is set in the code).
+5. Adjust the width of your browser window to change the width of Codepen window. You will see a text box at the bottom of the chart showing the viewport width as you adjust your browser window.
+6. Adjust the viewport width to 401px, check the height of <body> using "inspect". Jot down the height of <body>.
+7. Repeat step 6 with viewport width of 270px. 
+8. You should also check 320px to make sure the chart looks good on 320px as that's the viewport width of most iPhones (2 to 5, iPhone 6 is 375px). But you don't have to record the the height on 320px as it is either same or lower that the height on 270px.
+8. The largest height value among full width (desktop view), 401px and 270px is the height we want to set for the chart. We set 270px as our minimum width because that's the viewport width for some older smartphones.
+9. When you save your embed as a html file, the last parameter of the file name is the height. E.g.: iraq-laws-608.html where the chart height is 608px.
+10. To embed the iframe in story post, you need to wrap it with a div with class="nochop". Example: 
+<div class="nochop"><iframe frameborder="0" height="618" scrolling="no" src="https://cdn2.pri.org/embeds/iraq-laws-608.html" width="100%"></iframe></div>
+11. Add another 10px to the iframe height or else the embed will be cut off at the bottom.
+12. If you want the embed to take up the full width of the story site, use 'class="nochop full"'. But make sure the embed is placed further down the story as the embed might block the ads box on the far right column if it is placed high up.

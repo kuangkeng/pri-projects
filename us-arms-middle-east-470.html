@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Top destinations of US arms exports, 2009-2016</title>
+    <meta name="description" content="This is a template file to build a simple horizontal bar chart with single series data.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 500px ){
+    #container{height:270px;}
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">    
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Estimated US arms sales to the Middle East during the Obama administration</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text"></div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='https://www.ciponline.org/about-us/experts-staff/william_hartung' target='_blank'>William D. Hartung / CIP</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>
+        The figures are calculated based on the price of each arm sale when it was announced by the <a href="http://www.dsca.mil/major-arms-sales" target="_blank">Defense Security Cooperation Agency</a>. They have not been adjusted for inflation. The figures are estimates as the agency's announcements are made before the sales are concluded. The sales might be approved, rejected or adjusted thereafter.
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["Saudi Arabia","Qatar","Iraq","UAE","Kuwait","Turkey","Egypt","Oman","Jordan","Bahrain"],   
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: '$ billions',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                // minTickInterval:10,
+            },
+            credits: { enabled: false, },
+
+            //Disable the legend if there's only one series of data
+            legend: {enabled: false,},
+
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-696".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                //pointFormat: '<b>{point.y}%</b>',
+                valueSuffix: ' bil',
+                valuePrefix: '$',
+            },
+            plotOptions: {
+                series:{
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:.1f}',
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object such as '{y:17.7, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Total value", color:"#4188bc", data: [115.39,41.08,33.31,21.62,16.08,10.12,7.50,5.59,1.22,0.35]},
+            ],
+            });
+    });
+});
+</script>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Line chart with single series date/time data</title>
+    <meta name="description" content="This is a template file to build a simple line chart with single series data in date/time format. If you have dataset in irregular time format, refer to 'line-irregular-time-data.html' on how to style your dataset.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Imports from and exports to China explode in North Korea</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text"></div> 
+    </div>  
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='http://data.imf.org/?sk=9D6028D4-F14A-464C-A2F2-59B2CD424B85&sId=1390030341854' target='_blank'>IMF Direction of Trade Statistics</a>
+        <!-- INPUT: additional notes for the chart -->
+        
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //the unit of xAxis is time-based. If your xAxis unit is not time or date, use the line-category template.
+            xAxis: {
+                type: 'datetime',
+            //how the time/date unit should be displayed on xAxis, check Highcharts API for other options (http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats)    
+                dateTimeLabelFormats: {
+                    year: '%Y'
+                },
+            //set the interval between units displayed on xAxis (the current setting is for 5 years), remove this line if you want Highcharts to decide for you.        
+                // tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+            //INPUT: the unit of yAxis    
+                title: {
+                  text: '$ million',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            //Disable the legend if there's only one series of data
+            legend: {
+                enabled: true,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function as used by the example below.
+            tooltip: {
+                shared: true,
+                formatter:function() {
+                    return '<b>' + Highcharts.dateFormat('%Y',this.x) + '</b><br>Imports:<b>$' + Highcharts.numberFormat(this.points[1].y,0,'.',',') + ' mil</b><br>Exports:<b>$' + Highcharts.numberFormat(this.points[0].y,0,'.',',') + ' mil</b><br>' + 'Total volume: <b>$' + Highcharts.numberFormat(this.points[1].y+this.points[0].y,0,'.',',') + ' mil';
+                }
+            },
+            plotOptions: {
+                series: {
+                    //INPUT: Date/time of your first data point. The format goes by YYYY, MM, DD.
+                    pointStart: Date.UTC(1978, 1, 1),
+                    //INPUT: Interval between your data points  
+                    pointInterval: 24 * 3600 * 1000 * 365,
+
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.0f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,.0f}',
+                    },
+                },
+                //MODIFY: Show/hide the data point marker.
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object like '{y:1185, color:"#FF7F00"}', or see the chart "iraq-married-401".
+            series: [ 
+                {name:"North Korea exports to China", color:"#FFBA00", data: [224,330,303,232,304,254,272,245,281,236,234,185,129,86,154,296,199,64,69,122,51,42,37,167,271,395,582,497,468,582,754,790,1188,2464,2485,2914,2841,2484]},
+                {name:"North Korea imports from China", color:"#FF3900", data: [231,317,374,300,281,273,226,239,255,277,345,377,362,525,540,602,425,486,497,534,357,329,451,571,467,628,795,1085,1232,1392,2033,1891,2278,3165,3446,3633,3523,2946]},
+            ],
+        });
+    });
+
+});
+</script>

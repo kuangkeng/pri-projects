@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cumulative airstrikes by US forces in Syria</title>
+    <meta name="description" content="The United States military has already carried out more than 7,500 airstrikes in Syria. The US attacked an airfield on Thursday after a chemical attack on Tuesday killed dozens of civilians.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; 
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+}  
+
+</style>
+
+<body>
+<div id="wrapper">   
+    <div class="head">
+        <div class="headline">The US has already conducted more than 7,500 airstrikes in Syria</div>
+        <div id="text"></div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">Source: 
+        <a href='https://airwars.org/data/' target='_blank'>Airwars.org</a>
+        <br>Airstrike data comes from periodic updates from <a href="http://www.inherentresolve.mil/News/News-Releases/" target="_blank">Operation Inherent Resolve</a>, a US and coalition force created in 2014 to fight ISIS, and is tracked by AirWars. Data is updated through April 2, 2017. 
+        <div id="credit">Alex Newman / PRI</div>
+    </div>
+</div>
+</body>
+
+<!-- Google Analytics script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-2145282-16', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'line',
+        },
+        title: {
+            text: '',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                year: '%Y'
+            },
+            tickInterval: 24 * 3600 * 1000 * 365 ,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+              text: null,
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            headerFormat: '{point.x: %b %e, %Y}<br>',
+            pointFormat: 'Total airstrikes: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0,
+            },
+            line: {
+                marker: {
+                    enabled: true
+                }
+            },
+        },
+
+        series: [
+            {name: "Airstrikes", color:"#FFBA00",
+            //INPUT: the 3 figures inside Date.UTC() represents YYYY, MM-1, DD. The following figure outside of Date.UTC() is the data value. Note that the figure for month (MM) starts from 0, e.g. January is 0, June is 5, November is 11.
+                data :[
+                    [Date.UTC(2014,11,1), 431],
+                    [Date.UTC(2015,0,6), 662],
+                    [Date.UTC(2015,1,6), 955],
+                    [Date.UTC(2015,2,4), 1110],
+                    [Date.UTC(2015,3,3), 1227],
+                    [Date.UTC(2015,4,2), 1378],
+                    [Date.UTC(2015,5,6), 1608],
+                    [Date.UTC(2015,6,2), 1789],
+                    [Date.UTC(2015,6,31), 2131],
+                    [Date.UTC(2015,7,31), 2346],
+                    [Date.UTC(2015,9,2), 2463],
+                    [Date.UTC(2015,10,1), 2565],
+                    [Date.UTC(2015,10,30), 2774],
+                    [Date.UTC(2015,11,31), 2967],
+                    [Date.UTC(2016,1,1), 3129],
+                    [Date.UTC(2016,1,28), 3316],
+                    [Date.UTC(2016,2,27), 3443],
+                    [Date.UTC(2016,3,24), 3570],
+                    [Date.UTC(2016,4,30), 3751],
+                    [Date.UTC(2016,5,26), 4104],
+                    [Date.UTC(2016,6,31), 4498],
+                    [Date.UTC(2016,7,29), 4761],
+                    [Date.UTC(2016,8,25), 5047],
+                    [Date.UTC(2016,9,31), 5360],
+                    [Date.UTC(2016,10,27), 5673],
+                    [Date.UTC(2016,11,28), 5936],
+                    [Date.UTC(2017,0,30), 6510],
+                    [Date.UTC(2017,1,26), 7040],
+                    [Date.UTC(2017,2,27), 7450],
+                    [Date.UTC(2017,3,2), 7524],
+                ],
+                dataLabels: {
+                    enabled: false,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:,.0f}',
+                    y: 0,
+                    style: {
+                        fontSize: '11px',
+                    }
+                },
+            },
+        ], 
+
+    });
+});
+</script>

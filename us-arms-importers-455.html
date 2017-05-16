@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Top destinations of US arms exports, 2009-2016</title>
+    <meta name="description" content="This is a template file to build a simple horizontal bar chart with single series data.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 500px ){
+    #container{height:270px;}
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">    
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Top destinations of US arms exports, 2009-2016</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text"></div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='https://www.sipri.org/databases/armstransfers' target='_blank'>SIPRI Arms Transfers Database</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>To compare different weapons, SIPRI measures the export value using a common unit called <a href="https://www.sipri.org/databases/armstransfers/background#TIV-tables" target='_blank'>trend-indicator value (TIV)</a>, expressed in US dollar at constant 1990 prices. Data only covers major weapons which are defined by SIPRI's <a href="https://www.sipri.org/databases/armstransfers/sources-and-methods" target="_blank">methodology</a>.
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["Saudi Arabia","Australia","UAE","South Korea","Singapore","Iraq","Turkey","Taiwan","India","Japan"],   
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: 'TIV in $ billions (1990 constant USD)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                // minTickInterval:10,
+            },
+            credits: { enabled: false, },
+
+            //Disable the legend if there's only one series of data
+            legend: {enabled: false,},
+
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-696".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                //pointFormat: '<b>{point.y}%</b>',
+                valueSuffix: ' bil',
+                valuePrefix: '$',
+            },
+            plotOptions: {
+                series:{
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,.1f}',
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object such as '{y:17.7, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Value", color:"#4188bc", data: [7.1,5.8,5.5,5.1,3.9,3.6,3.4,3.0,2.8,2.6]},
+            ],
+            });
+    });
+});
+</script>

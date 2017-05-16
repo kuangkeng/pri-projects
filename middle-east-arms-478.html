@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Where did Middle East countries involved in armed conflicts get their weapons?</title>
+    <meta name="description" content="This is a template file to build a stacked horizontal bar chart with multiple series data in percentage.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 500px ){
+    #container{height:270px;}
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}  
+
+@media (max-width: 300px ){
+    #container{height:240px;}
+}
+
+</style>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Where did Middle East countries involved in armed conflicts get their weapons?</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Arms imports from 2009-2016</div>
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='https://www.sipri.org/databases/armstransfers' target='_blank'>SIPRI Arms Transfers Database</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>Data for Lebanon includes arms transferred to Hezbollah. However arms for Syrian rebels, Hamas, Palestinian Popular Resistance Committees, Palestinian Islamic Jihad and Kurdistan Workers' Party in Turkey are not included as the values are relatively negligible according to SIPRI database.
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["Afghanistan","UAE","Iraq","Israel","Turkey","Lebanon","Saudi Arabia","Yemen","Libya","Syria","Palestine"],    
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: "Percentage of total value",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                //minTickInterval:10,
+            },
+            credits: {enabled: false},
+            //Display the legend
+            legend: {
+                reversed: true,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-696".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                //pointFormat: '<b>{point.y}</b>',
+                shared:true,
+                valueSuffix: "%",
+            },
+            plotOptions: {
+                series:{
+                    //adding this line "stacking: 'percent'" turns the chart into a stacked chart with data in percentage.
+                    stacking: 'percent',
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.1,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    borderWidth: 0,
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,0f}',
+                    }
+                },
+            },    
+            //INPUT: Each data series is an object in "series". The first series will be stacked at the top of the bar. You can set the name and color for each series. 'Name' of the series will appear in the default tooltip. In each series, your data points should be in an array called "data". Color applies to all data points. If you want to change the color of a particular data point, replace that data value with an object such as '{y:489,, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Others", color:"#D3D3D3", data: [12.8,31,19.5,45.1,49.6,52,52.2,70.4,79,19.4,0]},
+                {name:"Russia", color:"#FF7F00", data: [19.8,7.5,20.3,0,0.5,0,0,22.8,18.6,80.6,100]},
+                {name:"US", color:"#4188BC", data: [67.5,61.6,60.2,54.9,49.9,48,47.8,6.8,2.4,0,0]},
+            ],
+            });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

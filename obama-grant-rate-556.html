@@ -1,0 +1,166 @@
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 600px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 18px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <div class="headline">But the rate of petitions being granted is far more inline with recent presidents</div>
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='https://www.justice.gov/pardon/clemency-statistics' target='_blank'>DOJ clemency statistics</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>
+        Petitions include requests for commutations, pardons, remissions and respites. Data goes back to 1900. 
+        <!-- INPUT: credit -->
+        <div id="credit">Alex Newman / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            //INPUT: title
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["Truman","Taft","Wilson","Nixon","JFK","Harding","McKinley","Eisenhower","FDR","Ford","LBJ","Hoover","Roosevelt","Carter","Coolidge","Reagan","Clinton","HW Bush","Obama","GW Bush"],   
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: 'Percentage of petitions granted',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  x:-40,
+                },
+                endOnTick: false,
+
+            //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                minTickInterval:10,
+            },
+            credits: { enabled: false, },
+
+            //Disable the legend if there's only one series of data
+            legend: {enabled: false,},
+
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-608".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                //pointFormat: '<b>{point.y}%</b>',
+            },
+            plotOptions: {
+                series:{
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+
+                    stickyTracking: false,
+
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. Remove this for Highcharts to auto-populate the label.
+                        formatter: function() {
+                            return this.y 
+                        },
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object such as '{y:17.7, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Percentage of petitions granted", color:"#4188bc", data: [40.6,39.4,37.9,35.7,32.9,31.4,30.3,28.2,28.0,26.8,26.2,25.1,24.4,21.5,21.0,11.9,6.1,5.3,{y:4.4, color:"#8DB7D6"},1.8]},
+                
+            ],
+            });
+    });
+});
+</script>

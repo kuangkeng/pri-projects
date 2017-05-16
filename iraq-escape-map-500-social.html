@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <style>
+  	body {
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif; 
+      max-width: 750px; 
+      font-size: 16px;
+    }
+
+  	.container {
+  		position:relative; 
+  		height:500px;
+  		border: solid 0.5px #D3D3D3;
+  	}
+
+  	#map-canvas {
+  		position: absolute; 
+  		top: 0; 
+  		left: 0; 
+  		height: 100%; 
+  		width: 100%;
+  	}
+
+    #start-btn {margin-top: 30px;}
+
+    #replay-btn {
+      position: absolute; 
+      bottom:5%;  
+      z-index:5; 
+      left:50%;
+      margin-left:-42px;
+      display: none;
+    }
+
+    .text-box {
+      position: absolute; 
+      top: 0px; 
+      left: 0; 
+      width: 100%; 
+      display: block; 
+      padding:10px; 
+      color: #000000; 
+      background-color: rgba(255,255,255,0.7); 
+      z-index:1; 
+    }
+
+    .title {
+    	font-size: 32px;
+    	font-weight: bold;
+    }
+
+    .text {
+    	font-size: 28px; 
+      line-height: 30px;
+    }
+
+    #startbox {
+      top: 0px; 
+      left: 0px; 
+      width:100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8); 
+      color:#262228;
+      position: absolute;
+      z-index:3;
+      text-align: center;
+    }
+
+    #starttitle {
+      margin-top: 2%;
+      margin-bottom: 20px;
+      color:#ffffff;
+      font-size: 40px;
+      font-weight: bold;
+      text-shadow: 1px 1px 1px #c1c1c1;
+    }
+
+    .imglead {
+      padding: 0px 20%;
+    }
+
+/*MODIFY: change the appearance of the marker labels*/
+    .labels {
+      font-size: 18px;
+      font-weight: bold;
+      color:#33333c;
+    }
+
+    .labelBig {
+      font-size: 20px;
+      color:#99999d;
+    }
+
+  @media (max-width: 600px ) { 
+    .imglead {padding: 0px 10%;}
+  }  
+
+  @media (max-width: 400px ) { 
+  	.container {height:400px;}
+    .imglead {padding: 0px 5%;}
+    #starttitle {font-size: 24px; margin-top: 7%;}
+    .title {font-size: 16px;}
+    .text {font-size: 14px; line-height: 16px;}
+    .btn {font-size: 16px;}
+  }
+
+  </style>
+
+<body>
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.22&libraries=geometry,visualization&sensor=false"></script>
+    <script src="https://cdn2.pri.org/scripts/markerwithlabel.js"></script>
+
+<div class="container-fluid">  
+  <div class="row">
+  	<div class="col-sm-12 col-xs-12 container">
+	    <div id="map-canvas"></div>
+      <div class="text-box">
+      	<div class="title">Fleeing ISIS</div>
+      	<div class="text">Ismail and his mother take a taxi to Erbil.</div>
+      </div>
+      <div id="startbox">
+        <!-- <div id="starttitle">Trapped in the Caliphate:<br>Ismail's journey</div> -->
+        <div id="starttitle">Ismail's long escape</div>
+        <div class="imglead"><img src="//cdn2.pri.org/images/ismail-map-inset-2.png" class="img-responsive center-block"></div>
+        <button type="button" class="btn btn-default btn-lg center-block" id="start-btn">Start</button>
+      </div>
+      <button type="button" class="btn btn-default btn-lg center-block" id="replay-btn" onClick="history.go(0)">Replay</button>
+	  </div>     
+  </div>
+</div>
+
+<script>
+
+//INPUT: markers and labels
+	var cities = [
+    [36.351832, 43.382628, "Bartella"],
+    [36.260798, 43.635824, "Khazer bridge"],
+    [36.344339, 43.223362, "Quds"],
+    [36.411470, 43.072599, "Shirayakhan"],
+    [36.367582, 43.292334, "Bazwaya"],
+    [36.390265, 43.200704, "Tahrir"],
+    [36.365660, 43.221138, "Samah"],
+    [36.308979, 43.538624, "Khazer camp"],
+    [36.189872, 44.008921, "Erbil"],
+	];
+
+  var mosul = [36.350729, 43.139516, "Mosul"];
+
+
+//INPUT: title and text for each card
+	var titles = [];
+        titles[0]="Fleeing ISIS",
+        titles[1]="Captured at Khazer bridge",
+        titles[2]="Jailed and forced to convert",
+        titles[3]="The first escape",
+        titles[4]="Recaptured",
+        titles[5]="The second escape",
+        titles[6]="'They had no beards'",
+        titles[7]="A safe haven",
+        titles[8]="Waiting for hope";
+
+	var texts = [];
+        texts[0]="Ismail and his mother lived in Bartella. When ISIS took over the town in August 2014, they decided to flee. They headed to Erbil.",
+        texts[1]="But they didn't get far. They were captured at an ISIS checkpoint and brought back to Mosul.",
+        texts[2]="Ismail was beaten and they were both detained. They were held for a month in a small room and told to convert to Islam. They were then moved to Shirayakhan.",
+        texts[3]="They were held here for six months and Ismail was often given lashes for small offenses, like owning a cellphone. They fled to an abandoned home in Bazwaya, a small village.",
+        texts[4]="Ismail and his mother waited in Bazwaya for the Iraqi army offensive, so they could escape. ISIS fighters found them first and took them back to Mosul at gunpoint.",
+        texts[5]="Ismail and his mother were placed in a house in the Tahrir neighborhood, but ISIS fighters were busy fighting the Iraqi army, so they left again, heading for the eastern edge of Mosul.",
+        texts[6]="As fighting surrounded them, Ismail and his mother ran through the front lines. When he saw Iraqi army soldiers without beards, he knew they were not ISIS. They were taken to an IDP camp in Khazer.",
+        texts[7]="A Christian charity found Ismail and his mother in the camp and brought them to Erbil.",
+        texts[8]="Today he lives in a small room in an abandoned office building and hopes to leave Iraq for Sweden.";
+
+	var markers = [];
+	var stop = 0;
+
+function init() {
+	$(".title").text(titles[stop]);
+	$(".text").text(texts[stop]);
+
+
+	var mapOptions = {
+    	streetViewControl: false,
+    	zoom: 11,
+    	zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: true,
+      scaleControlOptions: {position: google.maps.ControlPosition.BOTTOM_LEFT},
+      scrollwheel: false,
+//MODIFY: style google basemap. Can be done with online wizard: https://mapstyle.withgoogle.com/   
+      styles: [
+			{"elementType": "geometry","stylers": [{"color": "#e6e6e6"}]},
+			{"elementType": "labels","stylers": [{"visibility": "off"}]},
+			{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},
+			{"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},
+			{"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},
+			{"featureType": "administrative.land_parcel","stylers": [{"visibility": "off"}]},
+			{"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},
+			{"featureType": "administrative.neighborhood","stylers": [{"visibility": "off"}]},
+			{"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},
+			{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},
+			{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},
+			{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#E4EDDD"}]},
+			{"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},
+			{"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},
+			{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#848484"}]},
+			{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},
+			{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},
+			{"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},
+			{"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},
+			{"featureType": "water","elementType": "geometry","stylers": [{"color": "#9ABEDB"}]},
+			{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9ABEDB"}]},
+ 		],
+//INPUT: set the center of map when it first appears    
+		center: new google.maps.LatLng(36.351832, 43.382628)
+	};
+	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+//convert km to mile in mapscale
+var scaleInterval = setInterval(function() {
+  var scale = $(".gm-style-cc:not(.gmnoprint):contains(' km')");
+  if (scale.length) {
+    scale.click();
+    clearInterval(scaleInterval);
+  }
+}, 100);
+
+	//Call location marker with label
+	for (var i = 0; i < cities.length; i++) {
+		var city = cities[i];
+		var myLatLng = new google.maps.LatLng(city[0], city[1]);
+
+     markers[i] = new MarkerWithLabel({
+       position: myLatLng,
+       map: map,
+//MODIFY: change the appearance of markers 
+       icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 4,
+            strokeColor: '#047DB2',
+            fillColor: '#047DB2',
+            fillOpacity:1,
+          },
+       labelContent: city[2],
+       labelAnchor: new google.maps.Point(-15, 20),
+       labelClass: "labels", // the CSS class for the label
+     });
+	}
+
+//label for Mosul
+    var labelMosul =   new MarkerWithLabel({
+      position: new google.maps.LatLng(mosul[0], mosul[1]),
+      map:map,
+       icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 0,
+            strokeColor: '#ff7f00',
+            fillColor: '#ff7f00',
+            fillOpacity: 0,
+            strokeWeight: 0,
+          },
+      labelContent: mosul[2],
+      labelAnchor: new google.maps.Point(0, 30),
+      labelClass: "labelBig", // the CSS class for the label
+    });
+
+  	var animLoop = false,
+	    animIndex = 0,
+	    symbolPath = false,
+	    trailPath = false,
+      times = 0;
+
+//symbol that appears on the map when first started
+   var staticSymbol = new google.maps.Marker({
+       position: new google.maps.LatLng(cities[0][0], cities[0][1]),
+       map: map,
+//MODIFY: change the appearance of markers 
+       icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            strokeColor: '#e41a1c',
+            fillColor: '#e41a1c',
+            fillOpacity: 1.5,
+            strokeWeight: 2,
+          },
+        zIndex: 0, 
+    });
+
+//symbol that moves on the path
+//MODIFY: change the appearance of the animated symbol
+  var lineSymbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    strokeColor: '#e41a1c',
+    fillColor: '#e41a1c',
+    fillOpacity: 1.5,
+    strokeWeight: 2,
+  }; 
+
+//click to start the animation
+$("#start-btn").click(function(){
+  $("#startbox").fadeOut();
+  //lopp the animation of path and symbol
+  var i = 0; 
+  times = titles.length-1;
+  function loopwithdelay() {
+      animatePath(i);
+      i++;
+      if( i < times ){
+          setTimeout( loopwithdelay, 8000 ); //MODIFY: set the duration between 2 loops
+      } 
+  }
+  setTimeout(loopwithdelay, 5000);
+}); 
+
+//function that animates the path and symbol
+  function animatePath(count) {
+    if(count>0){symbolPath.set("icons", null);} 
+    else {staticSymbol.set("map", null);}
+    // Convert the points arrays into Lat / Lng objects
+     var sP = new google.maps.LatLng(cities[count][0], cities[count][1]); 
+     var eP = new google.maps.LatLng(cities[count+1][0], cities[count+1][1]); 
+
+    // Create a polyline for the symbol path
+    symbolPath = new google.maps.Polyline({
+      path: [sP, eP],
+      strokeColor: '#0f0',
+      strokeWeight: 0,
+      icons: [{
+        icon: lineSymbol,
+        offset: '0%'
+      }],
+      map: map,
+      geodesic: false,
+    });
+
+    trailPath = new google.maps.Polyline({
+      path: [sP, sP],
+      strokeColor: '#e41a1c',
+      strokeWeight: 2,
+      map: map,
+      geodesic: true,
+    });
+
+    // Start the animation loop
+    
+    	animLoop = window.requestAnimationFrame(function(){
+      	tick();
+    	});
+    
+    //Run the animation
+
+  	function tick() {
+  	  animIndex+=1;
+
+  	  // Draw path
+  	  var nextPoint = google.maps.geometry.spherical.interpolate(sP,eP,animIndex/100);
+  	  trailPath.setPath([sP, nextPoint]);
+
+  	  // Move the symbol
+  	  symbolPath.icons[0].offset=Math.min(animIndex,100)+'%';    
+  	  symbolPath.setPath(symbolPath.getPath());
+
+  	  // Ensure the symbol is in the center of the screen
+  	  map.panTo(nextPoint);
+
+  	  // We've reached the location, clear animLoop and upate the title/text card
+  	  if(animIndex>=100) {
+  	    window.cancelAnimationFrame(animLoop);
+        console.log("count = " + count + ", times= " +  times);
+        if(count==times-1) {$("#replay-btn").show();}
+  	    animIndex = 0;
+        $(".title").fadeOut(function() {
+          $(this).text(titles[count+1])
+        }).fadeIn();
+        $(".text").fadeOut(function() {
+          $(this).text(texts[count+1])
+        }).fadeIn();
+  	  }else{
+  	    animLoop = window.requestAnimationFrame(function(){
+  	      tick();
+  	    });
+  	  }
+  	}
+  }
+//function animatePath finishes here
+
+}
+//function init finishes here 
+
+google.maps.event.addDomListener(window, 'load', init);
+		
+</script>
+
+</body>
+</html>
+

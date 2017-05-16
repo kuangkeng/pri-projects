@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 700px; 
+max-width: 100%;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}  
+
+</style>
+</head>
+
+<div id="wrapper"> 
+    <div class="head">
+        <div class="headline">Obama ranks no. 5 for clemency</div>
+        <!-- <div id="text"></div> -->
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='https://www.justice.gov/pardon/clemency-statistics' target='_blank'>DOJ clemency statistics</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>
+        Other clemency granted includes remissions and respites. Data goes back to 1900. For years 1900-1945, DOJ data is counted in fiscal years and more than one president may have served in a year. 
+        <!-- INPUT: credit -->
+        <div id="credit">Alex Newman / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'bar',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["FDR","Wilson","Truman","Coolidge","Obama","Hoover","LBJ","Eisenhower","Roosevelt","Nixon","Taft","Harding","JFK","Carter","Clinton","McKinley","Ford","Reagan","GW Bush","HW Bush"],    
+            },
+            yAxis: {
+                title: {
+                  text: "petitions granted",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {
+                enabled: true,
+                reversed: true,
+            },
+            tooltip: {
+                //headerFormat: 'Year: <b>{point.key}</b><br>',
+                // pointFormat: 'Forest area in {series.name}: <b>{point.y} mil km sq</b><br>Changes 1990-2015: <b>{point.chg}%</b>',                
+                shared:true,
+            },
+            plotOptions: {
+                series:{
+                    stacking: 'normal',
+                    groupPadding: 0.1,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        format: '{point.y:,0f}',
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Other granted", color:"#FF3900", data: [489,374,13,145,0,121,1,0,68,3,87,87,3,3,2,32,5,0,0,0]},
+                {name:"Commutations", color:"#FFBA00", data: [488,1366,118,774,1385,405,226,47,363,60,361,386,100,29,61,123,22,13,11,3]},
+                {name:"Pardons", color:"#4188BC", data: [2819,1087,1913,773,212,672,960,1110,668,863,383,300,472,534,396,291,382,393,189,74]},
+                
+            ],
+            });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+<!--CSS starts here-->  
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #33333c;
+  max-width: 350px;
+  margin:0px auto;
+} 
+
+/*
+ * Flipcards styles
+ */  
+
+#box_wrapper {
+  margin:0px auto;
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#box01, #box02, #box03, #box04, #box05, #box06 {
+  margin:5px;
+  display: inline-block;
+  position: relative;
+  width: 340px;
+  height:390px;
+}
+
+.front-label {
+  position: absolute;
+  bottom:2%;
+  right:2%;
+  color:#ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgba(178,0,0,0.8);
+  padding:0px 10px;
+  border-radius: 5px;
+  z-index: 3;
+}
+
+img:hover {opacity:0.9;}
+.front-label:hover {cursor: pointer; background-color: rgba(178,0,0,1);}
+
+.front-text {
+  position: absolute;
+  width: 100%;
+  left:0%;
+  bottom:1%;
+  text-align: center;
+  line-height: 40px;
+  z-index: 2;
+  font-size: 35px;
+  font-style: bold;
+  color:#ffffff;
+  padding:10px 0px;
+  background-color: rgba(255,255,255,0.3);
+  text-shadow: 2px 2px 3px #000000;
+}
+
+.front {
+  position:relative;
+  display: flex;
+  -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+}
+
+.front-img {
+  position:absolute;
+  top:0;
+  left:0;
+}
+  
+.front:hover {
+  background: #ffceba;
+}    
+
+.back {
+  position:relative;
+  background: #b20000;
+  -webkit-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  -moz-box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+  box-shadow: 9px 10px 11px -5px rgba(119,119,119,0.88);
+}
+
+.back-text {
+  font-size: 16px;
+  line-height: 22px;
+  padding:30px 15px 10px 15px;
+  color: #ffffff;
+  text-align: left;
+  text-shadow: 1px 1px 3px #000000;
+}
+
+.photo-text {
+  position: absolute;
+  font-size: 13px;
+  line-height: 16px;
+  bottom:3%;
+  left:0%;
+  width: 100%;
+  color:#ffffff;
+  text-align: left;
+  padding:10px 15px 0px 15px;
+}
+
+/*
+ * Table styles
+ */
+
+#chinese_head, #english_head, #date_head, #category_head {
+  text-align: center;
+  font-weight: bold;
+}
+
+td.chinese, td.date {text-align: center !important;}
+th.category {width: 25% !important;}
+
+.table_wrapper {
+  max-width: 98%;
+  border:1px solid #D3D3D3;
+  padding:5px;
+  margin:0px auto;
+}
+  
+table.dataTable {
+  width: 100%;
+  clear: both;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+@media (max-width: 580px) {
+  #weibo, #chinese_head, #english_head, #date_head, #category_head, .dataTables_info, label {font-size:14px; line-height: 15px}
+  table.dataTable tbody td {padding: 8px 5px;}
+}
+
+@media (max-width: 460px) {
+    #weibo, #chinese_head, #english_head, #date_head, #category_head,.dataTables_info, label {font-size: 13px;}
+    .date{font-size: 11px !important;}
+  .table_wrapper {padding:0px;max-width: 100%;}
+}
+
+@media (max-width: 710px ) {
+  #box01, #box02, #box03, #box04, #box05, #box06 {
+  margin:5px 5px;
+  width: 310px;
+  height:355px;
+  }
+  .front-label {font-size: 12px;padding:0px 8px;}
+  .front-text {line-height: 30px;font-size: 25px;padding:5px 0px;}
+  .photo-text {font-size: 12px;line-height: 14px;padding:5px 10px 0px 10px;}
+  .back-text {padding:15px 10px 0px 10px;}  
+}
+
+@media (max-width: 318px ) {
+  #box01, #box02, #box03, #box04, #box05, #box06 {width: 260px;height:298px;}
+  .back-text {font-size: 14px;line-height: 18px;padding:15px 10px 0px 10px;}  
+}  
+
+</style>
+
+<!--HTML starts here-->
+<body>
+<div id="box_wrapper">
+<div id="box01">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="https://cdn1.pri.org/sites/default/files/styles/original_image/public/RTXBJA9-cropped.jpg?itok=nwJquqS1"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">那天<br>That day</div>
+  </div> 
+  <div class="back">
+      <div class="back-text">Mundane phrases that may be used to refer to the day of the crackdown including “那天” (that day), “特殊的日子” (special day), “今天” (today) and “那年” (that year) were blocked.</div> 
+      <div class="photo-text">Photo: Chinese students carry a sign that reads, "Give me democracy or give me death," during a demonstration in Tiananmen Square May 14, 1989.<br><i style="font-size:10px; color:#c1c1c1">Credit: Dominic Dudouble/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box02">
+  <div class="front">
+    <div class="front-img"><img class="img-responsive" src="https://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR4PFAS-cropped.jpg?itok=IZBwFzCa"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">占占点<br>[pictogram]</div>
+  </div> 
+  <div class="back">
+    <div class="back-text">One of the most creative alternative phrases produced by Chinese Internet users to circumvent the censorship is “占占点” or “占点占”. The phrase itself has no meaning but graphically illustrates the scenario of tanks (占占) crushing protesters (灬). It was detected and blocked as well.</div> 
+    <div class="photo-text">Photo: A man stands in front of a convoy of tanks in the Avenue of Eternal Peace in Tiananmen Square in Beijing in this June 5, 1989 file photo.<br><i style="font-size:10px; color:#c1c1c1">Credit: Arthur Tsang/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box03">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="https://cdn1.pri.org/sites/default/files/styles/original_image/public/RTXDP87-cropped.jpg?itok=pFjxJYDv"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">八的平方<br>8<sup>2</sup></div>
+  </div> 
+  <div class="back">
+    <div class="back-text">Various combinations of numbers referring to the day of June 4 and year 1989 were blocked such as “64”, “六四” (64) , “玖捌” (89) and “玖捌” (98). Even formulas that equal to 64 were not spared including “8x8”, “八的平方” (square of 8), “65-1” and “5月35日”(May 35 which translates to June 4).</div>
+    <div class="photo-text">Photo: Hundreds of thousands of people fill Tiananmen Square on May 17, 1989 in front of the Monument to People's Heroes and Mao's mausoleum.<br><i style="font-size:10px; color:#c1c1c1">Credit: Ed Nachtrieb/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box04">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="https://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR3S5V7-cropped.jpg?itok=u1DG8Ioa"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">周年<br>Anniversary</div>
+  </div> 
+  <div class="back"> 
+    <div class="back-text">Phrases related to the annual candlelight vigil at Victoria Park, Hong Kong to commemorate the protest's anniversary were disallowed. Number of the anniversary like “二十五年” (25 years); the words "周年" (anniversary), “致敬” (pay respect), “悼念” (mourn) and places like “维园” (Victoria Park) and “广场” (public square, referring to Victoria Park) were all blocked.</div>
+    <div class="photo-text">Photo: Tens of thousands of people take part in a candlelight vigil at Hong Kong's Victoria Park June 4, 2014, to mark the 25th anniversary of the Tiananmen protest.<br><i style="font-size:10px; color:#c1c1c1">Credit: Bobby Yip/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box05">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="https://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR3S66B-cropped.jpg?itok=QvZRdFD8"></div>
+    <div class="front-label">More</div>
+    <div class="front-text">蜡烛<br>Candle</div>
+  </div> 
+  <div class="back">
+    <div class="back-text">Sometimes general phrases or words were deemed sensitive when Chinese censors found out they have been used to discuss unwanted incidents. Examples include “蜡烛” (candle), “火” (fire), “推特” (Twitter) and “动” (move).</div>
+    <div class="photo-text">Photo: A participant looks on as she and others mourn those who killed during the Tiananmen Square protest, during a candlelight vigil at Hong Kong's Victoria Park June 4, 2014.<br><i style="font-size:10px; color:#c1c1c1">Credit: Bobby Yip/Reuters</i></div>
+  </div> 
+</div>
+
+<div id="box06">
+  <div class="front"> 
+    <div class="front-img"><img class="img-responsive" src="https://cdn1.pri.org/sites/default/files/styles/original_image/public/RTR3S5XH-cropped.jpg?itok=VQd1tyTF"></div>
+    <div class="front-label">More</div><
+    <div class="front-text">股市<br>Stock market</div>
+  </div> 
+  <div class="back">
+    <div class="back-text">Chinese censors are extremely responsive to current issues. In 2012, the Shanghai Stock Exchange’s Composite Index fell exactly 64.89 points on June 4, the 23rd anniversary of the protest. The authority soon blocked phrases including “上证” (Shanghai Composite), “指数” (index), “股市” (stock market) and “下跌” (fall).</div>
+    <div class="photo-text">Photo: Tens of thousands of people take part in a candlelight vigil at Hong Kong's Victoria Park June 4, 2014, to mark the 25th anniversary of the Tiananmen Square protest.<br><i style="font-size:10px; color:#c1c1c1">Credit: Bobby Yip/Reuters</i></div>
+  </div> 
+</div>
+
+</div> 
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://cdn2.pri.org/scripts/jquery.flip.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+
+</body>
+
+<!--script starts here-->
+<script>
+
+var cardNum = 0;
+
+$(document).ready( function () {
+  $("#box01,#box02,#box03,#box04,#box05,#box06").flip();
+  
+  $("#box01").click(function() {
+      cardNum = 1;                        
+      sendData();   
+  });
+
+  $("#box02").click(function() {
+      cardNum = 2;                        
+      sendData();   
+  });
+
+  $("#box03").click(function() {
+      cardNum = 3;                        
+      sendData();   
+  }); 
+
+  $("#box04").click(function() {
+      cardNum = 4;                        
+      sendData();   
+  });
+
+  $("#box05").click(function() {
+      cardNum = 5;                        
+      sendData();   
+  });
+
+  $("#box06").click(function() {
+      cardNum = 6;                        
+      sendData();   
+  });     
+
+}); 
+
+//Get IP address with Ipify, send data to google sheet
+function sendData() {
+  $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+    function(json) {
+      console.log(json.ip);
+      $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/1LpIMumhAXsQpefTmPt_aiWEF9nj9N58pnlDJee0sPuU/formResponse',
+        data: { 
+          "entry.1469930818": json.ip, //ip
+          "entry.355559817": cardNum, //card number
+          "entry.1307341339": document.referrer,
+        }
+      }); 
+    }
+  );   
+} 
+
+</script>

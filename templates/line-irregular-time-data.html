@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Line chart with irregular time data</title>
+    <meta name="description" content="This is not a template file. This example is to show the data format of irregular time data for line chart. You can use the template file 'line-time-simple-singleseries.html' to build a line chart then replace the data using the data format shown in this file.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <!-- Google Analytics script -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-2145282-16', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+
+  </head>
+
+
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; 
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+}  
+
+</style>
+
+<body>
+<div id="wrapper">   
+    <div class="head">
+        <div class="headline">Commutations granted during Obama administration</div>
+        <div id="text"></div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">Source: 
+        <a href='https://www.justice.gov/pardon/current-fiscal-year-clemency-statistics' target='_blank'>DOJ clemency statistics</a>
+        <br>Data for pardon granted on exact date is not available.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    Highcharts.setOptions({
+          lang: {
+            thousandsSep: ','
+          }
+    }),
+
+    $('#container').highcharts({
+        chart: {
+            type: 'line',
+        },
+        title: {
+            text: '',
+        },
+        subtitle: {
+            enabled: false,
+        },        
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                year: '%Y'
+            },
+            tickInterval: 24 * 3600 * 1000 * 365 ,
+            showLastLabel: true,
+        },
+        yAxis: {
+            title: {
+              text: null,
+              x: 0,
+              style: {
+                color: '#808080',
+                fontSize: '11px',
+              },  
+            },
+            labels: {
+                format: '{value:,.0f}'
+            },
+        },
+        credits: { enabled: false, },
+        legend: {
+            enabled: false,
+        },
+        tooltip: {
+            headerFormat: '{point.x: %b %e, %Y}<br>',
+            pointFormat: 'Commutations: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            series: {
+                groupPadding: 0,
+            },
+            line: {
+                marker: {
+                    enabled: true
+                }
+            },
+        },
+
+        series: [
+            {name: "Commutation", color:"#4188bc",
+            //INPUT: the 3 figures inside Date.UTC() represents YYYY, MM-1, DD. The following figure outside of Date.UTC() is the data value. Note that the figure for month (MM) starts from 0, e.g. January is 0, June is 5, November is 11.
+                data :[
+                    [Date.UTC(2011,10,21), 1],
+                    [Date.UTC(2013,11,19), 8],
+                    [Date.UTC(2014,3,15), 1],
+                    [Date.UTC(2014,11,15), 3],
+                    [Date.UTC(2014,11,17), 8],
+                    [Date.UTC(2015,2,31), 22],
+                    [Date.UTC(2015,6,13), 46],
+                    [Date.UTC(2015,11,18), 95],
+                    [Date.UTC(2016,2,30), 64],
+                    [Date.UTC(2016,4,5), 58],
+                    [Date.UTC(2016,5,3), 42],
+                    [Date.UTC(2016,7,3), 214],
+                    [Date.UTC(2016,7,30), 110],
+                    [Date.UTC(2016,9,6), 102],
+                    [Date.UTC(2016,9,27), 98],
+                    [Date.UTC(2016,10,4), 72],
+                    [Date.UTC(2016,10,22), 79],
+                    [Date.UTC(2016,11,19), 153],
+                    [Date.UTC(2017,0,17), 209],
+                ],
+                dataLabels: {
+                    enabled: false,
+                    rotation: 0,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:,.0f}',
+                    y: 0,
+                    style: {
+                        fontSize: '11px',
+                    }
+                },
+            },
+        ], 
+
+    });
+});
+</script>

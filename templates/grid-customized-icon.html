@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Grid chart with customized icons</title>
+    <meta name="description" content="This is a template file to build a grid chart with customized icons using heatmap.js from Highcharts. It is used to compare variables with binary values like 'Yes' and 'No'.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+
+    <!-- Google Analytics script -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-2145282-16', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 400px;  /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 600px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+.icon {
+  height:28px;
+  text-align: center;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}  
+
+</style>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Legal protections for women in major Middle East countries and the US</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Chart description</div> 
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='http://datatopics.worldbank.org/gender/home' target='_blank'>World Bank Gender Data Portal</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>Other notes for the chart
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    // The x-axis labels are positioned at the bottom by default but we want to move it to the top (opposite: true in 'xAxis'). When the width is too small on mobile, Highcharts automatically rotates the labels to fit the smaller width, cutting off parts of the labels. Hence we need to move the labels to their default position (bottom) when the width goes lower than a specific value (see function at the bottom 'opposite: false'). Before moving the labels to the bottom, we need to create a space under the chart to fit the labels, hence we create a variable called 'bottomValue'. You might wanna change the value of 'bottomValue' depending on your labels.
+    // The variable 'rightValue' is created simply to center the chart when it is viewed on wider screen. We change it back to the default value, 0, when viewed on mobile.
+
+    var bottomValue = 0;
+    var rightValue = 40;
+    if($(window).width() < 340){bottomValue = 125;}  
+    if($(window).width() < 380){rightValue = 0;}  
+
+    $('#container').highcharts({
+
+        chart: {
+            type: 'heatmap',
+            marginBottom: bottomValue,
+            marginRight: rightValue,
+            plotBorderWidth: 0,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {enabled: false,},
+        xAxis: {
+            //INPUT: Categories/labels displayed on xAxis
+            categories: ["Prohibits gender<br>discrimination in hiring","Doesn't require wives<br>to obey husbands","Prohibits domestic<br>violence"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '12px',
+              }
+            },
+            //Move the x-axis labels from its default position (bottom) to the top.
+            opposite: true,
+            lineWidth:0,
+            tickWidth: 0,
+        },
+
+        //INPUT: the labels on yAxis    
+        yAxis: {
+            categories: ["Yemen","UAE","<b>Iraq</b>","Iran","Egypt","Saudi<br>Arabia","Jordan","Turkey","Israel","US"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '12px',
+              }
+            },
+            
+        },
+
+        colorAxis: {
+            min: 0,
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        },
+
+        credits: {enabled: false,},
+        legend: {enabled: false,},
+
+        //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). Here we write a function to populate the tooltip based on the x-axis categories/labels.
+        tooltip: {
+            enabled:false,
+            formatter: function () {
+                     if (this.series.xAxis.categories[this.point.x]=="Prohibits gender<br>discrimination in hiring"){return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Is there law that mandates nondiscrimination<br>based on gender in hiring? <b>' + this.point.word + '<b>'}
+                     if (this.series.xAxis.categories[this.point.x]=="Requires wives<br>to obey husbands"){return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Is there law that requires married<br>women to obey their husbands? <b>' + this.point.word + '<b>'}
+                     if (this.series.xAxis.categories[this.point.x]=="Prohibits domestic<br>violence"){return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Is there legislation on<br>domestic violence? <b>' + this.point.word + '<b>'}       
+            }
+        },
+        series: [{
+            //INPUT: Each data point is a box in the grid chart. Its position is shown by x and y value. We create a variable called 'file' to load the different SVG files of icon from our cdn2 server. 'Color' is the background color of each box.
+
+            name: 'Legal Grounds',
+            borderWidth: 0,
+            data: [
+              {x: 0, y: 0, file: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 1, file: "icon-cross.svg", color: "#fff"},            
+              {x: 0, y: 2, file: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 3, file: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 4, file: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 5, file: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 6, file: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 7, file: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 8, file: "icon-check.svg", color: "#fff"},
+              {x: 0, y: 9, file: "icon-check.svg", color: "#fff"},
+              {x: 1, y: 0, file: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 1, file: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 2, file: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 3, file: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 4, file: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 5, file: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 6, file: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 7, file: "icon-check.svg", color: "#fff"},
+              {x: 1, y: 8, file: "icon-check.svg", color: "#fff"},
+              {x: 1, y: 9, file: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 0, file: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 1, file: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 2, file: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 3, file: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 4, file: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 5, file: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 6, file: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 7, file: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 8, file: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 9, file: "icon-check.svg", color: "#fff"}],
+            //INPUT: Instead of showing number or text as the data label of each box, we load SVG files of icon as data label by writing a function to call the SVG files in our cdn2 server.
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                useHTML: true,
+                formatter: function () {
+                  return '<img class="icon" src="https://cdn2.pri.org/embeds/2017-01/mosul-visuals/' + this.point.file +'">';
+                },
+                // y:0,
+                x:-15,
+            }
+        }]
+    });
+//Function to move the x-axis labels back to its default position (bottom) when the width goes below a certain value.
+var chart = $('#container').highcharts();
+if($(window).width() < 340){
+  chart.xAxis[0].update({
+           opposite: false,
+  });
+}
+
+
+});
+</script>

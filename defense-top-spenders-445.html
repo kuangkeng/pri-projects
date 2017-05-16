@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Top defense spenders 1992-2016</title>
+    <meta name="description" content="This is a template file to build a simple line chart with single series data in date/time format. If you have dataset in irregular time format, refer to 'line-irregular-time-data.html' on how to style your dataset.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+#button {
+  background-color: #e9e9e9; 
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+    
+} 
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Defense expenditure of the world's top 6 spenders</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text"></div> 
+    </div>  
+    <div id="container"></div>
+    <div class="note">
+        <div id="button-container"><div class="button"><button id="button">Zoom in</button></div></div>
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='https://www.sipri.org/databases/milex' target='_blank'>SIPRI Military Expenditure Database</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //the unit of xAxis is time-based. If your xAxis unit is not time or date, use the line-category template.
+            xAxis: {
+                type: 'datetime',
+            //how the time/date unit should be displayed on xAxis, check Highcharts API for other options (http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats)    
+                dateTimeLabelFormats: {
+                    year: '%Y'
+                },
+            //set the interval between units displayed on xAxis (the current setting is for 5 years), remove this line if you want Highcharts to decide for you.        
+                tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,                                  
+            },
+            yAxis: {
+            //INPUT: the unit of yAxis    
+                title: {
+                  text: '$ billions (2014 constant USD)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+                min: 0,
+            },
+            credits: {enabled: false},
+            //Disable the legend if there's only one series of data
+            legend: {
+                enabled: true,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function.
+            tooltip: {
+                xDateFormat: '%Y',
+                pointFormat: '{point.series.name}: <b>${point.y} bil</b>',
+            },
+            plotOptions: {
+                series: {
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.0f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,.0f}',
+                    },
+                },
+                //MODIFY: Show/hide the data point marker.
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object like '{y:1185, color:"#FF7F00"}', or see the chart "iraq-married-401".
+            series: [ 
+              {name:"US", color: "#4188BC", data: [
+                [Date.UTC(1992,0,1), 514.8],
+                [Date.UTC(1993,0,1), 487.8],
+                [Date.UTC(1994,0,1), 460.1],
+                [Date.UTC(1995,0,1), 433.2],
+                [Date.UTC(1996,0,1), 409.7],
+                [Date.UTC(1997,0,1), 407.5],
+                [Date.UTC(1998,0,1), 398.3],
+                [Date.UTC(1999,0,1), 399.3],
+                [Date.UTC(2000,0,1), 414.8],
+                [Date.UTC(2001,0,1), 418.1],
+                [Date.UTC(2002,0,1), 469.5],
+                [Date.UTC(2003,0,1), 534.4],
+                [Date.UTC(2004,0,1), 582.4],
+                [Date.UTC(2005,0,1), 610.2],
+                [Date.UTC(2006,0,1), 619.7],
+                [Date.UTC(2007,0,1), 635.9],
+                [Date.UTC(2008,0,1), 683.0],
+                [Date.UTC(2009,0,1), 737.7],
+                [Date.UTC(2010,0,1), 758.0],
+                [Date.UTC(2011,0,1), 748.6],
+                [Date.UTC(2012,0,1), 706.1],
+                [Date.UTC(2013,0,1), 650.1],
+                [Date.UTC(2014,0,1), 609.9],
+                [Date.UTC(2015,0,1), 595.5],
+              ]},
+              {name:"Russia", color: "#FF7F00", data: [
+                [Date.UTC(1992,0,1), 57.6],
+                [Date.UTC(1993,0,1), 50.4],
+                [Date.UTC(1994,0,1), 47.6],
+                [Date.UTC(1995,0,1), 31.3],
+                [Date.UTC(1996,0,1), 29.6],
+                [Date.UTC(1997,0,1), 32.4],
+                [Date.UTC(1998,0,1), 19.2],
+                [Date.UTC(1999,0,1), 21.4],
+                [Date.UTC(2000,0,1), 28.8],
+                [Date.UTC(2001,0,1), 31.2],
+                [Date.UTC(2002,0,1), 34.5],
+                [Date.UTC(2003,0,1), 36.2],
+                [Date.UTC(2004,0,1), 37.8],
+                [Date.UTC(2005,0,1), 43.0],
+                [Date.UTC(2006,0,1), 47.6],
+                [Date.UTC(2007,0,1), 51.8],
+                [Date.UTC(2008,0,1), 56.9],
+                [Date.UTC(2009,0,1), 59.7],
+                [Date.UTC(2010,0,1), 60.9],
+                [Date.UTC(2011,0,1), 65.0],
+                [Date.UTC(2012,0,1), 75.4],
+                [Date.UTC(2013,0,1), 79.0],
+                [Date.UTC(2014,0,1), 84.7],
+                [Date.UTC(2015,0,1), 91.1],
+              ]},
+              {name:"Saudi Arabia", color: "#4DAF4A", data: [
+                [Date.UTC(1992,0,1), 24.3],
+                [Date.UTC(1993,0,1), 25.8],
+                [Date.UTC(1994,0,1), 22.2],
+                [Date.UTC(1995,0,1), 19.6],
+                [Date.UTC(1996,0,1), 19.6],
+                [Date.UTC(1997,0,1), 26.6],
+                [Date.UTC(1998,0,1), 30.7],
+                [Date.UTC(1999,0,1), 27.3],
+                [Date.UTC(2000,0,1), 30.1],
+                [Date.UTC(2001,0,1), 32.1],
+                [Date.UTC(2002,0,1), 28.2],
+                [Date.UTC(2003,0,1), 28.4],
+                [Date.UTC(2004,0,1), 31.5],
+                [Date.UTC(2005,0,1), 38.0],
+                [Date.UTC(2006,0,1), 43.3],
+                [Date.UTC(2007,0,1), 49.9],
+                [Date.UTC(2008,0,1), 48.9],
+                [Date.UTC(2009,0,1), 50.3],
+                [Date.UTC(2010,0,1), 52.4],
+                [Date.UTC(2011,0,1), 53.1],
+                [Date.UTC(2012,0,1), 60.0],
+                [Date.UTC(2013,0,1), 68.8],
+                [Date.UTC(2014,0,1), 80.8],
+                [Date.UTC(2015,0,1), 85.4],
+              ]},
+              {name:"France", color: "#984EA3", data: [
+                [Date.UTC(1992,0,1), 67.8],
+                [Date.UTC(1993,0,1), 67.0],
+                [Date.UTC(1994,0,1), 67.4],
+                [Date.UTC(1995,0,1), 64.0],
+                [Date.UTC(1996,0,1), 62.5],
+                [Date.UTC(1997,0,1), 62.7],
+                [Date.UTC(1998,0,1), 61.1],
+                [Date.UTC(1999,0,1), 61.6],
+                [Date.UTC(2000,0,1), 60.9],
+                [Date.UTC(2001,0,1), 60.7],
+                [Date.UTC(2002,0,1), 62.0],
+                [Date.UTC(2003,0,1), 63.8],
+                [Date.UTC(2004,0,1), 65.6],
+                [Date.UTC(2005,0,1), 64.2],
+                [Date.UTC(2006,0,1), 64.5],
+                [Date.UTC(2007,0,1), 64.8],
+                [Date.UTC(2008,0,1), 64.1],
+                [Date.UTC(2009,0,1), 68.5],
+                [Date.UTC(2010,0,1), 65.3],
+                [Date.UTC(2011,0,1), 63.7],
+                [Date.UTC(2012,0,1), 62.8],
+                [Date.UTC(2013,0,1), 62.7],
+                [Date.UTC(2014,0,1), 63.6],
+                [Date.UTC(2015,0,1), 60.7],
+              ]},
+              {name:"UK", color: "#000000", data: [
+                [Date.UTC(1992,0,1), 61.1],
+                [Date.UTC(1993,0,1), 58.3],
+                [Date.UTC(1994,0,1), 56.7],
+                [Date.UTC(1995,0,1), 53.2],
+                [Date.UTC(1996,0,1), 52.9],
+                [Date.UTC(1997,0,1), 51.2],
+                [Date.UTC(1998,0,1), 51.5],
+                [Date.UTC(1999,0,1), 51.4],
+                [Date.UTC(2000,0,1), 52.8],
+                [Date.UTC(2001,0,1), 54.9],
+                [Date.UTC(2002,0,1), 58.5],
+                [Date.UTC(2003,0,1), 62.7],
+                [Date.UTC(2004,0,1), 63.4],
+                [Date.UTC(2005,0,1), 63.9],
+                [Date.UTC(2006,0,1), 64.3],
+                [Date.UTC(2007,0,1), 66.4],
+                [Date.UTC(2008,0,1), 69.3],
+                [Date.UTC(2009,0,1), 70.7],
+                [Date.UTC(2010,0,1), 69.2],
+                [Date.UTC(2011,0,1), 66.3],
+                [Date.UTC(2012,0,1), 63.4],
+                [Date.UTC(2013,0,1), 60.8],
+                [Date.UTC(2014,0,1), 59.2],
+                [Date.UTC(2015,0,1), 59.7],
+              ]},
+              {name:"China", color: "#E41A1C", data: [
+                [Date.UTC(1992,0,1), 28.4],
+                [Date.UTC(1993,0,1), 26.2],
+                [Date.UTC(1994,0,1), 25.3],
+                [Date.UTC(1995,0,1), 26.2],
+                [Date.UTC(1996,0,1), 27.8],
+                [Date.UTC(1997,0,1), 29.9],
+                [Date.UTC(1998,0,1), 32.7],
+                [Date.UTC(1999,0,1), 39.8],
+                [Date.UTC(2000,0,1), 43.2],
+                [Date.UTC(2001,0,1), 52.2],
+                [Date.UTC(2002,0,1), 60.6],
+                [Date.UTC(2003,0,1), 65.5],
+                [Date.UTC(2004,0,1), 72.4],
+                [Date.UTC(2005,0,1), 79.8],
+                [Date.UTC(2006,0,1), 92.6],
+                [Date.UTC(2007,0,1), 103.7],
+                [Date.UTC(2008,0,1), 113.5],
+                [Date.UTC(2009,0,1), 137.4],
+                [Date.UTC(2010,0,1), 144.4],
+                [Date.UTC(2011,0,1), 155.9],
+                [Date.UTC(2012,0,1), 169.3],
+                [Date.UTC(2013,0,1), 182.9],
+                [Date.UTC(2014,0,1), 199.7],
+                [Date.UTC(2015,0,1), 214.5],
+              ]},
+            ],
+        });
+        var button = 0;
+        $('#button').click(function () {
+            if (button == 0){
+              chart.yAxis[0].setExtremes(1, 220); 
+              $('#button').text("Zoom out");
+              button = 1;
+            } else {
+              chart.yAxis[0].setExtremes(1, 760); 
+              $('#button').text("Zoom in");
+              button = 0;
+            }
+        });
+    });
+
+});
+</script>

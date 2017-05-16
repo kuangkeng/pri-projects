@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>US is the biggest contributor to the world's CO2 emissions</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 500px ){
+    #container{height:270px;}
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+@media (max-width: 300px ){
+    #container{height:250px;}
+}
+
+</style>
+
+<body>
+<div id="wrapper">    
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">US is the biggest contributor to the world's CO2 emissions</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Cumulative CO2 emissions, 1850-2013</div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='http://www.wri.org/resources/data-sets/cait-historical-emissions-data-countries-us-states-unfccc' target='_blank'>CAIT Climate Data Explorer by World Resources Institute</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>Data exclude emissions from land-use change and forestry. Data for Russia before 1990 exclude emissions from other former Soviet republics.
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'pie'
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {enabled: false,},
+            credits: {enabled: false,},
+            legend: {enabled: false,},
+            tooltip: {
+                pointFormat: '<b>{point.y}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}<br>{point.y:.0f}%',
+                        distance: -30,
+                        y: -15,
+                        x:0,
+                        style: {
+                            width: '100px',
+                            fontSize: '13px',
+                        },
+                    }
+                }
+            },    
+
+            series: [{
+                data: [
+                    {name:"US", color:"#4188BC", y:26.6, sliced: true},
+                    {name:"EU (28)", color:"#4DAF4A", y:23.8},
+                    {name:"China", color:"#E41A1C", y:11.4},
+                    {name:"Russia", color:"#FF8B00", y:7.5},
+                    {name:"Japan", color:"#984EA3", y:3.7},
+                    {name:"Rest of the world", color:"#d3d3d3", y:26.9},
+                ]
+            }]
+            });
+    });
+});
+</script>

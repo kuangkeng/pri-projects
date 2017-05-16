@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Image slider</title>
+    <meta name="description" content="This is a template file to build a interactive image slider which is usually used to compare 2 images side by side">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn2.pri.org/scripts/juxtapose.css" rel="stylesheet">
+
+    <!-- Google Analytics script -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-2145282-16', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+
+  </head>
+
+<style type="text/css">
+
+  body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+  .container {
+  padding: 5px;
+  width:100%; 
+  height:auto; 
+/* MODIFY: set the maximum width of the slider based on the images. Suggestion: 600px for vertical image, 1000px for horizontal image  */
+  max-width:600px;
+  margin: 0px auto;
+}
+  
+  img
+  {max-width:100%}
+
+  .title {font-size: 18px;}
+  .credit {font-size: 14px;}
+
+
+  @media (max-width: 400px ) { 
+  .title {font-size: 14px;}
+  .credit {font-size: 12px; line-height: 12px;}   
+  div.jx-image div.jx-label {font-size: 14px;} 
+  }
+
+</style>
+<head>
+
+<body>
+<div class="container">
+<div class="juxtapose" data-startingposition="50" data-showlabels="true" data-showcredits="false" data-animate="true" data-mode="horizontal">
+<!-- INPUT: Insert the url and label of both images. The first one is the image on the left, second one is the image on the right. Leave 'data-credit' blank. -->
+<img src="https://cdn2.pri.org/embeds/2017-01/trump-inauguration/2009-1.jpg" data-label="Jan. 20, 2009" data-credit="">
+<img src="https://cdn2.pri.org/embeds/2017-01/trump-inauguration/2017-1.jpg" data-label="Jan. 20, 2017" data-credit="">
+</div>
+<!-- INPUT (OPTIONAL): Insert title of the slider is there's one -->
+<!-- <div class="title">Bolivia’s Lake Poopó has dried up.</div> -->
+
+<!-- INPUT: Image credit -->
+<div class="credit"><i>Credit: Carlos Barria / Reuters (left), Jonathan Ernst / Reuters (right)</a></i></div>
+</div>
+</body>
+
+<script src="https://cdn2.pri.org/scripts/juxtapose.js"></script>
+
+</html>

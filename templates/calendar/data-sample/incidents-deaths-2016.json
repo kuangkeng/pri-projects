@@ -1,0 +1,1832 @@
+[
+  {
+    "date": "2016-01-01",
+    "incidents": 31,
+    "nkill": 29
+  },
+  {
+    "date": "2016-01-02",
+    "incidents": 25,
+    "nkill": 25
+  },
+  {
+    "date": "2016-01-03",
+    "incidents": 42,
+    "nkill": 40
+  },
+  {
+    "date": "2016-01-04",
+    "incidents": 41,
+    "nkill": 40
+  },
+  {
+    "date": "2016-01-05",
+    "incidents": 40,
+    "nkill": 38
+  },
+  {
+    "date": "2016-01-06",
+    "incidents": 27,
+    "nkill": 25
+  },
+  {
+    "date": "2016-01-07",
+    "incidents": 41,
+    "nkill": 40
+  },
+  {
+    "date": "2016-01-08",
+    "incidents": 21,
+    "nkill": 19
+  },
+  {
+    "date": "2016-01-09",
+    "incidents": 26,
+    "nkill": 24
+  },
+  {
+    "date": "2016-01-10",
+    "incidents": 34,
+    "nkill": 33
+  },
+  {
+    "date": "2016-01-11",
+    "incidents": 77,
+    "nkill": 76
+  },
+  {
+    "date": "2016-01-12",
+    "incidents": 33,
+    "nkill": 33
+  },
+  {
+    "date": "2016-01-13",
+    "incidents": 40,
+    "nkill": 37
+  },
+  {
+    "date": "2016-01-14",
+    "incidents": 40,
+    "nkill": 35
+  },
+  {
+    "date": "2016-01-15",
+    "incidents": 49,
+    "nkill": 46
+  },
+  {
+    "date": "2016-01-16",
+    "incidents": 44,
+    "nkill": 42
+  },
+  {
+    "date": "2016-01-17",
+    "incidents": 44,
+    "nkill": 42
+  },
+  {
+    "date": "2016-01-18",
+    "incidents": 35,
+    "nkill": 34
+  },
+  {
+    "date": "2016-01-19",
+    "incidents": 25,
+    "nkill": 23
+  },
+  {
+    "date": "2016-01-20",
+    "incidents": 30,
+    "nkill": 29
+  },
+  {
+    "date": "2016-01-21",
+    "incidents": 39,
+    "nkill": 39
+  },
+  {
+    "date": "2016-01-22",
+    "incidents": 18,
+    "nkill": 17
+  },
+  {
+    "date": "2016-01-23",
+    "incidents": 34,
+    "nkill": 34
+  },
+  {
+    "date": "2016-01-24",
+    "incidents": 41,
+    "nkill": 38
+  },
+  {
+    "date": "2016-01-25",
+    "incidents": 37,
+    "nkill": 37
+  },
+  {
+    "date": "2016-01-26",
+    "incidents": 40,
+    "nkill": 38
+  },
+  {
+    "date": "2016-01-27",
+    "incidents": 31,
+    "nkill": 28
+  },
+  {
+    "date": "2016-01-28",
+    "incidents": 47,
+    "nkill": 43
+  },
+  {
+    "date": "2016-01-29",
+    "incidents": 30,
+    "nkill": 28
+  },
+  {
+    "date": "2016-01-30",
+    "incidents": 43,
+    "nkill": 39
+  },
+  {
+    "date": "2016-01-31",
+    "incidents": 52,
+    "nkill": 50
+  },
+  {
+    "date": "2016-02-01",
+    "incidents": 35,
+    "nkill": 32
+  },
+  {
+    "date": "2016-02-02",
+    "incidents": 43,
+    "nkill": 41
+  },
+  {
+    "date": "2016-02-03",
+    "incidents": 63,
+    "nkill": 62
+  },
+  {
+    "date": "2016-02-04",
+    "incidents": 32,
+    "nkill": 30
+  },
+  {
+    "date": "2016-02-05",
+    "incidents": 42,
+    "nkill": 38
+  },
+  {
+    "date": "2016-02-06",
+    "incidents": 57,
+    "nkill": 56
+  },
+  {
+    "date": "2016-02-07",
+    "incidents": 34,
+    "nkill": 29
+  },
+  {
+    "date": "2016-02-08",
+    "incidents": 29,
+    "nkill": 27
+  },
+  {
+    "date": "2016-02-09",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-02-10",
+    "incidents": 34,
+    "nkill": 32
+  },
+  {
+    "date": "2016-02-11",
+    "incidents": 36,
+    "nkill": 33
+  },
+  {
+    "date": "2016-02-12",
+    "incidents": 53,
+    "nkill": 52
+  },
+  {
+    "date": "2016-02-13",
+    "incidents": 31,
+    "nkill": 30
+  },
+  {
+    "date": "2016-02-14",
+    "incidents": 34,
+    "nkill": 32
+  },
+  {
+    "date": "2016-02-15",
+    "incidents": 47,
+    "nkill": 46
+  },
+  {
+    "date": "2016-02-16",
+    "incidents": 51,
+    "nkill": 49
+  },
+  {
+    "date": "2016-02-17",
+    "incidents": 41,
+    "nkill": 39
+  },
+  {
+    "date": "2016-02-18",
+    "incidents": 37,
+    "nkill": 36
+  },
+  {
+    "date": "2016-02-19",
+    "incidents": 34,
+    "nkill": 33
+  },
+  {
+    "date": "2016-02-20",
+    "incidents": 26,
+    "nkill": 26
+  },
+  {
+    "date": "2016-02-21",
+    "incidents": 39,
+    "nkill": 36
+  },
+  {
+    "date": "2016-02-22",
+    "incidents": 39,
+    "nkill": 37
+  },
+  {
+    "date": "2016-02-23",
+    "incidents": 43,
+    "nkill": 42
+  },
+  {
+    "date": "2016-02-24",
+    "incidents": 49,
+    "nkill": 49
+  },
+  {
+    "date": "2016-02-25",
+    "incidents": 29,
+    "nkill": 29
+  },
+  {
+    "date": "2016-02-26",
+    "incidents": 29,
+    "nkill": 28
+  },
+  {
+    "date": "2016-02-27",
+    "incidents": 45,
+    "nkill": 45
+  },
+  {
+    "date": "2016-02-28",
+    "incidents": 31,
+    "nkill": 29
+  },
+  {
+    "date": "2016-02-29",
+    "incidents": 48,
+    "nkill": 44
+  },
+  {
+    "date": "2016-03-01",
+    "incidents": 37,
+    "nkill": 36
+  },
+  {
+    "date": "2016-03-02",
+    "incidents": 38,
+    "nkill": 37
+  },
+  {
+    "date": "2016-03-03",
+    "incidents": 43,
+    "nkill": 40
+  },
+  {
+    "date": "2016-03-04",
+    "incidents": 24,
+    "nkill": 22
+  },
+  {
+    "date": "2016-03-05",
+    "incidents": 33,
+    "nkill": 31
+  },
+  {
+    "date": "2016-03-06",
+    "incidents": 37,
+    "nkill": 33
+  },
+  {
+    "date": "2016-03-07",
+    "incidents": 44,
+    "nkill": 37
+  },
+  {
+    "date": "2016-03-08",
+    "incidents": 41,
+    "nkill": 38
+  },
+  {
+    "date": "2016-03-09",
+    "incidents": 42,
+    "nkill": 42
+  },
+  {
+    "date": "2016-03-10",
+    "incidents": 28,
+    "nkill": 24
+  },
+  {
+    "date": "2016-03-11",
+    "incidents": 42,
+    "nkill": 41
+  },
+  {
+    "date": "2016-03-12",
+    "incidents": 48,
+    "nkill": 41
+  },
+  {
+    "date": "2016-03-13",
+    "incidents": 71,
+    "nkill": 66
+  },
+  {
+    "date": "2016-03-14",
+    "incidents": 41,
+    "nkill": 39
+  },
+  {
+    "date": "2016-03-15",
+    "incidents": 48,
+    "nkill": 48
+  },
+  {
+    "date": "2016-03-16",
+    "incidents": 37,
+    "nkill": 34
+  },
+  {
+    "date": "2016-03-17",
+    "incidents": 28,
+    "nkill": 26
+  },
+  {
+    "date": "2016-03-18",
+    "incidents": 23,
+    "nkill": 23
+  },
+  {
+    "date": "2016-03-19",
+    "incidents": 29,
+    "nkill": 29
+  },
+  {
+    "date": "2016-03-20",
+    "incidents": 31,
+    "nkill": 31
+  },
+  {
+    "date": "2016-03-21",
+    "incidents": 31,
+    "nkill": 30
+  },
+  {
+    "date": "2016-03-22",
+    "incidents": 62,
+    "nkill": 60
+  },
+  {
+    "date": "2016-03-23",
+    "incidents": 30,
+    "nkill": 27
+  },
+  {
+    "date": "2016-03-24",
+    "incidents": 37,
+    "nkill": 36
+  },
+  {
+    "date": "2016-03-25",
+    "incidents": 28,
+    "nkill": 27
+  },
+  {
+    "date": "2016-03-26",
+    "incidents": 26,
+    "nkill": 26
+  },
+  {
+    "date": "2016-03-27",
+    "incidents": 30,
+    "nkill": 30
+  },
+  {
+    "date": "2016-03-28",
+    "incidents": 27,
+    "nkill": 27
+  },
+  {
+    "date": "2016-03-29",
+    "incidents": 26,
+    "nkill": 25
+  },
+  {
+    "date": "2016-03-30",
+    "incidents": 42,
+    "nkill": 40
+  },
+  {
+    "date": "2016-03-31",
+    "incidents": 37,
+    "nkill": 32
+  },
+  {
+    "date": "2016-04-01",
+    "incidents": 26,
+    "nkill": 24
+  },
+  {
+    "date": "2016-04-02",
+    "incidents": 23,
+    "nkill": 23
+  },
+  {
+    "date": "2016-04-03",
+    "incidents": 47,
+    "nkill": 45
+  },
+  {
+    "date": "2016-04-04",
+    "incidents": 65,
+    "nkill": 61
+  },
+  {
+    "date": "2016-04-05",
+    "incidents": 32,
+    "nkill": 29
+  },
+  {
+    "date": "2016-04-06",
+    "incidents": 39,
+    "nkill": 35
+  },
+  {
+    "date": "2016-04-07",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-04-08",
+    "incidents": 26,
+    "nkill": 25
+  },
+  {
+    "date": "2016-04-09",
+    "incidents": 41,
+    "nkill": 41
+  },
+  {
+    "date": "2016-04-10",
+    "incidents": 36,
+    "nkill": 34
+  },
+  {
+    "date": "2016-04-11",
+    "incidents": 34,
+    "nkill": 34
+  },
+  {
+    "date": "2016-04-12",
+    "incidents": 35,
+    "nkill": 32
+  },
+  {
+    "date": "2016-04-13",
+    "incidents": 48,
+    "nkill": 46
+  },
+  {
+    "date": "2016-04-14",
+    "incidents": 36,
+    "nkill": 33
+  },
+  {
+    "date": "2016-04-15",
+    "incidents": 46,
+    "nkill": 42
+  },
+  {
+    "date": "2016-04-16",
+    "incidents": 37,
+    "nkill": 32
+  },
+  {
+    "date": "2016-04-17",
+    "incidents": 39,
+    "nkill": 37
+  },
+  {
+    "date": "2016-04-18",
+    "incidents": 50,
+    "nkill": 46
+  },
+  {
+    "date": "2016-04-19",
+    "incidents": 30,
+    "nkill": 29
+  },
+  {
+    "date": "2016-04-20",
+    "incidents": 38,
+    "nkill": 36
+  },
+  {
+    "date": "2016-04-21",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-04-22",
+    "incidents": 26,
+    "nkill": 24
+  },
+  {
+    "date": "2016-04-23",
+    "incidents": 31,
+    "nkill": 29
+  },
+  {
+    "date": "2016-04-24",
+    "incidents": 30,
+    "nkill": 29
+  },
+  {
+    "date": "2016-04-25",
+    "incidents": 55,
+    "nkill": 54
+  },
+  {
+    "date": "2016-04-26",
+    "incidents": 34,
+    "nkill": 30
+  },
+  {
+    "date": "2016-04-27",
+    "incidents": 44,
+    "nkill": 40
+  },
+  {
+    "date": "2016-04-28",
+    "incidents": 43,
+    "nkill": 41
+  },
+  {
+    "date": "2016-04-29",
+    "incidents": 30,
+    "nkill": 28
+  },
+  {
+    "date": "2016-04-30",
+    "incidents": 25,
+    "nkill": 23
+  },
+  {
+    "date": "2016-05-01",
+    "incidents": 49,
+    "nkill": 46
+  },
+  {
+    "date": "2016-05-02",
+    "incidents": 48,
+    "nkill": 46
+  },
+  {
+    "date": "2016-05-03",
+    "incidents": 41,
+    "nkill": 33
+  },
+  {
+    "date": "2016-05-04",
+    "incidents": 50,
+    "nkill": 48
+  },
+  {
+    "date": "2016-05-05",
+    "incidents": 48,
+    "nkill": 47
+  },
+  {
+    "date": "2016-05-06",
+    "incidents": 39,
+    "nkill": 36
+  },
+  {
+    "date": "2016-05-07",
+    "incidents": 47,
+    "nkill": 46
+  },
+  {
+    "date": "2016-05-08",
+    "incidents": 64,
+    "nkill": 60
+  },
+  {
+    "date": "2016-05-09",
+    "incidents": 67,
+    "nkill": 58
+  },
+  {
+    "date": "2016-05-10",
+    "incidents": 54,
+    "nkill": 50
+  },
+  {
+    "date": "2016-05-11",
+    "incidents": 28,
+    "nkill": 27
+  },
+  {
+    "date": "2016-05-12",
+    "incidents": 40,
+    "nkill": 40
+  },
+  {
+    "date": "2016-05-13",
+    "incidents": 21,
+    "nkill": 17
+  },
+  {
+    "date": "2016-05-14",
+    "incidents": 43,
+    "nkill": 41
+  },
+  {
+    "date": "2016-05-15",
+    "incidents": 36,
+    "nkill": 35
+  },
+  {
+    "date": "2016-05-16",
+    "incidents": 39,
+    "nkill": 38
+  },
+  {
+    "date": "2016-05-17",
+    "incidents": 42,
+    "nkill": 38
+  },
+  {
+    "date": "2016-05-18",
+    "incidents": 50,
+    "nkill": 47
+  },
+  {
+    "date": "2016-05-19",
+    "incidents": 37,
+    "nkill": 34
+  },
+  {
+    "date": "2016-05-20",
+    "incidents": 27,
+    "nkill": 24
+  },
+  {
+    "date": "2016-05-21",
+    "incidents": 40,
+    "nkill": 36
+  },
+  {
+    "date": "2016-05-22",
+    "incidents": 21,
+    "nkill": 21
+  },
+  {
+    "date": "2016-05-23",
+    "incidents": 40,
+    "nkill": 36
+  },
+  {
+    "date": "2016-05-24",
+    "incidents": 48,
+    "nkill": 45
+  },
+  {
+    "date": "2016-05-25",
+    "incidents": 46,
+    "nkill": 44
+  },
+  {
+    "date": "2016-05-26",
+    "incidents": 38,
+    "nkill": 37
+  },
+  {
+    "date": "2016-05-27",
+    "incidents": 26,
+    "nkill": 24
+  },
+  {
+    "date": "2016-05-28",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-05-29",
+    "incidents": 83,
+    "nkill": 82
+  },
+  {
+    "date": "2016-05-30",
+    "incidents": 56,
+    "nkill": 52
+  },
+  {
+    "date": "2016-05-31",
+    "incidents": 40,
+    "nkill": 37
+  },
+  {
+    "date": "2016-06-01",
+    "incidents": 44,
+    "nkill": 43
+  },
+  {
+    "date": "2016-06-02",
+    "incidents": 20,
+    "nkill": 19
+  },
+  {
+    "date": "2016-06-03",
+    "incidents": 33,
+    "nkill": 31
+  },
+  {
+    "date": "2016-06-04",
+    "incidents": 30,
+    "nkill": 27
+  },
+  {
+    "date": "2016-06-05",
+    "incidents": 78,
+    "nkill": 77
+  },
+  {
+    "date": "2016-06-06",
+    "incidents": 44,
+    "nkill": 40
+  },
+  {
+    "date": "2016-06-07",
+    "incidents": 46,
+    "nkill": 45
+  },
+  {
+    "date": "2016-06-08",
+    "incidents": 36,
+    "nkill": 35
+  },
+  {
+    "date": "2016-06-09",
+    "incidents": 29,
+    "nkill": 28
+  },
+  {
+    "date": "2016-06-10",
+    "incidents": 33,
+    "nkill": 31
+  },
+  {
+    "date": "2016-06-11",
+    "incidents": 39,
+    "nkill": 36
+  },
+  {
+    "date": "2016-06-12",
+    "incidents": 38,
+    "nkill": 35
+  },
+  {
+    "date": "2016-06-13",
+    "incidents": 27,
+    "nkill": 24
+  },
+  {
+    "date": "2016-06-14",
+    "incidents": 34,
+    "nkill": 32
+  },
+  {
+    "date": "2016-06-15",
+    "incidents": 46,
+    "nkill": 42
+  },
+  {
+    "date": "2016-06-16",
+    "incidents": 37,
+    "nkill": 37
+  },
+  {
+    "date": "2016-06-17",
+    "incidents": 25,
+    "nkill": 23
+  },
+  {
+    "date": "2016-06-18",
+    "incidents": 29,
+    "nkill": 26
+  },
+  {
+    "date": "2016-06-19",
+    "incidents": 32,
+    "nkill": 32
+  },
+  {
+    "date": "2016-06-20",
+    "incidents": 49,
+    "nkill": 30
+  },
+  {
+    "date": "2016-06-21",
+    "incidents": 51,
+    "nkill": 51
+  },
+  {
+    "date": "2016-06-22",
+    "incidents": 45,
+    "nkill": 44
+  },
+  {
+    "date": "2016-06-23",
+    "incidents": 38,
+    "nkill": 38
+  },
+  {
+    "date": "2016-06-24",
+    "incidents": 36,
+    "nkill": 33
+  },
+  {
+    "date": "2016-06-25",
+    "incidents": 28,
+    "nkill": 27
+  },
+  {
+    "date": "2016-06-26",
+    "incidents": 39,
+    "nkill": 39
+  },
+  {
+    "date": "2016-06-27",
+    "incidents": 46,
+    "nkill": 36
+  },
+  {
+    "date": "2016-06-28",
+    "incidents": 40,
+    "nkill": 36
+  },
+  {
+    "date": "2016-06-29",
+    "incidents": 35,
+    "nkill": 33
+  },
+  {
+    "date": "2016-06-30",
+    "incidents": 42,
+    "nkill": 40
+  },
+  {
+    "date": "2016-07-01",
+    "incidents": 36,
+    "nkill": 36
+  },
+  {
+    "date": "2016-07-02",
+    "incidents": 38,
+    "nkill": 38
+  },
+  {
+    "date": "2016-07-03",
+    "incidents": 32,
+    "nkill": 29
+  },
+  {
+    "date": "2016-07-04",
+    "incidents": 41,
+    "nkill": 41
+  },
+  {
+    "date": "2016-07-05",
+    "incidents": 30,
+    "nkill": 30
+  },
+  {
+    "date": "2016-07-06",
+    "incidents": 23,
+    "nkill": 20
+  },
+  {
+    "date": "2016-07-07",
+    "incidents": 34,
+    "nkill": 32
+  },
+  {
+    "date": "2016-07-08",
+    "incidents": 27,
+    "nkill": 27
+  },
+  {
+    "date": "2016-07-09",
+    "incidents": 38,
+    "nkill": 33
+  },
+  {
+    "date": "2016-07-10",
+    "incidents": 27,
+    "nkill": 26
+  },
+  {
+    "date": "2016-07-11",
+    "incidents": 29,
+    "nkill": 27
+  },
+  {
+    "date": "2016-07-12",
+    "incidents": 38,
+    "nkill": 30
+  },
+  {
+    "date": "2016-07-13",
+    "incidents": 32,
+    "nkill": 31
+  },
+  {
+    "date": "2016-07-14",
+    "incidents": 37,
+    "nkill": 36
+  },
+  {
+    "date": "2016-07-15",
+    "incidents": 33,
+    "nkill": 33
+  },
+  {
+    "date": "2016-07-16",
+    "incidents": 28,
+    "nkill": 27
+  },
+  {
+    "date": "2016-07-17",
+    "incidents": 31,
+    "nkill": 30
+  },
+  {
+    "date": "2016-07-18",
+    "incidents": 45,
+    "nkill": 41
+  },
+  {
+    "date": "2016-07-19",
+    "incidents": 36,
+    "nkill": 34
+  },
+  {
+    "date": "2016-07-20",
+    "incidents": 31,
+    "nkill": 30
+  },
+  {
+    "date": "2016-07-21",
+    "incidents": 27,
+    "nkill": 24
+  },
+  {
+    "date": "2016-07-22",
+    "incidents": 70,
+    "nkill": 70
+  },
+  {
+    "date": "2016-07-23",
+    "incidents": 45,
+    "nkill": 45
+  },
+  {
+    "date": "2016-07-24",
+    "incidents": 39,
+    "nkill": 37
+  },
+  {
+    "date": "2016-07-25",
+    "incidents": 42,
+    "nkill": 42
+  },
+  {
+    "date": "2016-07-26",
+    "incidents": 30,
+    "nkill": 29
+  },
+  {
+    "date": "2016-07-27",
+    "incidents": 39,
+    "nkill": 38
+  },
+  {
+    "date": "2016-07-28",
+    "incidents": 28,
+    "nkill": 27
+  },
+  {
+    "date": "2016-07-29",
+    "incidents": 39,
+    "nkill": 39
+  },
+  {
+    "date": "2016-07-30",
+    "incidents": 34,
+    "nkill": 29
+  },
+  {
+    "date": "2016-07-31",
+    "incidents": 45,
+    "nkill": 42
+  },
+  {
+    "date": "2016-08-01",
+    "incidents": 41,
+    "nkill": 40
+  },
+  {
+    "date": "2016-08-02",
+    "incidents": 36,
+    "nkill": 35
+  },
+  {
+    "date": "2016-08-03",
+    "incidents": 28,
+    "nkill": 26
+  },
+  {
+    "date": "2016-08-04",
+    "incidents": 28,
+    "nkill": 27
+  },
+  {
+    "date": "2016-08-05",
+    "incidents": 49,
+    "nkill": 45
+  },
+  {
+    "date": "2016-08-06",
+    "incidents": 62,
+    "nkill": 59
+  },
+  {
+    "date": "2016-08-07",
+    "incidents": 39,
+    "nkill": 34
+  },
+  {
+    "date": "2016-08-08",
+    "incidents": 90,
+    "nkill": 87
+  },
+  {
+    "date": "2016-08-09",
+    "incidents": 26,
+    "nkill": 25
+  },
+  {
+    "date": "2016-08-10",
+    "incidents": 49,
+    "nkill": 48
+  },
+  {
+    "date": "2016-08-11",
+    "incidents": 34,
+    "nkill": 30
+  },
+  {
+    "date": "2016-08-12",
+    "incidents": 48,
+    "nkill": 46
+  },
+  {
+    "date": "2016-08-13",
+    "incidents": 30,
+    "nkill": 30
+  },
+  {
+    "date": "2016-08-14",
+    "incidents": 36,
+    "nkill": 34
+  },
+  {
+    "date": "2016-08-15",
+    "incidents": 43,
+    "nkill": 42
+  },
+  {
+    "date": "2016-08-16",
+    "incidents": 26,
+    "nkill": 25
+  },
+  {
+    "date": "2016-08-17",
+    "incidents": 35,
+    "nkill": 32
+  },
+  {
+    "date": "2016-08-18",
+    "incidents": 37,
+    "nkill": 35
+  },
+  {
+    "date": "2016-08-19",
+    "incidents": 29,
+    "nkill": 25
+  },
+  {
+    "date": "2016-08-20",
+    "incidents": 29,
+    "nkill": 27
+  },
+  {
+    "date": "2016-08-21",
+    "incidents": 32,
+    "nkill": 32
+  },
+  {
+    "date": "2016-08-22",
+    "incidents": 36,
+    "nkill": 33
+  },
+  {
+    "date": "2016-08-23",
+    "incidents": 32,
+    "nkill": 32
+  },
+  {
+    "date": "2016-08-24",
+    "incidents": 21,
+    "nkill": 20
+  },
+  {
+    "date": "2016-08-25",
+    "incidents": 38,
+    "nkill": 36
+  },
+  {
+    "date": "2016-08-26",
+    "incidents": 32,
+    "nkill": 30
+  },
+  {
+    "date": "2016-08-27",
+    "incidents": 36,
+    "nkill": 36
+  },
+  {
+    "date": "2016-08-28",
+    "incidents": 24,
+    "nkill": 23
+  },
+  {
+    "date": "2016-08-29",
+    "incidents": 33,
+    "nkill": 28
+  },
+  {
+    "date": "2016-08-30",
+    "incidents": 37,
+    "nkill": 36
+  },
+  {
+    "date": "2016-08-31",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-09-01",
+    "incidents": 23,
+    "nkill": 21
+  },
+  {
+    "date": "2016-09-02",
+    "incidents": 37,
+    "nkill": 34
+  },
+  {
+    "date": "2016-09-03",
+    "incidents": 32,
+    "nkill": 31
+  },
+  {
+    "date": "2016-09-04",
+    "incidents": 36,
+    "nkill": 36
+  },
+  {
+    "date": "2016-09-05",
+    "incidents": 46,
+    "nkill": 46
+  },
+  {
+    "date": "2016-09-06",
+    "incidents": 26,
+    "nkill": 25
+  },
+  {
+    "date": "2016-09-07",
+    "incidents": 32,
+    "nkill": 30
+  },
+  {
+    "date": "2016-09-08",
+    "incidents": 39,
+    "nkill": 38
+  },
+  {
+    "date": "2016-09-09",
+    "incidents": 34,
+    "nkill": 33
+  },
+  {
+    "date": "2016-09-10",
+    "incidents": 26,
+    "nkill": 25
+  },
+  {
+    "date": "2016-09-11",
+    "incidents": 32,
+    "nkill": 27
+  },
+  {
+    "date": "2016-09-12",
+    "incidents": 29,
+    "nkill": 29
+  },
+  {
+    "date": "2016-09-13",
+    "incidents": 23,
+    "nkill": 18
+  },
+  {
+    "date": "2016-09-14",
+    "incidents": 25,
+    "nkill": 22
+  },
+  {
+    "date": "2016-09-15",
+    "incidents": 24,
+    "nkill": 20
+  },
+  {
+    "date": "2016-09-16",
+    "incidents": 25,
+    "nkill": 22
+  },
+  {
+    "date": "2016-09-17",
+    "incidents": 31,
+    "nkill": 28
+  },
+  {
+    "date": "2016-09-18",
+    "incidents": 37,
+    "nkill": 36
+  },
+  {
+    "date": "2016-09-19",
+    "incidents": 44,
+    "nkill": 42
+  },
+  {
+    "date": "2016-09-20",
+    "incidents": 32,
+    "nkill": 30
+  },
+  {
+    "date": "2016-09-21",
+    "incidents": 129,
+    "nkill": 124
+  },
+  {
+    "date": "2016-09-22",
+    "incidents": 28,
+    "nkill": 27
+  },
+  {
+    "date": "2016-09-23",
+    "incidents": 25,
+    "nkill": 19
+  },
+  {
+    "date": "2016-09-24",
+    "incidents": 29,
+    "nkill": 26
+  },
+  {
+    "date": "2016-09-25",
+    "incidents": 34,
+    "nkill": 33
+  },
+  {
+    "date": "2016-09-26",
+    "incidents": 47,
+    "nkill": 45
+  },
+  {
+    "date": "2016-09-27",
+    "incidents": 24,
+    "nkill": 22
+  },
+  {
+    "date": "2016-09-28",
+    "incidents": 25,
+    "nkill": 25
+  },
+  {
+    "date": "2016-09-29",
+    "incidents": 27,
+    "nkill": 26
+  },
+  {
+    "date": "2016-09-30",
+    "incidents": 36,
+    "nkill": 34
+  },
+  {
+    "date": "2016-10-01",
+    "incidents": 39,
+    "nkill": 32
+  },
+  {
+    "date": "2016-10-02",
+    "incidents": 28,
+    "nkill": 25
+  },
+  {
+    "date": "2016-10-03",
+    "incidents": 43,
+    "nkill": 42
+  },
+  {
+    "date": "2016-10-04",
+    "incidents": 46,
+    "nkill": 44
+  },
+  {
+    "date": "2016-10-05",
+    "incidents": 29,
+    "nkill": 26
+  },
+  {
+    "date": "2016-10-06",
+    "incidents": 32,
+    "nkill": 28
+  },
+  {
+    "date": "2016-10-07",
+    "incidents": 32,
+    "nkill": 28
+  },
+  {
+    "date": "2016-10-08",
+    "incidents": 25,
+    "nkill": 24
+  },
+  {
+    "date": "2016-10-09",
+    "incidents": 37,
+    "nkill": 36
+  },
+  {
+    "date": "2016-10-10",
+    "incidents": 40,
+    "nkill": 32
+  },
+  {
+    "date": "2016-10-11",
+    "incidents": 46,
+    "nkill": 45
+  },
+  {
+    "date": "2016-10-12",
+    "incidents": 31,
+    "nkill": 29
+  },
+  {
+    "date": "2016-10-13",
+    "incidents": 35,
+    "nkill": 34
+  },
+  {
+    "date": "2016-10-14",
+    "incidents": 37,
+    "nkill": 35
+  },
+  {
+    "date": "2016-10-15",
+    "incidents": 28,
+    "nkill": 26
+  },
+  {
+    "date": "2016-10-16",
+    "incidents": 45,
+    "nkill": 43
+  },
+  {
+    "date": "2016-10-17",
+    "incidents": 27,
+    "nkill": 26
+  },
+  {
+    "date": "2016-10-18",
+    "incidents": 22,
+    "nkill": 22
+  },
+  {
+    "date": "2016-10-19",
+    "incidents": 46,
+    "nkill": 43
+  },
+  {
+    "date": "2016-10-20",
+    "incidents": 48,
+    "nkill": 45
+  },
+  {
+    "date": "2016-10-21",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-10-22",
+    "incidents": 24,
+    "nkill": 23
+  },
+  {
+    "date": "2016-10-23",
+    "incidents": 56,
+    "nkill": 56
+  },
+  {
+    "date": "2016-10-24",
+    "incidents": 34,
+    "nkill": 31
+  },
+  {
+    "date": "2016-10-25",
+    "incidents": 31,
+    "nkill": 30
+  },
+  {
+    "date": "2016-10-26",
+    "incidents": 40,
+    "nkill": 39
+  },
+  {
+    "date": "2016-10-27",
+    "incidents": 48,
+    "nkill": 46
+  },
+  {
+    "date": "2016-10-28",
+    "incidents": 44,
+    "nkill": 42
+  },
+  {
+    "date": "2016-10-29",
+    "incidents": 45,
+    "nkill": 44
+  },
+  {
+    "date": "2016-10-30",
+    "incidents": 33,
+    "nkill": 33
+  },
+  {
+    "date": "2016-10-31",
+    "incidents": 27,
+    "nkill": 25
+  },
+  {
+    "date": "2016-11-01",
+    "incidents": 24,
+    "nkill": 22
+  },
+  {
+    "date": "2016-11-02",
+    "incidents": 39,
+    "nkill": 32
+  },
+  {
+    "date": "2016-11-03",
+    "incidents": 45,
+    "nkill": 43
+  },
+  {
+    "date": "2016-11-04",
+    "incidents": 42,
+    "nkill": 40
+  },
+  {
+    "date": "2016-11-05",
+    "incidents": 41,
+    "nkill": 32
+  },
+  {
+    "date": "2016-11-06",
+    "incidents": 39,
+    "nkill": 38
+  },
+  {
+    "date": "2016-11-07",
+    "incidents": 38,
+    "nkill": 33
+  },
+  {
+    "date": "2016-11-08",
+    "incidents": 39,
+    "nkill": 36
+  },
+  {
+    "date": "2016-11-09",
+    "incidents": 46,
+    "nkill": 43
+  },
+  {
+    "date": "2016-11-10",
+    "incidents": 22,
+    "nkill": 22
+  },
+  {
+    "date": "2016-11-11",
+    "incidents": 21,
+    "nkill": 20
+  },
+  {
+    "date": "2016-11-12",
+    "incidents": 47,
+    "nkill": 45
+  },
+  {
+    "date": "2016-11-13",
+    "incidents": 42,
+    "nkill": 40
+  },
+  {
+    "date": "2016-11-14",
+    "incidents": 35,
+    "nkill": 32
+  },
+  {
+    "date": "2016-11-15",
+    "incidents": 49,
+    "nkill": 40
+  },
+  {
+    "date": "2016-11-16",
+    "incidents": 34,
+    "nkill": 32
+  },
+  {
+    "date": "2016-11-17",
+    "incidents": 30,
+    "nkill": 28
+  },
+  {
+    "date": "2016-11-18",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-11-19",
+    "incidents": 39,
+    "nkill": 37
+  },
+  {
+    "date": "2016-11-20",
+    "incidents": 47,
+    "nkill": 44
+  },
+  {
+    "date": "2016-11-21",
+    "incidents": 32,
+    "nkill": 30
+  },
+  {
+    "date": "2016-11-22",
+    "incidents": 32,
+    "nkill": 31
+  },
+  {
+    "date": "2016-11-23",
+    "incidents": 43,
+    "nkill": 38
+  },
+  {
+    "date": "2016-11-24",
+    "incidents": 32,
+    "nkill": 32
+  },
+  {
+    "date": "2016-11-25",
+    "incidents": 42,
+    "nkill": 37
+  },
+  {
+    "date": "2016-11-26",
+    "incidents": 40,
+    "nkill": 37
+  },
+  {
+    "date": "2016-11-27",
+    "incidents": 36,
+    "nkill": 33
+  },
+  {
+    "date": "2016-11-28",
+    "incidents": 36,
+    "nkill": 29
+  },
+  {
+    "date": "2016-11-29",
+    "incidents": 23,
+    "nkill": 22
+  },
+  {
+    "date": "2016-11-30",
+    "incidents": 21,
+    "nkill": 21
+  },
+  {
+    "date": "2016-12-01",
+    "incidents": 99,
+    "nkill": 99
+  },
+  {
+    "date": "2016-12-02",
+    "incidents": 21,
+    "nkill": 19
+  },
+  {
+    "date": "2016-12-03",
+    "incidents": 26,
+    "nkill": 24
+  },
+  {
+    "date": "2016-12-04",
+    "incidents": 44,
+    "nkill": 35
+  },
+  {
+    "date": "2016-12-05",
+    "incidents": 24,
+    "nkill": 23
+  },
+  {
+    "date": "2016-12-06",
+    "incidents": 29,
+    "nkill": 28
+  },
+  {
+    "date": "2016-12-07",
+    "incidents": 26,
+    "nkill": 26
+  },
+  {
+    "date": "2016-12-08",
+    "incidents": 23,
+    "nkill": 22
+  },
+  {
+    "date": "2016-12-09",
+    "incidents": 20,
+    "nkill": 19
+  },
+  {
+    "date": "2016-12-10",
+    "incidents": 19,
+    "nkill": 16
+  },
+  {
+    "date": "2016-12-11",
+    "incidents": 31,
+    "nkill": 29
+  },
+  {
+    "date": "2016-12-12",
+    "incidents": 31,
+    "nkill": 29
+  },
+  {
+    "date": "2016-12-13",
+    "incidents": 14,
+    "nkill": 13
+  },
+  {
+    "date": "2016-12-14",
+    "incidents": 31,
+    "nkill": 27
+  },
+  {
+    "date": "2016-12-15",
+    "incidents": 29,
+    "nkill": 25
+  },
+  {
+    "date": "2016-12-16",
+    "incidents": 23,
+    "nkill": 23
+  },
+  {
+    "date": "2016-12-17",
+    "incidents": 23,
+    "nkill": 22
+  },
+  {
+    "date": "2016-12-18",
+    "incidents": 33,
+    "nkill": 32
+  },
+  {
+    "date": "2016-12-19",
+    "incidents": 37,
+    "nkill": 33
+  },
+  {
+    "date": "2016-12-20",
+    "incidents": 18,
+    "nkill": 16
+  },
+  {
+    "date": "2016-12-21",
+    "incidents": 39,
+    "nkill": 35
+  },
+  {
+    "date": "2016-12-22",
+    "incidents": 24,
+    "nkill": 21
+  },
+  {
+    "date": "2016-12-23",
+    "incidents": 22,
+    "nkill": 22
+  },
+  {
+    "date": "2016-12-24",
+    "incidents": 18,
+    "nkill": 16
+  },
+  {
+    "date": "2016-12-25",
+    "incidents": 42,
+    "nkill": 41
+  },
+  {
+    "date": "2016-12-26",
+    "incidents": 20,
+    "nkill": 19
+  },
+  {
+    "date": "2016-12-27",
+    "incidents": 15,
+    "nkill": 14
+  },
+  {
+    "date": "2016-12-28",
+    "incidents": 23,
+    "nkill": 21
+  },
+  {
+    "date": "2016-12-29",
+    "incidents": 31,
+    "nkill": 25
+  },
+  {
+    "date": "2016-12-30",
+    "incidents": 25,
+    "nkill": 24
+  },
+  {
+    "date": "2016-12-31",
+    "incidents": 32,
+    "nkill": 29
+  }
+]

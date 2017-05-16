@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sanctuary cities in California (PRI.org)</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/2.2.0/topojson.min.js"></script>
+  </head>
+
+<style>
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+} 
+
+#wrapper {
+  border:1px solid #D3D3D3;
+  max-width: 600px;  /*MODIFY: set the maximum width of the map.*/
+  margin: 0 auto;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+  padding:0px 10px 10px 10px;
+}
+
+#credit {
+  font-size: 10px;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.headline {
+  font-size: 18px;
+  font-weight: normal;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  color: #33333c;
+  line-height: 24px;
+}
+
+#text, #legend-title {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 18px;
+} 
+
+/*MODIFY: sytle the label for the selected county*/
+.map-label {
+  font-size: 16px;
+  stroke: #5b5b5b;
+  fill: #5b5b5b;
+  pointer-events: none;
+}
+
+/*MODIFY: style the border of the selected state*/
+.outline {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 0px;
+}
+
+/*MODIFY: This class name is determined by the name of the "objects" in your map file.*/
+.counties {
+  fill: #d3d3d3;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+/*MODIFY: Set the binary colors.*/
+#bucket0 { background-color: #FF7F00; }
+#bucket1 { background-color: #999999; }
+
+/*MODIFY: Set the height of tooltip to fit your content.*/
+div.tooltip {
+  position: absolute;
+  left: 75px;
+  text-align: center;
+  height: 35px;
+  padding: 8px;
+  font-size: 13px;
+  line-height: 15px;
+  background: #FFFFFF;
+  border: 0px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+#legend-container {
+  padding:10px;
+}
+
+.colorlabel {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+}
+
+#legend-title {margin-bottom: 10px;}
+
+.colorblock {
+  width:20px;
+  height:20px;
+}
+
+.colorlabel {
+  width:95px;
+  padding-left: 5px;
+}
+
+#legend-color-box, .legend-color{
+  display:flex;
+  justify-content: flex-start;
+}
+
+.legend-color{
+  align-items: center;
+}
+
+.legend-color {
+  width:120px;
+}
+
+@media (max-width: 400px ) { 
+    div.tooltip {font-size: 12px; line-height: 14px;}
+}
+
+</style>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title of map -->
+        <div class="headline">Sanctuary counties in California</div>
+        <!-- INPUT: description of map -->
+        <div id="text">Rollover for county names.</div>
+    </div>   
+    <div id="map-container"></div>
+      <div id="legend-container">
+        <!-- INPUT: title of legend -->
+        <div id="legend-title"></div>
+        <!-- INPUT: color and labels  -->
+        <div id="legend-color-box">
+          <div class="legend-color">
+            <div class="colorblock" id="bucket0"></div>
+            <div class="colorlabel">Sanctuary</div>
+          </div>
+          <div class="legend-color">
+            <div class="colorblock" id="bucket1"></div>
+            <div class="colorlabel">Not sanctuary</div>
+          </div>
+        </div>
+      </div>  
+    <div class="note">
+      <!-- INPUT: data source -->
+      Source: <a href='https://www.americanprogress.org/issues/immigration/reports/2017/01/26/297366/the-effects-of-sanctuary-policies-on-crime-and-the-economy/' target='_blank'>Tom Wong, Immigration and Customs Enforcement data via Immigrant Legal Resource Center </a>
+      <!-- INPUT: additional notes for the chart -->
+      <br>Sanctuary counties are defined here based on data received via a Freedom on Information Act request filed by the Immigrant Legal Resource Center and shows status as of 2016. PRI is updating the map as sanctuary status in counties change.
+      <!-- INPUT: credit -->
+      <div id="credit">PRI data team</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+//Create tooltip
+var div = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+//Set dimensions
+var ww = $("#wrapper").width();
+var width = ww - 20;
+var height;
+
+if (ww >= 510){height = 470}
+  else if ( ww < 510 && ww > 330){height = 420}
+  else {height = 360}        
+
+//Tell the map what projection to use. If you change the scale here, you need to update the same code in the below function named resize()
+var projection = d3.geo.albersUsa();
+
+//Tell the map how to draw the paths from the projection
+var path = d3.geo.path()
+    .projection(projection);
+
+//Append svg to page
+var map = d3.select("#map-container").append("svg")
+  .attr('height', height)
+  .attr('width', width);  
+
+//INPUT: Load your data file (csv) and map file (topojson)
+queue()
+    .defer(d3.json, "https://cdn2.pri.org/map-files/us-county-state-topojson-d3.json")
+    .defer(d3.csv, "//cdn1.pri.org/interactive/2017/03/mapping-sanctuary/data/sanctuary-merge-vote.csv")
+    .await(ready); //parse the data into function ready()
+
+//Moves selection to front
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+}; 
+
+//Moves selection to back
+d3.selection.prototype.moveToBack = function() { 
+  return this.each(function() { 
+  var firstChild = this.parentNode.firstChild; 
+    if (firstChild) { 
+      this.parentNode.insertBefore(this, firstChild); 
+    } 
+  }); 
+};    
+
+//The first variable "us" refers to the first file loaded which is "us-county-state-topojson-d3.json" and the second variable "inputdata" refers to the second file loaded which is "binary-map.csv". You can console.log the 2 variables to see the content.
+function ready(error, us, inputdata) {
+  if (error) throw error;
+
+//console.log the variables to see their content:
+  // console.log(JSON.stringify(us), JSON.stringify(inputdata));  
+
+//filter to get only one state with the id "6" and center the state on the map
+  var states = topojson.feature(us, us.objects.states),
+      state = states.features.filter(function(d) { return d.id === 06; })[0];
+  
+  projection.scale(1)
+    .translate([0, 0]);
+ 
+  var b = path.bounds(state),
+    s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+    t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+ 
+  projection.scale(s)
+    .translate(t);
+
+  //Sets breaking point and colors
+  //MODIFY: the value in ".domain" is the breaking point between 2 colors. The 2 colors are set inside ".range".
+var breakpoint = d3.scale.threshold()
+    .domain([0.5])
+    .range(["#999999","#FF7F00"]);
+  
+  //MODIFY: For data in each column in the CSV file that you want to use to color the map or show in tooltip, you need to match them with the county id in the SAME CSV FILE (not the map file). In this case, "county_id" is the column head of county FIPS in the CSV file that is used to match with the county FIPS in the MAP file. We want to color the map based on "per_trump" and to show "state" and "county_name" in the tooltip. Hence we need to match each of them with "county_id" which is the key in the CSV file to match with the map file.
+  
+  //Pair data with county id
+  var MatchData = {};
+  inputdata.forEach(function(d) { MatchData[d.county_id] = +d.sanctuary; });
+
+  //Pair state name with county id
+  var MatchState = {};
+  inputdata.forEach(function(d) { MatchState[d.county_id] = d.state; });
+
+  //Pair county name with county id
+  var MatchCounty = {};
+  inputdata.forEach(function(d) { MatchCounty[d.county_id] = d.county_name; });
+
+    //Draw border of the selected state
+    map.append("path")
+      .datum(state)
+      .attr("class", "outline")
+      .attr("d", path)
+      .attr('id', 'land');
+    
+    //Draw the clipPath or "cookie cutter"
+    map.append("clipPath")
+      .attr("id", "clip-land")
+      .append("use")
+      .attr("xlink:href", "#land");  
+
+  //Draw counties
+  map.append("g")
+    .attr("class", "counties")
+    .selectAll("path")
+  //MODIFY: This class name "counties" is determined by the name of the "objects" in your map file.  
+    .data(topojson.feature(us, us.objects.counties).features)
+    .enter()
+    .append("path")
+    .attr("d", path)
+    //Apply the clipPath to hide all other states
+    .attr("clip-path", "url(#clip-land)")
+    //Color the counties
+    .attr("fill", function(d) { return breakpoint(MatchData[d.id]); })
+    //Tooltip for counties when mouseover
+    .on("mouseover", function(d) {
+      if (MatchData[d.id] == 1){
+        var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's data 
+        div.html(MatchCounty[d.id] + "<br>" + "(Sanctuary)")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");
+      } else
+      {
+        var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's no data
+        div.html(MatchCounty[d.id] + "<br>" + "(Not sanctuary)")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");     
+      }
+    })
+    .on("mouseout", function() {
+      var sel = d3.select(this);
+        sel.moveToBack();
+      d3.select(this)
+      .transition().duration(300)
+      .style("opacity", 1);
+      div.transition().duration(300)
+      .style("opacity", 0);
+    });
+
+  //Insert label for Sacramento county
+  //First filter out Sacramento county
+  var allcounties = topojson.feature(us, us.objects.counties),
+      selcounties = allcounties.features.filter(function(d) { return d.id === "06067"; })[0];
+
+  //Draw the label
+  map.append("text")
+    .datum(selcounties)
+    .text(function(d){
+        return MatchCounty[d.id];
+    })
+    .attr("dx", function(d){
+        return path.centroid(d)[0];
+    })
+    .attr("dy", function(d){
+        return  path.centroid(d)[1];
+    })
+    .attr("text-anchor","start")
+    .attr('class','map-label');  
+
+}
+
+</script>

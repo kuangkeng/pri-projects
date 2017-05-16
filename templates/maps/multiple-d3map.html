@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Multiple d3 maps loading on same page</title>
+    <meta name="description" content="This is a template file to demonstrate loading more than one d3 map on a single page. (Note: Color tone for map2 and map3 are specified in script using d3.scale.threshold, not d3.scale.quantile as used in other template map files.)">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/2.2.0/topojson.min.js"></script>
+  </head>
+
+<style>
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+} 
+
+.wrapper {
+  border:1px solid #D3D3D3;
+  max-width: 1000px;  /*MODIFY: set the maximum width of the map.*/
+  margin: 0 auto;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+  padding:0px 10px 10px 10px;
+}
+
+#credit {
+  font-size: 10px;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.headline {
+  font-size: 18px;
+  font-weight: normal;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  color: #33333c;
+  line-height: 24px;
+}
+
+#text, #legend-title, #legend-title-2, #legend-title-3 {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 18px;
+} 
+
+/*MODIFY: This class name is determined by the name of the "objects" in your map file.*/
+.counties {
+  fill: #d3d3d3;
+}
+
+/*MODIFY: Style state border*/
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+/*MODIFY: Set the binary colors.*/
+#bucket0 { background-color: #FF7F00; }
+#bucket1 { background-color: #999999; }
+
+/*MODIFY: Set the height of tooltip to fit your content.*/
+div.tooltip {
+  position: absolute;
+  left: 75px;
+  text-align: center;
+  height: 30px;
+  padding: 8px;
+  font-size: 13px;
+  line-height: 15px;
+  background: #FFFFFF;
+  border: 0px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+#legend-container {
+  padding:10px;
+}
+
+.colorlabel {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+}
+
+#legend-title {margin-bottom: 10px;}
+
+.colorblock {
+  width:20px;
+  height:20px;
+}
+
+.colorlabel {
+  width:95px;
+  padding-left: 5px;
+}
+
+#legend-color-box, .legend-color{
+  display:flex;
+  justify-content: flex-start;
+}
+
+.legend-color{
+  align-items: center;
+}
+
+.legend-color {
+  width:120px;
+}
+
+
+
+/*CSS for second map*/
+/*MODIFY: Set the color of each color bucket.*/
+#bucket0-2 { background-color: #fee5d9; }
+#bucket1-2 { background-color: #fcae91; }
+#bucket2-2 { background-color: #fb6a4a; }
+#bucket3-2 { background-color: #de2d26; }
+#bucket4-2 { background-color: #a50f15; }
+
+#legend-container-2 {
+  padding:10px;
+}
+
+#legend-tickmark {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+}
+
+#legend-title-2 {margin-bottom: 10px;}
+
+.colorblock-2, .tickmark {
+  width:15%;
+  height: 15px;
+}
+
+#legend-color-2, #legend-tickmark {
+  display:flex;
+  justify-content: flex-start;
+}
+
+.tickmark {text-align: right;}
+#legend-tickmark {margin-left: 10px;}
+
+
+
+
+/*CSS for third map*/
+/*MODIFY: Set the color of each color bucket.*/
+#bucket0-3 { background-color: #d9e0f2; }
+#bucket1-3 { background-color: #99b2dc; }
+#bucket2-3 { background-color: #5e8dc9; }
+#bucket3-3 { background-color: #2f5491; }
+#bucket4-3 { background-color: #0e2344; }
+
+#legend-container-3 {
+  padding:10px;
+}
+
+#legend-tickmark {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+}
+
+#legend-title-3 {margin-bottom: 10px;}
+
+.colorblock-3, .tickmark {
+  width:15%;
+  height: 15px;
+}
+
+#legend-color-3, #legend-tickmark {
+  display:flex;
+  justify-content: flex-start;
+}
+
+.tickmark {text-align: right;}
+#legend-tickmark {margin-left: 10px;}
+
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}
+
+</style>
+
+<body>
+  <div class="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title of map -->
+        <div class="headline"></div>
+        <!-- INPUT: description of map -->
+        <div id="text">Rollover for county names</div> 
+    </div>   
+    <div id="map-container"></div>
+    <div id="legend-container">
+      <!-- INPUT: title of legend --> 
+      <div id="legend-title"></div>
+      <!-- INPUT: color and labels  -->
+      <div id="legend-color-box">
+        <div class="legend-color">
+          <div class="colorblock" id="bucket0"></div>
+          <div class="colorlabel">Sanctuary</div>
+        </div>
+        <div class="legend-color">
+          <div class="colorblock" id="bucket1"></div>
+          <div class="colorlabel">Not sanctuary</div>
+        </div>
+      </div>
+    </div> 
+    <div class="note">
+      <!-- INPUT: data source -->
+      Source: <a href='https://www.americanprogress.org/issues/immigration/reports/2017/01/26/297366/the-effects-of-sanctuary-policies-on-crime-and-the-economy/' target='_blank'>Tom Wong, Immigration and Customs Enforcement data via Immigrant Legal Resource Center </a>
+      <!-- INPUT: additional notes for the chart -->
+      <br>Sanctuary counties are defined here based on data received via a Freedom on Information Act request filed by the Immigrant Legal Resource Center and shows status accurate in 2016. PRI is updating the map as sanctuary status in counties changes.  
+      <!-- INPUT: credit -->
+      <div id="credit">Alex Newman / PRI</div>
+    </div>    
+  </div>
+  <div class="wrapper"> 
+    <div id="map-container-2"></div>
+    <div id="legend-container-2">
+      <!-- INPUT: title of legend --> 
+      <div id="legend-title-2">Percent of vote</div>
+      <div id="legend-color-2">
+        <div class="colorblock-2" id="bucket0-2"></div>
+        <div class="colorblock-2" id="bucket1-2"></div>
+        <div class="colorblock-2" id="bucket2-2"></div>
+        <div class="colorblock-2" id="bucket3-2"></div>
+        <div class="colorblock-2" id="bucket4-2"></div>
+      </div>
+      <!-- INPUT: breaking point for color scale. Get them from console.log("breakpoint for color scale = " + breakpoint_show);   -->
+      <div id="legend-tickmark">
+        <div class="tickmark">20</div>
+        <div class="tickmark">40</div>
+        <div class="tickmark">60</div>
+        <div class="tickmark">80</div>
+      </div>
+    </div>
+    <div class="note">
+      <!-- INPUT: data source -->
+      Source: Secretary of State election results, PRI reporting
+      <!-- INPUT: additional notes for the chart -->
+      <!-- INPUT: credit -->
+      <div id="credit">PRI data team</div>
+    </div>    
+  </div>
+  <div class="wrapper"> 
+    <div id="map-container-3"></div>
+    <div id="legend-container-3">
+      <!-- INPUT: title of legend --> 
+      <div id="legend-title-3">Percent of vote</div>
+      <div id="legend-color-3">
+        <div class="colorblock-3" id="bucket0-3"></div>
+        <div class="colorblock-3" id="bucket1-3"></div>
+        <div class="colorblock-3" id="bucket2-3"></div>
+        <div class="colorblock-3" id="bucket3-3"></div>
+        <div class="colorblock-3" id="bucket4-3"></div>
+      </div>
+      <!-- INPUT: breaking point for color scale. Get them from console.log("breakpoint for color scale = " + breakpoint_show);   -->
+      <div id="legend-tickmark">
+        <div class="tickmark">20</div>
+        <div class="tickmark">40</div>
+        <div class="tickmark">60</div>
+        <div class="tickmark">80</div>
+      </div>
+    </div>
+    <div class="note">
+      <!-- INPUT: data source -->
+      Source: Secretary of State election results, PRI reporting
+      <!-- INPUT: additional notes for the chart -->
+      <!-- INPUT: credit -->
+      <div id="credit">PRI data team</div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+
+//Notes from Keng:
+// 1. When using same csv for multiple maps on the same page, data values like "null" or blank "" cannot be parsed. Have to fill them with "0". With 0 value in data, we can't use d3.scale.quantile to produce the color tone as "0" will be put into the first color bucket. Hence I used d3.scale.threshold to manually specify the breaking point for each color bucket. This is easy in map2 and map3 because the domain is 0-100 and there are 5 color buckets.
+// 2. This does not apply on map1 as map1 is using binary data (0 or 1), there's no "null" or blank value.
+
+
+//Create tooltip
+var div = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+//Set dimensions
+var margin = {top: 10, left: 0, bottom: 10, right: 0}
+  , width = window.outerWidth
+  , width = width - margin.left - margin.right
+  , mapRatio = .6 //depending on the map size
+  , height = width * mapRatio;
+
+//Tell the map what projection to use. If you change the scale here, you need to update the same code in the below function named resize()
+var projection = d3.geo.albersUsa()
+    .scale(width/0.8) //depending on the map size
+    .translate([width / 2, height / 2]);
+
+//Tell the map how to draw the paths from the projection
+var path = d3.geo.path()
+    .projection(projection);
+
+//Append svg to page
+var map = d3.select("#map-container").append("svg")
+  .style('height', height + 'px')
+  .style('width', width + 'px');  
+
+var map2 = d3.select("#map-container-2").append("svg")
+  .style('height', height + 'px')
+  .style('width', width + 'px'); 
+
+var map3 = d3.select("#map-container-3").append("svg")
+  .style('height', height + 'px')
+  .style('width', width + 'px'); 
+
+//INPUT: Load your data file (csv) and map file (topojson)
+queue()
+    
+    .defer(d3.json, "https://cdn2.pri.org/map-files/us-county-state-topojson-d3.json")
+    .defer(d3.csv, "https://cdn2.pri.org/templates/maps/sample-data/per_voted.csv")
+    .defer(d3.csv, "https://cdn2.pri.org/templates/maps/sample-data/binary-map.csv")
+    .await(ready);
+
+//Moves selection to front
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+}; 
+
+//Moves selection to back
+d3.selection.prototype.moveToBack = function() { 
+  return this.each(function() { 
+  var firstChild = this.parentNode.firstChild; 
+    if (firstChild) { 
+      this.parentNode.insertBefore(this, firstChild); 
+    } 
+  }); 
+};    
+
+
+//The first variable "us" refers to the first file loaded which is "us-county-state-topojson-d3.json" and the second variable "vote" refers to the second file loaded which is "per_voted.csv" and third variable "binary" is the file "binary-map.csv". You can console.log the variables to see the content.
+function ready(error, us, vote, binary) {
+  if (error) throw error;
+
+//console.log the variables to see their content:
+  // console.log(JSON.stringify(us), JSON.stringify(vote);   
+
+//Sets breaking point and colors
+//MODIFY: the value in ".domain" is the breaking point between 2 colors. The 2 colors are set inside ".range".
+//breakpoint for map 1
+var breakpoint = d3.scale.threshold()
+    .domain([0.5])
+    .range(["#999999","#FF7F00"]);
+
+//breakpoint for map 2
+var breakpoint2 = d3.scale.threshold()
+    .domain([1, 20, 40, 60, 80])
+    .range(["#999999","#fee5d9","#fcae91","#fb6a4a","#de2d26","#a50f15"]);  
+
+//breakpoint for map 3
+var breakpoint3 = d3.scale.threshold()
+    .domain([1, 20, 40, 60, 80])
+    .range(["#999999","#d9e0f2","#99b2dc","#5e8dc9","#2f5491","#0e2344"]);  
+
+  //MODIFY: For data in each column in the CSV file that you want to use to color the map or show in tooltip, you need to match them with the county id in the SAME CSV FILE (not the map file). We want to color the map based on "per_trump", "per_clinton" and to show "state_short" and "county_name" in the tooltip. Hence we need to match each of them with "county_id" in the same CSV file. This county_id will be parsed to match with the map file.
+
+  //Pair sanctuary status with county_id in "binary-map.csv"
+  var MatchSanctuary = {};
+  binary.forEach(function(d) { MatchSanctuary[d.county_id] = +d.sanctuary; });
+
+  //Pair Trump data with county_id in "per_voted.csv"
+  var MatchTrump = {};
+  vote.forEach(function(d) { MatchTrump[d.county_id] = +d.per_trump; });
+
+  //Pair Clinton data with county_id in "per_voted.csv"
+  var MatchClinton = {};
+  vote.forEach(function(d) { MatchClinton[d.county_id] = +d.per_clinton; });
+
+  //Pair county name with county_id in "binary-map.csv"
+  var MatchCounty = {};
+  binary.forEach(function(d) { MatchCounty[d.county_id] = d.county_name; });
+
+  //Pair state_short with county_id in "per_voted.csv"
+  var MatchStateShort = {};
+  vote.forEach(function(d) { MatchStateShort[d.county_id] = d.state_short; });
+
+  //Pair state with county_id in "binary-map.csv"
+  var MatchState = {};
+  binary.forEach(function(d) { MatchState[d.county_id] = d.state; });
+
+//Script for Map 1
+  //Append states
+  //MODIFY: This class name "counties" is determined by the name of the "objects" in your map file.
+  map.append("g")
+    .attr("class", "counties")
+    .selectAll("path")
+  //MODIFY: This class name "counties" is determined by the name of the "objects" in your map file.  
+    .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+    .attr("d", path)
+    //Color states
+    .attr("fill", function(d) { return breakpoint(MatchSanctuary[d.id]); })
+    //Tooltip when mouseover
+    .on("mouseover", function(d) {
+      if (MatchSanctuary[d.id] == 1){
+        var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's data 
+        div.html(MatchCounty[d.id] + ", " + MatchState[d.id] + "<br>(Sanctuary)")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");
+      } else
+      {
+        var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's no data
+        div.html(MatchCounty[d.id] + ", " + MatchState[d.id] + "<br>(Not sanctuary)")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");     
+      }
+    })
+    .on("mouseout", function() {
+      var sel = d3.select(this);
+        sel.moveToBack();
+      d3.select(this)
+      .transition().duration(300)
+      .style("opacity", 1);
+      div.transition().duration(300)
+      .style("opacity", 0);
+    });
+  
+    //Draw the state border
+    map.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path); 
+
+//Script for Map 2
+  map2.append("g")
+    .attr("class", "counties")
+    .selectAll("path")
+  //MODIFY: This class name "counties" is determined by the name of the "objects" in your map file.  
+    .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+    .attr("d", path)
+    //Color states
+    .attr("fill", function(d) { return breakpoint2(MatchTrump[d.id]); })
+    //Tooltip when mouseover
+    .on("mouseover", function(d) {
+      if (MatchTrump[d.id] == null){
+
+      } else
+      {
+            var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's data 
+        div.html(MatchCounty[d.id] + ", " + MatchStateShort[d.id] + "<br>" + "Trump: " + (MatchTrump[d.id]) + "%")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");
+      }
+    })
+    .on("mouseout", function() {
+      var sel = d3.select(this);
+        sel.moveToBack();
+      d3.select(this)
+      .transition().duration(300)
+      .style("opacity", 1);
+      div.transition().duration(300)
+      .style("opacity", 0);
+    });
+  
+    //Draw the state border
+    map2.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path);
+
+
+//Script for Map 3
+  map3.append("g")
+    .attr("class", "counties")
+    .selectAll("path")
+  //MODIFY: This class name "counties" is determined by the name of the "objects" in your map file.  
+    .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+    .attr("d", path)
+    //Color states
+    .attr("fill", function(d) { return breakpoint3(MatchClinton[d.id]); })
+    //Tooltip when mouseover
+    .on("mouseover", function(d) {
+      if (MatchClinton[d.id] == null){
+
+      } else
+      {
+        var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's data 
+        div.html(MatchCounty[d.id] + ", " + MatchStateShort[d.id] + "<br>" + "Clinton: " + (MatchClinton[d.id]) + "%")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");  
+      }
+    })
+    .on("mouseout", function() {
+      var sel = d3.select(this);
+        sel.moveToBack();
+      d3.select(this)
+      .transition().duration(300)
+      .style("opacity", 1);
+      div.transition().duration(300)
+      .style("opacity", 0);
+    });
+  
+    //Draw the state border
+    map3.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path);
+
+
+//RESPONSIVENESS (for all 3 maps)
+  d3.select(window).on('resize', resize);
+
+  function resize() {
+
+    var w = d3.select("#map-container").node().clientWidth;
+
+    // adjust things when the window size changes
+    width = w - margin.left - margin.right;
+    height = width * mapRatio;
+
+    // update projection
+    var newProjection = d3.geo.albersUsa()
+      .scale(width/0.8)
+      .translate([width / 2, height / 2]);
+
+    //Update path
+    path = d3.geo.path()
+      .projection(newProjection);    
+
+    // resize the map container
+    map
+        .style('width', width + 'px')
+        .style('height', height + 'px');
+
+    map2
+        .style('width', width + 'px')
+        .style('height', height + 'px');       
+
+    map3
+        .style('width', width + 'px')
+        .style('height', height + 'px');            
+
+    // resize the map
+    map.selectAll("path").attr('d', path);
+    map2.selectAll("path").attr('d', path);
+    map3.selectAll("path").attr('d', path);
+  }
+
+resize();
+
+}
+
+
+
+
+
+
+
+
+</script>

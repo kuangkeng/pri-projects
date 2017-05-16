@@ -1,0 +1,961 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+<script src="https://cdn2.pri.org/scripts/motion.js"></script>
+
+<style>
+
+@import "http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container01{
+height: 500px; 
+max-width: 850px;
+margin-bottom: 50px;
+}
+
+#container02{
+height: 250px; 
+max-width: 850px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 850px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #33333c;
+    line-height: 18px;
+}
+
+#play-controls {
+    text-align: center;
+    width: 100%;
+}
+
+#play-pause-button {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+
+}
+#play-range {
+    margin: 1%;
+    width: 85%;
+}
+
+.button {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    margin:10px;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+#subtitle02 {
+    padding-top: 20px;
+}
+
+#title {
+    margin:10px;
+    font-size: 25px;
+    line-height: 28px;
+}
+
+.bold {font-weight: bold;}
+
+#instruct {
+    margin:10px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+@media (max-width: 600px ) { 
+    #container01 {height: 420px;}
+}  
+@media (max-width: 550px ) { 
+    #instruct {padding-top: 20px;}
+}
+@media (max-width: 500px ) { 
+    #container01 {height: 350px;}
+    #title {font-size:22px;}
+    .subtitle {font-size:18px;}
+}  
+
+@media (max-width: 400px ) { 
+    #container01 {height: 250px;}
+    #title {font-size:18px; line-height:22px; font-weight: bold; margin-bottom: 0px;}
+    .subtitle {font-size:16px; line-height:20px; margin-top: 0px;}
+    #instruct {font-size:11px; line-height:13px;}
+    #subtitle02 {padding-top: 0px;}
+    #container02 {height: 200px;}
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">  
+    <div id="title">The diversity of refugees in the US</div>
+    <div class="subtitle" id="subtitle01">Top country of origin among refugees, by state in <span class="year" id="bigyear">2015</span>.</div>
+    <div id="container01"></div>
+    <div id="instruct">Click the play button to start the animation. Click on each state in the map will show the total number of refugees from the corresponding country accepted into the US from 2002 to 2015 in the chart below.</div>
+    <div class="subtitle" id="subtitle02">The top 5 countries of origin of refugees accepted into the US from 2002 to 2015.</div>
+    <div id="container02"></div>
+    <div id="note">
+        <div class="button"><button id="button01">Back to total</button></div>
+        <div id="text"></div>
+        Source: 
+        <a href='http://www.wrapsnet.org/Reports/InteractiveReporting/tabid/393/Default.aspx' target='_blank'>Refugee Processing Center</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+var input = "2015",
+count = 0,
+country01 = [7,7,2,2,2,0,0,0,1,0,1,1,1,0],
+country02 = [11,9,12,8,8,2,1,1,0,3,0,0,0,1],
+country03 = [18,2,9,4,5,5,3,3,3,1,3,3,2,6],
+active01 = 0,
+active02 = 0,
+active03 = 0,
+chart,
+chart02,
+checkchange = "",
+inCode = 0,
+outCode = "",
+labels=[];
+
+var countries = ["Burma","Iraq","Somalia","Bhutan","Cuba","Iran","DR Congo","Ukraine","Russia","Liberia","Sudan","Vietnam","Laos","Eritrea","Ethiopia","Burundi","Afghanistan","Sierra Leone","Bosnia & Herzegovina","Serbia","Belarus","Uzbekistan","Syria"];
+
+var colors = [
+    {"name": "Burma", "color":"#FFB74D"},
+    {"name": "Iraq", "color":"#64B5F6"},
+    {"name": "Somalia", "color":"#AED581"},
+    {"name": "Bhutan", "color":"#E57373"},
+    {"name": "Cuba", "color":"#7986CB"},
+    {"name": "Iran", "color":"#DCE775"},
+    {"name": "DR Congo", "color":"#81C784"},
+    {"name": "Ukraine", "color":"#4DB6AC"},
+    {"name": "Russia", "color":"#9575CD"},
+    {"name": "Liberia", "color":"#F06292"},
+    {"name": "Sudan", "color":"#FFF176"},
+    {"name": "Vietnam", "color":"#A1887F"},
+    {"name": "Laos", "color":"#90A4AE"},
+    {"name": "Eritrea", "color":"#E0E0E0"},
+    {"name": "Ethiopia", "color":"#E0E0E0"},
+    {"name": "Burundi", "color":"#E0E0E0"},
+    {"name": "Afghanistan", "color":"#FFAACC"},
+    {"name": "Sierra Leone", "color":"#E0E0E0"},
+    {"name": "Bosnia & Herzegovina", "color":"#BA68C8"},
+    {"name": "Serbia", "color":"#E0E0E0"},
+    {"name": "Belarus", "color":"#E0E0E0"},
+    {"name": "Uzbekistan", "color":"#E0E0E0"},
+    {"name": "Syria", "color":"#E0E0E0"},
+];
+
+var data = [{"code":"AL", "sequence":[275,75,75,165,165,65,125,125,125,195,195,125,125,85], "value":85},
+            {"code":"AK", "sequence":[225,165,135,135,225,235,205,35,35,195,55,205,195,195], "value":195},
+            {"code":"AZ", "sequence":[175,195,195,195,195,55,125,125,125,35,125,125,125,85], "value":85},
+            {"code":"AR", "sequence":[155,115,135,245,155,75,125,125,125,35,55,55,55,55], "value":55},
+            {"code":"CA", "sequence":[225,225,135,135,115,115,115,125,125,125,125,125,125,115], "value":115},
+            {"code":"CO", "sequence":[165,225,195,165,195,55,55,35,35,35,35,55,55,55], "value":55},
+            {"code":"CT", "sequence":[45,145,195,195,165,55,55,125,125,55,125,125,125,385,], "value":385},
+            {"code":"DE", "sequence":[255,145,325,145,145,145,125,125,55,55,155,55,55,265], "value":265},
+            {"code":"DC", "sequence":[105,105,185,105,165,105,125,125,125,95,125,125,95,95], "value":95},
+            {"code":"FL", "sequence":[75,75,75,75,75,75,75,75,75,75,75,75,75,75], "value":75},
+            {"code":"GA", "sequence":[245,105,195,165,195,55,55,35,55,35,35,55,55,55], "value":55},
+            {"code":"HI", "sequence":[245,245,245,245,245,245,55,335,155,55,155,125,55,55], "value":55},
+            {"code":"ID", "sequence":[45,15,195,165,165,65,125,35,55,35,55,125,125,85], "value":85},
+            {"code":"IL", "sequence":[175,175,195,165,195,55,125,125,125,55,125,125,125,55], "value":55},
+            {"code":"IN", "sequence":[225,145,195,55,55,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"IA", "sequence":[45,205,205,205,205,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"KS", "sequence":[15,205,195,245,165,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"KY", "sequence":[45,195,195,165,165,55,55,55,55,35,35,55,125,55], "value":55},
+            {"code":"LA", "sequence":[45,15,145,75,75,75,75,55,55,55,55,125,125,55], "value":55},
+            {"code":"ME", "sequence":[205,205,205,195,195,195,195,195,195,195,125,125,125,195], "value":195},
+            {"code":"MD", "sequence":[115,185,195,165,165,55,55,35,35,35,55,55,55,55], "value":55},
+            {"code":"MA", "sequence":[225,225,195,195,195,65,125,125,125,35,125,125,125,195,], "value":195},
+            {"code":"MI", "sequence":[45,145,195,165,195,125,125,125,125,125,125,125,125,125,], "value":125},
+            {"code":"MN", "sequence":[145,105,135,195,195,195,55,55,55,55,55,55,195,195], "value":195},
+            {"code":"MS", "sequence":[375,315,195,115,15,205,125,15,85,195,355,365,95,15], "value":15},
+            {"code":"MO", "sequence":[45,195,195,165,195,195,55,55,55,55,35,195,195,85], "value":85},
+            {"code":"MT", "sequence":[25,25,25,225,155,55,125,125,155,155,125,155,155,155], "value":155},
+            {"code":"NE", "sequence":[205,205,205,205,205,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"NV", "sequence":[175,175,75,75,75,75,75,75,75,75,75,75,75,85], "value":85},
+            {"code":"NH", "sequence":[45,205,195,165,165,65,35,35,35,35,35,35,85,85], "value":85},
+            {"code":"NJ", "sequence":[75,145,145,165,145,55,55,55,75,75,75,75,75,215], "value":215},
+            {"code":"NM", "sequence":[75,305,75,75,215,75,125,125,125,55,55,125,125,15], "value":15},
+            {"code":"NY", "sequence":[225,225,195,145,55,55,55,55,55,55,35,55,55,55], "value":55},
+            {"code":"NC", "sequence":[245,245,195,245,245,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"ND", "sequence":[45,145,145,195,195,195,35,35,35,35,35,35,35,35], "value":35},
+            {"code":"OH", "sequence":[225,195,195,195,195,195,55,35,35,35,35,35,35,35], "value":35},
+            {"code":"OK", "sequence":[245,285,145,165,195,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"OR", "sequence":[225,225,225,225,225,55,55,125,55,55,125,125,125,55], "value":55},
+            {"code":"PA", "sequence":[225,145,145,165,165,145,55,35,35,35,35,35,35,35], "value":35},
+            {"code":"RI", "sequence":[225,145,145,145,145,145,65,35,35,345,35,35,125,85], "value":85},
+            {"code":"SC", "sequence":[225,225,195,195,55,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"SD", "sequence":[225,205,195,195,195,195,195,35,55,35,35,35,35,395], "value":255},
+            {"code":"TN", "sequence":[175,205,195,195,195,65,125,55,125,55,55,125,125,55], "value":55},
+            {"code":"TX", "sequence":[245,205,195,195,195,55,55,55,55,55,55,125,125,55], "value":55},
+            {"code":"UT", "sequence":[15,205,195,195,195,55,55,55,35,55,195,125,195,195], "value":195},
+            {"code":"VT", "sequence":[45,295,195,165,165,65,35,35,35,35,35,35,35,35], "value":35},
+            {"code":"VA", "sequence":[45,185,195,195,165,55,125,35,125,35,125,125,125,125,], "value":125},
+            {"code":"WA", "sequence":[225,225,225,225,225,225,55,55,55,55,55,125,125,225], "value":225},
+            {"code":"WV", "sequence":[95,115,155,245,155,155,55,125,125,55,125,95,125,95], "value":95},
+            {"code":"WI", "sequence":[175,175,135,135,135,55,55,55,55,55,55,55,55,55], "value":55},
+            {"code":"WY", "sequence":[125,225,155,155,155,155,155,155,155,155,155,155,155,155], "value":155}
+];
+
+    chart = new Highcharts.Map({
+    chart: {
+        renderTo: 'container01',
+    },
+    
+    title : {
+        text: null,
+    },
+    subtitle : {
+        enabled: false,
+    },
+    legend: { enabled: false },
+    mapNavigation: {
+        enabled: true,
+        enableMouseWheelZoom: false,
+        buttonOptions: {
+          verticalAlign: 'bottom',
+          align: 'right',
+          floating: true,
+        },
+    },
+    credits: { enabled: false, },
+    colorAxis: {
+        dataClasses: [
+            {from:10, to:20, color: "#FFAACC"},
+            {from:20, to:30, color: "#E0E0E0"},
+            {from:30, to:40, color: "#E57373"},
+            {from:40, to:50, color: "#BA68C8"},
+            {from:50, to:60, color: "#FFB74D"},
+            {from:60, to:70, color: "#E0E0E0"},
+            {from:70, to:80, color: "#7986CB"},
+            {from:80, to:90, color: "#81C784"},
+            {from:90, to:100, color: "#E0E0E0"},
+            {from:100, to:110, color: "#E0E0E0"},
+            {from:110, to:120, color: "#DCE775"},
+            {from:120, to:130, color: "#64B5F6"},
+            {from:130, to:140, color: "#90A4AE"},
+            {from:140, to:150, color: "#F06292"},
+            {from:150, to:160, color: "#ffffff"},
+            {from:160, to:170, color: "#9575CD"},
+            {from:170, to:180, color: "#E0E0E0"},
+            {from:180, to:190, color: "#E0E0E0"},
+            {from:190, to:200, color: "#AED581"},
+            {from:200, to:210, color: "#FFF176"},
+            {from:210, to:220, color: "#E0E0E0"},
+            {from:220, to:230, color: "#4DB6AC"},
+            {from:230, to:240, color: "#E0E0E0"},
+            {from:240, to:250, color: "#A1887F"},
+            {from:250, to:400, color: "#E0E0E0"},
+        ]
+    },
+
+    plotOptions:{
+        series:{
+            borderColor: '#9e9e9e',
+            point:{
+                events:{
+                    click: function(){
+                        if(this.value == 45){
+                            var tempval = "Bosnia & Herzegovina";
+                        } else { var tempval = convertCode(this.value);}
+
+                        var country = tempval;
+                        for (var i=0; i<23; i++) {
+                            if(country == chart02.series[i].name){
+                                chart02.series[i].show();
+                                labels[i].show();
+                            } else {
+                                chart02.series[i].hide();
+                                labels[i].hide();
+                                }
+                        }
+                        $(chart02.series).each(function(){
+                            this.points[count].setState("");    
+                        });
+                        $("#subtitle02").html("Total refugees from <span class='bold' id='ori04'></span> accepted into the US, by year.");
+                        var selected = jQuery.grep(colors, function (n, i) {
+                            return (n.name == country);
+                        },false); //find among colors array for name that matches country, then pass the row into selected
+                        $("#ori04").text(country).css("color",selected[0]["color"]);
+                    }
+                }
+            }
+        }
+    },
+
+    motion: {
+        enabled: true,
+        axisLabel: 'year',
+        labels: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
+        series: 0, // The series which holds points to update
+        updateInterval: 1500,
+        magnet: {
+            round: 'floor', // ceil / floor / round
+            step: 1
+        }
+    },
+
+    tooltip: {
+        headerFormat: '',
+        pointFormatter: function () {
+                inCode = this.value;
+                outCode = convertCode(inCode);
+                return "<b>" + this.name + "</b>" + "<br>" + outCode;
+            },
+    },
+    series: [{
+        mapData: Highcharts.maps['countries/us/us-all'],
+        joinBy: ['postal-code', 'code'],
+        data: data,
+        dataLabels: {
+            enabled: true,
+            color: '#424242',
+            allowOverlap: 'true',
+            style: {
+                fontSize: '10px',
+                textOutline: false,
+                },
+            formatter: 
+            function () {
+                inCode = this.point.value;
+                if (inCode == 45){
+                    return "BiH"
+                } else {
+                    outCode = convertCode(inCode);
+                    return outCode;
+                }
+                
+            },
+        },
+    }]
+});
+
+if ($(window).width() < 500) {           
+    chart.series[0].update({
+        dataLabels: {
+            allowOverlap: false,
+            style: {
+                fontSize: '7px',
+            },
+        }
+    });
+}
+
+$(function () {
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart02 = new Highcharts.Chart({
+            chart: {
+                ignoreHiddenSeries: false,
+                renderTo: 'container02',
+                type: 'line',
+                marginRight: 65,
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    year: '%Y'
+                },
+                // tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true, 
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                },
+                labels: {
+                    format: '{value:,.0f}'
+                },
+                endOnTick: false,
+            },
+            credits: { enabled: false, },
+            legend: {
+                enabled: false,
+                itemWidth: 100,
+                itemStyle: {
+                    color: '#595959',
+                },
+                margin: 5,
+                maxHeight: 60,
+            },
+            tooltip: {
+                xDateFormat: '%Y',
+            },
+            plotOptions: {
+                line: {
+                  marker: {
+                      enabled: false
+                }
+              }
+            },
+            series: [
+                {name: "Burma", color:"#FFB74D", num:0, data: [ 
+                    [Date.UTC(2002,0,1), 113], 
+                    [Date.UTC(2003,0,1), 220], 
+                    [Date.UTC(2004,0,1), 1277], 
+                    [Date.UTC(2005,0,1), 1470], 
+                    [Date.UTC(2006,0,1), 2294], 
+                    [Date.UTC(2007,0,1), 14225], 
+                    [Date.UTC(2008,0,1), 19000], 
+                    [Date.UTC(2009,0,1), 19920], 
+                    [Date.UTC(2010,0,1), 17176], 
+                    [Date.UTC(2011,0,1), 15713], 
+                    [Date.UTC(2012,0,1), 15112], 
+                    [Date.UTC(2013,0,1), 14580], 
+                    [Date.UTC(2014,0,1), 15971], 
+                    [Date.UTC(2015,0,1), 17483]]},
+                {name: "Iraq", color:"#64B5F6", num:1, data: [ 
+                    [Date.UTC(2002,0,1), 552], 
+                    [Date.UTC(2003,0,1), 209], 
+                    [Date.UTC(2004,0,1), 73], 
+                    [Date.UTC(2005,0,1), 204], 
+                    [Date.UTC(2006,0,1), 218], 
+                    [Date.UTC(2007,0,1), 2631], 
+                    [Date.UTC(2008,0,1), 15766], 
+                    [Date.UTC(2009,0,1), 19472], 
+                    [Date.UTC(2010,0,1), 18251], 
+                    [Date.UTC(2011,0,1), 6339], 
+                    [Date.UTC(2012,0,1), 16369], 
+                    [Date.UTC(2013,0,1), 18567], 
+                    [Date.UTC(2014,0,1), 20337], 
+                    [Date.UTC(2015,0,1), 10169]]},
+                {name: "Somalia", color:"#AED581", num:2, data: [ 
+                    [Date.UTC(2002,0,1), 317], 
+                    [Date.UTC(2003,0,1), 2762], 
+                    [Date.UTC(2004,0,1), 15088], 
+                    [Date.UTC(2005,0,1), 9334], 
+                    [Date.UTC(2006,0,1), 10522], 
+                    [Date.UTC(2007,0,1), 5708], 
+                    [Date.UTC(2008,0,1), 2698], 
+                    [Date.UTC(2009,0,1), 4620], 
+                    [Date.UTC(2010,0,1), 4401], 
+                    [Date.UTC(2011,0,1), 3453], 
+                    [Date.UTC(2012,0,1), 5893], 
+                    [Date.UTC(2013,0,1), 7450], 
+                    [Date.UTC(2014,0,1), 10057], 
+                    [Date.UTC(2015,0,1), 7779]]},
+                {name: "Bhutan", color:"#E57373", num:3, data: [ 
+                    [Date.UTC(2002,0,1), 0], 
+                    [Date.UTC(2003,0,1), 0], 
+                    [Date.UTC(2004,0,1), 0], 
+                    [Date.UTC(2005,0,1), 0], 
+                    [Date.UTC(2006,0,1), 3], 
+                    [Date.UTC(2007,0,1), 0], 
+                    [Date.UTC(2008,0,1), 7544], 
+                    [Date.UTC(2009,0,1), 15077], 
+                    [Date.UTC(2010,0,1), 11729], 
+                    [Date.UTC(2011,0,1), 14735], 
+                    [Date.UTC(2012,0,1), 14459], 
+                    [Date.UTC(2013,0,1), 9051], 
+                    [Date.UTC(2014,0,1), 7476], 
+                    [Date.UTC(2015,0,1), 5764]]},
+                {name: "Cuba", color:"#7986CB", num:4, data: [ 
+                    [Date.UTC(2002,0,1), 1829], 
+                    [Date.UTC(2003,0,1), 468], 
+                    [Date.UTC(2004,0,1), 3812], 
+                    [Date.UTC(2005,0,1), 6440], 
+                    [Date.UTC(2006,0,1), 2574], 
+                    [Date.UTC(2007,0,1), 3249], 
+                    [Date.UTC(2008,0,1), 4340], 
+                    [Date.UTC(2009,0,1), 4790], 
+                    [Date.UTC(2010,0,1), 4865], 
+                    [Date.UTC(2011,0,1), 2151], 
+                    [Date.UTC(2012,0,1), 2707], 
+                    [Date.UTC(2013,0,1), 4101], 
+                    [Date.UTC(2014,0,1), 3703], 
+                    [Date.UTC(2015,0,1), 1060]]},
+                {name: "Iran", color:"#DCE775", num:5, data: [ 
+                    [Date.UTC(2002,0,1), 1778], 
+                    [Date.UTC(2003,0,1), 2481], 
+                    [Date.UTC(2004,0,1), 1746], 
+                    [Date.UTC(2005,0,1), 1763], 
+                    [Date.UTC(2006,0,1), 4065], 
+                    [Date.UTC(2007,0,1), 5140], 
+                    [Date.UTC(2008,0,1), 5067], 
+                    [Date.UTC(2009,0,1), 5437], 
+                    [Date.UTC(2010,0,1), 2979], 
+                    [Date.UTC(2011,0,1), 2100], 
+                    [Date.UTC(2012,0,1), 1973], 
+                    [Date.UTC(2013,0,1), 2535], 
+                    [Date.UTC(2014,0,1), 2830], 
+                    [Date.UTC(2015,0,1), 3121]]},
+                {name: "DR Congo", color:"#81C784", num:6, data: [ 
+                    [Date.UTC(2002,0,1), 94], 
+                    [Date.UTC(2003,0,1), 286], 
+                    [Date.UTC(2004,0,1), 626], 
+                    [Date.UTC(2005,0,1), 331], 
+                    [Date.UTC(2006,0,1), 478], 
+                    [Date.UTC(2007,0,1), 821], 
+                    [Date.UTC(2008,0,1), 963], 
+                    [Date.UTC(2009,0,1), 1134], 
+                    [Date.UTC(2010,0,1), 3160], 
+                    [Date.UTC(2011,0,1), 1206], 
+                    [Date.UTC(2012,0,1), 2132], 
+                    [Date.UTC(2013,0,1), 2592], 
+                    [Date.UTC(2014,0,1), 5128], 
+                    [Date.UTC(2015,0,1), 8206]]},
+                {name: "Ukraine", color:"#4DB6AC", num:7, data: [ 
+                    [Date.UTC(2002,0,1), 6104], 
+                    [Date.UTC(2003,0,1), 5429], 
+                    [Date.UTC(2004,0,1), 2822], 
+                    [Date.UTC(2005,0,1), 2991], 
+                    [Date.UTC(2006,0,1), 2276], 
+                    [Date.UTC(2007,0,1), 1452], 
+                    [Date.UTC(2008,0,1), 826], 
+                    [Date.UTC(2009,0,1), 552], 
+                    [Date.UTC(2010,0,1), 428], 
+                    [Date.UTC(2011,0,1), 458], 
+                    [Date.UTC(2012,0,1), 346], 
+                    [Date.UTC(2013,0,1), 209], 
+                    [Date.UTC(2014,0,1), 667], 
+                    [Date.UTC(2015,0,1), 1760]]},
+                {name: "Russia", color:"#9575CD", num:8, data: [ 
+                    [Date.UTC(2002,0,1), 2295], 
+                    [Date.UTC(2003,0,1), 1712], 
+                    [Date.UTC(2004,0,1), 1187], 
+                    [Date.UTC(2005,0,1), 7478], 
+                    [Date.UTC(2006,0,1), 4890], 
+                    [Date.UTC(2007,0,1), 1212], 
+                    [Date.UTC(2008,0,1), 460], 
+                    [Date.UTC(2009,0,1), 453], 
+                    [Date.UTC(2010,0,1), 265], 
+                    [Date.UTC(2011,0,1), 161], 
+                    [Date.UTC(2012,0,1), 198], 
+                    [Date.UTC(2013,0,1), 93], 
+                    [Date.UTC(2014,0,1), 198], 
+                    [Date.UTC(2015,0,1), 292]]},
+                {name: "Liberia", color:"#F06292", num:9, data: [ 
+                    [Date.UTC(2002,0,1), 729], 
+                    [Date.UTC(2003,0,1), 3990], 
+                    [Date.UTC(2004,0,1), 6696], 
+                    [Date.UTC(2005,0,1), 4069], 
+                    [Date.UTC(2006,0,1), 1995], 
+                    [Date.UTC(2007,0,1), 1822], 
+                    [Date.UTC(2008,0,1), 602], 
+                    [Date.UTC(2009,0,1), 447], 
+                    [Date.UTC(2010,0,1), 181], 
+                    [Date.UTC(2011,0,1), 132], 
+                    [Date.UTC(2012,0,1), 56], 
+                    [Date.UTC(2013,0,1), 81], 
+                    [Date.UTC(2014,0,1), 28], 
+                    [Date.UTC(2015,0,1), 11]]},
+                {name: "Sudan", color:"#FFF176", num:10, data: [ 
+                    [Date.UTC(2002,0,1), 1041], 
+                    [Date.UTC(2003,0,1), 2653], 
+                    [Date.UTC(2004,0,1), 3259], 
+                    [Date.UTC(2005,0,1), 2098], 
+                    [Date.UTC(2006,0,1), 1883], 
+                    [Date.UTC(2007,0,1), 465], 
+                    [Date.UTC(2008,0,1), 346], 
+                    [Date.UTC(2009,0,1), 705], 
+                    [Date.UTC(2010,0,1), 505], 
+                    [Date.UTC(2011,0,1), 442], 
+                    [Date.UTC(2012,0,1), 1529], 
+                    [Date.UTC(2013,0,1), 2044], 
+                    [Date.UTC(2014,0,1), 1043], 
+                    [Date.UTC(2015,0,1), 1688]]},
+                {name: "Vietnam", color:"#A1887F", num:11, data: [ 
+                    [Date.UTC(2002,0,1), 3581], 
+                    [Date.UTC(2003,0,1), 1373], 
+                    [Date.UTC(2004,0,1), 805], 
+                    [Date.UTC(2005,0,1), 3416], 
+                    [Date.UTC(2006,0,1), 1975], 
+                    [Date.UTC(2007,0,1), 1534], 
+                    [Date.UTC(2008,0,1), 1234], 
+                    [Date.UTC(2009,0,1), 1754], 
+                    [Date.UTC(2010,0,1), 470], 
+                    [Date.UTC(2011,0,1), 120], 
+                    [Date.UTC(2012,0,1), 87], 
+                    [Date.UTC(2013,0,1), 63], 
+                    [Date.UTC(2014,0,1), 80], 
+                    [Date.UTC(2015,0,1), 39]]},
+                {name: "Laos", color:"#90A4AE", num:12, data: [ 
+                    [Date.UTC(2002,0,1), 18], 
+                    [Date.UTC(2003,0,1), 13], 
+                    [Date.UTC(2004,0,1), 9201], 
+                    [Date.UTC(2005,0,1), 5630], 
+                    [Date.UTC(2006,0,1), 563], 
+                    [Date.UTC(2007,0,1), 101], 
+                    [Date.UTC(2008,0,1), 41], 
+                    [Date.UTC(2009,0,1), 6], 
+                    [Date.UTC(2010,0,1), 135], 
+                    [Date.UTC(2011,0,1), 115], 
+                    [Date.UTC(2012,0,1), 18], 
+                    [Date.UTC(2013,0,1), 0], 
+                    [Date.UTC(2014,0,1), 0], 
+                    [Date.UTC(2015,0,1), 0]]},
+                {name: "Eritrea", color:"#E0E0E0", num:13, data: [ 
+                    [Date.UTC(2002,0,1), 14], 
+                    [Date.UTC(2003,0,1), 41], 
+                    [Date.UTC(2004,0,1), 181], 
+                    [Date.UTC(2005,0,1), 515], 
+                    [Date.UTC(2006,0,1), 432], 
+                    [Date.UTC(2007,0,1), 846], 
+                    [Date.UTC(2008,0,1), 376], 
+                    [Date.UTC(2009,0,1), 1917], 
+                    [Date.UTC(2010,0,1), 2517], 
+                    [Date.UTC(2011,0,1), 1817], 
+                    [Date.UTC(2012,0,1), 1819], 
+                    [Date.UTC(2013,0,1), 1418], 
+                    [Date.UTC(2014,0,1), 1409], 
+                    [Date.UTC(2015,0,1), 1783]]},
+                {name: "Ethiopia", color:"#E0E0E0", num:14, data: [ 
+                    [Date.UTC(2002,0,1), 401], 
+                    [Date.UTC(2003,0,1), 2199], 
+                    [Date.UTC(2004,0,1), 2293], 
+                    [Date.UTC(2005,0,1), 1627], 
+                    [Date.UTC(2006,0,1), 1308], 
+                    [Date.UTC(2007,0,1), 946], 
+                    [Date.UTC(2008,0,1), 260], 
+                    [Date.UTC(2009,0,1), 345], 
+                    [Date.UTC(2010,0,1), 663], 
+                    [Date.UTC(2011,0,1), 594], 
+                    [Date.UTC(2012,0,1), 820], 
+                    [Date.UTC(2013,0,1), 672], 
+                    [Date.UTC(2014,0,1), 687], 
+                    [Date.UTC(2015,0,1), 682]]},
+                {name: "Burundi", color:"#E0E0E0", num:15, data: [ 
+                    [Date.UTC(2002,0,1), 62], 
+                    [Date.UTC(2003,0,1), 18], 
+                    [Date.UTC(2004,0,1), 335], 
+                    [Date.UTC(2005,0,1), 153], 
+                    [Date.UTC(2006,0,1), 514], 
+                    [Date.UTC(2007,0,1), 5058], 
+                    [Date.UTC(2008,0,1), 2567], 
+                    [Date.UTC(2009,0,1), 635], 
+                    [Date.UTC(2010,0,1), 435], 
+                    [Date.UTC(2011,0,1), 129], 
+                    [Date.UTC(2012,0,1), 183], 
+                    [Date.UTC(2013,0,1), 162], 
+                    [Date.UTC(2014,0,1), 133], 
+                    [Date.UTC(2015,0,1), 1208]]},
+                {name: "Afghanistan", color:"#FFAACC", num:16, data: [ 
+                    [Date.UTC(2002,0,1), 2026], 
+                    [Date.UTC(2003,0,1), 1370], 
+                    [Date.UTC(2004,0,1), 836], 
+                    [Date.UTC(2005,0,1), 876], 
+                    [Date.UTC(2006,0,1), 633], 
+                    [Date.UTC(2007,0,1), 413], 
+                    [Date.UTC(2008,0,1), 611], 
+                    [Date.UTC(2009,0,1), 338], 
+                    [Date.UTC(2010,0,1), 527], 
+                    [Date.UTC(2011,0,1), 392], 
+                    [Date.UTC(2012,0,1), 578], 
+                    [Date.UTC(2013,0,1), 678], 
+                    [Date.UTC(2014,0,1), 696], 
+                    [Date.UTC(2015,0,1), 1168]]},
+                {name: "Sierra Leone", color:"#E0E0E0", num:17, data: [ 
+                    [Date.UTC(2002,0,1), 188], 
+                    [Date.UTC(2003,0,1), 1590], 
+                    [Date.UTC(2004,0,1), 1179], 
+                    [Date.UTC(2005,0,1), 568], 
+                    [Date.UTC(2006,0,1), 401], 
+                    [Date.UTC(2007,0,1), 170], 
+                    [Date.UTC(2008,0,1), 81], 
+                    [Date.UTC(2009,0,1), 60], 
+                    [Date.UTC(2010,0,1), 48], 
+                    [Date.UTC(2011,0,1), 20], 
+                    [Date.UTC(2012,0,1), 1], 
+                    [Date.UTC(2013,0,1), 3], 
+                    [Date.UTC(2014,0,1), 10], 
+                    [Date.UTC(2015,0,1), 2]]},
+                {name: "Bosnia & Herzegovina", color:"#BA68C8", num:18, data: [ 
+                    [Date.UTC(2002,0,1), 3564], 
+                    [Date.UTC(2003,0,1), 217], 
+                    [Date.UTC(2004,0,1), 266], 
+                    [Date.UTC(2005,0,1), 29], 
+                    [Date.UTC(2006,0,1), 5], 
+                    [Date.UTC(2007,0,1), 2], 
+                    [Date.UTC(2008,0,1), 0], 
+                    [Date.UTC(2009,0,1), 0], 
+                    [Date.UTC(2010,0,1), 0], 
+                    [Date.UTC(2011,0,1), 0], 
+                    [Date.UTC(2012,0,1), 0], 
+                    [Date.UTC(2013,0,1), 0], 
+                    [Date.UTC(2014,0,1), 0], 
+                    [Date.UTC(2015,0,1), 0]]},
+                {name: "Serbia", color:"#E0E0E0", num:19, data: [ 
+                    [Date.UTC(2002,0,1), 2242], 
+                    [Date.UTC(2003,0,1), 1425], 
+                    [Date.UTC(2004,0,1), 99], 
+                    [Date.UTC(2005,0,1), 24], 
+                    [Date.UTC(2006,0,1), 6], 
+                    [Date.UTC(2007,0,1), 1], 
+                    [Date.UTC(2008,0,1), 0], 
+                    [Date.UTC(2009,0,1), 0], 
+                    [Date.UTC(2010,0,1), 0], 
+                    [Date.UTC(2011,0,1), 0], 
+                    [Date.UTC(2012,0,1), 0], 
+                    [Date.UTC(2013,0,1), 0], 
+                    [Date.UTC(2014,0,1), 0], 
+                    [Date.UTC(2015,0,1), 0]]},
+                {name: "Belarus", color:"#E0E0E0", num:20, data: [ 
+                    [Date.UTC(2002,0,1), 770], 
+                    [Date.UTC(2003,0,1), 776], 
+                    [Date.UTC(2004,0,1), 602], 
+                    [Date.UTC(2005,0,1), 410], 
+                    [Date.UTC(2006,0,1), 310], 
+                    [Date.UTC(2007,0,1), 196], 
+                    [Date.UTC(2008,0,1), 121], 
+                    [Date.UTC(2009,0,1), 148], 
+                    [Date.UTC(2010,0,1), 82], 
+                    [Date.UTC(2011,0,1), 75], 
+                    [Date.UTC(2012,0,1), 66], 
+                    [Date.UTC(2013,0,1), 10], 
+                    [Date.UTC(2014,0,1), 60], 
+                    [Date.UTC(2015,0,1), 102]]},
+                {name: "Uzbekistan", color:"#E0E0E0", num:21, data: [ 
+                    [Date.UTC(2002,0,1), 419], 
+                    [Date.UTC(2003,0,1), 208], 
+                    [Date.UTC(2004,0,1), 419], 
+                    [Date.UTC(2005,0,1), 312], 
+                    [Date.UTC(2006,0,1), 480], 
+                    [Date.UTC(2007,0,1), 162], 
+                    [Date.UTC(2008,0,1), 124], 
+                    [Date.UTC(2009,0,1), 170], 
+                    [Date.UTC(2010,0,1), 194], 
+                    [Date.UTC(2011,0,1), 83], 
+                    [Date.UTC(2012,0,1), 139], 
+                    [Date.UTC(2013,0,1), 39], 
+                    [Date.UTC(2014,0,1), 65], 
+                    [Date.UTC(2015,0,1), 34]]},
+                {name: "Syria", color:"#E0E0E0", num:22, data: [ 
+                    [Date.UTC(2002,0,1), 6], 
+                    [Date.UTC(2003,0,1), 1], 
+                    [Date.UTC(2004,0,1), 0], 
+                    [Date.UTC(2005,0,1), 7], 
+                    [Date.UTC(2006,0,1), 27], 
+                    [Date.UTC(2007,0,1), 26], 
+                    [Date.UTC(2008,0,1), 16], 
+                    [Date.UTC(2009,0,1), 32], 
+                    [Date.UTC(2010,0,1), 24], 
+                    [Date.UTC(2011,0,1), 23], 
+                    [Date.UTC(2012,0,1), 41], 
+                    [Date.UTC(2013,0,1), 45], 
+                    [Date.UTC(2014,0,1), 249], 
+                    [Date.UTC(2015,0,1), 2192]]},
+            ],
+            },
+
+            function(chart02){
+                //Create labels for all lines and hide them
+                for (var i=0; i<23; i++) {
+                    var point = chart02.series[i].points[13];
+                    labels[i] = chart02.renderer.label(chart02.series[i].name, point.plotX + chart02.plotLeft, point.plotY + chart02.plotTop -10,'callout', point.plotX + chart02.plotLeft,point.plotY + chart02.plotTop).css({color: '#000000'}).attr({zIndex: 6}).add().hide();
+                }
+
+                //Hide all lines except the first 5
+                for (var i=5; i<23; i++) {
+                    chart02.series[i].hide();
+                }
+
+                //Show labels for the first 5
+                for (var i=0; i<5; i++) {
+                    labels[i].show();
+                }
+            },
+
+            function(chart02){
+                function highlight(series, index, hide) {
+                    $(series).each(function (i, serie) {
+                        if(i != index) {
+                            $.each(serie.data, function (k, data) {
+                                if(data.series) {
+                                    data.series.graph && data.series.graph.attr("stroke", (hide ? "#D4D4D4": serie.color));
+                                    data.series.markerGroup && data.series.markerGroup.attr("visibility", (hide ? "hidden": "visible"));
+                                }
+                            });
+
+                        } else {
+                            serie.group.toFront();
+                            $.each(serie.data, function (k, data) {
+                                if(data.series) {
+                                    data.series.graph && data.series.graph.attr("stroke", serie.color);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        );
+    }); 
+});
+
+
+
+
+function convertCode(code) {
+        if (code == 15) {return "Afghanistan"}
+        if (code == 25) {return "Belarus"}
+        if (code == 35) {return "Bhutan"}
+        if (code == 45) {return "Bosnia & HerzegovinaH"}
+        if (code == 55) {return "Burma"}
+        if (code == 65) {return "Burundi"}
+        if (code == 75) {return "Cuba"}
+        if (code == 85) {return "DR Congo"}
+        if (code == 95) {return "Eritrea"}
+        if (code == 105) {return "Ethiopia"}
+        if (code == 115) {return "Iran"}
+        if (code == 125) {return "Iraq"}
+        if (code == 135) {return "Laos"}
+        if (code == 145) {return "Liberia"}
+        if (code == 155) {return "None"}
+        if (code == 165) {return "Russia"}
+        if (code == 175) {return "Serbia"}
+        if (code == 185) {return "Sierra Leone"}
+        if (code == 195) {return "Somalia"}
+        if (code == 205) {return "Sudan"}
+        if (code == 215) {return "Syria"}
+        if (code == 225) {return "Ukraine"}
+        if (code == 235) {return "Uzbekistan"}
+        if (code == 245) {return "Vietnam"}
+        if (code == 255) {return "Afghanistan/Liberia"}
+        if (code == 275) {return "Afghanistan/Vietnam"}
+        if (code == 285) {return "Afghanistan/Liberia/Sudan"}
+        if (code == 295) {return "Azerbaijan/Somalia"}
+        if (code == 305) {return "Cuba/Liberia"}
+        if (code == 315) {return "Liberia/Serbia"}
+        if (code == 325) {return "Eritrea/Sierra Leone"}
+        if (code == 335) {return "Russia/Vietnam"}
+        if (code == 345) {return "Bhutan/Burma"}
+        if (code == 355) {return "Afghanistan/Burma"}
+        if (code == 365) {return "Burma/Cuba/Iran"}
+        if (code == 375) {return "Iran/Sudan"}
+        if (code == 385) {return "DR Congo/Somalia"}
+        if (code == 395) {return "Burma/Somalia"}
+        if (code == 265) {return "Sri Lanka"}
+}
+
+
+function updateChart() {
+    var chart02 = $('#container02').highcharts();
+    for (var i=0; i<23; i++) {
+        chart02.series[i].hide();
+        labels[i].hide();
+        for (var p=0; p<14; p++) {
+            chart02.series[i].points[p].setState("");
+        }
+
+    }
+    if(input == 2002){count = 0}
+    if(input == 2003){count = 1}
+    if(input == 2004){count = 2}
+    if(input == 2005){count = 3}
+    if(input == 2006){count = 4}
+    if(input == 2007){count = 5}
+    if(input == 2008){count = 6}
+    if(input == 2009){count = 7}
+    if(input == 2010){count = 8}
+    if(input == 2011){count = 9}
+    if(input == 2012){count = 10}
+    if(input == 2013){count = 11}
+    if(input == 2014){count = 12}
+    if(input == 2015){count = 13}
+    active01 = country01[count]; 
+    active02 = country02[count]; 
+    active03 = country03[count]; 
+    chart02.series[active01].show();
+    chart02.series[active02].show();
+    chart02.series[active03].show();
+    chart02.series[active01].points[count].setState("hover");
+    chart02.series[active02].points[count].setState("hover");
+    chart02.series[active03].points[count].setState("hover");
+    labels[active01].show();
+    labels[active02].show();
+    labels[active03].show();
+    $("#subtitle02").html("The top 3 countries of origin of refugees in <span class='year'>year</span> are <span class='bold' id='ori01'>ori01</span>,  <span class='bold' id='ori02'>ori02</span> and <span class='bold' id='ori03'>ori03</span>.");
+    $(".year").text(input);
+    $("#ori01").text(countries[active01]).css("color",colors[active01]["color"]);
+    $("#ori02").text(countries[active02]).css("color",colors[active02]["color"]);
+    $("#ori03").text(countries[active03]).css("color",colors[active03]["color"]);
+    
+}
+
+$("#button01").click(function() {
+    for (var i=0; i<23; i++) {
+        chart02.series[i].hide();
+        labels[i].hide();
+    }
+
+    for (var i=0; i<5; i++) {
+        chart02.series[i].show();
+        labels[i].show();
+    }
+    //remove the hover markers added when redraw() is fired
+    $(chart02.series).each(function(){
+        this.points[count].setState("");    
+    });
+    $("#subtitle02").text("The top 5 countries of origin of refugees accepted into the US from 2002 to 2015.");
+    Highcharts.charts[0].motion.pause();
+});
+
+function animate() {
+    var change = $("#play-output").html();
+    if (change != input){
+        input = change; 
+        updateChart();
+    }
+    requestAnimationFrame(animate);
+}
+animate();
+
+
+
+</script>

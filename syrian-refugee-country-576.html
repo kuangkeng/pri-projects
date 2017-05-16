@@ -1,0 +1,157 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 400px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 401px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+    #container {height:350px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Number of Syrian refugees admitted by country</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Figures of each country are for different period of time. Mouse over or tap each bar for more details.</div> 
+    </div>    
+    <div id="container"></div>
+    <div class="note">
+        Source:  
+        <a href='http://www.wrapsnet.org/admissions-and-arrivals/' target='_blank'>US Department of State</a>, <a href='http://www.cic.gc.ca/english/refugees/welcome/milestones.asp' target='_blank'>Government of Canada</a>, <a href='http://data.unhcr.org/syrianrefugees/asylum.php' target='_blank'>UNHCR</a>.
+        <br>Figures of EU countries represent number of refugees who have applied for asylum in that country. Figures of Canada and the US represent number of refugees who have been resettled there.
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["Germany","Sweden","Canada","Netherlands","US","UK"],   
+            },
+            yAxis: {
+                title: {
+                  text: null,
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: '<b>{point.key}</b><br>',
+                pointFormat: 'Syrian refugees: <b>{point.y}</b><br>Period: <b>{point.date}</b>',
+                //valueSuffix: '%',
+                //shared:true,
+            },
+            plotOptions: {
+                series:{
+                    groupPadding: 0.05,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        formatter: function() {
+                            return this.y
+                        },
+                    }
+                },
+            },    
+
+            series: [ 
+                {name:"Syrian refugees", color:"#4188bc", data: [
+                    {y:456023, date:"Apr. 2011-Oct. 2016"},
+                    {y:109970, date:"Apr. 2011-Oct. 2016"},
+                    {y:39671, date:"Nov. 4, 2015-Jan. 2, 2017"},
+                    {y:32720, date:"Apr. 2011-Oct. 2016"},
+                    {y:18026, date:"Mar. 2011-Dec. 2016", color:"#ff7f00"},
+                    {y:10113, date:"Apr. 2011-Oct. 2016"},
+                ]},
+            ],
+            });
+    });
+
+});
+</script>

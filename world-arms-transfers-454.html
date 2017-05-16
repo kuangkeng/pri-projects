@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Global arms transfers since the end of the Cold War, 1992-2016</title>
+    <meta name="description" content="This is a template file to build a simple line chart with single series data in date/time format. If you have dataset in irregular time format, refer to 'line-irregular-time-data.html' on how to style your dataset.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 500px ){
+    #container{height:270px;}
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Global arms transfers since the end of the Cold War, 1992-2016</div>
+        <!-- INPUT: description for the chart -->
+        
+    </div>  
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='https://www.sipri.org/databases/armstransfers' target='_blank'>SIPRI Arms Transfers Database</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>To compare different weapons, SIPRI measures the export value using a common unit called <a href="https://www.sipri.org/databases/armstransfers/background#TIV-tables" target='_blank'>trend-indicator value (TIV)</a>, expressed in US dollar at constant 1990 prices. Data only covers major weapons which are defined by SIPRI's <a href="https://www.sipri.org/databases/armstransfers/sources-and-methods" target="_blank">methodology</a>.
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //the unit of xAxis is time-based. If your xAxis unit is not time or date, use the line-category template.
+            xAxis: {
+                type: 'datetime',
+            //how the time/date unit should be displayed on xAxis, check Highcharts API for other options (http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats)    
+                dateTimeLabelFormats: {
+                    year: '%Y'
+                },
+            //set the interval between units displayed on xAxis (the current setting is for 5 years), remove this line if you want Highcharts to decide for you.        
+                tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+            //INPUT: the unit of yAxis    
+                title: {
+                  text: 'TIV in $ billions (1990 constant USD)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            //Disable the legend if there's only one series of data
+            legend: {
+                enabled: false,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function.
+            tooltip: {
+                xDateFormat: '%Y',
+                valueSuffix: ' bil',
+                valuePrefix: '$',
+            },
+            plotOptions: {
+                series: {
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.0f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,.0f}',
+                    },
+                },
+                //MODIFY: Show/hide the data point marker.
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object like '{y:1185, color:"#FF7F00"}', or see the chart "iraq-married-401".
+            series: [ 
+                {name: "Value", color:"#4188BC", 
+                data :[
+                    [Date.UTC(1992,0,1), 24.1],
+                    [Date.UTC(1993,0,1), 25.9],
+                    [Date.UTC(1994,0,1), 22.8],
+                    [Date.UTC(1995,0,1), 22.9],
+                    [Date.UTC(1996,0,1), 23.9],
+                    [Date.UTC(1997,0,1), 28.9],
+                    [Date.UTC(1998,0,1), 27.8],
+                    [Date.UTC(1999,0,1), 25.2],
+                    [Date.UTC(2000,0,1), 19.4],
+                    [Date.UTC(2001,0,1), 18.9],
+                    [Date.UTC(2002,0,1), 17.9],
+                    [Date.UTC(2003,0,1), 19.1],
+                    [Date.UTC(2004,0,1), 21.6],
+                    [Date.UTC(2005,0,1), 21.5],
+                    [Date.UTC(2006,0,1), 24.9],
+                    [Date.UTC(2007,0,1), 26.7],
+                    [Date.UTC(2008,0,1), 24.2],
+                    [Date.UTC(2009,0,1), 24.3],
+                    [Date.UTC(2010,0,1), 25.8],
+                    [Date.UTC(2011,0,1), 30.1],
+                    [Date.UTC(2012,0,1), 28.4],
+                    [Date.UTC(2013,0,1), 27.1],
+                    [Date.UTC(2014,0,1), 27.3],
+                    [Date.UTC(2015,0,1), 28.4],
+                    [Date.UTC(2016,0,1), 31.1],
+                ]},
+            ],
+        });
+    });
+
+});
+</script>

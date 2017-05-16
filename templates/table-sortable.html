@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sortable, responsive table</title>
+    <meta name="description" content="This is a template file to build a sortable and responsive table">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+
+    <!-- Google Analytics script -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-2145282-16', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+
+  </head>  
+
+<style type="text/css">	
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: #33333c;
+  margin:0px auto;
+      } 
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 700px; 
+    margin: 0 auto;
+    padding:10px;
+}      
+
+.tableA {
+  text-align: center;
+}
+
+#title {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 10px 20px 10px;
+}
+#legend {
+  margin:0px 10px 10px 10px;
+}
+
+/*
+ * Table styles
+ */
+
+/* MODIFY: set the style for header rows*/
+#gold_w, #silver_w, #bronze_w, #total_w, #pct_w {font-weight: bold;}
+.rank, .country, .gold, .silver, .bronze, .total {text-align: center}
+
+.table_wrapper {
+  width:100%;
+  margin:0px auto;
+}
+
+/* MODIFY: set the height of each row*/
+#table01 tbody tr {height:27px;}
+
+/* MODIFY: Define style classes which will be assigned to specific columns in <script> under 'columnDefs:' */
+.center {text-align: center;}
+.left {text-align: left;}
+.bold {font-weight: bold;}
+
+/*Responsive settings */
+@media (max-width: 400px) {
+  #table01 {font-size:11px; line-height: 12px}
+  th {font-size: 11px; line-height: 12px}
+  #wrapper {padding:5px;}
+  #title {font-size: 16px; line-height: 20px; margin: 10px 5px 20px 5px;}
+
+/* MODIFY: Change the table height in smaller screen. The original table size is set in the script under option 'scrollY', not in the css. */  
+  .dataTables_scrollBody {max-height:430px !important;}
+}
+
+@media (max-width: 300px) {
+  #wrapper {padding:0px;}
+  #title {margin-bottom: 10px;}
+}
+
+</style>
+
+
+<body>
+<div id="wrapper">  
+  <!-- INPUT: Table title  -->
+  <div id="title" >All-time medal standings for women-only events in the Summer Olympics<br>(1896-2012)</div>   
+  
+  <!-- INPUT (OPTIONAL): Legend/description  -->
+  <div id="legend">
+    <div>Pct = Percentage of total medals won in women's events. The average is <b>19.7</b> percent.</div>
+  </div>  
+
+  <!-- Here's come the table -->
+  <div class="table_wrapper">        
+    <div class="tableA">
+      <!-- MODIFY: There are different styling/usability options which can be set under 'class', see <https://datatables.net/manual/styling/classes> for details. -->
+      <table id="table01" class="stripe order-column hover compact" cellspacing="0" width="100%">
+        
+        <!-- INPUT: Set how many columns and insert the header content. If you change the class and id, remember to change the css style classes above too. -->
+        <thead>
+          <tr>
+            <th class="rank" id="rank_head">Rank</th>
+            <th class="country" id="country_head">Country</th>
+            <th class="gold" id="gold_w">Gold</th>
+            <th class="silver" id="silver_w">Silver</th>
+            <th class="bronze" id="bronze_w">Bronze</th>
+            <th class="total" id="total_w">Total</th>
+            <th class="total" id="pct_w">Pct</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$(document).ready( function () {
+
+// INPUT: Your data for the table. You can choose which object to go into the table in the script after this. There are different to load data into datatables, see <https://datatables.net/manual/data/> and <https://datatables.net/examples/ajax/custom_data_property.html>.
+	var data = [
+{'noc':'AFG', 'country':'Afghanistan', 'rankw':85, 'totalt':2, 'bronzet':2, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':115, 'totalnw':2, 'bronzenw':2, 'silvernw':0, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'ALG', 'country':'Algeria', 'rankw':48, 'totalt':15, 'bronzet':8, 'silvert':2, 'goldt':5, 'totalw':3, 'bronzew':1, 'silverw':0, 'goldw':2, 'ranknw':59, 'totalnw':12, 'bronzenw':7, 'silvernw':2, 'goldnw':3, 'diff':-3, 'rankp':54, 'pctw':20,},
+{'noc':'ARG', 'country':'Argentina', 'rankw':64, 'totalt':70, 'bronzet':28, 'silvert':24, 'goldt':18, 'totalw':11, 'bronzew':6, 'silverw':5, 'goldw':0, 'ranknw':32, 'totalnw':59, 'bronzenw':22, 'silvernw':19, 'goldnw':18, 'diff':3, 'rankp':63, 'pctw':15.7,},
+{'noc':'ARM', 'country':'Armenia', 'rankw':77, 'totalt':12, 'bronzet':9, 'silvert':2, 'goldt':1, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':72, 'totalnw':11, 'bronzenw':8, 'silvernw':2, 'goldnw':1, 'diff':4, 'rankp':76, 'pctw':8.3,},
+{'noc':'AUS', 'country':'Australia', 'rankw':5, 'totalt':468, 'bronzet':177, 'silvert':153, 'goldt':138, 'totalw':182, 'bronzew':68, 'silverw':59, 'goldw':55, 'ranknw':12, 'totalnw':286, 'bronzenw':109, 'silvernw':94, 'goldnw':83, 'diff':-2, 'rankp':24, 'pctw':38.9,},
+{'noc':'AUT', 'country':'Austria', 'rankw':35, 'totalt':86, 'bronzet':35, 'silvert':33, 'goldt':18, 'totalw':17, 'bronzew':10, 'silverw':4, 'goldw':3, 'ranknw':34, 'totalnw':69, 'bronzenw':25, 'silvernw':29, 'goldnw':15, 'diff':0, 'rankp':55, 'pctw':19.8,},
+{'noc':'AZE', 'country':'Azerbaijan', 'rankw':55, 'totalt':26, 'bronzet':15, 'silvert':5, 'goldt':6, 'totalw':6, 'bronzew':4, 'silverw':1, 'goldw':1, 'ranknw':52, 'totalnw':20, 'bronzenw':11, 'silvernw':4, 'goldnw':5, 'diff':-1, 'rankp':44, 'pctw':23.1,},
+{'noc':'BAH', 'country':'Bahamas', 'rankw':41, 'totalt':12, 'bronzet':5, 'silvert':2, 'goldt':5, 'totalw':5, 'bronzew':1, 'silverw':1, 'goldw':3, 'ranknw':70, 'totalnw':7, 'bronzenw':4, 'silvernw':1, 'goldnw':2, 'diff':-13, 'rankp':18, 'pctw':41.7,},
+{'noc':'BAR', 'country':'Barbados', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':117, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'BDI', 'country':'Burundi', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':0, 'goldt':1, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':80, 'totalnw':1, 'bronzenw':0, 'silvernw':0, 'goldnw':1, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'BEL', 'country':'Belgium', 'rankw':38, 'totalt':142, 'bronzet':53, 'silvert':52, 'goldt':37, 'totalw':16, 'bronzew':10, 'silverw':3, 'goldw':3, 'ranknw':24, 'totalnw':126, 'bronzenw':43, 'silvernw':49, 'goldnw':34, 'diff':3, 'rankp':72, 'pctw':11.3,},
+{'noc':'BER', 'country':'Bermuda', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':118, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'BLR', 'country':'Belarus', 'rankw':27, 'totalt':75, 'bronzet':39, 'silvert':24, 'goldt':12, 'totalw':34, 'bronzew':18, 'silverw':10, 'goldw':6, 'ranknw':45, 'totalnw':41, 'bronzenw':21, 'silvernw':14, 'goldnw':6, 'diff':-3, 'rankp':16, 'pctw':45.3,},
+{'noc':'BOT', 'country':'Botswana', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':104, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'BRA', 'country':'Brazil', 'rankw':29, 'totalt':108, 'bronzet':55, 'silvert':30, 'goldt':23, 'totalw':22, 'bronzew':11, 'silverw':6, 'goldw':5, 'ranknw':31, 'totalnw':86, 'bronzenw':44, 'silvernw':24, 'goldnw':18, 'diff':0, 'rankp':53, 'pctw':20.4,},
+{'noc':'BRN', 'country':'Bahrain', 'rankw':77, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':131, 'totalnw':0, 'bronzenw':0, 'silvernw':0, 'goldnw':0, 'diff':-10, 'rankp':1, 'pctw':100,},
+{'noc':'BUL', 'country':'Bulgaria', 'rankw':18, 'totalt':214, 'bronzet':78, 'silvert':85, 'goldt':51, 'totalw':54, 'bronzew':20, 'silverw':23, 'goldw':11, 'ranknw':21, 'totalnw':160, 'bronzenw':58, 'silvernw':62, 'goldnw':40, 'diff':0, 'rankp':39, 'pctw':25.2,},
+{'noc':'CAN', 'country':'Canada', 'rankw':15, 'totalt':279, 'bronzet':121, 'silvert':99, 'goldt':59, 'totalw':89, 'bronzew':41, 'silverw':32, 'goldw':16, 'ranknw':19, 'totalnw':190, 'bronzenw':80, 'silvernw':67, 'goldnw':43, 'diff':0, 'rankp':31, 'pctw':31.9,},
+{'noc':'CHI', 'country':'Chile', 'rankw':67, 'totalt':13, 'bronzet':4, 'silvert':7, 'goldt':2, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':65, 'totalnw':12, 'bronzenw':4, 'silvernw':6, 'goldnw':2, 'diff':4, 'rankp':78, 'pctw':7.7,},
+{'noc':'CHN', 'country':'China', 'rankw':2, 'totalt':473, 'bronzet':127, 'silvert':145, 'goldt':201, 'totalw':267, 'bronzew':71, 'silverw':86, 'goldw':110, 'ranknw':11, 'totalnw':206, 'bronzenw':56, 'silvernw':59, 'goldnw':91, 'diff':-5, 'rankp':9, 'pctw':56.4,},
+{'noc':'CIV', 'country':'Ivory Coast', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':105, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'CMR', 'country':'Cameroon', 'rankw':49, 'totalt':5, 'bronzet':1, 'silvert':1, 'goldt':3, 'totalw':2, 'bronzew':0, 'silverw':0, 'goldw':2, 'ranknw':74, 'totalnw':3, 'bronzenw':1, 'silvernw':1, 'goldnw':1, 'diff':-8, 'rankp':21, 'pctw':40,},
+{'noc':'COL', 'country':'Colombia', 'rankw':46, 'totalt':19, 'bronzet':11, 'silvert':6, 'goldt':2, 'totalw':9, 'bronzew':6, 'silverw':1, 'goldw':2, 'ranknw':83, 'totalnw':10, 'bronzenw':5, 'silvernw':5, 'goldnw':0, 'diff':-13, 'rankp':14, 'pctw':47.4,},
+{'noc':'CRC', 'country':'Costa Rica', 'rankw':57, 'totalt':4, 'bronzet':2, 'silvert':1, 'goldt':1, 'totalw':4, 'bronzew':2, 'silverw':1, 'goldw':1, 'ranknw':128, 'totalnw':0, 'bronzenw':0, 'silvernw':0, 'goldnw':0, 'diff':-49, 'rankp':1, 'pctw':100,},
+{'noc':'CRO', 'country':'Croatia', 'rankw':55, 'totalt':23, 'bronzet':10, 'silvert':7, 'goldt':6, 'totalw':6, 'bronzew':4, 'silverw':1, 'goldw':1, 'ranknw':49, 'totalnw':17, 'bronzenw':6, 'silvernw':6, 'goldnw':5, 'diff':1, 'rankp':37, 'pctw':26.1,},
+{'noc':'CUB', 'country':'Cuba', 'rankw':17, 'totalt':209, 'bronzet':70, 'silvert':67, 'goldt':72, 'totalw':50, 'bronzew':20, 'silverw':18, 'goldw':12, 'ranknw':14, 'totalnw':159, 'bronzenw':50, 'silvernw':49, 'goldnw':60, 'diff':3, 'rankp':43, 'pctw':23.9,},
+{'noc':'CYP', 'country':'Cyprus', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':106, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'CZE', 'country':'Czech Republic', 'rankw':28, 'totalt':44, 'bronzet':15, 'silvert':15, 'goldt':14, 'totalw':17, 'bronzew':6, 'silverw':5, 'goldw':6, 'ranknw':42, 'totalnw':27, 'bronzenw':9, 'silvernw':10, 'goldnw':8, 'diff':-3, 'rankp':25, 'pctw':38.6,},
+{'noc':'DEN', 'country':'Denmark', 'rankw':22, 'totalt':179, 'bronzet':68, 'silvert':68, 'goldt':43, 'totalw':29, 'bronzew':13, 'silverw':7, 'goldw':9, 'ranknw':23, 'totalnw':150, 'bronzenw':55, 'silvernw':61, 'goldnw':34, 'diff':0, 'rankp':62, 'pctw':16.2,},
+{'noc':'DJI', 'country':'Djibouti', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':119, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'DOM', 'country':'Dominican Republic', 'rankw':85, 'totalt':6, 'bronzet':1, 'silvert':2, 'goldt':3, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':61, 'totalnw':6, 'bronzenw':1, 'silvernw':2, 'goldnw':3, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'ECU', 'country':'Ecuador', 'rankw':85, 'totalt':2, 'bronzet':0, 'silvert':1, 'goldt':1, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':75, 'totalnw':2, 'bronzenw':0, 'silvernw':1, 'goldnw':1, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'EGY', 'country':'Egypt', 'rankw':85, 'totalt':26, 'bronzet':10, 'silvert':9, 'goldt':7, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':44, 'totalnw':26, 'bronzenw':10, 'silvernw':9, 'goldnw':7, 'diff':2, 'rankp':131, 'pctw':0,},
+{'noc':'ERI', 'country':'Eritrea', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':120, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'ESP', 'country':'Spain', 'rankw':21, 'totalt':131, 'bronzet':35, 'silvert':59, 'goldt':37, 'totalw':37, 'bronzew':13, 'silverw':15, 'goldw':9, 'ranknw':27, 'totalnw':94, 'bronzenw':22, 'silvernw':44, 'goldnw':28, 'diff':-1, 'rankp':36, 'pctw':28.2,},
+{'noc':'EST', 'country':'Estonia', 'rankw':62, 'totalt':33, 'bronzet':15, 'silvert':9, 'goldt':9, 'totalw':1, 'bronzew':0, 'silverw':0, 'goldw':1, 'ranknw':43, 'totalnw':32, 'bronzenw':15, 'silvernw':9, 'goldnw':8, 'diff':0, 'rankp':83, 'pctw':3,},
+{'noc':'ETH', 'country':'Ethiopia', 'rankw':24, 'totalt':45, 'bronzet':17, 'silvert':7, 'goldt':21, 'totalw':18, 'bronzew':7, 'silverw':2, 'goldw':9, 'ranknw':36, 'totalnw':27, 'bronzenw':10, 'silvernw':5, 'goldnw':12, 'diff':-3, 'rankp':21, 'pctw':40,},
+{'noc':'FIN', 'country':'Finland', 'rankw':36, 'totalt':302, 'bronzet':117, 'silvert':84, 'goldt':101, 'totalw':9, 'bronzew':2, 'silverw':4, 'goldw':3, 'ranknw':10, 'totalnw':293, 'bronzenw':115, 'silvernw':80, 'goldnw':98, 'diff':3, 'rankp':84, 'pctw':3,},
+{'noc':'FRA', 'country':'France', 'rankw':12, 'totalt':677, 'bronzet':249, 'silvert':224, 'goldt':204, 'totalw':93, 'bronzew':37, 'silverw':27, 'goldw':29, 'ranknw':5, 'totalnw':584, 'bronzenw':212, 'silvernw':197, 'goldnw':175, 'diff':0, 'rankp':68, 'pctw':13.7,},
+{'noc':'GAB', 'country':'Gabon', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':107, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'GBR', 'country':'Great Britain', 'rankw':7, 'totalt':782, 'bronzet':272, 'silvert':273, 'goldt':237, 'totalw':153, 'bronzew':59, 'silverw':55, 'goldw':39, 'ranknw':4, 'totalnw':629, 'bronzenw':213, 'silvernw':218, 'goldnw':198, 'diff':0, 'rankp':56, 'pctw':19.6,},
+{'noc':'GEO', 'country':'Georgia', 'rankw':77, 'totalt':25, 'bronzet':14, 'silvert':5, 'goldt':6, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':46, 'totalnw':24, 'bronzenw':13, 'silvernw':5, 'goldnw':6, 'diff':6, 'rankp':82, 'pctw':4,},
+{'noc':'GER', 'country':'Germany', 'rankw':8, 'totalt':1304, 'bronzet':461, 'silvert':432, 'goldt':411, 'totalw':146, 'bronzew':56, 'silverw':51, 'goldw':39, 'ranknw':2, 'totalnw':1158, 'bronzenw':405, 'silvernw':381, 'goldnw':372, 'diff':0, 'rankp':73, 'pctw':11.2,},
+{'noc':'GHA', 'country':'Ghana', 'rankw':85, 'totalt':4, 'bronzet':3, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':93, 'totalnw':4, 'bronzenw':3, 'silvernw':1, 'goldnw':0, 'diff':8, 'rankp':131, 'pctw':0,},
+{'noc':'GRE', 'country':'Greece', 'rankw':32, 'totalt':110, 'bronzet':38, 'silvert':42, 'goldt':30, 'totalw':18, 'bronzew':6, 'silverw':8, 'goldw':4, 'ranknw':28, 'totalnw':92, 'bronzenw':32, 'silvernw':34, 'goldnw':26, 'diff':1, 'rankp':61, 'pctw':16.4,},
+{'noc':'GRN', 'country':'Grenada', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':0, 'goldt':1, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':81, 'totalnw':1, 'bronzenw':0, 'silvernw':0, 'goldnw':1, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'GUA', 'country':'Guatemala', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':108, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'GUY', 'country':'Guyana', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':121, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'HAI', 'country':'Haiti', 'rankw':85, 'totalt':2, 'bronzet':1, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':98, 'totalnw':2, 'bronzenw':1, 'silvernw':1, 'goldnw':0, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'HKG', 'country':'Hong Kong', 'rankw':60, 'totalt':3, 'bronzet':1, 'silvert':1, 'goldt':1, 'totalw':2, 'bronzew':1, 'silverw':0, 'goldw':1, 'ranknw':100, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':-20, 'rankp':7, 'pctw':66.7,},
+{'noc':'HUN', 'country':'Hungary', 'rankw':9, 'totalt':476, 'bronzet':165, 'silvert':144, 'goldt':167, 'totalw':102, 'bronzew':34, 'silverw':31, 'goldw':37, 'ranknw':8, 'totalnw':374, 'bronzenw':131, 'silvernw':113, 'goldnw':130, 'diff':0, 'rankp':47, 'pctw':21.4,},
+{'noc':'INA', 'country':'Indonesia', 'rankw':51, 'totalt':27, 'bronzet':11, 'silvert':10, 'goldt':6, 'totalw':9, 'bronzew':4, 'silverw':4, 'goldw':1, 'ranknw':48, 'totalnw':18, 'bronzenw':7, 'silvernw':6, 'goldnw':5, 'diff':1, 'rankp':27, 'pctw':33.3,},
+{'noc':'IND', 'country':'India', 'rankw':75, 'totalt':26, 'bronzet':11, 'silvert':6, 'goldt':9, 'totalw':3, 'bronzew':3, 'silverw':0, 'goldw':0, 'ranknw':41, 'totalnw':23, 'bronzenw':8, 'silvernw':6, 'goldnw':9, 'diff':4, 'rankp':71, 'pctw':11.5,},
+{'noc':'IRI', 'country':'Iran', 'rankw':85, 'totalt':60, 'bronzet':25, 'silvert':20, 'goldt':15, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':35, 'totalnw':60, 'bronzenw':25, 'silvernw':20, 'goldnw':15, 'diff':3, 'rankp':131, 'pctw':0,},
+{'noc':'IRL', 'country':'Ireland', 'rankw':34, 'totalt':28, 'bronzet':11, 'silvert':8, 'goldt':9, 'totalw':6, 'bronzew':1, 'silverw':1, 'goldw':4, 'ranknw':47, 'totalnw':22, 'bronzenw':10, 'silvernw':7, 'goldnw':5, 'diff':-3, 'rankp':47, 'pctw':21.4,},
+{'noc':'IRQ', 'country':'Iraq', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':122, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'ISL', 'country':'Iceland', 'rankw':77, 'totalt':4, 'bronzet':2, 'silvert':2, 'goldt':0, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':90, 'totalnw':3, 'bronzenw':1, 'silvernw':2, 'goldnw':0, 'diff':6, 'rankp':40, 'pctw':25,},
+{'noc':'ISR', 'country':'Israel', 'rankw':67, 'totalt':7, 'bronzet':5, 'silvert':1, 'goldt':1, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':77, 'totalnw':6, 'bronzenw':5, 'silvernw':0, 'goldnw':1, 'diff':1, 'rankp':65, 'pctw':14.3,},
+{'noc':'ISV', 'country':'Virgin Islands', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':109, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'ITA', 'country':'Italy', 'rankw':14, 'totalt':549, 'bronzet':186, 'silvert':166, 'goldt':197, 'totalw':76, 'bronzew':25, 'silverw':26, 'goldw':25, 'ranknw':6, 'totalnw':473, 'bronzenw':161, 'silvernw':140, 'goldnw':172, 'diff':1, 'rankp':67, 'pctw':13.8,},
+{'noc':'JAM', 'country':'Jamaica', 'rankw':25, 'totalt':67, 'bronzet':20, 'silvert':30, 'goldt':17, 'totalw':35, 'bronzew':13, 'silverw':15, 'goldw':7, 'ranknw':39, 'totalnw':32, 'bronzenw':7, 'silvernw':15, 'goldnw':10, 'diff':-3, 'rankp':10, 'pctw':52.2,},
+{'noc':'JPN', 'country':'Japan', 'rankw':13, 'totalt':398, 'bronzet':142, 'silvert':126, 'goldt':130, 'totalw':91, 'bronzew':35, 'silverw':30, 'goldw':26, 'ranknw':9, 'totalnw':307, 'bronzenw':107, 'silvernw':96, 'goldnw':104, 'diff':3, 'rankp':45, 'pctw':22.9,},
+{'noc':'KAZ', 'country':'Kazakhstan', 'rankw':31, 'totalt':52, 'bronzet':19, 'silvert':17, 'goldt':16, 'totalw':11, 'bronzew':4, 'silverw':2, 'goldw':5, 'ranknw':38, 'totalnw':41, 'bronzenw':15, 'silvernw':15, 'goldnw':11, 'diff':-1, 'rankp':49, 'pctw':21.2,},
+{'noc':'KEN', 'country':'Kenya', 'rankw':42, 'totalt':86, 'bronzet':29, 'silvert':32, 'goldt':25, 'totalw':13, 'bronzew':2, 'silverw':9, 'goldw':2, 'ranknw':29, 'totalnw':73, 'bronzenw':27, 'silvernw':23, 'goldnw':23, 'diff':1, 'rankp':64, 'pctw':15.1,},
+{'noc':'KGZ', 'country':'Kyrgyzstan', 'rankw':85, 'totalt':3, 'bronzet':2, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':94, 'totalnw':3, 'bronzenw':2, 'silvernw':1, 'goldnw':0, 'diff':9, 'rankp':131, 'pctw':0,},
+{'noc':'KOR', 'country':'South Korea', 'rankw':11, 'totalt':243, 'bronzet':80, 'silvert':82, 'goldt':81, 'totalw':76, 'bronzew':22, 'silverw':23, 'goldw':31, 'ranknw':16, 'totalnw':167, 'bronzenw':58, 'silvernw':59, 'goldnw':50, 'diff':-1, 'rankp':33, 'pctw':31.3,},
+{'noc':'KSA', 'country':'Saudi Arabia', 'rankw':85, 'totalt':3, 'bronzet':2, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':95, 'totalnw':3, 'bronzenw':2, 'silvernw':1, 'goldnw':0, 'diff':9, 'rankp':131, 'pctw':0,},
+{'noc':'KUW', 'country':'Kuwait', 'rankw':85, 'totalt':2, 'bronzet':2, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':116, 'totalnw':2, 'bronzenw':2, 'silvernw':0, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'LAT', 'country':'Latvia', 'rankw':67, 'totalt':19, 'bronzet':5, 'silvert':11, 'goldt':3, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':55, 'totalnw':18, 'bronzenw':5, 'silvernw':10, 'goldnw':3, 'diff':5, 'rankp':79, 'pctw':5.3,},
+{'noc':'LIB', 'country':'Lebanon', 'rankw':85, 'totalt':4, 'bronzet':2, 'silvert':2, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':89, 'totalnw':4, 'bronzenw':2, 'silvernw':2, 'goldnw':0, 'diff':8, 'rankp':131, 'pctw':0,},
+{'noc':'LTU', 'country':'Lithuania', 'rankw':40, 'totalt':21, 'bronzet':10, 'silvert':5, 'goldt':6, 'totalw':7, 'bronzew':2, 'silverw':2, 'goldw':3, 'ranknw':57, 'totalnw':14, 'bronzenw':8, 'silvernw':3, 'goldnw':3, 'diff':-3, 'rankp':27, 'pctw':33.3,},
+{'noc':'LUX', 'country':'Luxembourg', 'rankw':85, 'totalt':2, 'bronzet':0, 'silvert':1, 'goldt':1, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':76, 'totalnw':2, 'bronzenw':0, 'silvernw':1, 'goldnw':1, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'MAR', 'country':'Morocco', 'rankw':57, 'totalt':22, 'bronzet':11, 'silvert':5, 'goldt':6, 'totalw':4, 'bronzew':2, 'silverw':1, 'goldw':1, 'ranknw':53, 'totalnw':18, 'bronzenw':9, 'silvernw':4, 'goldnw':5, 'diff':0, 'rankp':57, 'pctw':18.2,},
+{'noc':'MAS', 'country':'Malaysia', 'rankw':77, 'totalt':6, 'bronzet':3, 'silvert':3, 'goldt':0, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':85, 'totalnw':5, 'bronzenw':2, 'silvernw':3, 'goldnw':0, 'diff':6, 'rankp':59, 'pctw':16.7,},
+{'noc':'MDA', 'country':'Moldova', 'rankw':77, 'totalt':7, 'bronzet':5, 'silvert':2, 'goldt':0, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':88, 'totalnw':6, 'bronzenw':4, 'silvernw':2, 'goldnw':0, 'diff':6, 'rankp':65, 'pctw':14.3,},
+{'noc':'MEX', 'country':'Mexico', 'rankw':43, 'totalt':62, 'bronzet':28, 'silvert':21, 'goldt':13, 'totalw':13, 'bronzew':6, 'silverw':5, 'goldw':2, 'ranknw':37, 'totalnw':49, 'bronzenw':22, 'silvernw':16, 'goldnw':11, 'diff':4, 'rankp':51, 'pctw':21,},
+{'noc':'MGL', 'country':'Mongolia', 'rankw':65, 'totalt':24, 'bronzet':13, 'silvert':9, 'goldt':2, 'totalw':3, 'bronzew':2, 'silverw':1, 'goldw':0, 'ranknw':62, 'totalnw':21, 'bronzenw':11, 'silvernw':8, 'goldnw':2, 'diff':5, 'rankp':70, 'pctw':12.5,},
+{'noc':'MKD', 'country':'Macedonia', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':123, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'MNE', 'country':'Montenegro', 'rankw':67, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':130, 'totalnw':0, 'bronzenw':0, 'silvernw':0, 'goldnw':0, 'diff':-23, 'rankp':1, 'pctw':100,},
+{'noc':'MOZ', 'country':'Mozambique', 'rankw':60, 'totalt':2, 'bronzet':1, 'silvert':0, 'goldt':1, 'totalw':2, 'bronzew':1, 'silverw':0, 'goldw':1, 'ranknw':129, 'totalnw':0, 'bronzenw':0, 'silvernw':0, 'goldnw':0, 'diff':-43, 'rankp':1, 'pctw':100,},
+{'noc':'MRI', 'country':'Mauritius', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':124, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'NAM', 'country':'Namibia', 'rankw':85, 'totalt':4, 'bronzet':0, 'silvert':4, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':84, 'totalnw':4, 'bronzenw':0, 'silvernw':4, 'goldnw':0, 'diff':6, 'rankp':131, 'pctw':0,},
+{'noc':'NED', 'country':'Netherlands', 'rankw':10, 'totalt':267, 'bronzet':104, 'silvert':85, 'goldt':78, 'totalw':111, 'bronzew':40, 'silverw':36, 'goldw':35, 'ranknw':20, 'totalnw':156, 'bronzenw':64, 'silvernw':49, 'goldnw':43, 'diff':-4, 'rankp':20, 'pctw':41.6,},
+{'noc':'NGR', 'country':'Nigeria', 'rankw':53, 'totalt':23, 'bronzet':12, 'silvert':8, 'goldt':3, 'totalw':9, 'bronzew':5, 'silverw':3, 'goldw':1, 'ranknw':66, 'totalnw':14, 'bronzenw':7, 'silvernw':5, 'goldnw':2, 'diff':-5, 'rankp':23, 'pctw':39.1,},
+{'noc':'NIG', 'country':'Niger', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':125, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'NOR', 'country':'Norway', 'rankw':26, 'totalt':149, 'bronzet':44, 'silvert':49, 'goldt':56, 'totalw':19, 'bronzew':5, 'silverw':7, 'goldw':7, 'ranknw':17, 'totalnw':130, 'bronzenw':39, 'silvernw':42, 'goldnw':49, 'diff':3, 'rankp':69, 'pctw':12.8,},
+{'noc':'NZL', 'country':'New Zealand', 'rankw':23, 'totalt':99, 'bronzet':39, 'silvert':18, 'goldt':42, 'totalw':18, 'bronzew':6, 'silverw':3, 'goldw':9, 'ranknw':25, 'totalnw':81, 'bronzenw':33, 'silvernw':15, 'goldnw':33, 'diff':-1, 'rankp':57, 'pctw':18.2,},
+{'noc':'PAK', 'country':'Pakistan', 'rankw':85, 'totalt':10, 'bronzet':4, 'silvert':3, 'goldt':3, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':58, 'totalnw':10, 'bronzenw':4, 'silvernw':3, 'goldnw':3, 'diff':6, 'rankp':131, 'pctw':0,},
+{'noc':'PAN', 'country':'Panama', 'rankw':85, 'totalt':3, 'bronzet':2, 'silvert':0, 'goldt':1, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':78, 'totalnw':3, 'bronzenw':2, 'silvernw':0, 'goldnw':1, 'diff':6, 'rankp':131, 'pctw':0,},
+{'noc':'PAR', 'country':'Paraguay', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':110, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'PER', 'country':'Peru', 'rankw':67, 'totalt':4, 'bronzet':0, 'silvert':3, 'goldt':1, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':73, 'totalnw':3, 'bronzenw':0, 'silvernw':2, 'goldnw':1, 'diff':2, 'rankp':40, 'pctw':25,},
+{'noc':'PHI', 'country':'Philippines', 'rankw':85, 'totalt':9, 'bronzet':7, 'silvert':2, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':86, 'totalnw':9, 'bronzenw':7, 'silvernw':2, 'goldnw':0, 'diff':6, 'rankp':131, 'pctw':0,},
+{'noc':'POL', 'country':'Poland', 'rankw':19, 'totalt':271, 'bronzet':125, 'silvert':82, 'goldt':64, 'totalw':56, 'bronzew':27, 'silverw':19, 'goldw':10, 'ranknw':15, 'totalnw':215, 'bronzenw':98, 'silvernw':63, 'goldnw':54, 'diff':3, 'rankp':52, 'pctw':20.7,},
+{'noc':'POR', 'country':'Portugal', 'rankw':47, 'totalt':23, 'bronzet':10, 'silvert':9, 'goldt':4, 'totalw':5, 'bronzew':2, 'silverw':1, 'goldw':2, 'ranknw':63, 'totalnw':18, 'bronzenw':8, 'silvernw':8, 'goldnw':2, 'diff':-5, 'rankp':46, 'pctw':21.7,},
+{'noc':'PRK', 'country':'North Korea', 'rankw':30, 'totalt':47, 'bronzet':21, 'silvert':12, 'goldt':14, 'totalw':17, 'bronzew':7, 'silverw':5, 'goldw':5, 'ranknw':40, 'totalnw':30, 'bronzenw':14, 'silvernw':7, 'goldnw':9, 'diff':0, 'rankp':26, 'pctw':36.2,},
+{'noc':'PUR', 'country':'Puerto Rico', 'rankw':85, 'totalt':8, 'bronzet':6, 'silvert':2, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':87, 'totalnw':8, 'bronzenw':6, 'silvernw':2, 'goldnw':0, 'diff':6, 'rankp':131, 'pctw':0,},
+{'noc':'QAT', 'country':'Qatar', 'rankw':85, 'totalt':4, 'bronzet':4, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':114, 'totalnw':4, 'bronzenw':4, 'silvernw':0, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'ROU', 'country':'Romania', 'rankw':4, 'totalt':301, 'bronzet':119, 'silvert':94, 'goldt':88, 'totalw':153, 'bronzew':49, 'silverw':46, 'goldw':58, 'ranknw':26, 'totalnw':148, 'bronzenw':70, 'silvernw':48, 'goldnw':30, 'diff':-12, 'rankp':11, 'pctw':50.8,},
+{'noc':'RSA', 'country':'South Africa', 'rankw':33, 'totalt':76, 'bronzet':27, 'silvert':26, 'goldt':23, 'totalw':16, 'bronzew':7, 'silverw':5, 'goldw':4, 'ranknw':30, 'totalnw':60, 'bronzenw':20, 'silvernw':21, 'goldnw':19, 'diff':2, 'rankp':50, 'pctw':21.1,},
+{'noc':'RUS', 'country':'Russia', 'rankw':6, 'totalt':393, 'bronzet':142, 'silvert':120, 'goldt':131, 'totalw':166, 'bronzew':47, 'silverw':67, 'goldw':52, 'ranknw':13, 'totalnw':227, 'bronzenw':95, 'silvernw':53, 'goldnw':79, 'diff':-2, 'rankp':17, 'pctw':42.2,},
+{'noc':'SEN', 'country':'Senegal', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':111, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'SIN', 'country':'Singapore', 'rankw':65, 'totalt':4, 'bronzet':2, 'silvert':2, 'goldt':0, 'totalw':3, 'bronzew':2, 'silverw':1, 'goldw':0, 'ranknw':101, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':-6, 'rankp':6, 'pctw':75,},
+{'noc':'SLO', 'country':'Slovenia', 'rankw':54, 'totalt':19, 'bronzet':9, 'silvert':6, 'goldt':4, 'totalw':6, 'bronzew':3, 'silverw':2, 'goldw':1, 'ranknw':56, 'totalnw':13, 'bronzenw':6, 'silvernw':4, 'goldnw':3, 'diff':3, 'rankp':32, 'pctw':31.6,},
+{'noc':'SRB', 'country':'Serbia', 'rankw':59, 'totalt':7, 'bronzet':4, 'silvert':2, 'goldt':1, 'totalw':2, 'bronzew':0, 'silverw':1, 'goldw':1, 'ranknw':92, 'totalnw':5, 'bronzenw':4, 'silvernw':1, 'goldnw':0, 'diff':-15, 'rankp':35, 'pctw':28.6,},
+{'noc':'SRI', 'country':'Sri Lanka', 'rankw':67, 'totalt':2, 'bronzet':0, 'silvert':2, 'goldt':0, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':102, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':-4, 'rankp':12, 'pctw':50,},
+{'noc':'SUD', 'country':'Sudan', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':112, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'SUI', 'country':'Switzerland', 'rankw':44, 'totalt':185, 'bronzet':65, 'silvert':73, 'goldt':47, 'totalw':9, 'bronzew':3, 'silverw':4, 'goldw':2, 'ranknw':18, 'totalnw':176, 'bronzenw':62, 'silvernw':69, 'goldnw':45, 'diff':4, 'rankp':81, 'pctw':4.9,},
+{'noc':'SUR', 'country':'Suriname', 'rankw':85, 'totalt':2, 'bronzet':1, 'silvert':0, 'goldt':1, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':79, 'totalnw':2, 'bronzenw':1, 'silvernw':0, 'goldnw':1, 'diff':6, 'rankp':131, 'pctw':0,},
+{'noc':'SVK', 'country':'Slovakia', 'rankw':45, 'totalt':24, 'bronzet':8, 'silvert':9, 'goldt':7, 'totalw':7, 'bronzew':1, 'silverw':4, 'goldw':2, 'ranknw':51, 'totalnw':17, 'bronzenw':7, 'silvernw':5, 'goldnw':5, 'diff':-4, 'rankp':34, 'pctw':29.2,},
+{'noc':'SWE', 'country':'Sweden', 'rankw':20, 'totalt':483, 'bronzet':176, 'silvert':164, 'goldt':143, 'totalw':39, 'bronzew':15, 'silverw':14, 'goldw':10, 'ranknw':7, 'totalnw':444, 'bronzenw':161, 'silvernw':150, 'goldnw':133, 'diff':2, 'rankp':77, 'pctw':8.1,},
+{'noc':'SYR', 'country':'Syria', 'rankw':62, 'totalt':3, 'bronzet':1, 'silvert':1, 'goldt':1, 'totalw':1, 'bronzew':0, 'silverw':0, 'goldw':1, 'ranknw':96, 'totalnw':2, 'bronzenw':1, 'silvernw':1, 'goldnw':0, 'diff':-15, 'rankp':27, 'pctw':33.3,},
+{'noc':'TAN', 'country':'Tanzania', 'rankw':85, 'totalt':2, 'bronzet':0, 'silvert':2, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':91, 'totalnw':2, 'bronzenw':0, 'silvernw':2, 'goldnw':0, 'diff':9, 'rankp':131, 'pctw':0,},
+{'noc':'TGA', 'country':'Tonga', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':113, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':4, 'rankp':131, 'pctw':0,},
+{'noc':'THA', 'country':'Thailand', 'rankw':39, 'totalt':24, 'bronzet':11, 'silvert':6, 'goldt':7, 'totalw':10, 'bronzew':5, 'silverw':2, 'goldw':3, 'ranknw':54, 'totalnw':14, 'bronzenw':6, 'silvernw':4, 'goldnw':4, 'diff':-6, 'rankp':18, 'pctw':41.7,},
+{'noc':'TJK', 'country':'Tajikistan', 'rankw':77, 'totalt':3, 'bronzet':2, 'silvert':1, 'goldt':0, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':97, 'totalnw':2, 'bronzenw':1, 'silvernw':1, 'goldnw':0, 'diff':5, 'rankp':27, 'pctw':33.3,},
+{'noc':'TOG', 'country':'Togo', 'rankw':85, 'totalt':1, 'bronzet':1, 'silvert':0, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':126, 'totalnw':1, 'bronzenw':1, 'silvernw':0, 'goldnw':0, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'TPE', 'country':'Taiwan', 'rankw':52, 'totalt':21, 'bronzet':12, 'silvert':7, 'goldt':2, 'totalw':12, 'bronzew':8, 'silverw':3, 'goldw':1, 'ranknw':71, 'totalnw':9, 'bronzenw':4, 'silvernw':4, 'goldnw':1, 'diff':-3, 'rankp':8, 'pctw':57.1,},
+{'noc':'TTO', 'country':'Trinidad & Tobago', 'rankw':85, 'totalt':18, 'bronzet':10, 'silvert':6, 'goldt':2, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':64, 'totalnw':18, 'bronzenw':10, 'silvernw':6, 'goldnw':2, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'TUN', 'country':'Tunisia', 'rankw':67, 'totalt':10, 'bronzet':4, 'silvert':3, 'goldt':3, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':60, 'totalnw':9, 'bronzenw':4, 'silvernw':2, 'goldnw':3, 'diff':3, 'rankp':74, 'pctw':10,},
+{'noc':'TUR', 'country':'Turkey', 'rankw':50, 'totalt':86, 'bronzet':24, 'silvert':24, 'goldt':38, 'totalw':8, 'bronzew':2, 'silverw':5, 'goldw':1, 'ranknw':22, 'totalnw':78, 'bronzenw':22, 'silvernw':19, 'goldnw':37, 'diff':3, 'rankp':75, 'pctw':9.3,},
+{'noc':'UAE', 'country':'UAE', 'rankw':85, 'totalt':1, 'bronzet':0, 'silvert':0, 'goldt':1, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':82, 'totalnw':1, 'bronzenw':0, 'silvernw':0, 'goldnw':1, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'UGA', 'country':'Uganda', 'rankw':85, 'totalt':7, 'bronzet':2, 'silvert':3, 'goldt':2, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':67, 'totalnw':7, 'bronzenw':2, 'silvernw':3, 'goldnw':2, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'UKR', 'country':'Ukraine', 'rankw':16, 'totalt':114, 'bronzet':54, 'silvert':27, 'goldt':33, 'totalw':52, 'bronzew':25, 'silverw':11, 'goldw':16, 'ranknw':33, 'totalnw':62, 'bronzenw':29, 'silvernw':16, 'goldnw':17, 'diff':-5, 'rankp':15, 'pctw':45.6,},
+{'noc':'URS', 'country':'Soviet Union', 'rankw':3, 'totalt':1010, 'bronzet':296, 'silvert':319, 'goldt':395, 'totalw':261, 'bronzew':91, 'silverw':75, 'goldw':95, 'ranknw':3, 'totalnw':749, 'bronzenw':205, 'silvernw':244, 'goldnw':300, 'diff':0, 'rankp':38, 'pctw':25.8,},
+{'noc':'URU', 'country':'Uruguay', 'rankw':85, 'totalt':10, 'bronzet':6, 'silvert':2, 'goldt':2, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':69, 'totalnw':10, 'bronzenw':6, 'silvernw':2, 'goldnw':2, 'diff':5, 'rankp':131, 'pctw':0,},
+{'noc':'USA', 'country':'USA', 'rankw':1, 'totalt':2400, 'bronzet':667, 'silvert':757, 'goldt':976, 'totalw':587, 'bronzew':169, 'silverw':180, 'goldw':238, 'ranknw':1, 'totalnw':1813, 'bronzenw':498, 'silvernw':577, 'goldnw':738, 'diff':0, 'rankp':42, 'pctw':24.5,},
+{'noc':'UZB', 'country':'Uzbekistan', 'rankw':77, 'totalt':20, 'bronzet':10, 'silvert':5, 'goldt':5, 'totalw':1, 'bronzew':1, 'silverw':0, 'goldw':0, 'ranknw':50, 'totalnw':19, 'bronzenw':9, 'silvernw':5, 'goldnw':5, 'diff':5, 'rankp':80, 'pctw':5,},
+{'noc':'VEN', 'country':'Venezuela', 'rankw':76, 'totalt':12, 'bronzet':8, 'silvert':2, 'goldt':2, 'totalw':2, 'bronzew':2, 'silverw':0, 'goldw':0, 'ranknw':68, 'totalnw':10, 'bronzenw':6, 'silvernw':2, 'goldnw':2, 'diff':5, 'rankp':59, 'pctw':16.7,},
+{'noc':'VIE', 'country':'Vietnam', 'rankw':67, 'totalt':2, 'bronzet':0, 'silvert':2, 'goldt':0, 'totalw':1, 'bronzew':0, 'silverw':1, 'goldw':0, 'ranknw':103, 'totalnw':1, 'bronzenw':0, 'silvernw':1, 'goldnw':0, 'diff':-4, 'rankp':12, 'pctw':50,},
+{'noc':'ZAM', 'country':'Zambia', 'rankw':85, 'totalt':2, 'bronzet':1, 'silvert':1, 'goldt':0, 'totalw':0, 'bronzew':0, 'silverw':0, 'goldw':0, 'ranknw':99, 'totalnw':2, 'bronzenw':1, 'silvernw':1, 'goldnw':0, 'diff':7, 'rankp':131, 'pctw':0,},
+{'noc':'ZIM', 'country':'Zimbabwe', 'rankw':37, 'totalt':8, 'bronzet':1, 'silvert':4, 'goldt':3, 'totalw':8, 'bronzew':1, 'silverw':4, 'goldw':3, 'ranknw':127, 'totalnw':0, 'bronzenw':0, 'silvernw':0, 'goldnw':0, 'diff':-65, 'rankp':1, 'pctw':100,},
+	];
+
+    $('#table01').DataTable(
+	    {
+	    	data: data,
+          
+        // INPUT: Specify which data goes into which column. Start from the first column on the left.
+        columns: [
+          { data: 'rankw' },
+          { data: 'country' },
+          { data: 'goldw' },
+          { data: 'silverw' },
+          { data: 'bronzew' },
+          { data: 'totalw' },
+          { data: 'pctw' },
+        ],
+	    	responsive: true,
+	    	
+        //MODIFY: Specify which columns to be collapsed first when screen gets smaller. 'Targets' is the column (0 is the first column). 'responsivePriority' set which column to be collapsed first (column with higher number gets collapsed first before column with lower number). See <https://datatables.net/reference/option/columns.responsivePriority> for details. You can also assign classes that you've defined in the css style to specific columns using 'className'.
+        columnDefs: [
+		        { responsivePriority: 1, targets: 1 },
+		        { responsivePriority: 2, targets: 0 },
+            { responsivePriority: 3, targets: 6 },
+            { responsivePriority: 4, targets: 5 },
+            { responsivePriority: 5, targets: 2 },
+            { responsivePriority: 6, targets: 3 },
+            { responsivePriority: 7, targets: 4 },
+            { className: "center", "targets": [ 0 ] },
+            { className: "left", "targets": [ 1 ] },
+
+		    ],
+	    	
+        //OPTIONS: You can customize the interface of the table. See <https://datatables.net/manual/options> for details.
+        //MODIFY: Change 'paging' to 'true' if you want to have pagination.
+        "paging": false,
+	    	
+        //MODIFY: Set the height of the table.
+        "scrollY": "400px",
+        //Allow the table to reduce in height when a limited number of rows are shown.
+	    	"scrollCollapse": true,
+        //Feature control table information display field.
+        "info": false,
+		  }
+    );
+
+});
+
+
+</script>
+
+</body>	
+</html>

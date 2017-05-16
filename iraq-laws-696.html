@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/heatmap.js"></script>
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 600px; 
+max-width: 100%;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 400px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    color: #33333c;
+    line-height: 18px;
+}
+
+.icon {
+  height:28px;
+  text-align: center;
+}
+
+@media (max-width: 380px ) { 
+    #text {font-size: 12px;line-height: 16px;padding-bottom: 3px;}
+    .highcharts-title {font-size: 15px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper"> 
+    <div id="container"></div>
+    <div id="note">
+        <div id="text"><br>Data updated until 2015.</div>
+        Source: <a href='http://datatopics.worldbank.org/gender/home' target='_blank'>World Bank Gender Data Portal</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+
+var bottomValue = 0;
+var rightValue = 40;
+if($(window).width() < 340){bottomValue = 125;}  
+if($(window).width() < 380){rightValue = 0;}  
+
+    $('#container').highcharts({
+
+        chart: {
+            type: 'heatmap',
+            marginBottom: bottomValue,
+            marginRight: rightValue,
+            plotBorderWidth: 0,
+        },
+        title: {
+            text: 'Legal protections for women in major Middle East countries and the US',
+        },
+        subtitle: {enabled: false,},
+        xAxis: {
+            categories: ["Prohibits gender<br>discrimination in hiring","Doesn't require wives<br>to obey husbands","Prohibits domestic<br>violence"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '12px',
+              }
+            },
+            opposite: true,
+            lineWidth:0,
+            tickWidth: 0,
+        },
+
+        yAxis: {
+            categories: ["Yemen","UAE","<b>Iraq</b>","Iran","Egypt","Saudi<br>Arabia","Jordan","Turkey","Israel","US"],
+            title: null,
+            labels: {
+              style: {
+                fontSize: '12px',
+              }
+            },
+            
+        },
+
+        colorAxis: {
+            min: 0,
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        },
+
+        credits: {enabled: false,},
+        legend: {enabled: false,},
+
+        tooltip: {
+            enabled:false,
+            formatter: function () {
+                     if (this.series.xAxis.categories[this.point.x]=="Prohibits gender<br>discrimination in hiring"){return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Is there law that mandates nondiscrimination<br>based on gender in hiring? <b>' + this.point.word + '<b>'}
+                     if (this.series.xAxis.categories[this.point.x]=="Requires wives<br>to obey husbands"){return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Is there law that requires married<br>women to obey their husbands? <b>' + this.point.word + '<b>'}
+                     if (this.series.xAxis.categories[this.point.x]=="Prohibits domestic<br>violence"){return '<b>' + this.series.yAxis.categories[this.point.y] + '<b><br>Is there legislation on<br>domestic violence? <b>' + this.point.word + '<b>'}       
+            }
+        },
+        series: [{
+            name: 'Legal Grounds',
+            borderWidth: 0,
+            data: [
+              {x: 0, y: 0, word: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 1, word: "icon-cross.svg", color: "#fff"},            
+              {x: 0, y: 2, word: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 3, word: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 4, word: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 5, word: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 6, word: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 7, word: "icon-cross.svg", color: "#fff"},
+              {x: 0, y: 8, word: "icon-check.svg", color: "#fff"},
+              {x: 0, y: 9, word: "icon-check.svg", color: "#fff"},
+              {x: 1, y: 0, word: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 1, word: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 2, word: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 3, word: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 4, word: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 5, word: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 6, word: "icon-cross.svg", color: "#fff"},
+              {x: 1, y: 7, word: "icon-check.svg", color: "#fff"},
+              {x: 1, y: 8, word: "icon-check.svg", color: "#fff"},
+              {x: 1, y: 9, word: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 0, word: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 1, word: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 2, word: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 3, word: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 4, word: "icon-cross.svg", color: "#fff"},
+              {x: 2, y: 5, word: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 6, word: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 7, word: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 8, word: "icon-check.svg", color: "#fff"},
+              {x: 2, y: 9, word: "icon-check.svg", color: "#fff"}],
+            dataLabels: {
+                enabled: true,
+                color: '#ffffff',
+                useHTML: true,
+                formatter: function () {
+                  return '<img class="icon" src="https://cdn2.pri.org/embeds/2017-01/mosul-visuals/' + this.point.word +'">';
+                },
+                // y:0,
+                x:-15,
+            }
+        }]
+    });
+
+var chart = $('#container').highcharts();
+
+if($(window).width() < 340){
+  chart.xAxis[0].update({
+           opposite: false,
+  });
+}
+
+
+});
+</script>

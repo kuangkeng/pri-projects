@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bar chart (horizontal) with single series data</title>
+    <meta name="description" content="This is a template file to build a simple horizontal bar chart with single series data.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <!-- Google Analytics script -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-2145282-16', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+.container{
+    height: 305px; /*INPUT: set the height of the chart*/
+    width: 100%;
+    /*max-width: 100%;*/
+    margin-top:5px;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+.col {
+    width:29%;
+    text-align: center;
+}
+
+#col0 {
+    width:10%;
+    vertical-align: top;
+}
+
+#table-axis {
+    margin-top: 7px;
+}
+
+#chart-table {
+    width:100%;
+}
+
+.row-axis {
+    font-size:13px;
+    line-height: 14px;
+    height:20px;
+}
+
+#head1 {
+    margin-bottom: -10px;
+}
+
+.highcharts-grid-line {
+    stroke-width:0px;
+}
+
+.highcharts-container {
+    border:0px;
+}
+
+/*Styling for legend*/
+
+.colorblock {
+  width:20px;
+  height:20px;
+}
+
+.colorlabel {
+  font-size: 12px;
+  line-height: 14px;
+  width:45px;
+  padding-left: 5px;
+}
+
+#legend-color-box, .legend-color{
+  padding-left:10px;
+  display:flex;
+  justify-content: flex-start;
+}
+
+.legend-color {
+  width:70px;
+  align-items: center;
+}
+
+#bucket0 { background-color: #4188BC; }
+#bucket1 { background-color: #FF7F00; }
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">    
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Macomb County, Michigan</div>
+        <!-- INPUT: description for the chart -->
+    </div>    
+    <div id="table-wrapper">
+        <table id="chart-table">
+            <tr id="header">
+                <td id="col0"></td>
+                <td class="col" id="head1">County</td>
+                <td class="col" id="head2">Michigan</td>
+                <td class="col" id="head3">US</td>
+            </tr>
+            <tr id="row">
+                <td id="col0">
+                    <div id="container0">
+                        <table id="table-axis">           
+                            <tr class="row-axis"><td>Education</td></tr>
+                            <tr class="row-axis"><td>Retail</td></tr>
+                            <tr class="row-axis"><td>Professional</td></tr>    
+                            <tr class="row-axis"><td>Manufacturing</td></tr>
+                            <tr class="row-axis"><td>Arts</td></tr>
+                            <tr class="row-axis"><td>Finance</td></tr>
+                            <tr class="row-axis"><td>Construction</td></tr>
+                            <tr class="row-axis"><td>Transportation</td></tr>
+                            <tr class="row-axis"><td>Others</td></tr>
+                            <tr class="row-axis"><td>Public admin.</td></tr>   
+                            <tr class="row-axis"><td>Wholesale</td></tr>
+                            <tr class="row-axis"><td>Information</td></tr>
+                            <tr class="row-axis"><td>Agriculture</td></tr>
+                        </table>
+                    </div>
+                </td>
+                <td class="col" id="col1"><div class="container" id="container1"></div></td>
+                <td class="col" id="col2"><div class="container" id="container2"></div></td>
+                <td class="col" id="col3"><div class="container" id="container3"></div></td>
+            </tr>
+        </table>
+    </div>
+    <div id="legend-color-box">
+        <div class="legend-color">
+            <div class="colorblock" id="bucket0"></div>
+            <div class="colorlabel">2010</div>
+        </div>
+        <div class="legend-color">
+            <div class="colorblock" id="bucket1"></div>
+            <div class="colorlabel">2015</div>
+        </div>
+    </div>    
+    <div class="note">
+        <!-- INPUT: data source -->
+        <!-- Source: <a href='http://datatopics.worldbank.org/gender/home' target='_blank'>World Bank Gender Data Portal</a> -->
+        <!-- INPUT: additional notes for the chart -->
+       <!--  <br>Other notes for the chart -->
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+var categories = [
+    "Educational services,<br>and health care<br>and social assistance",
+    "Retail trade",
+    "Professional, scientific,<br>and management,<br>and administrative <br>and waste management<br>services",
+    "Manufacturing",
+    "Arts, entertainment,<br>and recreation,<br>and accommodation and<br>food services",
+    "Finance and insurance,<br>and real estate <br>and rental and leasing",
+    "Construction",
+    "Transportation <br>and warehousing,<br>and utilities",
+    "Other services,<br>except public<br>administration",
+    "Public administration",
+    "Wholesale trade",
+    "Information",
+    "Agriculture, forestry,<br>fishing and hunting,<br>and mining",
+];
+
+$(document).ready(function () {
+
+    Highcharts.chart('container1', {
+        chart: {
+            type: 'bar',
+            marginTop: 0,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },
+        xAxis: {
+            categories: categories,
+            visible: false,
+        },
+        yAxis: {
+            visible: false,
+            max:25,
+            min:-25,
+        },
+        credits: { enabled: false, },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0,
+                stacking: 'normal'
+            }
+        },
+        legend: {enabled: false,},
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br>' + this.point.category + '<br>' +
+                    'Percentage: <b>' + Math.abs(this.point.y) + '%<b>';
+            }
+        },
+
+        series: [{
+            name: '2010',
+            data: [-20.5,-12.6,-9.8,-20.5,-8.6,-5.8,-5.5,-3.4,-4.6,-3.7,-2.9,-1.9,-0.2], color:"#4188BC",
+        }, {
+            name: '2015',
+            data: [21.1,12,9.7,20.7,9.3,5.8,4.8,3.6,4.7,3.9,2.5,1.6,0.3], color:"#FF7F00",
+        }]
+    });
+
+    Highcharts.chart('container2', {
+        chart: {
+            type: 'bar',
+            marginTop: 0,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },
+        xAxis: {
+            categories: categories,
+            visible: false,
+        },
+        yAxis: {
+            visible: false,
+            max:25,
+            min:-25,
+        },
+        credits: { enabled: false, },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0,
+                stacking: 'normal'
+            }
+        },
+        legend: {enabled: false,},
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br>' + this.point.category + '<br>' +
+                    'Percentage: <b>' + Math.abs(this.point.y) + '%<b>';
+            }
+        },
+
+        series: [{
+            name: '2010',
+            data: [-23.2,-11.6,-8.9,-17.6,-9.1,-5.7,-5.3,-4.2,-4.7,-3.8,-2.8,-1.9,-1.3], color:"#4188BC",
+        }, {
+            name: '2015',
+            data: [23.9,11.4,9.3,17.8,9.5,5.4,4.8,4.2,4.7,3.6,2.4,1.6,1.3], color:"#FF7F00",
+        }]
+    });
+
+
+    Highcharts.chart('container3', {
+        chart: {
+            type: 'bar',
+            marginTop: 0,
+        },
+        title: {
+            text: null,
+        },
+        subtitle: {
+            enabled: false,
+        },
+        xAxis: {
+            categories: categories,
+            visible: false,
+        },
+        yAxis: {
+            visible: false,
+            max:25,
+            min:-25,
+        },
+        credits: { enabled: false, },
+        plotOptions: {
+            series: {
+                groupPadding: 0.05,
+                pointPadding: 0,
+                stacking: 'normal'
+            }
+        },
+        legend: {enabled: false,},
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br>' + this.point.category + '<br>' +
+                    'Percentage: <b>' + Math.abs(this.point.y) + '%<b>';
+            }
+        },
+
+        series: [{
+            name: '2010',
+            data: [-22.1,-11.5,-10.4,-11,-8.9,-7,-7.1,-5.1,-4.9,-4.8,-3.1,-2.4,-1.9], color:"#4188BC",
+        }, {
+            name: '2015',
+            data: [23.1,11.6,11,10.4,9.6,6.6,6.2,5,4.9,4.8,2.7,2.1,2], color:"#FF7F00",
+        }]
+    });
+
+
+});
+
+</script>

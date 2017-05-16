@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stacked bar chart with multiple series data in percentage</title>
+    <meta name="description" content="This is a template file to build a stacked horizontal bar chart with multiple series data in percentage.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}  
+
+</style>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">North Korea is dependent on China for trade</div>
+        <!-- INPUT: description for the chart -->
+        <!-- <div id="text">Trade with China compared to other countries</div>  -->
+    </div>   
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='https://news.kotra.or.kr/user/globalBbs/kotranews/11/globalBbsDataView.do?setIdx=249&dataIdx=151201' target='_blank'>Korea Trade-Investment Promotion Agency (KOTRA) 2015 annual report</a>
+        <!-- INPUT: additional notes for the chart -->
+        
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    year: '%Y'
+                },
+                showLastLabel: true,            
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: "Percentage of total North Korean trade",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                //minTickInterval:10,
+            },
+            credits: {enabled: false},
+            //Display the legend
+            legend: {
+                reversed: true,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-696".
+            tooltip: {
+                //headerFormat: '<b>{point.key}</b><br>',
+                //pointFormat: '<b>{point.y}%</b>',
+                shared:true,
+                valueSuffix: '%'
+            },
+            plotOptions: {
+                series:{
+                    //adding this line "stacking: 'percent'" turns the chart into a stacked chart with data in percentage.
+                    stacking: 'percent',
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.1,
+                    pointPadding: 0,
+                    stickyTracking: false,
+                    borderWidth: 0,
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        // format: '{point.y:,0f}',
+                        formatter: 
+                            function () {
+                                if (this.y == 91.3){
+                                    return this.y + "%"
+                                } 
+                            },
+                        y:-90,
+                    }
+                },
+            },    
+            //INPUT: Each data series is an object in "series". The first series will be stacked at the top of the bar. You can set the name and color for each series. 'Name' of the series will appear in the default tooltip. In each series, your data points should be in an array called "data". Color applies to all data points. If you want to change the color of a particular data point, replace that data value with an object such as '{y:489, color:"#FF7F00"}'.
+            series: [ 
+                {name:"All other countries", color:"#FFBA00", data: [
+                    [Date.UTC(2006,0,1), 43.3],
+                    [Date.UTC(2007,0,1), 32.9],
+                    [Date.UTC(2008,0,1), 27.0],
+                    [Date.UTC(2009,0,1), 21.5],
+                    [Date.UTC(2010,0,1), 17.0],
+                    [Date.UTC(2011,0,1), 11.4],
+                    [Date.UTC(2012,0,1), 11.7],
+                    [Date.UTC(2013,0,1), 10.9],
+                    [Date.UTC(2014,0,1), 9.8],
+                    [Date.UTC(2015,0,1), 8.7],
+                ]},
+                {name:"China", color:"#FF3900", data: [
+                    [Date.UTC(2006,0,1), 56.7],
+                    [Date.UTC(2007,0,1), 67.1],
+                    [Date.UTC(2008,0,1), 73.0],
+                    [Date.UTC(2009,0,1), 78.5],
+                    [Date.UTC(2010,0,1), 83.0],
+                    [Date.UTC(2011,0,1), 88.6],
+                    [Date.UTC(2012,0,1), 88.3],
+                    [Date.UTC(2013,0,1), 89.1],
+                    [Date.UTC(2014,0,1), 90.2],
+                    [Date.UTC(2015,0,1), 91.3],
+                ]},
+            ],
+            });
+
+    });
+    
+});
+</script>  
+</body>
+</html>  
+

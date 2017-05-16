@@ -1,0 +1,177 @@
+<head>
+
+<title>Chart feature: adding callout text box</title>
+
+<meta name="description" content="This is not a template file. Do not use this to build chart as the style is not updated. This example is to show how to add callout text box to data points. Just check the parts annotated with //INPUT.">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <!-- Google Analytics script -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-2145282-16', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#container{
+height: 400px; 
+max-width: 650px;
+}
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 650px; 
+    margin: 0 auto;
+}
+
+#note {
+    font-size: 11px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#text {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+    color:#33333c;
+}
+.highcharts-title {width:100% !important;}
+
+/*.button01 {text-align: center;}
+#button01 {
+    border-radius: 5px; 
+    padding:5px 10px;
+    background-color:#0375B4;
+    color:white;
+    margin-bottom: 10px;
+}
+#button01:hover {background-color:#3689b6;}
+#button01:focus, input[type="button"]:focus {outline: none;}*/
+
+@media (max-width: 400px ) { 
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .ui-tabs-anchor {padding:5px !important;}
+    .ui-tabs-panel {padding-left:0px !important; padding-right: 0px !important;}
+    .highcharts-title {font-size: 14px !important;}
+} 
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">    
+    <div id="container"></div>
+    <div id="note">
+        <div id="text">The attack on Jul 7, 2016 that killed five Dallas police officers is the deadliest incident for law enforcement in the US since the 9/11 terrorist attacks which killed 72 officers.</div>
+        Source:  
+        <a href='http://www.nleomf.org/facts/officer-fatalities-data/year.html' target='_blank'>The National Law Enforcement Officers Memorial</a>
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: 'Police officers killed in the US, 1980-2015',
+                margin: 30,
+            },
+            subtitle: {
+                enabled: false,
+            },
+            xAxis: {
+                categories: ["1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015"],   
+                minTickInterval: 5,                
+            },
+            yAxis: {
+                title: {
+                  text: 'Fatalities',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            legend: {enabled: false},
+            tooltip: {
+                headerFormat: 'Year: {point.key}<br>',
+            },
+            plotOptions: {
+                line: {
+                  marker: {
+                      enabled: false
+                  }
+                }
+            },    
+
+            series: [ 
+                {name:"Fatalities", color:"#FF1300", data: [207,203,195,193,184,176,179,183,196,195,160,149,161,158,179,184,140,173,171,145,162,241,159,150,165,163,156,192,149,125,161,171,131,109,122,123]},
+            ],
+        });
+    
+        //INPUT: Function that adds the callout text.
+        $(chart.series).each(function(){
+          var point = this.points[21]; //which data point should the callout text attached to.
+          //content of the callout text and its position relative to the data point. If the arrow pointing to the data point is missing, adjust the position so the callout text sits right above the data point.
+          chart.renderer.label("72 killed in 9/11 attacks", point.plotX + chart.plotLeft - 120, point.plotY + chart.plotTop - 30,'callout',
+          point.plotX + chart.plotLeft,
+          point.plotY + chart.plotTop)
+          //style the callout text
+          .css({color: '#FFFFFF'})
+          .attr({ fill: 'rgba(0, 0, 0, 0.5)',padding: 3,r: 5,zIndex: 6}).add();
+        });
+
+        //INPUT: Function that adds second callout text.
+        $(chart.series).each(function(){
+          var point = this.points[5];
+          chart.renderer.label("second callout text box", point.plotX + chart.plotLeft - 120, point.plotY + chart.plotTop - 30,'callout',
+          point.plotX + chart.plotLeft,
+          point.plotY + chart.plotTop)
+          .css({color: '#FFFFFF'})
+          .attr({ fill: 'rgba(0, 0, 0, 0.5)',padding: 3,r: 5,zIndex: 6}).add();
+        });
+
+
+    });
+
+});
+</script>

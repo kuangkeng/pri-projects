@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Draw the impacts of the Clean Power Plan</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+#button {
+    background-color: #4188bc;
+    color: #fff;
+    border-radius: 5px;
+    padding:3px;
+    width:240px;
+    text-align: center;
+    font-size: 16px;
+    margin:0 auto;
+    margin-bottom: 20px;
+    opacity:0.3;
+    -webkit-transition: opacity 1s; /* Safari */
+    transition: opacity 1s;
+}
+
+.cursorPointer{
+    cursor : pointer
+}
+.cursorDefault{
+    cursor : default
+}
+
+@media (max-width: 570px ) { 
+    #container{height: 285px; }
+}
+
+@media (max-width: 500px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+@media (max-width: 400px ) { 
+    #container{height: 270px; }
+    #button {font-size: 14px; width:200px;}
+}
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Without the CPP, the CO2 emissions from electricity generation would...</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Click/tap on the gray area to plot your own line. To remove the line, click on the point you added.</div> 
+    </div>  
+    <div id="container"></div>
+    <div id="button">Compare with actual data</div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source:  
+        <a href='https://www.eia.gov/analysis/requests/powerplants/cleanplan/' target='_blank'>US Energy Information Administration</a>
+        <!-- INPUT: additional notes for the chart -->
+        <!-- INPUT: credit -->
+        <div id="credit">Kuang Keng Kuek Ser / PRI</div>
+    </div>
+    <div id="x-loc"></div>
+</div>
+</body>
+
+
+<!-- Google Analytics script -->
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-2145282-16', 'auto');
+ ga('send', 'pageview');
+
+</script>
+
+<script>
+$(function () {
+    $(".note").hide();
+
+    var chart;
+    var clicked = 0;
+
+    //convert year to miliseconds which is the value format used by Highcharts
+    var yr2015 = 1420070400000,
+        yr2020 = 1577836800000,
+        yr2025 = 1735689600000,
+        yr2030 = 1893456000000,
+        yr2035 = 2051222400000,
+        yr2040 = 2208988800000;
+
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                marginRight: 20,
+                type: 'line',
+                events: {
+                    click: function (e) {
+                        // find the clicked values and the series
+                        var x = e.xAxis[0].value,
+                            y = e.yAxis[0].value,
+                            series = this.series[1];
+
+                        var x1, len, lastdata;
+                        if(x< yr2015 || x> yr2040){return;}
+
+                        if(x >= yr2015 && x <= yr2020){
+                            len = chart.series[1].data.length;
+                            lastdata = chart.series[1].data[len-1].x;
+                            if(lastdata > yr2015){return;}
+                                else {x1 = yr2020}
+                        }
+                        if(x > yr2020 && x <= yr2025){
+                            len = chart.series[1].data.length;
+                            lastdata = chart.series[1].data[len-1].x;
+                            if (lastdata > yr2020){return;}
+                            else{
+                                if (lastdata == yr2020){x1 = yr2030}
+                                else {x1 = yr2020}
+                            }        
+                        }
+                        if(x > yr2025 && x <= yr2030){
+                            len = chart.series[1].data.length;
+                            lastdata = chart.series[1].data[len-1].x;
+                            if (lastdata > yr2020){return;}
+                            else{
+                                x1 = yr2030
+                            }
+                        }
+                        if(x > yr2030 && x <= yr2035){
+                            len = chart.series[1].data.length;
+                            lastdata = chart.series[1].data[len-1].x;
+                            if (lastdata > yr2030){return;}
+                            else{
+                                if (lastdata == yr2030){x1 = yr2040}
+                                else {x1 = yr2030}
+                            }        
+                        }
+                        if(x > yr2035 && x <= yr2040){
+                            len = chart.series[1].data.length;
+                            lastdata = chart.series[1].data[len-1].x;
+                            if (lastdata > yr2030){return;}
+                            else {
+                                x1 = yr2040    
+                            }
+                        }   
+                        series.addPoint([x1, y]);
+                        if(x1 == yr2040){
+                            $("#button").addClass("cursorPointer");
+                            $("#button").css("opacity","1");
+                            if(clicked == 0){clicked = 1;} else {}
+                        }
+                                                                                                                  
+                    }
+                },
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //the unit of xAxis is time-based. If your xAxis unit is not time or date, use the line-category template.
+            xAxis: {
+                type: 'datetime',
+            //how the time/date unit should be displayed on xAxis, check Highcharts API for other options (http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats)    
+                dateTimeLabelFormats: {
+                    year: '%Y'
+                },
+            //set the interval between units displayed on xAxis (the current setting is for 5 years), remove this line if you want Highcharts to decide for you.        
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,  
+                tickInterval: 24 * 3600 * 1000 * 365 *10,
+                max: Date.UTC(2040,0,2),
+                gridLineWidth: 1,
+                plotBands: [{
+                  color: '#f2f2f2',
+                  from: Date.UTC(2015,0,1), //Start and end points of the plotzone. It is based on the index of the data point which starts from 0.
+                  to: Date.UTC(2040,0,1),
+                }],
+
+            },
+            yAxis: {
+            //INPUT: the unit of yAxis    
+                title: {
+                  text: 'CO2 emissions (million metric tons)',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                  y:15,
+                },
+                endOnTick: false,
+                min: 0,
+                max: 3000,
+            },
+            credits: {enabled: false},
+            //Disable the legend if there's only one series of data
+            legend: {
+                // enabled: false,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function.
+            tooltip: {
+                // enabled:false,
+                xDateFormat: '%Y',
+                pointFormat: '{point.y:,.0f} MMT',
+            },
+            plotOptions: {
+                series: {
+                    point: {
+                        events: {
+                            'click': function () {
+                                if (this.series.index == 1){
+                                    if (this.series.data.length > 1) {
+                                        if(this.x == yr2015 || clicked == 2){return;} else {
+                                            this.remove();    
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: false,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.0f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.y:,.0f}',
+                    },
+                },
+                //MODIFY: Show/hide the data point marker.
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object like '{y:1185, color:"#FF7F00"}', or see the chart "iraq-married-401".
+            series: [ 
+                {name: "Actual", color:"#FF7F00",
+                data :[
+                    [Date.UTC(1990,0,1), 1831],
+                    [Date.UTC(1991,0,1), 1830],
+                    [Date.UTC(1992,0,1), 1843],
+                    [Date.UTC(1993,0,1), 1919],
+                    [Date.UTC(1994,0,1), 1944],
+                    [Date.UTC(1995,0,1), 1960],
+                    [Date.UTC(1996,0,1), 2033],
+                    [Date.UTC(1997,0,1), 2101],
+                    [Date.UTC(1998,0,1), 2192],
+                    [Date.UTC(1999,0,1), 2204],
+                    [Date.UTC(2000,0,1), 2310],
+                    [Date.UTC(2001,0,1), 2273],
+                    [Date.UTC(2002,0,1), 2288],
+                    [Date.UTC(2003,0,1), 2319],
+                    [Date.UTC(2004,0,1), 2350],
+                    [Date.UTC(2005,0,1), 2416],
+                    [Date.UTC(2006,0,1), 2358],
+                    [Date.UTC(2007,0,1), 2425],
+                    [Date.UTC(2008,0,1), 2373],
+                    [Date.UTC(2009,0,1), 2158],
+                    [Date.UTC(2010,0,1), 2270],
+                    [Date.UTC(2011,0,1), 2170],
+                    [Date.UTC(2012,0,1), 2034],
+                    [Date.UTC(2013,0,1), 2050],
+                    [Date.UTC(2014,0,1), 2050],
+                    [Date.UTC(2015,0,1), 1913],
+                ]},
+                {name: "Your line", color:"red",
+                data:[
+                    [Date.UTC(2015,0,1), 1913],
+                ]},               
+            ],
+        });
+
+        $('#container').bind('mousemove', function (e) {
+            
+            //get mouse cursor coordinates
+            var e = chart.pointer.normalize(e),
+                msX = chart.xAxis[0].toValue(e.chartX),
+                msY = chart.yAxis[0].toValue(e.chartY);
+
+            //use this to check the UTC date in number format (milliseconds)    
+            // $("#x-loc").text(chart.series[0].data[10].x);
+
+            //change cursor to pointer when inside the user plot area
+            if (msX >= yr2015 && msX <= yr2040 && msY >=0 && msY <= 3000)
+                {$("#container").removeClass("cursorDefault").addClass("cursorPointer"); } 
+            else {
+                $("#container").removeClass("cursorPointer").addClass("cursorDefault");   
+            }
+
+
+        }); 
+
+        
+        $("#button").click(function() {
+            if (clicked == 1){
+                clicked = 2;
+                $("#button").removeClass("cursorPointer").addClass("cursorDefault");
+                chart.addSeries(
+                    {name: "Projection (without CPP)", color:"#FF7F00", dashStyle: "ShortDash",
+                    data:[
+                        [Date.UTC(2015,0,1), 1913],
+                        [Date.UTC(2020,0,1), 2107],
+                        [Date.UTC(2030,0,1), 2177],
+                        [Date.UTC(2040,0,1), 2195],
+                    ]}
+                );
+                chart.addSeries(
+                    {name: "Projection (with CPP)", color:"#4188BC", dashStyle: "ShortDash",
+                    data:[
+                        [Date.UTC(2015,0,1), 1913],
+                        [Date.UTC(2020,0,1), 1814],
+                        [Date.UTC(2030,0,1), 1596],
+                        [Date.UTC(2040,0,1), 1691],
+                    ]}
+                );
+                $(".note").show();
+                $('#container').unbind('mousemove');
+            }
+        }); 
+        
+       
+
+
+    });
+
+});
+</script>

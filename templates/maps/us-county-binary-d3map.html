@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>US county binary colors map built with D3 - responsive and mouseover tooltip</title>
+    <meta name="description" content="This is a template file to build a US map with binary colors showing counties which is responsive and with mouseover tooltip. You can also use this template to build US county map with more than 2 color groups.
+    Find all annotations that start with 'MODIFY' and 'INPUT' to change the code based on your data file and map file.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/2.2.0/topojson.min.js"></script>
+  </head>
+
+<style>
+
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+} 
+
+#wrapper {
+  border:1px solid #D3D3D3;
+  max-width: 1000px;  /*MODIFY: set the maximum width of the map.*/
+  margin: 0 auto;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+  padding:0px 10px 10px 10px;
+}
+
+#credit {
+  font-size: 10px;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.headline {
+  font-size: 18px;
+  font-weight: normal;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  color: #33333c;
+  line-height: 24px;
+}
+
+#text, #legend-title {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 18px;
+} 
+
+/*MODIFY: This class name is determined by the name of the "objects" in your map file.*/
+.counties {
+  fill: #d3d3d3;
+}
+
+/*MODIFY: Style state border*/
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+/*MODIFY: Set the binary colors.*/
+.bucket0 { fill: #4188BC; }
+.bucket1 { fill: #FF7F00; }
+#bucket0 { background-color: #4188BC; }
+#bucket1 { background-color: #FF7F00; }
+
+/*MODIFY: Set the height of tooltip to fit your content.*/
+div.tooltip {
+  position: absolute;
+  left: 75px;
+  text-align: center;
+  height: 30px;
+  padding: 8px;
+  font-size: 13px;
+  line-height: 15px;
+  background: #FFFFFF;
+  border: 0px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+#legend-container {
+  padding:10px;
+}
+
+.colorlabel {
+  font-size: 11px;
+  color: #808080;
+  line-height: 14px;
+}
+
+#legend-title {margin-bottom: 10px;}
+
+.colorblock {
+  width:20px;
+  height:20px;
+}
+
+.colorlabel {
+  width:95px;
+  padding-left: 5px;
+}
+
+#legend-color-box, .legend-color{
+  display:flex;
+  justify-content: flex-start;
+}
+
+.legend-color{
+  align-items: center;
+}
+
+.legend-color {
+  width:120px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+}
+
+</style>
+
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <!-- INPUT: title of map -->
+        <div class="headline">Map title</div>
+        <!-- INPUT: description of map -->
+        <div id="text">Map description</div> 
+    </div>   
+    <div id="map-container"></div>
+    <div id="legend-container">
+      <!-- INPUT: title of legend --> 
+      <div id="legend-title">Legend title</div>
+      <!-- INPUT: color and labels  -->
+      <div id="legend-color-box">
+        <div class="legend-color">
+          <div class="colorblock" id="bucket0"></div>
+          <div class="colorlabel">Sanctuary</div>
+        </div>
+        <div class="legend-color">
+          <div class="colorblock" id="bucket1"></div>
+          <div class="colorlabel">Not sanctuary</div>
+        </div>
+      </div>
+    </div>  
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href='https://www.justice.gov/pardon/clemency-statistics' target='_blank'>DOJ clemency statistics</a>
+        <!-- INPUT: additional notes for the chart -->
+        <br>Other notes for the chart
+        <!-- INPUT: credit -->
+        <div id="credit">Alex Newman / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+//Create tooltip
+var div = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+//Set dimensions
+var margin = {top: 10, left: 0, bottom: 10, right: 0}
+  , width = window.outerWidth
+  , width = width - margin.left - margin.right
+  , mapRatio = .6 //depending on the map size
+  , height = width * mapRatio;
+
+//Tell the map what projection to use. If you change the scale here, you need to update the same code in the below function named resize()
+var projection = d3.geo.albersUsa()
+    .scale(width/0.8) //depending on the map size
+    .translate([width / 2, height / 2]);
+
+//Tell the map how to draw the paths from the projection
+var path = d3.geo.path()
+    .projection(projection);
+
+//Append svg to page
+var map = d3.select("#map-container").append("svg")
+  .style('height', height + 'px')
+  .style('width', width + 'px');  
+
+//INPUT: Load your data file (csv) and map file (topojson)
+queue()
+    .defer(d3.json, "https://cdn2.pri.org/map-files/us-county-state-topojson-d3.json")
+    .defer(d3.csv, "https://cdn2.pri.org/templates/maps/sample-data/binary-map.csv")
+    .await(ready); //parse the data into function ready()
+
+//Moves selection to front
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+}; 
+
+//Moves selection to back
+d3.selection.prototype.moveToBack = function() { 
+  return this.each(function() { 
+  var firstChild = this.parentNode.firstChild; 
+    if (firstChild) { 
+      this.parentNode.insertBefore(this, firstChild); 
+    } 
+  }); 
+};    
+
+//The first variable "us" refers to the first file loaded which is "us-county-state-topojson-d3.json" and the second variable "inputdata" refers to the second file loaded which is "binary-map.csv". You can console.log the 2 variables to see the content.
+function ready(error, us, inputdata) {
+  if (error) throw error;
+
+//console.log the variables to see their content:
+  // console.log(JSON.stringify(us), JSON.stringify(inputdata));  
+
+  //Sets breaking point and colors
+  //MODIFY: the value in ".domain" is the breaking point between 2 colors. The 2 colors are set inside ".range".
+var breakpoint = d3.scale.threshold()
+    .domain([0.5])
+    .range(["#FF7F00","#4188BC"]);
+  
+  //MODIFY: For data in each column in the CSV file that you want to use to color the map or show in tooltip, you need to match them with the county id in the SAME CSV FILE (not the map file). In this case, "county_id" is the column head of county FIPS in the CSV file that is used to match with the county FIPS in the MAP file. We want to color the map based on "per_trump" and to show "state" and "county_name" in the tooltip. Hence we need to match each of them with "county_id" which is the key in the CSV file to match with the map file.
+  
+  //Pair data with county id
+  var MatchData = {};
+  inputdata.forEach(function(d) { MatchData[d.county_id] = +d.sanctuary; });
+
+  //Pair state name with county id
+  var MatchState = {};
+  inputdata.forEach(function(d) { MatchState[d.county_id] = d.state; });
+
+  //Pair county name with county id
+  var MatchCounty = {};
+  inputdata.forEach(function(d) { MatchCounty[d.county_id] = d.county_name; });
+
+  //Append states
+  //MODIFY: This class name "counties" is determined by the name of the "objects" in your map file.
+  map.append("g")
+    .attr("class", "counties")
+    .selectAll("path")
+  //MODIFY: This class name "counties" is determined by the name of the "objects" in your map file.  
+    .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+    .attr("d", path)
+    //Color states
+    .attr("fill", function(d) { return breakpoint(MatchData[d.id]); })
+    //Tooltip when mouseover
+    .on("mouseover", function(d) {
+      if (MatchData[d.id] == 1){
+        var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's data 
+        div.html(MatchCounty[d.id] + ", " + MatchState[d.id] + "<br>" + "(Sanctuary)")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");
+      } else
+      {
+        var sel = d3.select(this);
+          sel.moveToFront();
+        d3.select(this).transition().duration(300).style("opacity", 0.6);
+        div.transition().duration(300)
+        .style("opacity", 0.85)
+      //MODIFY: Set tooltip content in html when there's no data
+        div.html(MatchCounty[d.id] + ", " + MatchState[d.id] + "<br>" + "(Not sanctuary)")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY -30) + "px");     
+      }
+    })
+    .on("mouseout", function() {
+      var sel = d3.select(this);
+        sel.moveToBack();
+      d3.select(this)
+      .transition().duration(300)
+      .style("opacity", 1);
+      div.transition().duration(300)
+      .style("opacity", 0);
+    });
+  
+    //Draw the state border
+    map.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path);     
+
+//RESPONSIVENESS
+  d3.select(window).on('resize', resize);
+
+  function resize() {
+
+    var w = d3.select("#map-container").node().clientWidth;
+
+    // adjust things when the window size changes
+    width = w - margin.left - margin.right;
+    height = width * mapRatio;
+
+    // update projection
+    var newProjection = d3.geo.albersUsa()
+      .scale(width/0.8)
+      .translate([width / 2, height / 2]);
+
+    //Update path
+    path = d3.geo.path()
+      .projection(newProjection);    
+
+    // resize the map container
+    map
+        .style('width', width + 'px')
+        .style('height', height + 'px');
+
+    // resize the map
+    map.selectAll("path").attr('d', path);
+  }
+
+resize();
+
+}
+
+
+
+
+</script>
